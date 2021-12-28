@@ -1,4 +1,4 @@
-# Zufallsvariablen
+# Zufallsvariablen {#zufallsvariablen}
 
 ## Univariat
 
