@@ -3,3 +3,6 @@
 ## Definition
 
 ## Bedingte Wahrscheinlichkeit
+
+## Satz von Bayes
+
