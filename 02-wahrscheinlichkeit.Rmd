@@ -156,8 +156,57 @@ $$
   
 ## Bedingte Wahrscheinlichkeit
 
+Manchmal gibt es begrenzte Informationen über einen Zufallsvorgang.
+Dann kennt man nicht das realisierte Ergebnis, kann aber die Menge der 
+möglichen Ergebnisse eingrenzen. Dadurch ändern sich die 
+Wahrscheinlichkeiten für Ereignisse. 
 
+> Wir betrachten zwei Ereignsse $A$ und $B$ mit $P(B)>0$. 
+> Dann heißt
+> $$
+> P(A|B)=\frac{P(A\cap B)}{P(B)}
+> $$
+> die **bedingte Wahrscheinlichkeit** von $A$ gegeben $B$
 
+Die Notation $A|B$ steht nicht für ein bestimmtes Ereignis, sondern
+zeigt an, dass wir eine neue Art von Wahrscheinlichkeit betrachten,
+nämlich die bedingte Wahrscheinlichkeit. Beim Sprechen über
+Wahrscheinlichkeiten ist es nicht immer einfach (aber wichtig!), 
+zwischen der Wahrscheinlichkeit $P(A\cap B)$ und der bedingten 
+Wahrscheinlichkeit $P(A|B)$ zu unterscheiden. Wenn man $P(A\cap B)$
+meint, spricht man von der Wahrscheinlichkeit für $A$ und $B$.
+Wenn man $P(A|B)$ meint, sagt man $A$ gegeben $B$, oder: $A$ wenn $B$,
+oder: $A$ unter der Bedingung $B$.
+
+**Beispiele:**
+
+- Ein Würfel wird geworfen. Wir betrachten die beiden Ereignisse 
+  $A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{4,5,6\}$ ("eine Zahl größer als 3"). 
+  Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
+$$
+P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(\{4,6\})}{P(\{4,5,6\})}=\frac{2}{3}
+$$
+  und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet
+$$
+P(B|A)=\frac{P(B\cap A)}{P(A)}=\frac{P(\{4,6\})}{P(\{2,4,6\})}=\frac{2}{3}.
+$$
+
+- Zwei Würfel werden geworfen. Sei $A$ das Ereignis "die Augensumme ist 10". 
+  Sei $B$ das Ereignis "einer der beiden Würfel (oder beide) zeigt eine 2".
+  Dann ist
+$$
+P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(\{\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}=0.
+$$
+  Die bedingte Wahrscheinlichkeit für das Ereignis $C$: "Augensumme ist 5" 
+  unter der Bedingung $B$ ist
+$$
+P(C|B)=\frac{P(C\cap B)}{P(B)}=\frac{P(\{23,32\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}=\frac{2}{11}.
+$$
+
+- Bei einer Umfrage werden Personen zufällig ausgewählt und befragt. Sei $A$
+  das Ereignis "die befragte Person ist weiblich". Sei $B$ das Ereignis
+  "die befragte Person arbeitet in Teilzeit". 
+  
 
 ## Satz von Bayes
 
