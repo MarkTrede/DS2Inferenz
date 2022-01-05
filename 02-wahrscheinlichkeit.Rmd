@@ -1,6 +1,6 @@
 # Wahrscheinlichkeit {#wahrscheinlichkeit}
 
-## Definition
+## Definition {#def:wahrscheinlichkeit}
 
 Manche Ereignisse sind weniger wahrscheinlich als andere. Wie hoch
 die Wahrscheinlichkeit eines Ereignisses ist, wird durch eine
@@ -31,7 +31,7 @@ Aus diesen Axiomen lassen sich einige Rechenregeln ableiten, zum Beispiel
 
 - Additionssatz: $P(A\cup B)=P(A)+P(B)-P(A\cap B)$
 
-## Venn-Diagramme
+## Venn-Diagramme {#venn}
 
 Ereignisse lassen sich - wie andere Mengen in der Mengenlehre auch - in
 Form von Venn-Diagrammen darstellen. Wenn die Ergebnismenge $\Omega$
@@ -62,7 +62,7 @@ Die Wahrscheinlichkeit von $A\cup B$ (also $A$ oder $B$) ergibt sich als
 die Summe aus den beiden Kreisflächen $A$ und $B$ abzüglich der Fläche
 der Schnittmenge, die sonst doppelt gezählt werden würde.
 
-## Laplace-Experimente
+## Laplace-Experimente {#laplace}
 
 Eine besonders einfache Art von Zufallsvorgängen sind die sogenannten
 Laplace-Experimente.
@@ -105,7 +105,11 @@ denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
   Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$.
   Dann ist
 $$
-P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}=0.5.
+\begin{align*}
+P(A)&=\frac{|A|}{|\Omega|}\\
+&=\frac{3}{6}\\
+&=0.5.
+\end{align*}
 $$
 - Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine Rolle,
   wie man die Ergebnismenge festlegt. Wir wählen
@@ -126,11 +130,15 @@ $$
   Ergebnisse gleich wahrscheinlich sind, können wir mit unserem
   Alltagswissen begründen, nicht aus der Mathematik heraus.
   
-  
   Sei $A$ das Ereignis "Die Augenzahlen der beiden Würfel unterscheiden 
   sich um 2", d.h. $A=\{13,24,31,35,42,46,53,64\}$. Dann gilt
 $$
-P(A)=\frac{|A|}{|\Omega|}=\frac{8}{36}=\frac{2}{9}\approx 0.2222.
+\begin{align*}
+P(A)&=\frac{|A|}{|\Omega|}\\
+&=\frac{8}{36}\\
+&=\frac{2}{9}\\
+&\approx 0.2222.
+\end{align*}
 $$
   Als Ergebnismenge wäre auch
 $$
@@ -145,16 +153,16 @@ $$
 \end{align*}
 $$
   möglich gewesen, aber dann wäre die Annahme eines Laplace-Experiments
-  nicht sinnvoll. Die Elementarereignisse "11" und "12" wären
+  nicht plausibel gewesen. Die Elementarereignisse "11" und "12" wären
   beispielsweise nicht gleich wahrscheinlich (ein Pasch tritt
-  erfahrungsgemäß seltener).
+  erfahrungsgemäß seltener auf).
   
   Die Wahl der Ergebnismenge sollte immer so erfolgen, dass das weitere
   Vorgehen möglichst einfach und elegant ist. Wenn die Ergebnismenge
   so gewählt werden kann, dass ein Laplace-Experiment vorliegt, sollte
   man das tun.
   
-## Bedingte Wahrscheinlichkeit
+## Bedingte Wahrscheinlichkeit {#bedingt}
 
 Manchmal gibt es begrenzte Informationen über einen Zufallsvorgang.
 Dann kennt man nicht das realisierte Ergebnis, kann aber die Menge der 
@@ -176,7 +184,9 @@ zwischen der Wahrscheinlichkeit $P(A\cap B)$ und der bedingten
 Wahrscheinlichkeit $P(A|B)$ zu unterscheiden. Wenn man $P(A\cap B)$
 meint, spricht man von der Wahrscheinlichkeit für $A$ und $B$.
 Wenn man $P(A|B)$ meint, sagt man $A$ gegeben $B$, oder: $A$ wenn $B$,
-oder: $A$ unter der Bedingung $B$.
+oder: $A$ unter der Bedingung $B$. Wenn man ausdrücklich angeben
+möchte, dass eine Wahrscheinlichkeit *keine* bedingte Wahrscheinlichkeit
+ist, nennt man sie auch eine unbedingte Wahrscheinlichkeit.
 
 **Beispiele:**
 
@@ -184,29 +194,160 @@ oder: $A$ unter der Bedingung $B$.
   $A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{4,5,6\}$ ("eine Zahl größer als 3"). 
   Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
 $$
-P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(\{4,6\})}{P(\{4,5,6\})}=\frac{2}{3}
+\begin{align*}
+P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
+&=\frac{P(\{4,6\})}{P(\{4,5,6\})}\\
+&=\frac{2}{3}
+\end{align*}
 $$
   und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet
 $$
-P(B|A)=\frac{P(B\cap A)}{P(A)}=\frac{P(\{4,6\})}{P(\{2,4,6\})}=\frac{2}{3}.
+\begin{align*}
+P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
+&=\frac{P(\{4,6\})}{P(\{2,4,6\})}\\
+&=\frac{2}{3}.
+\end{align*}
 $$
 
 - Zwei Würfel werden geworfen. Sei $A$ das Ereignis "die Augensumme ist 10". 
   Sei $B$ das Ereignis "einer der beiden Würfel (oder beide) zeigt eine 2".
   Dann ist
 $$
-P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(\{\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}=0.
+\begin{align*}
+P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
+&=\frac{P(\{\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
+&=0.
+\end{align*}
 $$
   Die bedingte Wahrscheinlichkeit für das Ereignis $C$: "Augensumme ist 5" 
   unter der Bedingung $B$ ist
 $$
-P(C|B)=\frac{P(C\cap B)}{P(B)}=\frac{P(\{23,32\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}=\frac{2}{11}.
+\begin{align*}
+P(C|B)&=\frac{P(C\cap B)}{P(B)}\\
+&=\frac{P(\{23,32\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
+&=\frac{2}{11}.
+\end{align*}
 $$
 
 - Bei einer Umfrage werden Personen zufällig ausgewählt und befragt. Sei $A$
   das Ereignis "die befragte Person ist weiblich". Sei $B$ das Ereignis
-  "die befragte Person arbeitet in Teilzeit". 
+  "die befragte Person arbeitet in Teilzeit". Zwischen der (unbedingten)
+  Wahrscheinlichkeit $P(B)$ und der bedingten Wahrscheinlichkeit $P(B|A)$
+  besteht ein Unterschied. Die Wahrscheinlichkeit $P(B)$ steht dafür, dass 
+  eine zufällig ausgewählte Person in Teilzeit arbeitet, und diese Person
+  kann männlich oder weiblich sein. Dagegen ist $P(B|A)$ die 
+  Wahrscheinlichkeit, dass eine zufällig ausgewählte Frau in Teilzeit
+  arbeitet.
+
+In den Medien werden häufig bedingte Wahrscheinlichkeiten berichtet,
+ohne dass das explizit erwähnt wird. Oftmals sind die berichteten
+bedingten Wahrscheinlichkeiten gar nicht die, für die man sich
+eigentlich interessiert, weil die Bedingung und das Bedingte
+quasi falsch herum angeordnet sind. Man interessiert sich für $P(A|B)$,
+aber berichtet wird $P(B|A)$. 
   
+**Beispiele:**
 
-## Satz von Bayes
+- In den Medien wird berichtet, dass ein Corona-Schnelltest mit einer
+  Wahrscheinlichkeit von xxx Prozent ein falsch positives Ergebnis liefert.
+  Falsch positiv bedeutet, die Wahrscheinlichkeit wird unter der Bedingung 
+  angegeben, dass die getestete Person negativ ist. Wenn man Test an sich
+  durchführt, interessiert man sich dagegen für die bedingte
+  Wahrscheinlichkeit, infiziert zu sein, obwohl der Test negativ ausfällt,
+  und natürlich auch für die bedingte Wahrscheinlichkeit, tatsächlich
+  infiziert zu sein, wenn der Test positiv ausfällt.
+  
+- In den Medien erfährt man, dass XX Prozent der Studierenden ein
+  "akademisches Elternhaus" haben. Es handelt sich um die bedingte
+  Wahrscheinlichkeit eines akademischen Elternhauses, wenn eine Person
+  studiert. Für die Bewertung der Chancengleichheit ist hingegen die
+  bedingte Wahrscheinlichkeit interessanter, dass ein Kind studiert, wenn 
+  es aus einem akademischen Elternhaus stammt - und zwar im Vergleich
+  zu der bedingten Wahrscheinlichkeit, dass ein Kind studiert, wenn
+  es aus einem nicht-akademischen Elternhaus stammt.
+  
+Wie kann man eine bedingte Wahrscheinlichkeit "umdrehen"? Wie verhält sich
+$P(B|A)$ zu $P(A|B)$? Das sehen wir im folgenden Abschnitt \@ref(bayes).
 
+Bedingte Wahrscheinlichkeiten sind auch nützlich, um die Wahrscheinlichkeit
+zu berechnen, dass mehrere Ereignisse gemeinsam passieren. Dazu formen wir
+die Definition der bedingten Wahrscheinlichkeit einfach um. Aus
+$$
+P(A|B)=\frac{P(A\cap B)}{P(B)}
+$$
+wird
+$$
+P(A\cap B)={P(B)P(A|B)}
+$$
+Das lässt sich auf mehr als zwei Ereignisse erweitern:
+$$
+\begin{align*}
+P(A\cap B \cap C)&=P(C)P(B|C)P(A|B\cap C)\\
+P(A\cap B\cap C\cap D)&=P(D)P(C|D)P(B|C\cap D)P(A|B\cap C\cap D)
+\end{align*}
+$$
+Diese Formeln sind bei näherer Betrachtung intuitiv: Die Wahrscheinlichkeit,
+dass $A$, $B$ und $C$ gemeinsam eintreten, ergibt sich, indem man zuerst
+eine der unbedingten Wahrscheinlichkeiten nimmt (z.B. $P(C)$).
+Nun ist $C$ quasi eingetreten und wir arbeiten unter der Bedingung $C$
+weiter. Die Wahrscheinlichkeit $P(C)$ wird jetzt mit der 
+bedingten Wahrscheinlichkeit des nächsten Ereignisses multipliziert,
+also $P(B|C)$. Nun sind $B$ und $C$ eingetreten, und auf der nächsten
+Stufe multiplizieren wir deshalb mit $P(A|B\cap C)$. Eine andere
+Reihenfolge der Bedingungen wäre natürlich ebenfalls möglich, z.B.
+$$
+P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B).
+$$
+
+## Totale Wahrscheinlichkeit {#total}
+
+Aus mehreren bedingten Wahrscheinlichkeiten lässt sich eine unbedingte
+Wahrscheinlichkeit errechnen. Dazu zerlegen wir den Ergebnisraum $\Omega$
+in eine Partition. Unter einer Partition versteht man eine Zerlegung
+in disjunkte Mengen $A_1, A_2, \ldots, A_n$, so dass die Vereinigungsmenge
+der $A_1,\ldots, A_n$ wieder $\Omega$ ergibt. Die "Partitionierung eines
+Rinds" könnte etwa so aussehen:
+
+```{r echo=FALSE,out.width="100%"}
+knitr::include_graphics("images/partitionrind.jpg")
+```
+
+Das Rind wird also vollständig Teilmengen zerlegt, und alle Teilmengen 
+zusammen ergeben wieder das gesamte Rind.
+
+Nun nehmen wir an, dass für jedes Ereignis $A_i$, $i=1,\ldots,n$, die
+bedingte Wahrscheinlichkeit $P(B|A_i$ gegeben ist, wobei $B$ irgendein
+Ereignis ist. Dann gilt für die unbedingte Wahrscheinlichkeit von $B$:
+$$
+P(B)=\sum_{i=1}^n P(B|A_i)P(A_i).
+$$
+Die unbedingte Wahrscheinlichkeit ergibt sich also als gewichtete Summe
+aller bedingten Wahrscheinlichkeiten, die Gewichtung erfolgt durch die
+Wahrscheinlichkeiten der bedingenden Ereignisse.
+
+**Beispiele:**
+
+
+
+## Satz von Bayes {#bayes}
+
+Der Satz von Bayes setzt die beiden bedingten Wahrscheinlichkeiten
+$P(A|B)$ und $P(B|A)$ zueinander in Beziehung. Es gilt
+$$
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
+$$
+Um die Bedingung und das Bedingte zu vertauschen, braucht man also beide
+unbedingte Wahrscheinlichkeiten. Die Herleitung des Satzes von Bayes
+ergibt sich aus der Definition der bedingten Wahrscheinlichkeit. 
+Wegen 
+$$
+\begin{align*}
+P(A|B) &= \frac{P(A\cap B)}{P(B)}\\
+P(B|A) &= \frac{P(A\cap B)}{P(A)}
+\end{align*}
+$$
+gilt
+$$
+P(A|B)P(B)=P(B|A)P(A).
+$$
+Daraus folgt unmittelbar der Satz von Bayes.
