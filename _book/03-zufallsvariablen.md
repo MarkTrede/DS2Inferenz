@@ -1,0 +1,5 @@
+# Zufallsvariablen
+
+## Univariat
+
+## Multivariat

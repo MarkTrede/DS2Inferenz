@@ -1,0 +1,13 @@
+zufallsvorgänge
+ergebnisraum
+ereignisse
+wahrscheinlichkeit
+definition
+bedingte-wahrscheinlichkeit
+zufallsvariablen
+univariat
+multivariat
+stichproben
+punktschätzung
+intervallschätzung
+hypothesentests
