@@ -1,5 +1,9 @@
-# Zufallsvariablen
+# Zufallsvariablen {#zufallsvariablen}
 
-## Univariat
+## Verteilungsfunktion
 
-## Multivariat
+## Quantilfunktion
+
+## Erwartungswert
+
+## Varianz

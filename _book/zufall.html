@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Kapitel 2 Zufallsvorgänge | Data Science 2: Statistische Inferenz</title>
+<meta name="author" content="Mark Trede">
+<meta name="description" content="Was bedeutet eigentlich Zufall? Wann ist ein Vorgang zufällig? Solche Fragen sind schwierig zu beantworten. Sie gehören eher in den Bereich der Philosophie als der Wirtschaftswissenschaften und...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Kapitel 2 Zufallsvorgänge | Data Science 2: Statistische Inferenz">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Was bedeutet eigentlich Zufall? Wann ist ein Vorgang zufällig? Solche Fragen sind schwierig zu beantworten. Sie gehören eher in den Bereich der Philosophie als der Wirtschaftswissenschaften und...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kapitel 2 Zufallsvorgänge | Data Science 2: Statistische Inferenz">
+<meta name="twitter:description" content="Was bedeutet eigentlich Zufall? Wann ist ein Vorgang zufällig? Solche Fragen sind schwierig zu beantworten. Sie gehören eher in den Bereich der Philosophie als der Wirtschaftswissenschaften und...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Data Science 2: Statistische Inferenz</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Kapitel 2</span> Zufallsvorgänge</a></li></ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="zufall" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Kapitel 2</span> Zufallsvorgänge<a class="anchor" aria-label="anchor" href="#zufall"><i class="fas fa-link"></i></a>
+</h1>
+<p>Was bedeutet eigentlich Zufall? Wann ist ein Vorgang zufällig?
+Solche Fragen sind schwierig zu beantworten. Sie gehören eher in den
+Bereich der Philosophie als der Wirtschaftswissenschaften und
+wir werden uns nicht tiefergehend damit befassen. In diesem Kurs verstehen wir
+Zufall schlicht und einfach ganz pragmatisch:</p>
+<blockquote>
+<p>Ein <strong>Zufallsvorgang</strong> (engl. random experiment) liegt dann vor, wenn wir
+zwar wissen, was passieren kann, aber nicht sicher wissen, was passieren
+wird.</p>
+</blockquote>
+<p>Zufallsvorgänge sind allgegenwärtig. Natürlich gehören dazu Glücksspiele.
+Wir wissen, wo die Roulette-Kugel landen kann, aber wir wissen vor dem
+Spiel nicht, auf welchem Feld sie letztlich liegen bleibt. Roulette ist
+also ein Zufallsvorgang.</p>
+<div class="inline-figure"><img src="images/Roulette.jpg" width="100%"></div>
+<p>Wir wissen, welche Augenzahlen ein Würfel anzeigen
+kann, aber vor dem Wurf wissen wir noch nicht, welche Augenzahl tatsächlich
+angezeigt werden wird. Wir wissen, dass eine Münze Kopf oder Zahl zeigen
+kann, aber wir wissen nicht, ob es Kopf sein wird oder Zahl. Bei einem
+Pferderennen wissen wir, dass eines der Pferde zuerst im Ziel einlaufen
+wird, aber wir wissen nicht, welches Pferd das sein wird. Alle diese
+Vorgänge sind also Zufallsvorgänge.</p>
+<p>In diesem Kurs werden wir häufig Beispiele mit Würfeln oder Münzen
+betrachten. Der Grund dafür ist nicht, dass diese Beispiele in den
+Wirtschaftswissenschaften besonders wichtig sind, sondern dass sie
+relativ einfach zu untersuchen sind und darum beim Einstieg in das
+Thema didaktisch hilfreich sein können.</p>
+<p>In den Wirtschaftswissenschaften haben wir es jedoch auch sehr oft
+mit Zufallsvorgängen zu tun.</p>
+<ul>
+<li><p>Wenn wir unter Studierenden eine Umfrage zur Wohnsituation durchführen,
+wissen wir zwar, welche Antworten die Befragten geben können
+(z.B. bei den Eltern, in einer WG, eigene Wohnung, Wohnheim etc.),
+aber wir wissen nicht, welche Antworten zufällig ausgewählte
+Studierende tatsächlich geben werden.</p></li>
+<li><p>Wir wissen, welche Rendite eine Aktie am kommenden Börsentag haben
+könnte, aber wir wissen nicht, wie die Aktie sich dann wirklich
+entwickelt.</p></li>
+<li><p>Wir wissen, wie lange eine Person, die gerade arbeitslos geworden ist,
+arbeitslos bleiben könnte, aber wir wissen nicht, wie lange sie
+tatsächlich arbeitslos sein wird.</p></li>
+<li><p>Wenn ein Kunde den Supermarkt betritt, wissen wir, welche Produkte
+er kaufen könnte, aber nicht, welche er wirklich kaufen wird.</p></li>
+<li><p>Wir wissen, wie hoch das Bruttoinlandsprodukt im kommenden Jahr sein
+könnte, aber wir wissen nicht, wie hoch die Wachstumsrate tatsächlich
+sein wird.</p></li>
+<li><p>Bei einer Qualitätskontrolle wird ein neu hergestelltes Werkstück
+ausgemessen. Jede Messung unterliegt einem mehr oder weniger großen
+Messfehler. Wie wissen zwar, wie groß der Fehler sein könnte, aber
+wie groß er tatsächlich ist, wissen wir nicht.</p></li>
+</ul>
+<p>Diese Beispiele zeigen, dass der Zufall in den Wirtschaftswissenschaften
+eine sehr wichtige Rolle spielt. Es fällt leicht sich weitere Beispiele
+auszudenken. Es ist eher schwierig, sich Vorgänge zu überlegen, bei
+denen der Zufall keine Rolle spielt.</p>
+<p>Aus Sicht der Ökonomik ist der Zufall nicht objektiv, sondern subjektiv.
+Es kann durchaus passieren, dass ein und derselbe Vorgang für eine
+Person ein Zufallsvorgang ist, für eine andere Person dagegen nicht.
+Zum Beispiel weiß der Kunde, der den Supermarkt betritt, selber vielleicht
+schon genau und sicher, was er einkaufen wird. Die Filialleitung, die das
+Kundenverhalten beobachtet, weiß es dagegen nicht. Für die Filialleitung ist
+der Kauf des Kunden also ein Zufallsvorgang, für den Kunden aber nicht.</p>
+<p>Hinweis: In manchen Einführungen zur Wahrscheinlichkeitstheorie wird
+zusätzlich gefordert, dass der Zufallsvorgang unter identischen Bedingungen
+beliebig oft wiederholt werden kann. Das ist bei den Glücksspielen
+(z.B. einem Würfelwurf) keine schwerwiegende Annahme. In den
+Wirtschaftswissenschaften sind die Vorgänge dagegen im Allgemeinen
+nicht unter identischen Bedingungen wiederholbar. Darum fordern wir
+in unserer Definition von Zufallsvorgängen die Wiederholbarkeit
+ausdrücklich nicht.</p>
+<p>Damit man mit Zufallsvorgängen rational umgehen kann, ist es nützlich,
+das Vorgehen zu vereinheitlichen und von den konkreten Anwendungen
+zu abstrahieren. Das werden wir in den folgenden Abschnitten und Kapiteln
+tun. Wenn die abstrakten Konzepte dann auf einfache konkrete Einzelfälle
+angewendet werden, wirkt es manchmal etwas umständlich und kompliziert.
+Davon sollte man sich nicht irritieren lassen.</p>
+<div id="ergebnismenge" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Ergebnismenge<a class="anchor" aria-label="anchor" href="#ergebnismenge"><i class="fas fa-link"></i></a>
+</h2>
+<p>Wie wir bereits gesehen haben, ist bei einem Zufallsvorgang von vornherein
+bekannt, was alles passieren kann bzw. welche möglichen Ergebnisse
+eintreten können. Die möglichen Ergebnisse (engl. outcomes) werden zu einer
+Menge zusammengefasst, die “Ergebnismenge” genannt und mit dem
+griechischen Buchstaben <span class="math inline">\(\Omega\)</span> (Groß-Omega) bezeichnet wird.</p>
+<blockquote>
+<p>Die <strong>Ergebnismenge</strong> <span class="math inline">\(\Omega\)</span> (engl. sample space) enthält alle möglichen
+Ergebnisse des Zufallsvorgangs.</p>
+</blockquote>
+<p>Wenn wir abstrakt über einzelne Elemente der Ergebnismenge schreiben oder
+reden, nennen wir die Elemente <span class="math inline">\(\omega_1, \omega_2, \ldots\)</span> (das sind
+Klein-Omegas).</p>
+<p>In den meisten Fällen gibt es nur eine naheliegende natürliche Möglichkeit, die
+Ergebnismenge aufzuschreiben. Das muss aber nicht so sein, manchmal gibt
+es mehrere Möglichkeiten. Man sollte die Ergebnismenge immer so wählen,
+dass es möglichst einfach ist, mit ihr zu arbeiten. Wir kommen darauf
+an späterer Stelle (in Kapitel <a href="wahrscheinlichkeit.html#wahrscheinlichkeit">3</a> noch einmal
+ausführlicher zurück.</p>
+<p><strong>Beispiele:</strong></p>
+<ul>
+<li><p>Eine Münze wird geworfen. Sie kann Kopf (K) oder Zahl (Z) zeigen. Die
+natürliche Ergebnismenge ist <span class="math inline">\(\Omega=\{K, Z\}\)</span>. Es wäre zwar erlaubt,
+in die Ergebnismenge auch Ergebnisse aufzunehmen, die gar nicht eintreten
+können, aber das wäre unnötig umständlich und sinnlos.</p></li>
+<li><p>Ein Würfel wird geworfen. Die Ergebnismenge ist <span class="math inline">\(\Omega=\{1,2,3,4,5,6\}\)</span>.</p></li>
+<li><p>Zwei gleich aussehende Würfel werden geworfen. Hier gibt es zwei
+auf den ersten Blick naheliegende Möglichkeiten, die Ergebnismenge
+festzulegen. Zum einen (die beiden Ziffern sollen die beiden
+Augenzahlen anzeigen, beispielsweise ist mit “43” gemeint, dass
+der erste Würfel eine 4 und der zweite eine 3 zeigt)
+<span class="math display">\[
+\begin{align*}
+\Omega=\{&amp;11,12,13,14,15,16,\\
+&amp;21,22,23,24,25,26,\\
+&amp;31,32,33,34,35,36,\\
+&amp;41,42,43,44,45,46,\\
+&amp;51,52,53,54,55,56,\\
+&amp;61,62,63,64,65,66\}
+\end{align*}
+\]</span>
+Zum anderen könnte man argumentieren, dass die Würfel nicht unterscheidbar
+sind und dass darum “43” und “34” eigentlich gleich sind. Dann wäre die
+Ergebnismenge
+<span class="math display">\[
+\begin{align*}
+\Omega=\{
+&amp;11,12,13,14,15,16,\\
+&amp;22,23,24,25,26,\\
+&amp;33,34,35,36,\\
+&amp;44,45,46,\\
+&amp;55,56,\\
+&amp;66\}
+\end{align*}
+\]</span>
+Wir werden später sehen, dass es viel einfacher und intuitiver ist,
+Wahrscheinlichkeiten zu bestimmen, wenn man die erste Möglichkeit wählt.
+Das Beispiel zeigt dennoch, dass die Wahl der “richtigen” Ergebnismenge
+nicht immer eindeutig klar ist.</p></li>
+<li><p>Bei einer Umfrage zur Wohnsituation von Studierenden enthält die
+Ergebnismenge <span class="math inline">\(\Omega\)</span> für eine befragte Person alle möglichen Antworten,
+also z.B. “bei den Eltern,” “in einer WG,” “alleine in einer Wohnung,” “mit
+Partner/in” und “in einem Wohnheim.”</p></li>
+<li><p>Die Rendite einer Aktie von heute auf morgen (in Prozent) ist zufällig.
+Die Werte, die angenommen werden können, liegen alle zwischen <span class="math inline">\(-100\%\)</span>
+(denn mehr als alles kann man bei Aktien wegen der Haftungsgrenze der Aktionäre
+nicht verlieren) und unendlich, d.h. <span class="math inline">\(\Omega=[-100, \infty]\)</span>. Es spielt
+hier keine Rolle, dass extreme Renditen von mehr als 10 Prozent Gewinn oder
+Verlust pro Tag sehr selten auftreten. Sie sind denkbar und
+gehören darum in die Ergebnismenge hinein.</p></li>
+</ul>
+</div>
+<div id="ereignisse" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Ereignisse<a class="anchor" aria-label="anchor" href="#ereignisse"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf
+einzelne Ergebnisse aus der Ergebnismenge, sondern oft auf mehrere
+Ergebnisse. Zusammenfassungen von Ergebnissen nennt man Ereignisse
+(engl. events). Sie werden meist mit großen lateinischen Buchstaben
+bezeichnet (<span class="math inline">\(A, B, \ldots\)</span>).</p>
+<blockquote>
+<p>Teilmengen der Ergebnismenge <span class="math inline">\(\Omega\)</span> heißen <strong>Ereignisse</strong>.
+Ein Ereignis <span class="math inline">\(A\)</span> tritt ein, wenn das Ergebnis <span class="math inline">\(\omega\)</span> des
+Zufallsvorgangs Element des Ereignisses ist, d.h.
+wenn <span class="math inline">\(\omega\in A\)</span>.</p>
+</blockquote>
+<p>Zu den Ereignissen gehören auch die leere Menge <span class="math inline">\(\emptyset\)</span> und
+<span class="math inline">\(\Omega\)</span> selber. Das Ereignis <span class="math inline">\(\emptyset\)</span> nennt man das
+<strong>unmögliche Ereignis</strong>, weil es nie eintreten kann. Das Ereignis <span class="math inline">\(\Omega\)</span>
+nennt man das <strong>sichere Ereignis</strong>, weil es mit Sicherheit eintritt. Wenn ein
+Ereignis nur ein einziges Ergebnis enthält (z.B. <span class="math inline">\(A=\{\omega\}\)</span>),
+dann spricht man von einem <strong>Elementarereignis</strong>.</p>
+<p>Weil Ereignisse Mengen sind, lassen sie sich nach den normalen
+Regeln der Mengenlehre verknüpfen:</p>
+<ul>
+<li><p>Vereinigungsmenge: Das Ereignis <span class="math inline">\(A\cup B\)</span> tritt ein, wenn <span class="math inline">\(A\)</span>
+<strong>oder</strong> <span class="math inline">\(B\)</span> eintritt (oder beide).</p></li>
+<li><p>Schnittmenge: Das Ereignis <span class="math inline">\(A\cap B\)</span> tritt ein, wenn <span class="math inline">\(A\)</span> <strong>und</strong>
+<span class="math inline">\(B\)</span> eintreten.</p></li>
+<li><p>Komplementärmenge: Das Ereignis <span class="math inline">\(\bar A\)</span> tritt ein, wenn <span class="math inline">\(A\)</span>
+<strong>nicht</strong> eintritt.</p></li>
+</ul>
+<p>Bei einem Zufallsvorgang tritt immer nur ein Ergebnis ein, da aber dieses
+Ergebnis Element mehrerer Ereignisse sein kann, können durchaus mehrere
+Ereignisse eintreten. Die Unterscheidung zwischen Ergebnis und Ereignis
+mag zunächst etwas haarspalterisch erscheinen, sie ist aber wichtig und
+nützlich, denn sie erleichtert später den Umgang mit Wahrscheinlichkeiten.
+Über Wahrscheinlichkeiten wurde bisher noch nichts gesagt, das folgt
+direkt im nächsten Kapitel.</p>
+<p><strong>Beispiele:</strong></p>
+<ul>
+<li><p>Wir betrachten einen Würfelwurf mit der Ergebnismenge
+<span class="math inline">\(\Omega=\{1,2,3,4,5,6\}\)</span> und definieren die folgenden drei
+Ereignisse:
+<span class="math display">\[
+\begin{align*}
+A &amp;= \{2,4,6\}\\
+B &amp;= \{1,2,3\}\\
+C &amp;= \{2\}
+\end{align*}
+\]</span>
+Die Ereignisse lassen sich auch in Worten ausdrücken: <span class="math inline">\(A\)</span> ist das
+Ereignis “Eine gerade Zahl wird gewürfelt,” <span class="math inline">\(B\)</span> ist “Eine Zahl kleiner
+als 4 wird gewürfelt” und <span class="math inline">\(C\)</span> ist “Eine 2 wird gewürfelt.” Wenn bei dem
+Wurf nun eine 6 gewürfelt wird, dann tritt <span class="math inline">\(A\)</span> ein, <span class="math inline">\(B\)</span> und <span class="math inline">\(C\)</span> dagegen
+nicht. Wenn eine 2 auftritt, dann treten alle drei Ereignisse ein.</p></li>
+<li><p>Nun werden zwei Würfel geworfen. Die Ergebnismenge ist
+<span class="math display">\[
+\begin{align*}
+\Omega=\{&amp;11,12,13,14,15,16,\\
+&amp;21,22,23,24,25,26,\\
+&amp;31,32,33,34,35,36,\\
+&amp;41,42,43,44,45,46,\\
+&amp;51,52,53,54,55,56,\\
+&amp;61,62,63,64,65,66\}
+\end{align*}
+\]</span>
+Wir betrachten die drei Ereignisse
+<span class="math display">\[
+\begin{align*}
+A &amp;= \{11,12,13,14,15,16\}\\
+B &amp;= \{26,35,44,53,62\}\\
+C &amp;= \{11,22,33,44,55,66\}
+\end{align*}
+\]</span>
+In Worten bedeutet <span class="math inline">\(A\)</span>: “Der erste Würfel zeigt eine 1,”
+<span class="math inline">\(B\)</span>: “Die Augensumme beträgt 8” und <span class="math inline">\(C\)</span>: “Es liegt ein Pasch vor” (d.h. auf
+beiden Würfel ist die gleiche Augenzahl zu sehen). Wenn nach dem Wurf das
+Ergebnis “44” auftritt, dann treten <span class="math inline">\(B\)</span> und <span class="math inline">\(C\)</span> ein, aber <span class="math inline">\(A\)</span> nicht. Bei
+dem Ergebnis “25” tritt keins der drei Ereignisse ein. Bei “15” tritt nur
+<span class="math inline">\(A\)</span> ein.</p></li>
+<li><p>Wir betrachten die Tagesrendite einer Aktie mit der Ergebnismenge
+<span class="math inline">\(\Omega=[-100, \infty]\)</span>. Außerdem definieren wir die Ereignisse
+<span class="math display">\[
+\begin{align*}
+A &amp;= [-100, -20]\\
+B &amp;= [-2,2]\\
+C &amp;= [-100,-10]\cup [10,\infty].
+\end{align*}
+\]</span>
+In Worten könnte man diese Ereignisse so ausdrücken: <span class="math inline">\(A\)</span>: “Ein katastrophaler
+Absturz der Aktie,” <span class="math inline">\(B\)</span>: “Eine normale Tagesrendite” und <span class="math inline">\(C\)</span>: “Eine sehr
+starke Schwankung.” Wenn die realisierte Tagesrendite dann 1 Prozent ist,
+tritt nur <span class="math inline">\(B\)</span> ein. Wenn der Kurs um 25 Prozent fällt, treten <span class="math inline">\(A\)</span> und <span class="math inline">\(C\)</span>
+auf.</p></li>
+</ul>
+<p>Die Kardinalität der Ergebnismenge bezeichnen wir mit <span class="math inline">\(|\Omega|\)</span>. Wenn
+<span class="math inline">\(\Omega\)</span> nur endlich viele Elemente hat, ist die Kardinalität schlicht und
+einfach die Anzahl der Elemente. Es ist aber auch möglich (und in vielen
+ökonomischen Anwendungen auch üblich), dass die Ergebnismenge unendlich
+viele Elemente enthält. In solchen Fällen kann es zu einigen
+mathematisch-technischen Schwierigkeiten kommen, die wir in diesem Kurs
+aber einfach ignorieren. Eine sorgfältigere Behandlung findet in dem
+Wahlpflichtmodul “Advanced Statistics” statt.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Data Science 2: Statistische Inferenz</strong>" was written by Mark Trede. It was last built on 2021-12-29.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
