@@ -279,6 +279,13 @@ wird
 $$
 P(A\cap B)={P(B)P(A|B)}
 $$
+
+**Beispiele:**
+
+- Eins
+
+- Zwei
+
 Das lässt sich auf mehr als zwei Ereignisse erweitern:
 $$
 \begin{align*}
@@ -327,6 +334,9 @@ Wahrscheinlichkeiten der bedingenden Ereignisse.
 
 **Beispiele:**
 
+- Eins
+
+- Zwei
 
 
 ## Satz von Bayes {#bayes}
@@ -350,4 +360,49 @@ gilt
 $$
 P(A|B)P(B)=P(B|A)P(A).
 $$
-Daraus folgt unmittelbar der Satz von Bayes.
+Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
+
+**Beispiele:**
+
+- Eins
+
+- Zwei
+
+## Unabhängigkeit
+
+Zwei Ereignisse $A$ und $B$ heißen unabhängig (oder auch stochastisch
+unabhängig), wenn
+$$
+P(A\cap B)=P(A)\cdot P(B).
+$$
+Eine alternative (fast äquivalente) Definition der Unabhängigkeit lautet so:
+Die Ereignisse $A$ und $B$ heißen unabhängig, wenn gilt
+$$
+P(A|B)=P(A)
+$$
+bzw. wenn
+$$
+P(B|A)=P(B).
+$$
+Die Definition über die bedingten Wahrscheinlichkeiten ist etwas intuitiver.
+Wenn das Wissen darüber, ob $A$ eingetreten ist oder nicht, für die
+Wahrscheinlichkeit von $B$ keine Rolle spielt (und umgekehrt),
+dann sind $A$ und $B$ unabhängig. 
+
+Achten Sie darauf, Unabhängigkeit nicht mit Disjunktheit zu verwechseln.
+Zur Erinnerung: Die Ereignisse $A$ und $B$ sind disjunkt, wenn 
+$A\cap B=\emptyset$, so dass $P(A\cap B)=0$. Disjunkte Ereignisse
+können also nicht beide zusammen eintreten. Wenn $A$ eintritt, kann 
+man sicher sein, dass $B$ nicht eintritt. Und wenn $B$ eintritt,
+kann man sicher sein, dass $A$ nicht eintritt. Unabhängige Ereignisse
+können hingegen sehr wohl zusammen eintreten.
+
+Wie lässt sich die Definition von Unabhängigkeit auf mehr als
+zwei Ereignisse verallgemeinern?
+
+
+## Vier-Felder-Tafeln
+
+
+## Wahrscheinlichkeitsbäume
+
