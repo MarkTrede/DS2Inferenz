@@ -398,8 +398,43 @@ kann man sicher sein, dass $A$ nicht eintritt. Unabhängige Ereignisse
 können hingegen sehr wohl zusammen eintreten.
 
 Wie lässt sich die Definition von Unabhängigkeit auf mehr als
-zwei Ereignisse verallgemeinern?
+zwei Ereignisse verallgemeinern? Das ist etwas komplizierter, als man es
+vielleicht zunächst vermutet. Intuitiv gesprochen liegt bei nur zwei
+Ereignissen ($A$ und $B$) Unabhängigkeit dann vor, wenn Informationen über die 
+Ausprägung eines Ereignisses die Wahrscheinlichkeit für das andere Ereignis nicht
+verändern. Bei drei Ereignissen ($A$, $B$, $C$) kann es passieren, dass die 
+Information über $A$ weder die Wahrscheinlichkeit von $B$ noch die von
+$C$ verändert, dass aber die Information über $A$ *und* $B$ dennoch
+die Wahrscheinlichkeit von $C$ verändert. Sehen wir uns dazu ein einfaches
+Beispiel an:
 
+**Beispiel:**
+
+Zwei faire Würfel werden geworfen (mit der üblichen Ergebnismenge). Wir definieren 
+die folgenden drei Ereignisse:
+
+$A$: Die Augenzahl des ersten Würfels ist ungerade
+
+$B$: Die Augenzahl des zweiten Würfels ist ungerade
+
+$C$: Die Summe der Augenzahlen ist ungerade
+
+Wenn man zwei beliebige dieser Ereignisse auswählt, dann sind sie 
+unabhängig voneinander. Das dritte Ereignis ist aber von den beiden
+anderen abhängig, weil die Summe von zwei ungeraden Zahlen niemals
+ungerade ist. Weil die Situation bei mehr als zwei Ereignissen
+also komplexer ist, wird Unabhängigkeit für mehrere Ereignisse
+so definiert:
+
+> Seien $A_1,\ldots,A_n$ Ereignisse. Sie heißen *global unabhängig*, 
+> wenn für jedes $m\in \{2,\ldots,n\}$ und alle möglichen
+> Indizes $1\le i_1<\ldots<i_m\le n$ gilt
+> $$P(A_{i_1}\cap\ldots\cap A_{i_m})=P(A_{i_1})\cdot\ldots\cdot P(A_{i_m})$$.
+
+Die formale Definition ist nicht ganz leicht zu durchschauen. Letztlich
+sagt sie aber einfach aus: Bei globaler Unabhängigkeit ist die Wahrscheinlichkeit,
+dass beliebig viele beliebig ausgewählte Ereignisse gemeinsam eintreten,
+gerade dem Produkt der einzelnen Wahrscheinlichkeiten entspricht. 
 
 ## Vier-Felder-Tafeln
 
