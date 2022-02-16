@@ -438,6 +438,34 @@ gerade dem Produkt der einzelnen Wahrscheinlichkeiten entspricht.
 
 ## Vier-Felder-Tafeln
 
+Die Vier-Felder-Tafel ist ein besonders einfaches, aber nützliches
+Werkzeug für Fragen zu Wahrscheinlichkeiten, wenn zwei genau Ereignisse 
+(und ihre Gegenereignisse) eine Rolle spielen, z.B. $A$ und $B$ (und 
+$\bar A$ und $\bar B$). Jedes der beiden Ereignisse kann eintrefen oder nicht,
+so dass es insgesamt vier Kombinationsmöglichkeiten gibt. Die Wahrscheinlichkeiten
+dieser vier Möglichkeiten werden wie folgt angeordnet:
+$$
+\begin{array}{c|cc|} 
+& A & \bar A& \\ \hline
+B & P(A\cap B) & P(\bar A\cap B)\\
+\bar B & P(A\cap \bar B) & P(\bar A\cap \bar B)\\ \hline
+\end{array}
+$$
+Da $P((A\cap B)\cup (A\cap \bar B))=P(A)$ ist (und entsprechend für
+die anderen Zeilen und Spalten), kann man die Ränder ergänzen:
+$$
+\begin{array}{c|cc|c} 
+& A & \bar A& \\ \hline
+B & P(A\cap B) & P(\bar A\cap B) & P(B)\\
+\bar B & P(A\cap \bar B) & P(\bar A\cap \bar B) & P(\bar B)\\ \hline
+& P(A) & P(\bar A) & 1
+\end{array}
+$$
+Weil die Zeilen und Spalten sich immer zu den Randwerten addieren müssen,
+kann man Felder leicht ergänzen, wenn in einer Zeilen oder
+Spalte ein Wert fehlt.
+
+
 
 ## Wahrscheinlichkeitsbäume
 
