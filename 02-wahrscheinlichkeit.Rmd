@@ -465,7 +465,104 @@ Weil die Zeilen und Spalten sich immer zu den Randwerten addieren müssen,
 kann man Felder leicht ergänzen, wenn in einer Zeilen oder
 Spalte ein Wert fehlt.
 
+Will man eine Vier-Felder-Tafel ausfüllen, dann ist es wichtig darauf zu
+achten, ob es sich bei den vorgegebenen Wahrscheinlichkeiten um gemeinsame
+Wahrscheinlichkeiten (z.B. $A$ und $B$ bzw. $P(A\cap B)$) handelt, oder
+um bedingte Wahrscheinlichkeiten (also z.B. $P(A|B)$). Letztere können
+leicht umgeformt werden, wenn man den Zusammenhang 
+\[
+P(A\cap B)=P(A|B)P(B)
+\]
+beachtet (oder die analogen Zusammenhänge für andere bedingte
+Wahrscheinlichkeiten).
+
+**Beispiele:**
 
 
 ## Wahrscheinlichkeitsbäume
 
+Vier-Felder-Tafeln sind ein nützliches Werkzeug, um einfaches
+Wahrscheinlichkeitsprobleme zu lösen, in denen nur zwei Ereignisse und
+ihre Gegenwahrscheinlichkeiten vorkommen. Ein Werkzeug, mit dem man auch
+allgemeine und etwas komplexere Probleme übersichtlich bearbeiten kann,
+sind Wahrscheinlichkeitsbäume. Die Ereignisse - es können hier durch
+aus mehr als zwei sein - bilden die Äste des Baums.
+
+**Beispiel:** 
+
+Definition der Ereignisse:
+$$
+\begin{eqnarray*}
+A &\text{:}&\text{ Die Firma hat Erfolg} \\
+B &\text{:}&\text{ Der Manager strengt sich an}
+\end{eqnarray*}
+$$
+Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$. 
+Für die Auszahlung von Boni an einen Manager ist es wichtig zu wissen,
+ob er eine gute Leistung erbracht hat. Wir wollen bestimmen, wie hoch die
+Wahrscheinlichkeit ist, dass der Manager sich tatsächlich für den Erfolg
+angestrengt hat, wenn wir beobachten, dass die Firma erfolgreich ist. Oder
+anders gesagt, ist der Erfolg der Firma wirklich ein Indikator für eine
+gute Leistung?
+
+Wir nehmen an (auch wenn es in der Praxis unrealistisch ist, diese
+Werte zu kennen):
+$$
+\begin{eqnarray*}
+P\left( A|B\right) &=&0.8 \\
+P(A|\bar{B}) &=&0.5 \\
+P\left( B\right) &=&0.6
+\end{eqnarray*}
+$$
+Hier handelt es sich um eine Fragestellung, die auch mit einer Vier-Felder-Tafel
+beantwortet werden könnte. Trotzdem nutzen wir nun einen Wahrscheinlichkeitsbaum.
+Auf der ersten Ebene verzweigt der Baum in die beiden Ereignisse
+$B$ und $\bar B$, denn wir kennen bedingte Wahrscheinlichkeiten, die diese
+beiden Ereignisse als Bedingung haben. An die beiden Zweige schreiben wir
+die Ereignisse und ihre Wahrscheinlichkeiten. Die Wahrscheinlichkeit von 0.4
+für das Ereignis $\bar B$ ergibt sich aus der Gegenwahrscheinlichkeit von $B$.
+```{r}
+plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F)
+points(c(0,0.4,0.4),c(0.5,0.2,0.8))
+lines(c(0.4,0,0.4),c(0.2,0.5,0.8))
+text(0.2,0.7,expression(B))
+text(0.35,0.83,0.6)
+text(0.35,0.17,0.4)
+text(0.2,0.29,expression(bar(B)))
+```
+Auf der zweiten Stufe werden nun die bedingten Ereignisse und Wahrscheinlichkeiten 
+ergänzt, einmal unter der Bedingung, dass $B$ eingetreten ist, einmal unter 
+der Bedingung, dass $\bar B$ eingetreten ist. An die neuen Zweige werden 
+die zugehörigen bedingten Wahrscheinlichkeiten geschrieben. Dabei nutzen wir
+wiederum die Gegenwahrscheinlichkeiten der bedingten Ereignisse.
+```{r echo=FALSE}
+plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F)
+points(c(0,0.4,0.4,0.8,0.8,0.8,0.8),c(0.5,0.2,0.8,0,0.4,0.6,1))
+lines(c(0.4,0,0.4),c(0.2,0.5,0.8))
+lines(c(0.8,0.4,0.8),c(0,0.2,0.4))
+lines(c(0.8,0.4,0.8),c(0.6,0.8,1))
+text(0.2,0.7,expression(B))
+text(0.2,0.29,expression(bar(B)))
+text(0.6,0.04,expression(bar(A)))
+text(0.6,0.35,expression(A))
+text(0.6,0.65,expression(bar(A)))
+text(0.6,0.95,expression(A))
+text(c(0.35,0.35,0.75,0.75,0.75,0.75),
+     c(0.3,0.7,0.93,0.67,0.33,0.07),
+     c(0.4,0.6,0.8,0.2,0.5,0.5))
+```
+Die Wahrscheinlichkeiten für $A\cap B$, $A\cap \bar B$, $\bar A\cap B$ und
+$\bar A\cap\bar b$ ergeben sich nun, indem man entlang der Äste die
+Wahrscheinlichkeiten multipliziert. Man erhält
+$$
+\begin{align*}
+P(A\cap B)&=0.6\cdot 0.8 = 0.48\\
+P(\bar A\cap B)&=0.6\cdot 0.2 = 0.12\\
+P(A\cap \bar B)&=0.4\cdot 0.5 = 0.2\\
+P(\bar A\cap \bar B)&=0.4\cdot 0.5 = 0.2
+\end{align*}
+$$
+Die (unbedingten) Wahrscheinlichkeiten $P(A)$ und $P(\bar A)$ ergeben sich,
+indem man die Wahrscheinlichkeiten aller Pfade aufaddiert, die einen $A$-Ast
+(bzw. einen $\bar A$-Ast) haben. Es ergibt sich $P(A)=0.68$ und 
+$P(\bar A)=0.32$. 
