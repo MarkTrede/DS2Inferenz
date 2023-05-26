@@ -61,8 +61,6 @@ Die Ergebnismenge ist in diesem Fall $\Omega=\mathbb{R}^+_0$ (die
 Menge der nicht-negativen reellen Zahlen).
 
 
-
-
 ## Ereignisse
 
 Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf 
@@ -191,3 +189,45 @@ viele Elemente enthält. In solchen Fällen kann es zu einigen
 mathematisch-technischen Schwierigkeiten kommen, die wir in diesem Kurs
 aber einfach ignorieren. Eine sorgfältigere Behandlung findet in dem
 Wahlpflichtmodul "Advanced Statistics" statt. 
+
+## Mengen in R
+
+In der Programmierumgebung R können Mengen durch Vektoren repräsentiert werden,
+zumindest wenn die Anzahl der Elemente in den Mengen nicht zu groß ist.
+Die Vektoren können entweder Zahlen oder Zeichen(ketten) als
+Elemente enthalten. 
+
+Die vier Mengen
+$$
+\begin{align*}
+\Omega &=\{1,2,3,4,5,6\} \\
+A &= \{2,4,6\}\\
+B &= \{1,2,3\}\\
+C &= \{2\}
+\end{align*}
+$$
+können in R beispielsweise so dargestellt werden:
+```{r}
+Omega <- 1:6
+A <- c(2,4,6)
+B <- c(1,2,3)
+C <- 2
+```
+Das Ereignis "A und B" entspricht der Schnittmenge
+$A\cap B$. In R finden wir dieses Ereignis mit der
+Funktion `intersect`.
+```{r}
+intersect(A,B)
+```
+Das Ereignis "A oder B" entspricht der Vereinigungsmenge
+$A\cup B$. Dazu brauchen wir die R-Funktion `union`.
+```{r}
+union(A,B)
+```
+Das Komplementärereignis "nicht A" enthält alle Elemente
+aus $\Omega$, die nicht in der Menge $A$ enthalten sind,
+also die Mengendifferenz.
+```{r}
+setdiff(Omega,A)
+```
+

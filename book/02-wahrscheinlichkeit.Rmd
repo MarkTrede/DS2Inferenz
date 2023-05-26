@@ -462,8 +462,13 @@ B & P(A\cap B) & P(\bar A\cap B) & P(B)\\
 \end{array}
 $$
 Weil die Zeilen und Spalten sich immer zu den Randwerten addieren müssen,
-kann man Felder leicht ergänzen, wenn in einer Zeilen oder
-Spalte ein Wert fehlt.
+kann man Felder leicht ergänzen, wenn in einer Zeile oder
+Spalte ein Wert fehlt. Eine häufiger Fehler bei der Konstruktion von
+Vier-Felder-Tafeln besteht darin, dass man bedingte Wahrscheinlichkeiten
+in die Felder einträgt, also beispielsweise $P(A|B)$ anstelle von
+$P(A\cap B)$. Wenn die bedingte Wahrscheinlichkeit $P(A|B)$ bekannt ist,
+hilft das bei der Erstellung der Vier-Felder-Tafel aber durchaus weiter,
+weil $P(A\cap B)=P(A|B)P(B)$ ist. 
 
 Will man eine Vier-Felder-Tafel ausfüllen, dann ist es wichtig darauf zu
 achten, ob es sich bei den vorgegebenen Wahrscheinlichkeiten um gemeinsame
@@ -521,7 +526,7 @@ $B$ und $\bar B$, denn wir kennen bedingte Wahrscheinlichkeiten, die diese
 beiden Ereignisse als Bedingung haben. An die beiden Zweige schreiben wir
 die Ereignisse und ihre Wahrscheinlichkeiten. Die Wahrscheinlichkeit von 0.4
 für das Ereignis $\bar B$ ergibt sich aus der Gegenwahrscheinlichkeit von $B$.
-```{r}
+```{r echo=FALSE}
 plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F)
 points(c(0,0.4,0.4),c(0.5,0.2,0.8))
 lines(c(0.4,0,0.4),c(0.2,0.5,0.8))
