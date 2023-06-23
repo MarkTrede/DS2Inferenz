@@ -1,2 +1,0 @@
-# Punktschätzung {#punktschaetzung}
-

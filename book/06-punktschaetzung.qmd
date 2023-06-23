@@ -1,0 +1,17 @@
+# Punktschätzung {#punktschaetzung}
+
+## Unverzerrtheit
+
+## Wichtige Schätzer
+
+### Erwartungswert
+
+### Anteile
+
+### Varianz
+
+### Quantile
+
+### Korrelationskoeffizient
+
+## Maximum-Likelihood-Schätzer

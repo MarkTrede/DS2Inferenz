@@ -1,0 +1,14 @@
+{
+  "index.qmd": {
+    "index.html": "bb3b4a85"
+  },
+  "01-zufall.qmd": {
+    "01-zufall.html": "e7a19ccd"
+  },
+  "02-wahrscheinlichkeit.qmd": {
+    "02-wahrscheinlichkeit.html": "05454443"
+  },
+  "03-zufallsvariablen.qmd": {
+    "03-zufallsvariablen.html": "20688c64"
+  }
+}

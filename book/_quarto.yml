@@ -1,0 +1,28 @@
+project:
+  type: book
+
+book:
+  title: "Data Science 2: Statistische Inferenz"
+  author: "Mark Trede"
+  date: "Juni 2023"
+  chapters:
+    - index.qmd
+    - 01-zufall.qmd
+    - 02-wahrscheinlichkeit.qmd
+    - 03-zufallsvariablen.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: source
+
+callout-icon: false
+
+callout-tip-title: "Beispiele"
+
+callout-note-title: "Definition"

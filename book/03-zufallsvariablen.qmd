@@ -1,0 +1,79 @@
+# Zufallsvariablen {#zufallsvariablen}
+
+Die wichtigsten formalen Grundlagen der Wahrscheinlichkeitstheorie sind nun gelegt. Darauf aufbauend definieren wir Zufallsvariablen. Zufallsvariablen sind - intuitiv gesprochen - Zahlen, deren Wert man noch nicht kennt, deren Wert sich aber (irgendwann) realisiert. Die formale Definition von Zufallsvariablen bezieht sich auf die Ergebnismenge.
+
+::: {.callout-note}
+## Definition
+
+Eine Abbildung $$
+X: \Omega\rightarrow \mathbb{R}
+$$ heißt Zufallsvariable.
+:::
+
+Eine Zufallsvariable kann man sich zwar als eine Zahl, deren Wert man noch nicht kennt, vorstellen, formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
+
+::: {.callout-tip}
+## Beispiel
+
+xxx
+:::
+
+Wenn die Zufallsvariable sich realisiert, bezeichnet man die Realisation gewöhnlich mit einem Kleinbuchstaben. Beispielsweise ist $x$ die Realisation der Zufallsvariable $X$. Gedanklich ist es oft hilfreich, sich $X$ (also die Zufallsvariable) als die Situation ex ante und $x$ (also die Realisierung) als die Situation ex post vorzustellen.
+
+Beachten Sie den großen Unterschied zwischen einer Zufallsvariable und ihrer Realisation. Die Zufallsvariable ist eine Funktion, die Realisation ist eine reelle Zahl. Wahrscheinlichkeitsaussagen lassen sich nur über Zufallsvariablen treffen, nicht über ihre Realisation.
+
+Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen eine große Hilfe. Praktisch alle Vorgänge, bei denen der Zufall oder Unwissenheit eine Rolle spielen, lassen sich gut mit Hilfe von Zufallsvariablen beschreiben.
+
+::: {.callout-tip}
+## Beispiele
+
+- Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert.
+
+- $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$.
+
+- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population. Nachdem ein Haushalt ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und ist zum Beispiel $x=3456$.
+:::
+
+## Verteilungsfunktion
+
+Wir wissen zwar nicht, welchen Wert eine Zufallsvariable annehmen wird, aber oft wissen wir, dass bestimmte Werte mit einer höheren Wahrscheinlichkeit vorkommen als andere Werte. So wissen wir zum Beispiel, dass beim Werfen mit zwei Würfeln die Augensumme 2 weniger wahrscheinlich ist als die Augensumme 7, denn für die Augensumme 2 müssen beide Würfel eine 1 zeigen, für die Augensumme 7 gibt es dagegen viel mehr Möglichkeiten (nämlich 16, 25, 34, 43, 52 und 61). Um die Verteilung einer Zufallsvariable zu beschreiben, gibt es mehrere Möglichkeiten. Eine besonders wichtige ist die Verteilungsfunktion.
+
+::: {.callout-note}
+## Definition
+
+Die **Verteilungsfunktion** einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
+$$
+F_X(x)=P(\{\omega: X(\omega)\le x\})
+$$
+oder in Kursschreibweise
+$$
+F_X(x)=P(X\le x).
+$$
+:::
+
+
+
+
+## Quantilfunktion
+
+## Erwartungswert
+
+## Varianz
+
+## Diskrete Standardverteilungen
+
+### Binomialverteilung
+
+### Poisson-Verteilung
+
+### Geometrische Verteilung
+
+## Stetige Standardverteilungen
+
+### Standardnormalverteilung
+
+### Normalverteilung
+
+### Exponentialverteilung
+
+### Paretoverteilung

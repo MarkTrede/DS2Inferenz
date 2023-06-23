@@ -1,1 +1,0 @@
-# Intervallschätzung {#intervallschaetzung}
