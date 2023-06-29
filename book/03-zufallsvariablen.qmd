@@ -2,19 +2,17 @@
 
 Die wichtigsten formalen Grundlagen der Wahrscheinlichkeitstheorie sind nun gelegt. Darauf aufbauend definieren wir Zufallsvariablen. Zufallsvariablen sind - intuitiv gesprochen - Zahlen, deren Wert man noch nicht kennt, deren Wert sich aber (irgendwann) realisiert. Die formale Definition von Zufallsvariablen bezieht sich auf die Ergebnismenge.
 
-::: {.callout-note}
-## Definition
-
-Eine Abbildung $$
+::: callout-note
+Eine Abbildung 
+$$
 X: \Omega\rightarrow \mathbb{R}
-$$ heißt Zufallsvariable.
+$$ 
+heißt Zufallsvariable.
 :::
 
 Eine Zufallsvariable kann man sich zwar als eine Zahl, deren Wert man noch nicht kennt, vorstellen, formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
 
-::: {.callout-tip}
-## Beispiel
-
+::: callout-tip
 xxx
 :::
 
@@ -24,9 +22,7 @@ Beachten Sie den großen Unterschied zwischen einer Zufallsvariable und ihrer Re
 
 Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen eine große Hilfe. Praktisch alle Vorgänge, bei denen der Zufall oder Unwissenheit eine Rolle spielen, lassen sich gut mit Hilfe von Zufallsvariablen beschreiben.
 
-::: {.callout-tip}
-## Beispiele
-
+::: callout-tip
 - Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert.
 
 - $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$.
@@ -38,9 +34,7 @@ Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen ein
 
 Wir wissen zwar nicht, welchen Wert eine Zufallsvariable annehmen wird, aber oft wissen wir, dass bestimmte Werte mit einer höheren Wahrscheinlichkeit vorkommen als andere Werte. So wissen wir zum Beispiel, dass beim Werfen mit zwei Würfeln die Augensumme 2 weniger wahrscheinlich ist als die Augensumme 7, denn für die Augensumme 2 müssen beide Würfel eine 1 zeigen, für die Augensumme 7 gibt es dagegen viel mehr Möglichkeiten (nämlich 16, 25, 34, 43, 52 und 61). Um die Verteilung einer Zufallsvariable zu beschreiben, gibt es mehrere Möglichkeiten. Eine besonders wichtige ist die Verteilungsfunktion.
 
-::: {.callout-note}
-## Definition
-
+::: callout-note
 Die **Verteilungsfunktion** einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
 $$
 F_X(x)=P(\{\omega: X(\omega)\le x\})

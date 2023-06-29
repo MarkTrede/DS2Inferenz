@@ -16,18 +16,13 @@ bibliography: references.bib
 
 format:
   html:
-    theme: sandstone
-  pdf:
-    documentclass: scrreprt
+    theme: cosco
 
 editor: source
 
 toc-title-document: "Inhalt"
-
 toc-title-website: "In diesem Kapitel"
 
 callout-icon: false
-
 callout-tip-title: "Beispiele"
-
 callout-note-title: "Definition"

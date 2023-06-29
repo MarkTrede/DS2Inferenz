@@ -15,7 +15,8 @@ wenn gilt
 -   Normierung: $P(\Omega)=1$
 
 -   Additivität: Für disjunkte Ereignisse $A$ und $B$ (d.h.
-    $A\cap B=\emptyset$) ist $$
+    $A\cap B=\emptyset$) ist 
+    $$
     P(A\cup B)=P(A)+P(B).
     $$
 :::
@@ -96,9 +97,11 @@ vermuten, dass beide Seiten mit der gleichen Wahrscheinlichkeit oben
 liegen. Hier liegt also kein Laplace-Experiment vor.
 
 Bei einem Laplace-Experiment ist die Wahrscheinlichkeit, dass ein
-Ergebnis $A$ eintritt leicht zu ermitteln. Sie beträgt $$
+Ergebnis $A$ eintritt leicht zu ermitteln. Sie beträgt 
+$$
 P(A)=\frac{|A|}{|\Omega|},
-$$ also die Anzahl der Ergebnisse in $A$ dividiert durch die Anzahl
+$$ 
+also die Anzahl der Ergebnisse in $A$ dividiert durch die Anzahl
 aller Ergebnisse. Um Aussagen über Wahrscheinlichkeiten zu treffen, muss
 man also abzählen, wie viele Ergebnisse in den Mengen sind. Das ist
 manchmal sehr einfach, kann aber bei großen Mengen kompliziert sein. In
@@ -111,7 +114,8 @@ denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
 -   Ein Würfel wird geworfen. Es handelt sich um ein Laplace-Experiment.
     Die Anzahl der Ergebnisse in $\Omega$ beträgt 6. Sei $A$ das
     Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$. Dann
-    ist $$
+    ist 
+    $$
     \begin{align*}
     P(A)&=\frac{|A|}{|\Omega|}\\
     &=\frac{3}{6}\\
@@ -120,7 +124,8 @@ denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
     $$
 
 -   Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine
-    Rolle, wie man die Ergebnismenge festlegt. Wir wählen $$
+    Rolle, wie man die Ergebnismenge festlegt. Wir wählen 
+    $$
     \begin{align*}
     \Omega=\{&11,12,13,14,15,16,\\
     &21,22,23,24,25,26,\\
@@ -129,23 +134,29 @@ denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
     &51,52,53,54,55,56,\\
     &61,62,63,64,65,66\}
     \end{align*}
-    $$ weil es sich dann um ein Laplace-Experiment handelt. Die
+    $$ 
+    weil es sich dann um ein Laplace-Experiment handelt. Die
     Ergebnisse "24" und "42" sind zwar nicht unterscheidbar, wenn die
     Würfel gleich aussehen, aber wir können den zuerst geworfenen Würfel
     (oder den weiter links liegenden) als ersten Würfel bezeichnen. Dass
     alle 36 Ergebnisse gleich wahrscheinlich sind, können wir (nur) mit
     unserem Alltagswissen begründen, nicht aus der Mathematik heraus.
     Sei $A$ das Ereignis "Die Augenzahlen der beiden Würfel
-    unterscheiden sich um 2", d.h. $$
+    unterscheiden sich um 2", d.h. 
+    $$
     A=\{13,24,31,35,42,46,53,64\}.
-    $$ Dann gilt $$
+    $$ 
+    Dann gilt 
+    $$
     \begin{align*}
     P(A)&=\frac{|A|}{|\Omega|}\\
     &=\frac{8}{36}\\
     &=\frac{2}{9}\\
     &\approx 0.2222.
     \end{align*}
-    $$ Als Ergebnismenge wäre auch $$
+    $$ 
+    Als Ergebnismenge wäre auch 
+    $$
     \begin{align*}
     \Omega=\{
     &11,12,13,14,15,16,\\
@@ -155,9 +166,10 @@ denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
     &55,56,\\
     &66\}
     \end{align*}
-    $$ möglich gewesen, wenn die beiden Würfel nicht unterscheidbar
+    $$ 
+    möglich gewesen, wenn die beiden Würfel nicht unterscheidbar
     sind. Dann wäre aber die Annahme eines Laplace-Experiments nicht
-    mehr korrekt Die Elementarereignisse "11" und "12" sind
+    mehr korrekt, denn die Elementarereignisse "11" und "12" sind
     beispielsweise nicht gleich wahrscheinlich (wir wissen aus unserer
     Erfahrung, dass ein Pasch seltener auftritt).
 :::
@@ -175,9 +187,11 @@ möglichen Ergebnisse eingrenzen. Dadurch ändern sich die
 Wahrscheinlichkeiten für Ereignisse.
 
 ::: callout-note
-Wir betrachten zwei Ereignsse $A$ und $B$ mit $P(B)>0$. Dann heißt $$
+Wir betrachten zwei Ereignsse $A$ und $B$ mit $P(B)>0$. Dann heißt 
+$$
 P(A|B)=\frac{P(A\cap B)}{P(B)}
-$$ die **bedingte Wahrscheinlichkeit** von $A$ gegeben $B$
+$$ 
+die **bedingte Wahrscheinlichkeit** von $A$ gegeben $B$.
 :::
 
 Die Notation $A|B$ steht nicht für ein bestimmtes Ereignis, sondern
@@ -203,7 +217,9 @@ Wahrscheinlichkeit.
     &=\frac{P(\{4,6\})}{P(\{4,5,6\})}\\
     &=\frac{2}{3}
     \end{align*}
-    $$ und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet $$
+    $$ 
+    und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet 
+    $$
     \begin{align*}
     P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
     &=\frac{P(\{4,6\})}{P(\{2,4,6\})}\\
@@ -213,14 +229,17 @@ Wahrscheinlichkeit.
 
 -   Zwei Würfel werden geworfen. Sei $A$ das Ereignis "die Augensumme
     ist 10". Sei $B$ das Ereignis "einer der beiden Würfel (oder beide)
-    zeigt eine 2". Dann ist $$
+    zeigt eine 2". Dann ist 
+    $$
     \begin{align*}
     P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
     &=\frac{P(\{\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
     &=0.
     \end{align*}
-    $$ Die bedingte Wahrscheinlichkeit für das Ereignis $C$: "Augensumme
-    ist 5" unter der Bedingung $B$ ist $$
+    $$ 
+    Die bedingte Wahrscheinlichkeit für das Ereignis $C$: "Augensumme
+    ist 5" unter der Bedingung $B$ ist 
+    $$
     \begin{align*}
     P(C|B)&=\frac{P(C\cap B)}{P(B)}\\
     &=\frac{P(\{23,32\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
@@ -285,12 +304,14 @@ $$
 -   Zwei
 :::
 
-Das lässt sich auf mehr als zwei Ereignisse erweitern: $$
+Das lässt sich auf mehr als zwei Ereignisse erweitern: 
+$$
 \begin{align*}
 P(A\cap B \cap C)&=P(C)P(B|C)P(A|B\cap C)\\
 P(A\cap B\cap C\cap D)&=P(D)P(C|D)P(B|C\cap D)P(A|B\cap C\cap D)
 \end{align*}
-$$ Diese Formeln sind bei näherer Betrachtung intuitiv: Die
+$$ 
+Diese Formeln sind bei näherer Betrachtung intuitiv: Die
 Wahrscheinlichkeit, dass $A$, $B$ und $C$ gemeinsam eintreten, ergibt
 sich, indem man zuerst eine der unbedingten Wahrscheinlichkeiten nimmt
 (z.B. $P(C)$). Nun ist $C$ quasi eingetreten und wir arbeiten unter der
@@ -298,7 +319,8 @@ Bedingung $C$ weiter. Die Wahrscheinlichkeit $P(C)$ wird jetzt mit der
 bedingten Wahrscheinlichkeit des nächsten Ereignisses multipliziert,
 also $P(B|C)$. Nun sind $B$ und $C$ eingetreten, und auf der nächsten
 Stufe multiplizieren wir deshalb mit $P(A|B\cap C)$. Eine andere
-Reihenfolge der Bedingungen wäre natürlich ebenfalls möglich, z.B. $$
+Reihenfolge der Bedingungen wäre natürlich ebenfalls möglich, z.B. 
+$$
 P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B).
 $$
 
@@ -335,19 +357,25 @@ die Wahrscheinlichkeiten der bedingenden Ereignisse.
 ## Satz von Bayes {#bayes}
 
 Der Satz von Bayes setzt die beiden bedingten Wahrscheinlichkeiten
-$P(A|B)$ und $P(B|A)$ zueinander in Beziehung. Es gilt $$
+$P(A|B)$ und $P(B|A)$ zueinander in Beziehung. Es gilt 
+$$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
-$$ Um die Bedingung und das Bedingte zu vertauschen, braucht man also
+$$ 
+Um die Bedingung und das Bedingte zu vertauschen, braucht man also
 beide unbedingte Wahrscheinlichkeiten. Die Herleitung des Satzes von
 Bayes ergibt sich aus der Definition der bedingten Wahrscheinlichkeit.
-Wegen $$
+Wegen 
+$$
 \begin{align*}
 P(A|B) &= \frac{P(A\cap B)}{P(B)}\\
 P(B|A) &= \frac{P(A\cap B)}{P(A)}
 \end{align*}
-$$ gilt $$
+$$ 
+gilt 
+$$
 P(A|B)P(B)=P(B|A)P(A).
-$$ Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
+$$ 
+Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
 
 ::: callout-tip
 -   Eins
@@ -357,14 +385,20 @@ $$ Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
 ## Unabhängigkeit
 
 Zwei Ereignisse $A$ und $B$ heißen unabhängig (oder auch stochastisch
-unabhängig), wenn $$
+unabhängig), wenn 
+$$
 P(A\cap B)=P(A)\cdot P(B).
-$$ Eine alternative (fast äquivalente) Definition der Unabhängigkeit
-lautet so: Die Ereignisse $A$ und $B$ heißen unabhängig, wenn gilt $$
+$$ 
+Eine alternative (fast äquivalente) Definition der Unabhängigkeit
+lautet so: Die Ereignisse $A$ und $B$ heißen unabhängig, wenn gilt 
+$$
 P(A|B)=P(A)
-$$ bzw. wenn $$
+$$ 
+bzw. wenn 
+$$
 P(B|A)=P(B).
-$$ Die Definition über die bedingten Wahrscheinlichkeiten ist etwas
+$$ 
+Die Definition über die bedingten Wahrscheinlichkeiten ist etwas
 intuitiver. Wenn das Wissen darüber, ob $A$ eingetreten ist oder nicht,
 für die Wahrscheinlichkeit von $B$ keine Rolle spielt (und umgekehrt),
 dann sind $A$ und $B$ unabhängig.
@@ -410,7 +444,8 @@ wird Unabhängigkeit für mehrere Ereignisse so definiert:
 ::: callout-note
 Seien $A_1,\ldots,A_n$ Ereignisse. Sie heißen *global unabhängig*, wenn
 für jedes $m\in \{2,\ldots,n\}$ und alle möglichen Indizes
-$1\le i_1<\ldots<i_m\le n$ gilt $$
+$1\le i_1<\ldots<i_m\le n$ gilt 
+$$
 P(A_{i_1}\cap\ldots\cap A_{i_m})=P(A_{i_1})\cdot\ldots\cdot P(A_{i_m}).
 $$
 :::
@@ -429,21 +464,25 @@ Werkzeug für Fragen zu Wahrscheinlichkeiten, wenn zwei genau Ereignisse
 $\bar A$ und $\bar B$). Jedes der beiden Ereignisse kann eintrefen oder
 nicht, so dass es insgesamt vier Kombinationsmöglichkeiten gibt. Die
 Wahrscheinlichkeiten dieser vier Möglichkeiten werden wie folgt
-angeordnet: $$
+angeordnet: 
+$$
 \begin{array}{c|cc|} 
 & A & \bar A& \\ \hline
 B & P(A\cap B) & P(\bar A\cap B)\\
 \bar B & P(A\cap \bar B) & P(\bar A\cap \bar B)\\ \hline
 \end{array}
-$$ Da $P((A\cap B)\cup (A\cap \bar B))=P(A)$ ist (und entsprechend für
-die anderen Zeilen und Spalten), kann man die Ränder ergänzen: $$
+$$ 
+Da $P((A\cap B)\cup (A\cap \bar B))=P(A)$ ist (und entsprechend für
+die anderen Zeilen und Spalten), kann man die Ränder ergänzen: 
+$$
 \begin{array}{c|cc|c} 
 & A & \bar A& \\ \hline
 B & P(A\cap B) & P(\bar A\cap B) & P(B)\\
 \bar B & P(A\cap \bar B) & P(\bar A\cap \bar B) & P(\bar B)\\ \hline
 & P(A) & P(\bar A) & 1
 \end{array}
-$$ Weil die Zeilen und Spalten sich immer zu den Randwerten addieren
+$$ 
+Weil die Zeilen und Spalten sich immer zu den Randwerten addieren
 müssen, kann man Felder leicht ergänzen, wenn in einer Zeile oder Spalte
 ein Wert fehlt. Eine häufiger Fehler bei der Konstruktion von
 Vier-Felder-Tafeln besteht darin, dass man bedingte Wahrscheinlichkeiten
@@ -474,12 +513,14 @@ sind Wahrscheinlichkeitsbäume. Die Ereignisse - es können hier durch aus
 mehr als zwei sein - bilden die Äste des Baums.
 
 ::: callout-tip
-Definition der Ereignisse: $$
+Definition der Ereignisse: 
+$$
 \begin{eqnarray*}
 A &\text{:}&\text{ Die Firma hat Erfolg} \\
 B &\text{:}&\text{ Der Manager strengt sich an}
 \end{eqnarray*}
-$$ Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$.
+$$ 
+Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$.
 Für die Auszahlung von Boni an einen Manager ist es wichtig zu wissen,
 ob er eine gute Leistung erbracht hat. Wir wollen bestimmen, wie hoch
 die Wahrscheinlichkeit ist, dass der Manager sich tatsächlich für den
@@ -488,13 +529,15 @@ ist. Oder anders gesagt, ist der Erfolg der Firma wirklich ein Indikator
 für eine gute Leistung?
 
 Wir nehmen an (auch wenn es in der Praxis unrealistisch ist, diese Werte
-zu kennen): $$
+zu kennen): 
+$$
 \begin{eqnarray*}
 P\left( A|B\right) &=&0.8 \\
 P(A|\bar{B}) &=&0.5 \\
 P\left( B\right) &=&0.6
 \end{eqnarray*}
-$$ Hier handelt es sich um eine Fragestellung, die auch mit einer
+$$ 
+Hier handelt es sich um eine Fragestellung, die auch mit einer
 Vier-Felder-Tafel beantwortet werden könnte. Trotzdem nutzen wir nun
 einen Wahrscheinlichkeitsbaum. Auf der ersten Ebene verzweigt der Baum
 in die beiden Ereignisse $B$ und $\bar B$, denn wir kennen bedingte
@@ -539,14 +582,16 @@ text(c(0.35,0.35,0.75,0.75,0.75,0.75),
 
 Die Wahrscheinlichkeiten für $A\cap B$, $A\cap \bar B$, $\bar A\cap B$
 und $\bar A\cap\bar b$ ergeben sich nun, indem man entlang der Äste die
-Wahrscheinlichkeiten multipliziert. Man erhält $$
+Wahrscheinlichkeiten multipliziert. Man erhält 
+$$
 \begin{align*}
 P(A\cap B)&=0.6\cdot 0.8 = 0.48\\
 P(\bar A\cap B)&=0.6\cdot 0.2 = 0.12\\
 P(A\cap \bar B)&=0.4\cdot 0.5 = 0.2\\
 P(\bar A\cap \bar B)&=0.4\cdot 0.5 = 0.2
 \end{align*}
-$$ Die (unbedingten) Wahrscheinlichkeiten $P(A)$ und $P(\bar A)$ ergeben
+$$ 
+Die (unbedingten) Wahrscheinlichkeiten $P(A)$ und $P(\bar A)$ ergeben
 sich, indem man die Wahrscheinlichkeiten aller Pfade aufaddiert, die
 einen $A$-Ast (bzw. einen $\bar A$-Ast) haben. Es ergibt sich
 $P(A)=0.68$ und $P(\bar A)=0.32$.
