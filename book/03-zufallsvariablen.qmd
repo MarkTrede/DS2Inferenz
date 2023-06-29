@@ -43,12 +43,71 @@ oder in Kursschreibweise
 $$
 F_X(x)=P(X\le x).
 $$
+Wenn die Zufallsvariable sich aus dem Kontext erschließt, schreibt man auch
+anstelle von $F_X(x)$ einfach $F(x)$.
 :::
 
+Die Verteilungsfunktion einer Zufallsvariable ist sehr nützlich, weil durch sie die
+Verteilung der Zufallsvariable eindeutig charakterisiert wird. Kennt man die Verteiliungsfunktion,
+dann weiß man alles über die Vertelung, was wichtig ist.
+
+Die Verteilungsfunktion ist - wie der Name schon sagt - eine Funktion. Ihr
+Definitionsbereich ist die Menge der reellen Zahlen $\mathbb{R}$. Man darf also
+jede beliebige Zahl in die Funktion einsetzen. Der Wertebereich der Verteilungsfunktion
+ist das Intervall ${0,1}$, da es sich um eine Wahrscheinlichkeit handelt.
+
+Verteilungsfunktionen sind (wegen ihrer Konstruktion) immer monoton wachsend. Sie
+verlaufen niemals fallend, es kann jedoch sein, dass sie in einigen Bereichen 
+flach verlaufen und nicht steigen. Verteilungsfunktionen können stetig sein,
+sie können aber auch Sprünge aufweisen.
+
+Wenn man die Verteilungsfunktion $F_X(x)$ für immer kleinere Werte von $x$ auswertet,
+dann erreicht man (zumindest als Grenzwert) die 0, d.h.
+$$
+\lim_{x\to -\infty} F_X(x)=0.
+$$
+Für immer größere Werte von $x$ erreicht man (zumindest als Grenzwert) die 1, d.h.
+$$
+\lim_{x\to\infty} F_X(x)=1.
+$$
 
 
+::: callout-tip
+eins
+
+zwei
+:::
 
 ## Quantilfunktion
+
+Die Quantilfunktion ist das Gegenstück zur Verteilungsfunktion. Während die
+Verteilungsfunktion auf die Frage antwortet "Wie hoch ist die Wahrscheinlichkeit,
+dass die Zufallsvariable den Wert $x$ nicht übersteigt?", beantwortet die
+Quantilfunktion die Frage "Welcher Wert wird mit einer Wahrscheinlichkeit von 
+$p$ nicht überschritten?". Da es einige Fälle gibt, in denen diese Frage
+nicht eindeutig beantwortet werden kann, ist die formale Definition der
+Quantilfunktion etwas komplizierter:
+
+::: callout-note
+Die Funktion
+$$
+F_X^{-1}(p)=\min\{x:F_X(x)\ge p\}
+$$
+heißt **Quantilfunktion** von $X$. Der Wert $x_p=F_X^{-1}(p)$ heißt **p-Quantil** von $X$
+:::
+
+Den Subindex kann man weglassen, wenn sich
+die Zufallsvariable aus dem Kontext ergibt. Oft findet man auch die 
+alternative Notation $Q(p)$ für die Quantilfunktion.
+
+Es gibt eine Reihe von speziellen Quantilen mit eigener Bezeichnung:
+
+- Median $x_{0.5}$
+- Quartile: $x_{0.25}, x_{0.5}, x_{0.75}$
+- Quintile: $x_{0.2}, x_{0.4}, x_{0.6}, x_{0.8}$
+- Dezile: $x_{0.1}, x_{0.2}, \ldots, x_{0.9}$
+- Perzentile: $x_{0.01}, x_{0.02}, \ldots,x_{0.99}$
+
 
 ## Erwartungswert
 
