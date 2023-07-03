@@ -78,6 +78,10 @@ eins
 zwei
 :::
 
+## Diskrete Zufallsvariablen
+
+## Stetige Zufallsvariablen
+
 ## Quantilfunktion
 
 Die Quantilfunktion ist das Gegenstück zur Verteilungsfunktion. Während die
@@ -113,22 +117,3 @@ Es gibt eine Reihe von speziellen Quantilen mit eigener Bezeichnung:
 
 ## Varianz
 
-## Diskrete Standardverteilungen
-
-### Binomialverteilung
-
-### Poisson-Verteilung
-
-### Geometrische Verteilung
-
-## Stetige Standardverteilungen
-
-### Standardnormalverteilung
-
-### Normalverteilung
-
-### Exponentialverteilung
-
-### Paretoverteilung
-
-## Monte-Carlo-Simulationen

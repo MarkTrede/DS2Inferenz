@@ -1,0 +1,22 @@
+# Spezielle Verteilungen
+
+## Diskrete Verteilungen
+
+### Binomialverteilung
+
+### Poisson-Verteilung
+
+### Geometrische Verteilung
+
+## Stetige Verteilungen
+
+### Standardnormalverteilung
+
+### Normalverteilung
+
+### Exponentialverteilung
+
+### Paretoverteilung
+
+## Monte-Carlo-Simulationen
+
