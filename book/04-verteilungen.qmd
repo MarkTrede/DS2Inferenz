@@ -1,6 +1,54 @@
-# Spezielle Verteilungen
+# Standardverteilungen
+
+Für viele Anwendungsfälle gibt es **Standardverteilungen**, die man nutzen
+kann. Sie beschreiben bestimmte Zufallsvorgänge sehr gut. Eine 
+übersichtliche Liste einiger Standardverteilungen finden Sie auf
+der deutschsprachigen Wikipedia-Seite 
+"[Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen)". Die entsprechende 
+[englischsprachige Wikipedia-Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet eine
+noch deutlich größere Zahl von Standardverteilungen auf, stellt ihre
+Eigenschaften aber nicht so übersichtlich dar. In diesem
+Kurs lernen Sie exemplarisch drei wichtige diskrete und drei 
+wichtige stetige Standardverteilungen kennen. 
+
+## Standardverteilunge in R
+
+Diese Verteilungen (und noch viele weitere) sind in R
+implementiert oder lassen leicht durch R-Pakete ergänzen.
+Es gibt R-Funktionen, mit denen man die Verteilungsfunktion,
+die Quantilfunktion oder auch die Dichte- bzw. Wahrscheinlichkeitsfunktion
+auswerten kann. Außerdem stellt R Funktionen bereit, mit denen sich
+Realisationen von standardverteilten Zufallsvariablen generieren lassen.
+
+Die Syntax der R-Funktionen ist sehr einfach und für alle 
+Standardverteilung nahezu gleich:
+
+- `pVERTEILUNG(x, PARAMETER)`: Verteilungsfunktion
+- `qVERTEILUNG(p, PARAMETER)`: Quantilfunktion
+- `dVERTEILUNG(x, PARAMETER)`: Dichte- oder Wahrscheinlichkeitsfunktion
+
+Dabei ist `VERTEILUNG` eine Abkürzung für den Namen der Standardverteilung
+und `PARAMETER` ist der Parameter der Verteilung (bzw. die Parameter,
+wenn es mehrere sind). Mit `x` wird die Stelle bezeichnet, an der die
+Verteilungs-, Dichte- oder Wahrscheinlichkeitsfunktion ausgewertet werden
+soll, und `p` ist die Stelle, an der die Quantilfunktion ausgewertet
+werden soll.
+
+Um Realisationen der Zufallsvariable zu ziehen, nutzt man die
+R-Funktionen
+
+- `rVERTEILUNG(n, PARAMETER)`
+
+Das erste Argument (`n`) gibt an, wie viele (unabhängige) Ziehungen aus
+der Zufallsvariable simuliert werden sollen. Die Ziehungen werden als
+**Zufallszahlen** bezeichnet. Die Funktion liefert als Output einen
+Vektor der Länge `n`. In Abschnitt XXX wird erklärt,
+wie man in R mit Hilfe von Zufallszahlen sogenannte 
+Monte-Carlo-Simulationen durchführt.
 
 ## Diskrete Verteilungen
+
+
 
 ### Binomialverteilung
 
@@ -9,8 +57,6 @@
 ### Geometrische Verteilung
 
 ## Stetige Verteilungen
-
-### Standardnormalverteilung
 
 ### Normalverteilung
 

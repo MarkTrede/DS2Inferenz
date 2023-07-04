@@ -7,7 +7,7 @@ Eine Abbildung
 $$
 X: \Omega\rightarrow \mathbb{R}
 $$ 
-heißt Zufallsvariable.
+heißt Zufallsvariable (engl. random variable).
 :::
 
 Eine Zufallsvariable kann man sich zwar als eine Zahl, deren Wert man noch nicht kennt, vorstellen, formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
@@ -35,7 +35,7 @@ Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen ein
 Wir wissen zwar nicht, welchen Wert eine Zufallsvariable annehmen wird, aber oft wissen wir, dass bestimmte Werte mit einer höheren Wahrscheinlichkeit vorkommen als andere Werte. So wissen wir zum Beispiel, dass beim Werfen mit zwei Würfeln die Augensumme 2 weniger wahrscheinlich ist als die Augensumme 7, denn für die Augensumme 2 müssen beide Würfel eine 1 zeigen, für die Augensumme 7 gibt es dagegen viel mehr Möglichkeiten (nämlich 16, 25, 34, 43, 52 und 61). Um die Verteilung einer Zufallsvariable zu beschreiben, gibt es mehrere Möglichkeiten. Eine besonders wichtige ist die Verteilungsfunktion.
 
 ::: callout-note
-Die **Verteilungsfunktion** einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
+Die **Verteilungsfunktion** (engl. cumulative distributio function, cdf) einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
 $$
 F_X(x)=P(\{\omega: X(\omega)\le x\})
 $$
@@ -54,7 +54,7 @@ dann weiß man alles über die Vertelung, was wichtig ist.
 Die Verteilungsfunktion ist - wie der Name schon sagt - eine Funktion. Ihr
 Definitionsbereich ist die Menge der reellen Zahlen $\mathbb{R}$. Man darf also
 jede beliebige Zahl in die Funktion einsetzen. Der Wertebereich der Verteilungsfunktion
-ist das Intervall ${0,1}$, da es sich um eine Wahrscheinlichkeit handelt.
+ist das Intervall $[0,1]$, da es sich um eine Wahrscheinlichkeit handelt.
 
 Verteilungsfunktionen sind (wegen ihrer Konstruktion) immer monoton wachsend. Sie
 verlaufen niemals fallend, es kann jedoch sein, dass sie in einigen Bereichen 
@@ -80,7 +80,59 @@ zwei
 
 ## Diskrete Zufallsvariablen
 
+::: callout-note
+Eine Zufallsvariable heißt **diskret** (engl. discrete), wenn es 
+
+- endliche viele Punkte $x_1, x_2,\ldots, x_J$ oder
+- abzählbar unendlich viele Punkte $x_1, x_2,\ldots$
+
+gibt mit der Eigenschaft 
+$$
+P(X=x_j)>0
+$$
+für alle $j$ und
+$$
+\sum_j P(X=x_j)=1.
+$$
+:::
+
+Ohne tiefer in die Mengenlehre einzusteigen, sei hier nur erwähnt, dass eine
+Menge abzählbar unendlich ist, wenn man ihre Elemente mit den natürlichen 
+Zahlen durchnummerieren kann. Abzählbar unendlich sind zum Beispiel die Menge
+der natürlichen Zahlen $\mathbb{N}$, die Menge der ganzen Zahlen  $\mathbb{Z}$ 
+und die Menge aller Brüche $\mathbb{B}$, nicht jedoch die Menge der
+reellen Zahlen  $\mathbb{R}$ oder ein Intervall reeller Zahlen. Letztere
+nennt man überabzählbar unendlich.
+
+Die Menge aller Werte, die eine diskret verteilte Zufallsvariable annehmen kann, 
+nennt man den Träger (engl. support) der Verteilung. Für endliche viele
+Ausprägungen ist der Träger
+$$
+T_X=\{x_1,\ldots,x_J\},
+$$
+und für (abzählbar) unendlich viele Ausprägungen ist er
+$$
+T_X=\{x_1,x_2,x_3,\ldots\}.
+$$
+Die Funktion 
+$$
+f(x)=\left\{\begin{array}{ll}
+p_j & \text{ wenn }x=x_j\\
+0 &\text{ sonst}
+\end{array}\right.
+$$
+heißt **Wahrscheinlichkeitsfunktion**. 
+
+::: callout-tip
+- eins
+
+-zwei
+:::
+
 ## Stetige Zufallsvariablen
+
+Eine Zufallsvariable heißt stetig (engl. continuous)
+
 
 ## Quantilfunktion
 
@@ -115,5 +167,22 @@ Es gibt eine Reihe von speziellen Quantilen mit eigener Bezeichnung:
 
 ## Erwartungswert
 
+Der Erwartungswert einer Verteilung gibt Auskunft darüber, wo der
+"Schwerpunkt" der Verteilung liegt. 
+
+::: callout-note
+Der **Erwartungswert** (engl. expectation) einer Zufallsvariable ist
+$$
+E(X)=\left\{
+\begin{array}{ll}
+\sum\limits_{j\in T_X} x_j f(x_j) & \text{ für X diskret}\\
+\int\limits_{-\infty}^\infty x f(x)dx & \text{ für X stetig}
+\end{array}
+\right.
+$$
+:::
+
 ## Varianz
+
+
 

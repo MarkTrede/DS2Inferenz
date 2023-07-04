@@ -10,7 +10,7 @@ book:
     - 01-zufall.qmd
     - 02-wahrscheinlichkeit.qmd
     - 03-zufallsvariablen.qmd
-    - 04-zufallsvektoren.qmd
+    - 04-verteilungen.qmd
 
 bibliography: references.bib
 

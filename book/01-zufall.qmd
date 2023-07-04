@@ -15,7 +15,7 @@ Um einen Zufallsvorgang formal zu erfassen, schreiben wir alle möglichen Ergebn
 ::: {.callout-note}
 ## Definition
 
-Die Menge aller Ergebnisse nennen wir **Ergebnisraum**. 
+Die Menge aller Ergebnisse nennen wir **Ergebnisraum** (engl. sample space).
 :::
 
 Der Ergebnisraum wird meist mit dem griechischen Buchstaben $\Omega$ (großes Omega) bezeichnet. Die Elemente des Ergebnisraums werden allgemein als $\omega_1,\omega_2,\ldots$ (kleine Omegas) notiert.
@@ -38,7 +38,7 @@ Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf einzelne E
 
 ::: {.callout-note}
 ## Definition
-Teilmengen der Ergebnismenge $\Omega$ heißen **Ereignisse**. Ein Ereignis $A$ tritt ein, wenn das Ergebnis $\omega$ des Zufallsvorgangs Element des Ereignisses ist, d.h. wenn $\omega\in A$.
+Teilmengen der Ergebnismenge $\Omega$ heißen **Ereignisse** (engl. events). Ein Ereignis $A$ tritt ein, wenn das Ergebnis $\omega$ des Zufallsvorgangs Element des Ereignisses ist, d.h. wenn $\omega\in A$.
 :::
 
 Zu den Ereignissen gehören auch die leere Menge $\emptyset$ und $\Omega$ selber. Das Ereignis $\emptyset$ nennt man das **unmögliche Ereignis**, weil es nie eintreten kann. Das Ereignis $\Omega$ nennt man das **sichere Ereignis**, weil es mit Sicherheit eintritt. Wenn ein Ereignis nur ein einziges Ergebnis enthält (z.B. $A=\{\omega\}$), dann spricht man von einem **Elementarereignis**.
@@ -73,9 +73,7 @@ $$
 $$
 
 
-::: {.callout-tip}
-## Beispiele
-
+::: callout-tip
 - Wir betrachten einen Würfelwurf mit der Ergebnismenge $\Omega=\{1,2,3,4,5,6\}$ und definieren die folgenden drei Ereignisse: 
 $$
 \begin{align*}
