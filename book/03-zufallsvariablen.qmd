@@ -179,17 +179,20 @@ Die Dichte hat folgende Eigenschaften:
 - Die Dichte kann nicht negativ sein, da sonst die Verteilungsfunktion
 nicht mehr monoton wachsend wäre. Es gilt also $f(x)\le 0$ für alle $x\in\mathbb{R}$.
 
-- Die Fläche unter der Dichte muss 1 ergeben, da die Verteiliungsfunktion $F_X(x)$
+- Die Fläche unter der Dichte muss 1 ergeben, da jede Verteiliungsfunktion $F_X(x)$
 für $x\to\infty$ gegen 1 konvergiert. Es gilt also
 $$
 \int_{-\infty}^\infty f(x)dx=1.
 $$
 
-- Die Dichte gibt an, wie steil der Verteilungsfunktion verläuft. Für
+- Die Dichte gibt an, wie steil die Verteilungsfunktion verläuft. Für
 alle Stellen, an denen die Verteilungsfunktion differenzierbar ist, gilt daher
 $$
 f(x)=F'(x).
 $$
+Es ist jedoch nicht unbedingt nötig, dass die Verteilungsfunktion überall
+differenzierbar ist, sie darf nicht differenzierbare Knicke enthalten.
+
 - Der Wert der Dichte an einer Stelle $x$ ist *keine* Wahrscheinlichkeit.
 Hingegen ist die Fläche unter der Dichte eine Wahrscheinlichkeit. So gilt
 beispielsweise
@@ -287,6 +290,7 @@ Für die Berechnung der Varianz ist diese Formel oft hilfreich:
 $$
 Var(X)=E(X^2)-(E(X))^2.
 $$
+
 ::: callout-tip
 - eins
 
@@ -297,9 +301,112 @@ $$
 
 ## Lineare Transformationen
 
+Eine lineare Transformation einer Zufallsvariable ergibt wieder eine
+Zufallsvariable. Für zwei reelle Zahlen $a$ und $b$ ist
+$$
+Y=aX+b
+$$
+eine lineare Transformation von $X$. Welche Eigenschaften hat die
+transformierte Zufallsvariable $Y$? Wir sehen uns an, wie sich die
+Transformation auf die Verteilungsfunktion, den Erwartungswert und die
+Varianz auswirkt.
 
+Die Verteilungsfunktion von $Y$ ist für $a>0$
+$$
+\begin{align*}
+F_Y(y) &= P(Y\le y)\\
+&= P(aX+b \le y)\\
+&= P(aX \le y-b)\\
+&= P\left(X \le \frac{y-b}{a}\right)\\
+&= F_X\left(\frac{y-b}{a}\right).
+\end{align*}
+$$
+Für $a<0$ dreht sich die Ungleichung bei der Division durch $a$ um, also gilt dann
+$$
+\begin{align*}
+F_Y(y) &= P(Y\le y)\\
+&= P(aX+b \le y)\\
+&= P(aX \le y-b)\\
+&= P\left(X \ge \frac{y-b}{a}\right)\\
+&= 1-P\left(X <\frac{y-b}{a}\right).
+\end{align*}
+$$
+Wie die Beziehung des letzten Terms zur Verteilungsfunktion von $X$ aussieht,
+lässt sich nicht einfach allgemein beantworten. Wenn $X$ stetig verteilt ist,
+macht es keinen Unterschied, ob in der Ungleichung ein "$<$" oder ein "$\le$"
+steht, dann ist also
+$$
+F_Y(y)=1-F_X\left(\frac{y-b}{a}\right).
+$$
+Wie wirkt sich eine lineare Transformation $Y=aX+b$ auf den Erwartungswert aus?
+Wir untersuchen diskrete und stetige Zufallsvariablen getrennt voneinander.
+Zuerst betrachten wir eine diskrete Zufallsvariable $X$ und $a,b\in\mathbb{R}$.
+Der Erwartungswert von $Y$ ist
+$$
+\begin{align*}
+E(Y) &= E(aX+b)\\
+&= \sum_{j\in T_X}(ax_j+b)f(x_j)\\
+&= \sum_{j\in T_X}ax_j f(x_j) + \sum_{j\in T_X}b f(x_j)\\
+&= a\sum_{j\in T_X}x_j f(x_j) + b\sum_{j\in T_X}f(x_j)\\
+&= aE(X)+b,
+\end{align*}
+$$
+denn $\sum_{j\in T_X}f(x_j)=1$. Wenn $X$ eine stetige Zufallsvariable ist,
+dann gilt für den Erwartungswert der linearen Transformation
+$$
+\begin{align*}
+E(Y) &= E(aX+b)\\
+&= \int_{-\infty}^\infty (ax+b)f(x)dx\\
+&= \int_{-\infty}^\infty ax f(x)dx + \int_{-\infty}^\infty b f(x)dx\\
+&= a\int_{-\infty}^\infty x f(x)dx + b\int_{-\infty}^\infty f(x)dx\\
+&= aE(X)+b,
+\end{align*}
+$$
+weil $\int_{-\infty}^\infty f(x)dx=1$.
+
+Es gilt also sowohl für diskrete als auch für stetige Zufallsvariablen, 
+dass der Erwartungswert der linearen Transformation der Zufallsvariable
+der linearen Transformation des Erwartungswerts entspricht. Kurz gesagt,
+kann man den Erwartungswert in eine lineare Funktion "hineinziehen"
+oder ihn aus ihr "herausziehen". Man sagt auch, dass der Erwartungswert
+ein "linearer Operator" ist.
+
+*Achtung*: Leider kann man der Erwartungswert im allgemeinen nicht aus anderen
+(nichtlinearen) Funktionen herausziehen oder ihn dort hineinziehen.
+So ist beispielsweise im allgemeinen
+$$
+E(X^2) \neq E(X)^2.
+$$
+Die Ergebnisse zum Erwartungswert können wir nun benutzen, um die
+Varianz einer linear transformierten Zufallsvariable zu untersuchen.
+Es gilt
+$$
+\begin{align*}
+Var(Y) &= E((Y-E(Y))^2)\\
+&= E((aX+b-E(aX+b))^2)\\
+&= E((aX+b-(aE(X)+b))^2)\\
+&= E((aX+b-aE(X)-b)^2)\\
+&= E((aX-aE(X))^2)\\
+&= E(a^2(X-E(X))^2)\\
+&= a^2 E((X-E(X))^2)\\
+&= a^2 Var(X).
+\end{align*}
+$$
+Diese Herleitung gilt sowohl für diskrete als auch für stetige Zufallsvariablen.
+Offensichtlich wirkt sich eine additive Verschiebung um $b$ überhaupt nicht
+auf die Varianz aus. Eine Multiplikation mit $a$ verändert die Varianz jedoch,
+und zwar um den Faktor $a^2$. Wenn $a>1$ ist, wird die Varianz also größer,
+wenn $0<a<1$ ist, wird sie kleiner. Beachten Sie, dass es für die Varianz
+keine Rolle spielt, ob $a$ positiv oder negativ ist. Insbesondere bleibt die
+Varianz unverändert, wenn $X$ mit $(-1)$ multipliziert wird.
 
 ## Standardisierung
+
+Eine lineare Transformation, die dazu führt, dass der Erwartungswert der
+transformierten Zufallsvariable 0 und die Varianz 1 ist, nennt man 
+**Standardisierung**. Die transformierte Zufallsvariable heißt 
+standardisiert. Welche lineare Transformation muss für eine
+Standardisierung durchgeführt werden?
 
 
 
