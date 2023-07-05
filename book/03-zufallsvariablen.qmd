@@ -71,12 +71,28 @@ $$
 \lim_{x\to\infty} F_X(x)=1.
 $$
 
-
 ::: callout-tip
 eins
 
 zwei
 :::
+
+Alle Verteilungsfunktionen sind monoton (aber nicht unbedingt streng monoton) 
+wachsend. Für praktisch alle Anwendungen reicht es aus, sich auf zwei Klassen
+von Verteilungsfunktionen einzuschränken. 
+
+- Die eine Klasse sind Treppenfunktionen
+(Stufenfunktionen), d.h. die Verteilungsfunktion hat Sprünge und verläuft 
+zwischen den Sprüngen waagerecht. Zufallsvariablen, die eine solche
+Verteilungsfunktion haben, nennt man diskrete Zufallsvariablen. 
+
+- Die andere Klasse sind stetige Verteilungsfunktionen (d.h. ohne Sprünge).
+Zufallsvariablen mit einer stetigen Verteilungsfunktion nennt man
+stetige Zufallsvariablen.
+
+Im folgenden wird genauer definiert, wann Zufallsvariablen diskret oder
+stetig sind und was für Eigenschaften diskrete und stetige
+Zufallsvariablen haben.
 
 ## Diskrete Zufallsvariablen
 
@@ -123,16 +139,75 @@ p_j & \text{ wenn }x=x_j\\
 $$
 heißt **Wahrscheinlichkeitsfunktion**. 
 
+Die Verteilungsfunktion einer diskreten Zufallsvariable ist eine
+Treppenfunktion. Der Träger der Zufallsvariable gibt an, an welchen
+Stellen die Treppenstufen liegen. Die erste Stufe ist an der Stelle $x_1$,
+die zweite an der Stelle $x_2$ etc. Die Stufenhöhen sind $p_1, p_2,\ldots,$.
+
+An der folgenden Abbildung der Verteilungsfunktion einer Zufallsvariablen
+$X$ lässt sich also ablesen, dass $X$ diskret verteilt, dass $X$ den 
+Wert $x_1$ mit einer Wahrscheinlichkeit von XXX annimmt, den 
+Wert $x_2$ mit einer Wahrscheinlichkeit von XXX und den Wert $x_3=XXX$
+mit einer Wahrscheinlichkeit von XXX.
+
+XXX Abbildung XXX
+
 ::: callout-tip
 - eins
 
 -zwei
 :::
 
+
+
 ## Stetige Zufallsvariablen
 
-Eine Zufallsvariable heißt stetig (engl. continuous)
+::: callout-note
+Eine Zufallsvariable $X$ heißt stetig (engl. continuous), wenn es eine
+Funktion $f_X(x)$ gibt, so dass
+$$
+F_X(x)=\int_{-\infty}^x f_X(t)dt
+$$
+für alle $x\in\mathbb{R}$. Die Funktion $f_X(x)$ heißt **Dichtefunktion**
+oder **Dichte** (engl. density function bzw. density). Wenn aus dem Kontext
+hervorgeht, zu welcher Zufallsvariable eine Dichte gehört, lässt man den
+Subindex gewöhnlich weg und schreibt einfach $f(x)$.
+:::
 
+Die Dichte hat folgende Eigenschaften:
+
+- Die Dichte kann nicht negativ sein, da sonst die Verteilungsfunktion
+nicht mehr monoton wachsend wäre. Es gilt also $f(x)\le 0$ für alle $x\in\mathbb{R}$.
+
+- Die Fläche unter der Dichte muss 1 ergeben, da die Verteiliungsfunktion $F_X(x)$
+für $x\to\infty$ gegen 1 konvergiert. Es gilt also
+$$
+\int_{-\infty}^\infty f(x)dx=1.
+$$
+
+- Die Dichte gibt an, wie steil der Verteilungsfunktion verläuft. Für
+alle Stellen, an denen die Verteilungsfunktion differenzierbar ist, gilt daher
+$$
+f(x)=F'(x).
+$$
+- Der Wert der Dichte an einer Stelle $x$ ist *keine* Wahrscheinlichkeit.
+Hingegen ist die Fläche unter der Dichte eine Wahrscheinlichkeit. So gilt
+beispielsweise
+$$
+P(a<X\le b)=\int_a^b f(x)dx.
+$$
+
+- Die Wahrscheinlichkeit, dass eine stetige Zufallsvariable exakt den Wert
+$x$ annimmt, ist also (für jedes $x\in\mathbb{R}$)
+$$
+P(X=x)=0.
+$$
+
+::: callout-tip
+- eins
+
+-zwei
+:::
 
 ## Quantilfunktion
 
@@ -183,6 +258,49 @@ $$
 :::
 
 ## Varianz
+
+Die Varianz einer Zufallsvariable gibt an, wie stark die Verteilung 
+streut bzw. wie sehr man mit großen Abweichungen vom Erwartungswert
+rechnen sollte.
+
+::: callout-note
+Der **Varianz** (engl. variance) einer Zufallsvariable ist
+$$
+Var(X)=E\left[(X-E(X))^2\right].
+$$
+Die (positive) Wurzel aus der Varianz nennt man Standardabweichung
+(engl. standard deviation).
+:::
+
+Für diskrete und stetige Zufallsvariablen lässt sich die Varianz
+folgendermaßen schreiben:
+$$
+Var(X)==\left\{
+\begin{array}{ll}
+\sum\limits_{j\in T_X} (x_j-E(X))^2 f(x_j) & \text{ für X diskret}\\
+\int\limits_{-\infty}^\infty (x-E(X))^2 f(x)dx & \text{ für X stetig}
+\end{array}
+\right.
+$$
+
+Für die Berechnung der Varianz ist diese Formel oft hilfreich:
+$$
+Var(X)=E(X^2)-(E(X))^2.
+$$
+::: callout-tip
+- eins
+
+- zwei
+:::
+
+
+
+## Lineare Transformationen
+
+
+
+## Standardisierung
+
 
 
 
