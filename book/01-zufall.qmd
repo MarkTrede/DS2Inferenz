@@ -12,22 +12,31 @@ Damit wir einen Zufallsvorgang präzise beschreiben können und vernünftig mit 
 
 Um einen Zufallsvorgang formal zu erfassen, schreiben wir alle möglichen Ergebnisse des Zufallsvorgangs in eine Menge. Dabei spielt es keine Rolle, ob der Eintritt eines Ergebnisses als wahrscheinlich oder unwahrscheinlich angesehen wird. Alle Ergebnisse, die eintreten können, werden in die Menge aufgenommen.
 
-::: {.callout-note}
-## Definition
-
+::: callout-note
 Die Menge aller Ergebnisse nennen wir **Ergebnisraum** (engl. sample space).
 :::
 
 Der Ergebnisraum wird meist mit dem griechischen Buchstaben $\Omega$ (großes Omega) bezeichnet. Die Elemente des Ergebnisraums werden allgemein als $\omega_1,\omega_2,\ldots$ (kleine Omegas) notiert.
 
-::: {.callout-tip}
-## Beispiele
-
+::: callout-tip
 -   Beim Werfen einer Münze kann es zu den beiden Ergebnissen "Kopf" (K) oder "Zahl" (Z) kommen. Die Ergebnismenge hat also zwei Elemente: $\Omega=\{K,Z\}$.
 
 -   Wenn die Münze zweimal geworfen wird (oder wenn zwei Münzen geworfen werden), dann lautet die Ergebnismenge $\Omega=\{KK,KZ,ZK,ZZ\}$.
 
 -   Beim Werfen eines Würfels kann jede Augenzahl von 1 bis 6 auftreten, die Ergebnismenge ist also $\Omega=\{1,2,3,4,5,6\}$.
+
+-   Beim Werfen zweier Würfel kann bei jedem der beiden Würfel jede Augenzahl 
+von 1 bis 6 auftreten, die Ergebnismenge ist also 
+$$
+\begin{align*}
+\Omega=\{&11,12,13,14,15,16,\\
+&21,22,23,24,25,26,\\
+&31,32,33,34,35,36,\\
+&41,42,43,44,45,46,\\
+&51,52,53,54,55,56,\\
+&61,62,63,64,65,66\}.
+\end{align*}
+$$
 
 -   Der DAX-Index von morgen kann Werte zwischen 0 und unendlich annehmen. Die Ergebnismenge ist in diesem Fall $\Omega=\mathbb{R}^+_0$ (die Menge der nicht-negativen reellen Zahlen).
 :::
@@ -36,8 +45,7 @@ Der Ergebnisraum wird meist mit dem griechischen Buchstaben $\Omega$ (großes Om
 
 Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf einzelne Ergebnisse aus der Ergebnismenge, sondern oft auf mehrere Ergebnisse. Zusammenfassungen von Ergebnissen nennt man Ereignisse (engl. events). Sie werden meist mit großen lateinischen Buchstaben bezeichnet ($A, B, \ldots$).
 
-::: {.callout-note}
-## Definition
+::: callout-note
 Teilmengen der Ergebnismenge $\Omega$ heißen **Ereignisse** (engl. events). Ein Ereignis $A$ tritt ein, wenn das Ergebnis $\omega$ des Zufallsvorgangs Element des Ereignisses ist, d.h. wenn $\omega\in A$.
 :::
 
@@ -71,7 +79,6 @@ $$
 \overline{A\cap B} &= \overline{A}\cup \overline{B}.
 \end{align*}
 $$
-
 
 ::: callout-tip
 - Wir betrachten einen Würfelwurf mit der Ergebnismenge $\Omega=\{1,2,3,4,5,6\}$ und definieren die folgenden drei Ereignisse: 

@@ -2,7 +2,7 @@
 
 Für viele Anwendungsfälle gibt es **Standardverteilungen**, die man nutzen
 kann. Sie beschreiben bestimmte Zufallsvorgänge sehr gut. Eine 
-übersichtliche Liste einiger Standardverteilungen finden Sie auf
+übersichtliche Liste wichtiger Standardverteilungen finden Sie auf
 der deutschsprachigen Wikipedia-Seite 
 "[Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen)". Die entsprechende 
 [englischsprachige Wikipedia-Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet eine
@@ -50,11 +50,69 @@ Monte-Carlo-Simulationen durchführt.
 
 ### Bernoulli-Verteilung
 
-
+Ein Zufallsexperiment heißt **Bernoulli-Experiment**, wenn es nur darauf
+ankommt, ob etwas eintritt ("Erfolg", $A$) oder nicht eintritt
+("Misserfolg", $\bar A$). Die Wahrscheinlichkeit eines Erfolgs bezeichnen
+wir mit dem Parameter $\pi$ (der hier nichts mit der Kreiszahl 3.14159...
+zu tun hat),
+$$
+P(A)=\pi.
+$$
+Die Indikatorvariable $1_A$ ist eine Zufallsvariable mit
+$$
+1_A=\left\{
+\begin{array}{ll}
+1 & \text{ wenn }A\text{ eintritt (Erfolg)}\\
+0 & \text{ wenn }\bar A\text{ eintritt (Misserfolg)}\\
+\end{array}
+\right.
+$$
+Die Zufallsvariable $1_A$ heißt **Bernoulli-verteilt** mit Parameter $\pi$.
+Die Wahrscheinlichkeitsfunktion lautet
+$$
+f(x)=P(1_A=x)=\left\{
+\begin{array}{ll}
+0 & \text{ mit Wahrscheinlichkeit }1-\pi\\
+1 & \text{ mit Wahrscheinlichkeit }\pi
+\end{array}
+\right.
+$$
+Der Erwartungswert lässt sich nun leicht ausrechnen. Es gilt
+$$
+E(1_A)=0\cdot (1-\pi)+1\cdot \pi=\pi.
+$$
+Und die Varianz beträgt
+$$
+\begin{align*}
+Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot \pi\\
+&=\pi^2(1-\pi)+(1-\pi)^2\pi\\
+&=\pi^2-\pi^3+(1-2\pi+\pi^2)\pi\\
+&=\pi^2-\pi^3+\pi-2\pi^2+\pi^3\\
+&=\pi-\pi^2\\
+&=\pi (1-\pi).
+\end{align*}
+$$
+::: callout-tip
+Eine zufällig aus einer Population ausgewählte Person wird
+befragt, ob sie in einem Startup arbeitet. Die Antwort
+wird durch eine Zufallsvariable $X$ codiert,
+$$
+X=\left\{
+\begin{array}{ll}
+0 & \text{ wenn die Person nicht in einem Startup arbeitet}\\
+1 & \text{ wenn die Person in einem Startup arbeitet}
+\end{array}
+\right.
+$$
+Die Zufallsvariable $X$ ist Bernoulli-verteilt. Der Parameter $\pi$ ist
+die Wahrscheinlichkeit dafür, dass die Person in einem Startup arbeitet.
+Da eine Person zufällig aus der Population gezogen wird, entspricht diese
+Wahrscheinlichkeit dem Anteil der Personen, die in einem Startup arbeiten.
+:::
 
 ### Binomialverteilung
 
-Eine Zufallsvariable heißt binomialverteilt mit den Parametern
+Eine Zufallsvariable $X$ heißt **binomialverteilt** mit den Parametern
 $n$ und $\pi$, wenn der Träger 
 $$
 T_X=\{0,1,2,\ldots,n\}
@@ -63,7 +121,7 @@ ist und die Wahrscheinlichkeitsfunktion für $k=0,1,2,\ldots,n$
 $$
 P(X=k)={n \choose k} \pi^k (1-\pi)^{n-k}
 $$
-lautet. Der Ausdruck ${n \choose k}$ heißt Binomialkoeffizient, er ist eine
+lautet. Der Ausdruck ${n \choose k}$ heißt **Binomialkoeffizient**, er ist eine
 Kurzschreibweise für 
 $$
 {n \choose k} =\frac{n!}{k!(n-k)!},
@@ -71,13 +129,101 @@ $$
 wobei $n!$ die Fakultät von $n$ ist, d.h.
 $$
 n!=1\cdot 2\cdot\ldots\cdot n.
-
 $$
+Die Binomialverteilung ergibt sich, wenn ein Bernoulli-Experiment $n$-mal 
+unabhängig wiederholt wird. Mit $A_1, A_2,\ldots, A_n$ bezeichnen wir
+die Ereignisse, ob bei der $i$-ten Wiederholung ein Erfolg oder
+Misserfolg aufgetreten ist. Dazu werden die $n$ Zufallsvariablen 
+$$
+1_{A_i}=\left\{
+\begin{array}{ll}
+1 & \text{ wenn }A_i\text{ eintritt (Erfolg)}\\
+0 & \text{ wenn }\bar A_i\text{ eintritt (Misserfolg)}
+\end{array}
+\right.
+$$
+definiert. Dann ist die Summe
+$$
+X=\sum_{i=1}^n 1_{A_i}
+$$
+eine binomialverteilte Zufallsvariable. Sie gibt an, wie viele Erfolge bei den
+$n$ Wiederholungen aufgetreten sind. Die Verteilung von $X$ hängt davon ab,
+welche Werte $n$ und $\pi$ annehmen.
 
+Die übliche Kurzschreibweise für eine binomialverteilte Zufallsvariable 
+mit den Parametern $n$ und $\pi$ lautet
+$$
+X\sim B(n,\pi).
+$$
+Der Erwartungswert und die Varianz betragen
+$$
+\begin{align*}
+E(X) &= n\pi\\
+Var(X) &= n\pi (1-\pi).
+\end{align*}
+$$
+Auf die Herleitungen verzichten wir an dieser Stelle. Sie sind 
+sehr einfach mit Methoden, die in Kapitel XXX behandelt werden.
 
+In R ist die Abkürzung für die Binomialverteilung `binom`. 
+Die R-Funktion zur Berechnung der Wahrscheinlichkeitsfunktion
+$P(X=k)$ einer binomialverteilten Zufallsvariable $X$ mit den Parametern
+$n$ und $p$ ist
+```{r eval=FALSE}
+dbinom(k, size=n, prob=p)
+```
+Die Verteilungsfunktion $F(x)=P(X\le x)$ wird in R berechnet durch
+```{r eval=FALSE}
+pbinom(x, size=n, prob=p)
+```
+Und die Quantilfunktion kann in R ausgewertet werden mit der R-Funktion
+```{r eval=FALSE}
+qbinom(p, size=n, prob=p)
+```
+Diese Funktion berechnet das $p$-Quantil.
 
+Alle drei Funktionen können auch an mehreren Stellen gleichzeitig ausgewertet
+werden, indem man für `k`, `x` oder `p` einen Vektor einsetzt.
+
+::: callout-tip
+Die idealtypische Anwendung der Binomialverteilung hat zwar keinen ökonomischen
+Bezug, ist aber trotzdem für das Verständnis hilfreich. Es geht um das
+Ziehen von Kugeln aus einer Urne mit Zurücklegen. Als Beispiel betrachten
+wir eine Urne mit 10 Kugeln, von denen 3 rot und 7 weiß sind. Aus dieser
+Urne werden nun (mit Zurücklegen) fünf Kugeln gezogen. 
+
+Die Zufallsvariable $X$ sei die Anzahl der gezogenen roten Kugeln. 
+Offenbar kann $X$ Werte zwischen 0 und 5 annehmen. Die Wahrscheinlichkeit,
+bei einem Zug eine rote Kugel zu ziehen, beträgt jedesmal 3/10=0.3.
+Also gilt
+$$
+X\sim B(5,0.3).
+$$
+Die Wahrscheinlichkeit, dass genau 2 rote Kugeln gezogen werden, beträgt $P(X=2)$,
+```{r}
+dbinom(2, size=5, prob=0.3)
+```
+Die Wahrscheinlichkeit, dass höchstens 1 rote Kugel geogen wird, ist
+$P(X\le 1)$,
+```{r}
+pbinom(1, size=5, prob=0.3)
+```
+Der Median ist
+```{r}
+qbinom(0.5, size=5, prob=0.3)
+```
+
+Wenn man den Vektor `0:5` als Argument in die Funktion `dbinom` einsetzt,
+erhält man die komplette Wahrscheinlichkeitsfunktion,
+```{r}
+dbinom(0:5, size=5, prob=0.3)
+```
+Die Summe dieser Wahrscheinlichkeiten ist 1.
+:::
 
 ### Poisson-Verteilung
+
+
 
 ### Geometrische Verteilung
 

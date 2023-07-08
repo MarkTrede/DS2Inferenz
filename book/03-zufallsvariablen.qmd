@@ -7,27 +7,86 @@ Eine Abbildung
 $$
 X: \Omega\rightarrow \mathbb{R}
 $$ 
-heißt Zufallsvariable (engl. random variable).
+heißt **Zufallsvariable** (engl. random variable).
 :::
 
-Eine Zufallsvariable kann man sich zwar als eine Zahl, deren Wert man noch nicht kennt, vorstellen, formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
+Eine Zufallsvariable kann man sich zwar als eine Zahl vorstellen, deren Wert man noch nicht kennt. Formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
 
 ::: callout-tip
-xxx
+Als Beispiel betrachten wir ein Zufallsexperiment, bei dem zwei Würfel geworfen
+werden. Jeder der beiden Würfel zeigt dann 1, 2, 3, 4, 5 oder 6.
+Der Ergebnisraum hat folglich 36 Elemente, nämlich
+$$
+\Omega=\{11,12,13,14,15,16,21,22,23,\ldots,65,66\}.
+$$
+Nun definieren wir eine Zufallsvariable $X$, die angibt, wie hoch die
+Summe der Augenzahlen ist. Offensichtlich kann es passieren, dass beide
+Würfel 1 zeigen, dann ist $X=2$. Wenn einer der Würfel eine 1 anzeigt,
+der andere eine 2, dann ist $X=3$ usw. Die Abbildung bzw. Funktion aus dem 
+Ergebnisraum in die Menge der reellen Zahlen sieht also so aus:
+$$
+\begin{array}{lll}
+\Omega && \mathbb{R}\\\hline
+11 & \longrightarrow & 2\\
+12 & \longrightarrow & 3\\
+13 & \longrightarrow & 4\\
+14 & \longrightarrow & 5\\
+15 & \longrightarrow & 6\\
+16 & \longrightarrow & 7\\
+21 & \longrightarrow & 3\\
+22 & \longrightarrow & 4\\
+23 & \longrightarrow & 5\\
+\vdots&&\vdots\\
+65 & \longrightarrow & 11\\
+66 & \longrightarrow & 12
+\end{array}
+$$
 :::
 
-Wenn die Zufallsvariable sich realisiert, bezeichnet man die Realisation gewöhnlich mit einem Kleinbuchstaben. Beispielsweise ist $x$ die Realisation der Zufallsvariable $X$. Gedanklich ist es oft hilfreich, sich $X$ (also die Zufallsvariable) als die Situation ex ante und $x$ (also die Realisierung) als die Situation ex post vorzustellen.
+Wenn die Zufallsvariable sich realisiert, bezeichnet man die **Realisation** gewöhnlich mit einem Kleinbuchstaben. Beispielsweise ist $x$ die Realisation der Zufallsvariable $X$. Gedanklich ist es oft hilfreich, sich $X$ (also die Zufallsvariable) als die Situation ex ante und $x$ (also die Realisierung) als die Situation ex post vorzustellen.
 
 Beachten Sie den großen Unterschied zwischen einer Zufallsvariable und ihrer Realisation. Die Zufallsvariable ist eine Funktion, die Realisation ist eine reelle Zahl. Wahrscheinlichkeitsaussagen lassen sich nur über Zufallsvariablen treffen, nicht über ihre Realisation.
 
-Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen eine große Hilfe. Praktisch alle Vorgänge, bei denen der Zufall oder Unwissenheit eine Rolle spielen, lassen sich gut mit Hilfe von Zufallsvariablen beschreiben.
+::: callout-tip
+Wir betrachten weiterhin das Zufallsexperiment mit zwei Würfeln. 
+Wie hoch ist die Wahrscheinlichkeit, dass die Zufallsvariable $X$: "Summe
+der beiden Augenzahlen" den Wert 4 annimmt? Um diese eigentlich sehr einfache
+Frage in dem formalen Rahmen sauber zu beantworten, müssen wir zunächst 
+ermitteln, welche Ergebnisse aus $\Omega$ dazu führen, dass $X=4$ ist (das
+sogenannte Urbild von $X=4$).
+
+Es gibt drei Ergebnisse, die auf $X=4$ führen, nämlich $13,22$ und $31$. 
+Nun fragen wir uns, wie wahrscheinlich das Ereignis $\{13,22,31\}$ ist? Die
+Antwort ist einfach, weil es sich um ein Laplace-Experiment handelt,
+$$
+P(X=4)=P(\{13,22,31\})=\frac{|(\{13,22,31\}|}{|\Omega|}=\frac{3}{36}=\frac{1}{12}.
+$$
+:::
+
+Um mit Zufallsvorgängen in der Ökonomik zu arbeiten, sind Zufallsvariablen eine 
+große Hilfe. Praktisch alle Vorgänge, bei denen der Zufall oder Unwissenheit 
+eine Rolle spielen, lassen sich gut mit Hilfe von Zufallsvariablen beschreiben. 
+In fast allen Fällen wird die Funktion
+$X:\Omega\to\mathbb{R}$ nicht explizit angegeben, sondern implizit als
+vorhanden vorausgesetzt. Trotzdem ist es wichtig zu erkennen, dass 
+Zufallsvariablen quasi auf dem mengentheoretischen Fundament aufbauen, dass
+wir in den vorangegangenen Kapiteln gelegt haben.
 
 ::: callout-tip
-- Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert.
+Mögliche Zufallsvariablen in der Ökonomik:
 
-- $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$.
+- Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert. Von den ex ante vielen möglichen
+Gewinnen hat sich nur einer tatsächlich eingestellt.
 
-- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population. Nachdem ein Haushalt ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und ist zum Beispiel $x=3456$.
+- $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$
+oder $x=2$..
+
+- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population. Nachdem ein Haushalt zufällig ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und ist zum Beispiel $x=3456$.
+
+- $X$ ist die Dauer, die ein technisches Gerät ohne Fehler funktioniert. Am
+Start des Geräts weiß man noch nicht, wie lange es fehlerfrei laufen wird.
+Sobald ein Fehler auftritt, hat sich die Zufallsvariable realisiert. Die
+Realisation ist dann beispielsweise $x=12345$ Stunden.
 :::
 
 ## Verteilungsfunktion
@@ -70,13 +129,6 @@ Für immer größere Werte von $x$ erreicht man (zumindest als Grenzwert) die 1,
 $$
 \lim_{x\to\infty} F_X(x)=1.
 $$
-
-::: callout-tip
-eins
-
-zwei
-:::
-
 Alle Verteilungsfunktionen sind monoton (aber nicht unbedingt streng monoton) 
 wachsend. Für praktisch alle Anwendungen reicht es aus, sich auf zwei Klassen
 von Verteilungsfunktionen einzuschränken. 
@@ -145,12 +197,26 @@ Stellen die Treppenstufen liegen. Die erste Stufe ist an der Stelle $x_1$,
 die zweite an der Stelle $x_2$ etc. Die Stufenhöhen sind $p_1, p_2,\ldots,$.
 
 An der folgenden Abbildung der Verteilungsfunktion einer Zufallsvariablen
-$X$ lässt sich also ablesen, dass $X$ diskret verteilt, dass $X$ den 
-Wert $x_1$ mit einer Wahrscheinlichkeit von XXX annimmt, den 
-Wert $x_2$ mit einer Wahrscheinlichkeit von XXX und den Wert $x_3=XXX$
-mit einer Wahrscheinlichkeit von XXX.
+$X$ lässt sich also ablesen, dass $X$ diskret verteilt ist, dass $X$ den 
+Wert $x_1=0$ mit einer Wahrscheinlichkeit von 0.3 annimmt, den 
+Wert $x_2=3$ mit einer Wahrscheinlichkeit von 0.1, den Wert 
+$x_3=4$ mit einer Wahrscheinlichkeit von 0.2 und den Wert $x_4=9$ mit
+einer Wahrscheinlichkeit von 0.4.
 
-XXX Abbildung XXX
+```{r echo=FALSE}
+library(ggplot2)
+D <- data.frame(x=c(-1,0,3,4,9,10), 
+                xend=c(0,3,4,9,10,10),
+                y=c(0,0.3,0.4,0.6,1,1))
+ggplot(D, aes(x=x, y=y, xend=xend, yend=y)) +
+      geom_vline(aes(xintercept=x), linetype=2, color="grey") +
+      geom_segment() +
+      annotate("point",c(0,3,4,9),c(0.3,0.4,0.6,1))+
+      scale_x_continuous("x",breaks=0:10)+
+      scale_y_continuous("F(x)",breaks=c(0,0.2,0.4,0.6,0.8,1))+
+      ggtitle("Verteilungsfunktion einer diskreten Zufallsvariable")
+```
+
 
 ::: callout-tip
 - eins
@@ -406,8 +472,46 @@ Eine lineare Transformation, die dazu führt, dass der Erwartungswert der
 transformierten Zufallsvariable 0 und die Varianz 1 ist, nennt man 
 **Standardisierung**. Die transformierte Zufallsvariable heißt 
 standardisiert. Welche lineare Transformation muss für eine
-Standardisierung durchgeführt werden?
+Standardisierung durchgeführt werden? Wie erreicht man, dass der 
+Erwartungswert nach der Transformation 0 ist und die Varianz 1?
 
+Wir gehen in zwei Schritten vor. Im ersten Schritt subtrahieren wir von der
+Zufallsvariablen $X$ ihren Erwartungswert $E(X)$ (also eine reelle Zahl),
+$$
+X-E(X).
+$$
+Die Zufallsvariable $X-E(X)$ hat den Erwartungswert
+$$
+E(X-E(X))=E(X)-E(X)=0.
+$$
+Die Varianz von $X-E(X)$ ist gleich der Varianz von $X$, denn die Varianz
+verändert sich nicht, wenn eine reelle Zahl addiert oder subtrahiert wird. 
+Der Erwartungswert ist eine reelle Zahl. Man nennt die Zufallsvariable
+$X-E(X)$ auch **zentriert**.
 
-
+Im zweiten Schritt dividieren wir $X-E(X)$ durch die Standardabweichung von
+$X$,
+$$
+\frac{X-E(X)}{\sqrt{Var(X)}}.
+$$
+Dadurch verändert sich der Erwartungswert nicht, er bleibt weiterhin 0. Wie
+groß ist die Varianz? Um das zu beantworten, nutzen wir die Ergebisse zu
+Varianzen von linearen Transformationen, insb. das Ergebnis, dass eine multiplikative
+Konstante aus der Varianz herausgezogen werden kann, dann aber ins Quadrat
+gesetzt werden muss. Also ergibt sich
+$$
+Var\left(
+\frac{X-E(X)}{\sqrt{Var(X)}}
+\right)=
+\frac{1}{Var(X)}Var(X-E(X))=1.
+$$
+Fassen wir zusammen: Wenn $X$ eine Zufallsvariable mit Erwartungswert $E(X)$
+und Varianz $Var(X)$ ist, dann hat die linear transformierte Zufallsvariable
+$$
+Y=\frac{X-E(X)}{\sqrt{Var(X)}}
+$$
+den Erwartungswert $E(Y)=0$ und die Varianz $Var(Y)=1$. In der Schreibweise
+des vorhergehenden Abschnitts erreicht man eine Standardisierung von $X$ durch
+die lineare Transformation $Y=aX+b$ mit $a=1/\sqrt{Var(X)}$ und
+$b=E(X)/\sqrt{Var(X)}$.
 
