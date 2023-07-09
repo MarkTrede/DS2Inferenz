@@ -461,10 +461,10 @@ den Parametern $\mu\in\mathbb{R}$ und $\sigma^2>0$ lautet: $X\sim N(\mu,\sigma^2
 Der Parameter $\mu$ bewirkt eine Verschiebung der Dichte. Für positive Werte
 von $\mu$ liegt die Dichte weiter rechts, für negative Werte weiter links.
 Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf.
-Der Parameter $\sigma^2$ hat einen Einfluss auf die Streuung der Zufallsvariable.
-Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte nah um den
-Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, desto weniger ist
-die Dichte konzentriert.
+Der Parameter $\sigma^2$ hat einen Einfluss auf die Form der Dichte.
+Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte schmal und
+hoch und nah um den Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, 
+desto breiter und flacher ist die Dichte.
 
 XXX Shiny-App??? XXX
 
@@ -507,15 +507,115 @@ Normalverteilung sind also
 
 ::: callout-tip
 Die Normalverteilung ist ein gutes Modell für die Verteilung von Fehlern
-(z.B. Messfehler oder Produktionsabweichungen). 
+(z.B. Messfehler oder Produktionsabweichungen). Mit der Zufallsvariable
+$X$ bezeichnen wir das Gewicht (in g) einer zufällig ausgewählten
+200g-Tafel Schokolade. Da bei der Produktion der Tafeln immer kleine
+Abweichungen von der nominalen Menge auftreten, sind die 200g-Tafeln nicht
+immer 200g schwer. Wir gehen davon aus, dass das tatsächliche Gewicht 
+einer Normalverteilung folgt mit den Parametern $\mu=201$ (Erwartungswert)
+und $\sigma=2$ (Standardabweichung).
 
-Produktion von Schokoladentafeln
+Die Wahrscheinlichkeit, dass eine zufällig ausgewählte Tafel Schokolade
+weniger als 200g wiegt, beträgt $P(X\le 200)$,
+```{r}
+pnorm(200, mean=201, sd=2)
+```
+Wenn $X\sim N(201, 2^2)$ ist, welches Gewicht wird dann mit einer 
+Wahrscheinlichkeit von nur 5 Prozent unterschritten? Gesucht ist nun
+das 0.05-Quantil von $X$. Es ist
+```{r}
+qnorm(0.05, mean=201, sd=2)
+```
 :::
-
 
 ### Exponentialverteilung
 
+Die Exponentialverteilung ist oft gut geeignet zur Modellierung von 
+Wartezeiten oder Dauern. Eine Zufallsvariable $X$ heißt **exponentialverteilt** 
+mit Parameter $\lambda>0$, wenn ihre Dichte
+$$
+f(x)=\left\{
+\begin{array}{ll}
+\lambda e^{-\lambda x} & \text{ für }x\ge 0\\
+0 & \text{ für }x<0.
+\end{array}
+\right.
+$$
+ist. Die Kurzschreibweise für eine exponentialverteilte Zufallsvariable
+ist $X\sim Exp(\lambda)$.
+
+Der Plot zeigt den Verlauf der Dichtefunktion von $Exp(1)$.
+```{r echo=FALSE}
+D <- data.frame(x=seq(0,5,length=101), y=dexp(seq(0,5,length=101)))
+ggplot(D, aes(x,y))+
+    geom_line()+
+    ylab("Dichte der Exp(1)")+
+    ggtitle("Dichte der Exponentialverteilung")
+```
+Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
+muss die Verteilungsfunktion an der Stelle 0 den Wert 0 annehmen. Für
+die Verteilungsfunktion ergibt sich
+$$
+F(X)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x<0\\
+1-e^{-\lambda x}& \text{ für }x\ge 0.
+\end{array}
+\right.
+$$
+Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
+Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
+$$
+\begin{align*}
+&&F(x)&=p\\
+\Leftrightarrow &&1-e^{-\lambda x}&=p \\
+\Leftrightarrow &&1-p&=e^{-\lambda x} \\
+\Leftrightarrow &&\ln(1-p)&=-\lambda x \\
+\Leftrightarrow &&x &=-\frac{1}{\lambda}\ln(1-p).
+\end{align*}
+$$
+Die Quantilfunktion lautet also
+$$
+F^{-1}(p)=-\frac{1}{\lambda}\ln(1-p).
+$$
+Der Erwartungswert und die Varianz sind
+$$
+\begin{align*}
+E(X) &= \frac{1}{\lambda}\\
+Var(X) &= \frac{1}{\lambda^2}.
+\end{align*}
+$$
+
+In R ist die Abkürzung für die Exponentialverteilung `exp`. Die Funktionen
+für die Dichte, Verteilungs- und Quantilfunktion sind:
+
+- `dexp(x, rate=lambda)`
+- `pexp(x, rate=lambda)`
+- `qexp(p, rate=lambda)`
+
+::: callout-tip
+Mit der Zufallsvariable $X$ sei die Dauer in Sekunden bis zur nächsten
+Transaktion einer Volkswagenaktie an der Xetra-Börse bezeichnet. Die
+Dauer wird modelliert durch eine Exponentialverteilung mit Parameter
+$\lambda=0.04$. Wie groß ist die Wahrscheinlichkeit, dass man bis zur
+nächsten Transaktion mehr als 1 Minute warten muss?
+
+Die gesuchte Wahrscheinlichkeit $P(X>60)=1-P(X\le 60)$ beträgt
+```{r}
+1 - pexp(60, rate=0.04)
+```
+Der Median der Transaktionsdauer ist
+```{r}
+qexp(0.5, rate=0.04)
+```
+:::
+
 ### Paretoverteilung
 
-## Monte-Carlo-Simulationen
+Die Paretoverteilung kann in vielen Anwendungen extreme Ereignisse gut beschreiben. 
+Beispielsweise folgt die Vermögensverteilung bei den Superreichen einer
+Paretoverteilung. Auch extreme Aktienrenditen können gut durch eine
+Paretoverteilung beschrieben werden.
+
+
 
