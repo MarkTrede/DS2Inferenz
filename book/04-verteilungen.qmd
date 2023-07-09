@@ -5,8 +5,8 @@ kann. Sie beschreiben bestimmte Zufallsvorgänge sehr gut. Eine
 übersichtliche Liste wichtiger Standardverteilungen finden Sie auf
 der deutschsprachigen Wikipedia-Seite 
 "[Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen)". Die entsprechende 
-[englischsprachige Wikipedia-Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet eine
-noch deutlich größere Zahl von Standardverteilungen auf, stellt ihre
+[englischsprachige Wikipedia-Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet 
+noch mehr Standardverteilungen auf, stellt ihre
 Eigenschaften aber nicht so übersichtlich dar. In diesem
 Kurs lernen Sie exemplarisch einige ausgewählte diskrete und 
 stetige Standardverteilungen kennen. 
@@ -223,13 +223,295 @@ Die Summe dieser Wahrscheinlichkeiten ist 1.
 
 ### Poisson-Verteilung
 
+Eine Zufallsvariable $X$ heißt **Poisson-verteilt** mit dem Parameter $\lambda$, 
+wenn sie die Wahrscheinlichkeitsfunktion 
+$$
+P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}
+$$
+für $x=0,1,2,\ldots$ hat. Die übliche Kurzschreibweise ist $X\sim Po(\lambda)$.
 
+Der Träger der Poisson-Verteilung besteht aus allen natürlichen Zahlen (und
+der Null). Erwartungswert und Varianz sind beide
+$$
+\begin{align*}
+E(X) &= \lambda\\
+Var(X) &= \lambda.
+\end{align*}
+$$
+In R ist die Abkürzung für die Poisson-Verteilung `pois`. 
+Die R-Funktion zur Berechnung der Wahrscheinlichkeitsfunktion
+$P(X=x)$ einer Poisson-verteilten Zufallsvariable $X$ mit dem Parameter
+$\lambda$ ist
+```{r eval=FALSE}
+dpois(x, lambda)
+```
+Die Verteilungsfunktion $F(x)=P(X\le x)$ wird in R berechnet durch
+```{r eval=FALSE}
+ppois(x, lambda)
+```
+Und die Quantilfunktion ist
+```{r eval=FALSE}
+qpois(p, lambda)
+```
 
-### Geometrische Verteilung
+Es gibt zwei Anwendungen, für die die Poisson-Verteilung besonders gut geeignet
+ist. Zum einen ist es die Approximation einer Binomialverteilung, wenn die
+Zahl der Ziehungen groß und die Wahrscheinlichkeit eines Erfolgs klein ist.
+Zum anderen kann die Poisson-Verteilung gut zur Modellierung von 
+"Schalterproblemen" eingesetzt werden.
+
+Die **Approximation** einer Binomialverteilung durch eine Poisson-Verteilung
+ist sehr präzise möglich, wenn $n$ groß und gleichzeitig $\pi$ klein ist.
+Die Poisson-Verteilung ergibt sich als Grenzwert, wenn $n\to\infty$ und
+$\pi$ so gegen 0 konvergiert, dass $n\pi$ gegen eine Konstante konvergiert.
+In diesem Fall gilt
+$$
+P(X=x)={n\choose x}\pi^x (1-\pi)^{n-x}\approx e^{-\lambda}\frac{\lambda^x}{x!}
+$$
+mit $\lambda=n\pi$, d.h. der Parameter $\mu$ der Poisson-Verteilung wird
+bei der Approximation auf den Erwartungswert der Binomialverteilung gesetzt.
+Die folgende Tabelle zeigt die Wahrscheinlichkeiten $P(X=k)$ für $k=0,1,\ldots,5$
+bei einigen Binomialverteilungen und ihre Approximation durch eine
+Poisson-Verteilung.
+
+```{r}
+D <- data.frame(k=0:5,V1=0:5,V2=0:5,V3=0:5,V4=0:5)
+D[[2]] <- dbinom(0:5,size=10,prob=0.1)
+D[[3]] <- dbinom(0:5,size=100,prob=0.01)
+D[[4]] <- dbinom(0:5,size=1000,prob=0.001)
+D[[5]] <- dpois(0:5,lambda=1)
+names(D) <- c("k","B(10,0.1)","B(100,0.01)","B(1000,0.001)","Po(1)")
+round(D,5)
+```
+
+Man erkennt, dass selbst bei $n=10$ und $\pi=0.1$ die Approximation schon
+einigermaßen gut ist. Für $n=1000$ und $\pi=0.001$ sind die Unterschiede
+zwischen Binomial- und Poisson-Verteilung vernachlässigbar.
+
+::: callout-tip
+Ein Unternehmen verschickt einen Werbebrief an 10000 Personen. Wie viele 
+Kunden tatsächlich auf den Brief reagieren, ist vor der Werbeaktion nicht
+bekannt. Die Zufallsvariable $X$ sei die Anzahl der Personen, die auf den
+Brief reagieren. Die Reaktionen der Personen seien unabhängig voneinander.
+Die Reaktionswahrscheinlichkeit sei für jede Person 0.0003, d.h. der 
+Erwartungswert der Anzahl der Reaktionen beträgt 3. Natürlich ist die
+Reaktionswahrscheinlichkeit in der Praxis nicht bekannt; wie man damit
+umgeht, behandelt wir später in diesem Kurs.
+
+Die Anzahl der Reaktionen ist binomialverteilt mit
+$$
+X\sim N(10000, 0.0003).
+$$
+Diese Binomialverteilung kann gut approximiert werden durch
+$$
+X\sim Po(3).
+$$
+Die Wahrscheinlichkeit, dass genau 2 Personen auf die Werbeaktion
+reagieren, beträgt $P(X=2)$,
+```{r}
+dpois(2, lambda=3)
+```
+Die Wahrscheinlichkeit, dass mindestens 5 Personen reagieren, ist 
+$$
+P(X\ge 5)=1-P(X<5)=1-P(X\le 4).
+$$
+In R ergibt sich
+```{r}
+1 - ppois(4, lambda=3)
+```
+:::
+
+Ein weiterer wichtiger Anwendungsbereich der Poisson-Verteilung sind
+**"Schalterprobleme"**. Dabei wird die Zahl von Kunden als Zufallsvariable
+modelliert, die innerhalb einer bestimmten Zeitspanne am Schalter
+eintreffen. Eine besondere Eigenschaft der Poisson-Verteilung ist es, dass
+dann auch die Zahl der eintreffenden Kunden für eine längere oder kürzere
+Zeitspanne poisson-verteilt ist. Der Parameter der Verteilung verändert
+sich proportional zur Länge der Zeitspanne.
+
+::: callout-tip
+Sei 
+$$
+X\sim Po(\lambda)
+$$ 
+die Zahl der Anrufe in einem Callcenter innerhalb
+einer Stunde. Wir nehmen an, dass die erwartete Zahl der Anrufe \lambda=8$
+beträgt. Sei nun $Y$ die Anzahl der Anrufe innerhalb einer halben Stunde,
+dann gilt
+$$
+Y\sim Po(4).
+$$
+Die Wahrscheinlichkeit, dass in der Zeit von 10:00 bis 11:00 genau sechs
+Anrufe erfolgen, beträgt
+```{r}
+dpois(6, lambda=8)
+```
+Die Wahrscheinlichkeit, dass zwischen 14:30 und 15:00 mehr als 7 
+Anrufe eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
+```{r}
+1 - ppois(7, lambda=4)
+```
+:::
 
 ## Stetige Verteilungen
 
 ### Normalverteilung
+
+Die mit großem Abstand wichtigste Verteilung überhaupt ist die Normalverteilung,
+manchmal auch Gauß-Verteilung genannt. Sie ist aus zwei Gründen so wichtig.
+Zum einen lassen sich viele empirische Phänomene sehr gut durch eine
+Normalverteilung modellieren, z.B. biometrische Größen (Körpergröße und -gewicht),
+ökonomische Größen (Jahresrenditen von Aktien oder Anleihen), Messfehler und
+Produktionsabweichungen. Zum anderen spielt die Normalverteilung  eine extrem 
+wichtige Rolle in der Schätz- und Testtheorie, die später in diesem Kurs
+in den Kapiteln XXX und XXX behandelt werden.
+
+Bevor die allgemeine Normalverteilung eingeführt wird, definieren wir
+zuerst die **Standardnormalverteilung**. Eine Zufallsvariable $U$ 
+heißt standardnormalverteilt, wenn sie für $u\in\mathbb{R}$ die Dichte
+$$
+\phi(u)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)
+$$
+hat. Die Kurzschreibweise lautet $U\sim N(0,1)$. Das Symbol $\phi$ ist die
+gängige Notation für die Dichte der Standardnormalverteilung.
+
+Das "Herz" der Normalverteilung ist die Funktion $e^{-u^2}$. Alle anderen
+Bestandteile der Dichte dienen nur zur Normierung. Ein Plot der Dichte
+zeigt, dass sie eine Glockenkurve beschreibt, die symmetrisch um die
+Null herum verläuft.
+```{r echo=FALSE}
+D <- data.frame(x=seq(-4,4,length=401), y=dnorm(seq(-4,4,length=401)))
+ggplot(D, aes(x,y))+
+    geom_line()+
+    ylab(expression(phi(x)))+
+    ggtitle("Dichte der Standardnormalverteilung")
+```
+Die zugehörige Verteilungsfunktion wird mit $\Phi(u)=P(U\le u)$ bezeichnet,
+$$
+\Phi(u)=\int_{-\infty}^u \phi(t)dt.
+$$
+Die Funktion $\Phi(u)$ ist auf ganz $\mathbb{R}$
+streng monoton wachsend, jedoch sind Werte betragsmäßig größer als 4
+extrem unwahrscheinlich, wie man an der folgenden Abbildung erkennt.
+```{r echo=FALSE}
+D <- data.frame(x=seq(-4,4,length=401), y=pnorm(seq(-4,4,length=401)))
+ggplot(D, aes(x,y))+
+    geom_line()+
+    ylab(expression(Phi(x)))+
+    geom_vline(xintercept=0)+
+    ggtitle("Verteilungsfunktion der Standardnormalverteilung")
+```
+Wegen der Symmetrie der Standardnormalverteilung um die Null herum gilt
+$$
+\Phi(u)=1-\Phi(-u).
+$$
+Die Inverse der Verteilungsfunktion ist die Quantilfunktion $\Phi^{-1}(p)$,
+```{r echo=FALSE}
+D <- data.frame(x=seq(0.001,0.999,length=401), y=qnorm(seq(0.001,0.999,length=401)))
+ggplot(D, aes(x,y))+
+    geom_line()+
+    ylab(expression(Phi^{-1} (x)))+
+    geom_hline(yintercept=0)+
+    ggtitle("Quantilfunktion der Standardnormalverteilung")
+```
+Auch hier gibt es eine Symmetriebeziehung, nämlich
+$$
+\begin{align*}
+\Phi^{-1}(p) &= -\Phi^{-1}(1-p)\\
+\text{bzw.}\qquad u_p &= -u_{1-p}.
+\end{align*}
+$$
+
+Der Erwartungswert der Standardnormalverteilung ist $E(U)=0$, die
+Varianz ist $Var(U)=1$. Die Zufallsvariable $U$ ist also standardisiert.
+
+Leider gibt es keine geschlossene Formel für das Integral der Dichtefunktion.
+Die Verteilungsfunktion $\Phi(u)$ kann daher nicht einfach formelmäßig notiert
+werden. Dennoch lassen sich Dichte-, Verteilungs- und
+Quantilfunktion in R sehr einfach berechnen. 
+
+Die Abkürzung für die Normalverteilung ist `norm`. 
+
+::: callout-tip
+Der Wert der Dichtefunktion an den Stellen $u=-3,-2.5,\ldots,2.5,3$ beträgt
+```{r}
+u <- seq(from=-3, to=3, by=0.5)
+dnorm(u)
+```
+Die Verteilungsfunktion nimmt an der Stelle $u=2$ den Wert
+```{r}
+pnorm(2)
+```
+an. Und das 0.975-Quantil der Standardnormalverteilung ist
+```{r}
+qnorm(0.975)
+```
+:::
+
+Die Standardnormalverteilung ist ein Spezialfall der **Normalverteilung**.
+Die allgemeine Normalverteilung hat zwei Parameter, die meistes mit $\mu$ und
+$\sigma^2$ (oder $\sigma$) bezeichnet werden. Die Dichtefunktion der
+Normalverteilung ist
+$$
+f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right).
+$$
+Die Kurzschreibweise für eine Zufallsvariable, die normalverteilt ist mit
+den Parametern $\mu\in\mathbb{R}$ und $\sigma^2>0$ lautet: $X\sim N(\mu,\sigma^2)$.
+
+Der Parameter $\mu$ bewirkt eine Verschiebung der Dichte. Für positive Werte
+von $\mu$ liegt die Dichte weiter rechts, für negative Werte weiter links.
+Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf.
+Der Parameter $\sigma^2$ hat einen Einfluss auf die Streuung der Zufallsvariable.
+Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte nah um den
+Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, desto weniger ist
+die Dichte konzentriert.
+
+XXX Shiny-App??? XXX
+
+Zwischen der Dichte der $N(\mu,\sigma^2)$ und der Dichte der Standardnormalverteilung
+besteht eine enge Beziehung. Es gilt
+$$
+f(x)=\phi\left(\frac{x-\mu}{\sigma}\right).
+$$
+Die Verteilungsfunktion der allgemeinen Normalverteilung $N(\mu,\sigma^2)$ wird 
+indirekt durch die Vertelungsfunktion der Standardnormalverteilung 
+$N(0,1)$ ausgedrückt. Sie ist 
+$$
+F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right).
+$$
+Auch die Quantilfunktion der $N(\mu,\sigma^2)$ wird durch die Quantilfunktion
+der $N(0,1)$ ausgedrückt, und zwar gilt
+$$
+F^{-1}(p) = \mu+\sigma \cdot\Phi^{-1}(p).
+$$
+Erwartungswert und Varianz der $N(\mu,\sigma^2)$ sind
+$$
+\begin{align*}
+E(X) &= \mu\\
+Var(X) &= \sigma^2.
+\end{align*}
+$$
+
+In R verwendet man für die allgemeine Normalverteilung die gleichen Funktionen
+wie für die Standardnormalverteilung. Nur die beiden Parameter $\mu$ 
+(`mean`) und $\sigma^2$ (`sd`) werden als zusätzliche Argumente angefügt. 
+*Achtung*: Anstelle der Varianz $\sigma^2$ erwartet die Funktion als
+Argument die Standardabweichung $\sigma$!
+
+Die R-Funktionen für die Dichte-, Verteilungs- und Quantilfunktion der 
+Normalverteilung sind also
+
+- `dnorm(x, mean=mu, sd=sigma)`
+- `pnorm(x, mean=mu, sd=sigma)`
+- `qnorm(p, mean=mu, sd=sigma)`
+
+::: callout-tip
+Die Normalverteilung ist ein gutes Modell für die Verteilung von Fehlern
+(z.B. Messfehler oder Produktionsabweichungen). 
+
+Produktion von Schokoladentafeln
+:::
+
 
 ### Exponentialverteilung
 

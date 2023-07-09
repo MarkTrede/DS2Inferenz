@@ -2,6 +2,11 @@
 
 <img src="images/arrows.png" align="left" width="40%"/> 
 
+```{r echo=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+
 In den Wirtschaftswissenschaften spielen Zufall und Unsicherheit eine wichtige Rolle. Zum einen, weil die ökonomische Theorie deskriptive und normative Aussagen darüber macht, wie ökonomische Akteure sich unter Unsicherheit verhalten und wie sie sich rational verhalten sollten. Zum anderen, weil ökonomische Modelle mit Hilfe von statistischen Verfahren an die Realität angepasst werden sollen oder ökonomische Theorien anhand von emprischen Beobachtungen überprüft werden sollen. In dem Modul *Data Science 2* lernen Sie, wie man mit Zufall und Unsicherheit umgeht.
 
 Das Modul lässt sich in zwei große Teile gliedern, nämlich die Grundlagen der Wahrscheinlichkeitstheorie und die statistische Inferenz.
