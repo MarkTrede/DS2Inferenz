@@ -16,7 +16,8 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosco
+    theme: sandstone
+    css: styles.css
 
 editor: source
 
