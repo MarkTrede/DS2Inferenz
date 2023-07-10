@@ -460,16 +460,38 @@ den Parametern $\mu\in\mathbb{R}$ und $\sigma^2>0$ lautet: $X\sim N(\mu,\sigma^2
 
 Der Parameter $\mu$ bewirkt eine Verschiebung der Dichte. Für positive Werte
 von $\mu$ liegt die Dichte weiter rechts, für negative Werte weiter links.
-Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf.
+Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf. Die
+Abbildung zeigt drei Dichten von $N(\mu,1)$ für $\mu=-1,1,5$.
+```{r echo=FALSE}
+x <- seq(-4,9,length=500)
+D <- data.frame(x=rep(x,3), 
+                y=c(dnorm(x,-1,1),dnorm(x,1,1),dnorm(x,5,1)),
+                m=rep(factor(c(-1,1,5)),each=500))
+ggplot(D,aes(x,y,colour=m))+
+    geom_line()+
+    scale_colour_discrete(expression(mu))+
+    ylab("Dichte")+
+    theme(legend.position = "bottom")
+```
 Der Parameter $\sigma^2$ hat einen Einfluss auf die Form der Dichte.
 Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte schmal und
 hoch und nah um den Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, 
-desto breiter und flacher ist die Dichte.
-
-XXX Shiny-App??? XXX
-
-Zwischen der Dichte der $N(\mu,\sigma^2)$ und der Dichte der Standardnormalverteilung
-besteht eine enge Beziehung. Es gilt
+desto breiter und flacher ist die Dichte. Die Abbildung zeigt
+drei Dichten von $N(0,\sigma^2)$ für $\sigma^2=0.3,1,3$.
+```{r echo=FALSE}
+x <- seq(-7,7,length=500)
+D <- data.frame(x=rep(x,3), 
+                y=c(dnorm(x,0,sqrt(0.3)),
+                    dnorm(x,0,1),
+                    dnorm(x,0,sqrt(3))),
+                m=rep(factor(c(0.3,1,3)),each=500))
+ggplot(D,aes(x,y,colour=m))+
+    geom_line()+
+    scale_colour_discrete(expression(sigma^2))+
+    ylab("Dichte")+
+    theme(legend.position = "bottom")
+```
+Zwischen der Dichte der $N(\mu,\sigma^2)$ und der Dichte der Standardnormalverteilung besteht eine enge Beziehung. Es gilt
 $$
 f(x)=\phi\left(\frac{x-\mu}{\sigma}\right).
 $$
@@ -556,7 +578,7 @@ Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem
 muss die Verteilungsfunktion an der Stelle 0 den Wert 0 annehmen. Für
 die Verteilungsfunktion ergibt sich
 $$
-F(X)=\left\{
+F(x)=\left\{
 \begin{array}{ll}
 0 & \text{ für }x<0\\
 1-e^{-\lambda x}& \text{ für }x\ge 0.
@@ -612,10 +634,63 @@ qexp(0.5, rate=0.04)
 
 ### Paretoverteilung
 
-Die Paretoverteilung kann in vielen Anwendungen extreme Ereignisse gut beschreiben. 
-Beispielsweise folgt die Vermögensverteilung bei den Superreichen einer
-Paretoverteilung. Auch extreme Aktienrenditen können gut durch eine
+Die Paretoverteilung kann in vielen Anwendungen extreme Ereignisse gut
+beschreiben. Beispielsweise folgt die Vermögensverteilung bei den Superreichen
+einer Paretoverteilung. Auch extreme Aktienrenditen können gut durch eine
 Paretoverteilung beschrieben werden.
 
+Die Paretoverteilung hat zwei Parameter, und zwar $c>0$ und $\alpha>0$.
+Die Dichte lautet
+$$
+f(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x<c\\
+\frac{\alpha}{c}\left(\frac{c}{x}\right)^{\alpha+1}& \text{ für }x\ge c.
+\end{array}
+\right.
+$$
+Für $c=1$ und $\alpha=2$ ergibt sich folgendes Bild:
+```{r echo=FALSE}
+x <- seq(1,5,length=200)
+alpha <- 2
+cc <- 1
+D <- data.frame(x=x,
+                y=(alpha/cc)*(cc/x)^(alpha+1))
+ggplot(D, aes(x=x,y=y))+
+    geom_line()+
+    xlim(0,5)+
+    ylab("Dichte")+
+    ggtitle("Dichte der Paretoverteilung")
 
+```
+Der Verlauf der Dichte ist auf den ersten Blick ähnlich wie bei
+der Exponentialverteilung. Jedoch fällt die Dichte der Paretoverteilung 
+deutlich langsamer gegen 0 als die Dichte der Exponentialverteilung.
+Bei der Paretoverteilung können daher extrem große Ausreißer auftreten.
+Ein weiterer Unterschied zur Exponentialverteilung besteht darin,
+dass die Paretoverteilung als Untergrenze den Parameter $c>0$ hat,
+die Exponentialverteilung startet hingegen immer bei 0.
 
+Duch Integration der Dichte erhält man die Verteilungsfunktion.
+$$
+F(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x<c\\
+1-\left(\frac{c}{x}\right)^\alpha & \text{ für }x\ge c.
+\end{array}
+\right.
+$$
+
+Invertieren der Verteilungsfunktion führt auf die Quantilfunktion.
+$$
+F^{-1}(p)=c(1-p)^{-1/\alpha}.
+$$
+Erwartungswert und Varianz der Paretoverteilung sind
+$$
+\begin{align*}
+E(X) &= \frac{\alpha c}{\alpha-1}\\
+Var(X) &= \frac{\alpha c^2}{(\alpha-2)(\alpha-1)^2}.
+\end{align*}
+$$
+Der Erwartungswert ist nur definiert, wenn der $\alpha>1$ ist,
+die Varianz ist sogar nur dann definiert, wenn $\alpha>2$ ist.
