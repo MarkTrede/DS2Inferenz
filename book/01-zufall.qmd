@@ -2,9 +2,13 @@
 
 In diesem Kurs geht es um Zufall. Die Frage, was man denn unter Zufall eigentlich zu verstehen hat, ist schwierig zu beantworten. Sie gehört eher in den Bereich der Philosophie als den der Wirtschaftswissenschaften. Wir definieren in diesem Kurs Zufall auf eine sehr pragmatische Art: Wir haben es mit einem **Zufallsvorgang** zu tun, wenn wir nicht genau wissen, was passieren wird, aber wissen, was alles passieren könnte.
 
+<img src="images/AdobeStock_437318696b.jpeg" align="right" width=35%" style="padding-left:15px;padding-top:5px;"/>
+
 Mit Zufallsvorgängen hat man es also unentwegt zu tun. Wir wissen nicht, wie sich der DAX-Index im Laufe des nächsten Monats entwickeln wird, aber wir wissen, dass er einen Wert zwischen 0 und unendlich haben wird. Die Entwicklung des DAX-Index ist also im Sinne unserer Definition zufällig. Wir wissen nicht, ob eine bestimmte Person im nächsten Jahr arbeitslos sein wird, aber wissen, dass sie es sein könnte oder auch nicht. Der Arbeitslosigkeitsstatus dieser Person ist also ebenfalls zufällig im Sinne unserer Defintion.
 
-In den Wirtschaftswissenschaften betrachten wir oft Zufallsvorgänge, die nicht unter identischen Bedingungen wiederholt werden können. In diesem Kurs werden wir aber zumindest am Beginn aus didaktischen Gründen oft Zufallsvorgänge betrachten, die nichts mit wirtschaftlichen Fragestellungen zu tun haben. Als Beispiele dienen oft Münzwürfe oder Würfelwürfe. Solche Zufallsvorgänge, die sich unter praktisch identischen Bedingungen wiederholen lassen, nennt man auch Zufallsexperimente.
+<img src="images/AdobeStock_52375773b.jpeg" align="right" width=35%" style="padding-left:15px;padding-top:5px;"/>
+
+In den Wirtschaftswissenschaften betrachten wir oft Zufallsvorgänge, die nicht unter identischen Bedingungen wiederholt werden können. In diesem Kurs werden wir aber trotzdem zumindest am Beginn aus didaktischen Gründen oft Zufallsvorgänge betrachten, die nichts mit wirtschaftlichen Fragestellungen zu tun haben. Als Beispiele dienen oft Münzwürfe oder Würfelwürfe. Solche Zufallsvorgänge, die sich unter praktisch identischen Bedingungen wiederholen lassen, nennt man auch Zufallsexperimente.
 
 Damit wir einen Zufallsvorgang präzise beschreiben können und vernünftig mit ihm arbeiten können, brauchen wir einen formalen Rahmen und eine geeignete Terminologie. Die Wahrscheinlichkeitstheorie bietet einen solchen Rahmen. In den folgenden Abschnitten lernen wir ihn kennen.
 
@@ -44,6 +48,8 @@ $$
 ## Ereignisse
 
 Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf einzelne Ergebnisse aus der Ergebnismenge, sondern oft auf mehrere Ergebnisse. Zusammenfassungen von Ergebnissen nennt man Ereignisse (engl. events). Sie werden meist mit großen lateinischen Buchstaben bezeichnet ($A, B, \ldots$).
+
+<img src="images/AdobeStock_159363813b.jpeg" align="center" width="99%"/>
 
 ::: callout-note
 Teilmengen der Ergebnismenge $\Omega$ heißen **Ereignisse** (engl. events). Ein Ereignis $A$ tritt ein, wenn das Ergebnis $\omega$ des Zufallsvorgangs Element des Ereignisses ist, d.h. wenn $\omega\in A$.

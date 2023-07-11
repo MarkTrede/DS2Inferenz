@@ -24,7 +24,7 @@ Eine Abbildung $P: A \mapsto P(A)$ heißt **Wahrscheinlichkeitsmaß**
 Diese Eigenschaften, die eine Wahrscheinlichkeitsabbildung erfüllen
 muss, sind intuitiv sinnvoll und können nicht aus irgendwelchen Fakten
 hergeleitet werden, daher spricht man auch von **Axiomen**. Etwas
-allgemeiner und präziser wurden diese Axiome 1933 von Andrey Kolmogorov
+allgemeiner und präziser wurden diese Axiome 1933 von Andrey Kolmogorov (1903-1987)
 für eine saubere mathematische Fundierung der Wahrscheinlichkeitstheorie
 eingeführt.
 
@@ -83,10 +83,10 @@ viele Ergebnisse gibt (d.h. wenn $|\Omega|=n$) und wenn alle
 Elementarereignisse als gleich wahrscheinlich angenommen werden können.
 :::
 
+<img src="images/AdobeStock_332174058b.jpeg" align="right" width="35%"/>
 Beachten Sie, dass es sich dabei um eine Aussage handelt, die aus
 unserem Alltagswissen herrührt, nicht aus mathematischen Überlegungen
-oder Herleitungen.
-<img src="images/kronkorken.jpg" align="right" width="20%"/> Ein
+oder Herleitungen. Ein
 typisches, einfaches Beispiel für ein Laplace-Experiment sind
 Würfelwürfe. Es ist aus unserem Alltagswissen heraus plausibel, davon
 auszugehen, dass alle Augenzahlen eines Würfels gleich wahrscheinlich
@@ -267,27 +267,33 @@ berichtet wird aber $P(B|A)$.
 
 ::: callout-tip
 -   Es wird berichtet, dass ein medizinischer Schnelltest mit einer
-    Wahrscheinlichkeit von xxx Prozent ein falsch positives Ergebnis
-    liefert. Falsch positiv bedeutet, die Wahrscheinlichkeit wird unter
-    der Bedingung angegeben, dass die getestete Person negativ ist. Wenn
-    man Test an sich durchführt, interessiert man sich dagegen für die
-    bedingte Wahrscheinlichkeit, infiziert zu sein, obwohl der Test
-    negativ ausfällt, und natürlich auch für die bedingte
-    Wahrscheinlichkeit, tatsächlich infiziert zu sein, wenn der Test
-    positiv ausfällt.
+    Wahrscheinlichkeit von 99 Prozent eine infizierte Person korrekt als
+    infiziert (positiv) erkennt und ebenfalls mit einer Wahrscheinlichkeit von 99
+    Prozent eine nicht infizierte Person als nicht infiziert erkennt
+    (negativ). Sei $A$ das Ereignis "infiziert" und $B$ das Ereignis "Test positiv". 
+    Die angegebenen Wahrscheinlichkeiten sind bedingte Wahrscheinlichkeiten,
+    und zwar $P(B|A)=0.99$ und $P(\bar B|\bar A)=0.99$. Als Testanwender 
+    interessiert man sich jedoch eher für die
+    bedingte Wahrscheinlichkeit, tatsächlich infiziert zu sein, 
+    wenn der Test positiv ausfällt, also für $P(A|B)$. Oder auch für die 
+    bedingte Wahrscheinlichkeit infiziert zu sein, obwohl der Test
+    negativ ausfällt, also $P(A|\bar B)$.
 
--   In den Medien erfährt man, dass XX Prozent der Studierenden ein
+-   Es wird berichtet, dass 75 Prozent der Studierenden ein
     "akademisches Elternhaus" haben. Es handelt sich um die bedingte
     Wahrscheinlichkeit eines akademischen Elternhauses, wenn eine Person
-    studiert. Für die Bewertung der Chancengleichheit ist hingegen die
+    studiert. Hier sind die Ereignisse $A$: "Kind studiert", und
+    $B$: "akademisches Elternhaus". Gegeben ist $P(B|A)=0.75$.
+    Für die Bewertung der Chancengleichheit ist jedoch die
     bedingte Wahrscheinlichkeit interessanter, dass ein Kind studiert,
-    wenn es aus einem akademischen Elternhaus stammt - und zwar im
-    Vergleich zu der bedingten Wahrscheinlichkeit, dass ein Kind
-    studiert, das nicht aus einem akademischen Elternhaus stammt.
+    wenn es aus einem akademischen Elternhaus stammt, also
+    $P(A|B)$ - und zwar im Vergleich zu der bedingten Wahrscheinlichkeit, 
+    dass ein Kind studiert, das nicht aus einem akademischen Elternhaus stammt,
+    also $P(A|\bar B)$.
 :::
 
 Wie kann man eine bedingte Wahrscheinlichkeit "umdrehen"? Wie verhält
-sich $P(B|A)$ zu $P(A|B)$? Das sehen wir im folgenden Abschnitt.
+sich $P(B|A)$ zu $P(A|B)$? Das sehen wir in Kürze im Abschnitt \@ref(bayes).
 
 Bedingte Wahrscheinlichkeiten sind auch nützlich, um die
 Wahrscheinlichkeit zu berechnen, dass mehrere Ereignisse gemeinsam
@@ -325,25 +331,26 @@ Reihenfolge der Bedingungen wäre natürlich ebenfalls möglich, z.B.
 $$
 P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B).
 $$
+Für jede Reihenfolge gelangt man zum gleichen Ergebnis.
 
 ## Totale Wahrscheinlichkeit {#total}
 
 Aus mehreren bedingten Wahrscheinlichkeiten lässt sich eine unbedingte
 Wahrscheinlichkeit errechnen. Dazu zerlegen wir den Ergebnisraum
-$\Omega$ in eine Partition. Unter einer Partition versteht man eine
+$\Omega$ in eine Partition. Unter einer **Partition** versteht man eine
 Zerlegung in disjunkte Mengen $A_1, A_2, \ldots, A_n$, so dass die
 Vereinigungsmenge der $A_1,\ldots, A_n$ wieder $\Omega$ ergibt. Die
 "Partitionierung eines Rinds" könnte etwa so aussehen:
 
 ```{r echo=FALSE,out.width="100%"}
-knitr::include_graphics("images/partitionrind.jpg")
+knitr::include_graphics("images/AdobeStock_101998556b.jpeg")
 ```
 
 Das Rind wird also vollständig Teilmengen zerlegt, und alle Teilmengen
 zusammen ergeben wieder das gesamte Rind.
 
 Nun nehmen wir an, dass für jedes Ereignis $A_i$, $i=1,\ldots,n$, die
-bedingte Wahrscheinlichkeit $P(B|A_i$ gegeben ist, wobei $B$ irgendein
+bedingte Wahrscheinlichkeit $P(B|A_i)$ gegeben ist, wobei $B$ irgendein
 Ereignis ist. Dann gilt für die unbedingte Wahrscheinlichkeit von $B$:
 $$
 P(B)=\sum_{i=1}^n P(B|A_i)P(A_i).
@@ -381,7 +388,32 @@ $$
 Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
 
 ::: callout-tip
--   Eins
+-   Wir betrachten wieder den medizinischen Schnelltest und die beiden
+Ereignisse $A$: "Person ist infiziert", und $B$: "Test positiv". Neben
+den beiden bedingten Wahrscheinlichkeiten $P(B|A)=0.99$ und 
+$P(\bar B|\bar A)=0.99$ sei bekannt, dass $P(A)=0.001$, d.h. nur mit
+einer Wahrscheinlichkeit von 0.1 Prozent ist eine zufällig aus der
+Population ausgewählte Person infiziert. 
+
+Wie groß ist Wahrscheinlichkeit, dass eine Person infiziert ist, bei
+der der Schnelltest ein positives Ergebnis zeigt? Gesucht ist also
+$P(A|B)$. Nach dem Satz von Bayes gilt
+$$
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
+$$
+Nach dem Satz der totalen Wahrscheinlichkeit berechnet man
+$$
+\begin{align*}
+P(B) &=P(B|A)P(A)+P(B|\bar A)P(\bar A)\\
+&= P(B|A)P(A)+[1-P(\bar B|\bar A)][1-P(A)]\\
+&= 0.99\cdot 0.001+[1-0.99]\cdot [1-0.001]\\
+&= 0.01098.
+\end{align*}
+$$
+Die Wahrscheinlichkeit, dass eine Person mit einem positiven Testergebnis
+tatsächlich infiziert ist, ist folglich immer noch sehr klein, obwohl der
+Test scheinbar sehr genau arbeitet. 
+
 -   Zwei
 :::
 

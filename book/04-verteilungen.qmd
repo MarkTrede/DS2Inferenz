@@ -1,5 +1,9 @@
 # Standardverteilungen
 
+```{r echo=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
 Für viele Anwendungsfälle gibt es **Standardverteilungen**, die man nutzen
 kann. Sie beschreiben bestimmte Zufallsvorgänge sehr gut. Eine 
 übersichtliche Liste wichtiger Standardverteilungen finden Sie auf

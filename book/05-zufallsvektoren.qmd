@@ -1,6 +1,109 @@
 # Zufallsvektoren {#zufallsvektoren}
 
+Zufallsvariablen sind Funktionen aus dem Ergebnisraum in die Menge der
+reellen Zahlen. Es ist natürlich möglich, nicht nur eine solche Funktion 
+zu betrachten, sondern mehrere gleichzeitig. Man erhält dann mehrere
+Zufallsvariablen, die jedoch alle vom gleichen zugrundeliegenden 
+Zufallsvorgang abhängen und auf dem gleichen Ergebnisraum $\Omega$
+basieren. Ordnet man diese Zufallsvariablen in Form eines
+Vektors an, dann spricht man von einem **Zufallsvektor**. Man sagt
+auch, dass die Zufallsvariablen eine **gemeinsame Verteilung** haben.
+
+Gemeinsame Verteilungen sind erheblich interessanter und vielseitiger
+als eindimensionale Zufallsvariablen, weil sie auch Zusammenhänge
+und Abhängigkeiten zwischen den Variablen beschreiben können.
+
+::: callout-tip
+- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die
+kleinere Augenzahl, die Zufallsvariable $Y$ die größere Augenzahl.
+Die beiden Zufallsvariablen $X$ und $Y$ basieren auf dem gleichen
+Ergebnisraum. Sie haben eine gemeinsame Verteilung. Das lässt
+sich etwa so veranschaulichen:
+$$
+\begin{array}{lclcl}
+\mathbb{R}& X & \Omega & Y & \mathbb{R}\\\hline
+1 & \longleftarrow & 11 & \longrightarrow & 1\\
+1 & \longleftarrow & 12 & \longrightarrow & 2\\
+1 & \longleftarrow & 13 & \longrightarrow & 3\\
+1 & \longleftarrow & 14 & \longrightarrow & 4\\
+1 & \longleftarrow & 15 & \longrightarrow & 5\\
+1 & \longleftarrow & 16 & \longrightarrow & 6\\
+1 & \longleftarrow & 21 & \longrightarrow & 2\\
+2 & \longleftarrow & 22 & \longrightarrow & 2\\
+2 & \longleftarrow & 23 & \longrightarrow & 3\\
+\vdots && \vdots&&\vdots\\
+5 & \longleftarrow & 65 & \longrightarrow & 6\\
+6 & \longleftarrow & 66 & \longrightarrow & 6
+\end{array}
+$$
+
+- Wir betrachten die Tagesrenditen von zwei Aktien an einem zukünftigen Tag. 
+Sei $X$ die Tagesrendite der Volkswagenaktie und $Y$ die Tagesrendite von
+BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung.
+:::
+
+Im folgenden gehen wir Schritt für Schritt fast genauso vor wie bei den 
+univariaten Zufallsvariablen in Kapitel \@ref(zufallsvariablen).
+
 ## Verteilungsfunktion
+
+::: callout-note
+Sei $\Omega$ eine Ergebnismenge, seien $X:\Omega \longrightarrow \mathbb{R}$ 
+und $Y:\Omega\longrightarrow \mathbb{R}$ zwei Zufallsvariablen. Dann ist
+\[ F_{XY}(x,y) =P(X\leq x,Y\leq y) \]
+die **gemeinsame Verteilungsfunktion** von $X$ und $Y$.
+:::
+
+Die gemeinsame Verteilungsfunktion lässt sich leicht auf mehr als zwei
+Zufallsvariablen verallgemeinern. Da die Notation dann etwas unübersichtlicher
+wird, beschränken wir uns auf den Fall von zwei Zufallsvariablen. Alle
+wichtigen Konzepte lassen sich auch gut in diesem Fall verstehen.
+
+Eigenschaften der gemeinsamen Verteilungsfunktion:
+
+- $F_{XY}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend 
+(aber nicht unbedingt streng monoton steigend) in $x$ und $y$.
+
+- Es gilt $\lim_{x\to -\infty}F_{XY}(x,y)$ und $\lim_{y\to -\infty}F_{XY}(x,y)=0$.
+
+- Es gilt $\lim_{z\to \infty}F_{XY}(z,z) =1$.
+
+## Gemeinsam diskrete Zufallsvariablen
+
+::: callout-note
+Zwei Zufallsvariablen $X$ und $Y$ heißen **gemeinsam diskret**, 
+wenn es endlich viele oder abzählbar unendlich viele Werte 
+$x_1,x_2,\ldots$ und $y_1,y_2,\ldots $ gibt, so dass 
+$$
+\sum_{j}\sum_{k}p_{jk}=1
+$$
+mit $p_{jk}=P(X=x_j,Y=y_k)$.
+:::
+
+Gemeinsam diskrete Zufallsvariablen haben eine 
+**gemeinsame Wahrscheinlichkeitsfunktion**, nämlich
+$$
+f(x,y) =\left\{ 
+\begin{array}{ll}
+p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\ 
+0 & \quad \text{sonst.}
+\end{array}\right.
+$$
+Wenn die Zahl der unterschiedlichen möglichen Werte, die $X$ und $Y$
+annehmen können, nicht allzu groß ist, dann kann man die 
+gemeinsamen Wahrscheinlichkeiten übersichtlich in Form einer
+Wahrscheinlichkeitstabelle darstellen:
+$$
+\begin{array}{c|ccc|}
+X\backslash Y & y_{1} & \ldots & y_{K} \\ \hline
+x_{1} & p_{11} & \ldots  & p_{1K} \\ 
+\vdots& \vdots &  & \vdots  \\ 
+x_{J} & p_{J1} & \ldots  & p_{JK}\\\hline
+\end{array}
+$$
+## Gemeinsam stetige Zufallsvariablen
+
+## Randverteilungen
 
 ## Bedingte Verteilungen
 
