@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Data Science 2: Statistische Inferenz"
+  title: "Data Science 2"
   author: "Mark Trede"
   date: "Juni 2023"
   chapters:
@@ -11,6 +11,7 @@ book:
     - 02-wahrscheinlichkeit.qmd
     - 03-zufallsvariablen.qmd
     - 04-verteilungen.qmd
+    - 05-zufallsvektoren.qmd
 
 bibliography: references.bib
 
