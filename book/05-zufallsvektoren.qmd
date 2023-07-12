@@ -6,8 +6,10 @@ zu betrachten, sondern mehrere gleichzeitig. Man erhält dann mehrere
 Zufallsvariablen, die jedoch alle vom gleichen zugrundeliegenden 
 Zufallsvorgang abhängen und auf dem gleichen Ergebnisraum $\Omega$
 basieren. Ordnet man diese Zufallsvariablen in Form eines
-Vektors an, dann spricht man von einem **Zufallsvektor**. Man sagt
-auch, dass die Zufallsvariablen eine **gemeinsame Verteilung** haben.
+Vektors an, dann spricht man von einem **Zufallsvektor** 
+(engl. random vector). Man sagt
+auch, dass die Zufallsvariablen eine **gemeinsame Verteilung** 
+(engl. joint distribution) haben.
 
 Gemeinsame Verteilungen sind erheblich interessanter und vielseitiger
 als eindimensionale Zufallsvariablen, weil sie auch Zusammenhänge
@@ -43,17 +45,25 @@ BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung.
 :::
 
 Im folgenden gehen wir Schritt für Schritt fast genauso vor wie bei den 
-univariaten Zufallsvariablen in Kapitel \@ref(zufallsvariablen).
+univariaten Zufallsvariablen in Kapitel XXX.
 
 ## Verteilungsfunktion
+
+Alle wichtigen Eigenschaften der Verteilung einer univariaten 
+Zufallsvariable werden durch ihre Verteilungsfunktion beschrieben. 
+Wie lässt sich die Idee einer Verteilungsfunktion auf 
+Zufallsvektoren übertragen? 
 
 ::: callout-note
 Sei $\Omega$ eine Ergebnismenge, seien $X:\Omega \longrightarrow \mathbb{R}$ 
 und $Y:\Omega\longrightarrow \mathbb{R}$ zwei Zufallsvariablen. Dann ist
 \[ F_{XY}(x,y) =P(X\leq x,Y\leq y) \]
-die **gemeinsame Verteilungsfunktion** von $X$ und $Y$.
+die **gemeinsame Verteilungsfunktion** (engl. joint cumulative
+distribution function) von $X$ und $Y$.
 :::
 
+Wenn aus dem Kontext eindeutig hervorgeht, um welchen Zufallsvektor
+bzw. um welche Zufallsvariablen es sich handelt, kann der Subindex entfallen.
 Die gemeinsame Verteilungsfunktion lässt sich leicht auf mehr als zwei
 Zufallsvariablen verallgemeinern. Da die Notation dann etwas unübersichtlicher
 wird, beschränken wir uns auf den Fall von zwei Zufallsvariablen. Alle
@@ -70,9 +80,14 @@ Eigenschaften der gemeinsamen Verteilungsfunktion:
 
 ## Gemeinsam diskrete Zufallsvariablen
 
+Im univariaten Fall haben wir uns auf zwei Klassen von Zufallsvariablen
+beschränkt, nämlich diskrete und stetige Zufallsvariablen. Das 
+lässt sich leicht auf den mehrdimensionalen Fall verallgemeinern. 
+
 ::: callout-note
-Zwei Zufallsvariablen $X$ und $Y$ heißen **gemeinsam diskret**, 
-wenn es endlich viele oder abzählbar unendlich viele Werte 
+Zwei Zufallsvariablen $X$ und $Y$ heißen **gemeinsam diskret**
+(jointly discrete),  wenn es endlich viele oder 
+abzählbar unendlich viele Werte 
 $x_1,x_2,\ldots$ und $y_1,y_2,\ldots $ gibt, so dass 
 $$
 \sum_{j}\sum_{k}p_{jk}=1
@@ -81,9 +96,10 @@ mit $p_{jk}=P(X=x_j,Y=y_k)$.
 :::
 
 Gemeinsam diskrete Zufallsvariablen haben eine 
-**gemeinsame Wahrscheinlichkeitsfunktion**, nämlich
+**gemeinsame Wahrscheinlichkeitsfunktion**
+(engl. joint probability function), nämlich
 $$
-f(x,y) =\left\{ 
+f_{XY}(x,y) =\left\{ 
 \begin{array}{ll}
 p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\ 
 0 & \quad \text{sonst.}
@@ -94,25 +110,58 @@ annehmen können, nicht allzu groß ist, dann kann man die
 gemeinsamen Wahrscheinlichkeiten übersichtlich in Form einer
 Wahrscheinlichkeitstabelle darstellen:
 $$
-\begin{array}{c|ccc|}
+\begin{array}{c|ccc}
 X\backslash Y & y_{1} & \ldots & y_{K} \\ \hline
 x_{1} & p_{11} & \ldots  & p_{1K} \\ 
 \vdots& \vdots &  & \vdots  \\ 
-x_{J} & p_{J1} & \ldots  & p_{JK}\\\hline
+x_{J} & p_{J1} & \ldots  & p_{JK}
 \end{array}
 $$
+
+::: callout-tip
+Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
+der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
+$Y$: "größere Augenzahl" sieht als Wahrscheinlichkeitstabelle so aus:
+$$
+\begin{array}{c|cccccc}
+X\backslash Y & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+2 & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} \\
+5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} \\
+6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36}
+\end{array}
+$$
+Der Wert der gemeinsamen Verteilungsfunktion an der Stelle
+$(x,y)=(5.3, 2)$ gibt die Wahrscheinlichkeit an, dass $X\le 5$ ist
+und gleichzeitig $Y\le 2$. Diese Wahrscheinlichkeit ergibt sich,
+indem man alle Wahrscheinlichkeiten aus der Tabelle addiert,
+die in den ersten beiden Spalten ($Y\le 2$) und in den
+ersten fünf Zeilen ($X\le 5.3$) stehen. Man erhält
+$$
+F_{XY}(5.3,2)=\frac{1}{36}+\frac{2}{36}+\frac{1}{36}=\frac{4}{36}=\frac{1}{9}.
+$$
+:::
+
 ## Gemeinsam stetige Zufallsvariablen
 
+::: callout-note
+Die Zufallsvariablen $X$ und $Y$ heißen **gemeinsam stetig**
+(engl. jointly continuous), falls es eine Funktion $f_{XY} $ gibt mit 
+$$
+F_{XY}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{XY}(u,v)dudv.
+$$
+Die Funktion $f_{XY}$ heißt **gemeinsame Dichte** oder Dichtefunktion
+(engl. joint density function) von $X$ und $Y$.
+:::
+
 ## Randverteilungen
+
+## Unabhängigkeit
 
 ## Bedingte Verteilungen
 
 ## Kovarianz
 
 ## Linearkombinationen
-
-## Gesetz der großen Zahl
-
-## Zentraler Grenzwertsatz
-
-## Monte-Carlo-Simulationen

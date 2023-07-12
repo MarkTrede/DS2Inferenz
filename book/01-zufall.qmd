@@ -129,7 +129,7 @@ $$
 In Worten könnte man diese Ereignisse so ausdrücken: $A$: "Ein katastrophaler Absturz der Aktie", $B$: "Eine normale Tagesrendite" und $C$: "Eine sehr starke Schwankung". Wenn die realisierte Tagesrendite dann 1 Prozent ist, tritt nur $B$ ein. Wenn der Kurs um 25 Prozent fällt, treten $A$ und $C$ auf.
 :::
 
-Die Kardinalität der Ergebnismenge bezeichnen wir mit $|\Omega|$. Wenn $\Omega$ nur endlich viele Elemente hat, ist die Kardinalität schlicht und einfach die Anzahl der Elemente. Es ist aber auch möglich (und in vielen ökonomischen Anwendungen auch üblich), dass die Ergebnismenge unendlich viele Elemente enthält. In solchen Fällen kann es zu einigen mathematisch-technischen Schwierigkeiten kommen, die wir in diesem Kurs aber ignorieren. Eine sorgfältigere Behandlung findet in dem Wahlpflichtmodul **Advanced Statistics** statt.
+Die Kardinalität der Ergebnismenge bezeichnen wir mit $|\Omega|$. Wenn $\Omega$ nur endlich viele Elemente hat, ist die Kardinalität schlicht und einfach die Anzahl der Elemente. Es ist aber auch möglich (und in vielen ökonomischen Anwendungen auch üblich), dass die Ergebnismenge unendlich viele Elemente enthält. In solchen Fällen kann es zu einigen mathematisch-technischen Schwierigkeiten kommen, die wir in diesem Kurs aber ignorieren. Eine sorgfältigere Behandlung findet in dem Bachelor-Modul **Advanced Statistics** statt.
 
 ## Mengen in R
 

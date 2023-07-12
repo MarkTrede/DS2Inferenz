@@ -293,14 +293,17 @@ einigermaßen gut ist. Für $n=1000$ und $\pi=0.001$ sind die Unterschiede
 zwischen Binomial- und Poisson-Verteilung vernachlässigbar.
 
 ::: callout-tip
+<img src="images/AdobeStock_181000278b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Ein Unternehmen verschickt einen Werbebrief an 10000 Personen. Wie viele 
 Kunden tatsächlich auf den Brief reagieren, ist vor der Werbeaktion nicht
 bekannt. Die Zufallsvariable $X$ sei die Anzahl der Personen, die auf den
 Brief reagieren. Die Reaktionen der Personen seien unabhängig voneinander.
 Die Reaktionswahrscheinlichkeit sei für jede Person 0.0003, d.h. der 
 Erwartungswert der Anzahl der Reaktionen beträgt 3. Natürlich ist die
-Reaktionswahrscheinlichkeit in der Praxis nicht bekannt; wie man damit
-umgeht, behandelt wir später in diesem Kurs.
+tatsächliche Reaktionswahrscheinlichkeit in der Praxis nicht bekannt.
+Wie man damit umgeht, dass der Parameter (oder die Parameter) einer
+Verteilung unbekannt sind und aus Daten geschätzt werden müssen,
+wird ausführlich in dem Bachelor-Modul **Advanced Statistics** behandelt.
 
 Die Anzahl der Reaktionen ist binomialverteilt mit
 $$
@@ -532,6 +535,8 @@ Normalverteilung sind also
 - `qnorm(p, mean=mu, sd=sigma)`
 
 ::: callout-tip
+
+<img src="images/AdobeStock_177164862b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Die Normalverteilung ist ein gutes Modell für die Verteilung von Fehlern
 (z.B. Messfehler oder Produktionsabweichungen). Mit der Zufallsvariable
 $X$ bezeichnen wir das Gewicht (in g) einer zufällig ausgewählten

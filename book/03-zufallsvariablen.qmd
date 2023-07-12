@@ -229,7 +229,7 @@ ggplot(D, aes(x=x, y=y, xend=xend, yend=y)) +
 ## Stetige Zufallsvariablen
 
 ::: callout-note
-Eine Zufallsvariable $X$ heißt stetig (engl. continuous), wenn es eine
+Eine Zufallsvariable $X$ heißt **stetig** (engl. continuous), wenn es eine
 Funktion $f_X(x)$ gibt, so dass
 $$
 F_X(x)=\int_{-\infty}^x f_X(t)dt
@@ -271,6 +271,10 @@ $x$ annimmt, ist also (für jedes $x\in\mathbb{R}$)
 $$
 P(X=x)=0.
 $$
+
+- Die Menge $T_X=\{x: f_X(x)>0\}$ ist der Träger (engl. support)
+der Zufallsvariable $X$. Der Träger enthält alle Werte, die die
+Zufallsvariable im Prinzip annehmen könnte.
 
 ::: callout-tip
 - eins

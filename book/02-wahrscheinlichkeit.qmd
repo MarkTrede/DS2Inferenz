@@ -388,7 +388,7 @@ $$
 Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
 
 ::: callout-tip
--   Wir betrachten wieder den medizinischen Schnelltest und die beiden
+Wir betrachten wieder den medizinischen Schnelltest und die beiden
 Ereignisse $A$: "Person ist infiziert", und $B$: "Test positiv". Neben
 den beiden bedingten Wahrscheinlichkeiten $P(B|A)=0.99$ und 
 $P(\bar B|\bar A)=0.99$ sei bekannt, dass $P(A)=0.001$, d.h. nur mit
@@ -413,8 +413,6 @@ $$
 Die Wahrscheinlichkeit, dass eine Person mit einem positiven Testergebnis
 tatsächlich infiziert ist, ist folglich immer noch sehr klein, obwohl der
 Test scheinbar sehr genau arbeitet. 
-
--   Zwei
 :::
 
 ## Unabhängigkeit
@@ -446,106 +444,12 @@ sein, dass $B$ nicht eintritt. Und wenn $B$ eintritt, kann man sicher
 sein, dass $A$ nicht eintritt. Unabhängige Ereignisse können hingegen
 sehr wohl zusammen eintreten.
 
-Wie lässt sich die Definition von Unabhängigkeit auf mehr als zwei
-Ereignisse verallgemeinern? Das ist etwas komplizierter, als man es
-vielleicht zunächst vermutet. Intuitiv gesprochen liegt bei nur zwei
-Ereignissen ($A$ und $B$) Unabhängigkeit dann vor, wenn Informationen
-über die Ausprägung eines Ereignisses die Wahrscheinlichkeit für das
-andere Ereignis nicht verändern. Bei drei Ereignissen ($A$, $B$, $C$)
-kann es passieren, dass die Information über $A$ weder die
-Wahrscheinlichkeit von $B$ noch die von $C$ verändert, dass aber die
-Information über $A$ *und* $B$ dennoch die Wahrscheinlichkeit von $C$
-verändert. Sehen wir uns dazu ein einfaches Beispiel an:
-
-::: callout-tip
-Zwei faire Würfel werden geworfen (mit der üblichen Ergebnismenge). Wir
-definieren die folgenden drei Ereignisse:
-
-$A$: Die Augenzahl des ersten Würfels ist ungerade
-
-$B$: Die Augenzahl des zweiten Würfels ist ungerade
-
-$C$: Die Summe der Augenzahlen ist ungerade
-
-Wenn man zwei beliebige dieser Ereignisse auswählt, dann sind sie
-unabhängig voneinander. Das dritte Ereignis ist aber von den beiden
-anderen abhängig, weil die Summe von zwei ungeraden Zahlen niemals
-ungerade ist.
-:::
-
-Weil die Situation bei mehr als zwei Ereignissen also komplexer ist,
-wird Unabhängigkeit für mehrere Ereignisse so definiert:
-
-::: callout-note
-Seien $A_1,\ldots,A_n$ Ereignisse. Sie heißen *global unabhängig*, wenn
-für jedes $m\in \{2,\ldots,n\}$ und alle möglichen Indizes
-$1\le i_1<\ldots<i_m\le n$ gilt 
-$$
-P(A_{i_1}\cap\ldots\cap A_{i_m})=P(A_{i_1})\cdot\ldots\cdot P(A_{i_m}).
-$$
-:::
-
-Die formale Definition ist nicht ganz leicht zu durchschauen. Letztlich
-sagt sie aber einfach aus: Bei globaler Unabhängigkeit ist die
-Wahrscheinlichkeit, dass beliebig viele beliebig ausgewählte Ereignisse
-gemeinsam eintreten, gerade dem Produkt der einzelnen
-Wahrscheinlichkeiten entspricht.
-
-## Vier-Felder-Tafeln
-
-Die Vier-Felder-Tafel ist ein besonders einfaches, aber nützliches
-Werkzeug für Fragen zu Wahrscheinlichkeiten, wenn zwei genau Ereignisse
-(und ihre Gegenereignisse) eine Rolle spielen, z.B. $A$ und $B$ (und
-$\bar A$ und $\bar B$). Jedes der beiden Ereignisse kann eintrefen oder
-nicht, so dass es insgesamt vier Kombinationsmöglichkeiten gibt. Die
-Wahrscheinlichkeiten dieser vier Möglichkeiten werden wie folgt
-angeordnet: 
-$$
-\begin{array}{c|cc|} 
-& A & \bar A& \\ \hline
-B & P(A\cap B) & P(\bar A\cap B)\\
-\bar B & P(A\cap \bar B) & P(\bar A\cap \bar B)\\ \hline
-\end{array}
-$$ 
-Da $P((A\cap B)\cup (A\cap \bar B))=P(A)$ ist (und entsprechend für
-die anderen Zeilen und Spalten), kann man die Ränder ergänzen: 
-$$
-\begin{array}{c|cc|c} 
-& A & \bar A& \\ \hline
-B & P(A\cap B) & P(\bar A\cap B) & P(B)\\
-\bar B & P(A\cap \bar B) & P(\bar A\cap \bar B) & P(\bar B)\\ \hline
-& P(A) & P(\bar A) & 1
-\end{array}
-$$ 
-Weil die Zeilen und Spalten sich immer zu den Randwerten addieren
-müssen, kann man Felder leicht ergänzen, wenn in einer Zeile oder Spalte
-ein Wert fehlt. Eine häufiger Fehler bei der Konstruktion von
-Vier-Felder-Tafeln besteht darin, dass man bedingte Wahrscheinlichkeiten
-in die Felder einträgt, also beispielsweise $P(A|B)$ anstelle von
-$P(A\cap B)$. Wenn die bedingte Wahrscheinlichkeit $P(A|B)$ bekannt ist,
-hilft das bei der Erstellung der Vier-Felder-Tafel aber durchaus weiter,
-weil $P(A\cap B)=P(A|B)P(B)$ ist.
-
-Will man eine Vier-Felder-Tafel ausfüllen, dann ist es wichtig darauf zu
-achten, ob es sich bei den vorgegebenen Wahrscheinlichkeiten um
-gemeinsame Wahrscheinlichkeiten (z.B. $A$ und $B$ bzw. $P(A\cap B)$)
-handelt, oder um bedingte Wahrscheinlichkeiten (also z.B. $P(A|B)$).
-Letztere können leicht umgeformt werden, wenn man den Zusammenhang \[
-P(A\cap B)=P(A\|B)P(B) \] beachtet (oder die analogen Zusammenhänge für
-andere bedingte Wahrscheinlichkeiten).
-
-::: callout-tip
-XXX
-:::
-
 ## Wahrscheinlichkeitsbäume
 
-Vier-Felder-Tafeln sind ein nützliches Werkzeug, um einfaches
-Wahrscheinlichkeitsprobleme zu lösen, in denen nur zwei Ereignisse und
-ihre Gegenwahrscheinlichkeiten vorkommen. Ein Werkzeug, mit dem man auch
-allgemeine und etwas komplexere Probleme übersichtlich bearbeiten kann,
-sind Wahrscheinlichkeitsbäume. Die Ereignisse - es können hier durch aus
-mehr als zwei sein - bilden die Äste des Baums.
+Ein Werkzeug, mit dem man allgemeine und etwas komplexere 
+Wahrscheinlichkeits-Probleme übersichtlich bearbeiten kann,
+sind Wahrscheinlichkeitsbäume. Die Ereignisse bilden die Äste 
+des Baums.
 
 ::: callout-tip
 Definition der Ereignisse: 
