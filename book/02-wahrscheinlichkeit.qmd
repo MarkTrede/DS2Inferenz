@@ -306,12 +306,6 @@ wird
 $$
 P(A\cap B)={P(B)P(A|B)}.
 $$
-
-::: callout-tip
--   Eins
--   Zwei
-:::
-
 Das lässt sich auf mehr als zwei Ereignisse erweitern: 
 $$
 \begin{align*}
@@ -444,42 +438,61 @@ sein, dass $B$ nicht eintritt. Und wenn $B$ eintritt, kann man sicher
 sein, dass $A$ nicht eintritt. Unabhängige Ereignisse können hingegen
 sehr wohl zusammen eintreten.
 
+::: callout-tip
+Wir betrachten wieder den medizinischen Schnelltest und die beiden
+Ereignisse $A$: "Person ist infiziert", und $B$: "Test positiv".
+Zur Erinnerung: Gegeben sind die beiden bedingten Wahrscheinlichkeiten
+$P(B|A)=0.99$ und $P(\bar B|\bar A)=0.99$ sowie die
+unbedingte Wahrscheinlichkeit $P(A)=0.001$. Außerdem haben wir
+im letzten Abschnitt $P(B)=0.01098$ berechnet. 
+
+Sind die Ereignisse $A$ und $B$ unabhängig? Die Antwort lautet "nein",
+denn es gilt
+$$
+0.99=P(B|A)\neq P(B)=0.01098.
+$$
+Unabhängigkeit ist in diesem Fall natürlich auch nicht zu erwarten.
+Ein Schnelltest, dessen Ergebnis keinen Einfluss auf die 
+Einschätzung der Wahrscheinlichkeit einer Infektion hätte, wäre
+vollkommen nutzlos.
+:::
+
 ## Wahrscheinlichkeitsbäume
 
 Ein Werkzeug, mit dem man allgemeine und etwas komplexere 
 Wahrscheinlichkeits-Probleme übersichtlich bearbeiten kann,
 sind Wahrscheinlichkeitsbäume. Die Ereignisse bilden die Äste 
-des Baums.
+des Baums. Die Wahrscheinlichkeiten an den Ästen sind
+bedingte Wahrscheinlichkeiten, nur auf der ersten Stufe handelt
+es sich um unbedingte Wahrscheinlichkeiten.
 
 ::: callout-tip
-Definition der Ereignisse: 
-$$
-\begin{eqnarray*}
-A &\text{:}&\text{ Die Firma hat Erfolg} \\
-B &\text{:}&\text{ Der Manager strengt sich an}
-\end{eqnarray*}
-$$ 
+Als Beispiel betrachten wir den Erfolg einer Firma und den
+Einsatz ihres Managements. Dazu definieren wir die beiden
+Ereignisse $A$: "Die Firma hat Erfolg" und $B$:
+"Das Management strengt sich an".
+
 Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$.
-Für die Auszahlung von Boni an einen Manager ist es wichtig zu wissen,
-ob er eine gute Leistung erbracht hat. Wir wollen bestimmen, wie hoch
-die Wahrscheinlichkeit ist, dass der Manager sich tatsächlich für den
+Für die Auszahlung von Boni an Manager ist es wichtig zu wissen,
+ob sie eine gute Leistung erbracht haben. 
+
+Wir wollen bestimmen, wie hoch
+die Wahrscheinlichkeit ist, dass das Management sich tatsächlich für den
 Erfolg angestrengt hat, wenn wir beobachten, dass die Firma erfolgreich
-ist. Oder anders gesagt, ist der Erfolg der Firma wirklich ein Indikator
+ist. Oder anders gesagt: Ist der Erfolg der Firma wirklich ein Indikator
 für eine gute Leistung?
 
 Wir nehmen an (auch wenn es in der Praxis unrealistisch ist, diese Werte
 zu kennen): 
 $$
-\begin{eqnarray*}
-P\left( A|B\right) &=&0.8 \\
-P(A|\bar{B}) &=&0.5 \\
-P\left( B\right) &=&0.6
-\end{eqnarray*}
+\begin{align*}
+P(A|B) &= 0.8 \\
+P(A|\bar{B}) &= 0.5 \\
+P(B) &= 0.6.
+\end{align*}
 $$ 
-Hier handelt es sich um eine Fragestellung, die auch mit einer
-Vier-Felder-Tafel beantwortet werden könnte. Trotzdem nutzen wir nun
-einen Wahrscheinlichkeitsbaum. Auf der ersten Ebene verzweigt der Baum
-in die beiden Ereignisse $B$ und $\bar B$, denn wir kennen bedingte
+Es bietet sich an, den Baum auf der ersten Ebene in die beiden Ereignisse 
+$B$ und $\bar B$ zu verzweigen, denn wir kennen bedingte
 Wahrscheinlichkeiten, die diese beiden Ereignisse als Bedingung haben.
 An die beiden Zweige schreiben wir die Ereignisse und ihre
 Wahrscheinlichkeiten. Die Wahrscheinlichkeit von 0.4 für das Ereignis
@@ -521,7 +534,8 @@ text(c(0.35,0.35,0.75,0.75,0.75,0.75),
 
 Die Wahrscheinlichkeiten für $A\cap B$, $A\cap \bar B$, $\bar A\cap B$
 und $\bar A\cap\bar b$ ergeben sich nun, indem man entlang der Äste die
-Wahrscheinlichkeiten multipliziert. Man erhält 
+Wahrscheinlichkeiten multipliziert (wie in Abschnitt #bedingt
+beschrieben). Man erhält 
 $$
 \begin{align*}
 P(A\cap B)&=0.6\cdot 0.8 = 0.48\\
@@ -534,4 +548,19 @@ Die (unbedingten) Wahrscheinlichkeiten $P(A)$ und $P(\bar A)$ ergeben
 sich, indem man die Wahrscheinlichkeiten aller Pfade aufaddiert, die
 einen $A$-Ast (bzw. einen $\bar A$-Ast) haben. Es ergibt sich
 $P(A)=0.68$ und $P(\bar A)=0.32$.
+
+Wie hoch ist nun die Wahrscheinlichkeit $P(B|A)$, dass sich das
+Management angestrengt hat, wenn die Firma tatsächlich 
+erfolgreich war? Dazu rechnen wir
+$$
+P(B|A)=\frac{P(A\cup B)}{P(A)}=\frac{0.48}{0.68}=0.7059.
+$$
+Das Wissen, dass die Firma Erfolg hatte, führt also dazu, dass
+die Anstrengung des Managements eine höhere Wahrscheinlichkeit 
+hat als ohne dieses Wissen. Die bedingte Wahrscheinlichkeit
+$P(B|A)$ ist in diesem Beispiel höher als die unbedingte
+Wahrscheinlichkeit $P(B)$. Ob das als Nachweis für die guten
+Leistungen des Managements ausreicht und die Auszahlung von
+Boni rechtfertig, ist natürlich keine statistische Frage, sondern 
+solltein der Verträgen des Managements festgelegt sein.
 :::
