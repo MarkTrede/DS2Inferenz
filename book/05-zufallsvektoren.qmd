@@ -156,6 +156,53 @@ Die Funktion $f_{XY}$ heißt **gemeinsame Dichte** oder Dichtefunktion
 (engl. joint density function) von $X$ und $Y$.
 :::
 
+Wenn die Verteilungsfunktion partiell differenzierbar ist, dann
+erhält man die Dichte, indem man die Verteilungsfunktion nach beiden
+Argumenten ableitet,
+$$
+f_{XY}(x,y)=\frac{\partial^2}{\partial x\partial y}F_{XY}(x,y).
+$$
+Da die Verteilungsfunktion monoton steigend ist, kann die Dichte
+nie negativ sein (sie kann jedoch in einigen Bereichen 0 sein). Für
+$x,y\in\mathbb{R}$ gilt also
+$$
+f_{XY}(x,y)\ge 0.
+$$
+Das gesamte Volumen unter der Dichte beträgt 1,
+$$
+\int_{-\infty }^{\infty }\int_{-\infty }^{\infty }f_{XY}(x,y)dxdy=1.
+$$
+Die gemeinsame Dichte zweier Zufallsvariablen kann man sich als
+Gebirge mit einem Volumen von 1 vorstellen. Die Bereiche $(x,y)$, 
+in denen das Gebirge hoch ist, kommen mit einer höheren 
+Wahrscheinlichkeit vor, als die Bereiche, in denen es niedrig ist.
+
+In der folgenden Abbildung, die Sie mit der Maus bewegen können
+(allerdings leider nicht auf einem Tablet), erkennt man, dass es
+zwei Bereiche gibt, in denen die Realisationen der Zufallsvariablen
+mit hoher Wahrscheinlichkeit landen. 
+```{r echo=FALSE}
+library(mvtnorm)
+library(rgl)
+xx <- yy <- seq(-5,5,length=101)
+zz1 <- outer(xx,
+             yy, 
+             function(z1,z2) dmvnorm(cbind(z1,z2),
+                                     mean=c(2,2),
+                                     sigma=matrix(1.5*c(1,0.4,0.4,1),2,2)))
+zz2 <- outer(xx,
+             yy, 
+             function(z1,z2) dmvnorm(cbind(z1,z2),
+                                     mean=c(-2,1),
+                                     sigma=matrix(1.5*c(1,-0.5,-0.5,1),2,2)))
+zz <- 0.6*zz1 + 0.4*zz2
+persp3d(xx,yy,zz,col="light green")
+rglwidget()
+close3d()
+```
+
+
+
 ## Randverteilungen
 
 ## Unabhängigkeit
