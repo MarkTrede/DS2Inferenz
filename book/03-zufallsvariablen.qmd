@@ -204,27 +204,46 @@ $x_3=4$ mit einer Wahrscheinlichkeit von 0.2 und den Wert $x_4=9$ mit
 einer Wahrscheinlichkeit von 0.4.
 
 ```{r echo=FALSE}
-library(ggplot2)
-D <- data.frame(x=c(-1,0,3,4,9,10), 
-                xend=c(0,3,4,9,10,10),
-                y=c(0,0.3,0.4,0.6,1,1))
-ggplot(D, aes(x=x, y=y, xend=xend, yend=y)) +
-      geom_vline(aes(xintercept=x), linetype=2, color="grey") +
-      geom_segment() +
-      annotate("point",c(0,3,4,9),c(0.3,0.4,0.6,1))+
-      scale_x_continuous("x",breaks=0:10)+
-      scale_y_continuous("F(x)",breaks=c(0,0.2,0.4,0.6,0.8,1))+
-      ggtitle("Verteilungsfunktion einer diskreten Zufallsvariable")
+x <- c(0,3,4,9)
+y <- c(0,0.3,0.4,0.6,1)
+plot(stepfun(x,y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)",
+     main="Verteilungsfunktion")
 ```
-
+Die Punkte zeigen, dass der Funktionswert an einer Sprungstelle immer
+der obere Wert ist. Man nennt die Treppenfunktion rechts-stetig, denn
+wenn man von der Sprungstelle ein winziges Stück nach rechts wandert, ändert
+sich der Funktionswert nicht. Wandert man ein winziges Stück nach links,
+springt man auf die tiefere Stufe zurück.
 
 ::: callout-tip
-- eins
-
--zwei
+Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+der Sechsen. Sie kann also nur die Wert 0, 1 oder 2 annehmen
+(Träger). Die Wahrscheinlichkeitsfunktion ist
+$$
+P(X=k)=\left\{
+\begin{array}{ll}
+25/36 & \text{ für }k=0\\
+10/36 & \text{ für }k=1\\
+1/36 & \text{ für }k=2.
+\end{array}
+\right.
+$$
+Die zugehörige Verteilungsfunktion lautet
+$$
+F(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x<0\\
+25/36 & \text{ für }0\le x<1\\
+35/36 & \text{ für }1\le x<2\\
+1 & \text{ für }x\ge 2.
+\end{array}
+\right.
+$$
 :::
-
-
 
 ## Stetige Zufallsvariablen
 
@@ -278,7 +297,6 @@ Zufallsvariable im Prinzip annehmen könnte.
 
 ::: callout-tip
 - eins
-
 -zwei
 :::
 

@@ -226,25 +226,27 @@ Wahrscheinlichkeit (engl. unconditional probability).
     \end{align*}
     $$
 
--   Zwei Würfel werden geworfen. Sei $A$ das Ereignis "die Augensumme
-    ist 10". Sei $B$ das Ereignis "einer der beiden Würfel (oder beide)
-    zeigt eine 2". Dann ist 
-    $$
-    \begin{align*}
-    P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
-    &=\frac{P(\{\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
-    &=0.
-    \end{align*}
-    $$ 
-    Die bedingte Wahrscheinlichkeit für das Ereignis $C$: "Augensumme
-    ist 5" unter der Bedingung $B$ ist 
-    $$
-    \begin{align*}
-    P(C|B)&=\frac{P(C\cap B)}{P(B)}\\
-    &=\frac{P(\{23,32\})}{P(\{21,22,23,24,25,26,12,32,42,52,62\})}\\
-    &=\frac{2}{11}.
-    \end{align*}
-    $$
+-   Zwei Würfel werden geworfen, ohne dass Sie es sehen können.
+Sie fragen, ob eine Sechs geworfen wurde. Die Frage wird
+wahrheitsgemäß bejaht. Wie groß ist die Wahrscheinlichkeit,
+dass ein 6er-Pasch geworfen wurde? 
+
+Sei $A$ das Ereignis "6er-Pasch" und $B$ das Ereignis
+"mindest eine Sechs wurde geworfen", d.h.
+$$
+\begin{align*}
+A &= \{66\}\\
+B &= \{16,26,36,46,56,61,62,63,64,65,66\}.
+\end{align*}
+$$
+Daher gilt
+$$
+\begin{align*}
+P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
+&=\frac{P(\{66\})}{P(\{16,26,36,46,56,61,62,63,64,65,66\})}\\
+&=1/11.
+\end{align*}
+$$ 
 
 -   Bei einer Umfrage werden Personen zufällig ausgewählt und befragt.
     Sei $A$ das Ereignis "die befragte Person ist weiblich". Sei $B$ das
@@ -279,11 +281,12 @@ berichtet wird aber $P(B|A)$.
     bedingte Wahrscheinlichkeit infiziert zu sein, obwohl der Test
     negativ ausfällt, also $P(A|\bar B)$.
 
--   Es wird berichtet, dass 75 Prozent der Studierenden ein
-    "akademisches Elternhaus" haben. Es handelt sich um die bedingte
+-   Es wird berichtet, dass 50 Prozent der Studierenden ein
+    "akademisches Elternhaus" haben (die Zahlen in diesem
+    Beispiel sind fiktiv). Es handelt sich um die bedingte
     Wahrscheinlichkeit eines akademischen Elternhauses, wenn eine Person
     studiert. Hier sind die Ereignisse $A$: "Kind studiert", und
-    $B$: "akademisches Elternhaus". Gegeben ist $P(B|A)=0.75$.
+    $B$: "akademisches Elternhaus". Gegeben ist $P(B|A)=0.5$.
     Für die Bewertung der Chancengleichheit ist jedoch die
     bedingte Wahrscheinlichkeit interessanter, dass ein Kind studiert,
     wenn es aus einem akademischen Elternhaus stammt, also
@@ -327,6 +330,27 @@ P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B).
 $$
 Für jede Reihenfolge gelangt man zum gleichen Ergebnis.
 
+::: callout-tip
+Eine Bank möchte die Dauer ihrer Kundenbeziehungen modellieren. 
+Dazu definiert sie die Ereignisse $A_t$: "die Kundenbeziehung besteht seit $t$ Jahren"
+für $t=0,1,\ldots$. Die Bank kennt (aus Erfahrung) die
+Kündigungswahrscheinlichkeiten in Abhängigkeit von der Kundendauer.
+Mit $k_{t,t+1}$ wird die Wahrscheinlichkeit bezeichnet, dass ein
+Kunde, der schon seit $t$ Jahren Kunde ist, innerhalb des nächsten
+Jahres kündigt. Es handelt sich also um die bedingten Wahrscheinlichkeiten
+$$
+k_{t,t+1}=1-P(A_{t+1}|A_t).
+$$
+Die Wahrscheinlichkeit, dass ein Neukunde ($t=0$) nach 5 Jahren immer
+noch Kunde ist, beträgt
+$$
+\begin{align*}
+P(A_5)&=P(A_5|A_4)P(A_4|A_3)P(A_3|A_2)P(A_2|A_1)P(A_1|A_0)\\
+&=(1-k_{4,5})(1-k_{3,4})(1-k_{2,3})(1-k_{1,2})(1-k_{0,1}).
+\end{align*}
+$$
+:::
+
 ## Totale Wahrscheinlichkeit {#total}
 
 Aus mehreren bedingten Wahrscheinlichkeiten lässt sich eine unbedingte
@@ -349,13 +373,40 @@ Ereignis ist. Dann gilt für die unbedingte Wahrscheinlichkeit von $B$:
 $$
 P(B)=\sum_{i=1}^n P(B|A_i)P(A_i).
 $$ 
-Die unbedingte Wahrscheinlichkeit ergibt sich also als gewichtete
+Eine besonders simple Partitionierung ist die Unterteilung in
+$A$ und $\bar A$. Dann lautet die Formel
+$$
+P(B)=P(B|A)P(A)+P(B|\bar A)P(\bar A).
+$$ 
+
+Die unbedingte Wahrscheinlichkeit ergibt sich als gewichtete
 Summe aller bedingten Wahrscheinlichkeiten, die Gewichtung erfolgt durch
-die Wahrscheinlichkeiten der bedingenden Ereignisse.
+die Wahrscheinlichkeiten der bedingenden Ereignisse. Dieser Zusammenhang 
+ist dann besonders nützlich, wenn die bedingten Wahrscheinlichkeiten
+schon bekannt oder einfach zu ermitteln sind, die unbedingte 
+Wahrscheinlichkeit jedoch schwierig zu finden ist.
 
 ::: callout-tip
--   Eins
--   Zwei
+Eine Bank vergibt einen Kredit an ein Unternehmen. Das Unternehmen
+zahlt den Kredit mit einer Wahrscheinlichkeit von 0.95 zurück,
+wenn die konjunkturelle Lage positiv ist. Bei einer schwachen
+Konjunktur wird der Kredit jedoch nur mit einer Wahrscheinlichkeit
+von 0.8 zurückgezahlt. Die Wahrscheinlichkeit einer guten
+Konjunktur sei 0.75 (und die Konjunktur kann nur gut oder
+schlecht sein).
+
+Als Ereignisse definiert man $A$: "gute Konjunktur" und
+$B$: "Kredit wird zurückgezahlt". Gegeben sind die bedingten Wahrscheinlichkeiten
+$P(B|A)=0.95$ und $P(B|\bar A)=0.8$. Außerdem ist $P(A)=0.75$
+bekannt. Damit ergibt sich die Wahrscheinlichkeit einer
+Rückzahlung als
+$$
+\begin{align*}
+P(B)&=P(B|A)P(A)+P(B|\bar A)P(\bar A)\\
+&=0.95\cdot 0.75+0.8\cdot 0.25\\
+&=0.9125
+\end{align*}
+$$
 :::
 
 ## Satz von Bayes {#bayes}

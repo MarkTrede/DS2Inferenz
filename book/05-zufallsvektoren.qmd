@@ -176,29 +176,59 @@ Die gemeinsame Dichte zweier Zufallsvariablen kann man sich als
 Gebirge mit einem Volumen von 1 vorstellen. Die Bereiche $(x,y)$, 
 in denen das Gebirge hoch ist, kommen mit einer höheren 
 Wahrscheinlichkeit vor, als die Bereiche, in denen es niedrig ist.
+Solche Gebirge lassen sich mit ein wenig Aufwand in R grafisch
+darstellen.
 
-In der folgenden Abbildung, die Sie mit der Maus bewegen können
+::: callout-tip
+Die gemeinsame Dichte der beiden Zufallsvariablen $X$ und $Y$ sei
+für $x,y\in\mathbb{R}$
+$$
+f(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}.
+$$
+Diese Dichte soll nun in R grafisch dargestellt werden. In einem
+ersten Schritt 
+
+In der folgenden 3D-Abbildung, die Sie mit der Maus bewegen können
 (allerdings leider nicht auf einem Tablet), erkennt man, dass es
 zwei Bereiche gibt, in denen die Realisationen der Zufallsvariablen
 mit hoher Wahrscheinlichkeit landen. 
 ```{r echo=FALSE}
-library(mvtnorm)
 library(rgl)
-xx <- yy <- seq(-5,5,length=101)
-zz1 <- outer(xx,
-             yy, 
-             function(z1,z2) dmvnorm(cbind(z1,z2),
-                                     mean=c(2,2),
-                                     sigma=matrix(1.5*c(1,0.4,0.4,1),2,2)))
-zz2 <- outer(xx,
-             yy, 
-             function(z1,z2) dmvnorm(cbind(z1,z2),
-                                     mean=c(-2,1),
-                                     sigma=matrix(1.5*c(1,-0.5,-0.5,1),2,2)))
-zz <- 0.6*zz1 + 0.4*zz2
-persp3d(xx,yy,zz,col="light green")
+x <- y <- seq(-4,4,length=101)
+f <- matrix(0,length(x),length(y))
+for(i in 1:length(x)){
+    for(j in 1:length(y)){
+        f[i,j] <- (2*exp(-x[i])*exp(-y[j]))/(1+exp(-x[i])+exp(-y[j]))^3
+    }
+}
+persp3d(x,y,f,col="light green",
+        xlab="x",ylab="y",zlab="f(x,y)")
 rglwidget()
 close3d()
+```
+
+Weitere Möglichkeiten, ein Dichte"gebirge" grafisch darzustellen,
+sind Contour-Plots und Image-Plots. In einem Contour-Plot sieht man die Höhenlinien 
+der Dichtefunktion wie auf einer normalen Landkarte. In einem Image-Plot 
+werden die Höhen durch Farben repräsentiert. 
+
+Der Contour-Plot für die obige Dichte sieht so aus:
+```{r fig.asp=1, fig.width="70%"}
+contour(x,y,f,
+        xlab="x",ylab="y")
+```
+Ein Vorteil des Contour-Plots besteht darin, dass man leicht erkennen kann,
+wo die Dichte hoch ist. In diesem Bild sind die beiden Gipfel an den
+Koordinaten (2,2) und (-2,1), d.h. mit einer großen Wahrscheinlichkeit
+wird eine Realisation der Zufallsvariablen irgendwo in der Nähe dieser
+beiden Punkte landen. Hingegen kann man in einem Contour-Plot nur erkennen, 
+wie hoch die Gipfel sind, wenn man genau hinschaut und entweder die
+Höhen der Höhenlinien abliest oder die Höhenlinien abzählt.
+
+Ein farbiger Image-Plot der gleichen Dichte zeigt folgendes Bild:
+```{r fig.asp=1, fig.width="70%"}
+filled.contour(x,y,f,
+               xlab="x",ylab="y")
 ```
 
 
