@@ -224,11 +224,12 @@ Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Sie kann also nur die Wert 0, 1 oder 2 annehmen
 (Träger). Die Wahrscheinlichkeitsfunktion ist
 $$
-P(X=k)=\left\{
+f(x)=\left\{
 \begin{array}{ll}
-25/36 & \text{ für }k=0\\
-10/36 & \text{ für }k=1\\
-1/36 & \text{ für }k=2.
+25/36 & \text{ für }x=0\\
+10/36 & \text{ für }x=1\\
+1/36 & \text{ für }x=2\\
+0 & \text{ sonst.}
 \end{array}
 \right.
 $$
@@ -243,6 +244,17 @@ F(x)=\left\{
 \end{array}
 \right.
 $$
+bzw. als Grafik
+```{r echo=FALSE}
+x <- c(0,1,2)
+y <- c(0,25/36,35/36,1)
+plot(stepfun(x,y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)",
+     main="Verteilungsfunktion")
+```
 :::
 
 ## Stetige Zufallsvariablen
@@ -277,6 +289,8 @@ f(x)=F'(x).
 $$
 Es ist jedoch nicht unbedingt nötig, dass die Verteilungsfunktion überall
 differenzierbar ist, sie darf nicht differenzierbare Knicke enthalten.
+Wenn es nicht differenzierbare Stellen in der Verteilungsfunktion gibt,
+dann weist die Dichte an diesen Stellen einen Sprung auf. 
 
 - Der Wert der Dichte an einer Stelle $x$ ist *keine* Wahrscheinlichkeit.
 Hingegen ist die Fläche unter der Dichte eine Wahrscheinlichkeit. So gilt
@@ -295,9 +309,58 @@ $$
 der Zufallsvariable $X$. Der Träger enthält alle Werte, die die
 Zufallsvariable im Prinzip annehmen könnte.
 
+Obwohl die Dichte selbst keine Wahrscheinlichkeit ist, hilft sie beim
+intuitiven Verständnis einer Verteilung trotzdem sehr. Man erkennt an 
+einem Dichte-Plot sofort, in in welchen Bereichen die Zufallsvariable
+mit großer Wahrscheinlichkeit liegen wird und wo es eher unwahrscheinlich
+ist.
+
 ::: callout-tip
-- eins
--zwei
+Die Dichte der Zufallsvariable $X$ sei 
+$$
+f(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x < -0.56\\
+x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
+0 & \text{ für }x \ge 1.1.
+\end{array}
+\right.
+$$
+Der Plot der Dichte zeigt, dass die Zufallsvariable in dem Intervall
+$[-0.56, 1.1]$ liegen wird. Es ist eher unwahrscheinlich, dass ein Wert
+sehr nah an der rechten Grenzen realisiert wird. Auch der Bereich
+um die 0 herum ist etwas weniger wahrscheinlich als die Bereiche
+um die 0.75 herum oder nah an der linken Grenze.
+```{r echo=FALSE}
+x <- c(-1,-0.56,NA,seq(-0.56,1.1,length=100),NA,1.1,1.8)
+f <- 0.5-x^4+x^2
+f[c(1,2,105,106)] <- 0
+plot(x,f,t="l",lwd=3,
+     xlab="x",ylab="f(x)",main="Dichte")
+```
+Die Verteilungsfunktion erhält man durch Integration der Dichte.
+$$
+F(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x < -0.56\\
+\frac{1}{3}x^3-\frac{1}{5}x^5+0.5x+0.3275 & \text{ für }-0.56 \le x < 1.1\\
+1 & \text{ für }x \ge 1.1.
+\end{array}
+\right.
+$$
+Die Konstante (0.3275) muss so gewählt werden, dass die Verteilungsfunktion
+am Punkt -0.56 bei 0 startet und am Punkt 1.1 bei 1 endet. Ein Plot der
+Verteilungsfunktion macht deutlich, dass die Verteilungsfunktion für
+das schnelle Erfassen der Eigenschaften einer Verteilung nicht so gut
+geeignet ist wie die Dichte.
+```{r echo=FALSE}
+x <- c(-1,-0.56,seq(-0.56,1.1,length=100),1.1,1.8)
+f <- x^3/3-x^5/5+x/2+0.3275
+f[c(1,2)] <- 0
+f[c(103,104)] <- 1
+plot(x,f,t="l",lwd=3,
+     xlab="x",ylab="F(x)",main="Verteilungsfunktion")
+```
 :::
 
 ## Quantilfunktion
@@ -315,20 +378,65 @@ Die Funktion
 $$
 F_X^{-1}(p)=\min\{x:F_X(x)\ge p\}
 $$
-heißt **Quantilfunktion** von $X$. Der Wert $x_p=F_X^{-1}(p)$ heißt **p-Quantil** von $X$
+heißt **Quantilfunktion** von $X$. Der Wert $x_p=F_X^{-1}(p)$ 
+heißt **p-Quantil** von $X$. Der Definitionsbereich ist $0<p<1$
+(also ohne die Intervallgrenzen).
 :::
 
-Den Subindex kann man weglassen, wenn sich
-die Zufallsvariable aus dem Kontext ergibt. Oft findet man auch die 
-alternative Notation $Q(p)$ für die Quantilfunktion.
+Den Subindex kann man weglassen, wenn sich die Zufallsvariable 
+aus dem Kontext ergibt. Gelegentlich findet man auch die 
+alternative Notation $Q_X(p)$ oder $Q(p)$ für die Quantilfunktion.
+Das 0.5-Quantil heißt auch **Median** (engl. median).
 
-Es gibt eine Reihe von speziellen Quantilen mit eigener Bezeichnung:
+Aus einer gegebenen Verteilungsfunktion lässt sich die Quantilfunktion
+durch Invertieren finden. Das geht leicht, wenn die Verteilungsfunktion
+streng monoton steigend verläuft. Aufpassen muss man jedoch, wenn
+sie Sprünge aufweist oder in einigen Bereichen flach verläuft.
 
-- Median $x_{0.5}$
-- Quartile: $x_{0.25}, x_{0.5}, x_{0.75}$
-- Quintile: $x_{0.2}, x_{0.4}, x_{0.6}, x_{0.8}$
-- Dezile: $x_{0.1}, x_{0.2}, \ldots, x_{0.9}$
-- Perzentile: $x_{0.01}, x_{0.02}, \ldots,x_{0.99}$
+::: callout-tip
+- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+der Sechsen. Die Verteilungsfunktion ist eine Treppenfunktion
+mit den Sprungstellen 0, 1 und 2, die hier noch einmal 
+gezeigt wird. 
+```{r echo=FALSE}
+x <- c(0,1,2)
+y <- c(0,25/36,35/36,1)
+plot(stepfun(x,y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)",
+     main="Verteilungsfunktion")
+```
+Wie sieht die zugehörige Quantilfunktion aus? Um das zu beantworten,
+wandern wir langsam die y-Achse hoch und schauen jeweils, welches 
+Quantil zu dem Wert gehört. Für Werte von $0<p\le 25/36$ landet man
+auf dem Quantil 0. Für $25/36<p\le 35/36$ ergibt sich das Quantil
+1 und für $p>35/36$ ist das Quantil 2. Also ist
+$$
+F^{-1}(p)=\left\{
+\begin{array}{ll}
+0 & \text{ für }0 < p \le 25/36\\
+1 & \text{ für }25/36 < p \le 35/36\\
+2 & \text{ für }p>35/36
+\end{array}
+\right.
+$$
+bzw. als Grafik
+```{r echo=FALSE}
+p <- c(0,25/36,35/36)
+Q <- c(0,0,1,2)
+plot(stepfun(p,Q,right=FALSE),
+     verticals=FALSE, 
+     do.points = FALSE,
+     xlab="x",
+     ylab="F(x)",
+     xlim=c(0,1),
+     main="Quantilfunktion")
+```
+
+
+:::
 
 
 ## Erwartungswert
@@ -345,6 +453,54 @@ E(X)=\left\{
 \int\limits_{-\infty}^\infty x f(x)dx & \text{ für X stetig}
 \end{array}
 \right.
+$$
+:::
+
+Wie der Erwartungswert einer Zufallsvariable berechnet wird, hängt also
+davon ab, ob es sich um eine diskrete oder eine stetige Zufallsvariable
+handelt. 
+
+::: callout-tip
+- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+der Sechsen. Wie hoch ist der Erwartungswert von $X$? Für die
+Berechnung benötigt man die Wahrscheinlichkeitsfunktion. Sie lautet
+(s. XXX)
+$$
+f(x)=\left\{
+\begin{array}{ll}
+25/36 & \text{ für }x=0\\
+10/36 & \text{ für }x=1\\
+1/36 & \text{ für }x=2\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Der Erwartungswert ist 
+$$
+E(X)=0\cdot\frac{25}{36}+1\cdot\frac{10}{36}+2\cdot\frac{1}{36}=\frac{1}{3}.
+$$
+
+- Die Dichte der stetigen Zufallsvariable $X$ sei 
+$$
+f(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x < -0.56\\
+x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
+0 & \text{ für }x \ge 1.1.
+\end{array}
+\right.
+$$
+Der Erwartungswert dieser Zufallsvariable beträgt
+$$
+\begin{align*}
+E(X) &= \int_{-\infty}^\infty x f(x) dx\\
+&=\int_{-0.56}^{1.1} x f(x) dx\\
+&=\int_{-0.56}^{1.1} x (x^2-x^4+0.5) dx\\
+&=\int_{-0.56}^{1.1} (x^3-x^5+0.5x) dx\\
+&=\left. \frac{1}{4}x^4-\frac{1}{6}x^6+\frac{1}{4}x^2 \right|_{-0.56}^{1.1}\\
+&=0.3732-0.0978\\[1ex]
+&=0.2754.
+\end{align*}
 $$
 :::
 
@@ -374,7 +530,7 @@ Var(X)==\left\{
 \right.
 $$
 
-Für die Berechnung der Varianz ist diese Formel oft hilfreich:
+Für die Berechnung der Varianz ist manchmal diese Formel hilfreich:
 $$
 Var(X)=E(X^2)-(E(X))^2.
 $$
