@@ -424,18 +424,21 @@ F^{-1}(p)=\left\{
 $$
 bzw. als Grafik
 ```{r echo=FALSE}
-p <- c(0,25/36,35/36)
-Q <- c(0,0,1,2)
-plot(stepfun(p,Q,right=FALSE),
-     verticals=FALSE, 
-     do.points = FALSE,
+p <- c(0,25/36,35/36,1)
+Q <- c(0,1,2)
+plot(p[1:2],Q[c(1,1)],
+     t="l",
      xlab="x",
      ylab="F(x)",
      xlim=c(0,1),
+     ylim=c(0,2),
      main="Quantilfunktion")
+for(i in 2:length(Q)) lines(p[c(i,i+1)],Q[c(i,i)])
+points(p[2:3],Q[1:2],pch=19)
 ```
-
-
+Im Gegensatz zur Verteilungsfunktion ist die Quantilfunktion nicht
+rechtsstetig, sondern linksstetig. Der Funktionswert an einer Sprungstelle
+ist gleich dem Grenzwert, wenn man sich von links der Sprungstelle nähert.
 :::
 
 
