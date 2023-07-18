@@ -326,7 +326,8 @@ x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
 \end{array}
 \right.
 $$
-Der Plot der Dichte zeigt, dass die Zufallsvariable in dem Intervall
+Der Plot der Dichte zeigt, dass die Realisation der Zufallsvariable $X$
+mit Sicherheit in dem Intervall
 $[-0.56, 1.1]$ liegen wird. Es ist eher unwahrscheinlich, dass ein Wert
 sehr nah an der rechten Grenzen realisiert wird. Auch der Bereich
 um die 0 herum ist etwas weniger wahrscheinlich als die Bereiche
@@ -352,7 +353,11 @@ Die Konstante (0.3275) muss so gewählt werden, dass die Verteilungsfunktion
 am Punkt -0.56 bei 0 startet und am Punkt 1.1 bei 1 endet. Ein Plot der
 Verteilungsfunktion macht deutlich, dass die Verteilungsfunktion für
 das schnelle Erfassen der Eigenschaften einer Verteilung nicht so gut
-geeignet ist wie die Dichte.
+geeignet ist wie die Dichte. Die Realisation der Zufallsvariable liegt
+mit höherer Wahrscheinlichkeit in einem Bereich, in dem die Verteilungsfunktion
+steil ist, als in einem Bereich, in dem sie flacher verläuft. Bereiche,
+in denen die Verteilungsfunktion gar nicht ansteigt, gehören nicht zum
+Träger der Zufallsvariable.
 ```{r echo=FALSE}
 x <- c(-1,-0.56,seq(-0.56,1.1,length=100),1.1,1.8)
 f <- x^3/3-x^5/5+x/2+0.3275
@@ -594,8 +599,6 @@ Var(X) &= E(X^2)-(E(X))^2\\
 \end{align*}
 $$
 :::
-
-
 
 ## Lineare Transformationen
 
