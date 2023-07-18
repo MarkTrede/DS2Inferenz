@@ -452,7 +452,7 @@ Der **Erwartungswert** (engl. expectation) einer Zufallsvariable ist
 $$
 E(X)=\left\{
 \begin{array}{ll}
-\sum\limits_{j\in T_X} x_j f(x_j) & \text{ für X diskret}\\
+\sum\limits_{j: x_j\in T_X} x_j f(x_j) & \text{ für X diskret}\\
 \int\limits_{-\infty}^\infty x f(x)dx & \text{ für X stetig}
 \end{array}
 \right.
@@ -525,23 +525,74 @@ Die (positive) Wurzel aus der Varianz nennt man Standardabweichung
 Für diskrete und stetige Zufallsvariablen lässt sich die Varianz
 folgendermaßen schreiben:
 $$
-Var(X)==\left\{
+Var(X)=\left\{
 \begin{array}{ll}
-\sum\limits_{j\in T_X} (x_j-E(X))^2 f(x_j) & \text{ für X diskret}\\
+\sum\limits_{j:x_j\in T_X} (x_j-E(X))^2 f(x_j) & \text{ für X diskret}\\
 \int\limits_{-\infty}^\infty (x-E(X))^2 f(x)dx & \text{ für X stetig}
 \end{array}
 \right.
 $$
 
-Für die Berechnung der Varianz ist manchmal diese Formel hilfreich:
+Für die Berechnung der Varianz ist manchmal der sogenannte
+**Streuungsverschiebungssatz** hilfreich:
 $$
 Var(X)=E(X^2)-(E(X))^2.
 $$
 
 ::: callout-tip
-- eins
+- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+der Sechsen. Wie hoch ist die Varianz von $X$? Für die Berechnung nutzen
+wir den Streuungsverschiebungssatz. Der Erwartungswert von $X^2$ wird
+analog zum Erwartungswert berechnet. Es ergibt sich
+$$
+\begin{align*}
+E(X^2)&=\sum_{j:x_j\in T_X} x_j^2f(x_j)\\
+&=0^2\cdot\frac{25}{36}+1^2\cdot\frac{10}{36}+2^2\cdot\frac{1}{36}=\frac{7}{18}.
+\end{align*}
+$$
+Der Erwartungswert $E(X)$ wurde bereits im vorherigen Abschnitt berechnet,
+nämlich $E(X)=1/3$. Die Varianz ist folglich
+$$
+\begin{align*}
+Var(X) &= E(X^2)-(E(X))^2\\
+&=\frac{7}{18}-\frac{1}{9}\\
+&= \frac{5}{18}.
+\end{align*}
+$$
 
-- zwei
+- Auch für die Berechnung der Varianz einer stetigen Zufallsvariable nutzen
+wir den Streuungsverschiebungssatz. Die Dichte der stetigen Zufallsvariable $X$ 
+sei 
+$$
+f(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x < -0.56\\
+x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
+0 & \text{ für }x \ge 1.1.
+\end{array}
+\right.
+$$
+Der Erwartungswert von $X^2$ beträgt
+$$
+\begin{align*}
+E(X^2) &= \int_{-\infty}^\infty x^2f(x)dx\\
+&=\int_{-0.56}^{1.1} x^2 (x^2-x^4+0.5)dx\\
+&=\int_{-0.56}^{1.1} (x^4-x^6+0.5x^2)dx\\
+&=\int_{-0.56}^{1.1} (x^4-x^6+0.5x^2)dx\\
+&=\left. \frac{1}{5}x^5-\frac{1}{7}x^7+\frac{1}{6}x^3 \right|_{-0.56}^{1.1}\\
+&=0.2655-(-0.0378)\\[1ex]
+&=0.3033.
+\end{align*}
+$$
+Der Erwartungswert von $X$ wurde bereits im letzten Abschnitt berechnet,
+und zwar $E(X)=0.2754$. Damit ergibt sich die Varianz als
+$$
+\begin{align*}
+Var(X) &= E(X^2)-(E(X))^2\\
+&=0.3033-0.2754^2\\
+&= 0.2275.
+\end{align*}
+$$
 :::
 
 
