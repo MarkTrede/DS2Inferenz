@@ -185,13 +185,15 @@ für $x,y\in\mathbb{R}$
 $$
 f(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}.
 $$
-Diese Dichte soll nun in R grafisch dargestellt werden. In einem
-ersten Schritt 
-
 In der folgenden 3D-Abbildung, die Sie mit der Maus bewegen können
-(allerdings leider nicht auf einem Tablet), erkennt man, dass es
-zwei Bereiche gibt, in denen die Realisationen der Zufallsvariablen
-mit hoher Wahrscheinlichkeit landen. 
+(allerdings leider nicht auf einem Tablet), erkennt man, dass die
+Dichte um den Punkt $(0,0)$ herum besonders hoch ist. Die 
+gemeinsame Realisation von $X$ und $Y$ wird also mit hoher
+Wahrscheinlichkeit irgendwo in der Nähe des Nullpunkts liegen. 
+Außerdem ist eine leichte Asymmetrie zu erkennen. Es ist sehr
+unwahrscheinlich, dass sowohl $X$ als auch in $Y$ beide größer als
+3 sind. Hingegen kann es (wenn auch mit eher kleiner Wahrscheinlichkeit)
+passieren, dass beide Zufallsvariable kleiner als $-3$ sind.
 ```{r echo=FALSE}
 library(rgl)
 x <- y <- seq(-4,4,length=101)
@@ -213,23 +215,18 @@ der Dichtefunktion wie auf einer normalen Landkarte. In einem Image-Plot
 werden die Höhen durch Farben repräsentiert. 
 
 Der Contour-Plot für die obige Dichte sieht so aus:
-```{r fig.asp=1, fig.width="70%"}
+```{r echo=FALSE, fig.asp=1}
 contour(x,y,f,
         xlab="x",ylab="y")
 ```
 Ein Vorteil des Contour-Plots besteht darin, dass man leicht erkennen kann,
-wo die Dichte hoch ist. In diesem Bild sind die beiden Gipfel an den
-Koordinaten (2,2) und (-2,1), d.h. mit einer großen Wahrscheinlichkeit
-wird eine Realisation der Zufallsvariablen irgendwo in der Nähe dieser
-beiden Punkte landen. Hingegen kann man in einem Contour-Plot nur erkennen, 
-wie hoch die Gipfel sind, wenn man genau hinschaut und entweder die
-Höhen der Höhenlinien abliest oder die Höhenlinien abzählt.
-
-Ein farbiger Image-Plot der gleichen Dichte zeigt folgendes Bild:
-```{r fig.asp=1, fig.width="70%"}
+wo die Dichte hoch ist. Ein farbiger Image-Plot der gleichen Dichte zeigt folgendes Bild:
+```{r fig.asp=1, echo=FALSE}
 filled.contour(x,y,f,
                xlab="x",ylab="y")
 ```
+:::
+
 
 
 
