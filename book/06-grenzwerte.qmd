@@ -1,7 +1,131 @@
 # Grenzwertsätze und Simulationen {#grenzwerte}
 
+In diesem Kapitel gehen wir davon aus, dass eine Zufallsvariable 
+immer wieder neu gezogen wird. Als Ausgangspunkt der Überlegungen
+dient eine Folge von unabhängigen, identisch verteilten (engl. 
+independent and identically distributed, i.i.d.) Zufallsvariablen 
+$$
+X_1,X_2,X_3,\ldots
+$$
+Man kann sich diese Folge als unabhängige Wiederholungen einer
+Zufallsvariable $X$ vorstellen, z.B. als immer wieder neu
+geworfene Würfel. Im folgenden bezeichnen wir den Erwartungswert
+der Folgenelemente mit $E(X)=\mu$ und die Varianz mit
+$Var(X)=\sigma^2$.
+
 ## Gesetz der großen Zahl
+
+Aus den Elementen der Folge von Zufallsvariablen berechnen wir
+für jedes $n$ das arithmetische Mittel (den Durchschnitt)
+$$
+\bar X_n=\frac{1}{n}\sum_{i=1}^n X_i.
+$$
+*Achtung*: Es handelt sich bei $\bar X_n$ um den Durchschnitt
+von Zufallsvariablen, also quasi von Zahlen, deren Wert man noch
+nicht kennt. Darum kennt man natürlich auch den Wert des Durchschnitts
+noch nicht. Mit anderen Worten: Der Durchschnitt $\bar X_n$ ist
+ebenfalls eine Zufallsvariable.
+
+Da der Durchschnitt $\bar X_n$ eine Zufallsvariable ist, kann man
+den Erwartungswert und die Varianz ausrechnen. Sie sind mit den
+Rechenregeln aus Kapitel XXX leicht zu finden. Es gilt
+$$
+\begin{align*}
+E(X) &= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+&= \frac{1}{n}\sum_{i=1}^n E(X_i) \\
+&= \frac{1}{n}\sum_{i=1}^n \mu \\
+&= \mu
+\end{align*}
+$$
+und
+$$
+\begin{align*}
+Var(X) &= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+&= \frac{1}{n^2}\sum_{i=1}^n Var(X_i) \\
+&= \frac{1}{n^2}\sum_{i=1}^n \sigma^2 \\
+&= \frac{\sigma^2}{n}.
+\end{align*}
+$$
+Mit anderen Worten: Wenn man den Durchschnitt aus immer mehr
+Folgeelementen bildet, dann ist der Erwartungswert immer $\mu$,
+aber die Varianz wird mit steigendem $n$ immer kleiner. Der
+Durchschnitt $\bar X_n$ liegt also mit steigendem $n$
+"immer näher" am Erwartungswert $E(X)=\mu$ der Zufallsvariable $X$.
+
+Diese Einsicht lässt sich mathematisch präzise formulieren.
+
+::: callout-note
+Das **Gesetz der großen Zahl** besagt, dass für
+jedes (noch so kleine) $\epsilon >0$ gilt
+$$
+\lim_{n\to\infty} P(|\bar X_n-\mu|\ge \epsilon)=0.
+$$
+:::
+
+Als alternative Notation findet man oft
+$$
+\text{plim}_{n\to\infty}\bar X_n=\mu,
+$$
+wobei man "plim" als "Wahrscheinlichkeits-Limes" oder engl.
+"probability limit" spricht.
+
+Es gibt neben diesem Gesetz der großen Zahl, das auch als
+"schwaches Gesetz der großen Zahl" bezeichnet wird, noch weitere
+Varianten, die aber im Kern ebenfalls aussagen, dass der Durchschnitt
+in einem gewissen Sinn gegen den Erwartungswert konvergiert.
+
+Das Gesetz der großen Zahl gilt nicht nur für den Erwartungswert,
+sondern auch für andere wichtige Größen der Zufallsvariablen.
+So konvergiert die Varianz der Folgeelemente gegen die Varianz
+der Zufallsvariable; die empirische Verteilungsfunktion der Folgeelemente
+konvergiert gegen die Verteilungsfunktion der Zufallsvariable;
+die Quantile der Folgeelemente konvergieren gegen die Quantile
+der Zufallsvariable; und das Histogramm der Folgeelmente konvergiert
+gegen die Dichte der Zufallsvariable. 
+
+## Monte-Carlo-Simulationen (I)
+
+Das Gesetz der großen Zahl hat eine weitreichende 
+Konsequenz: Um die Verteilung einer Zufallsvariable zu kennen, 
+muss man nicht unbedingt die Verteilungsfunktion,
+Dichte oder Wahrscheinlichkeitsfunktion kennen, sondern es
+reicht aus, wenn man einen **Algorithmus** zur Verfügung hat, der viele 
+unabhängige Ziehungen aus der Zufallsvariable liefert. Solche
+Algorithmen gibt es - und viele davon sind in R (oder anderen
+Programmiersprachen) implementiert. Die Ziehungen, die vom
+Computer generiert werden, nennt man **Zufallszahlen** (engl.
+random numbers). Verfahren, die auf solchen Algorithmen
+beruhen, werden Monte-Carlo-Simulationen genannt, weil
+das Casino von Monte Carlo früher als Inbegriff von 
+Zufälligkeit galt.
+
+Die R-Funktionen zum Erzeugen von Zufallszahlen haben alle 
+die Form
+
+`rVERTEILUNG(n, PARAMETER)`
+
+Dabei gibt `n` an, wie viele Folgeelemente gezogen werden sollen.
+Für die Standardverteilungen, die in Kapitel XXX behandelt wurden,
+lauten die Funktionsnamen:
+
+- `rbinom(n, size, prob)`
+- `rpois(n, lambda)`
+- `rnorm(n, mean, sd)`
+- `rexp(n, rate)`
+
+Für die Paretoverteilung gibt es keinen vorgefertigten Algorithmus
+(allerdings gibt es einige Pakete, die eine solche Funktion
+bereitstellen).
+
+Das folgende Beispiel zeigt, wie durch eine Monte-Carlo-Simulation
+Kennzahlen einer Normalverteilung mit Erwartungswert 
+$\mu=10$ und Standardabweichung $\sigma=3$ bestimmt werden 
+können.
+
+
+
 
 ## Zentraler Grenzwertsatz
 
-## Monte-Carlo-Simulationen
+
+## Monte-Carlo-Simulationen (II)
