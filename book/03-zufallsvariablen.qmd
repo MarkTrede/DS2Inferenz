@@ -26,7 +26,7 @@ der andere eine 2, dann ist $X=3$ usw. Die Abbildung bzw. Funktion aus dem
 Ergebnisraum in die Menge der reellen Zahlen sieht also so aus:
 $$
 \begin{array}{lll}
-\Omega && \mathbb{R}\\\hline
+\Omega & X & \mathbb{R}\\\hline
 11 & \longrightarrow & 2\\
 12 & \longrightarrow & 3\\
 13 & \longrightarrow & 4\\
