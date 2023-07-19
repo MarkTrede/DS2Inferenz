@@ -176,8 +176,6 @@ Die gemeinsame Dichte zweier Zufallsvariablen kann man sich als
 Gebirge mit einem Volumen von 1 vorstellen. Die Bereiche $(x,y)$, 
 in denen das Gebirge hoch ist, kommen mit einer höheren 
 Wahrscheinlichkeit vor, als die Bereiche, in denen es niedrig ist.
-Solche Gebirge lassen sich mit ein wenig Aufwand in R grafisch
-darstellen.
 
 ::: callout-tip
 Die gemeinsame Dichte der beiden Zufallsvariablen $X$ und $Y$ sei
@@ -227,12 +225,133 @@ filled.contour(x,y,f,
 ```
 :::
 
+Wenn man sich für die Wahrscheinlichkeit interessiert, dass die
+Zufallsvariable in einem bestimmten Bereich landet, muss man
+das Volumen der Dichte über diesem Bereich berechnen. Für
+einen rechteckigen Bereich $[a_1,b_1]\times [a_2,b_2]$
+berechnet man das Doppel-Integral
+$$
+P(a_1< X \le b_1, a_2 < X\le b_2)=\int_{a_2}^{b_2}\int_{a_1}^{b_1}
+f(x,y)dxdy.
+$$
+Lässt man das Rechteck unendlich groß werden, ergibt sich das
+Gesamtvolumen 1. Die Herleitung des Doppelintegrals ist in vielen
+Fällen umständlich, in manchen Fällen sogar in geschlossener Form
+unmöglich. Numerische Approximationsverfahren (die wir in diesem
+Kurs aber nicht behandeln) erlauben jedoch so gut wie immer eine
+sehr genaue Berechnung der Wahrscheinlichkeit. In dem folgenden
+Beispiel ist die Dichte des Zufallsvektors von einer Form, die
+eine geschlossene Herleitung des Doppelintegrals erlaubt.
 
-
+::: callout-tip
+Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
+gemeinsame Dichtefunktion
+$$
+f(x,y)=\left\{
+\begin{array}{ll}
+x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Wie groß ist die Wahrscheinlichkeit, dass $X$ in dem Intervall $[0.5,0.75]$
+und gleichzeitig $Y$ in dem Intervall $[0.2,0.5]$ liegt? Diese
+Wahrscheinlichkeit ergibt sich als das Doppelintegral
+$$
+P(0.5< X\le 0.75,0.2<Y\le 0.5)=
+\int_{0.2}^{0.5}\int_{0.5}^{0.75}(x+y^2)dxdy.
+$$
+Zuerst bestimmen wir das innere Integral. Es ist
+$$
+\int_{0.5}^{0.75}(x+y^2)dx=\left.\frac{1}{2}x^2+xy^2\right|_{0.5}^{0.75}=0.25y^2+0.15625.
+$$
+Dieser Ausdruck wird nun in das äußere Integral eingesetzt. Man
+erhält
+$$
+\int_{0.2}^{0.5}(0.25y^2+0.15625)dy=
+\left. \frac{1}{12}y^3+0.15625y\right|_{0.2}^{0.5}=
+0.056625.
+$$
+Die Wahrscheinlichkeit, das die Realisation des Zufallsvektors in dem 
+Rechteck $[0.5,0.75]\times[0.2,0.5]$ liegt, beträgt also 5.7 Prozent.
+:::
 
 ## Randverteilungen
 
+Alle Informationen über die gemeinsame Verteilung eines Zufallsvektors $(X,Y)$
+sind in der gemeinsamen Dichte oder der gemeinsamen Verteilungsfunktion
+enthalten. In manchen Situationen interessiert man sich jedoch gar nicht
+für die gemeinsame Verteilung, sondern nur für die Verteilung einer
+der beiden Variablen. 
+
+::: callout-note
+Als **Randverteilung** bezeichnet man die Verteilung einer
+Zufallsvariablen eines Zufallsvektors, wenn die restlichen
+Zufallsvariablen des Zufallsvektors ignoriert werden.
+:::
+
+Die Randverteilungen lassen sich besonders einfach aus der gemeinsamen
+Verteilungsfunktion $F_{XY}(x,y)$ ableiten. Es gilt nämlich
+$$
+\begin{align*}
+F_X(x)&=F_{XY}(x,\infty)=\lim_{y\to\infty}F_{XY}(x,y)\\
+F_Y(y)&=F_{XY}(\infty,y)=\lim_{x\to\infty}F_{XY}(x,y),
+\end{align*}
+$$
+wobei $F_X$ und $F_Y$ die Randverteilungsfunktionen von $X$ und $Y$
+sind. Man erhält also die Randverteilungsfunktionen, indem man die
+jeweils andere Variable gegen unendlich gehen lässt. 
+
+Wenn $X$ und $Y$ gemeinsam diskret verteilt sind, ergeben sich die
+Randwahrscheinlichkeitsfunktionen aus der gemeinsamen
+Wahrscheinlichkeitsfunktion,
+$$
+\begin{align*}
+p_{j\cdot}&=P(X=x_j)=\sum_k p_{jk}\\
+p_{\cdot k}&=P(Y=y_k)=\sum_j p_{jk}.
+\end{align*}
+$$
+Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, erhält man
+die Randdichten aus der gemeinsamen Dichte wie folgt.
+$$
+\begin{align*}
+f_X(x)&=\int_{-\infty}^\infty f_{XY}(x,y)dy\\
+f_Y(y)&=\int_{-\infty}^\infty f_{XY}(x,y)dx.
+\end{align*}
+$$
+
 ## Unabhängigkeit
+
+::: callout-note
+Zwei Zufallsvariablen $X$ und $Y$ heißen **stochastisch unabhängig**
+oder **unabhängig**, wenn für alle $x,y\in\mathbb{R}$ gilt
+$$
+F_{XY}(x,y)=F_X(x)\cdot F_Y(y).
+$$
+:::
+
+Wenn die Zufallsvariablen nicht unabhängig sind, nennt man sie abhängig.
+Sowohl bei abhängigen als auch bei unabhängigen Zufallsvariablen gilt,
+dass die Randverteilungen aus der gemeinsamen Verteilung hergeleitet
+werden können. Im Gegensatz dazu ist die Herleitung der gemeinsamen
+Verteilung aus den Randverteilungen nur möglich, wenn die Zufallsvariablen
+unabhängig sind.
+
+Wenn $X$ und $Y$ gemeinsam diskret verteilt sind, dann gilt bei
+Unabhängigkeit für alle $j$ und $k$
+$$
+p_{jk}=p_{j\cdot}\cdot p_{\cdot k}.
+$$
+Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, ergibt sich bei
+Unabhängigkeit die gemeinsame Dichte als Produkt der beiden
+Randdichten,
+$$
+f_{XY}(x,y)=f_X(x)\cdot f_Y(y).
+$$
+
+
+
+
 
 ## Bedingte Verteilungen
 
