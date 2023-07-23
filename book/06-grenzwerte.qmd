@@ -113,19 +113,188 @@ lauten die Funktionsnamen:
 - `rnorm(n, mean, sd)`
 - `rexp(n, rate)`
 
-Für die Paretoverteilung gibt es keinen vorgefertigten Algorithmus
-(allerdings gibt es einige Pakete, die eine solche Funktion
-bereitstellen).
+Für die Paretoverteilung gibt es keinen vorgefertigten Algorithmus.
+Das Paket `distributionsrd` stellt jedoch die Funktion 
 
-Das folgende Beispiel zeigt, wie durch eine Monte-Carlo-Simulation
+- `rpareto(n, k, xmin)`
+
+bereit, mit der Zufallszahlen aus einer Paretoverteilung gezogen
+werden können.
+
+::: callout-tip
+Dieses Beispiel zeigt, wie durch eine Monte-Carlo-Simulation
 Kennzahlen einer Normalverteilung mit Erwartungswert 
 $\mu=10$ und Standardabweichung $\sigma=3$ bestimmt werden 
-können.
+können. Vorsicht: Die R-Funktionen zur Normalverteilung
+erwarten als Parameter für die Streuung nicht die
+Varianz, sondern die Standardabweichung.
 
+Zuerst werden $n=100\,000$ Zufallszahlen gezogen
+(Sie können die Zahl der Ziehungen durchaus noch
+höher setzen) und in einen Vektor `x` geschrieben.
+```{r}
+n <- 100000
+x <- rnorm(n, mean=10, sd=3)
+```
+Der Erwartungswert wird approximiert durch den Durchschnitt.
+```{r}
+mean(x)
+```
+Dieser Wert liegt sehr nahe an dem theoretischen Erwartungswert
+$E(X)=\mu=10$.
 
+Die Varianz der Zufallszahlen ist
+```{r}
+var(x)
+```
+Der Wert weicht nur wenig von der theoretischen Varianz
+$Var(X)=\sigma^2=9$ ab. 
 
+Als 0.75-Quantil erhält man
+```{r}
+quantile(x, 0.75)
+```
+Das theoretische 0.75-Quantil der $N(10,3^2)$ ist
+```{r}
+qnorm(0.75, mean=10, sd=3)
+```
+Auch hier ist die Approximation durch die Monte-Carlo-Simulation
+also sehr präzise.
+
+Der folgende Plot zeigt das Histogramm der Zufallszahlen
+zusammen mit der theoretischen Dichtefunktion der Normalverteilung,
+die als rote Linie zu sehen ist.
+```{r}
+hist(x, breaks=50, probability=TRUE)
+curve(dnorm(x, mean=10, sd=3), add=TRUE, col="red")
+```
+Zur Erklärung: Der R-Befehl `hist` erzeugt ein Histogramm. Die Option
+`breaks` gibt an, wie viele Intervalle gebildet werden sollen. 
+Die Option `probability=TRUE` dient dazu, die Fläche unter der
+Dichte auf 1 zu normieren, so dass das Histogramm quasi eine Dichte wird.
+Die rote Linie wird durch die Funktion `curve` erzeugt, die wir
+in diesem Kurs jedoch nicht weiter behandeln werden.
+:::
+
+Offensichtlich ist es nicht sinnvoll, eine Monte-Carlo-Simulation 
+durchzuführen, um Erwartungswert, Varianz, Quantile und Histogramm einer 
+Verteilung zu finden, für die man diese Größen auch einfach
+theoretisch herleiten kann. Monte-Carlo-Simulationen sind 
+immer dann extrem hilfreich, wenn es zwar nicht leicht ist, die
+theoretischen Größen zu bestimmen, wenn man aber sehr leicht
+und schnell Zufallszahlen erzeugen kann aus der Verteilung, die
+einen interessiert. Das passiert beispielsweise, wenn wir uns
+für eine Zufallsvariable interessieren, die keiner 
+Standardverteilung folgt, die sich aber aus einer anderen
+Zufallsvariablen ergibt, die wiederum einer Standardverteilung folgt.
+Das nächste Beispiel zeigt das.
+
+::: callout-tip
+Die Zufallsvariable $X$ folge einer Normalverteilung mit
+Erwartungswert $\mu=8$ und Standardabweichung $\sigma=0.5$.
+Die Zufallsvariable $Y=e^X$ soll den Bruttomonatslohn von
+Angestellten einer bestimmten Branche modellieren. Wir interessieren
+uns nicht für den Brutto-, sondern den Nettolohn. Letzterer
+ergibt sich, indem man die Abgaben und Steuern vom Bruttolohn 
+subtrahiert. Die Höhe der Abgaben und Steuern werde durch 
+folgende Funktion beschrieben:
+$$
+S(y)=\left\{ 
+\begin{array}{ll}
+0 & \text{ für }y\le 2000\\
+0.35(y-2000) & \text{ für }y> 2000\\
+\end{array}
+\right.
+$$
+wobei $y$ der Bruttolohn ist. Es handelt sich also um eine "flat tax"
+von 35 Prozent mit einem Freibetrag von 2000. 
+Der Nettolohn wird modelliert durch die Zufallsvariable
+$$
+Z=Y-S(Y)
+$$
+Wie hoch ist der Erwartungswert des Nettolohns? Das lässt
+sich recht einfach durch eine Monte-Carlo-Simulation
+ermitteln. Die Anzahl der Zufallszahlen sei $n=1\,000\,000$.
+```{r}
+n <- 1000000
+x <- rnorm(n, mean=8, sd=0.5)
+y <- exp(x)
+s <- ifelse(y <= 2000, 0, 0.35*(y-2000))
+z <- y-s
+mean(z)
+```
+Die Dichte des Nettolohns kann durch das Histogramm
+approximiert werden. Diese Form der Dichte entspricht keiner
+bekannten Standardverteilung.
+```{r}
+hist(z, probability=TRUE, breaks=150, xlim=c(0,10000))
+```
+:::
 
 ## Zentraler Grenzwertsatz
 
+Der **zentrale Grenzwertsatz** (engl. central limit theorem) 
+ist aus zwei Gründen relevant. Zum einen 
+liefert er eine mathematische Begründung dafür, warum in der Realität
+so viele Verteilungen zu finden sind, die sehr gut durch eine
+Normalverteilung beschrieben werden können. Zum zweiten ist er der
+Ausgangspunkt für die Herleitung von Konfidenzintervallen (Kapitel XXX) und
+Hypothesentests (Kapitel XXX).
+
+Für den zentralen Grenzwertsatz betrachtet man nicht die Folge
+von Zufallsvariablen 
+$$
+\bar X_n=\frac{1}{n}\sum_{i=1}^n X_i
+$$ 
+(d.h. den Durchschnitt), sondern die
+Folge der standardisierten $\bar X_n$. Dazu subtrahiert man den
+Erwartungswert und dividiert durch die Standardabweichung. Die
+Folge der standardisierten Durchschnitte bezeichnen wir mit
+$$
+U_n=\frac{\bar X_n-\mu}{\sqrt{\sigma^2/n}}.
+$$
+Die Wurzel von $n$ wird im allgemeinen vor den Bruch gezogen,
+$$
+U_n=\sqrt{n}\frac{\bar X_n-\mu}{\sigma}.
+$$
+
+::: callout-note
+Der **zentrale Grenzwertsatz** besagt, dass für alle $u\in\mathbb{R}$ gilt
+$$
+\lim_{n\to\infty} P(U_n\le u)=\Phi(u),
+$$
+wobei $\Phi$ die Verteilungsfunktion der Standardnormalverteilung 
+$N(0,1)$ ist.
+:::
+
+Etwas weniger präzise - aber dafür leichter verständlich - sagt der
+zentrale Grenzwertsatz, dass der standardisierte Durchschnitt von 
+vielen Zufallsvariablen im Limes einer Standardnormalverteilung folgt.
+Natürlich ist $n$ niemals wirklich unendlich groß, aber selbst
+wenn $n$ nur "ausreichend groß" ist, gilt 
+$$
+U_n\stackrel{appr}{\sim}N(0,1).
+$$
+Der standardisierte Durchschnitt von "vielen" Zufallsvariablen 
+ist annähernd normalverteilt. Diese Aussage ist deswegen 
+bemerkenswert, weil es gleichgültig ist, wie die zugrundeliegenden
+$X_i$ verteilt sind! Sie müssen nicht einmal stetig verteilt
+sein.
+
+Wenn der standardisierte Durchschnitt approximativ 
+standardnormalverteilt ist, dann ist der Durchschnitt selber
+approximativ normalverteilt. Für ausreichend große $n$ gilt
+also 
+$$
+\bar X_n \stackrel{appr}{\sim}N\left(\mu,\frac{\sigma^2}{n}\right).
+$$
+Und wenn beide Seiten mit $n$ multipliziert werden, dann
+gilt für die Summe
+$$
+\sum_{i=1}^n X_i \stackrel{appr}{\sim}N\left(n\mu,n\sigma^2\right),
+$$
+wobei zu beachten ist, dass bei der Multiplikation mit $n$ sich die
+Varianz um den Faktor $n^2$ erhöht.
 
 ## Monte-Carlo-Simulationen (II)
+

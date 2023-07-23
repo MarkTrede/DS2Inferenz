@@ -648,23 +648,23 @@ beschreiben. Beispielsweise folgt die Vermögensverteilung bei den Superreichen
 einer Paretoverteilung. Auch extreme Aktienrenditen können gut durch eine
 Paretoverteilung beschrieben werden.
 
-Die Paretoverteilung hat zwei Parameter, und zwar $c>0$ und $\alpha>0$.
+Die Paretoverteilung hat zwei Parameter, und zwar $x_{min}>0$ und $k>0$.
 Die Dichte lautet
 $$
 f(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<c\\
-\frac{\alpha}{c}\left(\frac{c}{x}\right)^{\alpha+1}& \text{ für }x\ge c.
+0 & \text{ für }x<x_{min}\\
+\frac{k}{x_{min}}\left(\frac{x_{min}}{x}\right)^{k+1}& \text{ für }x\ge x_{min}.
 \end{array}
 \right.
 $$
-Für $c=1$ und $\alpha=2$ ergibt sich folgendes Bild:
+Für $x_{min}=1$ und $k=2$ ergibt sich folgendes Bild:
 ```{r echo=FALSE}
 x <- seq(1,5,length=200)
-alpha <- 2
-cc <- 1
+k <- 2
+xmin <- 1
 D <- data.frame(x=x,
-                y=(alpha/cc)*(cc/x)^(alpha+1))
+                y=(k/xmin)*(xmin/x)^(k+1))
 ggplot(D, aes(x=x,y=y))+
     geom_line()+
     xlim(0,5)+
@@ -677,29 +677,67 @@ der Exponentialverteilung. Jedoch fällt die Dichte der Paretoverteilung
 deutlich langsamer gegen 0 als die Dichte der Exponentialverteilung.
 Bei der Paretoverteilung können daher extrem große Ausreißer auftreten.
 Ein weiterer Unterschied zur Exponentialverteilung besteht darin,
-dass die Paretoverteilung als Untergrenze den Parameter $c>0$ hat,
+dass die Paretoverteilung als Untergrenze den Parameter $x_{min}>0$ hat,
 die Exponentialverteilung startet hingegen immer bei 0.
 
 Duch Integration der Dichte erhält man die Verteilungsfunktion.
 $$
 F(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<c\\
-1-\left(\frac{c}{x}\right)^\alpha & \text{ für }x\ge c.
+0 & \text{ für }x<x_{min}\\
+1-\left(\frac{x_{min}}{x}\right)^k & \text{ für }x\ge x_{min}.
 \end{array}
 \right.
 $$
 
 Invertieren der Verteilungsfunktion führt auf die Quantilfunktion.
 $$
-F^{-1}(p)=c(1-p)^{-1/\alpha}.
+F^{-1}(p)=x_{min}(1-p)^{-1/k}.
 $$
 Erwartungswert und Varianz der Paretoverteilung sind
 $$
 \begin{align*}
-E(X) &= \frac{\alpha c}{\alpha-1}\\
-Var(X) &= \frac{\alpha c^2}{(\alpha-2)(\alpha-1)^2}.
+E(X) &= \frac{k x_{min}}{k-1}\\
+Var(X) &= \frac{k x_{min}^2}{(k-2)(k-1)^2}.
 \end{align*}
 $$
-Der Erwartungswert ist nur definiert, wenn der $\alpha>1$ ist,
-die Varianz ist sogar nur dann definiert, wenn $\alpha>2$ ist.
+Der Erwartungswert ist nur definiert, wenn der $k>1$ ist,
+die Varianz ist sogar nur dann definiert, wenn $k>2$ ist.
+
+In R gibt es die Funktionen für die Dichte, Verteilungsfunktion und
+Quantilfunktion nur in Zusatzpaketen. Installieren und aktivieren
+Sie das Paket `distributionsrd`. Nun stehen die Funktionen
+
+- `dpareto(x, k, xmin)`
+- `ppareto(x, k, xmin)`
+- `qpareto(p, k, xmin)`
+
+zur Verfügung. 
+
+::: callout-tip
+Die Zufallsvariable $X$ soll die Verteilung sehr hoher 
+Einkommen modellieren. Konkret soll $X$ das Nettojahreseinkommen 
+eines zufällig ausgewählten Haushalts in Deutschland sein.
+Der Haushalt wird jedoch nicht aus allen Haushalten ausgewählt,
+sondern aus den Haushalten mit einem Mindesteinkommen
+von $x_{min}=250000$ Euro. Die Paretoverteilung approximiert 
+die sehr hohen Einkommen sehr gut, als Flankenparameter
+setzen wir $k=1.5$. 
+
+Wie groß ist die Wahrscheinlichkeit, dass der zufällig
+ausgewählte Haushalt ein Einkommen von mehr als 1 Million
+Euro hat?
+
+Die gesuchte Wahrscheinlichkeit $P(X>1000000)=1-P(X\le 1000000)$ beträgt
+```{r}
+library(distributionsrd)
+1 - ppareto(1000000, k=1.5, xmin=250000)
+```
+Wie hoch ist der Median des Einkommens in der Gruppe der Haushalte
+mit einem Einkommen von mindestens 250000 Euro? Der Median beträgt
+```{r}
+qpareto(0.5, k=1.5, xmin=250000)
+```
+Von den Haushalten, die mehr als 250000 Euro Einkommen haben, hat
+also die Hälfte sogar mehr als knapp 400000 Euro.
+:::

@@ -42,7 +42,7 @@ $$
 \end{align*}
 $$
 
--   Der DAX-Index von morgen kann Werte zwischen 0 und unendlich annehmen. Die Ergebnismenge ist in diesem Fall $\Omega=\mathbb{R}^+_0$ (die Menge der nicht-negativen reellen Zahlen).
+- Der DAX-Index von morgen kann Werte zwischen 0 und unendlich annehmen. Die Ergebnismenge ist in diesem Fall $\Omega=\mathbb{R}^+_0$ (die Menge der nicht-negativen reellen Zahlen).
 :::
 
 ## Ereignisse
