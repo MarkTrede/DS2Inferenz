@@ -1,4 +1,4 @@
-# Zufallsvariablen {#zufallsvariablen}
+# Zufallsvariablen {#sec-zufallsvariablen}
 
 Die wichtigsten formalen Grundlagen der Wahrscheinlichkeitstheorie sind nun gelegt. Darauf aufbauend definieren wir Zufallsvariablen. Zufallsvariablen sind - intuitiv gesprochen - Zahlen, deren Wert man noch nicht kennt, deren Wert sich aber (irgendwann) realisiert. Die formale Definition von Zufallsvariablen bezieht sich auf die Ergebnismenge.
 
@@ -189,7 +189,9 @@ p_j & \text{ wenn }x=x_j\\
 0 &\text{ sonst}
 \end{array}\right.
 $$
-heißt **Wahrscheinlichkeitsfunktion**. 
+heißt **Wahrscheinlichkeitsfunktion**. Gelegentlich finden Sie auch
+die Bezeichnung Dichte für die Wahrscheinlichkeitsfunktion einer
+diskreten Zufallsvariable.
 
 Die Verteilungsfunktion einer diskreten Zufallsvariable ist eine
 Treppenfunktion. Der Träger der Zufallsvariable gibt an, an welchen
@@ -447,7 +449,7 @@ ist gleich dem Grenzwert, wenn man sich von links der Sprungstelle nähert.
 :::
 
 
-## Erwartungswert
+## Erwartungswert {#sec-erwartungswert}
 
 Der Erwartungswert einer Verteilung gibt Auskunft darüber, wo der
 "Schwerpunkt" der Verteilung liegt. 
@@ -464,12 +466,14 @@ E(X)=\left\{
 $$
 :::
 
-Wie der Erwartungswert einer Zufallsvariable berechnet wird, hängt also
+Beachten Sie, dass der Erwartungswert einer Zufallsvariablen
+keine Zufallsvariable, sondern eine reelle Zahl ist.
+Wie der Erwartungswert einer Zufallsvariable berechnet wird, hängt 
 davon ab, ob es sich um eine diskrete oder eine stetige Zufallsvariable
 handelt. 
 
 ::: callout-tip
-- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Wie hoch ist der Erwartungswert von $X$? Für die
 Berechnung benötigt man die Wahrscheinlichkeitsfunktion. Sie lautet
 (s. XXX)
@@ -487,8 +491,10 @@ Der Erwartungswert ist
 $$
 E(X)=0\cdot\frac{25}{36}+1\cdot\frac{10}{36}+2\cdot\frac{1}{36}=\frac{1}{3}.
 $$
+:::
 
-- Die Dichte der stetigen Zufallsvariable $X$ sei 
+::: callout-tip
+Die Dichte der stetigen Zufallsvariable $X$ sei 
 $$
 f(x)=\left\{
 \begin{array}{ll}
@@ -512,7 +518,7 @@ E(X) &= \int_{-\infty}^\infty x f(x) dx\\
 $$
 :::
 
-## Varianz
+## Varianz {#sec-varianz}
 
 Die Varianz einer Zufallsvariable gibt an, wie stark die Verteilung 
 streut bzw. wie sehr man mit großen Abweichungen vom Erwartungswert
@@ -527,6 +533,8 @@ Die (positive) Wurzel aus der Varianz nennt man Standardabweichung
 (engl. standard deviation).
 :::
 
+Ebenso wie der Erwartungswert ist auch die Varianz einer
+Zufallsvariable eine reelle Zahl.
 Für diskrete und stetige Zufallsvariablen lässt sich die Varianz
 folgendermaßen schreiben:
 $$
@@ -545,7 +553,7 @@ Var(X)=E(X^2)-(E(X))^2.
 $$
 
 ::: callout-tip
-- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Wie hoch ist die Varianz von $X$? Für die Berechnung nutzen
 wir den Streuungsverschiebungssatz. Der Erwartungswert von $X^2$ wird
 analog zum Erwartungswert berechnet. Es ergibt sich
@@ -564,8 +572,10 @@ Var(X) &= E(X^2)-(E(X))^2\\
 &= \frac{5}{18}.
 \end{align*}
 $$
+:::
 
-- Auch für die Berechnung der Varianz einer stetigen Zufallsvariable nutzen
+::: callout-tip
+Auch für die Berechnung der Varianz einer stetigen Zufallsvariable nutzen
 wir den Streuungsverschiebungssatz. Die Dichte der stetigen Zufallsvariable $X$ 
 sei 
 $$
@@ -672,6 +682,7 @@ kann man den Erwartungswert in eine lineare Funktion "hineinziehen"
 oder ihn aus ihr "herausziehen". Man sagt auch, dass der Erwartungswert
 ein "linearer Operator" ist.
 
+<img src="images/AdobeStock_458950051b.jpeg" align="right" width=10%" style="padding-left:15px;padding-top:5px;"/>
 *Achtung*: Leider kann man der Erwartungswert im allgemeinen nicht aus anderen
 (nichtlinearen) Funktionen herausziehen oder ihn dort hineinziehen.
 So ist beispielsweise im allgemeinen
@@ -703,13 +714,16 @@ Varianz unverändert, wenn $X$ mit $(-1)$ multipliziert wird.
 
 ## Standardisierung
 
+<img src="images/AdobeStock_13508641b.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
 Eine lineare Transformation, die dazu führt, dass der Erwartungswert der
 transformierten Zufallsvariable 0 und die Varianz 1 ist, nennt man 
 **Standardisierung**. Die transformierte Zufallsvariable heißt 
-standardisiert. Welche lineare Transformation muss für eine
+standardisiert. Vergleicht man zwei standardisierte Zufallsvariablen
+miteinander, dann wird sowohl die Lage (Erwartungswert) als auch
+die Streuung (Varianz) beim Vergleich ausgeblendet. 
+Welche lineare Transformation muss für eine
 Standardisierung durchgeführt werden? Wie erreicht man, dass der 
 Erwartungswert nach der Transformation 0 ist und die Varianz 1?
-
 Wir gehen in zwei Schritten vor. Im ersten Schritt subtrahieren wir von der
 Zufallsvariablen $X$ ihren Erwartungswert $E(X)$ (also eine reelle Zahl),
 $$

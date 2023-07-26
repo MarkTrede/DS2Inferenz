@@ -19,4 +19,6 @@ xxx
 
 Der Name dieses Moduls "Data Science 2" lässt einen vermuten, dass dieses Modul auf dem Modul "Data Science 1" aufbaut. Diese Vermutung ist aber falsch. Beiden Module sind inhaltlich in sich abgeschlossen und können unabhängig voneinander belegt werden. Wenn Sie "Data Science 1" bereits gehört haben, werden Sie jedoch feststellen, dass viele Begriffe, die Sie dort gelernt haben, in ähnlicher Form auch in "Data Science 2" vorkommen.
 
-In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul nur sparsam und erst ab Mitte des Semesters eingesetzt. R dient hauptsächlich dazu, die Verfahren zu illustrieren.
+In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul nur sparsam und erst ab Mitte des Semesters eingesetzt. 
+
+(Kein ggplot)

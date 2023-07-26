@@ -1,0 +1,291 @@
+# Programmieren in R {#sec-programmieren}
+
+In diesem Anhang lernen Sie elementare Programmiertechniken in R
+kennen. Einige dieser Techniken kommen nicht nur in R, sondern 
+in praktisch allen Programmiersprachen vor, nämlich die bedingte
+Ausführung von Befehlen (`if`) und Schleifen (`for`, `while`
+und `repeat`). Im folgenden
+Abschnitt wird jedoch zunächst vorgestellt, wie man in R mit
+Vektoren arbeitet. Vektoren sind R-spezifisch, kommen aber auch
+in einigen anderen Programmiersprachen vor, die in den
+Wirtschaftswissenschaften verwendet werden (z.B. Matlab oder
+Python).
+
+## Vektoren {#sec-vektoren}
+
+Die grundlegendsten Objekte in R sind Vektoren. Ein Vektor 
+ist eine Zusammenfassung von Zahlen oder Zeichenketten. Die
+Länge eines Vektors `x` wird durch die Funktion `length`
+ermittelt.
+
+### Erzeugen von Vektoren
+
+Es gibt viele Möglichkeiten, Vektoren in R zu erzeugen. Für diesen
+Kurs sollten Sie die folgenden drei Funktionen kennen:
+
+#### Funktion `c` (concatenate) {.unnumbered}
+
+Mit der Funktion `c` fasst man Zahlen (oder Zeichenketten)
+zu einem Vektor zusammen. Mit dem Zuweisungsoperator `<-` kann der
+Vektor in eine Variable geschrieben werden. 
+```{r}
+x <- c(8, 0, -5, 3, 1)
+```
+Anschließend sind die Zahlen 8, 0, $-5$, 3 und 1 Elemente des
+Vektors `x`. Der Vektor kann mit der `print`-Funktion 
+ausgegeben werden. 
+```{r}
+print(x)
+```
+Es ist auch möglich, abkürzend einfach nur `x` zu schreiben.
+```{r}
+x
+```
+Man kann auch einen Vektor aus anderen Vektoren zusammensetzen.
+```{r}
+a <- c(1, 3, 5)
+b <- c(2, 4, 6)
+x <- c(a, b)
+x
+```
+
+#### Funktion `seq` (sequence) {.unnumbered}
+
+Mit der Funktion `seq` erzeugt man einen Vektor von äquidistanten
+Werten (man spricht oft auch von Gitterpunkten). Die Funktion
+erwartet drei der folgenden vier Argumente:
+
+- `from` (erster Wert)
+- `to` (letzter Wert)
+- `length` (Anzahl der Werte)
+- `by` Schrittlänge
+
+Mit dem Befehl
+```{r}
+x <- seq(from=1, to=2, length=11)
+```
+erhält man einen Vektor mit 11 gleich weit voneinander entfernten
+Elementen, dessen erstes Element 1 und dessen letztes Element 2 ist:
+```{r}
+x
+```
+Das nächste Beispiel zeigt die Verwendung der Option `by`:
+```{r}
+y <- seq(from=0, to=100, by=5)
+y
+```
+Für ganzzahlige Elemente mit einer Schrittlänge von 1 gibt es
+die Kurzschreibweise `a:b`. Dadurch erhält man einen Vektor aller
+ganzen Zahlen von `a` bis `b` inklusive. Zum Beispiel
+```{r}
+1:20
+```
+In der Hilfefunktion zu `seq` erfährt man, dass die ersten beiden
+Argument `from` und `to` sind. Es ist also erlaubt, diese beiden
+Angaben ohne die Argumentnamen einzugeben. Es ist also gleichgültig,
+ob man
+```{r}
+x <- seq(from=0, to=20, length=100)
+```
+oder
+```{r}
+x <- seq(0, 20, length=100)
+```
+eingibt. Das dritte Argument sollte in jedem Fall benannt werden,
+damit beim Lesen klar ist, ob `length` oder `by` gemeint ist.
+
+#### Funktion `rep` (repeat) {.unnumbered}
+
+Die Funktion `rep` hat zwei Argumente. Das 
+erste Argument ist eine Zahl oder ein Vektor. Das zweite
+Argument gibt an, wie oft das erste Argument wiederholt
+werden soll. Mit
+```{r}
+x <- rep(0, 7)
+```
+erzeugt man einen Vektor, der sieben Nullen enthält.
+```{r}
+x
+```
+
+Mit 
+```{r}
+y <- rep(9, 4)
+```
+erhält man einen Vektor aus vier Neunen.
+
+Wenn das erste Objekt keine Zahl, sondern ein Vektor aus
+Zahlen ist, kann man wählen, ob das zweite Argument `times`
+oder `each` heißen soll. Wählt man `times=n`, dann wird
+der komplette Vektor $n$ Mal vervielfältigt. Wählt man `each=n`,
+dann wird jedes Element $n$ Mal wiederholt. Die
+beiden Beispiele zeigen die Funktionsweise.
+```{r}
+x <- rep(0:4, times=3)
+x
+```
+Hingegen ergibt
+```{r}
+y <- rep(0:4, each=3)
+y
+```
+
+In diesem Kurs dient die Funktion `rep` vor allem dazu,
+einen Vektor zu initialisieren, den man anschließend in einer
+Schleife Element für Element befüllt (siehe @sec-schleifen).
+
+### Numerische Indizierung
+
+Auf die Elemente eines Vektors kann man durch die Angabe von Indizes
+in eckigen Klammern hinter dem Vektornamen zugreifen. Man kann
+die Elemente eines Vektors lesen oder schreiben. Bei der
+numerischen Indizierung gibt man in den eckigen Klammern an, 
+welche Elemente ausgelesen (oder beschrieben) werden sollen.
+
+Besonders einfach ist die Indizierung mit einer einzelnen Zahl.
+```{r}
+x <- c(6, 1, 2, -3, 0, 0, 4)
+x[3]
+```
+
+Zum Indizieren kann auch ein Vektor von ganzen Zahlen benutzt
+werden. Dann werden so viele Elemente ausgelesen, wie der
+Indexvektor lang ist.
+```{r}
+a <- c(1,1,3,7)
+x[a]
+```
+Um beispielsweise die ersten drei Elemente auszulesen, kann
+man so vorgehen:
+```{r}
+x[1:3]
+```
+Mit negativen Indizes kann man einzelne (oder mehrere) Elemente 
+ausschließen.
+```{r}
+x[-6]
+```
+
+### Logische Indizierung
+
+Neben der Indizierung durch ganze Zahlen ist es auch möglich, 
+einen Vektor von logischen Ausdrücken (`FALSE`/`TRUE`) als Index 
+zu verwenden. Der logische Indizierungsvektor muss die gleiche 
+Länge haben wie der zu indizierende Vektor.
+
+## Bedingte Ausführung {#sec-if}
+
+
+
+
+
+## Schleifen {#sec-schleifen}
+
+Schleifen werden beim Programmieren eingesetzt, wenn dieselbe
+Folge von Befehlen wieder und wieder durchgeführt werden soll. 
+In R sind Schleifen im Vergleich zu einer vektoriellen
+Programmierung oft recht langsam. Falls es in Ihrem Programm
+auf eine hohe Geschwindigkeit ankommt, sollten Sie darum
+Schleifen nur einsetzen, wenn eine vektorielle Programmierung
+nicht möglich oder zu umständlich ist. Eine typische
+Anwendung, in der Schleifen sinnvoll eingesetzt werden können,
+sind Monte-Carlo-Simulationen (s. @sec-mc1 und @sec-mc2).
+
+### `for`-Schleifen
+
+In einer `for`-Schleife durchläuft ein Index alle Elemente 
+eines Vektors. Die Syntax ist wie folgt,
+```{r eval=FALSE}
+for(i in vektor){
+  ...
+}
+```
+Dabei ist `i` der Laufindex, hier kann natürlich ein 
+beliebiger anderer Name gewählt werden. Mit `vektor` wird
+angegeben, welche Werte `i` in jedem Durchlauf nacheinander
+annehmen soll. In der Mehrzahl aller Fälle sind das
+die ganzen Zahlen von 1 bis zu einer Obergrenze `n`.
+In diesem Fall schreibt man
+```{r eval=FALSE}
+for(i in 1:n){
+  ...
+}
+```
+Die Schleife wird nun so oft ausgeführt, wie `vektor`
+lang ist. In dem Fall `1:n` sind es also $n$ Durchläufe.
+Innerhalb der Schleife, d.h. in dem Bereich zwischen
+den geschweiften Klammern, kann beliebiger und beliebig
+langer Code stehen. Der Code darf insbesondere den Index `i` 
+enthalten. Für eine bessere Lesbarkeit des Codes sollten
+alle Zeilen innerhalb der Schleife eingerückt werden.
+Das folgende Beispiel illustriert eine `for`-Schleife
+für einen einzelnen Befehl innerhalb der Schleife.
+```{r}
+n <- 8
+for(i in 1:n){
+  print(i^2)
+}
+```
+In vielen Anwendungen benutzt man den Laufindex, um nacheinander
+auf die Elemente eines Vektors zuzugreifen. Der folgende Code
+berechnet die Summe der quadrierten Elemente des Vektors `x`.
+```{r}
+x <- c(6, 1, 2, -3, 0, 0, 4)
+S <- 0
+for(i in 1:length(x)){
+  S <- S + x[i]^2
+}
+print(S)
+```
+In ähnlicher Weise kann man den Laufindex zum Beschreiben der
+Elemente eines (schon vorhandenen) Vektors benutzen. 
+```{r}
+n <- 10
+x <- rep(0,n)
+for(i in 1:n){
+  x[i] <- i*(i+1)
+}
+print(x)
+```
+
+### `while`-Schleifen
+
+Eine `while`-Schleife hat eine ähnliche Syntax wie eine `for`-Schleife,
+es gibt jedoch keinen Laufindex.
+```{r eval=FALSE}
+while(BEDINGUNG){
+  ...
+}
+```
+Die `while`-Schleife wird solange wiederholt, bis die `BEDINGUNG`
+verletzt ist. Sollte die Bedingung schon beim Start der Schleife
+verletzt sein, wird der Code in der Schleife gar nicht ausgeführt.
+
+### `repeat`-Schleifen
+
+Im Gegensatz zu `for`-Schleifen und `while`-Schleifen haben
+`repeat`-Schleifen im Prinzip kein Ende, sondern durchlaufen
+den Code innerhalb der Schleife immer wieder.
+```{r eval=FALSE}
+repeat{
+  ...
+}
+```
+Es gibt jedoch die Möglichkeit, die Schleife mit dem Befehl `break`
+zu beenden. Typischerweise wird eine Bedingung festgelegt, unter
+der `break` aktiviert wird.
+```{r eval=FALSE}
+repeat{
+  ...
+  if(BEDINGUNG){
+    break
+  }
+  ...
+}
+```
+Die Schleife läuft so lange, bis die Bedingung erfüllt ist.
+Der Unterschied zu einer `while`-Schleife besteht im
+wesentlichen darin, dass die Bedingung auch in der Mitte
+der Schleife stehen kann, wohingegen sie bei `while`-Schleifen
+immer am Anfang steht.
+
