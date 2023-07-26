@@ -3,8 +3,9 @@ project:
 
 book:
   title: "Data Science 2"
+  subtitle: "Statistische Inferenz"
   author: "Mark Trede"
-  date: "Juni 2023"
+  date: "Juli 2023"
   chapters:
     - index.qmd
     - 01-zufall.qmd
@@ -12,8 +13,14 @@ book:
     - 03-zufallsvariablen.qmd
     - 04-verteilungen.qmd
     - 05-zufallsvektoren.qmd
-
-bibliography: references.bib
+    - 06-grenzwerte.qmd
+    - 07-stichproben.qmd
+    - 08-punktschaetzung.qmd
+    - 09-intervallschaetzung.qmd
+    - 10-hypothesentests.qmd
+  appendices:
+    - 11-programmieren.qmd
+    - 12-literatur.qmd
 
 format:
   html:
@@ -24,7 +31,13 @@ editor: source
 
 toc-title-document: "Inhalt"
 toc-title-website: "In diesem Kapitel"
+section-title-appendices: "Anhänge"
+title-block-author-single: "Autor"
+
+crossref-ch-prefix: "Kapitel"
+crossref-apx-prefix: "Anhang"
+crossref-sec-prefix: "Abschnitt"
 
 callout-icon: false
-callout-tip-title: "Beispiele"
+callout-tip-title: "Beispiel"
 callout-note-title: "Definition"

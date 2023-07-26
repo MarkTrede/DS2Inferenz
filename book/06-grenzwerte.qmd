@@ -1,4 +1,4 @@
-# Grenzwertsätze und Simulationen {#grenzwerte}
+# Grenzwertsätze {#sec-grenzwerte}
 
 In diesem Kapitel gehen wir davon aus, dass eine Zufallsvariable 
 immer wieder neu gezogen wird. Als Ausgangspunkt der Überlegungen
@@ -28,7 +28,8 @@ ebenfalls eine Zufallsvariable.
 
 Da der Durchschnitt $\bar X_n$ eine Zufallsvariable ist, kann man
 den Erwartungswert und die Varianz ausrechnen. Sie sind mit den
-Rechenregeln aus Kapitel XXX leicht zu finden. Es gilt
+Rechenregeln aus @sec-erwartungswert und @sec-varianz leicht zu 
+finden. Es gilt
 $$
 \begin{align*}
 E(X) &= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
@@ -83,7 +84,7 @@ die Quantile der Folgeelemente konvergieren gegen die Quantile
 der Zufallsvariable; und das Histogramm der Folgeelmente konvergiert
 gegen die Dichte der Zufallsvariable. 
 
-## Monte-Carlo-Simulationen (I)
+## Monte-Carlo (I) {#sec-mc1}
 
 Das Gesetz der großen Zahl hat eine weitreichende 
 Konsequenz: Um die Verteilung einer Zufallsvariable zu kennen, 
@@ -95,9 +96,11 @@ Algorithmen gibt es - und viele davon sind in R (oder anderen
 Programmiersprachen) implementiert. Die Ziehungen, die vom
 Computer generiert werden, nennt man **Zufallszahlen** (engl.
 random numbers). Verfahren, die auf solchen Algorithmen
-beruhen, werden Monte-Carlo-Simulationen genannt, weil
+beruhen, werden **Monte-Carlo-Simulationen** genannt, weil
 das Casino von Monte Carlo früher als Inbegriff von 
 Zufälligkeit galt.
+
+<img src="images/AdobeStock_266493629b.jpeg" width="90%"/>
 
 Die R-Funktionen zum Erzeugen von Zufallszahlen haben alle 
 die Form
@@ -105,7 +108,7 @@ die Form
 `rVERTEILUNG(n, PARAMETER)`
 
 Dabei gibt `n` an, wie viele Folgeelemente gezogen werden sollen.
-Für die Standardverteilungen, die in Kapitel XXX behandelt wurden,
+Für die Standardverteilungen, die in @sec-verteilungen behandelt wurden,
 lauten die Funktionsnamen:
 
 - `rbinom(n, size, prob)`
@@ -121,11 +124,12 @@ Das Paket `distributionsrd` stellt jedoch die Funktion
 bereit, mit der Zufallszahlen aus einer Paretoverteilung gezogen
 werden können.
 
-::: callout-tip
-Dieses Beispiel zeigt, wie durch eine Monte-Carlo-Simulation
+Die Vorgehensweise einer Monte-Carlo-Simulation versteht
+man am einfachsten anhand eines Beispiels. Das folgende 
+Beispiel zeigt, wie durch eine Monte-Carlo-Simulation
 Kennzahlen einer Normalverteilung mit Erwartungswert 
 $\mu=10$ und Standardabweichung $\sigma=3$ bestimmt werden 
-können. Vorsicht: Die R-Funktionen zur Normalverteilung
+können. *Vorsicht*: Die R-Funktionen zur Normalverteilung
 erwarten als Parameter für die Streuung nicht die
 Varianz, sondern die Standardabweichung.
 
@@ -165,31 +169,55 @@ Der folgende Plot zeigt das Histogramm der Zufallszahlen
 zusammen mit der theoretischen Dichtefunktion der Normalverteilung,
 die als rote Linie zu sehen ist.
 ```{r}
-hist(x, breaks=50, probability=TRUE)
+hist(x, breaks=100, probability=TRUE)
 curve(dnorm(x, mean=10, sd=3), add=TRUE, col="red")
 ```
 Zur Erklärung: Der R-Befehl `hist` erzeugt ein Histogramm. Die Option
 `breaks` gibt an, wie viele Intervalle gebildet werden sollen. 
 Die Option `probability=TRUE` dient dazu, die Fläche unter der
 Dichte auf 1 zu normieren, so dass das Histogramm quasi eine Dichte wird.
-Die rote Linie wird durch die Funktion `curve` erzeugt, die wir
-in diesem Kurs jedoch nicht weiter behandeln werden.
-:::
+Die eingefügte rote Linie zeigt die Dichte der Standardnormalverteilung.
+Sie wird durch die Funktion `curve` erzeugt. Das erste Argument
+von `curve` ist eine Funktion (von `x`), die geplottet werden soll.
+Die Option `add=TRUE` legt fest, dass die Funktion in einen
+bereits bestehenden Plot eingefügt wird. Und die Option 
+`col` bestimmt die Farbe der Linie.
+
+Im folgenden Plot sieht man die empirische Verteilungsfunktion 
+der Ziehungen $X_1,\ldots,X_n$. Es handelt sich zwar um eine
+Treppenfunktion, aber die Stufen sind so klein (nämlich jeweils
+$1/n=0.00001$), dass sie nicht zu erkennen sind. Mit Hilfe
+der Funktion `curve` ergänzen wir die theoretische
+Verteilungsfunktion der Normalverteilung als rote Linie.
+```{r}
+plot(ecdf(x),
+     main="Verteilungsfunktion")
+curve(pnorm(x, mean=10, sd=3),
+      add=TRUE,
+      col="red")
+```
+Die beiden Linien stimmen praktisch perfekt überein. Man kann also
+die theoretische Verteilungsfunktion beliebig genau bestimmen,
+indem man eine große Zahl von Zufallszahlen generiert und 
+ihre empirische Verteilungsfunktion bestimmt.
 
 Offensichtlich ist es nicht sinnvoll, eine Monte-Carlo-Simulation 
 durchzuführen, um Erwartungswert, Varianz, Quantile und Histogramm einer 
 Verteilung zu finden, für die man diese Größen auch einfach
 theoretisch herleiten kann. Monte-Carlo-Simulationen sind 
-immer dann extrem hilfreich, wenn es zwar nicht leicht ist, die
-theoretischen Größen zu bestimmen, wenn man aber sehr leicht
-und schnell Zufallszahlen erzeugen kann aus der Verteilung, die
-einen interessiert. Das passiert beispielsweise, wenn wir uns
-für eine Zufallsvariable interessieren, die keiner 
-Standardverteilung folgt, die sich aber aus einer anderen
-Zufallsvariablen ergibt, die wiederum einer Standardverteilung folgt.
-Das nächste Beispiel zeigt das.
+immer dann extrem hilfreich, 
 
-::: callout-tip
+- wenn es zwar nicht leicht ist, die theoretischen 
+Größen zu bestimmen, 
+- wenn man aber sehr leicht und schnell Zufallszahlen 
+erzeugen kann aus der Verteilung, die einen interessiert. 
+
+Das passiert beispielsweise, wenn wir uns
+für eine Zufallsvariable interessieren, die zwar nicht unmittelbar
+einer Standardverteilung folgt, die sich aber aus einer anderen
+Zufallsvariable ergibt, welche wiederum einer Standardverteilung 
+folgt. Das nächste Beispiel zeigt das.
+
 Die Zufallsvariable $X$ folge einer Normalverteilung mit
 Erwartungswert $\mu=8$ und Standardabweichung $\sigma=0.5$.
 Die Zufallsvariable $Y=e^X$ soll den Bruttomonatslohn von
@@ -229,7 +257,6 @@ bekannten Standardverteilung.
 ```{r}
 hist(z, probability=TRUE, breaks=150, xlim=c(0,10000))
 ```
-:::
 
 ## Zentraler Grenzwertsatz
 
@@ -238,8 +265,9 @@ ist aus zwei Gründen relevant. Zum einen
 liefert er eine mathematische Begründung dafür, warum in der Realität
 so viele Verteilungen zu finden sind, die sehr gut durch eine
 Normalverteilung beschrieben werden können. Zum zweiten ist er der
-Ausgangspunkt für die Herleitung von Konfidenzintervallen (Kapitel XXX) und
-Hypothesentests (Kapitel XXX).
+Ausgangspunkt für die Herleitung von Konfidenzintervallen
+(@sec-intervallschaetzung) und Hypothesentests 
+(@sec-hypothesentests).
 
 Für den zentralen Grenzwertsatz betrachtet man nicht die Folge
 von Zufallsvariablen 
@@ -294,7 +322,114 @@ $$
 \sum_{i=1}^n X_i \stackrel{appr}{\sim}N\left(n\mu,n\sigma^2\right),
 $$
 wobei zu beachten ist, dass bei der Multiplikation mit $n$ sich die
-Varianz um den Faktor $n^2$ erhöht.
+Varianz um den Faktor $n^2$ erhöht. 
 
-## Monte-Carlo-Simulationen (II)
+Die **intuitive Bedeutung** des zentralen Grenzwertsatzes lautet also:
+Wenn man viele unabhängige Zufallsvariablen addiert oder ihren
+Durchschnitt berechnet, dann ist die Summe bzw. der Durchschnitt
+ebenfalls eine Zufallsvariable, und zwar mit einer Normalverteilung.
+Das Besondere daran ist, dass die Verteilung der Summanden nicht
+normal sein muss. Die Normalverteilung ergibt sich quasi "aus dem Nichts"!
 
+Auf den Beweis des zentralen Grenzwertsatzes gehen wir in diesem
+Kurs nicht ein, er wird in dem Bachelor-Modul **Advanced Statistics**
+vorgestellt. Der zentrale Grenzwertsatz kann erheblich verallgemeinert 
+werden. Er gilt z.B. auch dann, wenn die Zufallsvariablen nicht unabhängig
+sind, sondern eine (nicht zu starke) Abhängigkeit aufweisen. Die
+Summanden müssen auch nicht unbedingt identisch verteilt sein.
+Die Verallgemeinerungen des zentralen Grenzwertsatzes sind aber
+fortgeschrittene Materie und werden in diesem Kurs nicht behandelt.
+
+## Monte-Carlo (II) {#sec-mc2}
+
+Wie lässt sich der zentrale Grenzwertsatz durch eine Monte-Carlo-Simulation
+illustrieren? Um das zu verstehen, muss man sich zunächst klar machen,
+dass die Folge $U_1,U_2,\ldots$ nicht gegen einen bestimmten *Wert*, sondern 
+gegen eine *Verteilung* konvergiert. 
+
+Um die Verteilung von $U_n$ zu simulieren, müssen wir 
+*für gegebenes* $n$ viele Ziehungen aus $U_n$ generieren, die 
+wir beispielsweise
+$$
+U_{n,1},U_{n,2},\ldots,U_{n,R}
+$$
+nennen können, wobei $R$ die vorgegebene (große) Zahl von Ziehungen ist,
+z.B. $R=100000$. Für jede dieser Ziehungen müssen die Zufallsvariablen
+$X_1,\ldots,X_n$ neu gezogen werden. Das lässt sich am elegantesten
+durch eine Schleife programmieren. Genauere Erklärungen zum Programmieren
+mit Schleifen finden Sie im @sec-programmieren.
+
+Bevor man die Schleife durchlaufen lässt, initialisiert man einen
+Vektor, der die Ergebnisse der Schleifendurchläufe aufnimmt. Welche
+Werte in diesem Vektor stehen, ist gleichgültig, da sie in der Schleife 
+ohnehin überschrieben werden. Es geht also nur darum, Platz für die
+Ergebnisse vorzubereiten.
+```{r}
+R <- 100000
+u <- rep(0, R)
+```
+Innerhalb der Schleife werden nun in jedem Durchlauf die
+Zufallszahlen $X_1,\ldots,X_n$ gezogen. Konkret nehmen wir
+an dieser Stelle an, dass die Folge $n=20$ Elemente umfasst
+und dass sie unabhängig exponentialverteilt mit Parameter $\lambda=1$
+sind, 
+$$
+X\sim Exp(2).
+$$
+Erwartungswert und Standardabweichung sind
+$$
+\begin{align*}
+E(X) &= \frac{1}{2}\\
+Var(X)& =\frac{1}{4}.
+\end{align*}
+$$
+Der R-Code sieht folgendermaßen aus:
+```{r}
+n <- 50
+for(r in 1:R){
+    x <- rexp(n, rate=2)
+    xquer <- mean(x)
+    u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
+}
+```
+Zur Erklärung: Der Laufindex der Schleife `r` durchläuft
+alle Werte von 1 bis `R`. Bei jedem Durchlauf wird zuerst
+die Folge `x` vom Umfang `n` aus der Rechteckverteilung
+gezogen. Anschließend wird der Durchschnitt der 
+Elemente der Folge gebildet und unter dem Namen `xquer`
+abgespeichert. In der letzten Zeile der Schleife 
+wird der Durchschnitt standardisiert und in die
+`r`-te Stelle des Vektors `u` geschrieben.
+
+Das Histogramm der $R=100000$ Zufallszahlen 
+$U_{n,1},\ldots,U_{n,R}$ kann trotz des noch kleinen
+Umfang $n=50$ schon recht gut durch eine Standardnormalverteilung
+approximiert werden.
+```{r}
+hist(u, prob=TRUE, breaks=100)
+curve(dnorm(x), add=TRUE, col="red")
+```
+Reduziert man die Länge der Folge auf $n=5$ Elemente, greift
+der zentrale Grenzwertsatz noch nicht so gut, wie das folgende Bild
+zeigt:
+```{r}
+n <- 5
+for(r in 1:R){
+    x <- rexp(n, rate=2)
+    xquer <- mean(x)
+    u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
+}
+hist(u, prob=TRUE, breaks=100)
+curve(dnorm(x), add=TRUE, col="red")
+```
+Wie viele Elemente die Folge $X_1,\ldots,X_n$ haben muss,
+damit der zentrale Grenzwertsatz greift, hängt von ihrer
+Verteilung ab. Es kann sein, dass schon für $n=10$ die
+Approximation sehr gut ist, es kann jedoch auch sein,
+dass selbst ein Umfang von $n=1000$ oder sogar $n=10000$
+noch zu klein ist.
+Erfahrungsgemäß ist in den meisten Fällen ein Umfang
+von $n=40$ schon ausreichend groß, um eine gute
+Annäherung an die Standardnormalverteilung zu erreichen.
+Das ist jedoch nur eine Faustregel, sie kann im 
+konkreten Einzelfall vollkommen falsch sein.

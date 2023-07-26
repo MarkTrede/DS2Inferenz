@@ -1,4 +1,4 @@
-# Zufallsvektoren {#zufallsvektoren}
+# Zufallsvektoren {#sec-zufallsvektoren}
 
 Zufallsvariablen sind Funktionen aus dem Ergebnisraum in die Menge der
 reellen Zahlen. Es ist natürlich möglich, nicht nur eine solche Funktion 
@@ -16,7 +16,7 @@ als eindimensionale Zufallsvariablen, weil sie auch Zusammenhänge
 und Abhängigkeiten zwischen den Variablen beschreiben können.
 
 ::: callout-tip
-- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die
+Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die
 kleinere Augenzahl, die Zufallsvariable $Y$ die größere Augenzahl.
 Die beiden Zufallsvariablen $X$ und $Y$ basieren auf dem gleichen
 Ergebnisraum. Sie haben eine gemeinsame Verteilung. Das lässt
@@ -38,14 +38,16 @@ $$
 6 & \longleftarrow & 66 & \longrightarrow & 6
 \end{array}
 $$
+:::
 
-- Wir betrachten die Tagesrenditen von zwei Aktien an einem zukünftigen Tag. 
+::: callout-tip
+Wir betrachten die Tagesrenditen von zwei Aktien an einem zukünftigen Tag. 
 Sei $X$ die Tagesrendite der Volkswagenaktie und $Y$ die Tagesrendite von
 BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung.
 :::
 
 Im folgenden gehen wir Schritt für Schritt fast genauso vor wie bei den 
-univariaten Zufallsvariablen in Kapitel XXX.
+univariaten Zufallsvariablen in @sec-zufallsvariablen.
 
 ## Verteilungsfunktion
 
@@ -57,7 +59,9 @@ Zufallsvektoren übertragen?
 ::: callout-note
 Sei $\Omega$ eine Ergebnismenge, seien $X:\Omega \longrightarrow \mathbb{R}$ 
 und $Y:\Omega\longrightarrow \mathbb{R}$ zwei Zufallsvariablen. Dann ist
-\[ F_{XY}(x,y) =P(X\leq x,Y\leq y) \]
+$$
+F_{XY}(x,y) =P(X\leq x,Y\leq y)
+$$
 die **gemeinsame Verteilungsfunktion** (engl. joint cumulative
 distribution function) von $X$ und $Y$.
 :::
@@ -86,7 +90,7 @@ lässt sich leicht auf den mehrdimensionalen Fall verallgemeinern.
 
 ::: callout-note
 Zwei Zufallsvariablen $X$ und $Y$ heißen **gemeinsam diskret**
-(jointly discrete),  wenn es endlich viele oder 
+(engl. jointly discrete),  wenn es endlich viele oder 
 abzählbar unendlich viele Werte 
 $x_1,x_2,\ldots$ und $y_1,y_2,\ldots $ gibt, so dass 
 $$
@@ -177,9 +181,9 @@ Gebirge mit einem Volumen von 1 vorstellen. Die Bereiche $(x,y)$,
 in denen das Gebirge hoch ist, kommen mit einer höheren 
 Wahrscheinlichkeit vor, als die Bereiche, in denen es niedrig ist.
 
-::: callout-tip
-Die gemeinsame Dichte der beiden Zufallsvariablen $X$ und $Y$ sei
-für $x,y\in\mathbb{R}$
+Die verschiedenen Arten der grafischen Darstellung werden nun
+für eine konkrete gemeinsame Dichte vorgestellt. Die Dichte
+der beiden Zufallsvariablen $X$ und $Y$ sei für $x,y\in\mathbb{R}$
 $$
 f(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}.
 $$
@@ -207,7 +211,7 @@ rglwidget()
 close3d()
 ```
 
-Weitere Möglichkeiten, ein Dichte"gebirge" grafisch darzustellen,
+Weitere Möglichkeiten, ein Dichtegebirge grafisch darzustellen,
 sind Contour-Plots und Image-Plots. In einem Contour-Plot sieht man die Höhenlinien 
 der Dichtefunktion wie auf einer normalen Landkarte. In einem Image-Plot 
 werden die Höhen durch Farben repräsentiert. 
@@ -223,7 +227,6 @@ wo die Dichte hoch ist. Ein farbiger Image-Plot der gleichen Dichte zeigt folgen
 filled.contour(x,y,f,
                xlab="x",ylab="y")
 ```
-:::
 
 Wenn man sich für die Wahrscheinlichkeit interessiert, dass die
 Zufallsvariable in einem bestimmten Bereich landet, muss man
@@ -254,6 +257,10 @@ x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
 \end{array}
 \right.
 $$
+Die obere Intervallgrenze (1.11963) für $x$ ist gerundet, streng genommen 
+lautet die Obergrenze $(\sqrt{19}-1)/3)$. Dieser Wert stellt sicher,
+dass das gesamte Volumen unter der Dichte 1 ergibt. 
+
 Wie groß ist die Wahrscheinlichkeit, dass $X$ in dem Intervall $[0.5,0.75]$
 und gleichzeitig $Y$ in dem Intervall $[0.2,0.5]$ liegt? Diese
 Wahrscheinlichkeit ergibt sich als das Doppelintegral
@@ -311,6 +318,37 @@ p_{j\cdot}&=P(X=x_j)=\sum_k p_{jk}\\
 p_{\cdot k}&=P(Y=y_k)=\sum_j p_{jk}.
 \end{align*}
 $$
+
+::: callout-tip
+Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
+der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
+$Y$: "größere Augenzahl" sieht als Wahrscheinlichkeitstabelle so aus:
+$$
+\begin{array}{c|cccccc}
+X\backslash Y & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+2 & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} \\
+4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} \\
+5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} \\
+6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36}
+\end{array}
+$$
+Die Zeilensummen ergeben die Randverteilung von $X$, die Spaltensummen die
+Randverteilung von $Y$. Die Wahrscheinlichkeiten sind:
+$$
+\begin{array}{lcc}
+k & P(X=k) & P(Y=k)\\ \hline
+1 & 11/36 & 1/36\\
+2 &  9/36 & 3/36\\
+3 &  7/36 & 5/36\\
+4 &  5/36 & 7/36\\
+5 &  3/36 & 9/36\\
+6 &  1/36 & 11/36\\
+\end{array}
+$$
+:::
+
 Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, erhält man
 die Randdichten aus der gemeinsamen Dichte wie folgt.
 $$
@@ -319,6 +357,43 @@ f_X(x)&=\int_{-\infty}^\infty f_{XY}(x,y)dy\\
 f_Y(y)&=\int_{-\infty}^\infty f_{XY}(x,y)dx.
 \end{align*}
 $$
+Man sagt auch, dass man $y$ "herausintegriert", um die Randdichte von $X$
+zu erhalten, und umgekehrt.
+
+::: callout-tip
+Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
+gemeinsame Dichtefunktion
+$$
+f(x,y)=\left\{
+\begin{array}{ll}
+x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Wie sehen die beiden Randdichten aus? Die Randdichte von $X$ erhält man,
+indem man $y$ "herausintegriert". Wenn $x$ nicht in dem Interval
+$[0,1.11963]$ liegt, ist die Randdichte offensichtlich 0. Wir betrachten
+darum nur den Fall, dass $x$ in dem Intervall liegt. Dann gilt
+$$
+\begin{align*}
+f_X(x) &= \int_{-\infty}^\infty f(x,y)dy \\
+&= \int_0^1 (x+y^2) dy\\
+&= x+\left. \frac{1}{3}y^3\right|_0^1 \\
+&= x+\frac{1}{3}.
+\end{align*}
+$$
+Nun bestimmen wir die Randdichte von $Y$, indem wir über $x$ integrieren.
+$$
+\begin{align*}
+f_Y(y) &= \int_{-\infty}^\infty f(x,y)dx \\
+&= \int_0^{1.11963} (x+y^2) dx\\
+&= 1.11963\cdot y^2 + \left. \frac{1}{2}x^2\right|_0^{1.11963} \\
+&= 1.11963\cdot y^2+0.62679
+\end{align*}
+$$
+für $y\in [0,1]$. Für $y\not\in [0,1]$ ist die Dichte $f_Y(y)=0$.
+:::
 
 ## Unabhängigkeit
 
@@ -342,6 +417,19 @@ Unabhängigkeit für alle $j$ und $k$
 $$
 p_{jk}=p_{j\cdot}\cdot p_{\cdot k}.
 $$
+
+::: callout-tip
+Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
+der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
+$Y$: "größere Augenzahl". Sind $X$ und $Y$ unabhängig? 
+Um diese Frage zu beantworten, betrachten wir die gemeinsame
+Wahrscheinlichkeit $P(X=6, Y=1)$. Sie ist offensichtlich 0, denn
+die kleinere Augenzahl $X$ kann niemals größer sein als die
+größere Augenzahl $Y$. Wir wissen aber bereits, dass 
+$P(X=6)>0$ und $P(Y=1)>0$ sind. Damit ist die Bedingung für
+Unabhängigkeit verletzt und $X$ und $Y$ sind abhängig voneinander.
+:::
+
 Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, ergibt sich bei
 Unabhängigkeit die gemeinsame Dichte als Produkt der beiden
 Randdichten,
@@ -349,9 +437,34 @@ $$
 f_{XY}(x,y)=f_X(x)\cdot f_Y(y).
 $$
 
-
-
-
+::: callout-tip
+Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
+gemeinsame Dichtefunktion
+$$
+f(x,y)=\left\{
+\begin{array}{ll}
+x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Sind $X$ und $Y$ unabhängig? Die beiden Randdichten wurden bereits
+weiter oben ermittelt. Wir werten sie an den beiden willkürlich
+ausgewählten Stellen $x=2/3$ und $y=0.2$ aus.
+$$
+\begin{align*}
+f_X(2/3) &= x+\frac{1}{3} = 1\\
+f_Y(0.2) &= 1.11963\cdot 0.2^2+0.62679=0.67158.
+\end{align*}
+$$
+Das Produkt ist also 0.67158. Setzt man $x=2/3$ und $y=0.2$
+in die gemeinsame Dichte ein, erhält man
+$$
+f(2/3, 0.2)=2/3+0.2^2=0.70667.
+$$
+Die beiden Werte sind nicht gleich. Die Zufallsvariablen $X$
+und $Y$ sind also nicht unabhängig.
+:::
 
 ## Bedingte Verteilungen
 

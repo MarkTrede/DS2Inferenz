@@ -1,14 +1,14 @@
-# Wahrscheinlichkeit {#wahrscheinlichkeit}
+# Wahrscheinlichkeit {#sec-wahrscheinlichkeit}
 
-## Definition {#def:wahrscheinlichkeit}
+## Definition {#sec-definition}
 
 Manche Ereignisse sind weniger wahrscheinlich als andere. Wie hoch die
 Wahrscheinlichkeit eines Ereignisses ist, wird durch eine Abbildung
 (Funktion) angegeben.
 
-::: callout-note
+:::: callout-note
 Eine Abbildung $P: A \mapsto P(A)$ heißt **Wahrscheinlichkeitsmaß**
-(engl. probability mass) oder kurz Wahrscheinlichkeit, wenn gilt
+(engl. probability measure) oder kurz Wahrscheinlichkeit (engl. probability), wenn gilt
 
 -   Nichtnegativität: $P(A)\ge 0$ für alle Ereignisse $A$
 
@@ -37,59 +37,24 @@ Beispiel
 
 -   Additionssatz: $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
 
-## Venn-Diagramme {#venn}
-
-Ereignisse lassen sich - wie andere Mengen in der Mengenlehre auch - in
-Form von Venn-Diagrammen darstellen. Wenn die Ergebnismenge $\Omega$
-durch ein Rechteck repräsentiert wird, dann kann man Ereignisse als
-Teilmengen des Rechtecks darstellen. In dem folgenden Bild ist zum
-Beispiel das Ereignis $A$ der kleine Kreis in der Mitte.
-
-```{r}
-#| out.width: "95%"
-#| echo: FALSE
-  
-library(plotrix)
-par(mar=c(0.1,0.1,0.1,0.1))
-plot(c(0,1),c(0,1),t="n", axes=F, xlab="",ylab="")
-draw.circle(0.5,0.5,radius=0.1,col=NA)
-draw.circle(0.65,0.65,radius=0.2,col=NA)
-draw.circle(0.2,0.3,radius=0.2,col=NA)
-box()
-text(0.1,0.8,expression(Omega),cex=1.2)
-text(0.5,0.5,"A",cex=1.2)
-text(0.65,0.65,"B",cex=1.2)
-text(0.2,0.3,"C",cex=1.2)
-```
-
-In diesem Venn-Diagramm wird deutlich, dass die Ereignisse $A$ und $C$
-nicht gleichzeitig eintreten können, $A$ und $B$ hingegen schon, denn
-ihre Schnittmenge ist nicht leer. Außerdem erkennt man, dass $A$ eine
-kleinere Wahrscheinlichkeit hat als $B$ und $C$. Der Additionssatz
-$P(A\cup B)=P(A)+P(B)-P(A\cap B)$ wird in dieser grafischen Sichtweise
-sehr einfach klar: Die Wahrscheinlichkeit von $A\cup B$ (also $A$ oder
-$B$) ergibt sich als die Summe aus den beiden Kreisflächen $A$ und $B$
-abzüglich der Fläche der Schnittmenge, die sonst doppelt gezählt werden
-würde.
-
-## Laplace-Experimente {#laplace}
+## Laplace-Experimente {#sec-laplace}
 
 Eine besonders einfache Art von Zufallsvorgängen sind die sogenannten
 Laplace-Experimente.
 
 ::: callout-note
-Ein Zufallsvorgang heißt **Laplace-Experiment**, wenn es nur endlich
-viele Ergebnisse gibt (d.h. wenn $|\Omega|=n$) und wenn alle
-Elementarereignisse als gleich wahrscheinlich angenommen werden können.
+Ein Zufallsvorgang heißt **Laplace-Experiment** (engl. Laplace experiment), 
+wenn es nur endlich viele Ergebnisse gibt (d.h. wenn $|\Omega|=n$) und wenn 
+alle Elementarereignisse als gleich wahrscheinlich angenommen werden können.
 :::
 
 <img src="images/AdobeStock_332174058b.jpeg" align="right" width="35%"/>
 Beachten Sie, dass es sich dabei um eine Aussage handelt, die aus
 unserem Alltagswissen herrührt, nicht aus mathematischen Überlegungen
-oder Herleitungen. Ein
+oder Herleitungen! Ein
 typisches, einfaches Beispiel für ein Laplace-Experiment sind
 Würfelwürfe. Es ist aus unserem Alltagswissen heraus plausibel, davon
-auszugehen, dass alle Augenzahlen eines Würfels gleich wahrscheinlich
+auszugehen, dass alle Augenzahlen eines normalen Würfels gleich wahrscheinlich
 sind. Auch bei einer Münze ist es naheliegend, dass die
 Wahrscheinlichkeit für Kopf und die Wahrscheinlichkeit für Zahl gleich
 sind. Hingegen würde man beim Werfen eines Kronkorkens nicht unbedingt
@@ -111,66 +76,70 @@ kombinatorische Probleme ein, sondern beschränken uns auf Mengen, bei
 denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
 
 ::: callout-tip
--   Ein Würfel wird geworfen. Es handelt sich um ein Laplace-Experiment.
-    Die Anzahl der Ergebnisse in $\Omega$ beträgt 6. Sei $A$ das
-    Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$. Dann
-    ist 
-    $$
-    \begin{align*}
-    P(A)&=\frac{|A|}{|\Omega|}\\
-    &=\frac{3}{6}\\
-    &=0.5.
-    \end{align*}
-    $$
+Ein Würfel wird geworfen. Es handelt sich um ein Laplace-Experiment.
+Die Anzahl der Ergebnisse in $\Omega$ beträgt 6. Sei $A$ das
+Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$. Dann
+ist 
+$$
+\begin{align*}
+P(A)&=\frac{|A|}{|\Omega|}\\
+&=\frac{3}{6}\\
+&=0.5.
+\end{align*}
+$$
+:::
 
--   Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine
-    Rolle, wie man die Ergebnismenge festlegt. Wir wählen 
-    $$
-    \begin{align*}
-    \Omega=\{&11,12,13,14,15,16,\\
-    &21,22,23,24,25,26,\\
-    &31,32,33,34,35,36,\\
-    &41,42,43,44,45,46,\\
-    &51,52,53,54,55,56,\\
-    &61,62,63,64,65,66\}
-    \end{align*}
-    $$ 
-    weil es sich dann um ein Laplace-Experiment handelt. Die
-    Ergebnisse "24" und "42" sind zwar nicht unterscheidbar, wenn die
-    Würfel gleich aussehen, aber wir können den zuerst geworfenen Würfel
-    (oder z.B. den weiter links liegenden) als ersten Würfel bezeichnen. Dass
-    alle 36 Ergebnisse gleich wahrscheinlich sind, können wir (nur) mit
-    unserem Alltagswissen begründen, nicht aus der Mathematik heraus.
-    Sei $A$ das Ereignis "Die Augenzahlen der beiden Würfel
-    unterscheiden sich um 2", d.h. 
-    $$
-    A=\{13,24,31,35,42,46,53,64\}.
-    $$ 
-    Dann gilt 
-    $$
-    \begin{align*}
-    P(A)&=\frac{|A|}{|\Omega|}\\
-    &=\frac{8}{36}\\
-    &=\frac{2}{9}\\
-    &\approx 0.2222.
-    \end{align*}
-    $$ 
-    Da die beiden Würfel nicht unterscheidbar sind, wäre als Ergebnismenge auch 
-    $$
-    \begin{align*}
-    \Omega=\{
-    &11,12,13,14,15,16,\\
-    &22,23,24,25,26,\\
-    &33,34,35,36,\\
-    &44,45,46,\\
-    &55,56,\\
-    &66\}
-    \end{align*}
-    $$ 
-    möglich gewesen. Dann wäre aber die Annahme eines Laplace-Experiments nicht
-    mehr korrekt, denn die Elementarereignisse "11" und "12" sind
-    beispielsweise nicht gleich wahrscheinlich (wir wissen aus unserer
-    Erfahrung, dass ein Pasch seltener auftritt).
+::: callout-tip
+Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine
+Rolle, wie man die Ergebnismenge festlegt. Wir wählen 
+$$
+\begin{align*}
+\Omega=\{&11,12,13,14,15,16,\\
+&21,22,23,24,25,26,\\
+&31,32,33,34,35,36,\\
+&41,42,43,44,45,46,\\
+&51,52,53,54,55,56,\\
+&61,62,63,64,65,66\}
+\end{align*}
+$$ 
+weil es sich dann um ein Laplace-Experiment handelt. Die
+Ergebnisse "24" und "42" sind zwar nicht unterscheidbar, wenn die
+Würfel gleich aussehen, aber wir können den zuerst geworfenen Würfel
+(oder z.B. den weiter links liegenden) als ersten Würfel bezeichnen. Dass
+alle 36 Ergebnisse gleich wahrscheinlich sind, können wir (nur) mit
+unserem Alltagswissen begründen, nicht aus der Mathematik heraus.
+
+Sei $A$ das Ereignis "Die Augenzahlen der beiden Würfel
+unterscheiden sich um 2", d.h. 
+$$
+A=\{13,24,31,35,42,46,53,64\}.
+$$ 
+Dann gilt 
+$$
+\begin{align*}
+P(A)&=\frac{|A|}{|\Omega|}\\
+&=\frac{8}{36}\\
+&=\frac{2}{9}\\
+&\approx 0.2222.
+\end{align*}
+$$ 
+Da die beiden Würfel nicht unterscheidbar sind, wäre als Ergebnismenge auch 
+$$
+\begin{align*}
+\Omega=\{
+&11,12,13,14,15,16,\\
+&22,23,24,25,26,\\
+&33,34,35,36,\\
+&44,45,46,\\
+&55,56,\\
+&66\}
+\end{align*}
+$$ 
+möglich gewesen. Die Ergebnismenge hätte dann 21 Elemente. Die Annahme 
+eines Laplace-Experiments wäre jedoch in diesem Fall nicht
+mehr korrekt, denn die Elementarereignisse "11" und "12" sind
+beispielsweise nicht gleich wahrscheinlich. Wir wissen aus unserer
+Erfahrung, dass ein Pasch seltener auftritt. 
 :::
 
 Die Wahl der Ergebnismenge sollte immer so erfolgen, dass das weitere
@@ -178,7 +147,7 @@ Vorgehen möglichst einfach und elegant ist. Wenn die Ergebnismenge so
 gewählt werden kann, dass ein Laplace-Experiment vorliegt, sollte man
 das tun.
 
-## Bedingte Wahrscheinlichkeit {#bedingt}
+## Bedingte Wahrscheinlichkeit {#sec-bedingt}
 
 Manchmal gibt es begrenzte Informationen über einen Zufallsvorgang. Dann
 kennt man zwar nicht das realisierte Ergebnis, kann aber die Menge der
@@ -207,26 +176,28 @@ Wahrscheinlichkeit ist, nennt man sie auch eine unbedingte
 Wahrscheinlichkeit (engl. unconditional probability).
 
 ::: callout-tip
--   Ein Würfel wird geworfen. Wir betrachten die beiden Ereignisse
-    $A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{4,5,6\}$ ("eine Zahl größer
-    als 3"). Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
-    $$
-    \begin{align*}
-    P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
-    &=\frac{P(\{4,6\})}{P(\{4,5,6\})}\\
-    &=\frac{2}{3}
-    \end{align*}
-    $$ 
-    und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet 
-    $$
-    \begin{align*}
-    P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
-    &=\frac{P(\{4,6\})}{P(\{2,4,6\})}\\
-    &=\frac{2}{3}.
-    \end{align*}
-    $$
+Ein Würfel wird geworfen. Wir betrachten die beiden Ereignisse
+$A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{4,5,6\}$ ("eine Zahl größer
+als 3"). Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
+$$
+\begin{align*}
+P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
+&=\frac{P(\{4,6\})}{P(\{4,5,6\})}\\
+&=\frac{2}{3}
+\end{align*}
+$$ 
+und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet 
+$$
+\begin{align*}
+P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
+&=\frac{P(\{4,6\})}{P(\{2,4,6\})}\\
+&=\frac{2}{3}.
+\end{align*}
+$$
+:::
 
--   Zwei Würfel werden geworfen, ohne dass Sie es sehen können.
+::: callout-tip
+Zwei Würfel werden geworfen, ohne dass Sie es sehen können.
 Sie fragen, ob eine Sechs geworfen wurde. Die Frage wird
 wahrheitsgemäß bejaht. Wie groß ist die Wahrscheinlichkeit,
 dass ein 6er-Pasch geworfen wurde? 
@@ -247,17 +218,20 @@ P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
 &=1/11.
 \end{align*}
 $$ 
+:::
 
--   Bei einer Umfrage werden Personen zufällig ausgewählt und befragt.
-    Sei $A$ das Ereignis "die befragte Person ist weiblich". Sei $B$ das
-    Ereignis "die befragte Person arbeitet in Teilzeit". Zwischen der
-    (unbedingten) Wahrscheinlichkeit $P(B)$ und der bedingten
-    Wahrscheinlichkeit $P(B|A)$ besteht ein Unterschied. Die
-    Wahrscheinlichkeit $P(B)$ steht dafür, dass eine zufällig
-    ausgewählte Person in Teilzeit arbeitet, und diese Person kann
-    männlich oder weiblich sein. Dagegen ist $P(B|A)$ die
-    Wahrscheinlichkeit, dass eine zufällig ausgewählte Frau in Teilzeit
-    arbeitet.
+::: callout-tip
+<img src="images/AdobeStock_172088861b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;padding-bottom:5px;"/>
+Bei einer Umfrage werden Personen zufällig ausgewählt und befragt.
+Sei $A$ das Ereignis "die befragte Person ist weiblich". Sei $B$ das
+Ereignis "die befragte Person arbeitet in Teilzeit". Zwischen der
+(unbedingten) Wahrscheinlichkeit $P(B)$ und der bedingten
+Wahrscheinlichkeit $P(B|A)$ besteht ein Unterschied. Die
+Wahrscheinlichkeit $P(B)$ steht dafür, dass eine zufällig
+ausgewählte Person in Teilzeit arbeitet, und diese Person kann
+männlich oder weiblich sein. Dagegen ist $P(B|A)$ die
+Wahrscheinlichkeit, dass eine zufällig ausgewählte Frau in Teilzeit
+arbeitet.
 :::
 
 In den Medien werden häufig bedingte Wahrscheinlichkeiten berichtet,
@@ -268,35 +242,38 @@ falsch herum angeordnet sind. Man interessiert sich für $P(A|B)$,
 berichtet wird aber $P(B|A)$.
 
 ::: callout-tip
--   Es wird berichtet, dass ein medizinischer Schnelltest mit einer
-    Wahrscheinlichkeit von 99 Prozent eine infizierte Person korrekt als
-    infiziert (positiv) erkennt und ebenfalls mit einer Wahrscheinlichkeit von 99
-    Prozent eine nicht infizierte Person als nicht infiziert erkennt
-    (negativ). Sei $A$ das Ereignis "infiziert" und $B$ das Ereignis "Test positiv". 
-    Die angegebenen Wahrscheinlichkeiten sind bedingte Wahrscheinlichkeiten,
-    und zwar $P(B|A)=0.99$ und $P(\bar B|\bar A)=0.99$. Als Testanwender 
-    interessiert man sich jedoch eher für die
-    bedingte Wahrscheinlichkeit, tatsächlich infiziert zu sein, 
-    wenn der Test positiv ausfällt, also für $P(A|B)$. Oder auch für die 
-    bedingte Wahrscheinlichkeit infiziert zu sein, obwohl der Test
-    negativ ausfällt, also $P(A|\bar B)$.
+<img src="images/AdobeStock_338942366b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>Es wird berichtet, dass 
+ein medizinischer Schnelltest mit einer
+Wahrscheinlichkeit von 99 Prozent eine infizierte Person korrekt als
+infiziert (positiv) erkennt und ebenfalls mit einer Wahrscheinlichkeit von 99
+Prozent eine nicht infizierte Person als nicht infiziert erkennt
+(negativ). Sei $A$ das Ereignis "infiziert" und $B$ das Ereignis "Test positiv". 
+Die angegebenen Wahrscheinlichkeiten sind bedingte Wahrscheinlichkeiten,
+und zwar $P(B|A)=0.99$ und $P(\bar B|\bar A)=0.99$. Als Testanwender 
+interessiert man sich jedoch eher für die
+bedingte Wahrscheinlichkeit, tatsächlich infiziert zu sein, 
+wenn der Test positiv ausfällt, also für $P(A|B)$. Oder auch für die 
+bedingte Wahrscheinlichkeit infiziert zu sein, obwohl der Test
+negativ ausfällt, also $P(A|\bar B)$.
+:::
 
--   Es wird berichtet, dass 50 Prozent der Studierenden ein
-    "akademisches Elternhaus" haben (die Zahlen in diesem
-    Beispiel sind fiktiv). Es handelt sich um die bedingte
-    Wahrscheinlichkeit eines akademischen Elternhauses, wenn eine Person
-    studiert. Hier sind die Ereignisse $A$: "Kind studiert", und
-    $B$: "akademisches Elternhaus". Gegeben ist $P(B|A)=0.5$.
-    Für die Bewertung der Chancengleichheit ist jedoch die
-    bedingte Wahrscheinlichkeit interessanter, dass ein Kind studiert,
-    wenn es aus einem akademischen Elternhaus stammt, also
-    $P(A|B)$ - und zwar im Vergleich zu der bedingten Wahrscheinlichkeit, 
-    dass ein Kind studiert, das nicht aus einem akademischen Elternhaus stammt,
-    also $P(A|\bar B)$.
+::: callout-tip
+Es wird berichtet, dass 50 Prozent der Studierenden ein
+"akademisches Elternhaus" haben (die Zahlen in diesem
+Beispiel sind fiktiv). Es handelt sich um die bedingte
+Wahrscheinlichkeit eines akademischen Elternhauses, wenn eine Person
+studiert. Hier sind die Ereignisse $A$: "Kind studiert", und
+$B$: "akademisches Elternhaus". Gegeben ist $P(B|A)=0.5$.
+Für die Bewertung der Chancengleichheit ist jedoch die
+bedingte Wahrscheinlichkeit interessanter, dass ein Kind studiert,
+wenn es aus einem akademischen Elternhaus stammt, also
+$P(A|B)$ - und zwar im Vergleich zu der bedingten Wahrscheinlichkeit, 
+dass ein Kind studiert, das nicht aus einem akademischen Elternhaus stammt,
+also $P(A|\bar B)$.
 :::
 
 Wie kann man eine bedingte Wahrscheinlichkeit "umdrehen"? Wie verhält
-sich $P(B|A)$ zu $P(A|B)$? Das sehen wir in Kürze im Abschnitt \@ref(bayes).
+sich $P(B|A)$ zu $P(A|B)$? Das sehen wir in Kürze im @sec-bayes.
 
 Bedingte Wahrscheinlichkeiten sind auch nützlich, um die
 Wahrscheinlichkeit zu berechnen, dass mehrere Ereignisse gemeinsam
@@ -331,17 +308,20 @@ $$
 Für jede Reihenfolge gelangt man zum gleichen Ergebnis.
 
 ::: callout-tip
+<img src="images/AdobeStock_19427911b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Eine Bank möchte die Dauer ihrer Kundenbeziehungen modellieren. 
-Dazu definiert sie die Ereignisse $A_t$: "die Kundenbeziehung besteht seit $t$ Jahren"
-für $t=0,1,\ldots$. Die Bank kennt (aus Erfahrung) die
-Kündigungswahrscheinlichkeiten in Abhängigkeit von der Kundendauer.
-Mit $k_{t,t+1}$ wird die Wahrscheinlichkeit bezeichnet, dass ein
-Kunde, der schon seit $t$ Jahren Kunde ist, innerhalb des nächsten
+Dazu definiert sie die Ereignisse $A_d$: "die Kundenbeziehung besteht seit $d$ Jahren"
+für $d=0,1,\ldots,D$. Die Bank kennt (aus Erfahrung) die
+Wahrscheinlichkeit für eine Kündigung in Abhängigkeit von der Kundendauer
+(und geht davon aus, dass sich diese Wahrscheinlichkeiten im
+Laufe der Zeit nicht verändern).
+Mit $k_{d,d+1}$ wird die Wahrscheinlichkeit bezeichnet, dass ein
+Kunde, der schon seit $d$ Jahren Kunde ist, innerhalb des nächsten
 Jahres kündigt. Es handelt sich also um die bedingten Wahrscheinlichkeiten
 $$
-k_{t,t+1}=1-P(A_{t+1}|A_t).
+k_{d,d+1}=1-P(A_{d+1}|A_d).
 $$
-Die Wahrscheinlichkeit, dass ein Neukunde ($t=0$) nach 5 Jahren immer
+Die Wahrscheinlichkeit, dass ein Neukunde ($d=0$) nach 5 Jahren immer
 noch Kunde ist, beträgt
 $$
 \begin{align*}
@@ -351,7 +331,7 @@ P(A_5)&=P(A_5|A_4)P(A_4|A_3)P(A_3|A_2)P(A_2|A_1)P(A_1|A_0)\\
 $$
 :::
 
-## Totale Wahrscheinlichkeit {#total}
+## Totale Wahrscheinlichkeit {#sec-total}
 
 Aus mehreren bedingten Wahrscheinlichkeiten lässt sich eine unbedingte
 Wahrscheinlichkeit errechnen. Dazu zerlegen wir den Ergebnisraum
@@ -364,7 +344,7 @@ Vereinigungsmenge der $A_1,\ldots, A_n$ wieder $\Omega$ ergibt. Die
 knitr::include_graphics("images/AdobeStock_101998556b.jpeg")
 ```
 
-Das Rind wird also vollständig Teilmengen zerlegt, und alle Teilmengen
+Das Rind wird also vollständig in Teilmengen zerlegt, und alle Teilmengen
 zusammen ergeben wieder das gesamte Rind.
 
 Nun nehmen wir an, dass für jedes Ereignis $A_i$, $i=1,\ldots,n$, die
@@ -409,7 +389,7 @@ P(B)&=P(B|A)P(A)+P(B|\bar A)P(\bar A)\\
 $$
 :::
 
-## Satz von Bayes {#bayes}
+## Satz von Bayes {#sec-bayes}
 
 Der Satz von Bayes setzt die beiden bedingten Wahrscheinlichkeiten
 $P(A|B)$ und $P(B|A)$ zueinander in Beziehung. Es gilt 
@@ -460,7 +440,7 @@ tatsächlich infiziert ist, ist folglich immer noch sehr klein, obwohl der
 Test scheinbar sehr genau arbeitet. 
 :::
 
-## Unabhängigkeit
+## Unabhängigkeit {#sec-unabhaengig}
 
 Zwei Ereignisse $A$ und $B$ heißen unabhängig (oder auch stochastisch
 unabhängig, engl. independent bzw. stochastically independent), wenn 
@@ -508,7 +488,7 @@ Einschätzung der Wahrscheinlichkeit einer Infektion hätte, wäre
 vollkommen nutzlos.
 :::
 
-## Wahrscheinlichkeitsbäume
+## Wahrscheinlichkeitsbäume {#sec-baeume}
 
 Ein Werkzeug, mit dem man allgemeine und etwas komplexere 
 Wahrscheinlichkeits-Probleme übersichtlich bearbeiten kann,
@@ -517,20 +497,22 @@ des Baums. Die Wahrscheinlichkeiten an den Ästen sind
 bedingte Wahrscheinlichkeiten, nur auf der ersten Stufe handelt
 es sich um unbedingte Wahrscheinlichkeiten.
 
-::: callout-tip
-Als Beispiel betrachten wir den Erfolg einer Firma und den
-Einsatz ihres Managements. Dazu definieren wir die beiden
-Ereignisse $A$: "Die Firma hat Erfolg" und $B$:
+Die Vorgehensweise lässt sich am besten an einem konkreten
+Beispiel erläutern. Als Beispiel betrachten wir den 
+Erfolg einer Firma und den Einsatz ihres Managements. 
+Dazu definieren wir die beiden Ereignisse 
+$A$: "Die Firma hat Erfolg" und $B$:
 "Das Management strengt sich an".
 
-Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$.
-Für die Auszahlung von Boni an Manager ist es wichtig zu wissen,
-ob sie eine gute Leistung erbracht haben. 
+Gesucht sei die bedingte Wahrscheinlichkeit $P(B|A)=P(A\cap B)/P(A)$,
+denn für die Auszahlung von Boni an Manager ist es wichtig zu wissen,
+ob sie eine gute Leistung erbracht haben. Wenn das Management sich
+nicht anstrengt, sollte keine Boni fließen.
 
-Wir wollen bestimmen, wie hoch
-die Wahrscheinlichkeit ist, dass das Management sich tatsächlich für den
-Erfolg angestrengt hat, wenn wir beobachten, dass die Firma erfolgreich
-ist. Oder anders gesagt: Ist der Erfolg der Firma wirklich ein Indikator
+Wir wollen bestimmen, wie hoch die Wahrscheinlichkeit ist, dass 
+das Management sich tatsächlich angestrengt hat, wenn wir 
+beobachten, dass die Firma erfolgreich ist. Oder anders gesagt: 
+Ist der Erfolg der Firma wirklich ein Indikator
 für eine gute Leistung?
 
 Wir nehmen an (auch wenn es in der Praxis unrealistisch ist, diese Werte
@@ -548,9 +530,9 @@ Wahrscheinlichkeiten, die diese beiden Ereignisse als Bedingung haben.
 An die beiden Zweige schreiben wir die Ereignisse und ihre
 Wahrscheinlichkeiten. Die Wahrscheinlichkeit von 0.4 für das Ereignis
 $\bar B$ ergibt sich aus der Gegenwahrscheinlichkeit von $B$.
-
-```{r echo=FALSE}
-plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F)
+```{r echo=FALSE,fig.asp=0.5}
+par(mar=c(0.1,0.1,0.1,0.1))
+plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F,frame.plot = TRUE)
 points(c(0,0.4,0.4),c(0.5,0.2,0.8))
 lines(c(0.4,0,0.4),c(0.2,0.5,0.8))
 text(0.2,0.7,expression(B))
@@ -558,16 +540,15 @@ text(0.35,0.83,0.6)
 text(0.35,0.17,0.4)
 text(0.2,0.29,expression(bar(B)))
 ```
-
 Auf der zweiten Stufe werden nun die bedingten Ereignisse und
 Wahrscheinlichkeiten ergänzt, einmal unter der Bedingung, dass $B$
 eingetreten ist, einmal unter der Bedingung, dass $\bar B$ eingetreten
 ist. An die neuen Zweige werden die zugehörigen bedingten
 Wahrscheinlichkeiten geschrieben. Dabei nutzen wir wiederum die
 Gegenwahrscheinlichkeiten der bedingten Ereignisse.
-
-```{r echo=FALSE}
-plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F)
+```{r echo=FALSE,fig.asp=0.5}
+par(mar=c(0.1,0.1,0.1,0.1))
+plot(c(0,1),c(0,1),t="n",xlab="",ylab="",axes=F,frame.plot = TRUE)
 points(c(0,0.4,0.4,0.8,0.8,0.8,0.8),c(0.5,0.2,0.8,0,0.4,0.6,1))
 lines(c(0.4,0,0.4),c(0.2,0.5,0.8))
 lines(c(0.8,0.4,0.8),c(0,0.2,0.4))
@@ -582,7 +563,6 @@ text(c(0.35,0.35,0.75,0.75,0.75,0.75),
      c(0.3,0.7,0.93,0.67,0.33,0.07),
      c(0.4,0.6,0.8,0.2,0.5,0.5))
 ```
-
 Die Wahrscheinlichkeiten für $A\cap B$, $A\cap \bar B$, $\bar A\cap B$
 und $\bar A\cap\bar b$ ergeben sich nun, indem man entlang der Äste die
 Wahrscheinlichkeiten multipliziert (wie in Abschnitt #bedingt
@@ -613,5 +593,4 @@ $P(B|A)$ ist in diesem Beispiel höher als die unbedingte
 Wahrscheinlichkeit $P(B)$. Ob das als Nachweis für die guten
 Leistungen des Managements ausreicht und die Auszahlung von
 Boni rechtfertig, ist natürlich keine statistische Frage, sondern 
-solltein der Verträgen des Managements festgelegt sein.
-:::
+sollte in der Verträgen des Managements festgelegt sein.

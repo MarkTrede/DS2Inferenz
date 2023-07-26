@@ -1,4 +1,4 @@
-# Standardverteilungen
+# Standardverteilungen {#sec-verteilungen}
 
 ```{r echo=FALSE, warning=FALSE}
 library(ggplot2)
@@ -50,7 +50,7 @@ Vektor der Länge `n`. In Abschnitt XXX wird erklärt,
 wie man in R mit Hilfe von Zufallszahlen sogenannte 
 Monte-Carlo-Simulationen durchführt.
 
-## Diskrete Verteilungen
+## Diskrete Verteilungen {#sec-diskret}
 
 ### Bernoulli-Verteilung
 
@@ -337,30 +337,29 @@ Zeitspanne poisson-verteilt ist. Der Parameter der Verteilung verändert
 sich proportional zur Länge der Zeitspanne.
 
 ::: callout-tip
-Sei 
-$$
-X\sim Po(\lambda)
-$$ 
-die Zahl der Anrufe in einem Callcenter innerhalb
-einer Stunde. Wir nehmen an, dass die erwartete Zahl der Anrufe \lambda=8$
-beträgt. Sei nun $Y$ die Anzahl der Anrufe innerhalb einer halben Stunde,
-dann gilt
-$$
-Y\sim Po(4).
-$$
-Die Wahrscheinlichkeit, dass in der Zeit von 10:00 bis 11:00 genau sechs
-Anrufe erfolgen, beträgt
+<img src="images/AdobeStock_218091505b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+Sei $X\sim Po(\lambda)$ 
+die Zahl der Flugpassagiere, die innerhalb einer Viertelstunde am Terminal
+ankommen. Wir nehmen an, dass die erwartete Zahl $\lambda=9$
+beträgt. Sei nun $Y$ die Anzahl der Ankommenden innerhalb von fünf Minuten,
+dann gilt $Y\sim Po(3)$. Allgemein bleibt bei einer Verlängerung
+oder Verkürzung des Intervalls die Poisson-Verteilung erhalten
+und der Parameter $\lambda$ wächst oder schrumpft proportional
+zu der Veränderung der Intervalllänge.
+
+Die Wahrscheinlichkeit, dass in der Zeit von 10:00 bis 10:15 genau sechs
+Passagiere ankommen, beträgt
 ```{r}
 dpois(6, lambda=8)
 ```
-Die Wahrscheinlichkeit, dass zwischen 14:30 und 15:00 mehr als 7 
-Anrufe eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
+Die Wahrscheinlichkeit, dass zwischen 14:30 und 14:35 mehr als 7 
+Passagiere eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
 ```{r}
 1 - ppois(7, lambda=4)
 ```
 :::
 
-## Stetige Verteilungen
+## Stetige Verteilungen {#sec-stetig}
 
 ### Normalverteilung
 
@@ -371,7 +370,7 @@ Normalverteilung modellieren, z.B. biometrische Größen (Körpergröße und -ge
 ökonomische Größen (Jahresrenditen von Aktien oder Anleihen), Messfehler und
 Produktionsabweichungen. Zum anderen spielt die Normalverteilung  eine extrem 
 wichtige Rolle in der Schätz- und Testtheorie, die später in diesem Kurs
-in den Kapiteln XXX und XXX behandelt werden.
+in @ch-intervallschaetzung und @ch-hypothesentests behandelt werden.
 
 Bevor die allgemeine Normalverteilung eingeführt wird, definieren wir
 zuerst die **Standardnormalverteilung**. Eine Zufallsvariable $U$ 
@@ -382,17 +381,23 @@ $$
 hat. Die Kurzschreibweise lautet $U\sim N(0,1)$. Das Symbol $\phi$ ist die
 gängige Notation für die Dichte der Standardnormalverteilung.
 
-Das "Herz" der Normalverteilung ist die Funktion $e^{-u^2}$. Alle anderen
-Bestandteile der Dichte dienen nur zur Normierung. Ein Plot der Dichte
+Das "Herz" der Standardnormalverteilung ist die Funktion $e^{-u^2}$. Alle 
+anderen Bestandteile der Dichte dienen nur der Normierung. Ein Plot der Dichte
 zeigt, dass sie eine Glockenkurve beschreibt, die symmetrisch um die
 Null herum verläuft.
 ```{r echo=FALSE}
-D <- data.frame(x=seq(-4,4,length=401), y=dnorm(seq(-4,4,length=401)))
-ggplot(D, aes(x,y))+
-    geom_line()+
-    ylab(expression(phi(x)))+
-    ggtitle("Dichte der Standardnormalverteilung")
+curve(dnorm(x),
+      from=-4,
+      to=4,
+      n=201,
+      main="Dichte der Standardnormalverteilung",
+      xlab="x",
+      ylab=expression(phi(x)),
+      yaxs="i",
+      ylim=c(0,0.45))
+abline(v=0)
 ```
+
 Die zugehörige Verteilungsfunktion wird mit $\Phi(u)=P(U\le u)$ bezeichnet,
 $$
 \Phi(u)=\int_{-\infty}^u \phi(t)dt.
@@ -401,12 +406,17 @@ Die Funktion $\Phi(u)$ ist auf ganz $\mathbb{R}$
 streng monoton wachsend, jedoch sind Werte betragsmäßig größer als 4
 extrem unwahrscheinlich, wie man an der folgenden Abbildung erkennt.
 ```{r echo=FALSE}
-D <- data.frame(x=seq(-4,4,length=401), y=pnorm(seq(-4,4,length=401)))
-ggplot(D, aes(x,y))+
-    geom_line()+
-    ylab(expression(Phi(x)))+
-    geom_vline(xintercept=0)+
-    ggtitle("Verteilungsfunktion der Standardnormalverteilung")
+curve(pnorm(x),
+      from=-4,
+      to=4,
+      n=201,
+      main="Verteilungsfunktion der Standardnormalverteilung",
+      xlab="x",
+      ylab=expression(Phi(x)),
+      yaxs="i",
+      ylim=c(0,1.1))
+abline(v=0)
+abline(h=1, lty="dotted")
 ```
 Wegen der Symmetrie der Standardnormalverteilung um die Null herum gilt
 $$
@@ -414,12 +424,15 @@ $$
 $$
 Die Inverse der Verteilungsfunktion ist die Quantilfunktion $\Phi^{-1}(p)$,
 ```{r echo=FALSE}
-D <- data.frame(x=seq(0.001,0.999,length=401), y=qnorm(seq(0.001,0.999,length=401)))
-ggplot(D, aes(x,y))+
-    geom_line()+
-    ylab(expression(Phi^{-1} (x)))+
-    geom_hline(yintercept=0)+
-    ggtitle("Quantilfunktion der Standardnormalverteilung")
+curve(qnorm(x),
+      from=0.001,
+      to=0.999,
+      n=201,
+      main="Quantilfunktion der Standardnormalverteilung",
+      xlab="x",
+      ylab=expression(Phi^-1 (x)),
+      xaxs="i")
+abline(h=0)
 ```
 Auch hier gibt es eine Symmetriebeziehung, nämlich
 $$
@@ -471,14 +484,18 @@ Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf. Die
 Abbildung zeigt drei Dichten von $N(\mu,1)$ für $\mu=-1,1,5$.
 ```{r echo=FALSE}
 x <- seq(-4,9,length=500)
-D <- data.frame(x=rep(x,3), 
-                y=c(dnorm(x,-1,1),dnorm(x,1,1),dnorm(x,5,1)),
-                m=rep(factor(c(-1,1,5)),each=500))
-ggplot(D,aes(x,y,colour=m))+
-    geom_line()+
-    scale_colour_discrete(expression(mu))+
-    ylab("Dichte")+
-    theme(legend.position = "bottom")
+plot(x,dnorm(x,-1,1),
+     t="l",
+     col="red",
+     yaxs="i",
+     ylim=c(0,0.45),
+     ylab="Dichten",
+     main=expression(paste("Einfluss von ",mu)))
+lines(x,dnorm(x,1,1),col="green")
+lines(x,dnorm(x,5,1),col="blue")
+legend("topright",
+       fill=c("red","green","blue"),
+       legend=c(expression(mu==1),expression(mu==2),expression(mu==3)))
 ```
 Der Parameter $\sigma^2$ hat einen Einfluss auf die Form der Dichte.
 Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte schmal und
@@ -487,16 +504,20 @@ desto breiter und flacher ist die Dichte. Die Abbildung zeigt
 drei Dichten von $N(0,\sigma^2)$ für $\sigma^2=0.3,1,3$.
 ```{r echo=FALSE}
 x <- seq(-7,7,length=500)
-D <- data.frame(x=rep(x,3), 
-                y=c(dnorm(x,0,sqrt(0.3)),
-                    dnorm(x,0,1),
-                    dnorm(x,0,sqrt(3))),
-                m=rep(factor(c(0.3,1,3)),each=500))
-ggplot(D,aes(x,y,colour=m))+
-    geom_line()+
-    scale_colour_discrete(expression(sigma^2))+
-    ylab("Dichte")+
-    theme(legend.position = "bottom")
+plot(x,dnorm(x,0,sqrt(0.3)),
+     t="l",
+     col="red",
+     yaxs="i",
+     ylim=c(0,0.8),
+     ylab="Dichten",
+     main=expression(paste("Einfluss von ",sigma^2)))
+lines(x,dnorm(x,0,1),col="green")
+lines(x,dnorm(x,0,sqrt(3)),col="blue")
+legend("topright",
+       fill=c("red","green","blue"),
+       legend=c(expression(sigma^2==0.3),
+                expression(sigma^2==1),
+                expression(sigma^2==3)))
 ```
 Zwischen der Dichte der $N(\mu,\sigma^2)$ und der Dichte der Standardnormalverteilung besteht eine enge Beziehung. Es gilt
 $$
@@ -508,6 +529,16 @@ $N(0,1)$ ausgedrückt. Sie ist
 $$
 F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right).
 $$
+Wegen dieses Zusammenhangs ist es möglich, die Verteilungsfunktion einer
+beliebigen Normalverteilung selbst dann auswerten, wenn man nur die
+Verteilungsfunktion des Standardnormalverteilung kennt. In alten Lehrbüchern
+zur Statistik finden Sie deshalb im Anhang Tabellen mit den Funktionswerten
+der Verteilungsfunktion der Standardnormalverteilung. Mit ihrer Hilfe
+konnte man früher die Verteilungsfunktion jeder Normalverteilung bestimmen.
+Heutzutage ist das nicht mehr nötig, da die Verteilungsfunktion der
+allgemeinen Normalverteilung in praktisch jedem Computerprogramm 
+implementiert ist.
+
 Auch die Quantilfunktion der $N(\mu,\sigma^2)$ wird durch die Quantilfunktion
 der $N(0,1)$ ausgedrückt, und zwar gilt
 $$
@@ -521,11 +552,14 @@ Var(X) &= \sigma^2.
 \end{align*}
 $$
 
+<img src="images/AdobeStock_458950051b.jpeg" align="left" width=10%" style="padding-right:15px;padding-top:5px;padding-bottom:15px;"/>
 In R verwendet man für die allgemeine Normalverteilung die gleichen Funktionen
 wie für die Standardnormalverteilung. Nur die beiden Parameter $\mu$ 
-(`mean`) und $\sigma^2$ (`sd`) werden als zusätzliche Argumente angefügt. 
-*Achtung*: Anstelle der Varianz $\sigma^2$ erwartet die Funktion als
-Argument die Standardabweichung $\sigma$!
+(`mean`) und $\sigma$ (`sd`) werden als zusätzliche Argumente angefügt. 
+*Achtung*: Anstelle der Varianz $\sigma^2$ erwarten die R-Funktionen 
+zur Normalverteilung als Argument die Standardabweichung $\sigma$! 
+Es ist ein häufiger und leider leicht zu übersehender Fehler, als Parameter 
+die Varianz anzugeben.
 
 Die R-Funktionen für die Dichte-, Verteilungs- und Quantilfunktion der 
 Normalverteilung sind also
@@ -544,19 +578,27 @@ $X$ bezeichnen wir das Gewicht (in g) einer zufällig ausgewählten
 Abweichungen von der nominalen Menge auftreten, sind die 200g-Tafeln nicht
 immer 200g schwer. Wir gehen davon aus, dass das tatsächliche Gewicht 
 einer Normalverteilung folgt mit den Parametern $\mu=201$ (Erwartungswert)
-und $\sigma=2$ (Standardabweichung).
+und $\sigma=2$ (Standardabweichung). Die 200g-Tafeln sind also
+im Erwartungswert ein klein schwerer als nötig. Trotzdem kann es
+passieren, dass eine zufällig ausgewählte Tafel tatsächlich weniger
+als 200g wiegt.
 
 Die Wahrscheinlichkeit, dass eine zufällig ausgewählte Tafel Schokolade
 weniger als 200g wiegt, beträgt $P(X\le 200)$,
 ```{r}
 pnorm(200, mean=201, sd=2)
 ```
+Es ist also gar nicht unwahrscheinlich, dass man eine zu leichte Tafel 
+zieht. 
+
 Wenn $X\sim N(201, 2^2)$ ist, welches Gewicht wird dann mit einer 
 Wahrscheinlichkeit von nur 5 Prozent unterschritten? Gesucht ist nun
 das 0.05-Quantil von $X$. Es ist
 ```{r}
 qnorm(0.05, mean=201, sd=2)
 ```
+Die Wahrscheinlichkeit, eine Tafel zu ziehen, die leichter als 197.7g
+ist, beträgt nur 5 Prozent.
 :::
 
 ### Exponentialverteilung
@@ -577,11 +619,17 @@ ist $X\sim Exp(\lambda)$.
 
 Der Plot zeigt den Verlauf der Dichtefunktion von $Exp(1)$.
 ```{r echo=FALSE}
-D <- data.frame(x=seq(0,5,length=101), y=dexp(seq(0,5,length=101)))
-ggplot(D, aes(x,y))+
-    geom_line()+
-    ylab("Dichte der Exp(1)")+
-    ggtitle("Dichte der Exponentialverteilung")
+curve(dexp(x),
+      from=0.0001,
+      to=5,
+      n=201,
+      main="Dichte der Exponentialverteilung",
+      xlab="x",
+      ylab="Dichte",
+      yaxs="i",
+      ylim=c(0,1.1),
+      xlim=c(-0.5,5))
+lines(c(0,0),c(0,1),lty="dotted")
 ```
 Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
 muss die Verteilungsfunktion an der Stelle 0 den Wert 0 annehmen. Für
@@ -625,6 +673,7 @@ für die Dichte, Verteilungs- und Quantilfunktion sind:
 - `qexp(p, rate=lambda)`
 
 ::: callout-tip
+<img src="images/AdobeStock_593020754b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Mit der Zufallsvariable $X$ sei die Dauer in Sekunden bis zur nächsten
 Transaktion einer Volkswagenaktie an der Xetra-Börse bezeichnet. Die
 Dauer wird modelliert durch eine Exponentialverteilung mit Parameter
@@ -635,10 +684,15 @@ Die gesuchte Wahrscheinlichkeit $P(X>60)=1-P(X\le 60)$ beträgt
 ```{r}
 1 - pexp(60, rate=0.04)
 ```
+Die Wahrscheinlichkeit, dass 60 Sekunden lang keine Transaktion
+ausgeführt wird, beträgt also weniger als 10 Prozent.
+
 Der Median der Transaktionsdauer ist
 ```{r}
 qexp(0.5, rate=0.04)
 ```
+Die Hälfte der Transaktionsdauern ist also geringer als
+17.3 Sekunden (und die andere Hälfte größer).
 :::
 
 ### Paretoverteilung
@@ -660,17 +714,19 @@ f(x)=\left\{
 $$
 Für $x_{min}=1$ und $k=2$ ergibt sich folgendes Bild:
 ```{r echo=FALSE}
-x <- seq(1,5,length=200)
 k <- 2
 xmin <- 1
-D <- data.frame(x=x,
-                y=(k/xmin)*(xmin/x)^(k+1))
-ggplot(D, aes(x=x,y=y))+
-    geom_line()+
-    xlim(0,5)+
-    ylab("Dichte")+
-    ggtitle("Dichte der Paretoverteilung")
-
+curve((k/xmin)*(xmin/x)^(k+1),
+      from=1,
+      to=5,
+      n=201,
+      main="Dichte der Paretoverteilung",
+      xlab="x",
+      ylab="Dichte",
+      yaxs="i",
+      ylim=c(0,2.2),
+      xlim=c(0,5))
+lines(c(xmin,xmin),c(0,2), lty="dotted")
 ```
 Der Verlauf der Dichte ist auf den ersten Blick ähnlich wie bei
 der Exponentialverteilung. Jedoch fällt die Dichte der Paretoverteilung 
@@ -715,6 +771,7 @@ Sie das Paket `distributionsrd`. Nun stehen die Funktionen
 zur Verfügung. 
 
 ::: callout-tip
+<img src="images/AdobeStock_XXXXXXXXXb.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Die Zufallsvariable $X$ soll die Verteilung sehr hoher 
 Einkommen modellieren. Konkret soll $X$ das Nettojahreseinkommen 
 eines zufällig ausgewählten Haushalts in Deutschland sein.
@@ -740,4 +797,88 @@ qpareto(0.5, k=1.5, xmin=250000)
 ```
 Von den Haushalten, die mehr als 250000 Euro Einkommen haben, hat
 also die Hälfte sogar mehr als knapp 400000 Euro.
+:::
+
+### Rechteckverteilung
+
+Mit einer Rechteckverteilung kann beispielsweise die
+Wartezeit an einer Ampel (oder im ÖPNV) modelliert werden.
+Die Ampel springt in regelmäßigen Abständen auf Grün (bzw.
+die U-Bahn kommt alle 10 Minuten). Wenn man ohne genaue
+Planung zur Ampel oder zum Bahnsteig geht, ist die
+Wartedauer rein zufällig und folgt einer Rechteckverteilung.
+Die Rechteckverteilung spielt auch eine wichtige Rolle
+in sogenannten Monte-Carlo-Simulationen (siehe @sec-mc1),
+weil sie Ausgangspunkt aller im Computer generierten
+Zufallszahlen ist.
+
+Eine Zufallsvariable $X$ heißt **rechteckverteilt** 
+(engl. uniformly distributed) mit den Parametern 
+$a$ und $b$ ($a<b$), wenn ihre Dichte
+$$
+f(x)=\left\{
+\begin{array}{ll}
+\frac{1}{b-a} & \text{ für }a\le x\le b\\
+0 & \text{ sonst}
+\end{array}
+\right.
+$$
+ist. Die Kurzschreibweise für eine rechteckverteilte Zufallsvariable
+ist $X\sim U(a,b)$.
+
+Der Plot zeigt den Verlauf der Dichtefunktion von $U(1,2)$.
+```{r echo=FALSE}
+plot(c(0.5,2.5),c(0,1.1),
+     t="n",
+     main="Dichte der Rechteckverteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i")
+lines(c(1,2),c(1,1))
+lines(c(1,1),c(0,1),lty="dotted")
+lines(c(2,2),c(0,1),lty="dotted")
+```
+Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
+muss die Verteilungsfunktion an der Stelle $a$ den Wert 0 annehmen. Für
+die Verteilungsfunktion ergibt sich
+$$
+F(x)=\left\{
+\begin{array}{ll}
+0 & \text{ für }x<a\\
+\frac{x-a}{b-a}& \text{ für }a\le x\le b\\
+1 & \text{ für }x>b.\\
+\end{array}
+\right.
+$$
+Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
+Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
+$$
+\begin{align*}
+&&F(x)&=p\\
+\Leftrightarrow &&\frac{x-a}{b-a}&=p \\
+\Leftrightarrow &&x &=a+(b-a)p.
+\end{align*}
+$$
+Eine Fallunterscheidung ist hier nicht nötig, weil $0<p<1$ ist.
+Die Quantilfunktion lautet
+$$
+F^{-1}(p)=a+(b-a)p.
+$$
+Als Erwartungswert und Varianz errechnet man
+$$
+\begin{align*}
+E(X) &= \frac{b-a}{2}\\
+Var(X) &= \frac{(b-a)^2}{12}.
+\end{align*}
+$$
+
+In R ist die Abkürzung für die Rechteckverteilung `unif`. Die Funktionen
+für die Dichte, Verteilungs- und Quantilfunktion sind:
+
+- `dunif(x, min, max)`
+- `punif(x, min, max)`
+- `qunif(p, min, max)`
+
+::: callout-tip
+<img src="images/AdobeStock_273318220b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 :::

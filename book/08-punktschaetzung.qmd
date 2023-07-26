@@ -1,6 +1,8 @@
-# Punktschätzung {#punktschaetzung}
+# Punktschätzung {#sec-punktschaetzung}
 
 ## Unverzerrtheit
+
+<img src="images/AdobeStock_391798b.jpeg" align="right" width=30%" style="padding-left:15px;padding-top:5px;"/>
 
 ## Wichtige Schätzer
 
