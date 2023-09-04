@@ -4,13 +4,13 @@
 library(ggplot2)
 ```
 
-Für viele Anwendungsfälle gibt es **Standardverteilungen**, die man nutzen
-kann. Sie beschreiben bestimmte Zufallsvorgänge sehr gut. Eine 
+Für viele Anwendungsfälle gibt es **Standardverteilungen**, die bestimmte Zufallsvorgänge sehr gut beschreiben können. Eine 
 übersichtliche Liste wichtiger Standardverteilungen finden Sie auf
 der deutschsprachigen Wikipedia-Seite 
-"[Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen)". Die entsprechende 
-[englischsprachige Wikipedia-Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet 
-noch mehr Standardverteilungen auf, stellt ihre
+
+- [Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen).
+
+Die entsprechende [englischsprachige Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet noch mehr Verteilungen auf, stellt ihre
 Eigenschaften aber nicht so übersichtlich dar. In diesem
 Kurs lernen Sie exemplarisch einige ausgewählte diskrete und 
 stetige Standardverteilungen kennen. 
@@ -46,9 +46,17 @@ R-Funktionen
 Das erste Argument (`n`) gibt an, wie viele (unabhängige) Ziehungen aus
 der Zufallsvariable simuliert werden sollen. Die Ziehungen werden als
 **Zufallszahlen** bezeichnet. Die Funktion liefert als Output einen
-Vektor der Länge `n`. In Abschnitt XXX wird erklärt,
-wie man in R mit Hilfe von Zufallszahlen sogenannte 
-Monte-Carlo-Simulationen durchführt.
+Vektor der Länge `n`. 
+
+Es gibt noch eine weitere R-Funktion zum Ziehen von Zufallszahlen,
+nämlich die Funktion 
+
+- `sample`
+
+Sie dient dazu, aus einem Vektor zufällig Elemente auszuwählen.
+Eine ausführliche Beschreibung folgt in @sec-empverteilung.
+In @sec-mc1 und @sec-mc2 wird erklärt, wie man in R mit Hilfe von 
+Zufallszahlen sogenannte Monte-Carlo-Simulationen durchführt.
 
 ## Diskrete Verteilungen {#sec-diskret}
 
@@ -96,7 +104,9 @@ Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot \pi\\
 &=\pi (1-\pi).
 \end{align*}
 $$
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Befragung
+
 Eine zufällig aus einer Population ausgewählte Person wird
 befragt, ob sie in einem Startup arbeitet. Die Antwort
 wird durch eine Zufallsvariable $X$ codiert,
@@ -167,7 +177,8 @@ Var(X) &= n\pi (1-\pi).
 \end{align*}
 $$
 Auf die Herleitungen verzichten wir an dieser Stelle. Sie sind 
-sehr einfach mit Methoden, die in Kapitel XXX behandelt werden.
+sehr einfach mit den Methoden durchführbar, die in 
+@sec-kovarianz behandelt werden.
 
 In R ist die Abkürzung für die Binomialverteilung `binom`. 
 Die R-Funktion zur Berechnung der Wahrscheinlichkeitsfunktion
@@ -189,7 +200,9 @@ Diese Funktion berechnet das $p$-Quantil.
 Alle drei Funktionen können auch an mehreren Stellen gleichzeitig ausgewertet
 werden, indem man für `k`, `x` oder `p` einen Vektor einsetzt.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Urnenmodell
+
 Die idealtypische Anwendung der Binomialverteilung hat zwar keinen ökonomischen
 Bezug, ist aber trotzdem für das Verständnis hilfreich. Es geht um das
 Ziehen von Kugeln aus einer Urne mit Zurücklegen. Als Beispiel betrachten
@@ -292,8 +305,10 @@ Man erkennt, dass selbst bei $n=10$ und $\pi=0.1$ die Approximation schon
 einigermaßen gut ist. Für $n=1000$ und $\pi=0.001$ sind die Unterschiede
 zwischen Binomial- und Poisson-Verteilung vernachlässigbar.
 
-::: callout-tip
-<img src="images/AdobeStock_181000278b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: { .callout-tip collapse="true"}
+## Beispiel: Werbepost
+
+<img src="images/AdobeStock_181000278b_Postwurf.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Ein Unternehmen verschickt einen Werbebrief an 10000 Personen. Wie viele 
 Kunden tatsächlich auf den Brief reagieren, ist vor der Werbeaktion nicht
 bekannt. Die Zufallsvariable $X$ sei die Anzahl der Personen, die auf den
@@ -336,8 +351,9 @@ dann auch die Zahl der eintreffenden Kunden für eine längere oder kürzere
 Zeitspanne poisson-verteilt ist. Der Parameter der Verteilung verändert
 sich proportional zur Länge der Zeitspanne.
 
-::: callout-tip
-<img src="images/AdobeStock_218091505b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: { .callout-tip collapse="true"}
+## Beispiel: Kunden treffen ein
+<img src="images/AdobeStock_218091505b_Warteschlange.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Sei $X\sim Po(\lambda)$ 
 die Zahl der Flugpassagiere, die innerhalb einer Viertelstunde am Terminal
 ankommen. Wir nehmen an, dass die erwartete Zahl $\lambda=9$
@@ -361,7 +377,7 @@ Passagiere eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
 
 ## Stetige Verteilungen {#sec-stetig}
 
-### Normalverteilung
+### Normalverteilung {#sec-norm}
 
 Die mit großem Abstand wichtigste Verteilung überhaupt ist die Normalverteilung,
 manchmal auch Gauß-Verteilung genannt. Sie ist aus zwei Gründen so wichtig.
@@ -452,7 +468,9 @@ Quantilfunktion in R sehr einfach berechnen.
 
 Die Abkürzung für die Normalverteilung ist `norm`. 
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Standardnormalverteilung
+
 Der Wert der Dichtefunktion an den Stellen $u=-3,-2.5,\ldots,2.5,3$ beträgt
 ```{r}
 u <- seq(from=-3, to=3, by=0.5)
@@ -529,6 +547,8 @@ $N(0,1)$ ausgedrückt. Sie ist
 $$
 F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right).
 $$
+Das bedeutet, dass eine standardisierte Normalverteilung einer
+Standardnormalverteilung folgt (die Begriffe sind also gut gewählt).
 Wegen dieses Zusammenhangs ist es möglich, die Verteilungsfunktion einer
 beliebigen Normalverteilung selbst dann auswerten, wenn man nur die
 Verteilungsfunktion des Standardnormalverteilung kennt. In alten Lehrbüchern
@@ -552,7 +572,7 @@ Var(X) &= \sigma^2.
 \end{align*}
 $$
 
-<img src="images/AdobeStock_458950051b.jpeg" align="left" width=10%" style="padding-right:15px;padding-top:5px;padding-bottom:15px;"/>
+<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="right" width=10%" style="padding-right:15px;padding-top:5px;padding-bottom:15px;"/>
 In R verwendet man für die allgemeine Normalverteilung die gleichen Funktionen
 wie für die Standardnormalverteilung. Nur die beiden Parameter $\mu$ 
 (`mean`) und $\sigma$ (`sd`) werden als zusätzliche Argumente angefügt. 
@@ -568,9 +588,10 @@ Normalverteilung sind also
 - `pnorm(x, mean=mu, sd=sigma)`
 - `qnorm(p, mean=mu, sd=sigma)`
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Produktionsfehler
 
-<img src="images/AdobeStock_177164862b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+<img src="images/AdobeStock_177164862b_Schokolade.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Die Normalverteilung ist ein gutes Modell für die Verteilung von Fehlern
 (z.B. Messfehler oder Produktionsabweichungen). Mit der Zufallsvariable
 $X$ bezeichnen wir das Gewicht (in g) einer zufällig ausgewählten
@@ -601,7 +622,7 @@ Die Wahrscheinlichkeit, eine Tafel zu ziehen, die leichter als 197.7g
 ist, beträgt nur 5 Prozent.
 :::
 
-### Exponentialverteilung
+### Exponentialverteilung {#sec-exp}
 
 Die Exponentialverteilung ist oft gut geeignet zur Modellierung von 
 Wartezeiten oder Dauern. Eine Zufallsvariable $X$ heißt **exponentialverteilt** 
@@ -672,8 +693,10 @@ für die Dichte, Verteilungs- und Quantilfunktion sind:
 - `pexp(x, rate=lambda)`
 - `qexp(p, rate=lambda)`
 
-::: callout-tip
-<img src="images/AdobeStock_593020754b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: { .callout-tip collapse="true"}
+## Beispiel: Transaktionsdauern
+
+<img src="images/AdobeStock_593020754b_Boerse.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Mit der Zufallsvariable $X$ sei die Dauer in Sekunden bis zur nächsten
 Transaktion einer Volkswagenaktie an der Xetra-Börse bezeichnet. Die
 Dauer wird modelliert durch eine Exponentialverteilung mit Parameter
@@ -695,7 +718,7 @@ Die Hälfte der Transaktionsdauern ist also geringer als
 17.3 Sekunden (und die andere Hälfte größer).
 :::
 
-### Paretoverteilung
+### Paretoverteilung {#sec-pareto}
 
 Die Paretoverteilung kann in vielen Anwendungen extreme Ereignisse gut
 beschreiben. Beispielsweise folgt die Vermögensverteilung bei den Superreichen
@@ -770,8 +793,10 @@ Sie das Paket `distributionsrd`. Nun stehen die Funktionen
 
 zur Verfügung. 
 
-::: callout-tip
-<img src="images/AdobeStock_XXXXXXXXXb.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: { .callout-tip collapse="true"}
+## Beispiel: Reichtum
+
+<img src="images/AdobeStock_610110968b_JetLimosine.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Die Zufallsvariable $X$ soll die Verteilung sehr hoher 
 Einkommen modellieren. Konkret soll $X$ das Nettojahreseinkommen 
 eines zufällig ausgewählten Haushalts in Deutschland sein.
@@ -799,7 +824,7 @@ Von den Haushalten, die mehr als 250000 Euro Einkommen haben, hat
 also die Hälfte sogar mehr als knapp 400000 Euro.
 :::
 
-### Rechteckverteilung
+### Rechteckverteilung {#sec-unif}
 
 Mit einer Rechteckverteilung kann beispielsweise die
 Wartezeit an einer Ampel (oder im ÖPNV) modelliert werden.
@@ -850,6 +875,17 @@ F(x)=\left\{
 \end{array}
 \right.
 $$
+Die Verteilungsfunktion von $U(1,2)$ sieht wie folgt aus.
+```{r echo=FALSE}
+plot(c(0.5,2.5),c(0,1.1),
+     t="n",
+     main="Verteilungsfunktion der Rechteckverteilung",
+     xlab="x",
+     ylab="F(x)",
+     yaxs="i")
+lines(c(0.5,1,2,2.5),c(0,0,1,1))
+```
+
 Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
 Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
 $$
@@ -867,7 +903,7 @@ $$
 Als Erwartungswert und Varianz errechnet man
 $$
 \begin{align*}
-E(X) &= \frac{b-a}{2}\\
+E(X) &= \frac{b-a}{2}\\[1ex]
 Var(X) &= \frac{(b-a)^2}{12}.
 \end{align*}
 $$
@@ -879,6 +915,223 @@ für die Dichte, Verteilungs- und Quantilfunktion sind:
 - `punif(x, min, max)`
 - `qunif(p, min, max)`
 
-::: callout-tip
-<img src="images/AdobeStock_273318220b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: { .callout-tip collapse="true"}
+## Beispiel: Wartezeiten
+
+<img src="images/AdobeStock_273318220b_Ubahn.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+Die Rechteckverteilung spielt in der statistischen Theorie eine
+wichtige Rolle. Sie kann jedoch auch eingesetzt werden, um 
+bestimmte Arten von Wartezeiten zu modellieren. Angenommen, 
+die U-Bahn fährt an einer Station regelmäßig und pünktlich
+alle 10 Minuten. Wenn jemand rein zufällig, ohne auf die
+Uhr zu sehen, zu dieser Station geht, dann ist die Wartezeit
+rechteckverteilt auf dem Intervall $[0,10]$ (Minuten).
+
+Die Wahrscheinlichkeit, dass man weniger als 5 Minuten warten
+muss, beträgt also
+```{r}
+punif(5, min=0, max=10)
+```
+Die Wahrscheinlichkeit, mehr als 8 Minuten zu warten, ist
+```{r}
+1-punif(8, min=0, max=10)
+```
 :::
+
+### t-Verteilung {#sec-t}
+
+Die t-Verteilung (engl. t distribution) ist ein gutes Modell für die
+Verteilung der Tagesrendite von Aktien oder anderen stark volatilen
+Vermögenswerten (z.B. Kryptowährungen). Eine Zufallsvariable $X$
+heißt **t-verteilt** mit dem Parameter $\nu>0$, wenn sie 
+für $x\in\mathbb{R}$ die Dichte
+$$
+f(x)=C_\nu \cdot \left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}
+$$
+hat. Die Konstante $C_\nu$ dient nur der Normierung. Ihre genaue
+Form ist komplex, aber an dieser Stelle nicht relevant.
+Die Kurzschreibweise für eine t-verteilte Zufallsvariable
+ist $X\sim t_\nu$. Der Parameter $\nu$ heißt auch "Zahl der Freiheitsgrade"
+(engl. degrees of freedom).
+
+Der Plot zeigt den Verlauf der Dichtefunktion einer t-Verteilung
+mit $\nu=2$ Freiheitsgraden (schwarze Linie) und $\nu=10$
+Freiheitsgraden (rote Linie). Zum Vergleich ist auch die Dichte
+der Standardnormalverteilung eingefügt (gepunktete blaue Linie).
+```{r echo=FALSE}
+curve(dt(x,df=2),
+      from=-5,
+      to=5,
+      n=301,
+      main="Dichte der t-Verteilung",
+      xlab="x",
+      ylab="Dichte",
+      yaxs="i",
+      ylim=c(0,0.4))
+curve(dt(x,df=10),
+      from=-5,
+      to=5,
+      n=301,
+      add=TRUE,
+      col="red")
+curve(dnorm(x),
+      from=-5,
+      to=5,
+      n=301,
+      add=TRUE,
+      col="blue",
+      lty="dotted")
+```
+Je größer die Zahl der Freiheitsgrade, desto ähnlicher ist die t-Verteilung der
+Standardnormalverteilung. Bei sinkenden Freiheitsgraden werden die Flanken der Verteilung immer stärker, d.h. es gibt immer mehr extreme Werte (Ausreißer). 
+
+Die Verteilungsfunktion lässt sich (wie schon bei der Normalverteilung) 
+nicht durch elementare Integrationsregeln herleiten. Sie ist jedoch 
+numerisch lösbar und in den meisten Computerprogrammen implementiert.
+
+Erwartungswert und Varianz der t-Verteilung sind (für $\nu>2$)
+$$
+\begin{align*}
+E(X) &= 0\\
+Var(X) &= \frac{\nu}{\nu-2}.
+\end{align*}
+$$
+
+<img src="images/AdobeStock_512216945b_Guiness.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+Übrigens: Die t-Verteilung wurde 1908 von William Gosset hergeleitet, der
+als Brauer und Statistiker für die Qualitätssicherung in der Guinessbrauerei 
+zuständig war. Damit konkurrierende Brauereien nichts über die Verfahren der 
+Qualitätssicherung erfahren, durfte er seine Forschungsergebnisse nicht unter
+seinem eigenen Namen veröffentlichen. Er hat sie unter dem Pseudonym
+"Student" publiziert. Daher nennt man die t-Verteilung oft auch die
+Studentsche Verteilung (engl. Student's t-distribution). Sie 
+spielt auch in der statistischen Inferenz eine wichtige Rolle 
+(vor allem in @sec-intervallschaetzung und @sec-hypothesentests).
+
+In R ist die Abkürzung für die t-Verteilung `t`. Die Funktionen
+für die Dichte, Verteilungs- und Quantilfunktion sind:
+
+- `dt(x, df=nu)`
+- `pt(x, df=nu)`
+- `qt(p, df=nu)`
+
+ Die Parameter-Abkürzung `df` steht für "degrees of freedom", also 
+die Zahl der Freiheitsgrade.
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Crypto-Währungen
+
+<img src="images/AdobeStock_422468616b_Bitcoin.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
+Die Zufallsvariable $X$: "Tagesrendite einer Kryptowährung" soll
+durch eine t-Verteilung mit 3 Freiheitsgraden modelliert werden. 
+(In einer vollwertigen Anwendung würde man die t-Verteilung
+noch umskalieren und etwas verschieben, das ignorieren wir hier
+jedoch zur Vereinfachung. Daher Vorsicht: Dieses Beispiel ist nicht
+ernsthaft empirisch untermauert.) Die Tagesrendite folgt also $X\sim t_3$.
+Im Finance-Bereich wird das Risiko gewöhnlich durch die
+Standardabweichung per annum ausgedrückt (also auf ein Jahr
+hochgerechnet), die im Finance-Bereich meist als "Volatilität" 
+bezeichnet wird. Die Volatilität per annum ergibt sich aus der
+Standardabweichung der Tagesrendite, indem der Wert mit
+$\sqrt{n}$ multipliziert wird, wobei $n$ die Anzahl der 
+Handelstage pro Jahr ist. Da Kryptowährungen jeden Tag
+gehandelt werden, ergibt sich die Volatilität als
+$$
+\sqrt{365}\cdot \frac{\nu}{\nu-2}=3\cdot\sqrt{365}=57.3.
+$$
+Wie hoch ist die Wahrscheinlichkeit, dass der Krypto-Kurs an einem
+Tag um mehr als 10 Prozent fällt? In R erhält man
+```{r}
+pt(-10, df=3)
+```
+Die Wahrscheinlichkeit eines so starken Kursrückgangs ist also
+mit nur ca. 0.1 Prozent ziemlich klein.
+
+Wie hoch ist die Wahrscheinlichkeit, dass der Kurs betragsmäßig 
+sich an einem Tag um nicht mehr als 2 Prozent verändert?
+```{r}
+pt(2, df=3) - pt(-2, df=3)
+```
+Die Wahrscheinlichkeit beträgt also 86 Prozent.
+:::
+
+## Empirische Verteilungen {#sec-empverteilung}
+
+In den Wirtschaftswissenschaften (und allgemein in den Sozialwissenschaften)
+interessiert man sich sehr oft für empirische Verteilungen: Wie sind bestimmte
+Größen in der Popoulation verteilt? Wie sieht die Einkommensverteilung
+oder die Vermögensverteilung aus? Wie ist die Altersstruktur der Bevölkerung?
+Welche Parteienpräferenzen gibt es in der wahlberechtigten Population? 
+Wie hoch ist der Anteil der Kunden, die ihren Versicherungsvertrag
+stornieren wollen? Nur in den seltensten Fällen kann man diese Fragen
+exakt beantworten, indem man alle Populationsmitglieder untersucht oder
+befragt, denn die Untersuchung (oder Befragung) ist oft aufwendig und
+kostspielig. Das gilt natürlich vor allem dann, wenn die Population sehr
+groß ist.
+
+<img src="images/AdobeStock_600015784b_Menschenmenge.jpeg" width="100%"
+style="padding-bottom:10px;"/>
+
+Die gesamte Verteilung lässt sich jedoch durch eine Zufallsvariable
+repräsentieren, wenn man ein kleines Gedankenexperiment macht. Dazu
+stellt man sich vor, dass aus der gesamten Population ein Element
+(z.B. eine Person, ein Haushalt, eine Firma,...) zufällig ausgewählt
+wird, und zwar so, dass jedes Element die gleiche Ziehungswahrscheinlichkeit
+hat. 
+
+Wie sieht die Verteilungsfunktion dieser Zufallsvariable aus?
+Um diese Frage zu beantworten, brauchen wir ein wenig Notation. 
+Seien $x_1^*,x_2^*,\ldots,x_N^*$ die tatsächlichen Werte für alle
+$N$ Elemente der Population. Es handelt sich dabei nicht um 
+Zufallsvariablen, sondern um reelle Zahlen, beispielsweise die
+Einkommen aller Personen in der Population. Mit $X$ bezeichnen
+wir die Zufallsvariable, die den Wert eines zufällig gezogenen
+Elements annimmt, wobei alle Element die gleiche Ziehungswahrscheinlichkeit
+von $1/N$ haben sollen.
+
+Die Verteilungsfunktion von $X$ ist gemäß der Definition
+$$
+F_X(x)=P(X\le x).
+$$
+Wie groß ist die Wahrscheinlichkeit, dass $X$ den Wert $x$
+nicht überschreitet? Da alle Element die gleiche Ziehungswahrscheinlichkeit
+haben, liegt hier ein Laplace-Experiment vor. Es gilt
+$$
+P(X\le x)=\frac{\text{Anzahl der Elemente}\le x}{N}.
+$$
+Das erscheint zunächst nicht sehr spektakulär. Es bedeutet aber,
+dass die Zufallsvariable $X$, die durch die Verteilungsfunktion
+$F_X$ beschrieben wird, die komplette Verteilung der Population
+repräsentiert. Wir sprechen von einer **empirischen Verteilung**.
+Es handelt sich bei $X$ um eine spezielle Art von diskreter Verteilung. 
+Die Wahrscheinlichkeitsfunktion lautet
+$$
+f_X(x)=\left\{
+\begin{array}{ll}
+1/N & \text{ für }x\in\{x_1^*,\ldots,x_N^*\}\\
+0 &\text{ sonst.}
+\end{array}
+\right.
+$$
+Da $X$ eine (diskrete) Zufallsvariable ist, können wir ihren 
+Erwartungswert und ihre Varianz berechnen. Für den Erwartungswert gilt
+$$
+\begin{align*}
+E(X)&=\sum_{i=1}^N x_i^* P(X=x_i^*)\\
+&= \frac{1}{N}\sum_{i=1}^N x_i^*.
+\end{align*}
+$$
+Mit anderen Worten: Der Erwartungswert einer empirischen Verteilung
+entspricht gerade dem Populationsmittel $\bar x$ aus dem Kurs
+"Data Science 1".
+
+Die Varianz von $X$ ist
+$$
+\begin{align*}
+Var(X)&=\sum_{i=1}^N (x_i^*-\bar x)^2 P(X=x_i^*)\\
+&= \frac{1}{N}\sum_{i=1}^N (x_i^*-\bar x)^2.
+\end{align*}
+$$
+Es handelt sich also um die Populationsvarianz $s^2$ aus
+dem Kurs "Data Science 1". 
+

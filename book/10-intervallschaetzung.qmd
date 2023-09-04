@@ -1,0 +1,554 @@
+# Intervallschätzung {#sec-intervallschaetzung}
+
+<img src="images/AdobeStock_541121821b_Konfidenzskala.jpeg" align="right" width=35%" style="padding-left:15px;"/>
+Die Analogie einer Schätzung zu einem Bogenschuss macht deutlich, 
+dass ein Punktschätzer zwar interessant ist, dass man aber nicht 
+erkennt, wie zuverlässig die Schätzung ist. Darf man davon ausgehen, 
+dass der Schätzer dicht am wahren Parameter liegt? Oder ist zu 
+vermuten, dass die Schätzung vielleicht deutlich daneben liegt? 
+
+Das Ziel der Intervallschätzung besteht darin, nicht nur einen
+Punkt als Schätzung zu liefern, sondern ein Intervall, in dem
+der wahre Parameterwert mit einer (vorgegebenen) hohen
+Wahrscheinlichkeit liegt.
+
+## Konfidenzintervalle
+
+Um etwas über den interessierenden Parameter $\theta$ der
+Zufallsvariable $X$ zu lernen, wird eine einfache Stichprobe 
+$X_1,\ldots,X_n$ erhoben. 
+
+::: callout-note
+## Definition: Konfidenzintervall
+
+Ein Intervall $[\hat\theta_u(X_1,\ldots,X_n);\hat\theta_o(X_1,\ldots,X_n)]$
+mit der Eigenschaft
+$$
+P(\hat\theta_u\le \theta\le \hat\theta_o)=1-\alpha
+$$
+heißt **Konfidenzintervall** (engl. confidence interval) für $\theta$
+zum (Konfidenz-)Niveau $1-\alpha$.
+:::
+
+Die Definition ist schwieriger zu verstehen, als es zunächst den
+Anschein hat. Das liegt daran, dass es sich bei den Intervallgrenzen 
+um Zufallsvariablen handelt. Sowohl die Untergrenze als auch die
+Obergrenze sind Statistiken im Sinne von @sec-statistiken, d.h.
+sie hängen von der Stichprobe ab. Da die Stichprobenelemente
+Zufallsvariablen sind, sind auch die Intervallgrenzen zufällig.
+Nur aus diesem Grund ist es möglich, eine Wahrscheinlichkeitsaussage
+darüber zu treffen, ob der wahre Wert von dem Intervall
+überdeckt wird.
+
+Nach der Realisation der Stichprobe sind die konkreten Stichprobenelemente
+reelle Zahlen. Aus dem Konfidenzintervall wird das 
+**konkrete Konfidenzintervall* (oder der Wert oder die Realisation
+des Konfidenzintervalls),
+$$
+[\hat\theta_u(x_1,\ldots,x_n);\hat\theta_o(x_1,\ldots,x_n)].
+$$
+Das konkrete Konfidenzintervall hat eine reelle Untergrenze und
+eine reelle Obergrenze, es handelt sich also um ein ganz normales
+Intervall. Eine Wahrscheinlichkeitsaussage darüber, ob dieses
+Intervall den wahren Wert überdeckt, ist nicht möglich. Ohne
+Zufallsvorgang kann man keine Wahrscheinlichkeitsaussagen machen.
+
+## Konfidenzintervall für den Erwartungswert
+
+Wie findet man ein Konfidenzintervall für einen interessierenden 
+Parameter? Auf die Konstruktionsmethoden gehen wir in diesem
+Kurs nicht ein, sie werden in dem Wahlmodul **Advanced Statistics**
+behandelt. Stattdessen wird im folgenden gezeigt, wie 
+**Konfidenzintervalle für den Erwartungswert** einer Verteilung
+aussehen. 
+
+Auf welche Weise man die Grenzen des Konfidenzintervalls
+berechnet, hängt davon ab, welche Informationen über die Population 
+$X$ bekannt sind. Dabei spielen zwei Fragen eine Rolle:
+
+- Ist die Varianz $\sigma^2=Var(X)$ bekannt? 
+Diese Frage dürfte in fast allen praktischen Anwendung
+mit "nein" beantwortet werden. Trotzdem ist es aus didaktischen
+Gründen sinnvoll, den Fall einer bekannten Varianz 
+durchzuspielen, denn er ist recht einfach und daher 
+für den Einstieg gut geeignet.
+
+- Folgt $X$ einer Normalverteilung? Diese Frage wird 
+in der Praxis durchaus nicht immer mit "nein" beantwortet 
+werden. So ist beispielsweise die Normalverteilung für
+die Modellierung von Mess- oder Produktionsfehlern gut geeignet. 
+
+Die vier Fälle (Varianz bekannt bzw. unbekannt, Normalverteilung
+bzw. keine Normalverteilung) werden wir nun einzeln durchgehen.
+Wir beginnen mit dem einfachsten Fall, nämlich
+
+### Normalverteilung mit bekannter Varianz {.unnumbered}
+
+Wie sehen die Grenzen eines Konfidenzintervalls 
+für den Erwartungswert $\mu$ aus, wenn man
+eine einfache Stichprobe $X_1,\ldots,X_n$ aus einer
+Normalverteilung vorliegen hat, deren Varianz $\sigma^2$
+bekannt ist?
+
+Aus @sec-statistiken wissen wir bereits, dass
+$$
+\bar X\sim N\left(\mu,\frac{\sigma^2}{n}\right).
+$$
+Das standardisierte Stichprobenmittel folgt demnach einer
+Standardnormalverteilung. Beim Standardisieren wird zuerst
+der Erwartungswert subtrahiert, anschließend wird durch
+die Standardabweichung dividiert. Es gilt also
+$$
+\frac{\bar X-\mu}{\sqrt{\sigma^2/n}}\sim N(0,1).
+$$
+Üblicherweise wird die Wurzel des Stichprobenumfangs vor den
+Bruch gezogen, 
+$$
+\sqrt{n}\frac{\bar X-\mu}{\sigma}\sim N(0,1).
+$$
+Wenn der Ausdruck auf der linken Seite einer Standardnormalverteilung
+folgt, dann gilt für einen vorgegeben (typischerweise kleinen) Wert von $\alpha$
+$$
+P\left(-u_{1-\alpha/2}\le \sqrt{n}\frac{\bar X-\mu}{\sigma}\le u_{1-\alpha/2}\right)=1-\alpha,
+$$
+wobei $u_{1-\alpha/2}$ das $(1-\alpha/2)$-Quantil der $N(0,1)$ ist.
+Die Wahrscheinlichkeit, dass eine standardnormalverteilte Zufallsvariable
+kleiner (oder gleich) $u_{1-\alpha/2}$ ist, beträgt also per Definition
+des Quantils gerade $1-\alpha/2$. Wegen der Symmetrie ist die Wahrscheinlichkeit,
+dass eine standardnormalverteilte Zufallsvariable kleiner ist als
+$-u_{1-\alpha/2}$ gerade $\alpha/2$ (vgl. @sec-norm). Zusammengenommen
+ist also die Wahrscheinlichkeit, zwischen den beiden Grenzen zu liegen
+gerade $1-\alpha/2-\alpha/2=1-\alpha$.
+
+Die Wahrscheinlichkeit wird für eine doppelte Ungleichung bestimmt.
+Diese Ungleichung (in den runden Klammern) formen wir nun Schritt für
+Schritt um. 
+$$
+\begin{align*}
+P\left(-u_{1-\alpha/2}\le \sqrt{n}\frac{\bar X-\mu}{\sigma}\le u_{1-\alpha/2}\right)&=1-\alpha\\
+P\left(-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\le \bar X-\mu\le u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)&=1-\alpha\\
+P\left(-\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\le -\mu\le -\bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)&=1-\alpha\\
+&= \ldots
+\end{align*}
+$$
+Wir haben nun erreicht, dass der unbekannte Parameter $\mu$ alleine
+in der Mitte der Ungleichung steht. Leider hat er das falsche Vorzeichen.
+Deshalb multiplizieren wir nun die Ungleichungen mit $(-1)$. Dabei
+drehen sich die Ungleichungszeichen um (denn 2 ist zwar kleiner als 3,
+aber $-2$ ist größer als $-3$),
+$$
+\begin{align*}
+\ldots &=\\
+P\left(-\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\le -\mu\le -\bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)&=1-\alpha\\
+P\left(\bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\ge \mu\ge \bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)&=1-\alpha\\
+&= \ldots
+\end{align*}
+$$
+In einem letzten Schritt drehen wir noch die Reihenfolge der Ungleichung
+um, so dass der kleinste Ausdruck wieder auf der linken Seite steht.
+$$
+\begin{align*}
+\ldots &=\\
+P\left(\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\le \mu\le \bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)&=1-\alpha.
+\end{align*}
+$$
+Mit anderen Worten: Wenn $\alpha$ auf einen kleinen Wert (z.B. 0.05) gesetzt
+wird, dann wird mit einer hohen Wahrscheinlichkeit von $1-\alpha$ (z.B. 0.95) der
+wahre Erwartungswert $\mu$ in dem (zufälligen) Konfidenzintervall
+$$
+\left[\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}, \bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right]
+$$
+liegen. Wir haben also das gesuchte Konfidenzintervall gefunden!
+
+Aus der Formel lassen sich mehrere Einsichten gewinnen:
+
+- Das Konfidenzintervall liegt symmetrisch um das Stichprobenmittel $\bar X$ herum.
+
+- Je größer die Varianz $\sigma^2$ der Population, desto breiter ist das
+Konfidenzintervall. Das ist plausibel, denn eine hohe Varianz führt zu einer
+starken Streuung der Stichprobenelement, so dass es einen starken 
+Zufallseinfluss auf $\bar X$ gibt. Der Wert $\bar X$ ist also für großes
+$\sigma^2$ weniger zuverlässig, daher muss das Intervall breiter sein.
+
+- Je größer der Stichprobenumfang $n$ ist, desto schmaler ist das
+Intervall. Jedoch ist der Einfluss nicht proportional, sondern nur
+proportional zur Wurzel von $n$. Vervierfacht man den Stichprobenumfang,
+dann halbiert sich die Breite des Konfidenzintervalls. Will man die
+Breite auf ein Zehntel reduzieren, braucht man also eine hundertmal
+größere Stichprobe.
+
+- Je kleiner $\alpha$ gewählt wird, desto breiter wird das Intervall. 
+Die Wahrscheinlichkeit $\alpha$, dass der Erwartungswert nicht getroffen 
+wird, sollte also nicht extrem klein sein. Der üblichste Wert in den 
+Wirtschaftswissenschaften ist $\alpha=0.05$, auch $\alpha=0.01$ oder
+$\alpha=0.1$ werden manchmal gewählt.
+
+Das Konfidenzintervall hat zufällige Grenzen. Wenn die Stichprobe
+tatsächlich realisiert wird, erhält man das konkrete
+Konfidenzintervall, indem die Stichprobenelemente durch ihre
+Realisationen ersetzt werden. Das konkrete Konfidenzintervall ist
+$$
+\left[\bar x-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}, \bar x+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right].
+$$
+Dieses Intervall hat reelle Unter- und Obergrenzen. Eine
+Wahrscheinlichkeitsaussage, ob der wahre Erwartungswert
+in diesem konkreten Intervall liegt, ist nicht sinnvoll, weil 
+hier kein Zufall mehr vorkommt.
+
+Die Herleitung für den (vollkommen unrealistischen) Fall einer 
+normalverteilten Population mit bekannter Varianz dient nun als
+Vorlage für die anderen Fälle. 
+
+### Beliebige Verteilung mit bekannter Varianz {.unnumbered}
+
+Was passiert, wenn man die Verteilung von $X$ nicht kennt,
+sondern nur weiß, wie hoch die Varianz ist? Auch dieser Fall
+ist offensichtlich unrealistisch, er zeigt jedoch, auf welche
+Weise der zentrale Grenzwertsatz in die Herleitung eingebaut
+werden kann.
+
+Aus @sec-clt wissen wir, dass für große $n$ approximativ gilt,
+dass
+$$
+\sqrt{n}\frac{\bar X-\mu}{\sigma}\stackrel{appr}{\sim} N(0,1).
+$$
+Diese Approximation ist in vielen Fällen sogar dann recht präzise, 
+wenn der Stichprobenumfang nur moderat ist (z.B. $n=50$). 
+
+Die Herleitung des Konfidenzintervalls verläuft nun exakt
+analog zum vorhergehenden Abschnitt. Der einzige Unterschied
+besteht darin, dass die exakte Gleichung für die Wahrscheinlichkeit
+nun nur approximativ gilt. Im Endergebnis erhält man
+$$
+P\left(\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\le \mu\le \bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right)\approx 1-\alpha.
+$$
+
+Das approximative $(1-\alpha)$-Konfidenzintervall für den 
+Erwartungswert $\mu$ ist also
+$$
+\left[\bar X-u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}, \bar X+u_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\right].
+$$
+Dieses Intervall sieht exakt so aus, wie für eine normalverteilte
+Population, es überdeckt den wahren Erwartungswert jedoch nur ungefähr
+mit einer Wahrscheinlichkeit von $1-\alpha$. Für großes $n$ ist
+die Abweichung jedoch meist vernachlässigbar.
+
+### Normalverteilung mit unbekannter Varianz {.unnumbered}
+
+Natürlich ist es sehr unrealistisch davon auszugehen, dass
+die Varianz $\sigma^2$ der Population $X$ bekannt ist. Das kommt
+in der Praxis so gut wie nie vor. Wie geht man mit diesem Problem
+um? Die Lösung ist eigentlich naheliegend: Aus der Stichprobe
+$X_1,\ldots,X_n$ lässt sich nicht nur das Stichprobenmittel
+als Schätzer für den Erwartungswert berechnen, sondern auch die 
+Stichprobenvarianz $S^2$ als Schätzer für die Populationsvarianz 
+$\sigma^2$. Diesen Schätzer kann man in den Herleitungen für das
+Konfidenzintervall anstelle der wahren Varianz nutzen.
+Allerdings ändern sich dadurch ein paar Dinge, wie wir gleich
+sehen werden.
+
+Wie findet man die Grenzen eines Konfidenzintervalls 
+für den Erwartungswert $\mu$ einer normalverteilten
+Zufallsvariable $X\sim N(\mu,\sigma^2)$ aus einer 
+einfachen Stichprobe $X_1,\ldots,X_n$, wenn die
+Varianz $\sigma^2$ unbekannt ist?
+
+Ausgangspunkt der Überlegungen ist die folgende Beziehung:
+$$
+\sqrt{n}\frac{\bar X-\mu}{S}\sim t_{n-1},
+$$
+wobei $S$ die Stichprobenstandardabweichung ist. Standardisiert
+man das Stichprobenmittel also nicht mit der wahren 
+Standardabweichung $\sigma$, sondern mit der geschätzten
+Standardabweichung $S$, dann folgt die resultierende
+Zufallsvariable nicht mehr einer $N(0,1)$-Verteilung, sondern
+einer t-Verteilung mit $n-1$ Freiheitsgraden (s.
+@sec-t zur t-Verteilung). Im Vergleich zur Normalverteilung
+hat die t-Verteilung stärkere Flanken, besonders bei
+einer geringen Zahl von Freiheitsgraden. Es gibt mehr
+Ausreißer als bei der $N(0,1)$-Verteilung.
+
+Das $(1-\alpha/2)$-Quantil der t-Verteilung mit $n-1$ 
+Freiheitsgraden bezeichnen wir mit $t_{n-1,1-\alpha/2}$.
+Die Wahrscheinlichkeit, dass eine t-verteilte
+Zufallsvariable mit $n-1$ Freiheitsgraden kleiner
+als dieses Quantil ist, beträgt per Definition $1-\alpha/2$.
+Wegen der Symmetrie der t-Verteilung ist die
+Wahrscheinlichkeit, einen Wert kleiner als $-t_{n-1,1-\alpha/2}$
+zu erhalten, gerade $\alpha/2$. Folglich gilt
+$$
+P\left(-t_{n-1,1-\alpha/2}\le \sqrt{n}\frac{\bar X-\mu}{S}\le t_{n-1,1-\alpha/2}\right)=1-\alpha.
+$$
+Von hier aus können wir die gleichen Herleitungsschritte
+durchführen wie im Fall einer Normalverteilung mit bekannter
+Varianz. Am Ende erhält man vollkommen analog das
+$(1-\alpha)$-Konfidenzintervall
+$$
+\left[\bar X-t_{n-1,1-\alpha/2}\cdot \frac{S}{\sqrt{n}}, \bar X+t_{n-1,1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right].
+$$
+Im Gegensatz zum Fall mit bekannter Varianz ist nun nicht nur
+der Mittelpunkt des Konfidenzintervalls zufällig, sondern 
+auch die Breite, da sie von der Zufallsvariable $S$ abhängt.
+
+Wenn die Stichprobe realisiert wurde, kann man die
+Stichprobenelemente durch ihre Realisationen ersetzen. Aus
+dem Konfidenzintervall wird das konkrete Konfidenzintervall
+$$
+\left[\bar x-t_{n-1,1-\alpha/2}\cdot \frac{s}{\sqrt{n}}, \bar x+t_{n-1,1-\alpha/2}\cdot \frac{s}{\sqrt{n}}\right].
+$$
+
+::: {.callout-tip collapse="true"}
+## Beispiel: Konfidenzintervall für Erwartungswert einer Normalverteilung
+
+<img src="images/AdobeStock_505566678b_Guiness.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
+In einer Brauerei soll die Qualitätskontrolle sicherstellen, dass 
+die in der Produktion eingesetzte Gerste im Mittel einen Kohlenhydratanteil 
+von 63 Prozent besitzt. Es ist plausibel davon auszugehen, dass 
+der Anteil einer Normalverteilung folgt. Allerdings sind der
+Erwartungswert und die Varianz der Normalverteilung nicht bekannt.
+Bei der Anlieferung der Gerste wird eine
+Stichprobe vom Umfang $n=8$ entnommen. Jedes Stichprobenelement wird
+genau analysiert. Bei der konkreten Messung ergaben sich die folgenden
+acht Werte, die in einem R-Vektor abgelegt sind:
+```{r}
+x <- c(59.81, 61.15, 56.56, 63.71, 54.97, 62.64, 61.43, 59.83)
+```
+Der Punktschätzer für den Erwartungswert ist mit
+```{r}
+mean(x)
+```
+deutlich kleiner als der Sollwert, aber die Messungen zeigen, dass zwischen
+den Stichprobenelementen ziemlich große Unterschiede bestehen. Sollte die
+Annahme der Lieferung verweigert werden, weil der Kohlenhydratgehalt zu
+niedrig ist?
+
+Der Unsicherheit der Messungen kann durch eine Intervallschätzung
+Rechnung getragen werden. Wir berechnen aus den 8 Werten
+das konkrete 0.95-Konfidenzintervall, d.h.
+```{r}
+alpha <- 0.05
+```
+Um die Intervallgrenzen zu bestimmen, braucht man das $(1-\alpha)$-Quantil der
+t-Verteilung mit $n-1=7$ Freiheitsgraden. In R erhält man es durch
+```{r}
+qnt <- qt(1-alpha/2, df=7)
+print(qnt)
+```
+Die Untergrenze ist 
+```{r}
+mean(x) - qnt * sd(x)/sqrt(8)
+```
+Und die Obergrenze ist
+```{r}
+mean(x) + qnt * sd(x)/sqrt(8)
+```
+Der Sollwert (63) wird also von dem Intervall nicht überdeckt. Die Brauerei sollte
+die Annahme der Gerste-Lieferung verweigern.
+:::
+
+### Beliebige Verteilung mit unbekannter Varianz {.unnumbered}
+
+Als letzten Fall betrachten wir die wohl realistischste
+Situation: Man kennt weder die Populationsvarianz noch 
+weiß man, ob die Population einer Normalverteilung folgt.
+Da die Varianz $\sigma^2$ unbekannt ist, wird sie - wie
+schon im letzten Abschnitt - aus der Stichprobe
+geschätzt, und zwar durch die Stichprobenvarianz $S^2$.
+
+Man kann zeigen, dass der zentrale Grenzwertsatz auch
+dann weiterhin gilt, wenn bei der Standardisierung des
+Stichprobenmittels die Stichprobenstandardabweichung
+eingesetzt wird. Wegen des Gesetzes der großen Zahl
+konvergiert die Stichprobenstandardabweichung $S$
+gegen die wahre Standardabweichung $S$, wenn
+$n\to\infty$ geht. 
+
+Für große $n$ gilt also approximativ
+$$
+\sqrt{n}\frac{\bar X-\mu}{S}\stackrel{appr}{\sim} N(0,1).
+$$
+Ab hier verläuft die Herleitung vollkommen analog zu
+den anderen Fällen. Am Ende erhält man das approximative
+$(1-\alpha)$-Konfidenzintervall
+$$
+\left[\bar X-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}, \bar X+u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right].
+$$
+Das zugehörige konkrete Konfidenzintervall ist
+$$
+\left[\bar x-u_{1-\alpha/2}\cdot \frac{s}{\sqrt{n}}, \bar x+u_{1-\alpha/2}\cdot \frac{s}{\sqrt{n}}\right].
+$$
+
+::: {.callout-tip collapse="true"}
+XXX
+:::
+
+
+Zusammenfassend haben wir gesehen, dass Konfidenzintervalle für
+den Erwartungswert einer Verteilung immer von der Form
+$$
+\bar X \pm \text{Quantil}\cdot \frac{\text{Streuung}}{\sqrt{n}}
+$$
+sind. Ferner haben wir gesehen, dass man für normalverteilte
+Populationen exakte Konfidenzintervalle berechnen kann, die
+auch bei kleinen Stichproben gültig sind. Wenn die Population
+einer beliebigen Verteilung folgt, lassen sich die Konfidenzintervalle
+nur approximativ bestimmen. Die Approximation ist umso besser,
+je größer der Stichprobenumfang ist.
+
+## Interpretation
+
+Konfidenzintervalle sind leicht zu interpretieren: Es sind
+(zufällige) Intervalle, die mit einer vorgegebenen hohen
+Wahrscheinlichkeit den wahren Erwartungswert überdecken.
+Leider gilt diese einfache Interpretation nicht für die konkreten
+Konfidenzintervalle, die aus den tatsächlich erhobenen konkreten
+Daten errechnet werden. Das liegt daran, dass das konkrete Intervall
+feste (nicht zufällige) Grenzen hat. Eine Wahrscheinlichkeitsaussage
+über die Überdeckungswahrscheinlichkeit des wahren Werts, der ja ebenfalls
+nicht zufällig ist, ergibt keinen Sinn. Ohne Zufall keine Wahrscheinlichkeit!
+
+Für das Verständnis von Konfidenzintervallen hilft es sehr, eine
+Monte-Carlo-Simulation durchzuführen. Im folgenden wird Schritt für
+Schritt erklärt, wie eine solche Simulation in R aussieht. 
+
+Zuerst legt man die Populationsverteilung fest. Wie soll die
+Zufallsvariable $X$ verteilt sein? In diesem Beispiel gehen wir von
+einer Situation aus, die in etwa dem Beispiel der Qualitätskontrolle
+in einer Brauerei entspricht. Die Zufallsvariable $X$ hat eine 
+Normalverteilung mit Erwartungswert $\mu=63$ und
+Varianz $\sigma^2=16$ (bzw. Standardabweichung $\sigma=4$) folgt,
+$$
+X\sim N(63, 4^2).
+$$
+In der Simulation tun wir so, als ob die Normalverteilung bekannt ist,
+die Varianz jedoch nicht und der Erwartungswert natürlich auch nicht. 
+Ferner legen wir den Stichprobenumfang und das 
+Konfidenzniveau fest. Der Umfang sei $n=8$, und das Konfidenzniveau sei 
+0.95 ($alpha=0.05$). Außerdem definieren wir einen Zähler, mit
+dem nachgehalten wird, wie oft die Konfidenzintervalle den wahren
+Erwartungswert überdecken.
+
+In der Monte-Carlo-Simulation wird nicht nur *eine* Stichprobe vom
+Umfang $n$ gezogen, sondern sehr *viele*. Das lässt sich mit einer
+Schleife leicht in R umsetzen. Sei $R=10000$ die Zahl der 
+Schleifendurchläufe. In jedem Schleifendurchlauf 
+
+- wird eine Stichprobe `x` als Vektor der Länge `n` aus der Zufallsvariable $X$ gezogen
+
+- werden aus der Stichprobe `x` die konkreten Intervallgrenzen `k_oben`
+und `k_unten` berechnet
+
+- wird kontrolliert, ob das konkrete Intervall den wahren Wert (63)
+überdeckt. Wenn ja, wird ein Zähler um 1 erhöht.
+
+Das R-Programm sieht folgendermaßen aus:
+```{r}
+mu <- 63
+sigma <- 4
+n <- 8
+alpha <- 0.05
+R <- 10000
+
+# (1-alpha/2)-Quantil der t-Verteilung
+# mit n-1 Freiheitsgraden
+qnt <- qt(1-alpha/2, df=n-1)
+
+# Initialisierung eines Zählers
+z <- 0
+
+for(r in 1:R){
+  
+  # Ziehung der Stichprobe
+  x <- rnorm(n, mean=mu, sd=sigma)
+  
+  # Berechnung der Intervallgrenzen
+  k_unten <- mean(x) - qnt * sd(x)/sqrt(n)
+  k_oben <- mean(x) + qnt * sd(x)/sqrt(n)
+  
+  # Wird der wahre Wert mu überdeckt?
+  if(k_unten <= mu & mu <= k_oben){
+    z <- z+1
+  }
+}
+```
+
+Der Anteil der Überdeckungen von $\mu$ konvergiert
+nach dem Gesetz der großen Zahl gegen die theoretische
+Wahrscheinlichkeit einer Überdeckung. In dieser Simulation
+ergab sich
+```{r}
+print(z/R)
+```
+Dieser Wert liegt sehr nahe an dem theoretischen Wert 
+von $1-\alpha=0.95$. (Führt man die Simulation erneut 
+durch, realisiert sich natürlich ein leicht anderer Wert.)
+
+Für ein deutlich kleineres $R$, z.B. $R=50$ kann man die 
+Intervalle auch grafisch darstellen. Dadurch wird die 
+Zufälligkeit der Konfidenzintervalle gut veranschaulicht.
+Vor dem Start der Schleife wird eine fast leere Grafik
+vorbereitet, in der nur der wahre Wert durch einen
+senkrechten Strich gezeigt wird. Der R-Code dazu lautet
+```{r eval=FALSE}
+R <- 50
+
+# Vorbereitung einer leeren Grafik
+plot(c(56,70),c(0,R),t="n",
+     xlab="mu", ylab="Durchlauf")
+abline(v=mu)
+```
+Der Befehl `abline` fügt in eine vorhandene Grafik eine Gerade
+ein. Vertikale Linien erzeugt man mit der Option `v=...` (wie
+andere Linien erzeugt werden, finden Sie mit der Hilfefunktion 
+heraus).
+
+Innerhalb der Schleife wird in jedem Durchlauf eine Linie in die Grafik
+eingefügt, die das Konfidenzintervall darstellt. Wenn der wahre
+Wert überdeckt wird, ist die Linie schwarz. Wenn das Intervall den
+wahren Wert verfehlt, wird sie rot gefärbt. Der folgende R-Code
+ersetzt den `if`-Befehl in der Schleife:
+```{r eval=FALSE}
+  if(k_unten <= mu & mu <= k_oben){
+    z <- z+1
+    lines(x=c(k_unten, k_oben), y=c(r, r))
+  } else {
+    lines(x=c(k_unten, k_oben), y=c(r, r), col="red")
+  }
+```
+
+Ersetzt man den entsprechenden R-Code vor bzw. in der Schleife,
+so erhält man eine Abbildung, in der alle (konkreten) 
+Konfidenzintervalle übereinander als waagerechte Linien 
+erscheinen. Nur die roten Linien überdecken den wahren Wert nicht. 
+
+```{r echo=FALSE, out.width="90%", fig.asp=1}
+mu <- 63
+sigma <- 4
+n <- 8
+alpha <- 0.05
+R <- 50
+plot(c(56,70),c(0,R),t="n",
+     xlab="mu", ylab="Durchlauf")
+abline(v=mu)
+qnt <- qt(1-alpha/2, df=n-1)
+z <- 0
+for(r in 1:R){
+  x <- rnorm(n, mean=mu, sd=sigma)
+  k_unten <- mean(x) - qnt * sd(x)/sqrt(n)
+  k_oben <- mean(x) + qnt * sd(x)/sqrt(n)
+  if(k_unten <= mu & mu <= k_oben){
+    z <- z+1
+    lines(x=c(k_unten, k_oben), y=c(r, r))
+  } else {
+    lines(x=c(k_unten, k_oben), y=c(r, r), col="red")
+  }
+}
+```
+
+Es ist wichtig, sich klar zu machen, dass jedes 
+Konfidenzintervall aus einer eigenen (konkreten)
+Stichprobe errechnet wurde. Alle $R=50$ Stichproben
+haben einen Umfang von $n=8$. Auf diese Weise 
+macht das Simulations-Experiment deutlich, dass
+die Stichprobenelemente zufällig sind und dass
+folglich auch die Konfidenzintervalle zufällig sind.

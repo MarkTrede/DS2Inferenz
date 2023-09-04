@@ -1,0 +1,188 @@
+# Stichproben {#sec-stichproben}
+
+In diesem Kapitel schlagen wir die Brücke von der rein theoretischen
+Wahrscheinlichkeitsrechnung zur Empirie. Ein großer Vorteil 
+der Wahrscheinlichkeitstheorie besteht nämlich darin, dass sie
+es uns erlaubt, Aussagen über Zufallsvariablen oder Populationen zu machen, 
+von denen wir keine vollständigen Informationen haben, sondern nur einen
+Teil beobachten können. Man sagt, dass man von einer Stichprobe 
+auf die Population schließt, und spricht daher auch von statistischer
+Inferenz (engl. statistical inference). Leider entspricht die
+Definition einer Stichprobe nicht dem umgangssprachlichen Gebrauch
+des Worts. Tatsächlich ist es nicht leicht - aber wichtig -, die formale 
+Definition einer Stichprobe tief zu verstehen. In diesem Kurs
+beschränken wir uns auf den einfachsten Fall, die sogenannte einfache
+Stichprobe.
+
+## Einfache Stichproben {#sec-srs}
+
+Ausgangspunkt unserer Überlegungen ist eine Zufallsvariable $X$. Es
+kann sich dabei um eine beliebige Zufallsvariable mit einer
+beliebigen Verteilung handeln. 
+
+::: { .callout-tip collapse="true"}
+## Beispiele: Populationen
+
+Mögliche Zufallsvariablen $X$ sind zum Beispiel:
+
+- $X$ ist die Dauer, die eine Geschirrspülmaschine fehlerfrei funktioniert. 
+
+- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population.
+
+- $X$ ist eine normalverteilte Zufallsvariable mit Erwartungswert $\mu=5$
+und Standardabweichung $\sigma=2$.
+:::
+
+Zu der Zufallsvariable $X$ gehört eine Stichprobe $X_1,X_2,\ldots,X_n$ des
+Umfangs $n$.
+
+::: callout-note
+Die Folge von Zufallsvariablen $X_1,X_2,\ldots,X_n$ heißt **einfache Stichprobe** 
+(engl. simple random sample) aus $X$, wenn
+
+1. jedes $X_i$ wie $X$ verteilt ist und
+
+2. $X_1,X_2,\ldots,X_n$ unabhängig voneinander sind.
+:::
+
+Neben dem englischen Terminus "simple random sample" spricht man auch
+von einem "i.i.d. sample", wobei die Abkürzung für
+"identical and independently distributed" steht.
+
+Im Gegensatz zur umgangssprachlichen Bedeutung des Worts "Stichprobe"
+handelt es sich also *nicht* um tatsächlich beobachtete Daten! Eine
+Stichprobe im Sinne der formalen Definition besteht aus Zufallsvariablen. 
+Man kann sich eine Stichprobe vorstellen als die erhobenen Daten,
+bevor sie tatsächlich erhoben wurden. Sobald die Stichprobe (also die
+Zufallsvariablen) realisiert wurde, erhält man die tatsächlich erhobenen
+Daten. Um sie von der Stichprobe zu unterscheiden, schreibt man sie
+meist mit Kleinbuchstaben, $x_1,x_2,\ldots,x_n$, und man spricht von
+der **konkreten Stichprobe** (oder realisierten Stichprobe).
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Stichprobe
+
+Wie sieht eine Stichprobe aus für die Zufallsvariable 
+$X$: "Dauer, die eine Geschirrspülmaschine fehlerfrei funktioniert"? 
+Als Stichprobenumfang setzen wir $n=10$. Aus der
+Produktion werden nun zufällig 10 Geschirrspülmaschinen
+ausgewählt. Jede dieser Maschinen lässt man laufen, bis sie
+zum ersten Mal einen Fehler aufweisen. Für die $i$-te Maschine
+sei $X_i$ die Dauer (z.B. in Stunden) bis zum Fehler.
+
+Da alle 10 Maschinen dasselbe Produktionsverfahren
+durchlaufen haben, ist es plausibel anzunehmen, dass
+die Verteilungen identisch sind.
+Ob eine Maschine länger oder kürzer hält, hat 
+plausiblerweise keinen Einfluss auf die Laufzeit einer 
+anderen Maschine. Die Dauern sind also unabhängig
+(zumindest wenn man die Annahme wirklich für
+plausibel hält).
+
+Bevor diese Messungen tatsächlich durchgeführt werden,
+ist $X_1,\ldots,X_{10}$ die Stichprobe. Es handelt sich
+noch um Zufallsvariablen. Sobald die Messungen
+durchgeführt wurden (und folglich alle 10 Maschinen kaputt
+bzw. fehlerhaft sind), liegt die konkrete Stichprobe 
+$x_1,\ldots,x_{10}$ vor. Bei der konkreten Stichprobe
+handelt es sich um 10 Zahlen. 
+:::
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Stichprobe
+
+Wie sieht eine Stichprobe aus für die Zufallsvariable 
+$X$: "Nettomonatseinkommen eines zufällig ausgewählten Haushalts"?
+Der Stichprobenumfang sei $n=1000$. Aus der Population wird
+ein Haushalt zufällig ausgewählt. Dabei soll sichergestellt
+sein, dass alle Haushalte die gleiche Ziehungswahrscheinlichkeit
+haben. Das Nettoeinkommen des gezogenen Haushalts ist $X_1$.
+Nun wird aus der gleichen Population (also inklusive dem
+zuerst gezogenen Haushalt) wieder ein Haushalt ausgewählt.
+Sein Nettoeinkommen ist $X_2$. Das wird bis $X_{1000}$
+wiederholt. Es ist also durchaus erlaubt und möglich, dass
+ein Haushalt mehrfach in einer einfachen Stichprobe vorkommt.
+
+Da in jedem der 1000 Ziehungen aus der gleichen Population
+gezogen wird, sind alle Zufallsvariablen identisch verteilt.
+Ob in Schritt $i$ ein reicher oder armer Haushalt gezogen
+wird, hat keinen Einfluss darauf, ob im nächsten Schritt
+ein reicher oder armer Haushalt gezogen wird. Die Ziehungen
+sind also unabhängig voneinander.
+
+Die Stichprobe $X_1,\ldots,X_{1000}$ setzt sich aus 
+1000 Nettoeinkommen zusammen, die noch nicht tatsächlich
+abgefragt wurden. Es handelt sich noch um Zufallsvariablen.
+Sobald die Einkommensdaten tatsächlich erhoben wurden,
+hat sich die Stichprobe realisiert. Die konkrete
+Stichprobe besteht aus den 1000 Zahlen $x_1,\ldots,x_{1000}$.
+:::
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Stichprobe
+
+Wie sieht eine Stichprobe aus für die Zufallsvariable
+$X\sim N(5,2^2)$? Als Stichprobenumfang setzen wir $n=50$.
+Wir ziehen nun 50 Mal unabhängig voneinander aus der
+Normalverteilung $N(5,2^2)$. Die Stichprobe besteht aus den
+Zufallsvariablen $X_1,\ldots,X_{50}$. Sobald die
+Ziehung tatsächlich durchgeführt wurde, liegt die
+konkrete Stichprobe $x_1,\ldots,x_{50}$ vor.
+
+In R kann man mit dem Befehl
+```{r eval=FALSE}
+x <- rnorm(n, mean=5, sd=2)
+```
+eine einfache Stichprobe aus $N(5,2^2)$ ziehen. Bevor
+der Befehl ausgeführt wird, steht `x` für die Stichprobe.
+Nach der Ausführung enthält `x` die konkrete Stichprobe.
+:::
+
+## Statistiken {#sec-statistiken}
+
+Als Vorbereitung auf die eigentliche statistische Inferenz
+dient die folgende Definition.
+
+::: callout-note
+Wenn $X_1,\ldots,X_n$ eine einfache Stichprobe aus $X$
+ist und $g$ eine reellwertige Funktion mit $n$ Argumenten,
+dann heißt die Zufallsvariable
+$$
+T=g(X_1,\ldots,X_n)
+$$
+**Statistik** (engl. statistic).
+:::
+
+Eine Statistik im engen Sinne dieser Definition ist also
+eine Funktion einer Stichprobe. Da die Stichprobenelemente
+Zufallsvariablen sind, ist auch die Statistik $T$ eine
+Zufallsvariable. 
+
+Die mit großem Abstand wichtigste Statistik ist das Stichprobenmittel
+(das gewöhnlich nicht mit $T$, sondern mit $\bar X$ bezeichnet wird),
+$$
+\bar X=\frac{1}{n}\sum_{i=1}^n X_i.
+$$
+Das Stichprobenmittel ist eine Zufallsvariable, weil es eine
+Funktion der Stichprobe ist. Wie wir bereits hergeleitet haben
+(in @sec-lln), sind $E(\bar X)=\mu$ und $Var(\bar X)=\sigma^2/n$,
+wobei $\mu=E(X)$ und $\sigma^2=Var(X)$ sind. 
+
+Wenn die Population einer Normalverteilung folgt, d.h. wenn
+$X\sim N(\mu,\sigma^2)$, dann folgt aus den Eigenschaften der
+Normalverteilung, dass
+$$
+\bar X\sim N\left(\mu,\frac{\sigma^2}{n}\right).
+$$
+Bei einer normalverteilten Population kennt man also nicht nur
+Erwartungswert und Varianz des Stichprobenmittels, sondern 
+zusätzlich auch noch die exakte Verteilung. 
+
+Eine weitere wichtige Statistik ist die Stichprobenvarianz
+$$
+S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2.
+$$
+Warum bei der Definition der Stichprobenvarianz im Nenner des
+Bruchs nicht $n$, sondern $n-1$ steht, wird in Abschnitt XXX
+begründet.
+

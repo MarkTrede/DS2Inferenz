@@ -1,0 +1,387 @@
+# Punktschätzung {#sec-punktschaetzung}
+
+Alle Verteilungen, für die man sich in den Wirtschaftswissenschaften
+interessiert, können durch Zufallsvariablen repräsentiert werden. 
+Eine Zufallsvariable $X$ kann beispielsweise Dauer bis zur
+nächsten Transaktion an einer Aktienbörse darstellen; $X$ kann die
+Einkommensverteilung in der Population darstellen; $X$ kann
+eine Fehlerverteilung sein, die durch eine Normalverteilung
+beschrieben wird etc.
+
+Wir interessieren uns oft für bestimmte Aspekte der Verteilung von
+$X$, zum Beispiel für den Erwartungswert, 
+ein Quantil oder die Standardabweichung.
+Diese interessierenden Größen nennt man Parameter von $X$.
+Leider ist es im allgemeinen nicht möglich, die interessierenden
+Parameter exakt zu berechnen, weil wir die Verteilungsfunktion oder die
+Dichtefunktion von $X$ bei realen Anwendungen praktisch nie kennen. 
+
+Was jedoch möglich ist: Wir können den unbekannten Parameter, 
+für den wir uns interessieren, aus einer Stichprobe berechnen.
+Die Stichprobe dient also dazu, etwas über die Verteilung der
+Zufallsvariable zu lernen. Da die Stichprobe immer einem
+Zufallseinfluss unterliegt, lernt man zwar nicht die wahre
+Verteilung von $X$, aber man kann zumindest Aussagen darüber
+machen, in welchem Bereich der Parameter liegt, für den man
+sich interessiert. Intuitiv klar ist auch, dass man aus einer
+großen Stichprobe mehr über eine Verteilung lernen kann als 
+aus einer kleinen Stichprobe. 
+
+In diesem Kapitel wird erklärt, wie man eine Punktschätzung für
+den interessierenden Parameter finden kann. Im nachfolgenden
+@sec-intervallschaetzung geht es dann darum, Intervalle zu 
+bestimmen, in denen der Parameter mit einer hohen Wahrscheinlichkeit
+liegt.
+
+## Schätzer
+
+Den Parameter, für den wir uns interessieren, bezeichnen wir
+allgemein mit $\theta$ ("theta"). Es kann sich bei $\theta$ um
+den Erwartungswert einer Verteilung handeln, um die Varianz,
+ein Quantil, den Wert der Verteilungsfunktion an einer bestimmten
+Stelle usw. 
+
+Um etwas über den unbekannten Wert von $\theta$ zu lernen,
+wird eine einfache Stichprobe $X_1,\ldots,X_n$ vom Umfang $n$ 
+erhoben. Die Stichprobe besteht, wie in @sec-stichproben erklärt,
+aus Zufallsvariablen, die identisch und unabhängig verteilt
+sind. 
+
+Mit Hilfe der Stichprobe wird nun eine Aussage über den Wert
+des unbekannten Parameters $\theta$ getroffen. Dazu
+benutzt man eine Stichprobenfunktion bzw. Statistik. 
+
+::: callout-note
+## Definition: Schätzer
+Eine Statistik $\hat\theta(X_1,\ldots,X_n)$, die dazu dient,
+eine Aussage über den Wert des unbekannten Parameters $\theta$
+zu machen, nennt man **Schätzer** (engl. estimator).
+:::
+
+Da die Stichprobe aus Zufallsvariablen besteht, handelt es
+sich auch bei dem Schätzer um eine Zufallsvariable. 
+Ersetzt man die Stichprobe durch die konkrete (realisierte)
+Stichprobe $x_1,\ldots,x_n$, erhält man eine Realisation
+des Schätzers. Sie heißt **Schätzwert** (engl. estimate).
+Der Schätzwert ist *keine* Zufallsvariable.
+In der Notation wird gewöhnlich nicht zwischen dem Schätzer
+und dem Schätzwert unterschieden, beides wird mit $\hat\theta$
+bezeichnet. Die richtige Bedeutung ergibt sich meist aus
+dem Kontext. Wenn die Bedeutung nicht eindeutig ist, sollte
+man $\hat\theta(X_1,\ldots,X_n)$ für den Schätzer und
+$\hat\theta(x_1,\ldots,x_n)$ für den Schätzwert schreiben.
+
+## Wichtige Schätzer
+
+Im folgenden werden Schätzer für zwei Parameter vorgestellt, 
+die in den Wirtschaftswissenschaften besonders oft von
+Interesse sind, nämlich Erwartungswert und Varianz.
+
+### Erwartungswert
+
+Der Erwartungswert einer Verteilung ist vermutlich der Parameter, 
+der mit Abstand am häufigsten von Interesse ist. Er wird
+durch den Schätzer
+$$
+\bar X=\hat\theta(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n X_i
+$$
+geschätzt. Es handelt sich also um das Stichprobenmittel. Der
+zugehörige Schätzwert 
+$$
+\bar x=\hat\theta(x_1,\ldots,x_n)=\frac{1}{n}\sum_{i=1}^n x_i
+$$
+ist das arithmetische Mittel der konkreten Stichprobe. 
+
+In R berechnet man das Stichprobenmittel mit der Funktion `mean`.
+Wenn die konkrete Stichprobe als Vektor `x` (der Länge `n`)
+vorliegt, dann ergibt `mean(x)` den Schätzwert für 
+den Erwartungswert.
+
+::: {.callout-tip collapse="true"}
+## Beispiel: Erwartungswertschätzung
+
+<img src="images/AdobeStock_14584248b_Erdbeeren.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
+In einem Supermarkt werden Erdbeeren in Pappschalen angeboten.
+Ausgeschildert sind die Schalen mit einem Gewicht von 500g.
+Natürlich wiegt nicht jede Schale wirklich exakt 500g,
+es gibt kleinere Abweichungen von dem Soll-Gewicht.
+Im Mittel muss das Gewicht der Schalen aber (mindestens) dem 
+ausgeschilderten Gewicht entsprechen. Um herauszufinden, wie 
+hoch der Erwartungswert des Gewichts einer Schale ist, werden 
+in dem Supermarkt daher zufällig $n=20$ Schalen ausgewählt 
+und gewogen. Die Ergebnisse der Messungen werden in R als 
+Vektor `x` zusammengefasst.
+```{r}
+x <- c(509.2,504.6,492.8,508.0,500.2,
+       508.4,502.6,518.0,494.4,487.1,
+       510.8,504.2,519.9,488.3,509.2,
+       513.8,511.2,506.1,505.7,493.3)
+x
+```
+Der Schätzwert für den Erwartungswert des Gewichts einer
+Schale Erdbeeren beträgt
+```{r}
+mean(x)
+```
+:::
+
+Der Schätzwert für das mittlere Gewicht ist also tatsächlich
+etwas höher als das angegebene Gewicht. Würde man eine
+neue Stichprobe (wieder vom Umfang 20) ziehen, ergäbe sich
+ein anderer Schätzwert.
+
+### Varianz
+
+Als Schätzer für die Varianz verwendet man
+$$
+S^2=\hat\theta(X_1,\ldots,X_n)=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2,
+$$
+also die Stichprobenvarianz. Die Realisation ist der Schätzwert
+$$
+s^2=\hat\theta(x_1,\ldots,x_n)=\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar x)^2,
+$$
+also die Varianz der konkreten Stichprobenelemente. 
+Schätzer und Schätzwert für die Standardabweichung sind $S$ und $s$.
+
+In R berechnet man die Stichprobenvarianz und die
+Stichprobenstandardabweichung mit den beiden
+Funktionen `var` und `sd` (standard deviation).
+Wenn die konkrete Stichprobe als Vektor `x` (der Länge `n`)
+vorliegt, dann ergibt `var(x)` den Schätzwert für 
+die Varianz und `sd(x)` den Schätzwert für die
+Standardabweichung.
+
+::: {.callout-tip collapse="true"}
+## Varianzschätzung 
+
+Wie hoch sind die Varianz und die Standardabweichung des
+Gewichts der Erdbeerschalen in dem Supermarkt? Beide
+Größen können mit Hilfe einer Stichprobe geschätzt
+werden. Wir verwenden die gleiche konkrete Stichprobe
+wie im letzten Beispiel. Die gemessenen Gewichte der
+20 zufällig ausgewählten Schalen waren
+```{r}
+x
+```
+Aus diesen konkreten Werten wird die Stichprobenvarianz
+bestimmt. Sie ist
+```{r}
+var(x)
+```
+Die Stichprobenstandardabweichung beträgt
+```{r}
+sd(x)
+```
+:::
+
+## Unverzerrtheit
+
+<img src="images/AdobeStock_391798b_Bogenschiessen.jpeg" align="right" width=30%" style="padding-left:15px;padding-top:5px;"/>
+Man kann sich einen Schätzer als Bogenschützen vorstellen, der
+auf eine Zielscheibe schießt. Der wahre Parameter $\theta$ liegt im Zentrum
+der Zielscheibe. Der Bogenschütze trifft natürlich nicht bei jedem 
+Schuss exakt ins Zentrum, er liegt manchmal zu weit oben oder unten,
+zu weit links oder rechts. Die Einschlagstelle des Pfeils in der Zielscheibe
+entspricht dem Schätzer $\hat\theta$.
+
+In einem Gedankenexperiment können wir uns vorstellen, dass nicht nur
+eine Stichprobe vom Umfang $n$ gezogen wird, sondern dass unabhängig
+voneinander mehrere Stichproben jeweils vom Umfang $n$ gezogen werden.
+Die Analogie des Bogenschützen wären mehrere Schüsse auf die Zielscheibe.
+
+Die folgende Abbildung zeigt die Einschläge von vier Bogenschützen,
+die jeweils 20 Pfeile mit dem Ziel abschießen, möglichst dicht an
+dem schwarzen Punkt in der Mitte zu landen.
+```{r echo=FALSE,out.width="70%",fig.asp=1,fig.align='center'}
+library(DescTools)
+bogen <- function(n,mx,my,sd){
+  x <- rnorm(n,0,sd)
+  y <- rnorm(n,0,sd)
+  return(list(x=x-mean(x)+mx,y=y-mean(y)+my))
+}
+n <- 20
+par(mfrow=c(2,2),mar=c(0.2,0.2,1.2,0.2))
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(a)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(n,0.5,0.5,0.05)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(b)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.3,0.35,0.05)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(c)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.5,0.5,0.15)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(d)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.3,0.35,0.15)
+points(xy)
+```
+
+Welcher Schütze ist der beste? Offenbar trafen die Pfeile von (a)
+besonders nahe am Zielpunkt. Der Schütze (a) hat zwar das Ziel nicht
+exakt getroffen, aber seine Pfeile lagen nicht systematisch zu hoch
+oder niedrig oder zu weite links oder rechts. Außerdem liegen alle
+Pfeile nahe beieinander. Im Gegensatz dazu hat (b) zwar auch alle 
+Pfeile nahe beieinander platziert, aber sie liegen systematisch zu 
+weit links unten. Die Pfeile der Schützen (c) und (d) streuen 
+deutlich mehr. Während (c) gleichmäßig um das Ziel herum getroffen
+hat, liegt (d) systematisch zu weit links unten. 
+
+Diese Überlegungen lassen sich auf Schätzer übertragen. Ein
+Qualitätskriterium für Schätzer ist die Erwartungstreue
+(oder Unverzerrtheit).
+
+::: callout-note
+## Definition: Erwartungstreue
+
+Ein Schätzer $\hat\theta$ heißt **erwartungstreu** oder **unverzerrt** 
+(engl. unbiased), wenn
+$$
+E(\hat\theta)=\theta.
+$$
+:::
+
+Der Schätzer $\hat\theta$ darf zwar um den wahren Wert $\theta$
+herum streuen, aber er soll im Erwartungswert nicht zu hoch oder
+zu niedrig sein, sondern den wahren Wert "im Mittel" treffen.
+Die Schützen (a) und (c) wären in Analogie erwartungstreu,
+die Schützen (b) und (d) hingegen nicht. 
+
+Im folgenden untersuchen wir, ob die Schätzer $\bar X$ (für
+den wahren Erwartungswert $\mu$) und $S^2$ (für die 
+wahre Varianz $\sigma^2$) erwartungstreu sind. 
+
+Den Erwartungswert von $\bar X$ haben wir bereits in @sec-lln
+hergeleitet (dort mit der leicht abgewandelten Notation $\bar X_n$),
+er ist
+$$
+E(\bar X)=\mu.
+$$
+Folglich ist $\bar X$ ein erwartungstreuer Schätzer für $E(X)$. 
+
+Nun betrachten wir den Varianzschätzer 
+$$
+S^2=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2.
+$$
+Die Herleitung ist recht komplex. Wir beginnen mit einem Trick:
+In die Definition des Schätzers fügen wir den Ausdruck
+$-\mu+\mu$ ein. Dadurch verändert sich das Ergebnis natürlich
+nicht, aber der Term unter dem Quadrat lässt sich auf eine
+neue Art schreiben.
+$$
+\begin{align*}
+E(S^2) &= E\left(\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2\right)\\
+&= E\left(\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\mu+\mu-\bar X)^2\right)\\
+&= E\left(\frac{1}{n-1}\sum_{i=1}^{n}[(X_i-\mu)+(\mu-\bar X)]^2\right)\\
+&= E\left(\frac{1}{n-1}\sum_{i=1}^{n}\left[(X_i-\mu)^2+
+(\mu-\bar X)^2+2(X_i-\mu)(\mu-\bar X) \right] \right)\\
+&= \left(\frac{1}{n-1}\sum_{i=1}^{n}E((X_i-\mu)^2)\right)+
+\frac{1}{n-1}\sum_{i=1}^{n}E((\mu-\bar X)^2)\\
+&\quad -\frac{2}{n-1}\sum_{i=1}^{n}E((X_i-\mu)(\bar X-\mu))\\
+&= \left(\frac{1}{n-1}\sum_{i=1}^{n}E((X_i-\mu)^2)\right) 
++\frac{n}{n-1}E((\bar{X}-\mu)^2) \\
+&\quad -\frac{2}{n-1}\sum_{i=1}^{n}E((X_i-\mu)(\bar{X}-\mu)).
+\end{align*}
+$$
+Der Schritt von Zeile 3 zu Zeile 4 ist eine Anwendung der
+ersten binomischen Formel. Danach werden die üblichen Rechenregeln
+für Erwartungswerte angewendet. Die drei Summanden werden nun 
+einzeln weiter betrachtet. Der erste Summand ist
+$$
+\begin{align*}
+\frac{1}{n-1}\sum_{i=1}^{n}E((X_i-\mu)^2)  &=
+\frac{1}{n-1}\sum_{i=1}^{n}Var(X_i) \\
+&=\frac{1}{n-1}\sum_{i=1}^{n}\sigma^2 \\
+&=\frac{n}{n-1}\sigma^2.
+\end{align*}
+$$
+Dabei wurde die Definition der Varianz (vgl. @sec-varianz) genutzt.
+
+Der zweite Summand ist 
+$$
+\begin{align*}
+\frac{n}{n-1}E((\bar{X}-\mu)^2) &=\frac{n}{n-1}Var(\bar{X}) \\
+&=\frac{n}{n-1}\frac{\sigma^2}{n}\\
+&=\frac{\sigma^2}{n-1}.
+\end{align*}
+$$
+Die Varianz des Stichprobenmittels wurde bereits in @sec-lln hergeleitet. 
+
+Der dritte Summand ist
+$$
+\begin{align*}
+\frac{2}{n-1}\sum_{i=1}^{n}E((X_i-\mu)(\bar{X}-\mu))  
+&= \frac{2n}{n-1} E((X_1-\mu)(\bar{X}-\mu))  \\
+&= \frac{2n}{n-1} Cov(X_{1},\bar{X}) \\
+&= \frac{2n}{n-1} Cov\left( X_{1},\frac{1}{n}\sum_{i=1}^{n}X_i\right)  \\
+&= \frac{2}{n-1}\sum_{i=1}^{n}Cov(X_1,X_i) \\
+&= \frac{2}{n-1}\sigma^2.
+\end{align*}
+$$
+Hier ist der erste Schritt der schwierigste. Da alle Stichprobenelemente
+$X_i$ identisch verteilt sind, ist der Ausdruck
+$$
+E((X_i-\mu)(\bar{X}-\mu))
+$$
+für alle $i$ gleich. Er hängt also nicht im Laufindex $i$ ab, und
+man darf folglich anstelle von $X_i$ auch (z.B.) $X_1$ schreiben.
+Dieser Ausdruck wird in der Summe $n$ Mal addiert. Im nächsten
+Schritt wird die Definition der Kovarianz verwendet 
+(vgl. @sec-kovarianz). Schließlich wird im letzten Schritt
+ausgenutzt, dass $Cov(X_1,X_1)=Var(X_1)=\sigma^2$ und $Cov(X_1,X_i)=0$ für $i>1$.
+
+Führt man die drei Terme wieder zusammen, ergibt sich
+$$
+\begin{align*}
+E(S^2) &= \frac{n}{n-1}\sigma^2+\frac{\sigma^2}{n-1}-\frac{2}{n-1}\sigma^2 \\
+&= \left(\frac{n}{n-1}+\frac{1}{n-1}-\frac{2}{n-1}\right)\sigma^2 \\
+&= \left(\frac{n+1-2}{n-1}\right)\sigma^2 \\
+&= \sigma^2.
+\end{align*}
+$$
+Der Schätzer $S^2$ ist also erwartungstreu für die Varianz $\sigma^2$.
+Diese Herleitung erklärt auch, warum der Varianzschätzer im Nenner
+$n-1$ stehen hat. Würde durch $n$ geteilt werden, dann wäre der
+Varianzschätzer verzerrt. 
+
+Beachten Sie, dass der Schätzer $S$ für die Standardabweichung
+*nicht* erwartungstreu ist für die wahre Standardabweichung $\sigma$.
+Die Wurzel ist keine lineare Funktion. In @sec-lintrans wurde
+gezeigt, dass der Erwartungswert bei nichtlinearen Funktionen 
+nicht aus der Funktion "herausgezogen" werden darf.
+
+Erwartungstreue ist ein gut verständliches Qualitätskriterium für
+einen Schätzer, denn Schätzer, die systematisch neben dem wahren
+Wert landen, sind schlechter als erwartungstreue Schätzer. In dem
+Wahlpflichtmodul **Advanced Statistics** werden weitere wichtige
+Qualitätskriterien für Schätzer (z.B. Konsistenz und Effizienz) 
+eingeführt und ausführlich diskutiert.
+
+## Simulation in R
+
+XXX
+
+## Schätzmethoden
+
+Eine Frage wurde in diesem Kapitel bisher verschwiegen: Woher
+kommen eigentlich die Schätzer? Warum wird der Erwartungswert
+durch $\bar X$ (also durch das Stichprobenmittel) geschätzt?
+Warum schätzt man die Varianz durch die Stichprobenvarianz?
+Was macht man, wenn man Parameter einer neuen Verteilung
+oder eines ökonomischen Modells schätzen will, für die
+es noch keine Schätzer gibt? 
+
+Es gibt einige allgemeine Konstruktionsprinzipien für 
+Schätzer. In diesem Kurs setzen wir jedoch einfach voraus, 
+dass die Formeln für die Schätzer vorliegen. 
+Ausführlicher behandelt werden Schätzmethoden 
+in dem Wahlpflichtmodul **Advanced Statistics**.

@@ -2,12 +2,10 @@
 
 In diesem Kurs geht es um Zufall. Die Frage, was man denn unter Zufall eigentlich zu verstehen hat, ist schwierig zu beantworten. Sie gehört eher in den Bereich der Philosophie als den der Wirtschaftswissenschaften. Wir definieren in diesem Kurs Zufall auf eine sehr pragmatische Art: Wir haben es mit einem **Zufallsvorgang** zu tun, wenn wir nicht genau wissen, was passieren wird, aber wissen, was alles passieren könnte.
 
-<img src="images/AdobeStock_437318696b.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
-
+<img src="images/AdobeStock_437318696b_DAX.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
 Mit Zufallsvorgängen hat man es also unentwegt zu tun. Wir wissen nicht, wie sich der DAX-Index im Laufe des nächsten Monats entwickeln wird, aber wir wissen, dass er einen Wert zwischen 0 und unendlich haben wird. Die Entwicklung des DAX-Index ist also im Sinne unserer Definition zufällig. Wir wissen nicht, ob eine bestimmte Person im nächsten Jahr arbeitslos sein wird, aber wissen, dass sie es sein könnte oder auch nicht. Der Arbeitslosigkeitsstatus dieser Person ist also ebenfalls zufällig im Sinne unserer Defintion. Entscheidend für unser Verständnis von Zufall ist also nicht, dass ein Vorgang ohne erkennbare Ursache auf ein bestimmtes Ergebnis zuläuft, sondern dass wir als Beobachter nicht genau vorhersehen können, was passieren wird, selbst wenn wir wissen, dass es Faktoren gibt, mit denen man das Ergebnis erklären könnte, wenn man mehr Informationen hätte.
 
-<img src="images/AdobeStock_52375773b.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
-
+<img src="images/AdobeStock_52375773b_Wuerfelweiss.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
 In den Wirtschaftswissenschaften betrachten wir fast immer Zufallsvorgänge, die nicht unter identischen Bedingungen wiederholt werden können. Trotzdem werden wir in diesem Kurs, zumindest am Beginn, aus didaktischen Gründen oft Zufallsvorgänge betrachten, die nichts mit wirtschaftlichen Fragestellungen zu tun haben. Als Beispiele dienen oft Münzwürfe oder Würfelwürfe. Solche Zufallsvorgänge, die sich unter praktisch identischen Bedingungen wiederholen lassen, nennt man auch Zufallsexperimente.
 
 Damit wir einen Zufallsvorgang präzise beschreiben können und vernünftig mit ihm arbeiten können, brauchen wir einen formalen Rahmen und eine geeignete Terminologie. Die Wahrscheinlichkeitstheorie bietet einen solchen Rahmen. In den folgenden Abschnitten lernen wir ihn kennen.
@@ -17,24 +15,19 @@ Damit wir einen Zufallsvorgang präzise beschreiben können und vernünftig mit 
 Um einen Zufallsvorgang formal zu erfassen, schreiben wir alle möglichen Ergebnisse des Zufallsvorgangs in eine Menge. Dabei spielt es keine Rolle, ob der Eintritt eines Ergebnisses als wahrscheinlich oder unwahrscheinlich angesehen wird. Alle Ergebnisse, die eintreten können, werden in die Menge aufgenommen.
 
 ::: callout-note
+## Definition: Ergebnisraum
 Die Menge aller Ergebnisse nennen wir **Ergebnisraum** (engl. sample space).
 :::
 
 Der Ergebnisraum wird meist mit dem griechischen Buchstaben $\Omega$ (großes Omega) bezeichnet. Die Elemente des Ergebnisraums werden allgemein als $\omega_1,\omega_2,\ldots$ (kleine Omegas) notiert.
 
-::: callout-tip
-Beim Werfen einer Münze kann es zu den beiden Ergebnissen "Kopf" (K) oder "Zahl" (Z) kommen. Die Ergebnismenge hat also zwei Elemente: $\Omega=\{K,Z\}$.
-:::
-
-::: callout-tip
-Wenn die Münze zweimal geworfen wird (oder wenn zwei Münzen geworfen werden), dann lautet die Ergebnismenge $\Omega=\{KK,KZ,ZK,ZZ\}$.
-:::
-
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Ein Würfel
 Beim Werfen eines Würfels kann jede Augenzahl von 1 bis 6 auftreten, die Ergebnismenge ist also $\Omega=\{1,2,3,4,5,6\}$.
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
 Beim Werfen zweier Würfel kann bei jedem der beiden Würfel jede Augenzahl 
 von 1 bis 6 auftreten, die Ergebnismenge ist also 
 $$
@@ -49,22 +42,25 @@ $$
 $$
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Aktienrendite
 Der DAX-Index von morgen kann Werte zwischen 0 und unendlich annehmen. Die Ergebnismenge ist in diesem Fall $\Omega=\mathbb{R}^+_0$ (die Menge der nicht-negativen reellen Zahlen).
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Wahlabsichten
 Wenn wir aus der Population aller Wahlberechtigten zufällig eine Person auswählen und nach ihrer bevorzugten Partei befragen, dann enthält die Ergebnismenge alle zur Wahl stehenden Parteien,
 $\Omega=\{$CDU, CSU, SPD, Grüne, FDP, $\ldots\}$.
 :::
 
 ## Ereignisse
 
-Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf einzelne Ergebnisse aus der Ergebnismenge, sondern oft auf mehrere Ergebnisse. Zusammenfassungen von Ergebnissen nennt man Ereignisse. Sie werden meist mit großen lateinischen Buchstaben bezeichnet ($A, B, \ldots$).
+Aussagen über Wahrscheinlichkeiten beziehen sich nicht immer nur auf einzelne Ergebnisse aus der Ergebnismenge, sondern oft auf mehrere Ergebnisse. Zusammenfassungen von Ergebnissen nennt man Ereignisse. Sie werden meist mit großen lateinischen Buchstaben bezeichnet ($A, B, C, \ldots$).
 
-<img src="images/AdobeStock_159363813b.jpeg" align="center" width="99%"/>
+<img src="images/AdobeStock_159363813b_Event.jpeg" align="center" width="99%"/>
 
 ::: callout-note
+## Definition: Ereignis
 Teilmengen der Ergebnismenge $\Omega$ heißen **Ereignisse** (engl. events). Ein Ereignis $A$ tritt ein, wenn das Ergebnis $\omega$ des Zufallsvorgangs Element des Ereignisses ist, d.h. wenn $\omega\in A$.
 :::
 
@@ -99,7 +95,8 @@ $$
 \end{align*}
 $$
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Ein Würfel
 Wir betrachten einen Würfelwurf mit der Ergebnismenge $\Omega=\{1,2,3,4,5,6\}$ und definieren die folgenden drei Ereignisse: 
 $$
 \begin{align*}
@@ -111,7 +108,8 @@ $$
 Die Ereignisse lassen sich auch in Worten ausdrücken: $A$ ist das Ereignis "Eine gerade Zahl wird gewürfelt", $B$ ist "Eine Zahl kleiner als 4 wird gewürfelt" und $C$ ist "Eine 2 wird gewürfelt". Wenn bei dem Wurf nun eine 6 gewürfelt wird, dann tritt $A$ ein, $B$ und $C$ dagegen nicht. Wenn eine 2 auftritt, dann treten alle drei Ereignisse ein.
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
 Nun werden zwei Würfel geworfen. Die Ergebnismenge ist 
 $$
 \begin{align*}
@@ -134,7 +132,8 @@ $$
 In Worten bedeutet $A$: "Der erste Würfel zeigt eine 1", $B$: "Die Augensumme beträgt 8" und $C$: "Es liegt ein Pasch vor" (d.h. auf beiden Würfel ist die gleiche Augenzahl zu sehen). Wenn nach dem Wurf das Ergebnis "44" auftritt, dann treten $B$ und $C$ ein, aber $A$ nicht. Bei dem Ergebnis "25" tritt keins der drei Ereignisse ein. Bei "15" tritt nur $A$ ein.
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Aktienrendite
 Wir betrachten die Tagesrendite einer Aktie mit der Ergebnismenge $\Omega=[-100, \infty]$. Außerdem definieren wir die Ereignisse 
 $$
 \begin{align*}

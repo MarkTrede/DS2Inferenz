@@ -1,0 +1,284 @@
+# Hypothesentests {#sec-hypothesentests}
+
+Bevor die grundlegende Idee (die "Philosophie") und das Vokabular
+der Hypothesentests vorgestellt werden, gehen wir einmal durch,
+wie ein Strafprozess abläuft. Zwischen einem Prozess und einem
+Hypothesentest gibt es nämlich viele Analogien, die für das 
+Verständnis hilfreich sind. Die Darstellung eines Prozesses ist
+sehr holzschnittartig und soll in keiner Weise ein Abbild der
+Realität eines echten Strafverfahrens in einem deutschen (oder
+anderen) Gericht sein, sondern nur die Grundideen eines
+Prozesses aufzeigen.
+
+<img src="images/AdobeStock_155565861b_Richter.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+Am Beginn des Strafverfahrens steht die Anklage. Dem Angeklagten
+wird ein Vergehen vorgeworfen. Ob die Anklage wahr oder falsch ist,
+d.h. ob der Angeklagte die Tat wirklich begangen hat oder nicht,
+weiß die Richterin nicht. Die Anwältin des Angeklagten behauptet,
+dass er unschuldig ist. Der Staatsanwalt behauptet hingegen, dass
+der Angeklagte schuldig ist. Damit die Richterin ein Urteil fällen 
+kann, braucht sie Zeugenaussagen und Beweise. 
+
+Im Allgemeinen hilft die Beweisaufnahme, ein genaueres Bild der 
+möglichen Tat zu gewinnen. Auf Grundlage der Beweise fällt
+die Richterin ihr Urteil. Sie kann den Angeklagten verurteilen
+oder freisprechen. Natürlich wäre es wünschenswert, wenn 
+der Angeklagte verurteilt wird, sofern er schuldig ist, und
+freigesprochen wird, sofern er unschuldig ist. Aber selbst mit den 
+Beweisen bleibt immer noch eine gewisse Restunsicherheit, ob der 
+Angeklagte die Tat wirklich begangen hat. Es kann also passieren, 
+dass die Richterin den Angeklagten verurteilt, obwohl er unschuldig 
+ist. Es kann passieren, dass er freigesprochen wird, obwohl er 
+schuldig ist. In beiden Fällen liegt ein Irrtum vor und es
+kommt zu einem Fehlurteil.
+
+Welches Art von Fehlurteil ist schlimmer? Ist es schlimmer, wenn
+ein Schuldiger freigesprochen wird? Oder sollte man versuchen,
+möglichst keinen Unschuldigen zu verurteilen? Bei dieser Abwägung
+handelt es sich um ein Werturteil. In unserem Rechtssystem ist
+die Antwort klar: Unschuldige sollen nicht verurteilt werden.
+Damit das soweit wie möglich sichergestellt ist, nimmt man 
+in Kauf, dass auch Schuldige freigesprochen werden: In dubio
+pro reo - im Zweifel für den Angeklagten. Diese Asymmetrie 
+führt dazu, dass Justizirrtümer, bei denen jemand irrtümlich 
+verurteilt wird, selten vorkommen. Der Preis dafür ist, dass es 
+relativ leicht passieren kann, dass Schuldige freigesprochen 
+werden.
+
+Die Asymmetrie ist also durchaus gewollt. Man erreicht sie,
+indem Angeklagte nur dann verurteilt werden, wenn die Beweise 
+*sehr deutlich* für ihre Schuld sprechen. Es reicht nicht 
+aus, wenn die Beweise nur "ein wenig" oder "eher" für die Schuld 
+sprechen.
+
+## Vokabular
+
+Ein statistischer Hypothesentest läuft in etwa analog zu einem
+Strafverfahren ab. Am Beginn steht anstelle der Anklage eine
+ökonomische Theorie oder Hypothese. Die Hypothese bezieht
+sich auf einen (unbekannten) Parameter einer Zufallsvariable $X$, 
+der allgemein mit $\theta$ bezeichnet sei. In diesem Kurs betrachten 
+wir eine besonders einfache, aber auch besonders wichtige Art
+von Hypothesen, nämlich Hypothesen über einen Erwartungswert
+(oder zwei Erwartungswerte). Trotz dieser Einschränkung 
+wird die grundsätzliche Vorgehensweise der statistischen
+Hypothesentests zunächst in allgemeiner Form vorgestellt.
+In den Wahlpflichtmodulen **Advanced Statistics** und
+**Econometrics** und in dem VWL-Pflichtmodul 
+**Empirical Economics** lernen Sie, wie man mit
+anderen Hypothesen umgeht. Die prinzipielle Vorgehensweise ist
+jedoch gleich. Ein tieferes Verständnis der Erwartungswerttests 
+ist wertvoll, weil man dann auch andere Tests leichter 
+verstehen kann.
+
+Die Gegenstücke zu den Behauptungen von Rechtanwältin und 
+Staatsanwalt heißen **Nullhypothese** und **Alternativhypothese**
+(engl. null hypothesis, alternative hypothesis; der
+Plural von hypothesis ist hypotheses).
+Sie werden mit $H_0$ und $H_1$ abgekürzt. Typischerweise
+besagt die Nullhypothese, dass der unbekannte Parameter $\theta$
+einen bestimmten Wert vorgegebenen Wert $\theta_0$ annimmt,
+während die typische Alternative behauptet, dass das nicht
+so ist.
+$$
+\begin{align*}
+H_0: \theta &=\theta_0\\
+H_1: \theta &\neq \theta_0.
+\end{align*}
+$$
+Die Nullhypothese entspricht der Unschuldsvermutung der
+Rechtsanwältin, die Alternative behauptet wie der
+Staatsanwalt: "schuldig". 
+
+Wenn in der Nullhypothese eine Gleichheit behauptet wird, 
+spricht man von einem **zweiseitigen Test**. Es ist auch möglich, 
+eine Ungleichung in der Nullhypothese zu formulieren. Dann spricht 
+man von einem **einseitigen Test**. Einseitige Tests sind also
+$$
+\begin{align*}
+H_0: \theta &\ge\theta_0\\
+H_1: \theta &< \theta_0
+\end{align*}
+$$
+oder
+$$
+\begin{align*}
+H_0: \theta &\le\theta_0\\
+H_1: \theta &> \theta_0.
+\end{align*}
+$$
+Einseitige Tests sind ein klein wenig schwieriger zu 
+verstehen, daher konzentrieren wir uns zunächst auf 
+zweiseitige Tests.
+
+Der Beweisaufnahme entspricht bei einem Hypothesentest 
+die Stichprobenerhebung. Die einfache Stichprobe $X_1,\ldots,X_n$
+besteht aus Zufallsvariablen. Aus der Stichprobe errechnet
+man eine **Testsstatistik** (engl. test statistic)
+$$
+T=T(X_1,\ldots,X_n).
+$$
+Die Teststatistik ist eine Statistik im Sinne von @sec-statistiken
+und somit eine Zufallsvariable. Die Teststatistik wird so
+gewählt, dass sie die "Beweislage" möglichst gut zusammenfasst.
+
+Da die Teststatistik eine Zufallsvariable ist, hat sie eine
+Verteilung. Man leitet nun her, wie die Verteilung der
+Teststatistik *unter Gültigkeit der Nullhypothese* aussieht.
+Die Verteilung unter der Nullhypothese gibt an, in welchem
+Bereich die Teststatistik vermutlich liegt, wenn die Nullhypothese
+stimmt. Umgekehrt folgt aus der Verteilung auch, in welchem
+Bereich die Teststatistik eher nicht liegen wird, wenn die
+Nullhypothese stimmt. Diesen Bereich nennt man den
+**kritischen Bereich** (engl. critical region). Die Festlegung des 
+kritischen Bereichs ist meist der schwierigste Schritt. Wir gehen
+später ausführlicher darauf ein und nehmen an dieser Stelle
+erst einmal einfach an, dass der kritische Bereich
+gegeben ist.
+
+Wenn die Teststatistik im kritischen Bereich liegt, wird
+die Nullhypothese abgelehnt. Das Analogon in einem Strafverfahren
+ist eine Beweislage, die deutlich für die Schuld des
+Angeklagten spricht. Deshalb verurteilt die Richterin den
+Angeklagten. Wenn die Teststatistik nicht im kritischen Bereich 
+liegt, wird die Nullhypothese nicht abgelehnt. Der Angeklagte
+wird mangels Beweisen nicht verurteilt.
+
+Wie in einem Prozess kann es auch bei einem Hypothesentest
+zu einem Fehlurteil kommen. Man spricht von einem 
+**Fehler erster Art** (engl. error of the first kind), 
+wenn die Nullhypothese verworfen wird,
+obwohl sie wahr ist. Ein Unschuldiger wird verurteilt.
+Ein **Fehler zweiter Art** (engl. error of the second kind) 
+tritt auf, wenn die Nullhypothese
+nicht abgelehnt wird, obwohl sie falsch ist. Ein Schuldiger
+wird freigesprochen.
+
+Bei einem Strafprozess will man sicherstellen, dass 
+Unschuldige möglichst nicht verurteilt werden. Dafür nimmt
+man in Kauf, dass Schuldige freigesprochen werden. 
+Welche Art von Fehler ist in der Wissenschaft schlimmer?
+Auch hier handelt es sich um ein Werturteil, das sich
+aus dem wissenschaftlichen Verfahren heraus ergibt: Ein
+Fehler erster Art ist schlimmer als ein Fehler zweiter
+Art, weil eine abgelehnt Hypothese quasi aus dem
+wissenschaftlichen "Rennen" aussortiert wird. Dagegen
+ist eine Hypothese, die nicht als falsch gilt, nicht
+unbedingt wahr. Sie bleibt "im Rennen", wird aber
+möglicherweise irgendwann in Zukunft als falsch erkannt 
+werden.
+
+Wenn ein Fehler erster Art schlimmer ist als ein Fehler
+zweiter Art, dann sollte der kritische Bereich so
+festgelegt werden, dass ein Fehler erster Art nur
+mit einer kleinen (vorgegebenen) Wahrscheinlichkeit
+auftritt. Diese Wahrscheinlichkeit nennt man das
+**Signifikanzniveau** (engl. significance level) 
+des Tests, sie wird mit $\alpha$ 
+bezeichnet. In den Wirtschaftswissenschaften setzt
+man fast immer $\alpha=0.05$, manchmal auch $\alpha=0.01$
+oder $\alpha=0.1$.
+
+Die Wahrscheinlichkeit, dass der Test eine falsche
+Nullhypothese tatsächlich auch als falsch erkennt,
+nennt man die **Power** oder **Güte** (engl. power)
+des Tests.
+
+Sobald die Stichprobe realisiert wurde, wird aus der
+Stichprobe $X_1,\ldots,X_n$ die konkrete Stichprobe
+$x_1,\ldots,x_n$. In der Folge realisiert sich
+auch die Teststatistik $T$, 
+$$
+t=T(x_1,\ldots,x_n).
+$$
+Die Realisation nennt man **Wert der Teststatistik** 
+oder **Testgröße**.
+
+## Erwartungswerttests
+
+Das allgemeine Vokabular wird besser verständlich, wenn man 
+konkrete Tests durchspielt. In diesem Abschnitt sehen
+wir uns mehrere Tests für Erwartungswerte an. Sie laufen
+alle nach einem ähnlichen Schema ab, die Unterschiede sind
+marginal. Ähnlich wie bei der Intervallschätzung starten
+wir mit einer sehr unrealistischen Situation. Die
+restriktiven Annahmen werden anschließend Schritt für
+Schritt aufgeweicht.
+
+### Normalverteiung mit bekannter Varianz {.unnumbered}
+
+Als erstes betrachten wir einen Test für den unbekannten
+Erwartungswert $\mu$ einer Zufallsvariable $X$, von der
+man weiß, dass sie einer Normalverteilung mit der
+Varianz $\sigma^2$ folgt. Die Null- und Alternativhypothesen 
+des zweiseitigen Tests lauten
+$$
+\begin{align*}
+H_0: \mu&=\mu_0\\
+H_1: \mu&\neq\mu_0.
+\end{align*}
+$$
+Dabei ist $\mu_0\in\mathbb{R}$ der (vorgegebene) Wert, gegen den getestet 
+werden soll. Um etwas über den Erwartungswert zu lernen, bietet
+es sich an, eine Stichprobe $X_1,\ldots,X_n$ zu ziehen und 
+das Stichprobenmittel $\bar X$ zu nutzen. Wir wissen bereits
+(aus @sec-statistiken), dass
+$$
+\sqrt{n}\frac{\bar X-\mu}{\sigma}\sim N(0,1).
+$$
+Diese Aussage hilft aber nicht weiter, weil $\mu$ unbekannt ist.
+Unter der Nullhypothese ist der Erwartungswert jedoch bekannt,
+er beträgt dann $\mu_0$. Unter der Nullhypothese gilt also
+$$
+\sqrt{n}\frac{\bar X-\mu_0}{\sigma}\sim N(0,1).
+$$
+Diese Größe nutzen wir als Teststatistik, d.h.
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{\sigma}.
+$$
+Da die Teststatistik unter der Nullhypothese einer Standardnormalverteilung
+folgt, liegt sie mit einer Wahrscheinlichkeit von $(1-\alpha)$ in dem
+Intervall $[-u_{1-\alpha/2},u_{1-\alpha/2}]$ (vgl. @sec-intervallschaetzung).
+Für das typische Signifikanzniveau $\alpha=0.05$ sind die Intervallgrenzen
+```{r}
+alpha <- 0.05
+-qnorm(1-alpha/2)
+qnorm(1-alpha/2)
+```
+
+Der kritische Bereich ist also 
+$$
+K=(-\infty,-u_{1-\alpha/2}]\cup [u_{1-\alpha/2},\infty).
+$$
+Mit anderen Worten: Wenn die Nullhypothese gilt, dann ist es nicht
+weiter verwunderlich, wenn die Teststatistik in dem Intervall 
+$[-1.96,1.96]$ liegt. Wenn die Teststatistik dagegen aus diesem Intervall
+herausfällt, dann spricht das gegen die Gültigkeit der Nullhypothese.
+In diesem Fall verwirft man $H_0$. 
+
+Die Wahrscheinlichkeit, dass die Nullhypothese abgelehnt wird,
+obwohl sie wahr ist, beträgt
+$$
+\begin{align*}
+P(T\in K||H_0\text{ ist wahr}) 
+&= P\left(T<-u_{1-\alpha/2})+P(T> u_{1-\alpha/2}\right)\\
+&= P\left(T<-u_{1-\alpha/2})+1-P(T\le u_{1-\alpha/2}\right)\\
+&= \frac{\alpha}{2}+1-\left(1-\frac{\alpha}{2}\right)\\
+&= \alpha.
+\end{align*}
+$$
+Die Fehlerwahrscheinlichkeit erster Art entspricht also dem vorgegebenen 
+Signifikanzniveau.
+
+Um die Fehlerwahrscheinlichkeit zweiter Art zu berechnen, brauchen
+wir eine Annahme über den wahren Wert von $\mu$. Wenn die Nullhypothese
+nicht wahr ist, dann kann $\mu$ alle Werte außer $\mu_0$ annehmen. 
+
+
+
+### Beliebige Verteilung mit bekannter Varianz {.unnumbered}
+
+### Normalverteiung mit unbekannter Varianz {.unnumbered}
+
+### Beliebige Verteilung mit unbekannter Varianz {.unnumbered}
+

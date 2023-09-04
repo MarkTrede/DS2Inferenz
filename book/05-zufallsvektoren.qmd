@@ -15,7 +15,9 @@ Gemeinsame Verteilungen sind erheblich interessanter und vielseitiger
 als eindimensionale Zufallsvariablen, weil sie auch Zusammenhänge
 und Abhängigkeiten zwischen den Variablen beschreiben können.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die
 kleinere Augenzahl, die Zufallsvariable $Y$ die größere Augenzahl.
 Die beiden Zufallsvariablen $X$ und $Y$ basieren auf dem gleichen
@@ -40,7 +42,9 @@ $$
 $$
 :::
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Aktienportfolio mit zwei Aktien
+
 Wir betrachten die Tagesrenditen von zwei Aktien an einem zukünftigen Tag. 
 Sei $X$ die Tagesrendite der Volkswagenaktie und $Y$ die Tagesrendite von
 BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung.
@@ -122,7 +126,9 @@ x_{J} & p_{J1} & \ldots  & p_{JK}
 \end{array}
 $$
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
 $Y$: "größere Augenzahl" sieht als Wahrscheinlichkeitstabelle so aus:
@@ -246,7 +252,9 @@ sehr genaue Berechnung der Wahrscheinlichkeit. In dem folgenden
 Beispiel ist die Dichte des Zufallsvektors von einer Form, die
 eine geschlossene Herleitung des Doppelintegrals erlaubt.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Gemeinsame Dichte
+
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
@@ -283,7 +291,7 @@ Die Wahrscheinlichkeit, das die Realisation des Zufallsvektors in dem
 Rechteck $[0.5,0.75]\times[0.2,0.5]$ liegt, beträgt also 5.7 Prozent.
 :::
 
-## Randverteilungen
+## Randverteilungen {#sec-randverteilung}
 
 Alle Informationen über die gemeinsame Verteilung eines Zufallsvektors $(X,Y)$
 sind in der gemeinsamen Dichte oder der gemeinsamen Verteilungsfunktion
@@ -301,8 +309,8 @@ Die Randverteilungen lassen sich besonders einfach aus der gemeinsamen
 Verteilungsfunktion $F_{XY}(x,y)$ ableiten. Es gilt nämlich
 $$
 \begin{align*}
-F_X(x)&=F_{XY}(x,\infty)=\lim_{y\to\infty}F_{XY}(x,y)\\
-F_Y(y)&=F_{XY}(\infty,y)=\lim_{x\to\infty}F_{XY}(x,y),
+F_X(x)&=F_{XY}(x,\infty)=\lim_{y\to\infty}F_{X,Y}(x,y)\\
+F_Y(y)&=F_{XY}(\infty,y)=\lim_{x\to\infty}F_{X,Y}(x,y),
 \end{align*}
 $$
 wobei $F_X$ und $F_Y$ die Randverteilungsfunktionen von $X$ und $Y$
@@ -319,7 +327,9 @@ p_{\cdot k}&=P(Y=y_k)=\sum_j p_{jk}.
 \end{align*}
 $$
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Gemeinsame Wahrscheinlichkeitsfunktion
+
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
 $Y$: "größere Augenzahl" sieht als Wahrscheinlichkeitstabelle so aus:
@@ -353,14 +363,16 @@ Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, erhält man
 die Randdichten aus der gemeinsamen Dichte wie folgt.
 $$
 \begin{align*}
-f_X(x)&=\int_{-\infty}^\infty f_{XY}(x,y)dy\\
-f_Y(y)&=\int_{-\infty}^\infty f_{XY}(x,y)dx.
+f_X(x)&=\int_{-\infty}^\infty f_{X,Y}(x,y)dy\\
+f_Y(y)&=\int_{-\infty}^\infty f_{X,Y}(x,y)dx.
 \end{align*}
 $$
 Man sagt auch, dass man $y$ "herausintegriert", um die Randdichte von $X$
 zu erhalten, und umgekehrt.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Randdichte
+
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
@@ -395,7 +407,7 @@ $$
 für $y\in [0,1]$. Für $y\not\in [0,1]$ ist die Dichte $f_Y(y)=0$.
 :::
 
-## Unabhängigkeit
+## Unabhängigkeit {#sec-unabhaengig2}
 
 ::: callout-note
 Zwei Zufallsvariablen $X$ und $Y$ heißen **stochastisch unabhängig**
@@ -418,7 +430,9 @@ $$
 p_{jk}=p_{j\cdot}\cdot p_{\cdot k}.
 $$
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Unabhängigkeit (diskret)
+
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
 $Y$: "größere Augenzahl". Sind $X$ und $Y$ unabhängig? 
@@ -437,7 +451,9 @@ $$
 f_{XY}(x,y)=f_X(x)\cdot f_Y(y).
 $$
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Unabhängigkeit (stetig)
+
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
@@ -468,6 +484,107 @@ und $Y$ sind also nicht unabhängig.
 
 ## Bedingte Verteilungen
 
-## Kovarianz
+Wir betrachten wieder eine gemeinsame Verteilung von zwei Zufallsvariablen
+$X$ und $Y$. Während man sich bei den Randverteilungen fragt, wie eine 
+Zufallsvariable verteilt ist, wenn man die andere ignoriert, stellt man 
+sich bei bedingten Verteilungen die Frage, wie eine Zufallsvariable verteilt 
+ist, wenn man den Wert der anderen Zufallsvariable kennt (oder annimmt). 
 
-## Linearkombinationen
+::: callout-note
+Als **bedingte Verteilung** bezeichnet man die Verteilung einer
+Zufallsvariable einer gemeinsamen Verteilung, wenn die andere
+Zufallsvariable auf einen bestimmten Wert fixiert wird.
+:::
+
+Wie ist $X$ (die bedingte Variable) verteilt, wenn man weiß 
+(oder annimmt), dass $Y$ (die bedingende Variable) den Wert $y$ 
+hat? Oder umgekehrt: Wie ist $Y$ (bedingte Variable) verteilt, 
+wenn man $X$ kennt (bedingende Variable)? Bedingte Verteilungen 
+sind deswegen in der Ökonomik wichtig, weil man durch sie 
+Informationsstände abbilden kann. Die Bedingung gibt an, welche
+Information ein ökonomischer Agent hat. 
+
+Für gemeinsam diskrete Verteilungen mit 
+$$
+p_{jk}=P(X=x_j, Y=y_k)
+$$
+für $j=1,\ldots,J$ und $k=1,\ldots,K$ gilt: Die bedingte Verteilung 
+von $X$ gegeben $Y=y_k$ ist für $j=1,\ldots,J$
+$$
+P(X=x_j|Y=y_k)=\frac{P(X=x_j,Y=y_k)}{P(Y=y_k)}.
+$$
+Es gibt also nicht nur eine bedingte Verteilung von $X$, sondern
+$k$ (nämlich für jeden möglichen Wert von $Y$ eine).
+
+Vertauscht man die beiden Variablen, so ergeben sich die bedingten
+Verteilungen von $Y$ gegeben $X=x_j$. Sie sind für festes $j$ und
+$k=1,\ldots,K$
+$$
+P(Y=y_k|X=x_j)=\frac{P(X=x_j,Y=y_k)}{P(X=x_j)}.
+$$
+
+Ein Blick auf die Wahrscheinlichkeitstabelle zeigt, dass die bedingte
+Verteilung sich aus einer Zeile oder Spalte der Tabelle ergibt, indem
+man diese Zeile oder Spalte durch den zugehörigen Wert der 
+Randverteilung dividiert. Aus der rot markierten Spalte erhält
+man beispielsweise die bedingte Verteilung von $X$ gegeben $Y=y_1$,
+indem man die Spalteneinträge durch $p_{\cdot 1}$ teilt.
+$$
+\begin{array}{c|ccc|c}
+X\backslash Y & y_{1} & \ldots & y_{K} & \\ \hline
+x_{1} & \color{red}{p_{11}} & \ldots  & p_{1K}& p_{1\cdot}\\ 
+\vdots& \color{red}\vdots &  & \vdots  &\vdots\\ 
+x_{J} & \color{red}{p_{J1}} & \ldots  & p_{JK}& p_{J\cdot} \\\hline
+& \color{red}{p_{\cdot 1}} & \ldots & p_{\cdot K}
+\end{array}
+$$
+
+Für gemeinsam stetige Verteilungen mit der gemeinsamen Dichte
+$f_{X,Y}(x,y)$ gilt: Die bedingte Dichte von $X$ gegeben $Y=y$ist
+$$
+f_{X|Y=y}(x)=\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+$$
+Es gibt also wiederum nicht nur eine bedingte Verteilung von $X$, 
+sondern nun sogar unendlich viele (nämlich für jeden Wert $y$
+aus dem Träger von $Y$ eine).
+
+Durch Vertauschen von $X$ und $Y$ erhält man die bedingte
+Verteilung von $Y$ gegeben $X=x$. Die bedingte Dichte lautet
+$$
+f_{Y|X=x}(y)=\frac{f_{X,Y}(x,y)}{f_X(x)}.
+$$
+
+Wenn $X$ und $Y$ unabhängig sind, dann sind alle bedingten
+Verteilungen gleich der Randverteilung. Das gilt sowohl für
+gemeinsam stetige als auch für gemeinsam diskrete Verteilungen.
+Die Herleitung ist einfach, wenn man die Definition der
+Unabhängigkeit berücksichtigt. Als Beispiel sehen wir uns
+den stetigen Fall an. Die bedingte Dichte von $X$ gegeben $Y=y$
+ist
+$$
+f_{X|Y=y}(x)=\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+$$
+Bei Unabhängigkeit gilt $f_{X,Y}(x,y)=f_X(x)f_Y(y)$, so dass
+$$
+f_{X|Y=y}(x)=\frac{f_X(x)f_Y(y)}{f_Y(y)}=f_X(x).
+$$
+Unabhängigkeit bedeutet also mit anderen Worten, dass die Information
+$Y=y$ keinen Einfluss auf die Form der Verteilung von $X$ hat. 
+Die Verteilung von $X$ hängt bei Unabhängigkeit nicht davon ab, 
+welchen Wert $Y$ annimmt (und umgekehrt).
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Bedingte Dichte
+
+Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
+gemeinsame Dichtefunktion
+$$
+f(x,y)=\left\{
+\begin{array}{ll}
+x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Die lautet die bedingte Dichtefunktion von $Y$ gegeben $X=0.8$?
+:::

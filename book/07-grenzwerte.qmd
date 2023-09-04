@@ -13,7 +13,7 @@ geworfene Würfel. Im folgenden bezeichnen wir den Erwartungswert
 der Folgenelemente mit $E(X)=\mu$ und die Varianz mit
 $Var(X)=\sigma^2$.
 
-## Gesetz der großen Zahl
+## Gesetz der großen Zahl {#sec-lln}
 
 Aus den Elementen der Folge von Zufallsvariablen berechnen wir
 für jedes $n$ das arithmetische Mittel (den Durchschnitt)
@@ -32,7 +32,7 @@ Rechenregeln aus @sec-erwartungswert und @sec-varianz leicht zu
 finden. Es gilt
 $$
 \begin{align*}
-E(X) &= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+E(\bar X_n) &= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
 &= \frac{1}{n}\sum_{i=1}^n E(X_i) \\
 &= \frac{1}{n}\sum_{i=1}^n \mu \\
 &= \mu
@@ -41,7 +41,7 @@ $$
 und
 $$
 \begin{align*}
-Var(X) &= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+Var(\bar X_n) &= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
 &= \frac{1}{n^2}\sum_{i=1}^n Var(X_i) \\
 &= \frac{1}{n^2}\sum_{i=1}^n \sigma^2 \\
 &= \frac{\sigma^2}{n}.
@@ -55,7 +55,9 @@ Durchschnitt $\bar X_n$ liegt also mit steigendem $n$
 
 Diese Einsicht lässt sich mathematisch präzise formulieren.
 
-::: callout-note
+::: callout-important
+## Gesetz der großen Zahl
+
 Das **Gesetz der großen Zahl** besagt, dass für
 jedes (noch so kleine) $\epsilon >0$ gilt
 $$
@@ -258,7 +260,7 @@ bekannten Standardverteilung.
 hist(z, probability=TRUE, breaks=150, xlim=c(0,10000))
 ```
 
-## Zentraler Grenzwertsatz
+## Zentraler Grenzwertsatz {#sec-clt}
 
 Der **zentrale Grenzwertsatz** (engl. central limit theorem) 
 ist aus zwei Gründen relevant. Zum einen 
@@ -269,24 +271,29 @@ Ausgangspunkt für die Herleitung von Konfidenzintervallen
 (@sec-intervallschaetzung) und Hypothesentests 
 (@sec-hypothesentests).
 
-Für den zentralen Grenzwertsatz betrachtet man nicht die Folge
+Für den zentralen Grenzwertsatz betrachtet man *nicht* die Folge
 von Zufallsvariablen 
 $$
 \bar X_n=\frac{1}{n}\sum_{i=1}^n X_i
 $$ 
 (d.h. den Durchschnitt), sondern die
 Folge der standardisierten $\bar X_n$. Dazu subtrahiert man den
-Erwartungswert und dividiert durch die Standardabweichung. Die
-Folge der standardisierten Durchschnitte bezeichnen wir mit
+Erwartungswert und dividiert durch die Standardabweichung. Zur 
+Erinnerung: Der Erwartungswert von $\bar X_n$ ist $E(\bar X_n)=\mu$,
+und die Standardabweichung ist $\sqrt{Var(\bar X_n)}=\sqrt{\sigma^2/n}$.
+Die Folge der standardisierten Durchschnitte bezeichnen wir mit
 $$
 U_n=\frac{\bar X_n-\mu}{\sqrt{\sigma^2/n}}.
 $$
-Die Wurzel von $n$ wird im allgemeinen vor den Bruch gezogen,
+Die Wurzel von $n$ wird im allgemeinen aus dem Nenner heraus
+vor den Bruch gezogen,
 $$
 U_n=\sqrt{n}\frac{\bar X_n-\mu}{\sigma}.
 $$
 
-::: callout-note
+::: callout-important
+## Zentraler Grenzwertsatz
+
 Der **zentrale Grenzwertsatz** besagt, dass für alle $u\in\mathbb{R}$ gilt
 $$
 \lim_{n\to\infty} P(U_n\le u)=\Phi(u),
@@ -304,10 +311,9 @@ $$
 U_n\stackrel{appr}{\sim}N(0,1).
 $$
 Der standardisierte Durchschnitt von "vielen" Zufallsvariablen 
-ist annähernd normalverteilt. Diese Aussage ist deswegen 
-bemerkenswert, weil es gleichgültig ist, wie die zugrundeliegenden
-$X_i$ verteilt sind! Sie müssen nicht einmal stetig verteilt
-sein.
+ist annähernd normalverteilt. 
+**Diese Aussage ist deswegen bemerkenswert, weil es gleichgültig ist, wie die zugrundeliegenden $X_i$ verteilt sind!**
+Sie müssen nicht einmal stetig verteilt sein.
 
 Wenn der standardisierte Durchschnitt approximativ 
 standardnormalverteilt ist, dann ist der Durchschnitt selber
@@ -354,7 +360,7 @@ $$
 U_{n,1},U_{n,2},\ldots,U_{n,R}
 $$
 nennen können, wobei $R$ die vorgegebene (große) Zahl von Ziehungen ist,
-z.B. $R=100000$. Für jede dieser Ziehungen müssen die Zufallsvariablen
+z.B. $R=10000$. Für jede dieser Ziehungen müssen die Zufallsvariablen
 $X_1,\ldots,X_n$ neu gezogen werden. Das lässt sich am elegantesten
 durch eine Schleife programmieren. Genauere Erklärungen zum Programmieren
 mit Schleifen finden Sie im @sec-programmieren.
@@ -365,13 +371,13 @@ Werte in diesem Vektor stehen, ist gleichgültig, da sie in der Schleife
 ohnehin überschrieben werden. Es geht also nur darum, Platz für die
 Ergebnisse vorzubereiten.
 ```{r}
-R <- 100000
+R <- 10000
 u <- rep(0, R)
 ```
 Innerhalb der Schleife werden nun in jedem Durchlauf die
 Zufallszahlen $X_1,\ldots,X_n$ gezogen. Konkret nehmen wir
-an dieser Stelle an, dass die Folge $n=20$ Elemente umfasst
-und dass sie unabhängig exponentialverteilt mit Parameter $\lambda=1$
+an dieser Stelle an, dass die Folge $n=50$ Elemente umfasst
+und dass sie unabhängig exponentialverteilt mit Parameter $\lambda=2$
 sind, 
 $$
 X\sim Exp(2).
@@ -385,11 +391,13 @@ Var(X)& =\frac{1}{4}.
 $$
 Der R-Code sieht folgendermaßen aus:
 ```{r}
+mu <- 1/2
+sigma <- sqrt(1/4)
 n <- 50
 for(r in 1:R){
     x <- rexp(n, rate=2)
     xquer <- mean(x)
-    u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
+    u[r] <- sqrt(n)*(xquer - mu)/sigma
 }
 ```
 Zur Erklärung: Der Laufindex der Schleife `r` durchläuft
@@ -401,12 +409,12 @@ abgespeichert. In der letzten Zeile der Schleife
 wird der Durchschnitt standardisiert und in die
 `r`-te Stelle des Vektors `u` geschrieben.
 
-Das Histogramm der $R=100000$ Zufallszahlen 
+Das Histogramm der $R=10000$ Zufallszahlen 
 $U_{n,1},\ldots,U_{n,R}$ kann trotz des noch kleinen
 Umfang $n=50$ schon recht gut durch eine Standardnormalverteilung
 approximiert werden.
 ```{r}
-hist(u, prob=TRUE, breaks=100)
+hist(u, prob=TRUE, breaks=50)
 curve(dnorm(x), add=TRUE, col="red")
 ```
 Reduziert man die Länge der Folge auf $n=5$ Elemente, greift
@@ -419,7 +427,7 @@ for(r in 1:R){
     xquer <- mean(x)
     u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
 }
-hist(u, prob=TRUE, breaks=100)
+hist(u, prob=TRUE, breaks=50)
 curve(dnorm(x), add=TRUE, col="red")
 ```
 Wie viele Elemente die Folge $X_1,\ldots,X_n$ haben muss,
@@ -429,7 +437,7 @@ Approximation sehr gut ist, es kann jedoch auch sein,
 dass selbst ein Umfang von $n=1000$ oder sogar $n=10000$
 noch zu klein ist.
 Erfahrungsgemäß ist in den meisten Fällen ein Umfang
-von $n=40$ schon ausreichend groß, um eine gute
+von $n=40$ schon ausreichend groß, um eine einigermaßen gute
 Annäherung an die Standardnormalverteilung zu erreichen.
 Das ist jedoch nur eine Faustregel, sie kann im 
 konkreten Einzelfall vollkommen falsch sein.

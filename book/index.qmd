@@ -2,23 +2,69 @@
 
 ```{r echo=FALSE,warning=FALSE,out.width="99%"}
 library(ggplot2)
-knitr::include_graphics("images/AdobeStock_262173764b.jpeg")
+knitr::include_graphics("images/AdobeStock_262173764b_DataScience.jpeg")
 ```
 
 In den Wirtschaftswissenschaften spielen Zufall und Unsicherheit eine wichtige Rolle. Zum einen, weil die ökonomische Theorie deskriptive und normative Aussagen darüber macht, wie ökonomische Akteure sich unter Unsicherheit verhalten und wie sie sich rational verhalten sollten. Zum anderen, weil ökonomische Modelle mit Hilfe von statistischen Verfahren an die Realität angepasst werden sollen oder ökonomische Theorien anhand von emprischen Beobachtungen überprüft werden sollen. In dem Modul *Data Science 2* lernen Sie, wie man mit Zufall und Unsicherheit umgeht.
 
-Das Modul lässt sich in zwei große Teile gliedern, nämlich die Grundlagen der Wahrscheinlichkeitstheorie und die statistische Inferenz.
+Das Modul lässt sich in zwei große Teile gliedern, nämlich die Grundlagen der Wahrscheinlichkeitstheorie und die statistische Inferenz. 
 
 ## Wahrscheinlichkeitstheorie {.unnumbered}
 
+Warum braucht man in den Wirtschaftswissenschaften Wahrscheinlichkeitstheorie? Es gibt zwei Gründe:
+Zum einen taucht die Wahrscheinlichkeitstheorie in der ökonomischen Theorie auf, wenn es 
+um das Verhalten von ökonomischen Agenten unter Unsicherheit geht. 
+Die Wahrscheinlichkeitstheorie ist also hier weniger ein Zweig der Mathematik, 
+sondern dient zur Beschreibung des Verhaltens von Menschen unter Unsicherheit. 
+Im ersten @sec-zufall wird ein formaler Rahmen eingeführt, in dem man 
+präzise mit Unsicherheit umgehen kann. Unsicherheit bedeutet, dass man nicht 
+genau und sicher weiß, was passieren wird. Praktisch befinden wir uns also in der 
+Realität so gut wie immer in einer Situation unter Unsicherheit. In @sec-wahrscheinlichkeit
+lernen Sie, was man unter Wahrscheinlichkeit versteht. Aufbauend auf den
+ersten beiden Kapitel wird anschließend in @sec-zufallsvariablen definiert,
+was Zufallsvariablen sind. Mit ihnen lassen sich in vielen Situationen 
+Zufallsvorgänge sehr einfach erfassen. In @sec-verteilungen lernen Sie eine
+Reihe von Standardverteilungen kennen. Bei vielen wissenschaftlichen Fragen
+geht es darum, wie mehrere Größen miteinander zusammenhängen. Auch dafür
+braucht man einen sauberen formalen Rahmen. Er wird in @sec-zufallsvektoren
+und @sec-kovarianz vorgestellt. 
 
+Der zweite Grund, warum Wahrscheinlichkeitstheorie wichtig in der Ökonomik ist, 
+ist ein technischer. Die Wahrscheinlichkeitstheorie ist das formale Fundament für
+die statistische Inferenz. Der Übergang zur statistischen Inferenz wird
+in @sec-grenzwerte vorbereitet, in dem es um das Gesetz der großen Zahl und 
+den zentralen Grenzwertsatz geht.
 
 ## Statistische Inferenz {.unnumbered}
 
-xxx
+Bei der statistischen Inferenz geht es um die Frage "Was können uns die Daten 
+eigentlich sagen?" Sind die Ergebnisse, die wir ausrechnen, wirklich
+zuverlässig? Wie groß ist die mögliche Fehlerspanne unserer Resultate? 
+Wie können wir Theorien oder Hypothesen empirisch überprüfen, wenn uns
+keine perfekten Daten vorliegen? In @sec-stichproben lernen Sie, was 
+man in der Wissenschaft unter einer Stichprobe versteht. In den
+nachfolgenden Kapiteln wird dann gezeigt, wie man Stichproben nutzen kann.
+In @sec-punktschaetzung und @sec-intervallschaetzung geht es um
+Punkt- und Intervallschätzungen. In @sec-hypothesentests wird 
+ausführlich erklärt, was statistische Hypothesentests sind, welche
+"Philosophie" ihnen zugrunde liegt und wie man sie durchführt.
 
-Der Name dieses Moduls "Data Science 2" lässt einen vermuten, dass dieses Modul auf dem Modul "Data Science 1" aufbaut. Diese Vermutung ist aber falsch. Beiden Module sind inhaltlich in sich abgeschlossen und können unabhängig voneinander belegt werden. Wenn Sie "Data Science 1" bereits gehört haben, werden Sie jedoch feststellen, dass viele Begriffe, die Sie dort gelernt haben, in ähnlicher Form auch in "Data Science 2" vorkommen.
+Der Name dieses Moduls "Data Science 2" lässt vermuten, dass dieses 
+Modul auf dem Modul "Data Science 1" aufbaut. Diese Vermutung ist aber 
+falsch. Beiden Module sind inhaltlich in sich abgeschlossen und 
+können unabhängig voneinander belegt werden. Wenn Sie "Data Science 1" 
+bereits gehört haben, werden Sie jedoch feststellen, dass viele 
+Begriffe, die Sie dort gelernt haben, in ähnlicher Form auch 
+in "Data Science 2" vorkommen. Das ist kein Zufall, denn wir werden
+sehen, dass auf einer tieferen Ebene eine enge Beziehung zwischen 
+beiden Ansätzen besteht.
 
-In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul nur sparsam und erst ab Mitte des Semesters eingesetzt. 
+In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul
+nur sparsam eingesetzt. R soll in erster Linie das Verständnis 
+von Zufall erleichtern. Visualisierungsmethoden (`ggplot`) spielen 
+in diesem Modul keine Rolle.
 
-(Kein ggplot)
+Im @sec-programmieren finden Sie ein Hinweise zum Programmieren in R, insbesondere
+zu Schleifen. Hinweise auf weiterführende Literatur gibt @sec-literatur. Dieses
+eSkript orientiert sich sowohl hinsichtlich des Aufbaus als auch der Notation
+recht eng an Mosler und Schmid (2011).

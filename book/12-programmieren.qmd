@@ -1,5 +1,7 @@
 # Programmieren in R {#sec-programmieren}
 
+<img src="images/AdobeStock_218614742b_Zahlenregen.jpeg" width=70%" style="padding-bottom:10px;"/>
+
 In diesem Anhang lernen Sie elementare Programmiertechniken in R
 kennen. Einige dieser Techniken kommen nicht nur in R, sondern 
 in praktisch allen Programmiersprachen vor, nämlich die bedingte
@@ -168,18 +170,77 @@ x[-6]
 
 ### Logische Indizierung
 
-Neben der Indizierung durch ganze Zahlen ist es auch möglich, 
+Neben der Indizierung durch ganze Zahlen ist es in R auch möglich, 
 einen Vektor von logischen Ausdrücken (`FALSE`/`TRUE`) als Index 
 zu verwenden. Der logische Indizierungsvektor muss die gleiche 
 Länge haben wie der zu indizierende Vektor.
 
+Mit der logischen Indizierung kann man gezielt Elemente aus einem
+Vektor herausgreifen. Das ist besonders einfach an einem Beispiel 
+zu verstehen. Wir betrachten einen Vektor
+```{r}
+x <- c(1, 9, 8, -1, 10, 5, 6, -3, 4)
+```
+Aus diesem Vektor möchten wir gerne nur die negativen Elemente
+herauslesen. Dazu bilden wir einen logischen Vektor
+```{r}
+b <- (x < 0)
+```
+Dieser Vektor hat den Datentyp `logical`, d.h. er enthält
+ausschließlich die Werte `TRUE` oder `FALSE` (oder gegebenenfalls
+noch `NA`, was wir hier aber ignorieren). Der Vektor `b` sieht
+so aus:
+```{r}
+print(b)
+```
+Das vierte und das vorletzte Element sind negativ. 
+Den Vektor `b` geben wir jetzt in eckigen Klammern als
+Indexvektor an. Das Resultat wird als Vektor `y` gespeichert.
+```{r}
+y <- x[b]
+y
+```
+
 ## Bedingte Ausführung {#sec-if}
 
+In Computerprogrammen kommt es oft vor, dass manche Befehle 
+nur unter bestimmten Bedingungen ausgeführt werden sollen.
+Dafür gibt es in R die Befehle `if` und `else`.
+Der Befehl `if` hat folgende Syntax:
+```{r eval=FALSE}
+if(BEDINGUNG){
+  ...
+  Code
+  ...
+}
+```
+Der Code in den geschweiften Klammern wird nur dann ausgeführt, 
+wenn die Bedingung `TRUE` ist. Falls die Bedingung `FALSE` ist, 
+wird der Code übersprungen und das Programm läuft am Ende
+der eingeklammerten Blocks weiter.
 
-
-
+Es ist auch möglich, einen alternativen Code-Block ausführen zu lassen,
+wenn die Bedingung `FALSE` ist. Dazu dient der Befehl `else`,
+der immer nur in Verbindung mit `if` vorkommen kann. Die Syntax ist:
+```{r eval=FALSE}
+if(BEDINGUNG){
+  ...
+  Code
+  ...
+} else {
+  ...
+  Alternativer Code
+  ...
+}
+```
+Es ist empfehlenswert, den Befehl `else` in die gleiche
+Zeile zu setzen, in der die schließende geschweifte Klammer 
+des `if`-Befehls steht, und anschließend sofort die
+öffnende Klammer für den `else`-Block zu setzen.
 
 ## Schleifen {#sec-schleifen}
+
+<img src="images/AdobeStock_544572273b_Geschenk.jpeg" width=30%" align="right" style="padding-bottom:10px;"/>
 
 Schleifen werden beim Programmieren eingesetzt, wenn dieselbe
 Folge von Befehlen wieder und wieder durchgeführt werden soll. 

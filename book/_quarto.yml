@@ -13,14 +13,15 @@ book:
     - 03-zufallsvariablen.qmd
     - 04-verteilungen.qmd
     - 05-zufallsvektoren.qmd
-    - 06-grenzwerte.qmd
-    - 07-stichproben.qmd
-    - 08-punktschaetzung.qmd
-    - 09-intervallschaetzung.qmd
-    - 10-hypothesentests.qmd
+    - 06-kovarianz.qmd
+    - 07-grenzwerte.qmd
+    - 08-stichproben.qmd
+    - 09-punktschaetzung.qmd
+    - 10-intervallschaetzung.qmd
+    - 11-hypothesentests.qmd
   appendices:
-    - 11-programmieren.qmd
-    - 12-literatur.qmd
+    - 12-programmieren.qmd
+    - 13-literatur.qmd
 
 format:
   html:
@@ -28,6 +29,10 @@ format:
     css: styles.css
 
 editor: source
+
+callout-icon: false
+callout-tip-title: "Beispiel"
+callout-note-title: "Definition"
 
 toc-title-document: "Inhalt"
 toc-title-website: "In diesem Kapitel"
@@ -37,7 +42,3 @@ title-block-author-single: "Autor"
 crossref-ch-prefix: "Kapitel"
 crossref-apx-prefix: "Anhang"
 crossref-sec-prefix: "Abschnitt"
-
-callout-icon: false
-callout-tip-title: "Beispiel"
-callout-note-title: "Definition"

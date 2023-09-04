@@ -3,6 +3,8 @@
 Die wichtigsten formalen Grundlagen der Wahrscheinlichkeitstheorie sind nun gelegt. Darauf aufbauend definieren wir Zufallsvariablen. Zufallsvariablen sind - intuitiv gesprochen - Zahlen, deren Wert man noch nicht kennt, deren Wert sich aber (irgendwann) realisiert. Die formale Definition von Zufallsvariablen bezieht sich auf die Ergebnismenge.
 
 ::: callout-note
+## Definition: Zufallsvariable
+
 Eine Abbildung 
 $$
 X: \Omega\rightarrow \mathbb{R}
@@ -12,7 +14,9 @@ heißt **Zufallsvariable** (engl. random variable).
 
 Eine Zufallsvariable kann man sich zwar als eine Zahl vorstellen, deren Wert man noch nicht kennt. Formal gesehen handelt es sich jedoch um eine Funktion, die jedem Element der Ergebnismenge genau eine reelle Zahl zuordnet.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
 Als Beispiel betrachten wir ein Zufallsexperiment, bei dem zwei Würfel geworfen
 werden. Jeder der beiden Würfel zeigt dann 1, 2, 3, 4, 5 oder 6.
 Der Ergebnisraum hat folglich 36 Elemente, nämlich
@@ -47,7 +51,9 @@ Wenn die Zufallsvariable sich realisiert, bezeichnet man die **Realisation** gew
 
 Beachten Sie den großen Unterschied zwischen einer Zufallsvariable und ihrer Realisation. Die Zufallsvariable ist eine Funktion, die Realisation ist eine reelle Zahl. Wahrscheinlichkeitsaussagen lassen sich nur über Zufallsvariablen treffen, nicht über ihre Realisation.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
 Wir betrachten weiterhin das Zufallsexperiment mit zwei Würfeln. 
 Wie hoch ist die Wahrscheinlichkeit, dass die Zufallsvariable $X$: "Summe
 der beiden Augenzahlen" den Wert 4 annimmt? Um diese eigentlich sehr einfache
@@ -72,16 +78,16 @@ vorhanden vorausgesetzt. Trotzdem ist es wichtig zu erkennen, dass
 Zufallsvariablen quasi auf dem mengentheoretischen Fundament aufbauen, dass
 wir in den vorangegangenen Kapiteln gelegt haben.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiele: Ökonomische Zufallsvariablen
+
 Mögliche Zufallsvariablen in der Ökonomik:
 
-- Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert. Von den ex ante vielen möglichen
-Gewinnen hat sich nur einer tatsächlich eingestellt.
+- Die Zufallsvariable $X$ steht für den Gewinn einer Aktiengesellschaft im kommenden Jahr. Wenn das Jahr vergangen ist, hat sich der Gewinn $x$ realisiert. Von den ex ante vielen möglichen Gewinnen hat sich nur einer tatsächlich eingestellt.
 
-- $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$
-oder $x=2$..
+- $X$ bezeichnet den Erwerbsstatus einer zufällig aus einer Population ausgewählten Person (0=nicht erwerbstätig, 1=Teilzeit, 2=Vollzeit). Sobald eine Person tatsächlich ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und es ist dann entweder $x=0$ oder $x=1$ oder $x=2$.
 
-- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population. Nachdem ein Haushalt zufällig ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und ist zum Beispiel $x=3456$.
+- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population. Nachdem ein Haushalt zufällig ausgewählt und befragt wurde, hat sich die Zufallsvariable realisiert und ist zum Beispiel $x=4321$.
 
 - $X$ ist die Dauer, die ein technisches Gerät ohne Fehler funktioniert. Am
 Start des Geräts weiß man noch nicht, wie lange es fehlerfrei laufen wird.
@@ -94,7 +100,9 @@ Realisation ist dann beispielsweise $x=12345$ Stunden.
 Wir wissen zwar nicht, welchen Wert eine Zufallsvariable annehmen wird, aber oft wissen wir, dass bestimmte Werte mit einer höheren Wahrscheinlichkeit vorkommen als andere Werte. So wissen wir zum Beispiel, dass beim Werfen mit zwei Würfeln die Augensumme 2 weniger wahrscheinlich ist als die Augensumme 7, denn für die Augensumme 2 müssen beide Würfel eine 1 zeigen, für die Augensumme 7 gibt es dagegen viel mehr Möglichkeiten (nämlich 16, 25, 34, 43, 52 und 61). Um die Verteilung einer Zufallsvariable zu beschreiben, gibt es mehrere Möglichkeiten. Eine besonders wichtige ist die Verteilungsfunktion.
 
 ::: callout-note
-Die **Verteilungsfunktion** (engl. cumulative distributio function, cdf) einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
+## Definition: Verteilungsfunktion
+
+Die **Verteilungsfunktion** (engl. cumulative distribution function, cdf) einer Zufallsvariable $X$ gibt für $x\in\mathbb{R}$ die Wahrscheinlichkeit an, dass $X\le x$ ist,
 $$
 F_X(x)=P(\{\omega: X(\omega)\le x\})
 $$
@@ -149,6 +157,8 @@ Zufallsvariablen haben.
 ## Diskrete Zufallsvariablen
 
 ::: callout-note
+## Definition: Diskrete Zufallsvariable
+
 Eine Zufallsvariable heißt **diskret** (engl. discrete), wenn es 
 
 - endliche viele Punkte $x_1, x_2,\ldots, x_J$ oder
@@ -221,7 +231,9 @@ wenn man von der Sprungstelle ein winziges Stück nach rechts wandert, ändert
 sich der Funktionswert nicht. Wandert man ein winziges Stück nach links,
 springt man auf die tiefere Stufe zurück.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Sie kann also nur die Wert 0, 1 oder 2 annehmen
 (Träger). Die Wahrscheinlichkeitsfunktion ist
@@ -262,13 +274,16 @@ plot(stepfun(x,y),
 ## Stetige Zufallsvariablen
 
 ::: callout-note
+## Definition: Stetige Zufallsvariable
+
 Eine Zufallsvariable $X$ heißt **stetig** (engl. continuous), wenn es eine
 Funktion $f_X(x)$ gibt, so dass
 $$
 F_X(x)=\int_{-\infty}^x f_X(t)dt
 $$
 für alle $x\in\mathbb{R}$. Die Funktion $f_X(x)$ heißt **Dichtefunktion**
-oder **Dichte** (engl. density function bzw. density). Wenn aus dem Kontext
+oder **Dichte** (engl. density function, density, 
+probability density function, pdf). Wenn aus dem Kontext
 hervorgeht, zu welcher Zufallsvariable eine Dichte gehört, lässt man den
 Subindex gewöhnlich weg und schreibt einfach $f(x)$.
 :::
@@ -278,7 +293,7 @@ Die Dichte hat folgende Eigenschaften:
 - Die Dichte kann nicht negativ sein, da sonst die Verteilungsfunktion
 nicht mehr monoton wachsend wäre. Es gilt also $f(x)\le 0$ für alle $x\in\mathbb{R}$.
 
-- Die Fläche unter der Dichte muss 1 ergeben, da jede Verteiliungsfunktion $F_X(x)$
+- Die Fläche unter der Dichte muss 1 ergeben, da jede Verteiliungsfunktion $F(x)$
 für $x\to\infty$ gegen 1 konvergiert. Es gilt also
 $$
 \int_{-\infty}^\infty f(x)dx=1.
@@ -317,13 +332,15 @@ einem Dichte-Plot sofort, in in welchen Bereichen die Zufallsvariable
 mit großer Wahrscheinlichkeit liegen wird und wo es eher unwahrscheinlich
 ist.
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Dichtefunktion
+
 Die Dichte der Zufallsvariable $X$ sei 
 $$
 f(x)=\left\{
 \begin{array}{ll}
 0 & \text{ für }x < -0.56\\
-x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
+-x^4+x^2+0.5 & \text{ für }-0.56 \le x < 1.1\\
 0 & \text{ für }x \ge 1.1.
 \end{array}
 \right.
@@ -341,21 +358,31 @@ f[c(1,2,105,106)] <- 0
 plot(x,f,t="l",lwd=3,
      xlab="x",ylab="f(x)",main="Dichte")
 ```
+Wie hoch ist die Wahrscheinlichkeit, dass die Zufallsvariable $X$
+in dem Intervall $[0.1,0.8]$ liegt? Um diese Frage zu beantworten,
+berechnen wir das Integral
+$$
+\begin{align*}
+\int_{0.1}^{0.8} f(x)dx&=\int_{0.1}^{0.8} (-x^4+x^2+0.5) dx\\
+&= \left. -\frac{1}{5}x^5+\frac{1}{3}x^3+\frac{1}{2}x \right|_{0.1}^{0.8}\\[2ex]
+&= 0.4548.
+\end{align*}
+$$
 Die Verteilungsfunktion erhält man durch Integration der Dichte.
 $$
 F(x)=\left\{
 \begin{array}{ll}
 0 & \text{ für }x < -0.56\\
-\frac{1}{3}x^3-\frac{1}{5}x^5+0.5x+0.3275 & \text{ für }-0.56 \le x < 1.1\\
+-\frac{1}{5}x^5+\frac{1}{3}x^3+\frac{1}{2}x+0.3275 & \text{ für }-0.56 \le x < 1.1\\
 1 & \text{ für }x \ge 1.1.
 \end{array}
 \right.
 $$
 Die Konstante (0.3275) muss so gewählt werden, dass die Verteilungsfunktion
-am Punkt -0.56 bei 0 startet und am Punkt 1.1 bei 1 endet. Ein Plot der
-Verteilungsfunktion macht deutlich, dass die Verteilungsfunktion für
+am Punkt -0.56 bei 0 startet und am Punkt 1.1 bei 1 endet. Der Plot der
+Verteilungsfunktion macht deutlich, dass Verteilungsfunktionen für
 das schnelle Erfassen der Eigenschaften einer Verteilung nicht so gut
-geeignet ist wie die Dichte. Die Realisation der Zufallsvariable liegt
+geeignet sind wie Dichtefunktionen. Die Realisation der Zufallsvariable liegt
 mit höherer Wahrscheinlichkeit in einem Bereich, in dem die Verteilungsfunktion
 steil ist, als in einem Bereich, in dem sie flacher verläuft. Bereiche,
 in denen die Verteilungsfunktion gar nicht ansteigt, gehören nicht zum
@@ -370,6 +397,83 @@ plot(x,f,t="l",lwd=3,
 ```
 :::
 
+## Numerische Integration {#sec-numintegration}
+
+Nicht immer ist es möglich, Integrale in geschlossener Form 
+zu berechnen. In manchen Fällen ist es vielleicht möglich, aber
+so mühsam, dass sich der Aufwand nicht lohnt, wenn eine
+Approximation des Ergebnisses ausreicht. In solchen
+Fällen lassen sich die Integrale durch numerische Verfahren
+berechnen. Auch für die Plausibilitätskontrolle eines
+analytischen Ergebnisses eignet sich die numerische Integration.
+Die numerische Mathematik liefert ausgefeilte Algorithmen für 
+die numerische Integration. In diesem Kurs lernen Sie nur eine
+"Holzhammer-Methode" kennen, mit der Sie eine grobe Approximation
+eines Integrals schnell und einfach bestimmen können. 
+
+Ein Integral einer Funktion $f(x)$ von $a$ bis $b$ ist die Fläche 
+zwischen der Funktion und der x-Achse,
+$$
+\int_a^b f(x)dx.
+$$
+
+Die Fläche lässt sich annähern, indem man viele schmale Rechtecke in 
+die Funktion einschmiegt. Die Graphik illustriert das beispielhaft
+für das Integral von 0.1 bis 0.8 der Dichtefunktion
+$$
+f(x)=0.5-x^4+x^2.
+$$
+
+```{r echo=FALSE}
+x <- c(-1,-0.56,NA,seq(-0.56,1.1,length=100),NA,1.1,1.8)
+f <- function(x) 0.5-x^4+x^2
+ff <- f(x)
+ff[c(1,2,105,106)] <- 0
+plot(x,ff,t="l",lwd=3,
+     xlab="x",ylab="f(x)",main="Approximation des Integrals")
+abline(h=0)
+dx <- 0.05
+g <- seq(0.1,0.8,by=dx)
+for(i in 1:(length(g)-1)){
+  lines(c(g[i],g[i],g[i]+dx,g[i]+dx),c(0,f(g[i]),f(g[i]),0))
+}
+```
+Die Fläche der Rechtecke lässt sich sehr leicht bestimmen, selbst wenn es 
+viele sind. Wenn die Gitterpunkte zwischen $a$ und $b$ mit $x_1,\ldots,x_R$
+bezeichnet werden und der Abstand zwischen zwei benachbarten Gitterpunkten
+mit $\Delta$, dann ist die gesamte Fläche aller Rechtecke
+$$
+\sum_{i=1}^R f(x_i)\Delta.
+$$
+Je feiner die Rechtecke (d.h. je größer $R$ bzw. je kleiner $\Delta$) sind, 
+desto genauer wird das Integral approximiert. Die Breite der Rechtecke
+entspricht (im Grenzwert) dem Symbol $dx$ des Integrals.
+
+Diese Berechnung kann wie folgt in R umgesetzt werden. 
+Zuerst wird ein feines Gitter von $a=0.1$ bis $b=0.8$ erzeugt. Die Gitterpunkte
+werden in einem Vektor `x` abgelegt. Der Vektor wird durch die Funktion
+`seq` erzeugt (s. @sec-vektoren). Dabei können Sie entweder mit der Option `length`
+die Anzahl der Gitterpunkte festlegen oder alternativ mit der Option `by` den
+Abstand der Gitterpunkte voneinander vorgeben. In dem folgenden Code
+wird der Abstand vorgegeben und mit `dx` bezeichnet, um die Analogie
+zum Integral deutlich zu machen.
+```{r}
+dx <- 0.001
+x <- seq(from=0.1, to=0.8, by=dx)
+```
+Nun werden die Funktionwerte an allen Gitterpunkten `x` ermittelt und
+in dem Vektor `f` gespeichert. Da R vektor-orientiert arbeitet, geschieht
+das sehr einfach mit einem einzigen Befehl.
+```{r}
+f <- 0.5 - x^4 + x^2
+```
+Der Wert des Integrals kann nun angenähert werden durch
+```{r}
+sum(f*dx)
+```
+Der analytisch hergeleitete Wert des Integrals beträgt 0.4548. 
+Der Fehler der numerischen Approximation ist also sehr klein.
+
 ## Quantilfunktion
 
 Die Quantilfunktion ist das Gegenstück zur Verteilungsfunktion. Während die
@@ -381,6 +485,8 @@ nicht eindeutig beantwortet werden kann, ist die formale Definition der
 Quantilfunktion etwas komplizierter:
 
 ::: callout-note
+## Definition: Quantilfunktion
+
 Die Funktion
 $$
 F_X^{-1}(p)=\min\{x:F_X(x)\ge p\}
@@ -400,8 +506,10 @@ durch Invertieren finden. Das geht leicht, wenn die Verteilungsfunktion
 streng monoton steigend verläuft. Aufpassen muss man jedoch, wenn
 sie Sprünge aufweist oder in einigen Bereichen flach verläuft.
 
-::: callout-tip
-- Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
+::: { .callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
+
+Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Die Verteilungsfunktion ist eine Treppenfunktion
 mit den Sprungstellen 0, 1 und 2, die hier noch einmal 
 gezeigt wird. 
@@ -443,11 +551,11 @@ plot(p[1:2],Q[c(1,1)],
 for(i in 2:length(Q)) lines(p[c(i,i+1)],Q[c(i,i)])
 points(p[2:3],Q[1:2],pch=19)
 ```
+:::
+
 Im Gegensatz zur Verteilungsfunktion ist die Quantilfunktion nicht
 rechtsstetig, sondern linksstetig. Der Funktionswert an einer Sprungstelle
 ist gleich dem Grenzwert, wenn man sich von links der Sprungstelle nähert.
-:::
-
 
 ## Erwartungswert {#sec-erwartungswert}
 
@@ -455,11 +563,13 @@ Der Erwartungswert einer Verteilung gibt Auskunft darüber, wo der
 "Schwerpunkt" der Verteilung liegt. 
 
 ::: callout-note
+## Definition: Erwartungswert
+
 Der **Erwartungswert** (engl. expectation) einer Zufallsvariable ist
 $$
 E(X)=\left\{
 \begin{array}{ll}
-\sum\limits_{j: x_j\in T_X} x_j f(x_j) & \text{ für X diskret}\\
+\sum\limits_{j: x_j\in T_X} x_j f(x_j) & \text{ für X diskret}\\[2ex]
 \int\limits_{-\infty}^\infty x f(x)dx & \text{ für X stetig}
 \end{array}
 \right.
@@ -472,7 +582,9 @@ Wie der Erwartungswert einer Zufallsvariable berechnet wird, hängt
 davon ab, ob es sich um eine diskrete oder eine stetige Zufallsvariable
 handelt. 
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Erwartungswert einer diskreten Zufallsvariable
+
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Wie hoch ist der Erwartungswert von $X$? Für die
 Berechnung benötigt man die Wahrscheinlichkeitsfunktion. Sie lautet
@@ -493,13 +605,15 @@ E(X)=0\cdot\frac{25}{36}+1\cdot\frac{10}{36}+2\cdot\frac{1}{36}=\frac{1}{3}.
 $$
 :::
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Erwartungswert einer stetigen Zufallsvariable
+
 Die Dichte der stetigen Zufallsvariable $X$ sei 
 $$
 f(x)=\left\{
 \begin{array}{ll}
 0 & \text{ für }x < -0.56\\
-x^2-x^4+0.5 & \text{ für }-0.56 \le x < 1.1\\
+-x^4+x^2+0.5 & \text{ für }-0.56 \le x < 1.1\\
 0 & \text{ für }x \ge 1.1.
 \end{array}
 \right.
@@ -516,6 +630,26 @@ E(X) &= \int_{-\infty}^\infty x f(x) dx\\
 &=0.2754.
 \end{align*}
 $$
+Der Erwartungswert einer stetige Zufallsvariable ist ein Integral.
+Es ist daher auch möglich, den Erwartungswert in R numerisch 
+zu approximieren. Die Vorgehensweise ist analog zu @sec-numintegration:
+Zuerst definiert man ein feines Gitter über dem relevanten
+Bereich. Für den Erwartungswert ist der relevante Bereich der
+gesamte Träger, also für $X$ das Intervall $[-0.56,1.1]$.
+```{r}
+dx <- 0.001
+x <- seq(-0.56, 1.1, by=dx)
+```
+Nun wird der Funktionswert an allen Gitterpunkten bestimmt.
+```{r}
+f <- -x^4+x^2+0.5
+```
+Die numerische Approximation des Erwartungswerts ist
+```{r}
+sum(x*f*dx)
+```
+Die Abweichung vom analytisch hergeleiteten Wert ist
+sehr gering.
 :::
 
 ## Varianz {#sec-varianz}
@@ -525,6 +659,8 @@ streut bzw. wie sehr man mit großen Abweichungen vom Erwartungswert
 rechnen sollte.
 
 ::: callout-note
+## Definition: Varianz und Standardabweichung
+
 Der **Varianz** (engl. variance) einer Zufallsvariable ist
 $$
 Var(X)=E\left[(X-E(X))^2\right].
@@ -540,7 +676,7 @@ folgendermaßen schreiben:
 $$
 Var(X)=\left\{
 \begin{array}{ll}
-\sum\limits_{j:x_j\in T_X} (x_j-E(X))^2 f(x_j) & \text{ für X diskret}\\
+\sum\limits_{j:x_j\in T_X} (x_j-E(X))^2 f(x_j) & \text{ für X diskret}\\[2ex]
 \int\limits_{-\infty}^\infty (x-E(X))^2 f(x)dx & \text{ für X stetig}
 \end{array}
 \right.
@@ -552,7 +688,9 @@ $$
 Var(X)=E(X^2)-(E(X))^2.
 $$
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Varianz einer diskreten Zufallsvariablen
+
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Wie hoch ist die Varianz von $X$? Für die Berechnung nutzen
 wir den Streuungsverschiebungssatz. Der Erwartungswert von $X^2$ wird
@@ -574,7 +712,9 @@ Var(X) &= E(X^2)-(E(X))^2\\
 $$
 :::
 
-::: callout-tip
+::: { .callout-tip collapse="true"}
+## Beispiel: Varianz einer stetigen Zufallsvariablen
+
 Auch für die Berechnung der Varianz einer stetigen Zufallsvariable nutzen
 wir den Streuungsverschiebungssatz. Die Dichte der stetigen Zufallsvariable $X$ 
 sei 
@@ -591,10 +731,10 @@ Der Erwartungswert von $X^2$ beträgt
 $$
 \begin{align*}
 E(X^2) &= \int_{-\infty}^\infty x^2f(x)dx\\
-&=\int_{-0.56}^{1.1} x^2 (x^2-x^4+0.5)dx\\
-&=\int_{-0.56}^{1.1} (x^4-x^6+0.5x^2)dx\\
-&=\int_{-0.56}^{1.1} (x^4-x^6+0.5x^2)dx\\
-&=\left. \frac{1}{5}x^5-\frac{1}{7}x^7+\frac{1}{6}x^3 \right|_{-0.56}^{1.1}\\
+&=\int_{-0.56}^{1.1} x^2 (-x^4+x^2+0.5)dx\\
+&=\int_{-0.56}^{1.1} (-x^6+x^4+0.5x^2)dx\\
+&=\int_{-0.56}^{1.1} (-x^6+x^4+0.5x^2)dx\\
+&=\left. -\frac{1}{7}x^7+\frac{1}{5}x^5+\frac{1}{6}x^3 \right|_{-0.56}^{1.1}\\
 &=0.2655-(-0.0378)\\[1ex]
 &=0.3033.
 \end{align*}
@@ -608,9 +748,32 @@ Var(X) &= E(X^2)-(E(X))^2\\
 &= 0.2275.
 \end{align*}
 $$
+So wie der Erwartungswert kann auch die Varianz numerisch
+approximiert werden, denn auch die Varianz einer stetigen
+Zufallsvariable ist letztlich ein Integral. Wir nutzen
+wieder das Gitter
+```{r}
+dx <- 0.001
+x <- seq(-0.56, 1.1, by=dx)
+```
+und berechnen den Funktionswert an allen Gitterpunkten.
+```{r}
+f <- -x^4+x^2+0.5
+```
+Die numerische Approximation der Varianz ist
+```{r}
+sum((x-0.2754)^2*f*dx)
+```
+oder alternativ, wenn man den Verschiebungssatz anwendet,
+```{r}
+sum(x^2*f*dx)-0.2754^2
+```
+Dabei wurde das Ergebnis für den Erwartungswert (gerundet 0.2754)
+übernommen. Die Abweichung vom analytisch hergeleiteten Wert ist
+wiederum gering, wenn auch etwas höher als beim Erwartungswert.
 :::
 
-## Lineare Transformationen
+## Lineare Transformationen {#sec-lintrans}
 
 Eine lineare Transformation einer Zufallsvariable ergibt wieder eine
 Zufallsvariable. Für zwei reelle Zahlen $a$ und $b$ ist
@@ -682,7 +845,7 @@ kann man den Erwartungswert in eine lineare Funktion "hineinziehen"
 oder ihn aus ihr "herausziehen". Man sagt auch, dass der Erwartungswert
 ein "linearer Operator" ist.
 
-<img src="images/AdobeStock_458950051b.jpeg" align="right" width=10%" style="padding-left:15px;padding-top:5px;"/>
+<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="left" width=10%" style="padding-left:15px;padding-top:5px;"/>
 *Achtung*: Leider kann man der Erwartungswert im allgemeinen nicht aus anderen
 (nichtlinearen) Funktionen herausziehen oder ihn dort hineinziehen.
 So ist beispielsweise im allgemeinen
@@ -712,9 +875,9 @@ wenn $0<a<1$ ist, wird sie kleiner. Beachten Sie, dass es für die Varianz
 keine Rolle spielt, ob $a$ positiv oder negativ ist. Insbesondere bleibt die
 Varianz unverändert, wenn $X$ mit $(-1)$ multipliziert wird.
 
-## Standardisierung
+## Standardisierung {#sec-standardisierung}
 
-<img src="images/AdobeStock_13508641b.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
+<img src="images/AdobeStock_13508641b_Gurken.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
 Eine lineare Transformation, die dazu führt, dass der Erwartungswert der
 transformierten Zufallsvariable 0 und die Varianz 1 ist, nennt man 
 **Standardisierung**. Die transformierte Zufallsvariable heißt 

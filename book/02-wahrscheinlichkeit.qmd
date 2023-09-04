@@ -7,8 +7,10 @@ Wahrscheinlichkeit eines Ereignisses ist, wird durch eine Abbildung
 (Funktion) angegeben.
 
 :::: callout-note
-Eine Abbildung $P: A \mapsto P(A)$ heißt **Wahrscheinlichkeitsmaß**
-(engl. probability measure) oder kurz Wahrscheinlichkeit (engl. probability), wenn gilt
+## Definition: Wahrscheinlichkeit
+Eine Abbildung $P: A \mapsto P(A)$ heißt **Wahrscheinlichkeit**
+(engl. probability) oder **Wahrscheinlichkeitsmaß** 
+(engl. probability measure), wenn gilt
 
 -   Nichtnegativität: $P(A)\ge 0$ für alle Ereignisse $A$
 
@@ -43,12 +45,13 @@ Eine besonders einfache Art von Zufallsvorgängen sind die sogenannten
 Laplace-Experimente.
 
 ::: callout-note
+## Definition: Laplace-Experiment
 Ein Zufallsvorgang heißt **Laplace-Experiment** (engl. Laplace experiment), 
 wenn es nur endlich viele Ergebnisse gibt (d.h. wenn $|\Omega|=n$) und wenn 
 alle Elementarereignisse als gleich wahrscheinlich angenommen werden können.
 :::
 
-<img src="images/AdobeStock_332174058b.jpeg" align="right" width="35%"/>
+<img src="images/AdobeStock_332174058b_Kronkorken.jpeg" align="right" width="35%"/>
 Beachten Sie, dass es sich dabei um eine Aussage handelt, die aus
 unserem Alltagswissen herrührt, nicht aus mathematischen Überlegungen
 oder Herleitungen! Ein
@@ -75,7 +78,8 @@ solchen Fällen hilft der Teilbereich der Mathematik weiter, den man
 kombinatorische Probleme ein, sondern beschränken uns auf Mengen, bei
 denen es einfach ist, die Anzahl ihrer Elemente zu bestimmen.
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Ein Würfel
 Ein Würfel wird geworfen. Es handelt sich um ein Laplace-Experiment.
 Die Anzahl der Ergebnisse in $\Omega$ beträgt 6. Sei $A$ das
 Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$. Dann
@@ -89,7 +93,8 @@ P(A)&=\frac{|A|}{|\Omega|}\\
 $$
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
 Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine
 Rolle, wie man die Ergebnismenge festlegt. Wir wählen 
 $$
@@ -155,6 +160,7 @@ möglichen Ergebnisse eingrenzen. Dadurch ändern sich die
 Wahrscheinlichkeiten für Ereignisse.
 
 ::: callout-note
+## Definition: Bedingte Wahrscheinlichkeit
 Wir betrachten zwei Ereignsse $A$ und $B$ mit $P(B)>0$. Dann heißt 
 $$
 P(A|B)=\frac{P(A\cap B)}{P(B)}
@@ -175,7 +181,8 @@ angeben möchte, dass eine Wahrscheinlichkeit *keine* bedingte
 Wahrscheinlichkeit ist, nennt man sie auch eine unbedingte
 Wahrscheinlichkeit (engl. unconditional probability).
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Ein Würfel
 Ein Würfel wird geworfen. Wir betrachten die beiden Ereignisse
 $A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{4,5,6\}$ ("eine Zahl größer
 als 3"). Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
@@ -196,7 +203,8 @@ P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
 $$
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Zwei Würfel
 Zwei Würfel werden geworfen, ohne dass Sie es sehen können.
 Sie fragen, ob eine Sechs geworfen wurde. Die Frage wird
 wahrheitsgemäß bejaht. Wie groß ist die Wahrscheinlichkeit,
@@ -220,8 +228,9 @@ P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
 $$ 
 :::
 
-::: callout-tip
-<img src="images/AdobeStock_172088861b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;padding-bottom:5px;"/>
+::: {.callout-tip collapse="true"}
+## Beispiel: Erwerbsstatus
+<img src="images/AdobeStock_172088861b_Umfrage.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;padding-bottom:5px;"/>
 Bei einer Umfrage werden Personen zufällig ausgewählt und befragt.
 Sei $A$ das Ereignis "die befragte Person ist weiblich". Sei $B$ das
 Ereignis "die befragte Person arbeitet in Teilzeit". Zwischen der
@@ -241,8 +250,9 @@ eigentlich interessiert, weil die Bedingung und das Bedingte quasi
 falsch herum angeordnet sind. Man interessiert sich für $P(A|B)$, 
 berichtet wird aber $P(B|A)$.
 
-::: callout-tip
-<img src="images/AdobeStock_338942366b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>Es wird berichtet, dass 
+::: {.callout-tip collapse="true"}
+## Beispiel: Schnelltest
+<img src="images/AdobeStock_338942366b_Medizintest.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>Es wird berichtet, dass 
 ein medizinischer Schnelltest mit einer
 Wahrscheinlichkeit von 99 Prozent eine infizierte Person korrekt als
 infiziert (positiv) erkennt und ebenfalls mit einer Wahrscheinlichkeit von 99
@@ -257,7 +267,8 @@ bedingte Wahrscheinlichkeit infiziert zu sein, obwohl der Test
 negativ ausfällt, also $P(A|\bar B)$.
 :::
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Studierneigung
 Es wird berichtet, dass 50 Prozent der Studierenden ein
 "akademisches Elternhaus" haben (die Zahlen in diesem
 Beispiel sind fiktiv). Es handelt sich um die bedingte
@@ -307,8 +318,9 @@ P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B).
 $$
 Für jede Reihenfolge gelangt man zum gleichen Ergebnis.
 
-::: callout-tip
-<img src="images/AdobeStock_19427911b.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+::: {.callout-tip collapse="true"}
+## Beispiel: Kündigungen
+<img src="images/AdobeStock_19427911b_Sparbuch.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Eine Bank möchte die Dauer ihrer Kundenbeziehungen modellieren. 
 Dazu definiert sie die Ereignisse $A_d$: "die Kundenbeziehung besteht seit $d$ Jahren"
 für $d=0,1,\ldots,D$. Die Bank kennt (aus Erfahrung) die
@@ -340,19 +352,25 @@ Zerlegung in disjunkte Mengen $A_1, A_2, \ldots, A_n$, so dass die
 Vereinigungsmenge der $A_1,\ldots, A_n$ wieder $\Omega$ ergibt. Die
 "Partitionierung eines Rinds" könnte etwa so aussehen:
 
-```{r echo=FALSE,out.width="100%"}
-knitr::include_graphics("images/AdobeStock_101998556b.jpeg")
+```{r echo=FALSE,out.width="60%",fig.align='center'}
+knitr::include_graphics("images/AdobeStock_101998556b_ButcherGuide.jpeg")
 ```
 
-Das Rind wird also vollständig in Teilmengen zerlegt, und alle Teilmengen
+Das Rind wird also vollständig in Teilmengen aufgeteilt, und alle Teilmengen
 zusammen ergeben wieder das gesamte Rind.
 
-Nun nehmen wir an, dass für jedes Ereignis $A_i$, $i=1,\ldots,n$, die
-bedingte Wahrscheinlichkeit $P(B|A_i)$ gegeben ist, wobei $B$ irgendein
-Ereignis ist. Dann gilt für die unbedingte Wahrscheinlichkeit von $B$:
+::: callout-important
+## Satz von der totalen Wahrscheinlichkeit
+
+Für jedes Ereignis $A_i$, $i=1,\ldots,n$, sei
+die bedingte Wahrscheinlichkeit $P(B|A_i)$ gegeben, 
+wobei $B$ irgendein Ereignis ist. 
+Dann gilt für die unbedingte (totale) Wahrscheinlichkeit von $B$:
 $$
 P(B)=\sum_{i=1}^n P(B|A_i)P(A_i).
 $$ 
+:::
+
 Eine besonders simple Partitionierung ist die Unterteilung in
 $A$ und $\bar A$. Dann lautet die Formel
 $$
@@ -366,7 +384,8 @@ ist dann besonders nützlich, wenn die bedingten Wahrscheinlichkeiten
 schon bekannt oder einfach zu ermitteln sind, die unbedingte 
 Wahrscheinlichkeit jedoch schwierig zu finden ist.
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Kreditausfall
 Eine Bank vergibt einen Kredit an ein Unternehmen. Das Unternehmen
 zahlt den Kredit mit einer Wahrscheinlichkeit von 0.95 zurück,
 wenn die konjunkturelle Lage positiv ist. Bei einer schwachen
@@ -392,10 +411,17 @@ $$
 ## Satz von Bayes {#sec-bayes}
 
 Der Satz von Bayes setzt die beiden bedingten Wahrscheinlichkeiten
-$P(A|B)$ und $P(B|A)$ zueinander in Beziehung. Es gilt 
+$P(A|B)$ und $P(B|A)$ zueinander in Beziehung. 
+
+::: callout-important
+## Satz von Bayes
+
+Es gilt 
 $$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
 $$ 
+:::
+
 Um die Bedingung und das Bedingte zu vertauschen, braucht man also
 beide unbedingte Wahrscheinlichkeiten. Die Herleitung des Satzes von
 Bayes ergibt sich aus der Definition der bedingten Wahrscheinlichkeit.
@@ -412,7 +438,8 @@ P(A|B)P(B)=P(B|A)P(A).
 $$ 
 Daraus folgt durch Umstellen unmittelbar der Satz von Bayes.
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Schnelltest
 Wir betrachten wieder den medizinischen Schnelltest und die beiden
 Ereignisse $A$: "Person ist infiziert", und $B$: "Test positiv". Neben
 den beiden bedingten Wahrscheinlichkeiten $P(B|A)=0.99$ und 
@@ -440,13 +467,18 @@ tatsächlich infiziert ist, ist folglich immer noch sehr klein, obwohl der
 Test scheinbar sehr genau arbeitet. 
 :::
 
-## Unabhängigkeit {#sec-unabhaengig}
+## Unabhängigkeit {#sec-unabhaengig1}
+
+::: callout-note
+## Definition: Unabhängigkeit
 
 Zwei Ereignisse $A$ und $B$ heißen unabhängig (oder auch stochastisch
 unabhängig, engl. independent bzw. stochastically independent), wenn 
 $$
 P(A\cap B)=P(A)\cdot P(B).
 $$ 
+:::
+
 Eine alternative (fast äquivalente) Definition der Unabhängigkeit
 lautet so: Die Ereignisse $A$ und $B$ heißen unabhängig, wenn gilt 
 $$
@@ -469,7 +501,8 @@ sein, dass $B$ nicht eintritt. Und wenn $B$ eintritt, kann man sicher
 sein, dass $A$ nicht eintritt. Unabhängige Ereignisse können hingegen
 sehr wohl zusammen eintreten.
 
-::: callout-tip
+::: {.callout-tip collapse="true"}
+## Beispiel: Schnelltest
 Wir betrachten wieder den medizinischen Schnelltest und die beiden
 Ereignisse $A$: "Person ist infiziert", und $B$: "Test positiv".
 Zur Erinnerung: Gegeben sind die beiden bedingten Wahrscheinlichkeiten
@@ -490,9 +523,12 @@ vollkommen nutzlos.
 
 ## Wahrscheinlichkeitsbäume {#sec-baeume}
 
+<img src="images/AdobeStock_203304945b_Baeume.jpeg" width="100%"
+style="padding-bottom:15px;"/>
+
 Ein Werkzeug, mit dem man allgemeine und etwas komplexere 
 Wahrscheinlichkeits-Probleme übersichtlich bearbeiten kann,
-sind Wahrscheinlichkeitsbäume. Die Ereignisse bilden die Äste 
+sind **Wahrscheinlichkeitsbäume**. Die Ereignisse bilden die Äste 
 des Baums. Die Wahrscheinlichkeiten an den Ästen sind
 bedingte Wahrscheinlichkeiten, nur auf der ersten Stufe handelt
 es sich um unbedingte Wahrscheinlichkeiten.
