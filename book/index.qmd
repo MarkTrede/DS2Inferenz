@@ -59,6 +59,7 @@ in "Data Science 2" vorkommen. Das ist kein Zufall, denn wir werden
 sehen, dass auf einer tieferen Ebene eine enge Beziehung zwischen 
 beiden Ansätzen besteht.
 
+<<<<<<< HEAD
 In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul
 nur sparsam eingesetzt. R soll in erster Linie das Verständnis 
 von Zufall erleichtern. Visualisierungsmethoden (`ggplot`) spielen 
@@ -68,3 +69,8 @@ Im @sec-programmieren finden Sie ein Hinweise zum Programmieren in R, insbesonde
 zu Schleifen. Hinweise auf weiterführende Literatur gibt @sec-literatur. Dieses
 eSkript orientiert sich sowohl hinsichtlich des Aufbaus als auch der Notation
 recht eng an Mosler und Schmid (2011).
+=======
+In Gegensatz zu "Data Science 1" wird die Software R in diesem Modul nur sparsam und erst ab Mitte des Semesters eingesetzt. 
+
+(Kein ggplot)
+>>>>>>> main

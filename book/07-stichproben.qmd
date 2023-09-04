@@ -1,0 +1,10 @@
+# Stichproben {#sec-stichproben}
+
+In diesem Kapitel schlagen wir die Brücke von der rein theoretischen
+Wahrscheinlichkeitsrechnung zur Empirie. 
+
+## Einfache Stichproben
+
+
+
+## Statistiken

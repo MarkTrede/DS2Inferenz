@@ -1,0 +1,2 @@
+# Intervallschätzung {#sec-intervallschaetzung}
+

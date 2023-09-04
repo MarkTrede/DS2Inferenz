@@ -360,7 +360,11 @@ $$
 U_{n,1},U_{n,2},\ldots,U_{n,R}
 $$
 nennen können, wobei $R$ die vorgegebene (große) Zahl von Ziehungen ist,
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 z.B. $R=10000$. Für jede dieser Ziehungen müssen die Zufallsvariablen
+=======
+z.B. $R=100000$. Für jede dieser Ziehungen müssen die Zufallsvariablen
+>>>>>>> main:book/06-grenzwerte.qmd
 $X_1,\ldots,X_n$ neu gezogen werden. Das lässt sich am elegantesten
 durch eine Schleife programmieren. Genauere Erklärungen zum Programmieren
 mit Schleifen finden Sie im @sec-programmieren.
@@ -371,13 +375,22 @@ Werte in diesem Vektor stehen, ist gleichgültig, da sie in der Schleife
 ohnehin überschrieben werden. Es geht also nur darum, Platz für die
 Ergebnisse vorzubereiten.
 ```{r}
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 R <- 10000
+=======
+R <- 100000
+>>>>>>> main:book/06-grenzwerte.qmd
 u <- rep(0, R)
 ```
 Innerhalb der Schleife werden nun in jedem Durchlauf die
 Zufallszahlen $X_1,\ldots,X_n$ gezogen. Konkret nehmen wir
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 an dieser Stelle an, dass die Folge $n=50$ Elemente umfasst
 und dass sie unabhängig exponentialverteilt mit Parameter $\lambda=2$
+=======
+an dieser Stelle an, dass die Folge $n=20$ Elemente umfasst
+und dass sie unabhängig exponentialverteilt mit Parameter $\lambda=1$
+>>>>>>> main:book/06-grenzwerte.qmd
 sind, 
 $$
 X\sim Exp(2).
@@ -391,13 +404,20 @@ Var(X)& =\frac{1}{4}.
 $$
 Der R-Code sieht folgendermaßen aus:
 ```{r}
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 mu <- 1/2
 sigma <- sqrt(1/4)
+=======
+>>>>>>> main:book/06-grenzwerte.qmd
 n <- 50
 for(r in 1:R){
     x <- rexp(n, rate=2)
     xquer <- mean(x)
+<<<<<<< HEAD:book/07-grenzwerte.qmd
     u[r] <- sqrt(n)*(xquer - mu)/sigma
+=======
+    u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
+>>>>>>> main:book/06-grenzwerte.qmd
 }
 ```
 Zur Erklärung: Der Laufindex der Schleife `r` durchläuft
@@ -409,12 +429,20 @@ abgespeichert. In der letzten Zeile der Schleife
 wird der Durchschnitt standardisiert und in die
 `r`-te Stelle des Vektors `u` geschrieben.
 
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 Das Histogramm der $R=10000$ Zufallszahlen 
+=======
+Das Histogramm der $R=100000$ Zufallszahlen 
+>>>>>>> main:book/06-grenzwerte.qmd
 $U_{n,1},\ldots,U_{n,R}$ kann trotz des noch kleinen
 Umfang $n=50$ schon recht gut durch eine Standardnormalverteilung
 approximiert werden.
 ```{r}
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 hist(u, prob=TRUE, breaks=50)
+=======
+hist(u, prob=TRUE, breaks=100)
+>>>>>>> main:book/06-grenzwerte.qmd
 curve(dnorm(x), add=TRUE, col="red")
 ```
 Reduziert man die Länge der Folge auf $n=5$ Elemente, greift
@@ -427,7 +455,11 @@ for(r in 1:R){
     xquer <- mean(x)
     u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
 }
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 hist(u, prob=TRUE, breaks=50)
+=======
+hist(u, prob=TRUE, breaks=100)
+>>>>>>> main:book/06-grenzwerte.qmd
 curve(dnorm(x), add=TRUE, col="red")
 ```
 Wie viele Elemente die Folge $X_1,\ldots,X_n$ haben muss,
@@ -437,7 +469,11 @@ Approximation sehr gut ist, es kann jedoch auch sein,
 dass selbst ein Umfang von $n=1000$ oder sogar $n=10000$
 noch zu klein ist.
 Erfahrungsgemäß ist in den meisten Fällen ein Umfang
+<<<<<<< HEAD:book/07-grenzwerte.qmd
 von $n=40$ schon ausreichend groß, um eine einigermaßen gute
+=======
+von $n=40$ schon ausreichend groß, um eine gute
+>>>>>>> main:book/06-grenzwerte.qmd
 Annäherung an die Standardnormalverteilung zu erreichen.
 Das ist jedoch nur eine Faustregel, sie kann im 
 konkreten Einzelfall vollkommen falsch sein.
