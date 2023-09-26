@@ -1,0 +1,620 @@
+# Bootstrap {#sec-bootstrap}
+
+Die bisherige Darstellung der Hypothesentests hat möglicherweise
+den Eindruck erweckt, dass es eine Reihe von vorgefertigten 
+Testverfahren gibt, die man als Nutzer heraussuchen und anwenden 
+kann. Tatsächlich stellt sich in vielen ökonomischen Anwendungen
+und vor allem in der empirischen akademischen Forschung oft die
+Frage, wie man eine Hypothese testen kann, für die es noch
+keinen vorgefertigten Test gibt. Ökonomen sollten also nicht nur
+vorgefertigte Tests verstehen und anwenden können, sondern auch in 
+der Lage sein, neue Tests zu entwickeln.
+
+In diesem Kapitel wird ein computer-gestützter Ansatz für
+Hypothesentests vorgestellt, bei dem Monte-Carlo-Simulationen
+eingesetzt werden. Man nennt diese Methode **Bootstrap**
+(oder Bootstrapping). 
+
+## Monte-Carlo-Simulation der kritischen Grenzen
+
+Um die Grundidee des Bootstraps zu beschreiben, betrachten wir
+ein konkretes Testbeispiel, das in @sec-t_test bereits ausführlich 
+besprochen wurde, nämlich einen Erwartungswerttest mit den Hypothesen
+$$
+\begin{align*}
+H_0: \mu&=\mu_0\\
+H_1: \mu&\neq\mu_0.
+\end{align*}
+$$
+Die Teststatistik für diesen Test ist 
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{S}.
+$$
+Wie könnte man die kritischen Grenzen bestimmen, wenn man keine
+Ahnung vom zentralen Grenzwertsatz und der t-Verteilung hätte, 
+aber zum einen wüsste, 
+wie die Population $X$ verteilt ist, und zum anderen, dass 
+die Nullhypothese wahr ist? 
+
+Konkret nehmen wir an, dass $H_0:\mu=63$ und $H_1:\mu\neq 63$,
+dass der Stichprobenumfang $n=100$ ist und dass
+$$
+X\sim N(63,4^2).
+$$
+Die Nullhypothese ist also korrekt, weil der Erwartungswert
+der Normalverteilung dem hypothetischen Wert entspricht.
+
+Die Verteilung der Teststatistik unter der Nullhypothese kann 
+man nun durch eine Monte-Carlo-Simulation mit den Methoden 
+aus @sec-mc1 beliebig genau ermitteln. Das prinzipielle Vorgehen 
+ist fast genauso wie in @sec-mc3, in dem wir Fehlerwahrscheinlichkeiten 
+für den Erwartungswerttest durch Monte-Carlo-Simulationen
+bestimmt haben. Wir interessieren uns 
+jetzt jedoch für das $(\alpha/2)\text{-}$Quantil 
+(also die untere kritische Grenze) und das $(1-\alpha/2)$-Quantil 
+(die obere kritische Grenze) der Teststatistik. 
+
+Der R-Code für die Monte-Carlo-Simulation sieht so aus:
+```{r}
+# Anzahl der Simulationsdurchläufe
+R <- 10000
+
+# Initialisierung eines Vektors, um die
+# Werte der Teststatistik aufzunehmen
+teststat <- rep(0, R)
+
+# Parameter
+alpha <- 0.05
+mu0 <- 63
+mu <- mu0
+sigma <- 4
+n <- 100
+
+# Schleife
+for(r in 1:R){
+  
+  x <- rnorm(n, mean=mu, sd=sigma)
+  teststat[r] <- sqrt(n) * (mean(x) - mu0)/sd(x)
+  
+}
+```
+Wenn die Schleife durchgelaufen ist, enthält der Vektor `teststat`
+die `R` Realisationen der Teststatistik (unter der Nullhypothese).
+Die gesuchten Quantile kann man nun mit Hilfe der R-Funktion
+`quantile` bestimmen. Sie sind
+```{r}
+quantile(teststat, prob=c(alpha/2, 1-alpha/2))
+```
+Diese Werte liegen sehr nah an den theoretisch hergeleiteten
+kritischen Grenzen, die sich aus der t-Verteilung ergeben, nämlich
+```{r}
+qt(c(alpha/2, 1-alpha/2), df=n-1)
+```
+Wenn die Anzahl der Schleifendurchläufe erhöht wird,
+dann sind die Unterschiede noch kleiner.
+
+Es ist also mit Hilfe von Monte-Carlo-Simulationen möglich, die
+kritischen Werte aus der Verteilung der Teststatistik unter der 
+Nullhypothese zu finden, wenn man die wahre Verteilung von $X$ kennt. 
+Das Problem für eine praktische Anwendung ist aber offensichtlich: 
+**Man kennt die wahre Verteilung von $X$ nicht.**
+Der Ansatz ist also nur als Computersimulation machbar, aber nicht
+von praktischer Relevanz. Es gibt jedoch einen Trick, der nun
+erklärt wird.
+
+## Stichprobe und Pseudo-Stichproben
+
+Die Idee der Bootstrap-Methode ist eigentlich naheliegend: Da wir die
+Verteilung von $X$ nicht kennen, brauchen wir eine Schätzung
+dieser Verteilung. Es gibt mehrere Möglichkeiten die
+Verteilung von $X$ aus einer Stichprobe $X_1,\ldots,X_n$
+zu schätzen. Die typische Methode beim Bootstrap besteht
+darin, die **empirische Verteilung der konkreten Stichprobe** 
+als beste Annäherung an die Populationsverteilung anzusehen. 
+Man nennt diese Bootstrap-Methode "nichtparametrisch".
+
+Ein Problem muss noch gelöst werden: Die Nullhypothese 
+wird von der Original-Stichprobe im allgemeinen nicht exakt 
+erfüllt, möglicherweise wird sie nicht einmal ungefähr
+erfüllt. Eine Simulation würde also nicht die gesuchte
+Verteilung der Teststatistik unter Gültigkeit der Nullhypothese 
+ermitteln. Daher muss die Original-Stichprobe so angepasst werden,
+dass sie die Nullhypothese erfüllt. Dabei soll die Verteilung
+der Original-Stichprobe möglichst wenig verändert werden. 
+
+Für den Erwartungswerttest sieht die Anpassung so aus,
+dass alle Stichprobenelemente der Original-Stichprobe,
+also $x_1,\ldots,x_n$ um $\mu_0-\bar x$ verschoben werden. 
+Die dadurch entstehende empirische Verteilung ist die
+Bootstrap-Populationsverteilung. Wir nennen sie $X^b$ 
+(für Bootstrap) mit den Ausprägungen
+$$
+x_i^b=x_i+\mu_0-\bar x,\quad i=1,\ldots,n.
+$$
+Die Wahrscheinlichkeitsfunktion von $X^b$ versieht jeden dieser Werte
+mit der Wahrscheinlichkeit $1/n$. Der Erwartungswert von $X^b$
+ist (vgl. @sec-empverteilung)
+$$
+\begin{align*}
+E(X^b)&=\frac{1}{n}\sum_{i=1}^n x_i^b\\
+&= \frac{1}{n}\sum_{i=1}^n (x_i+\mu_0-\bar x)\\
+&= \mu_0+\frac{1}{n}\sum_{i=1}^n x_i -\bar x\\
+&= \mu_0,
+\end{align*}
+$$
+so dass die Nullhypothese erfüllt ist.
+
+Nun ermittelt man die Verteilung der Teststatistik mit Hilfe
+von Monte-Carlo-Simulationen unter der Annahme, dass die
+Populationsverteilung nicht $X$ ist (denn die ist unbekannt), sondern 
+$X^b$ (denn die ist bekannt). Das ist der Kern der Bootstrap-Methode,
+es handelt sich also um eine Monte-Carlo-Simulation der
+Verteilung der Teststatistik, bei der die unbekannte Verteilung der
+Population $X$ durch die bekannte und an die Nullhypothese
+angepasste empirische Verteilung der Stichprobe $X^b$ ersetzt 
+wird. Im folgenden nennen wir diese Art von
+Simulation "Bootstrap-Simulation".
+
+Für die Bootstrap-Simulation muss in jedem Schleifendurchlauf
+eine neue Stichprobe aus der Bootstrap-Population
+$X^b$ gezogen werden. Diese Ziehungen nennt 
+man **Pseudo-Stichproben** oder **Resamples**. 
+Eine Pseudo-Stichprobe $X^b_1,\ldots,X^b_n$
+unter der Nullhypothese lässt sich mit der 
+R-Funktion `sample` ziehen. 
+```{r}
+xb <- sample(x + mu0 - mean(x), size=n, replace=TRUE)
+```
+Man zieht also aus der an die Nullhypothese angepassten
+Original-Stichprobe wie aus einer Urne
+$n$ Elemente. Nach jedem Zug wird das gezogene Element wieder zurückgelegt
+(`replace=TRUE`), so dass ein Stichprobenelement der Original-Stichprobe
+durchaus mehrfach in der Pseudo-Stichprobe landen kann. Andere
+Elemente der Original-Stichprobe tauchen dafür in der 
+Pseudo-Stichprobe gar nicht auf.
+
+## Bootstrap-Simulation
+
+Die Verteilung der Teststatistik unter der Nullhypothese wird 
+durch eine Bootstrap-Simulation mit vielen Schleifendurchläufen 
+ermittelt. Die Anzahl der Durchläufe nennen wir $B$.
+In jedem Schleifendurchlauf wird eine Pseudo-Stichprobe vom
+Umfang $n$ aus der Bootstrap-Population $X^b$ gezogen. 
+Aus jeder Pseudo-Stichprobe berechnet man den Wert der 
+Bootstrap-Teststatistik,
+$$
+T^b=\sqrt{n}\frac{\overline{X^b}-\mu_0}{S^b},
+$$
+wobei 
+$$
+\overline{X^b}=\frac{1}{n}\sum_{i=1}^n X^b_i
+$$
+das Stichprobenmittel der Pseudo-Stichprobe und
+$$
+S^b=\sqrt{\frac{1}{n-1}\sum_{i=1}^n \left(X^b_i-\overline{X^b}\right)}
+$$
+die Stichprobenstandardabweichung der Pseudo-Stichprobe sind.
+
+Nachdem die Schleife $B$-mal ausgeführt wurde, liegen $B$
+Werte der Bootstrap-Teststatistik vor. Das $(\alpha/2)$-Quantil
+dieser Werte ist die untere kritische Grenze, das
+$(1-\alpha/2)$-Quantil die obere kritische Grenze. 
+Wenn die Original-Teststatistik unter der unteren oder
+über der oberen kritischen Grenze liegt, wird die
+Nullhypothese verworfen.
+
+Wir gehen nun den R-Code für die Bestimmung der kritischen
+Grenzen beim Erwartungswerttest Schritt für Schritt durch. 
+Der hypothetische Wert sei $\mu_0=63$. Die Bootstrap-Methode
+basiert auf der Original-Stichprobe `x`. Die $n=80$ konkreten 
+Stichprobenelemente seien in dem Datensatz `bootstrap1.csv`
+unter dem Namen `originalstichprobe` abgespeichert. 
+```{r}
+D <- read.csv("../data/bootstrap1.csv")
+head(D)
+```
+Die Daten werden in dem Vektor `x` abgelegt.
+```{r}
+x <- D$originalstichprobe
+n <- length(x)
+```
+Aus der Original-Stichprobe wird die Original-Teststatistik berechnet.
+Ihr Wert ist
+```{r}
+mu0 <- 63
+teststat <- sqrt(n)*(mean(x) - mu0)/sd(x)
+print(teststat)
+```
+Vor dem Start der Bootstrap-Schleife wird ein Vektor `teststatb` 
+initialisiert, in dem die Werte der Bootstrap-Teststatistik gesammelt
+werden können. Die Zahl der Bootstrap-Wiederholungen setzen wir 
+auf $B=10000$.
+```{r}
+B <- 10000
+teststatb <- rep(0, B)
+```
+Nun folgt die eigentliche Bootstrap-Routine. In jedem Schleifendurchlauf
+wird eine Pseudo-Stichprobe `xb` gezogen. Aus ihr wird die Teststatistik
+berechnet und als ein Element in dem Vektor `teststatb` abgespeichert.
+```{r}
+for(b in 1:B){
+  
+  xb <- sample(x + mu0 - mean(x), size=n, replace=TRUE)
+  teststatb[b] <- sqrt(n)*(mean(xb) - mu0)/sd(xb)
+  
+}
+```
+Aus den $B$ Bootstrap-Werten der Teststatistik errechnet man
+die kritischen Grenzen mit der `quantile`-Funktion. Das
+Signifikanzniveau setzen wir auf 0.05.
+```{r}
+alpha <- 0.05
+quantile(teststatb, 
+         prob=c(alpha/2, 1-alpha/2))
+```
+Der Wert der Original-Teststatistik (`r round(teststat,2)`) liegt 
+nicht zwischen diesen beiden Werten, sondern ist kleiner 
+als die untere kritische Grenze. Die Nullhypothese wird also abgelehnt. 
+
+Eine Besonderheit des Bootstrapverfahrens besteht darin, dass
+die kritischen Grenzen speziell für die Original-Stichprobe
+bestimmt werden. Eine andere Original-Stichprobe führt zu anderen
+kritischen Grenzen. Natürlich gibt es auch einen Zufallseinfluss
+durch das Ziehen der Pseudo-Stichproben. Er wird jedoch
+immer kleiner, wenn man die Zahl der Durchläufe $B$ erhöht.
+
+## Weitere Bootstrap-Beispiele
+
+In den folgenden Abschnitten wird gezeigt, wie einige weitere 
+Hypothesentests mit Hilfe der Bootstrap-Methode durchgeführt werden 
+können. Die einzige Schwierigkeit der Bootstrap-Tests besteht darin,
+die Original-Stichprobe so anzupassen, dass die Nullhypothese
+erfüllt wird. 
+
+### Zwei Erwartungswerte
+
+Wir verwenden die Notation aus @sec-zweierwwerte. Es gibt nun
+zwei Original-Stichproben, nämlich $x_1,\ldots,x_m$ und
+$y_1,\ldots,y_n$. Sie können unterschiedlich lang sein. 
+Wie kann man die Stichproben so anpassen, dass die Nullhypothese 
+$$
+H_0:\mu_X=\mu_Y
+$$ 
+erfüllt ist? 
+
+Es gibt mehrere naheliegende Möglichkeiten: (i) Man verschiebt
+die $X$-Werte so, dass ihr Durchschnitt dem Durchschnitt der
+$Y$-Werte entspricht; (ii) man verschiebt die $Y$-Werte so,
+dass ihr Durchschnitt dem Durchschnitt der $X$-Werte
+entspricht; (iii) man verschiebt sowohl die $X$-Werte als
+auch die $Y$-Werte so, dass ihre Durchschnitte dem
+Gesamtdurchschnitt entsprechen. Tatsächlich hat die Art der
+Verschiebung keinen Einfluss auf das Testergebnis. Im folgenden 
+Code-Beispiel wird die Variante (i) gewählt.
+
+Zuerst werden die Daten der Original-Stichproben eingelesen.
+```{r}
+D <- read.csv("../data/bootstrap2.csv")
+head(D)
+```
+Nun zieht man aus diesem Dataframe die beiden Stichproben heraus
+und speichert sie als `x` und `y` ab.
+```{r}
+x <- D$wert[D$gruppe == "x"]
+y <- D$wert[D$gruppe == "y"]
+```
+Die Stichprobenumfänge sind
+```{r}
+m <- length(x)
+m
+```
+und
+```{r}
+n <- length(y)
+n
+```
+Aus den Original-Stichproben errechnet man den Wert der Teststatistik 
+```{r}
+teststat <- (mean(x) - mean(y))/sqrt(var(x)/m + var(y)/n)
+teststat
+```
+Für die Anpassung an die Nullhypothese werden alle Elemente
+der $X$-Stichprobe um $\bar y-\bar x$ verschoben. Beide
+Bootstrap-Populationen haben dann den Erwartungswert $\bar y$.
+Die Nullhypothese ist also erfüllt.
+
+Der weitere R-Code sieht wie folgt aus:
+```{r}
+B <- 10000
+teststatb <- rep(0, B)
+
+for(b in 1:B){
+  
+  xb <- sample(x + mean(y) - mean(x), size=m, replace=TRUE)
+  yb <- sample(y, size=n, replace=TRUE)
+  teststatb[b] <- (mean(xb) - mean(yb))/sqrt(var(xb)/m + var(yb)/n)
+  
+}
+```
+Die kritischen Grenzen sind auf einem Niveau von 5 Prozent
+```{r}
+alpha <- 0.05
+quantile(teststatb,
+         prob=c(alpha/2, 1-alpha/2))
+```
+Die Teststatistik (`r round(teststat,2)`) liegt 
+zwischen den kritischen Grenzen, daher
+wird die Nullhypothese nicht abgelehnt. Die Erwartungswerte
+sind nicht signifikant unterschiedlich.
+
+### Varianz-Test
+
+In diesem Abschnitt wird gezeigt, wie man einen Bootstrap-Test
+in einer neuen Situation anwenden kann. Wir möchten testen,
+ob die Varianz von $X$ einen vorgegebenen Wert $\sigma_0^2$ annimmt.
+Die Hypothesen sind
+$$
+\begin{align*}
+H_0: \sigma^2 &= \sigma_0^2\\
+H_1: \sigma^2 &\neq \sigma_0^2.
+\end{align*}
+$$
+Wie könnte eine Teststatistik aussehen? Die einfachste Lösung
+ist die Stichprobenvarianz
+$$
+T=S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2.
+$$
+Die Verteilung der Teststatistik unter der Nullhypothese wird
+durch eine Bootstrap-Simulation bestimmt. Wenn die Teststatistik,
+die sich aus den Werten der Original-Stichprobe ergibt, 
+kleiner ist als die untere kritische Grenze oder größer als
+die obere kritische Grenze, dann wird die Nullhypothese
+abgelehnt.
+
+Der R-Code wird nun vorgestellt. Zuerst wird die Originalstichprobe
+eingelesen.
+```{r}
+D <- read.csv("../data/bootstrap3.csv")
+head(D)
+```
+Die Werte aus dem Dataframe werden in den Vektor `x` geschrieben.
+```{r}
+x <- D$originalstichprobe
+```
+Die Stichprobenlänge ist
+```{r}
+n <- length(x)
+n
+```
+Der Wert der Teststatistik lautet
+```{r}
+teststat <- var(x)
+teststat
+```
+Es soll getestet werden, ob die Varianz $\sigma_0^2=0.5$ beträgt. 
+Um die Verteilung der Teststatistik unter der Nullhypothese zu
+simulieren, muss die Original-Stichprobe so angepasst werden,
+dass sie die Nullhypothese erfüllt. Die Varianz kann durch
+eine Umskalierung verändert werden (@sec-lintrans). Dabei
+muss man beachten, dass sich bei einer Multiplikation aller Werte
+mit einer Konstanten die Varianz im Quadrat erhöht.
+Die geeignete Umskalierung ist also:
+$$
+x_i^b=x_i\cdot\sqrt{\frac{0.5}{s^2}}.
+$$
+Die Bootstrap-Schleife sieht wie folgt aus:
+```{r}
+B <- 10000
+teststatb <- rep(0, B)
+
+for(b in 1:B){
+  
+  xb <- sample(x * sqrt(0.5/teststat), size=n, replace=TRUE)
+  teststatb[b] <- var(xb)
+  
+}
+```
+Aus den Bootstrap-Teststatistiken werden die kritischen Grenzen
+bestimmt. Das Signifikanzniveau sei 5 Prozent.
+```{r}
+alpha <- 0.05
+quantile(teststatb,
+         prob=c(alpha/2, 1-alpha/2))
+```
+Der Wert der Teststatistik (`r round(teststat,4)`) liegt 
+zwischen den kritischen Grenzen. Die Nullhypothese wird also
+nicht abgelehnt.
+
+### Unabhängigkeitstest
+
+Die Bootstrap-Version des Unabhängigkeitstests (@sec-unabhtest) ist 
+bemerkenswert, weil sie nicht nur bei ausreichend großen Stichproben 
+zuverlässig funktioniert, sondern auch, wenn die Faustregel zur
+Mindestbesetzung der Tabelleneinträge verletzt ist.
+
+Wir verwenden die Notation aus @sec-unabhtest. Die Träger von $X$
+und $Y$ sind partitioniert in
+$$
+A_1,\ldots,A_J\quad\text{und}\quad B_1,\ldots,B_K.
+$$
+In der Häufigkeitstabelle geben die Einträge $N_{jk}$ 
+für $j=1,\ldots,J$ und $k=1,\ldots,K$ an, wie oft in der 
+Stichprobe die Kombination $(A_j,B_k)$ vorkommt. Die
+Randverteilungen sind $N_{j\cdot}$ für $X$ und
+$N_{\cdot k}$ für $Y$.
+
+Wie lässt sich die Verteilung der Teststatistik unter der
+Nullhypothese, d.h. unter Unabhängigkeit, simulieren? 
+Wenn $X$ und $Y$ unabhängig sind, können sie separat
+voneinander aus ihren jeweiligen Original-Stichproben 
+gezogen werden. Man zieht also $X^b$ aus $x_1,\ldots,x_n$ und
+$Y^b$ aus $y_1,\ldots,y_n$. Die gemeinsame Verteilung 
+$(x_1,y_1),\ldots,(x_n,y_n)$ wird nicht gebraucht,
+weil die Bootstrap-Simulation unter der Nullhypothese
+der Unabhängigkeit stattfindet.
+
+Als Beispiel reproduzieren wir das Beispiel aus
+@sec-unabhtest: Sind die Tagesrenditen von Siemens
+und Zalando unabhängig voneinander? Der R-Code
+sieht so aus:
+```{r}
+renditen <- read.csv("../data/tagesrenditen.csv")
+s <- renditen$siemens
+z <- renditen$zalando
+n <- length(s)
+
+A_breaks <- c(-Inf, -1.4, -0.6, 0.1, 0.9, 1.6, Inf)
+B_breaks <- c(-Inf, -3, -1.5, 0, 1.3, 3.1, Inf)
+```
+Die Vektoren `s` und `z` enthalten die Original-Stichproben,
+also die beobachteten Tagesrenditen von Siemens und Zalando. 
+Die Partitionsgrenzen sind in `A_breaks` und `B_breaks` 
+gespeichert. Sie bleiben in den Bootstrap-Simulationen
+unverändert.
+
+In der Bootstrap-Schleife zieht man aus `s` und `z` 
+unabhängig voneinander die Pseudo-Stichproben `sb` und `zb`.
+Aus ihnen bestimmt man den Wert der Teststatistik
+und speichert ihn ab. Da die Berechnung der
+Teststatistik recht langsam ist, wird die Bootstrap-Schleife
+nur 1000 Mal durchlaufen.
+```{r}
+B <- 1000
+teststatb <- rep(0, B)
+
+for(b in 1:B){
+  
+  # Ziehung der Pseudo-Stichproben
+  sb <- sample(s, size=n, replace=TRUE)
+  zb <- sample(z, size=n, replace=TRUE)
+  
+  # Diskretisierung
+  sb_d <- cut(sb, A_breaks)
+  zb_d <- cut(zb, B_breaks)
+  
+  # Berechnung der Teststatistik
+  Nb_siemens <- table(sb_d)
+  Nb_zalando <- table(zb_d)
+  Nb <- table(sb_d, zb_d)
+  teststatb[b] <- 0
+  for(j in 1:6){
+    for(k in 1:6){
+      aux <- Nb_siemens[j]*Nb_zalando[k]/n
+      teststatb[b] <- teststatb[b] + (Nb[j,k]-aux)^2/(aux)
+    }
+  }
+}
+```
+Gesucht ist nun das obere $(1-\alpha)$-Quantil. Man erhält
+für ein Signifikanzniveau von 5 Prozent
+```{r}
+alpha <- 0.05
+quantile(teststatb, 1-alpha)
+```
+Der Wert der Teststatistik beträgt 130.9, er liegt also deutlich
+im kritischen Bereich. Die Nullhypothese wird verworfen. Die
+Tagesrenditen hängen statistisch signifikant miteinander zusammen.
+
+### Anpassungstest
+
+Die Bootstrap-Version des Anpassungstests (@sec-anpassung) ist 
+ist auch dann anwendbar, wenn die Faustregel zur
+Mindestbesetzung der Partitionseinträge nicht erfüllt ist.
+Wir verwenden die Notation aus @sec-anpassung. Die Träger von $X$
+ist partitioniert in
+$$
+A_1,\ldots,A_J.
+$$
+Die Null- und Alternativhypothesen sind
+$$
+\begin{align*}
+H_0&: ~P(X\in A_j)=\pi_j,\quad j=1,\ldots,J\\
+H_1&: ~\text{nicht }H_0,
+\end{align*}
+$$
+wobei sich die theoretischen Wahrscheinlichkeiten $\pi_1,\ldots,\pi_J$
+aus der zu testenden Verteilungsannahme und der Partition errechnen
+lassen. 
+
+Im Gegensatz zu Pseudo-Stichproben, die aus der Original-Stichprobe
+gezogen wurden, bietet es sich beim Anpassungstest an, die
+Pseudo-Stichproben einfach aus der Verteilung zu ziehen, die in 
+der Nullhypothese behauptet wird. 
+
+Zur Illustration wiederholen wir ein Beispiel aus
+@sec-anpassung. Die Nullhypothese behauptet, dass die Anzahl 
+der Kunden, die innerhalb einer Viertelstunde bei einer
+Hotline anrufen, einer Poisson-Verteiung mit dem Parameter
+$\lambda=4$ folgt. Aus den Daten der Original-Stichprobe
+sind die folgenden Häufigkeiten bekannt:
+```{r}
+x_j <- 0:9
+n_j <- c(6,27,78,81,72,64,33,23,9,7)
+
+J <- length(x_j)
+n <- sum(n_j)
+```
+Es gab also 7 Viertelstunden mit jeweils 9 Anrufen,
+9 Viertelstunden mit 8 Anrufen etc. Die theoretischen
+Wahrscheinlichkeiten für die Ausprägungen 
+"0" bis "8" sowie "9 oder mehr" sind
+```{r}
+pi_j <- c(dpois(0:8, lambda=4),
+          1-ppois(8, lambda=4))
+```
+Aus diesen Angaben ergab sich in @sec-anpassung als 
+Original-Teststatistik der Wert 10.3. Wie bestimmt man mit einer 
+Bootstrap-Simulation die kritische Grenze? Der R-Code 
+sieht wie folgt aus:
+```{r}
+B <- 10000
+teststatb <- rep(0, B)
+ 
+for(b in 1:B){
+  
+  # Ziehung der Pseudo-Stichprobe
+  xb <- rpois(n, lambda=4)
+  
+  # Bestimmung der Häufigkeiten
+  Nb <- rep(0, J)
+  for(i in 1:9){
+    Nb[i] <- sum(xb == (i-1))
+  }
+  Nb[10] <- sum(xb >= 9)
+  
+  # Berechnung der Teststatistik
+  teststatb[b] <- sum((Nb - n*pi_j)^2/(n*pi_j))
+  
+}
+```
+Zur Erklärung: In der Schleife wird zuerst die Pseudo-Stichprobe
+aus der hypothetischen Poisson-Verteilung gezogen. 
+Anschließend werden die Häufigkeiten der 10 Ausprägungen
+"0" bis "8" und "9 oder mehr" ausgezählt und der
+Wert der Teststatistik berechnet. Aus den $B$ Werten
+wird das $(1-\alpha)$-Quantil als kritische Grenze ermittelt.
+Es ist für das Signifikanzniveau 0.05
+```{r}
+alpha <- 0.05
+quantile(teststatb, prob=1-alpha)
+```
+Da der Wert der Original-Teststatistik mit 10.3 kleiner ist
+als der kritische Wert, wird die Nullhypothese nicht
+verworfen. Die Hypothese, dass die Anzahl der Anrufe innerhalb
+einer Viertelstunde einer Poisson-Verteilung mit dem
+Parameter $\lambda=4$ folgt, kann nicht abgelehnt werden.
+
+## Fazit
+
+Die Bootstrap-Methode ist ein sehr nützliches Instrument
+für die statistische Inferenz. Man kann mit Hilfe von
+Computersimulationen die Verteilung der Teststatistik
+unter der Nullhypothese simulieren und auf diese
+Weise den kritischen Bereich bestimmen. Auf welche Weise
+das genau geschehen soll, hängt zum Teil vom Einzelfall
+ab. Daher ist es sehr wichtig, dass man ein tiefes 
+Verständnis der statistischen Inferenz entwickelt. 
+Dazu gehört auch, dass man die klassischen Testverfahren
+gründlich durchdacht hat. Ein reines Anwenden von 
+"Kochrezepten" führt oft in die Irre und bringt auch
+keinen Spaß.

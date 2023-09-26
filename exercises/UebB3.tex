@@ -1,0 +1,236 @@
+\section[Bed.~Wahrscheinlichkeit]{Bedingte Wahrscheinlichkeit und Unabhängigkeit}
+
+\begin{enumerate}
+\item In einer Bank sind zwei unabh\"{a}ngig voneinander arbeitende
+Geldautomaten aufgestellt. Es ist bekannt, dass w\"{a}hrend einer Woche die
+Ausfallwahrscheinlichkeiten f\"{u}r die beiden Automaten 30\% bzw. 20\%
+betragen. Wir gro\ss\ ist die Wahrscheinlichkeit, dass im Laufe einer Woche
+\begin{enumerate}
+\item mindestens ein Geldautomat ausf\"{a}llt?
+\item beide Geldautomaten ausfallen?
+\item kein Geldautomat ausf\"{a}llt?
+\item genau ein Geldautomat ausf\"{a}llt?
+\end{enumerate}
+
+\item In einer Fabrik f\"{u}r Computer-Chips produzieren drei Maschinen A,
+B, C. Maschine A produziert 25\%, B produziert 35\%, und C produziert 40\%
+der Chips. Die Ausschussanteile sind 5\%, 4\% und 2\%. Ein Chip der
+Gesamtproduktion wird zuf\"{a}llig ausgew\"{a}hlt. Er ist kaputt. Wie groß
+ist die Wahrscheinlichkeit, dass er an Maschine A (B,C) produziert
+wurde?
+
+\item Ein Dienstleistungsunternehmen m\"{o}chte die Zufriedenheit seiner
+Kunden untersuchen. Dazu werden an zuf\"{a}llig ausgew\"{a}hlte Kunden 
+Fragebögen verschickt, auf denen die Kunden ankreuzen k\"{o}nnen, ob sie
+zufrieden oder unzufrieden sind (mehr Antwortm\"{o}glichkeiten soll es zur
+Vereinfachung nicht geben). Die Wahrscheinlichkeit, dass ein zuf\"{a}llig
+ausgew\"{a}hlter Kunde zufrieden ist, betr\"{a}gt 70\%. Leider antworten
+nicht alle Kunden auf den Fragebogen. Die Antwortwahrscheinlichkeit eines
+angeschriebenen Kunden betr\"{a}gt 60\%, wenn der Kunde zufrieden ist, aber
+nur 15\%, wenn der Kunde unzufrieden ist.
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass ein Kunde zufrieden ist,
+wenn er auf die Fragebogenaktion antwortet? Was bedeutet diese
+Wahrscheinlichkeit?
+\item Obwohl nicht alle Kunden auf die Fragebogenaktion antworten, kann man
+Grenzen angeben, in denen die Wahrscheinlichkeit liegen muss, dass ein Kunde
+zufrieden ist. Bestimmen Sie diese Grenzen.
+\end{enumerate}
+
+\item Die Subprime-Mortgages-Krise oder: Die Grenzen der Diversifikation.
+
+Im Jahr 2008 wurden die internationalen Finanzm\"{a}rkte durch
+eine Krise auf dem Kreditmarkt ersch\"{u}ttert. Die deutsche IKB Bank hat in
+Folge der Krise einen gro\ss en Verlust erlitten. Offenbar war ein Problem
+die falsche Beurteilung der Risiken eines Kre\-dit\-portfolios, also eines
+Bündels von Krediten. Durch B\"{u}ndelung von Einzelrisiken wird im
+Allgemeinen eine Diversifikation erreicht, die das Gesamtrisiko senkt. Im
+Folgenden wird ein stark vereinfachtes Modell eines Kreditportfolios
+behandelt, an dem die Folgen m\"{o}glicher Fehleinsch\"{a}tzungen deutlich
+gemacht werden k\"{o}nnen. Nutzen Sie R, um die Berechnungen durchzuführen.
+
+Eine Bank hat 100 Kreditkunden $i=1,\ldots ,100$. Sei $A_{i}$ das Ereignis
+"`Der Kredit des Kunden $i$ f\"{a}llt innerhalb eines Jahres aus"'.
+Wir nehmen vereinfachend an, dass Kredite nur ganz
+oder gar nicht ausfallen k\"{o}nnen. Die Wahrscheinlichkeit eines Ausfalls
+ist $P(A_{i})=0.05$ (das ist ziemlich hoch, es handelt sich also um subprime
+mortgages).
+
+Ein wichtiges Instrument f\"{u}r das Management von Kreditportfolios sind
+CDS (credit default swaps). Mit einer speziellen Version, den "`$k$-th to 
+default swaps"', lassen sich Kreditportfolios
+absichern. Derartige Swaps sind Versicherungen gegen den Ausfall von $k$
+oder mehr Kreditnehmern in einem Kreditportfolio.
+
+Gehen Sie davon aus, dass die Kreditausf\"{a}lle der Kunden $i=1,\ldots ,100$
+stochastisch unabh\"{a}ngig voneinander sind. (Wie wir in der n\"{a}chsten
+Aufgabe sehen werden, ist das eine kritische Annahme.)
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass kein einziger Ausfall
+eintritt?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass genau drei Ausf\"{a}lle
+eintreten?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass mehr als zehn Ausfälle 
+eintreten? Mit dieser Wahrscheinlichkeit l\"{a}sst sich der Wert eines
+"`$k$-th to default swaps"' (f\"{u}r $k=11$) ermitteln. Es ist daher 
+wichtig, dass diese Wahrscheinlichkeit korrekt bestimmt wird.
+\item Wie gro\ss\ w\"{a}re die Wahrscheinlichkeit, dass mehr als zehn 
+Ausfälle eintreten, wenn $P(A_{i})=0.07$ ist (wenn also das Rating falsch
+gewesen wäre)?
+\end{enumerate}
+
+\item Die Krise der Subprime Mortgages oder: Die Grenzen der Diversifikation
+(Fortsetzung).
+
+Tats\"{a}chlich sind Kreditausf\"{a}lle nicht unabh\"{a}ngig voneinander. 
+Fällt ein Kredit aus -- insbesondere im Bereich der subprime mortgages
+--, dann liegt das meist ein einem ung\"{u}nstigen gesamtwirtschaftlichen
+Umfeld. Damit sind auch die \"{u}brigen Kredite anf\"{a}lliger f\"{u}r einen
+Ausfall. Um diese Abh\"{a}ngigkeit zu modellieren, erweitern wir unser
+Modell:
+
+Sei $B$ das Ereignis "`Die Konjunktur ist gut (Boom)"' und $\bar{B}$ das 
+Ereignis "`Die Konjunktur ist schlecht (Flaute)"'. Sei $P(B)=0.5$. Im Fall
+eines Booms ist die Wahrscheinlichkeit eines Kreditausfalls gering, 
+$P(A_{i}|B)=0.01$ f\"{u}r $i=1,\ldots ,100$. Im Fall einer Flaute gilt jedoch 
+$P(A_{i}|\bar{B})=0.09$. Die Kreditausf\"{a}lle seien bedingt 
+unabhängig, d.h. f\"{u}r $i\neq j$ ist
+\[ P(A_{i}\cap A_{j}|B)=P(A_{i}|B)\cdot P(A_{j}|B) \]
+und analog f\"{u}r $\bar{B}$.
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass der Kredit des Kunden $i$
+innerhalb eines Jahres ausf\"{a}llt?
+\item Zeigen Sie, dass $A_{i}$ und $A_{j}$ (f\"{u}r $i\neq j$) nun
+stochastisch abh\"{a}ngig sind.
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass mehr als zehn Ausfälle 
+eintreten, wenn die Wirtschaft boomt?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass mehr als zehn 
+Ausfälle eintreten, wenn eine Konjunkturflaute eintritt?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass mehr als zehn 
+Ausfälle eintreten? Vergleichen Sie das Ergebnis mit der unter 5.c) ermittelten
+Wahrscheinlichkeit.
+\end{enumerate}
+Man sieht: F\"{u}r die Beurteilung des Risikos eines Kreditportfolios ist
+nicht nur ein exaktes Rating aller Einzelkredite wichtig, sondern auch eine
+exakte Erfassung der Abh\"{a}ngigkeit der Kreditausf\"{a}lle. Das Rating
+eines Kreditportfolios ist daher ungleich schwieriger als das Rating eines
+Einzelkredits.
+
+\item Informationskaskaden oder: Wie sich eine Mode durchsetzt.
+
+In dieser Aufgabe wird eine stark vereinfachte Version des Artikels
+"`A Theory of Fads, Fashion, Custom, and Cultural Change as 
+Informational Cascades"' von Sushil Bikhchandani, David
+Hirshleifer und Ivo Welch im Journal of Political Economy, vol.~100, 
+S.~992-1026, 1992, vorgestellt. In
+dieser Aufgabe liegt die Schwierigkeit darin, dass die Wahrscheinlichkeiten
+die subjektiven -- und m\"{o}glicherweise unterschiedlichen -- Einschätzungen 
+einzelner Personen repr\"{a}sentieren.
+
+Zwanzig Personen sollen sich nacheinander entscheiden, ob sie ein bestimmtes
+Verhalten annehmen (eine bestimmte Handlung durchf\"{u}hren, eine bestimmte Mütze 
+aufsetzen, einen bestimmten Studiengang belegen, eine bestimmte
+medizinische Behandlung anwenden, \ldots ). Sei $A_{i}$ das Ereignis
+"`Person $i$ nimmt das Verhalten an"', $i=1,\ldots ,20$.
+
+Leider wei\ss\ keine der 20 Personen, ob es n\"{u}tzlich ist, das Verhalten
+anzunehmen. Sei $B$ das Ereignis "`Das Verhalten ist nützlich"'. 
+Alle Personen haben anfangs die gleiche "`a-priori"' 
+Einsch\"{a}tzung, dass $P(B)=0.5$ ist.
+
+Jede Person empf\"{a}ngt nun ein "`privates Signal"'\footnote{Privat 
+bedeutet, dass jede Person nur ihr eigenes Signal kennt. Die
+empfangenen Signale werden nicht kommuniziert.} \"{u}ber die Nützlichkeit 
+des Verhaltens. Sei $S_{i}$ das Ereignis "`Person $i$ empf\"{a}ngt das 
+Signal, dass das Verhalten n\"{u}tzlich ist"' und $\bar{S}_{i}$ das Ereignis 
+"`Person $i $ empf\"{a}ngt das Signal, dass das Verhalten sch\"{a}dlich
+ist"'. Es gelte $P(S_{i}|B)=0.6$ und $P(S_{i}|\bar{B})=0.4$. 
+Die Signale $S_{1},\ldots ,S_{20}$ seien bedingt unabh\"{a}ngig
+voneinander, d.h. $P(S_{i}\cap S_{j}|B)=P(S_{i}|B)\cdot P(S_{j}|B)$ f\"{u}r 
+$i\neq j$ und analog f\"{u}r $\bar{B}$.
+
+Bis auf die erste Person kann jede Person $i$ beobachten, was die
+vorhergehenden Personen $1,\ldots ,i-1$ getan haben.
+
+Person $i$ nimmt das Verhalten an, wenn sie unter Ber\"{u}cksichtigung aller
+verf\"{u}gbaren Informationen (also dem privaten Signal und dem beobachteten
+Verhalten ihrer Vorg\"{a}nger) meint, dass die Wahrscheinlichkeit von $B$
+mehr als 50\% betr\"{a}gt. Wenn Person $i$ meint, dass die
+Wahrscheinlichkeit von $B$ kleiner ist als 50\%, nimmt sie das Verhalten
+nicht an. Bei genau 50\% wirft sie eine M\"{u}nze.
+\begin{enumerate}
+\item Skizzieren Sie den Modellaufbau in Form eines Wahrscheinlichkeitsbaums.
+\item Welche bedingte Wahrscheinlichkeit \"{u}ber das Eintreten von $B$ hat
+Person 1, wenn $S_{1}$ eintritt -- also nach dem Empfang eines positiven
+Signals?
+\item Wie wahrscheinlich ist es, dass Person 1 das Verhalten annimmt ($A_{1}$), 
+obwohl es sch\"{a}dlich ist?
+\item Welche bedingte Wahrscheinlichkeit \"{u}ber das Eintreten von $B$ hat
+Person 2, wenn $S_{2}$ und $A_{1}$ eintreten?
+\item Wie wahrscheinlich ist es, dass Person 2 das Verhalten annimmt ($A_{2}$%
+), obwohl es sch\"{a}dlich ist, wenn zuvor schon Person 1 das Verhalten
+angenommen hat?
+\item Analysieren Sie nun die Personen 3 und 4.
+\end{enumerate}
+
+\item Penalty kicks and mixed strategies
+
+This exercise is based on the article \textquotedblleft Professionals Play
+Minimax\textquotedblright\ by Ignacio Palacios-Huerta, \emph{Review of
+Economic Studies} 70 (2003) 395--415; this article is also nicely discussed
+in the book \textquotedblleft Why England Lose\textquotedblright\ by Simon
+Kuper and Stefan Szymanski, 2009. The article can be downloaded (password
+protected pdf) from the internet site of this course.
+
+A soccer penalty kick is a simple game theoretic situation for the kicker
+(K) and the goalkeeper (G). We assume that the kicker has to decide whether
+to kick to the right (R) or to the left (L), and that there are no
+other possibilities than R and L. Similarly, the goalkeeper has to decide
+whether to delve to the right or left. Players have a natural tendency to
+kick to one side (usually right-footed players kick to the right and vice
+versa). We call the kicker's stronger, preferred side the natural side and
+the other one the unnatural side. To keep the notation more intuitive, and
+without loss of generality, we assume that the natural side is right. The
+scoring probabilities (calculated from a large database, but here we assume
+these probabilities are known constants) depend on the decisions, e.g. if
+the kicker kicks to his strong side (R) and the goalkeeper delves to the
+other side (L), then the scoring probability is about 93\%.\footnote{The 
+probabilities in the off-diagonal seem counter-intuitive, and have been
+transposed in the book by Kuper and Szymanski. But the results (even in the
+book) are in line with the table given here.}
+
+\begin{center}
+\begin{tabular}{cc|cc}
+&  & \multicolumn{2}{|c}{Goalkeeper} \\
+&  & L & R \\ \cline{2-4}
+Kicker & L & 0.5830 & 0.9497 \\
+& R & 0.9291 & 0.6992
+\end{tabular}
+\end{center}
+
+The best strategy for the kicker is to randomize his kick, i.e. to kick to
+the left with a certain probability $k_{L}$ and to the right with 
+$k_{R}=1-k_{L}$. In the same way, the best strategy for the goalkeeper is to
+randomize as well (with probabilities $g_{L}$ and $g_{R}$). In game theory,
+these randomized strategies are called mixed strategies.
+
+\begin{enumerate}
+\item Determine the optimal mixed strategies for the kicker and the
+goalkeeper.
+
+Hints: In equilibrium, the goalkeeper chooses $g_{L}$ and $g_{R}$ such that
+-- given the probabilities shown in the table above -- the scoring
+probability for the kicker is the same, no matter if he chooses L or R.
+Similarly, the kicker chooses $k_{L}$ and $k_{R}$ such that the goalkeeper
+is indifferent between L and R (but remember that success is defined
+the other way round for the goalkeeper).
+
+\item Looking at the decisions actually taken by professional soccer
+players, one finds that goalkeepers delve to the right with probability
+57.69\% while kickers kick to the right with probability 60.02\%. Test if
+their behavior is compatible with the theoretically optimal mixed strategy.
+The number of penalty kicks analyzed for the paper (the sample size) was 
+754 for goalkeepers and 808 for kickers. You may impose restricting 
+assumptions (e.g.~as to the sampling mechanism).
+\end{enumerate}
+\end{enumerate}

@@ -1,0 +1,201 @@
+\newcommand{\woche}{}
+\newcommand{\nr}{3}
+\newcommand{\thema}{}
+
+\input{Loesung}
+\begin{Exercise}
+
+Die folgende Aufgabe beschreibt ein Ein-Faktor-Modell f\"{u}r den Aktienmarkt:
+
+Ein Portfolio bestehe aus $K\in\mathbb{N}$ Wertpapieren. Die Rendite $R_{i}$ des
+Wertpapiers $i$ f\"{u}r das kommende Jahr ist eine Zufallsvariable, $%
+i=1,\ldots ,K$. Betrachten Sie das folgende einfache multivariate
+Renditemodell. Die Rendite $R_{i}$ setzt sich additiv aus einer
+Marktkomponente $Y$ (oft auch Faktor oder Marktfaktor genannt) und einer
+individuellen Komponente $X_{i}$ zusammen, also%
+\begin{equation*}
+	R_{i}=Y+X_{i}
+\end{equation*}%
+mit $Y\sim N\left( \mu _{Y},\sigma _{Y}^{2}\right) $ und $X_{i}\sim N\left(
+0,\sigma _{X}^{2}\right) $ f\"{u}r $i=1,\ldots ,K$. Die individuellen
+Komponenten $X_{1},\ldots ,X_{K}$ sind paarweise unabh\"{a}ngig und auch unabh%
+\"{a}ngig von $Y$, sie haben alle die gleiche Varianz $\sigma _{X}^{2}.$
+
+	\Question Berechnen Sie die Varianz von $R_{i}$ (f\"{u}r ein beliebiges $i$).
+	\Question Berechnen Sie Kovarianz von $R_{i}$ und $R_{j}$ f\"{u}r $i\neq j$.
+	\Question Berechnen Sie den Korrelationskoeffizienten von $R_{i}$ und $R_{j}$ f%
+	\"{u}r $i\neq j$.
+
+\end{Exercise}
+\begin{Answer}
+\Question 
+\begin{eqnarray*}
+	Var(R_i)&=& Var(Y+X_i)\\
+	&=& Var(Y)+Var(X_i)+2\cdot  Cov(Y,X_i)\\
+	&=&\sigma_Y^2+\sigma_X^2+2\cdot 0\\
+	&=&\sigma_Y^2+\sigma_X^2
+\end{eqnarray*}
+\Question Sei $i\neq j$:
+\begin{eqnarray*}
+	Cov(R_i,R_j)&=&E(R_i\cdot R_j)-E(R_i)E(R_j)\\
+	&=&E((Y+X_i)\cdot (Y+X_j))-E(Y+X_i)\cdot E(Y+X_j)\\
+	&=&E(Y^2+Y\cdot X_i+Y\cdot X_j+X_i\cdot X_j)+(E(Y)+\underbrace{E(X_i)}_{=0})\cdot(E(Y)+\underbrace{E(X_j)}_{=0})\\
+	&=&E(Y^2)+E(Y)\cdot \underbrace{E(X_i)}_{=0}+E(Y)\cdot \underbrace{E(X_j)}_{=0}+\underbrace{E(X_i)\cdot E(X_j)}_{=0}-E(Y)^2\\
+	&=&Var(Y)+E(Y)^2-E(Y)^2\\
+	&=&\sigma_Y^2
+\end{eqnarray*}
+\Question Sei $i\neq j$
+\begin{eqnarray*}
+	Cor(R_i,R_j)&=&\frac{Cov(R_i,R_j)}{\sqrt{Var(R_i)}\cdot \sqrt{Var(R_j)}}\\
+	&=&\frac{\sigma_Y^2}{\sqrt{\sigma_Y^2+\sigma_X^2}\cdot \sqrt{\sigma_Y^2+\sigma_X^2}}\\
+	&=&\frac{\sigma_Y^2}{\sigma_Y^2+\sigma_X^2}
+\end{eqnarray*}
+\end{Answer}
+
+
+\begin{Exercise}
+	Seien $X_1$ und $X_2$ zwei unabhängige diskrete Zufallsvariable mit Verteilung
+	\begin{equation*}
+		P(X_i=k)=(1-p)^k\cdot p
+	\end{equation*}
+	für $k=0,1,2,\dots$ und $0\leq p\leq 1$. Sei $Z=\max(X_1,X_2)$.
+	\Question Zeigen Sie $P(X_2\leq k)=1-(1-p)^k$ für beliebiges $k\in\mathbb{N}_0$. \textit{Hinweis: Geometrische Reihe.}
+	\Question Bestimmen Sie die gemeinsame Verteilung von $Z$ und $X_1$.
+	\Question Bestimmen Sie die Verteilung von $Z$.\\
+	\textit{Bemerkung: Die Verteilung der Zufallsvariablen $X_1$ und $X_2$ ist die sogenannte geometrische Verteilung. Man schreibt kurz: $X_1,X_2\sim Geo(p)$.}
+\end{Exercise}
+
+\begin{Answer}
+	\Question
+	\begin{eqnarray*}
+		P(X_2\leq k)&=&\sum_{i=0}^{k}P(X_2=i)\\
+		&=&\sum_{i=0}^{k}p\cdot (1-p)^{i}\\
+		&=&p\cdot\sum_{i=0}^{k} (1-p)^{i}\\
+		&=&p\cdot \frac{1-(1-p)^{k+1}}{1-(1-p)}\\
+		&=&\slashed{p}\cdot \frac{1-(1-p)^{k+1}}{\slashed{p}}\\
+		&=&1-(1-p)^{k+1}
+	\end{eqnarray*}
+\Question Für $i,k\in\mathbb{N}_0$:
+\begin{equation*}
+	P(Z=i,X_1=k)=P(\max(X_1,X_2)=i,X_1=k)
+\end{equation*}
+Sei nun $i>k$:
+\begin{eqnarray*}
+	P(\max(X_1,X_2)=i,X_1=k)&=&P(X_2=i,X_1=k)\\
+	&=&P(X_2=i)P(X_1=k)\\
+	&=&p\cdot (1-p)^{i}\cdot p \cdot (1-p)^k\\
+	&=&p^2\cdot (1-p)^{i+k}
+\end{eqnarray*}
+Für $i<k$ gilt $P(\max(X_1,X_2)=i,X_1=k)=0$. Und für $i=k$ gilt:
+\begin{eqnarray*}
+	P(\max(X_1,X_2)=i,X_1=k)&=&P(X_2\leq k,X_1=k)\\
+	&=&P(X_2\leq k)\cdot P(X_1=k)\\
+	&=&(1-(1-p)^{k+1})p(1-p)^k
+\end{eqnarray*}
+\Question 
+\begin{eqnarray*}
+	P(Z=k)&=&\sum_{i=0}^kP(Z=k,X_1=i)\\
+	&=&P(Z=k,X_1=k)+\sum_{i=0}^{k-1}P(Z=k,X_1=i)\\
+	&=&(1-(1-p)^{k+1})p(1-p)^k+\sum_{i=0}^{k-1}p^2\cdot (1-p)^{k+i}\\
+	&=&(1-(1-p)^{k+1})p(1-p)^k+p^2\cdot (1-p)^k\cdot\sum_{i=0}^{k-1}(1-p)^{i}\\
+	&=&(1-(1-p)^{k+1})p(1-p)^k+p^{\slashed{2}}\cdot (1-p)^k\cdot\frac{1-(1-p)^k}{\slashed{p}}\\
+	&=&p(1-p)^k\cdot\left((1-(1-p)^{k+1})+(1-(1-p)^k)\right)\\
+	&=& p(1-p)^k\cdot\left(2-(1-p)^{k+1}-(1-p)^k\right)\\
+	&=&p(1-p)^k\cdot\left(2-(1-p)^k\cdot(1-p-1)\right)\\
+	&=&p(1-p)^k\cdot\left(2+(1-p)^k\cdot p\right)
+\end{eqnarray*}
+\end{Answer}
+
+
+\begin{Exercise}
+	Seien $X$ und $Y$ gemeinsam stetig verteilte Zufallsvariablen mit
+	der gemeinsamen Verteilungsfunktion%
+	\begin{equation*}
+		F_{X,Y}(x,y)=\left( x^{-2}+y^{-2}-1\right) ^{-1/2}
+	\end{equation*}%
+	f\"{u}r $0<x,y\leq 1$. F\"{u}r Werte von $x$ und $y$ au\ss erhalb dieses
+	Bereichs geht man wie folgt vor: Falls $x>1$ setzt man $x=1$ und analog f%
+	\"{u}r $y$. F\"{u}r $x,y\leq 0$ ist $F_{XY}(x,y)=0.$
+		\Question Bestimmen Sie die Randverteilungsfunktion von $X$.
+		\Question Sind $X$ und $Y$ stochastisch unabh\"{a}ngig?
+		\Question Bestimmen Sie die Randdichten von $X$ und $Y$.
+		\Question Bestimmen Sie die gemeinsame Dichtefunktion von $X$ und $Y$.
+		\Question Bestimmen Sie die bedingte Dichtefunktion von $X$ unter der Bedingung $%
+		Y=y$. 
+\end{Exercise}
+
+\begin{Answer}
+	\Question Setzt $y=1$ dann gilt $F_X(x)=F_{X,Y}(x,1)=\left(x^{-2}\right)^{-\frac{1}{2}}=x$ für $0<x\leq1$ und $F_X(x)=0$ für $x\leq 0$ und $F_X(x)=1$ für $x\geq1$.
+	
+	\Question Aufgrund der Symmetrie gilt $F_Y(y)=y$ für $0<y\leq1$ und $F_Y(y)=0$ für $y\leq 0$ und $F_Y(y)=1$ für $y\geq1$. Wären $X$ und $Y$ unabhängig so würde gelten $F_X(x)\cdot F_Y(y)=F_{XY}(x,y)$. Es gilt jedoch, dass $x\cdot y\neq F_{XY}(x,y)=\left( x^{-2}+y^{-2}-1\right) ^{-1/2}$ für $0<x,y\leq1$. Somit sind diese Zufallsvariablen nicht stochastisch unabhängig.
+	
+	\Question Es gilt $f_X(x)=\frac{\operatorname{d}}{\operatorname{d}x}F_X(x)$. Also ist $f_X(x)=1=f_Y(y)$ für $0<x,y\leq 1$ und $f_X(x)=f_Y(y)=0$ für alle anderen $x,y$.
+	
+	\Question Es gilt $\frac{\partial^2 }{\partial x\partial y}F_{X,Y}(x,y)=f_{X,Y}(x,y)$.\\
+	Seien $x,y\in\left(0,1\right]$. Erst nach $x$ ableiten:
+	\begin{eqnarray*}
+		\frac{\partial}{\partial x}F_{X,Y}(x,y)&=&\frac{\operatorname{d}}{\operatorname{d}x}\left( x^{-2}+y^{-2}-1\right)\cdot \frac{-1}{2\cdot \left(x^{-2}+y^{-2}-1\right)^{\frac{3}{2}}}\\
+		&=&-2x^{-3}\cdot\frac{-1}{2\cdot \left(x^{-2}+y^{-2}-1\right)^{\frac{3}{2}}}\\
+		&=& \dfrac{1}{\left(x^{-2}+y^{-2}-1\right)^\frac{3}{2}x^3}
+	\end{eqnarray*}
+	Ableitung nach $y$ mit einem ähnlichen Argument gibt:
+	\begin{equation*}
+		\frac{\partial^2}{\partial x\partial y}F_{X,Y}(x,y)=\dfrac{3}{x^3\cdot\left(y^{-2}+x^{-2}-1\right)^\frac{5}{2}y^3}
+	\end{equation*}
+	Für $x,y\notin\left(0,1\right]$ haben wir, dass $f_{XY}(x,y)=0$.
+	\Question Weil für die Randdichten für $0<x,y\leq1$ gilt, dass $f_X(x)=f_Y(y)=1$, gilt für die bedingte Dichtefunktion $f_{X\vert Y=y}(x)=f_{X,Y}(x,y)$.
+\end{Answer}
+
+\begin{Exercise}
+	Zeigen Sie, dass die folgenden Gleichungen gelten (die
+	erste Gleichung ist nat\"{u}rlich eine Definitionsgleichung):%
+	\begin{eqnarray*}
+		Cov(X,Y) &=&E\left[ \left( X-E(X)\right) \left( Y-E(Y)\right) \right]  \\
+		&=&E(XY)-E(X)E(Y) \\
+		&=&E\left[ \left( X-E(X)\right) \left( Y-a\right) \right]  \\
+		&=&E\left[ \left( X-a\right) \left( Y-E(Y)\right) \right]  \\
+		&=&E\left[ \left( X-E(X)\right) Y\right]  \\
+		&=&E\left[ X\left( Y-E(Y)\right) \right] 
+	\end{eqnarray*}%
+	f\"{u}r $a\in \mathbb{R}.$
+\end{Exercise}
+
+\begin{Answer}
+	\begin{eqnarray*}
+		Cov(X,Y)&=&E\left[ \left( X-E(X)\right) \left( Y-E(Y)\right) \right]\\
+		&=&E\left[X\cdot Y-X\cdot E(Y)-E(X)\cdot Y+E(X)\cdot E(Y)\right]\\
+		&=&E(X\cdot Y)-E(X\cdot E(Y))-E(E(X)\cdot Y)+E(E(X)\cdot E(Y))\\
+		&=&E(X\cdot Y)-E(X)\cdot E(Y)-E(X)\cdot E(Y)+E(X)\cdot E(Y)\\
+		&=&E(XY)-E(X)E(Y)
+	\end{eqnarray*}
+	Es gilt nun:
+	\begin{eqnarray*}
+		E\left[ \left( X-E(X)\right) \left( Y-a\right) \right] &=& E\left[X\cdot Y-E(X)\cdot Y-X\cdot a+E(X)\cdot a \right]\\
+		&=&E(XY)- E(E(X)\cdot Y)-E(X\cdot a)+E(E(X)\cdot a)\\
+		&=&E(XY)-E(X)E(Y)-E(X)\cdot a+E(X)\cdot a\\
+		&=&E(XY)-E(X)E(Y)
+	\end{eqnarray*}
+	Analog für $E\left[ \left( X-a\right) \left( Y-E(Y)\right) \right] $. Es gilt nun
+	\begin{eqnarray*}
+		E\left[(X-E(X))\cdot Y\right]&=&E\left[X\cdot Y-E(X)\cdot Y\right]\\
+		&=& E(X\cdot Y)-E(E(X)\cdot Y)\\
+		&=&E(XY)-E(X)E(Y)
+	\end{eqnarray*}
+	Analog für $E\left[ X\left( Y-E(Y)\right) \right] $.
+\end{Answer}
+
+\begin{Exercise}
+	Seien $X_1,\dots,X_n$ positive, unabhängige und identisch verteilte Zufallsvariablen. Zeigen Sie, dass $E(\frac{X_1}{X_1+\dots+X_n})=\frac{1}{n}$ ist.
+\end{Exercise}
+
+\begin{Answer}
+	\begin{eqnarray*}
+		1&=&\frac{X_1+\dots+ X_n}{X_1+\dots X_n}\\
+		&=&E\left[\frac{X_1+\dots+ X_n}{X_1+\dots X_n}\right]\\
+		&=&E\left[\frac{X_1}{X_1+\dots+X_n}\right]+\dots+E\left[\frac{X_n}{X_1+\dots+X_n}\right]\\
+		&\stackrel{\text{Identisch verteilt}}{=}&E\left[\frac{X_1}{X_1+\dots+X_n}\right]+\dots+E\left[\frac{X_1}{X_1+\dots+X_n}\right]\\
+		&=&n\cdot E\left[\frac{X_1}{X_1+\dots+X_n}\right]
+	\end{eqnarray*}
+	Das ist äquivalent zu der zu zeigenden Aussage.
+\end{Answer}
+\end{document}

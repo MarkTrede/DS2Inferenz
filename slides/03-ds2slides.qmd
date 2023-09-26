@@ -1,0 +1,784 @@
+---
+title: "Data Science 2"
+format: beamer
+date: today
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Zufallsvariable
+\framesubtitle{Definition}
+
+Oft interessiert uns nicht das Ergebnis selbst,
+sondern eine \textbf{Zahl}, die vom Ergebnis abhängt
+\begin{exampleblock}{Beispiele}
+\begin{itemize}
+\item Beispiel 1: Gewinn in EUR beim Roulette
+\item Beispiel 2: Gewinn der Volkswagen AG 2024
+\item Beispiel 3: Kurs der Allianz-Aktie morgen
+\item Beispiel 4: Monatsgehalt einer zufällig ausgewählten Person
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Definition}
+\begin{block}{Zufallsvariable}
+Eine Abbildung
+$$
+X:\Omega \rightarrow \mathbb{R}
+$$
+heißt Zufallsvariable
+\end{block}
+
+Eine Zufallsvariable ordnet jedem Ergebnis eine reelle Zahl zu;
+Zufallsvariablen sind Funktionen!
+
+
+
+# Zufallsvariable
+\framesubtitle{Definition}
+\begin{itemize}
+\item Intuition: Eine Zufallsvariable ist eine Zahl, deren Wert man noch nicht kennt
+\item Die Realisation von $X$ wird mit $x$ bezeichnet
+\item $X$ beschreibt die Situation ex ante
+\item $x$ beschreibt die Situation ex post
+\item Wahrscheinlichkeitsaussagen kann man nur über $X$ machen,
+nicht über die Realisation $x$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Definition}
+\begin{itemize}
+\item Ihre erste Frage sollte immer lauten:
+\medskip
+\begin{center}
+\textbf{Was ist die Zufallsvariable $X$?}
+\bigskip
+\end{center}
+\end{itemize}
+\begin{exampleblock}{Beispiele: Zufallsvariable}
+\begin{itemize}
+\item Beispiel 1: $X:$ Gewinn der Volkswagen AG 2024
+\item Beispiel 2: $X:$ codiert Erwerbsstatus (0/1)
+\item Beispiel 3: $X:$ Monatsgehalt zufällig ausgewählter Person
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Verteilungsfunktion}
+\begin{block}{Verteilungsfunktion}
+Die Funktion
+\begin{align*}
+F_X(x) &=P(\{\omega|X(\omega)\leq x\}) \\
+&=P(X\leq x)
+\end{align*}
+heißt Verteilungsfunktion von $X$
+\end{block}
+
+Achtung: $x$ ist hier nicht die Realisation von $X$, man könnte
+auch beispielsweise $F_X(t)=P(X\leq t)$ schreiben 
+
+
+
+# Zufallsvariable
+\framesubtitle{Verteilungsfunktion}
+\textbf{Eigenschaften der Verteilungsfunktion:}
+\medskip
+\begin{itemize}
+\item $F_X(x)$ ist monoton wachsend
+\item Die Grenzwerte sind
+\begin{align*}
+\lim_{x\rightarrow -\infty }F_X(x) &=0 \\
+\lim_{x\rightarrow \infty }F_X(x) &=1
+\end{align*}
+\item $F_X$ ist rechtsstetig, d.h. $\lim_{\varepsilon \downarrow 0}F_X(x+\varepsilon )=F_X(x)$
+\item Definitionsbereich $\mathbb{R}$, Wertebereich $[0,1]$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Diskrete Zufallsvariable}
+\begin{block}{Diskrete Zufallsvariable}
+Eine Zufallsvariable $X$ heißt diskret, wenn es
+\begin{itemize}
+\item endlich viele Punkte $x_{1},\ldots ,x_{J}$
+\item oder abzählbar unendlich viele Punkte $x_{1},x_{2},\ldots $
+\end{itemize}
+gibt mit der Eigenschaft
+$$
+p_j=P(X=x_j)>0 \quad \text{und}\quad\sum_{j=1}^J p_j=1
+$$
+\end{block}
+
+
+
+# Zufallsvariable
+\framesubtitle{Diskrete Zufallsvariable}
+\begin{itemize}
+\item Träger: $T_X=\{x_1,\ldots ,x_J\}$ bzw.\ $T_X=\{x_1,x_2,\ldots \}$
+\item Wahrscheinlichkeitsfunktion:
+$$
+f_X(x)=\left\{ 
+\begin{array}{ll}
+p_{j} & \quad \text{falls }x=x_{j} \\ 
+0 & \quad \text{sonst}
+\end{array}\right.
+$$
+\item Die Verteilungsfunktion ist eine Treppenfunktion
+\item Sprungstellen: diese Werte kommen vor
+\item Sprunghöhen: sind die Wahrscheinlichkeiten
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Diskrete Zufallsvariable}
+\begin{exampleblock}{Beispiel: Zwei Münzen}
+\begin{itemize}
+\item Zwei Münzen werden geworfen
+\item Sei $X$ die Anzahl der Köpfe
+\item Es gilt
+\begin{align*}
+P(X=0)&=0.25\\
+P(X=1)&=0.5\\
+P(X=2)&=0.25
+\end{align*}
+\item Wie sieht die Wahrscheinlichkeitsfunktion von $X$ aus?
+\item Wie sieht die Verteilungsfunktion von $X$ aus?
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Diskrete Zufallsvariable}
+\begin{exampleblock}{Forts. Beispiel: Zwei Münzen}
+Wahrscheinlichkeitsfunktion $f_X(x)$
+\vspace*{5cm}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Diskrete Zufallsvariable}
+\begin{exampleblock}{Forts. Beispiel: Zwei Münzen}
+Verteilungsfunktion $F_X(x)$
+\vspace*{5cm}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{block}{Stetige Zufallsvariable}
+Eine Zufallsvariable heißt stetig, wenn es eine Funktion $f_X$ gibt mit
+$$
+F_X(x)=\int_{-\infty }^{x}f_X(t)dt
+$$
+für alle $x\in \mathbb{R}$.
+\medskip
+
+Die Funktion $f_X(x)$ heißt Dichte (oder Dichtefunktion)
+\end{block}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\textbf{Eigenschaften der Dichte:}\medskip
+\begin{itemize}
+\item Nichtnegativität: $f_X(x)\geq 0$ für alle $x\in \mathbb{R}$
+\item Die Fläche unter der Dichte ist $\int_{-\infty }^{\infty}f_X(x)dx=1$
+\item Wenn $F_X(x)$ an $x$ differenzierbar ist, gilt 
+$$
+f_X(x)=F_X^{\prime }(x)=\frac{dF_X(x)}{dx}
+$$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{itemize}
+\item Achtung: Die Dichte ist keine Wahrscheinlichkeit!
+\item Die Fläche unter der Dichte ist eine Wahrscheinlichkeit,
+$$
+P(a<X\leq b)=\int_{a}^{b}f(x)dx
+$$
+\item Also gilt $P(X=x)=0$
+\item Bei stetigen Zufallsvariablen spielt es darum keine Rolle, 
+ob Ungleichungen strikt sind ($>, <$) oder nicht ($\ge,\le$)
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{exampleblock}{Beispiel: Stetige Zufallsvariable}
+Sei $X$ eine Zufallsvariable mit Dichte
+$$
+f(x)=\left\{ 
+\begin{array}{ll}
+\frac{3}{4}(1-x^2) & \quad \text{falls }-1\leq x\leq 1 \\ 
+0 & \quad \text{sonst}
+\end{array} \right.
+$$
+Wie lautet die Verteilungsfunktion von $X$?
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{exampleblock}{Forts. Beispiel: Stetige Zufallsvariable}
+Die Verteilungsfunktion ist $F_X(x)=\int_{-\infty }^{x}\frac{3}{4}( 1-x^2) dt=\ldots$
+\uncover<2>{
+$$
+F(x)=\left\{ \begin{array}{ll}
+0 & \quad \text{für }x<-1 \\[4ex] 
+-\frac{1}{4}x^3+\frac{3}{4}x+\frac{1}{2} & \quad \text{für }-1\leq x\leq 1 \\[4ex] 
+1 & \quad \text{für }x>1
+\end{array}\right.
+$$
+}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{exampleblock}{Forts. Beispiel: Stetige Zufallsvariable}
+Dichte- und Verteilungsfunktion
+\end{exampleblock}
+```{r}
+#| echo: FALSE
+#| fig-height: 5
+#| fig-width: 10
+x <- seq(-1,1,length=200)
+xx <- c(-1.5,x,1.5)
+ff <- c(0,0.75*(1-x^2),0)
+FF <- c(0,-0.25*x^3+0.75*x+0.5,1)
+par(mfrow=c(1,2),mar=c(4,4,2,0.5))
+plot(xx, ff, t="l", 
+     xlim=c(-1.5,1.5), 
+     xlab="x",
+     ylab="f(x)", 
+     main="Dichte")
+plot(xx, FF, t="l", 
+     xlim=c(-1.5,1.5), 
+     xlab="x",
+     ylab="F(x)", 
+     main="Verteilungsfkt.")
+```
+
+
+
+# Zufallsvariable
+\framesubtitle{Stetige Zufallsvariable}
+\begin{exampleblock}{Forts. Beispiel: Stetige Zufallsvariable}
+\begin{itemize}
+\item Wie hoch ist die Wahrscheinlichkeit $P(-0.2< X\le 0.3)$?
+\uncover<2>{
+\begin{align*}
+P(-0.2<X\le 0.3)&=P(X\le 0.3)-P(X\le -0.2)\\
+&= F_X(0.3)-F_X(0.2)\\
+&= -\frac{1}{4}0.3^3+\frac{3}{4}0.3+\frac{1}{2}\\
+&\quad +\frac{1}{4}(-0.2)^3-\frac{3}{4}(-0.2)-\frac{1}{2}\\
+&= 0.36625
+\end{align*}
+}
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Numerische Integration}
+\textbf{Numerische Integration:}\\\medskip
+\begin{itemize}
+\item Manchmal sind Integrale mühsam oder gar nicht analytisch zu berechnen
+\item Approximation durch numerische Verfahren
+\item Einfache ``Holzhammer''-Methode
+\item Umsetzung in R
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Numerische Integration}
+\begin{itemize}
+\item Das Integral $\int_a^b f(x)dx$
+kann approximiert werden durch die Summe
+$$
+\sum_{i=1}^R f(x_i)\Delta
+$$
+\item $x_1,\ldots,x_R$: Gitterpunkte von $a$ bis $b$
+\item $\Delta$: Abstand der Gitterpunkte
+\item Je feiner das Gitter, desto besser die Approximation
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Numerische Integration}
+\begin{exampleblock}{Beispiel: Numerische Integration}
+Integriere die (Dichte-)Funktion $f(x)=\frac{3}{4}(1-x^2)$ von $-0.2$ bis $0.3$
+\end{exampleblock}
+```{r}
+dx <- 0.001
+x <- seq(from=-0.2, to=0.3, by=dx)
+f <- 0.75*(1 - x^2)
+sum(f * dx)  # (analytisch: 0.36625)
+```
+
+
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+\begin{block}{Quantilfunktion}
+Die Funktion
+$$
+F_X^{-1}(p)=\min \{x|F_X(x)\geq p\}
+$$
+heißt Quantilfunktion von $X$
+\end{block}
+\begin{itemize}
+\item Intuition: Welcher Wert wird mit einer vorgegebenen
+Wahrscheinlichkeit $p$ unterschritten?
+\item $x_{p}=F_X^{-1}(p)$ heißt $p$-Quantil von $X$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+```{r}
+#| echo: FALSE
+par(mar=c(4.5,4,3,1),cex=1.5)
+x <- c(1,2,2,2,2,3,3,3,3,5)
+plot(ecdf(x),ylab="F(x)",main="Quantile")
+```
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+```{r}
+#| echo: FALSE
+par(mar=c(4.5,4,3,1),cex=1.5)
+x <- c(1,2,2,2,2,3,3,3,3,5)
+plot(ecdf(x),ylab="F(x)",main="0.3-Quantil")
+arrows(-0.2,0.3,2,0.3,col="red",length=0.12,lty=5)
+arrows(2,0.3,2,0,col="red",length=0.12,lty=5)
+```
+
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+```{r}
+#| echo: FALSE
+par(mar=c(4.5,4,3,1),cex=1.5)
+x <- c(1,2,2,2,2,3,3,3,3,5)
+plot(ecdf(x),ylab="F(x)",main="0.9-Quantil")
+arrows(-0.2,0.9,3,0.9,col="red",length=0.12,lty=5)
+arrows(3,0.9,3,0,col="red",length=0.12,lty=5)
+```
+
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+\begin{exampleblock}{Beispiel: Quantilfunktion}
+Sei $X$ eine Zufallsvariable mit
+$$
+F(x)=\left\{ \begin{array}{ll}0 & \quad \text{falls }x<0 \\ 
+1-e^{-x} & \quad \text{sonst}\end{array}\right.
+$$
+Wie lautet die Quantilfunktion von $X$?
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Quantilfunktion}
+\begin{exampleblock}{Beispiel: Quantilfunktion}
+Löse $F(x)=p$ nach $x$ auf:
+\uncover<2>{
+\begin{align*}
+1-e^{-x} &= p\\
+e^{-x} &= 1-p\\
+-x &= \ln(1-p)\\
+x &= -\ln(1-p)
+\end{align*}
+Die Quantilfunktion ist $F^{-1}(p)=-\ln(1-p)$
+}
+\end{exampleblock}
+
+
+
+
+
+# Zufallsvariable
+\framesubtitle{Erwartungswert}
+
+\begin{block}{Erwartungswert}
+Der Erwartungswert von $X$ ist
+$$
+E(X) =\left\{ \begin{array}{ll}
+\sum\limits_{j=1}^{J}x_j\, f_X(x_j) & \quad X\text{ diskret} \\[2ex] 
+\int\limits_{-\infty }^{+\infty}x\,f_X(x)\,dx & \quad X\text{ stetig}
+\end{array}\right.
+$$
+\end{block}
+Wo liegt die Verteilung? Wie kann man die Lage der Verteilung durch \textit{eine} Zahl charakterisieren?
+
+
+
+# Zufallsvariable
+\framesubtitle{Erwartungswert}
+\begin {exampleblock}{Beispiel: Erwartungswert diskreter Zufallsvariable}
+Sei $X$ diskret mit
+\begin{center}
+\begin{tabular}{c|rrr}
+$x_j$ & $-5$ & 10 & 45 \\\hline
+$f_X(x_j)$ & 0.05 & 0.70 & 0.25
+\end{tabular}
+\end{center}
+\vspace*{3ex}
+
+Der Erwartungswert von $X$ ist
+\uncover<2>{
+\begin{eqnarray*}
+E(X) &=&-5\cdot 0.05+10\cdot 0.70+45\cdot 0.25 \\
+&=&18
+\end{eqnarray*}
+}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Erwartungswert}
+\begin {exampleblock}{Beispiel: Erwartungswert diskreter Zufallsvariable}
+Sei $X$ diskret mit
+\begin{center}
+\begin{tabular}{c|rrr}
+$x_j$ & $-5$ & 10 & 45 \\\hline
+$f_X(x_j)$ & 0.05 & 0.70 & 0.25
+\end{tabular}
+\end{center}
+\end{exampleblock}
+```{r}
+xj <- c(-5, 10, 45)
+fj <- c(0.05, 0.70, 0.25)
+sum(xj * fj)
+```
+
+
+
+# Zufallsvariable
+\framesubtitle{Erwartungswert}
+\begin{exampleblock}{Beispiel: Erwartungswert stetiger Zufallsvariable}
+Sei $X$ stetig mit Dichte
+$$
+f_X(x)=\left\{ 
+\begin{array}{ll}
+2x & \quad \text{wenn }0\leq x\leq 1 \\ 
+0 & \quad \text{sonst}
+\end{array}
+\right.
+$$
+Der Erwartungswert von $X$ ist
+\uncover<2>{
+\begin{eqnarray*}
+E(X) &=&\int_{0}^{1}x\cdot 2x\,dx\\
+&=& \left. \frac{2}{3}x^3\right|_0^1=\frac{2}{3}
+\end{eqnarray*}
+}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Erwartungswert}
+\begin{exampleblock}{Beispiel: Erwartungswert stetiger Zufallsvariable}
+Sei $X$ stetig mit Dichte
+$$
+f_X(x)=\left\{ 
+\begin{array}{ll}
+2x & \quad \text{wenn }0\leq x\leq 1 \\ 
+0 & \quad \text{sonst}
+\end{array}
+\right.
+$$
+\end{exampleblock}
+```{r}
+dx <- 0.0001
+x <- seq(from=0, to=1, by=dx)
+f <- 2*x
+sum(x * f * dx)
+```
+
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{block}{Varianz}
+Die Varianz ist
+$$
+Var(X) =E\left[ \left( X-E\left( X\right) \right)^2\right]
+$$
+Die Standardabweichung ist $\sqrt{Var(X)}$
+\end{block}
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{itemize}
+\item Bei diskreten bzw. stetigen Zufallsvariablen ist
+$$
+Var(X) =\left\{ 
+\begin{array}{l}
+\sum\limits_{j=1}^{J}(x_j-E(X))^2 f_X(x_j) \\[2ex] 
+\int\limits_{-\infty }^{+\infty}(x-E(X))^2 f_X(x)dx
+\end{array}\right.
+$$
+\item Folgende Formel ist oft nützlich:
+$$
+Var(X) =E(X^2)-(E(X))^2
+$$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+Herleitung von $Var(X) =E(X^2)-(E(X))^2$
+\uncover<2>{
+\begin{align*}
+Var(X) &= E[(X-E(X))^2] \\
+&= E[X^2-2XE(X)+(E(X))^2] \\
+&= E(X^2)-2E(X)E(X)+(E(X))^2 \\
+&= E(X^2)-2(E(X))^2+(E(X))^2\\
+&= E(X^2)-(E(X))^2
+\end{align*}
+}
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{exampleblock}{Beispiel: Varianz diskreter Zufallsvariable}
+Sei $X$ diskret mit
+\begin{center}
+\begin{tabular}{c|rrr}
+$x_j$ & $-5$ & 10 & 45 \\\hline
+$f_X(x_j)$ & 0.05 & 0.70 & 0.25
+\end{tabular}
+\end{center}
+\vspace*{3ex}
+
+Wir wissen bereits $E(X)=18$. Die Varianz ist
+\uncover<2>{
+\begin{eqnarray*}
+Var(X) &=&(-5-18)^2\cdot 0.05+(10-18)^2\cdot 0.70\\
+&& +(45-18)^2\cdot 0.25 \\
+&=&253.5
+\end{eqnarray*}
+}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{exampleblock}{Beispiel: Varianz diskreter Zufallsvariable}
+Sei $X$ diskret mit
+\begin{center}
+\begin{tabular}{c|rrr}
+$x_j$ & $-5$ & 10 & 45 \\\hline
+$f_X(x_j)$ & 0.05 & 0.70 & 0.25
+\end{tabular}
+\end{center}
+\end{exampleblock}
+```{r}
+xj <- c(-5, 10, 45)
+fj <- c(0.05, 0.7, 0.25)
+EX <- sum(xj * fj)
+sum((xj - EX)^2 * fj)
+```
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{exampleblock}{Beispiel: Varianz stetiger Zufallsvariable}
+Sei $X$ stetig mit Dichte
+$$ 
+f_X(x)=\left\{ 
+\begin{array}{ll}
+2x & \quad \text{für }0\leq x\leq 1 \\ 
+0 & \quad \text{sonst}
+\end{array}
+\right.
+$$
+Wir wissen bereits $E(X)=2/3$. Die Varianz ist
+\uncover<2>{
+\begin{eqnarray*}
+Var(X) &=&\int_{-\infty }^{+\infty }\left( x-E(X)\right) ^{2}f(x)dx \\
+&=&\int_{0}^{1}\left( x-\frac{2}{3}\right) ^{2}\cdot 2x\,dx =\frac{1}{18}
+\end{eqnarray*}
+}
+\end{exampleblock}
+
+
+
+# Zufallsvariable
+\framesubtitle{Varianz}
+\begin{exampleblock}{Beispiel: Varianz stetiger Zufallsvariable}
+Sei $X$ stetig mit Dichte
+$$ 
+f_X(x)=\left\{ 
+\begin{array}{ll}
+2x & \quad \text{für }0\leq x\leq 1 \\ 
+0 & \quad \text{sonst}
+\end{array}
+\right.
+$$
+\end{exampleblock}
+```{r}
+dx <- 0.0001
+x <- seq(from=0, to=1, by=dx)
+f <- 2*x
+EX <- sum(x * f * dx)
+sum((x - EX)^2 * f * dx)
+```
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+\textbf{Lineare Transformationen:}\medskip
+\begin{itemize}
+\item Sei $X$ eine Zufallsvariable mit Verteilungsfunktion $F_{X}(x)$
+\item Definiere $Y=aX+b$ mit $a,b\in \mathbb{R}$ und $a>0$
+\item Verteilungsfunktion $F_Y$?
+\item Dichte $f_Y$ (wenn stetige Zufallsvariable)?
+\item Erwartungswert $E(Y)$ und Varianz $Var(Y)$?
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+Verteilungsfunktion von $Y=aX+b$
+\uncover<2>{
+\begin{align*}
+F_Y(y) &= P(Y\le y) \\
+&= P(aX+b\le y)\\
+&= P\left(X\le \frac{y-b}{a}\right)\\
+&= F_X\left(\frac{y-b}{a}\right)
+\end{align*}
+}
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+Dichtefunktion von $Y=aX+b$
+\uncover<2>{
+\begin{align*}
+f_Y(y) &= F'_Y(y) \\
+&= F'_X\left(\frac{y-b}{a}\right)\cdot\frac{1}{a}\\
+&= f_X\left(\frac{y-b}{a}\right)\cdot\frac{1}{a}
+\end{align*}
+}
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+Erwartungswert von $Y=aX+b$
+\uncover<2>{
+\begin{align*}
+E(aX+b)&=\int (ax+b)f_X(x)dx \\
+&= a\int x f_X(x)dx+ b\int f_X(x)dx=aE(X)+b
+\end{align*}
+}
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+\begin{itemize}
+\item \textbf{Achtung}: Bei nichtlinearen Funktionen $g$ gilt 
+$$
+E(g(X))\neq g(E(X))
+$$
+\item Zum Beispiel
+$$
+E(X^2)\neq E(X)^2
+$$
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Lineare Transformation}
+Varianz von $Y=aX+b$
+\uncover<2>{
+\begin{align*}
+Var(aX+b) &= E[((aX+b)-E(aX+b))^2]\\
+&= E[(aX+b-aE(X)-b)^2] \\
+&= E[(aX-aE(X))^2]\\
+&= E[a^2(X-E(X))^2]\\
+&= a^2 E[(X-E(X))^2]\\
+&= a^2 Var(X)
+\end{align*}
+}
+
+
+
+# Zufallsvariable
+\framesubtitle{Standardisierung}
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt \textbf{zentriert}, wenn $E(X)=0$
+\item Eine Zufallsvariable $X$ heißt \textbf{standardisiert}, \\
+wenn $E(X)=0$ und $Var(X)=1$
+\item Eine nicht standardisierte Zufallsvariable kann durch
+$$
+\frac{X-E\left( X\right) }{\sqrt{Var(X)}}
+$$
+standardisiert werden.
+\end{itemize}
+
+
+
+# Zufallsvariable
+\framesubtitle{Standardisierung}
+Standardisieren: $Y=(X-E(X))/\sqrt{Var(X)}$
+\uncover<2>{
+\begin{align*}
+E(Y) &= E((X-E(X))/\sqrt{Var(X)})\\
+&= (E(X)-E(X))/\sqrt{Var(X)}\\
+&= 0\\
+Var(Y) &= Var((X-E(X))/\sqrt{Var(X)})\\
+&= \frac{1}{Var(X)}Var(X-E(X))=1
+\end{align*}
+}
+

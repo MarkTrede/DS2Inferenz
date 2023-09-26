@@ -1,0 +1,160 @@
+\newcommand{\woche}{}
+\newcommand{\nr}{2}
+\newcommand{\thema}{}
+
+\input{Loesung}
+\begin{Exercise}
+Ein Kunde einer Bank will einen Kredit haben. Der Kredit soll 1 Mio.\
+Euro betragen, \"{u}ber ein Jahr laufen und am Ende des Jahres getilgt
+werden. Die Bank stellt Nachforschungen \"{u}ber die Bonit\"{a}t des Kunden
+an und erf\"{a}hrt,
+
+\begin{itemize}
+	\item dass der Kunde mit einer Wahrscheinlichkeit von 70\% Zinsen und Tilgung zahlt,
+	\item dass der Kunde mit einer Wahrscheinlichkeit von 10\% weder Zinsen noch Tilgung zahlt,
+	\item dass der Kunde mit einer Wahrscheinlichkeit von 20\% zwar keine Zinsen
+	zahlt, aber einen Betrag von $X$ tilgt, wobei $X$ eine stetige
+	Zufallsvariable ist (in Mio.\ Euro) mit Dichtefunktion%
+	\begin{equation*}
+		f_{X}\left( x\right) =\left\{ 
+		\begin{array}{ll}
+			0 & \quad \text{f\"{u}r }x<0 \\ 
+			2x & \quad \text{f\"{u}r }0\leq x\leq 1 \\ 
+			0 & \quad \text{f\"{u}r }x>1.%
+		\end{array}%
+		\right.
+	\end{equation*}
+\end{itemize}
+
+Welchen Zinssatz m\"{u}sste die Bank fordern, damit sie eine erwartete
+Rendite von 6\% erzielt?
+\end{Exercise}
+\begin{Answer}
+Wir definieren folgende Ereignisse:
+\begin{eqnarray*}
+	A&:=& \left\lbrace \text{Der Kunde zahlt Zinsen und Tilgung}\right\rbrace\\
+	B&:=& \left\lbrace \text{Der Kunde zahlt weder Zinsen noch Tilgung}\right\rbrace\\
+	C&:=& \left\lbrace \text{Der Kunde zahlt die Zinsen nicht, tilgt aber den Betrag } X\right\rbrace
+\end{eqnarray*}
+Wobei $X$ eine Zufallsvariable mit der Dichtefunktion $f_X(x)$ ist.\\
+Aus dem Aufgabentext wird dann klar, dass $P(A)=0.7, P(B)=0.1$ und $P(C)=0.2$.
+Sei $i$ der Zins, den der Kunde zahlen soll. Wenn $U$ die Zufallsvariable ist, die den Umsatz der Bank beschreiben soll, so ergibt sich für die Zufallsvariable $R$, die die Rendite beschreiben soll $R=\frac{U}{1 \text{Mio.}}$. Wir können also ohne Beschränkung der Allgemeinheit annehmen, dass der Kredit die Höhe 1 hat, womit dann gilt $R=\frac{U}{1}=U$. Es ergibt sich folgende Rechnung
+\begin{eqnarray*}
+	1+0.06=1.06&=&E(R)\\
+	&=&E(U)\\
+	&=&P(A)\cdot 1 \cdot (1+i)+P(B)\cdot 0+P(C) \cdot E(X)\\
+	&=&0.7\cdot 1 \cdot (1+i)+0.1 \int_{-\infty}^\infty x\cdot  f_X(x)\operatorname{d}x\\
+	&=&0.7\cdot 1 \cdot (1+i)+0.1 \int_{0}^1 x\cdot 2x\operatorname{d}x\\
+	&=&0.7\cdot 1 \cdot (1+i)+0.1 \int_{0}^1  2x^2\operatorname{d}x\\
+	&=&0.7\cdot 1 \cdot (1+i)+0.1 \left[ \frac{2}{3}x^3\right]_0^1\\
+	&=&0.7\cdot 1 \cdot (1+i)+0.1\frac{2}{3}\\
+	&=&0.7+0.7i+\frac{2}{30}
+\end{eqnarray*}
+Diese Gleichung kann man nun nach $i$ auflösen und erhält das Ergebnis $i=\frac{1.06-0.7-\frac{2}{30}}{0.7}\approx 0.4190$.
+\end{Answer}
+
+
+\begin{Exercise}
+	Das Intervall $\left[0,2\right]$ werde in zwei Teile zerlegt, indem in $\left[0,1\right]$ zufällig (gemäß der Rechtecksverteilung) ein Punkt markiert wird. Sei $X$ das Längenverhältnis $\frac{l_1}{l_2}$ der kürzeren Teilstrecke $l_1$ zur längeren Teilstrecke $l_2$. Es gilt also $l_1\in\left[0,1\right]$ und $l_2\geq1$ und $l_2\in\left[0,2\right]$. Berechnen Sie die Dichte $f_X(x)$ von $X$.\\
+	(Hinweis: Berechnen Sie zuerst die Verteilungsfunktion. Beachten Sie dabei, dass Sie innerhalb der Wahrscheinlichkeit $P$ Operationen gemäß der linearen Transformation im Skript durchführen können. Sie dürfen bei abschnittsweise definierten Funktionen die Ableitung auch abschnittweise durchführen.)
+\end{Exercise}
+
+\begin{Answer}
+Wir wissen das gilt $l_1\sim \text{U}\left[0,1\right]$ und $l_2=2-l_1$. Wir berechnen zunächst die Verteilungsfunktion $F_X(x)$:
+Da $X\leq 1$ gilt $F_X(x)=1$ für $x\geq1$. Außerdem gilt auch $X\geq 0$. Analog gilt für die Verteilungsfunktion dann auch $F_X(x)=0$ für $x\leq0$. Für $x\in\left(0,1\right)$ gilt dann:
+\begin{eqnarray*}
+	F_X(x)&=&P(X\leq x)\\
+	&=&P(\frac{l_1}{l_2}\leq x)\\
+	&=&P(l_1\leq x\cdot l_2)\\
+	&=&P(l_1\leq x\cdot (2-l_1))\\
+	&=&P(l_1+xl_1\leq 2x)\\
+	&=&P((1+x)l_1\leq 2x)\\
+	&=&P(l_1\leq \frac{2x}{1+x})\\
+	&=&\int_0^{\frac{2x}{1+x}}1\operatorname{d}t\\
+	&=&\frac{2x}{1+x}
+\end{eqnarray*}
+Die Verteilungsfunktion ist stetig, da $\lim_{x\downarrow0}F_X(x)=0$ und $\lim_{x\uparrow1}F_X(x)=1$. Nach er Vorlesung können wir also ausnutzen, dass $F^{'}_X(x)=f_X(x)$. Nach der Quotientenregel für Ableitungen gilt dann $f_X(x)=\frac{2}{(1+x)^2}$.
+\end{Answer}
+
+
+\begin{Exercise}
+	Die Zahl der Bücher, die während eines Jahres aus einer großen Bibliothek verschwinden, kann als $Po(\lambda)$-verteilt angenommen werden. Sie sollen davon ausgehen, dass diese Bibliothek so groß ist, dass diese unendlich viele Bücher enthält. Bei der Jahresendrevision wird das Fehlen eines Buches mit Wahrscheinlichkeit $p$ entdeckt und in diesem Fall unmittelbar ersetzt. Bestimmen Sie die Verteilung der Anzahl fehlender Bücher nach der ersten Revision und zu Beginn der zweiten Revision. Nehmen Sie für diese Aufgabe an, dass $X_1$ bzw. $X_2$ die Anzahlen der Bücher, die während des ersten bzw. zweiten Jahres aus der Bibliothek verschwinden, beschreiben. Nehmen Sie außerdem an, dass $Y$ die Anzahl fehlender Bücher nach der ersten Revision und $Z$ die Anzahl fehlender Bücher zu Beginn der zweiten Revision beschreiben. Sie können annehmen, dass $X_2$ und $Y$ paarweise unabhängig voneinander sind.
+	
+	\Question Stellen Sie $Z$ als Kombination der Zufallsvariablen $Y$ und $X_2$ dar.
+	
+	\Question Zeigen Sie, dass $Y\sim Po(\lambda(1-p))$ gilt.\\
+	(Hinweis: In diesem Aufgabenteil müssen Sie ausnutzen, dass $e^x=\sum_{n=0}^\infty \frac{x^n}{n!}$. Nutzen Sie darüber hinaus den Satz der totalen Wahrscheinlichkeit für $P(Y=k)$ mit $k\in\mathbb{N}_0=\left\lbrace0,1,2,\dots\right\rbrace$.)
+	
+	\Question Nutzen Sie Ihre Ergebnisse aus a) und b), die Verteilung von $Z$ herauszufinden.\\
+	(Hinweis: In diesem Aufgabenteil müssen Sie ausnutzen, dass für zwei unabhängige Zufallsvariablen $W_1\sim Po(\lambda_1),W_2\sim Po(\lambda_2)$ gilt, dass $W_1+W_2\sim Po(\lambda_1+\lambda_2)$.)
+\end{Exercise}
+
+\begin{Answer}
+	\Question Es gilt $Z=Y+X_2$.
+	
+	\Question
+	Wir ermitteln die Verteilung von $Y$. Wenn $X_1=n$ bekannt ist, so hat $Y$ eine $B(n,1-p)$-Verteilung. Also gilt nach dem Satz der totalen Wahrscheinlichkeit für alle $k\in\mathbb{N}_0=\left\lbrace0,1,2,\dots\right\rbrace$:
+	\begin{eqnarray*}
+		P(Y=k)&=&\sum_{n=0}^\infty P(Y=k\vert X_1=n)\cdot P(X_1=n)\\
+		&=&\sum_{n=k}^\infty P(Y=k\vert X_1=n)\cdot P(X_1=n)\\
+		&=&\sum_{n=k}^\infty \binom{n}{k}(1-p)^kp^{n-k}e^{-\lambda}\frac{\lambda^n}{n!}\\
+		&=&e^{-\lambda}\sum_{n=k}^\infty\frac{\slashed{n!}}{k!(n-k)!}\cdot\frac{(1-p)^k}{p^k}\cdot p^n\cdot \frac{\lambda^n}{\slashed{n!}}\\
+		&=&e^{-\lambda}\sum_{n=k}^\infty\frac{1}{k!}\frac{1}{(n-k)!}\cdot\frac{(1-p)^k}{p^k}\cdot p^{n-k}\cdot p^k\cdot \lambda^n\\
+		&=&e^{-\lambda}\sum_{n=k}^\infty\frac{1}{k!}\frac{1}{(n-k)!}\cdot\left(\frac{1-p}{p}\right)^k\cdot p^{n-k}\cdot p^k\cdot \lambda^{n-k}\lambda^k\\
+		&=&e^{-\lambda}\frac{1}{k!}\cdot\left(\frac{1-p}{p}\right)^k\cdot (p\cdot\lambda)^k\cdot \sum_{n=k}^\infty\frac{(p\lambda)^{n-k}}{(n-k)!}\\
+		&\stackrel{\text{Indexshift}}{=}&e^{-\lambda}\frac{1}{k!}\cdot\left(\frac{1-p}{p}\right)^k\cdot (p\cdot\lambda)^k\cdot \sum_{n=0}^\infty\frac{(p\lambda)^{n}}{n!}\\
+		&=&e^{-\lambda}\frac{1}{k!}\cdot\left(\frac{1-p}{p}\right)^k\cdot (p\cdot\lambda)^k\cdot e^{p\lambda}\\
+		&=&e^{-\lambda(1-p)}\frac{\left[\lambda(1-p)\right]^k}{k!}
+	\end{eqnarray*}
+	Womit $Y\sim Po(\lambda(1-p))$. 
+	
+	\Question Nach der Additionseigenschaft für Poissonverteilungen gilt dann für $Z=Y+X_2$, dass $Z\sim Po(\lambda(1-p)+\lambda)=Po(\lambda(2-p))$, wobei wir annehmen, dass $Y$ und $X_2$ unabhängig verteilt sind.
+\end{Answer}
+
+\begin{Exercise}
+	Sei $X\sim Exp(\lambda)$. 
+	\Question In welcher Aufgabe auf Hausaufgabenblatt 21 haben Sie gezeigt, dass $E(X)=\frac{1}{\lambda}$?
+	\Question Berechnen Sie $V(X)$. Sie dürfen hierbei annehmen, dass $\lim_{x\to\infty} -x^2e^{-\lambda x}=0$.
+\end{Exercise}
+	
+\begin{Answer}
+	\Question Auf Blatt 1 Aufgabe 1b) haben wir genau diese Aussage gezeigt.
+	
+	\Question Wir benutzen die Abkürzungsformel $V(X)=E(X^2)-E(X)^2$. Da wir $E(X)$ kennen, müssen wir noch $E(X^2)$ berechnen.
+	\begin{eqnarray*}
+		E(X^2)&=& \int_{-\infty}^\infty x^2f_X(x)\operatorname{d}x\\
+		&=&\int_{0}^\infty x^2f_X(x)\operatorname{d}x\\
+		&=&\int_{0}^\infty  x^2\lambda e^{-\lambda x}\operatorname{d}x\\
+		&\stackrel{\text{partielle Integration}}{=}& \left[ -x^2 e^{-\lambda x}\right]_0^\infty-\int_{0}^\infty  2x\left(-\frac{1}{\lambda}\right) e^{-\lambda x}\operatorname{d}x\\
+		&=& \underbrace{\lim_{x\to\infty}-x^2 e^{-\lambda x}}_{=0}-\underbrace{(-0^2e^{-\lambda 0})}_{=0}+\frac{2}{\lambda}\int_{0}^\infty  x e^{-\lambda x}\operatorname{d}x\\
+		&\stackrel{\text{Blatt 1 Aufgabe 1b)}}{=}&\frac{2}{\lambda}\cdot \frac{1}{\lambda}\\
+		&=& \frac{2}{\lambda^2}.
+	\end{eqnarray*}
+	Es gilt dann $V(X)=E(X^2)-E(X)^2=\frac{2}{\lambda^2}-\frac{1}{\lambda^2}=\frac{1}{\lambda^2}$.
+\end{Answer}
+
+\begin{Exercise}
+	Zeigen Sie für die Zufallsvariable $X$ mit Werten in $\mathbb{N}=\left\lbrace 1,2,\dots\right\rbrace$ folgendes:
+	\Question $E(X)=\sum_{n=1}^\infty P(X\geq n)$.
+	\Question $E(X^2)=\sum_{n=1}^\infty (2n-1)P(X\geq n)$. Benutzen Sie hier die Identität $\sum_{n=1}^{k}(2n-1)=k^2$.
+\end{Exercise}
+
+\begin{Answer}
+	\Question 
+	\begin{eqnarray*}
+		\sum_{n=1}^\infty P(X\geq n)&=& \sum_{n=1}^\infty\sum_{i=n}^\infty P(X=i)\\
+		&=&\sum_{i=1}^\infty\sum_{n=1}^{i}P(X=i)\\
+		&=&\sum_{i=1}^\infty i \cdot P(X=i)\\
+		&=&E(X)
+	\end{eqnarray*}
+	\Question 
+	\begin{eqnarray*}
+		\sum_{n=1}^\infty (2n-1)P(X\geq n)&=& \sum_{n=1}^\infty (2n-1)\sum_{i=n}^\infty P(X=i)\\
+		&=&\sum_{n=1}^\infty\sum_{i=n}^\infty(2n-1)P(X=i)\\
+		&=&\sum_{i=1}^\infty\sum_{n=1}^{i}(2n-1)P(X=i)\\
+		&=&\sum_{i=1}^\infty P(X=i)\sum_{n=1}^{i}(2n-1)\\
+		&=&\sum_{i=1}^\infty P(X=i) i^2\\
+		&=&E(X^2)
+	\end{eqnarray*}
+\end{Answer}
+\end{document}

@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
+
+\parindent0mm
+\parskip1.5ex plus0.5ex minus0.5ex
+
+\begin{document}
+\section*{Lineare Transformation}
+
+Sei $X$ eine Zufallsvariable mit Verteilungsfunktion $F_X(x)$.
+Definiere $Y=aX+b$ mit $a,b\in\mathbb{R}$ und $a>0$. 
+Dann gilt für die Verteilungsfunktion von $Y$
+\begin{align*}
+F_Y(y) &= P(Y\le y) \\
+&= P(aX+b\le y)\\
+&= P\left(X\le \frac{y-b}{a}\right)\\
+&= F_X\left(\frac{y-b}{a}\right).
+\end{align*}
+Wenn $Y$ eine stetige Zufallsvariable ist, dann gilt für
+die Dichte
+\begin{align*}
+f_Y(y) &= F'_Y(y) \\
+&= F'_X\left(\frac{y-b}{a}\right)\cdot\frac{1}{a}\\
+&= f_X\left(\frac{y-b}{a}\right)\cdot\frac{1}{a}.
+\end{align*}
+
+\section*{Varianz}
+Aus
+\[ V(X)=E((X-E(X))^2) \]
+folgt
+\begin{align*}
+V(X) &= E[(X-E(X))^2] \\
+&= E[X^2-2XE(X)+(E(X))^2] \\
+&= E(X^2)-2E(X)E(X)+(E(X))^2 \\
+&= E(X^2)-2(E(X))^2+(E(X))^2\\
+&= E(X^2)-(E(X))^2.
+\end{align*}
+
+\section*{Varianz von linearen Transformationen}
+Es gilt
+\begin{align*}
+V(aX+b) &= E[((aX+b)-E(aX+b))^2]\\
+&= E[(aX+b-aE(X)-b)^2] \\
+&= E[(aX-aE(X))^2]\\
+&= E[a^2(X-E(X))^2]\\
+&= a^2 E[(X-E(X))^2]\\
+&= a^2 V(X).
+\end{align*}
+Die Standardabweichung ist also
+\[ \sqrt{V(aX+b)} = |a|\sqrt{V(X)}. \]
+
+\section*{Erwartungswert von $S^2$}
+Wir betrachten den Varianzschätzer 
+\[
+S^{2}=\frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\bar{X}\right) ^{2}.
+\]
+Es gilt
+\begin{eqnarray*}
+E\left( S^{2}\right)  &=&E\left( \frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\bar{X%
+}\right) ^{2}\right)  \\
+&=&E\left( \frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\mu +\mu -\bar{X}\right)
+^{2}\right)  \\
+&=&E\left( \frac{1}{n}\sum_{i=1}^{n}\left[ \left( X_{i}-\mu \right)
+^{2}+\left( \mu -\bar{X}\right) ^{2}+2\left( X_{i}-\mu \right) \left( \mu -%
+\bar{X}\right) \right] \right)  \\
+&=&E\left( \frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\mu \right) ^{2}+\frac{1}{n}%
+\sum_{i=1}^{n}\left( \mu -\bar{X}\right) ^{2}-\frac{2}{n}\sum_{i=1}^{n}%
+\left( X_{i}-\mu \right) \left( \bar{X}-\mu \right) \right)  \\
+&=&\left( \frac{1}{n}\sum_{i=1}^{n}E\left( \left( X_{i}-\mu \right)
+^{2}\right) \right) +E\left( \left( \bar{X}-\mu \right) ^{2}\right) -\frac{2%
+}{n}\sum_{i=1}^{n}E\left( \left( X_{i}-\mu \right) \left( \bar{X}-\mu
+\right) \right) .
+\end{eqnarray*}%
+Nebenrechnungen: Der erste Summand ist%
+\begin{eqnarray*}
+\frac{1}{n}\sum_{i=1}^{n}E\left( \left( X_{i}-\mu \right) ^{2}\right)  &=&%
+\frac{1}{n}\sum_{i=1}^{n}V(X_{i}) \\
+&=&\frac{1}{n}\sum_{i=1}^{n}\sigma ^{2} \\
+&=&\sigma ^{2}.
+\end{eqnarray*}%
+Der zweite Summand ist 
+\begin{eqnarray*}
+E\left( \left( \bar{X}-\mu \right) ^{2}\right)  &=&V(\bar{X}) \\
+&=&\sigma ^{2}/n.
+\end{eqnarray*}%
+Der dritte Summand ist%
+\begin{eqnarray*}
+\frac{2}{n}\sum_{i=1}^{n}E\left( \left( X_{i}-\mu \right) \left( \bar{X}-\mu
+\right) \right)  &=&2E\left( \left( X_{1}-\mu \right) \left( \bar{X}-\mu
+\right) \right)  \\
+&=&2Cov(X_{1},\bar{X}) \\
+&=&2Cov\left( X_{1},\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)  \\
+&=&\frac{2}{n}\sum_{i=1}^{n}Cov(X_{1},X_{i}) \\
+&=&\frac{2}{n}\sigma ^{2},
+\end{eqnarray*}%
+da $Cov(X_{1},X_{1})=V(X_{1})=\sigma ^{2}$ und $Cov(X_{1},X_{i})=0$ f\"{u}r $%
+i>1.$ F\"{u}hrt man die drei Terme wieder zusammen, ergibt sich%
+\begin{eqnarray*}
+E\left( S^{2}\right)  &=&\sigma ^{2}+\frac{\sigma ^{2}}{n}-\frac{2\sigma ^{2}%
+}{n} \\
+&=&\sigma ^{2}-\frac{\sigma ^{2}}{n} \\
+&=&\frac{n-1}{n}\sigma ^{2}.
+\end{eqnarray*}%
+
+\section*{Konfidenzintervalle}
+Ausgangspunkt der Konfidenzintervalle f\"{u}r Erwartungswerte 
+ist die Verteilung des standardisierten Stichprobenmittels.
+
+Wenn die Stichprobe aus einer Normalverteilung stammt, gilt f\"{u}r jeden
+Stichprobenumfang $n$%
+\begin{eqnarray*}
+\sqrt{n}\frac{\bar{X}-\mu }{\sigma } &\sim &N(0,1) \\
+\sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }} &\sim &t_{n-1}.
+\end{eqnarray*}
+
+Wenn die Stichprobe nicht aus einer Normalverteilung stammt, m\"{u}ssen wir
+den zentralen Grenzwertsatz anwenden, d.h. der Stichprobenumfang $n$ muss groß sein. 
+Dann gilt%
+\begin{eqnarray*}
+&&\sqrt{n}\frac{\bar{X}-\mu }{\sigma }\overset{appr}{\sim }N(0,1) \\
+&&\sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }}\overset{appr}{\sim }N(0,1).
+\end{eqnarray*}
+
+F\"{u}r Konfidenzintervalle werden Quantile der $N(0,1)$- oder der $t_{n-1}$%
+-Verteilung bestimmt, so dass%
+\begin{eqnarray*}
+P\left( -c\leq \sqrt{n}\frac{\bar{X}-\mu }{\sigma }\leq c\right) 
+&=&1-\alpha  \\
+P\left( -c\leq \sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }}\leq c\right) 
+&=&1-\alpha ;
+\end{eqnarray*}%
+anschlie\ss end l\"{o}st man die Ungleichungen in der Wahrscheinlichkeit
+nach $\mu $ auf.
+
+Aulösen nach $\mu$ an einem Beispiel:
+\begin{align*}
+P\left( -c\leq \sqrt{n}\frac{\bar{X}-\mu }{\sigma }\leq c\right) &= 1-\alpha \\
+P\left( -c\frac{\sigma}{\sqrt{n}}\leq (\bar{X}-\mu)\leq c\frac{\sigma}{\sqrt{n}}\right) &= 1-\alpha \\
+P\left( -\bar X-c\frac{\sigma}{\sqrt{n}}\leq -\mu \leq -\bar X+c\frac{\sigma}{\sqrt{n}}\right) &= 1-\alpha \\
+P\left( \bar X+c\frac{\sigma}{\sqrt{n}}\geq \mu \geq \bar X-c\frac{\sigma}{\sqrt{n}}\right) &= 1-\alpha \\
+P\left( \bar X-c\frac{\sigma}{\sqrt{n}}\leq \mu \leq \bar X+c\frac{\sigma}{\sqrt{n}}\right) &= 1-\alpha 
+\end{align*}
+Also ist das Konfidenzintervall
+\[
+\bar X\pm c\frac{\sigma}{\sqrt{n}}.
+\]
+Analog geht man für die anderen Fälle vor.
+
+\section*{Hypothesentests}
+Ausgangspunkt der Erwartungswerttests ist die Verteilung 
+des standardisierten Stichprobenmittels.
+Bei Hypothesentests ist unter G\"{u}ltigkeit der Nullhypothese $\mu =\mu_0$. 
+Die Teststatistik lautet
+\begin{eqnarray*}
+T &=&\sqrt{n}\frac{\bar{X}-\mu_0}{\sigma } \\
+T &=&\sqrt{n}\frac{\bar{X}-\mu_0}{S^{\ast }}.
+\end{eqnarray*}
+Der kritische Wert ist dann ein geeignetes Quantil der $N(0,1)$- oder der 
+$t_{n-1}$-Verteilung.
+
+\section*{Powerfunktion}
+Die Powerfunktion gibt in Abhängigkeit vom Parameter $\mu$ an, wie groß die 
+Wahrscheinlichkeit ist, dass die Teststatistik $T$ im kritischen Bereich liegt.
+Wir betrachten beispielhaft den rechtsseitigen Gaußtest mit den Hypothesen
+\begin{align*}
+H_0 &: \mu\le\mu_0\\
+H_1 &: \mu > \mu_0.
+\end{align*}
+Der kritische Bereich des rechtsseitigen Gaußtests ist rechts vom
+kritischen Wert $u_{1-\alpha}$. Die Wahrscheinlichkeit, dass die
+Teststatistik im kritischen Bereich liegt, ist also
+\begin{align*}
+P\left(\sqrt{n}\frac{\bar X-\mu_0}{\sigma}>u_{1-\alpha}\right) &=
+P\left(\sqrt{n}\frac{\bar X-\mu+\mu-\mu_0}{\sigma}>u_{1-\alpha}\right)\\
+&=P\left(\sqrt{n}\frac{\bar X-\mu}{\sigma}+\sqrt{n}\frac{\mu-\mu_0}{\sigma}>u_{1-\alpha}\right)\\
+&=P\left(\sqrt{n}\frac{\bar X-\mu}{\sigma}>u_{1-\alpha}-\sqrt{n}\frac{\mu-\mu_0}{\sigma}\right)\\
+&=1-P\left(\sqrt{n}\frac{\bar X-\mu}{\sigma}\le u_{1-\alpha}-\sqrt{n}\frac{\mu-\mu_0}{\sigma}\right)\\
+&=1-\Phi\left(u_{1-\alpha}-\sqrt{n}\frac{\mu-\mu_0}{\sigma}\right).
+\end{align*}
+
+Für das Beispiel (Folie 379) ergibt sich als Power an $\mu=201$
+\begin{align*}
+P\left(\sqrt{n}\frac{\bar X-\mu_0}{\sigma}>u_{1-\alpha}\right) &=
+1-\Phi\left(u_{1-\alpha}-\sqrt{n}\frac{\mu-\mu_0}{\sigma}\right)\\
+&=1-\Phi\left(1.6449-\sqrt{8}\frac{201-198}{2}\right)\\
+&=1-\Phi(-2.60)\\
+&=\Phi(2.60)\\
+&=0.9953.
+\end{align*}
+
+
+\end{document}

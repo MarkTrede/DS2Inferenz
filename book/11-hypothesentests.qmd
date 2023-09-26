@@ -10,6 +10,8 @@ Realität eines echten Strafverfahrens in einem deutschen (oder
 anderen) Gericht sein, sondern nur die Grundideen eines
 Prozesses aufzeigen.
 
+## Prozesse {#sec-prozess}
+
 <img src="images/AdobeStock_155565861b_Richter.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Am Beginn des Strafverfahrens steht die Anklage. Dem Angeklagten
 wird ein Vergehen vorgeworfen. Ob die Anklage wahr oder falsch ist,
@@ -33,8 +35,8 @@ schuldig ist. In beiden Fällen liegt ein Irrtum vor und es
 kommt zu einem Fehlurteil.
 
 Welches Art von Fehlurteil ist schlimmer? Ist es schlimmer, wenn
-ein Schuldiger freigesprochen wird? Oder sollte man versuchen,
-möglichst keinen Unschuldigen zu verurteilen? Bei dieser Abwägung
+ein Schuldiger freigesprochen wird? Oder ist es schlimmer,
+wenn ein Unschuldiger verurteilt wird? Bei dieser Abwägung
 handelt es sich um ein Werturteil. In unserem Rechtssystem ist
 die Antwort klar: Unschuldige sollen nicht verurteilt werden.
 Damit das soweit wie möglich sichergestellt ist, nimmt man 
@@ -51,25 +53,43 @@ indem Angeklagte nur dann verurteilt werden, wenn die Beweise
 aus, wenn die Beweise nur "ein wenig" oder "eher" für die Schuld 
 sprechen.
 
-## Vokabular
+Die Asymmetrie hat auch Konsequenzen für die Einschätzung der
+Schuld nach einem Urteil. Wenn der Angeklagte freigesprochen
+wird, heißt das nur, dass die Beweise nicht für eine
+Verurteilung ausreichen. Ein Freispruch ist keine wirklich
+belastbare Aussage über die Unschuld des Angeklagten. Man wäre
+nicht sehr überrascht, wenn sich herausstellt, dass ein
+freigesprochener Angeklagter in Wirklichkeit schuldig ist.
+Umgekehrt ist eine Verurteilung jedoch ein belastbares
+Ergebnis. Man kann zwar nicht hundertprozentig, aber doch
+ziemlich sicher sein, dass der Angeklagte tatsächlich schuldig 
+ist, wenn er verurteilt wird. Die Beweislage wiegt so schwer,
+dass es trotz der Unschuldsvermutung zu einer Verurteilung 
+kommt.
 
+## Vokabular {#sec-vokabular}
+
+<img src="images/AdobeStock_129146509b_Vokabular.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Ein statistischer Hypothesentest läuft in etwa analog zu einem
 Strafverfahren ab. Am Beginn steht anstelle der Anklage eine
 ökonomische Theorie oder Hypothese. Die Hypothese bezieht
 sich auf einen (unbekannten) Parameter einer Zufallsvariable $X$, 
 der allgemein mit $\theta$ bezeichnet sei. In diesem Kurs betrachten 
-wir eine besonders einfache, aber auch besonders wichtige Art
-von Hypothesen, nämlich Hypothesen über einen Erwartungswert
-(oder zwei Erwartungswerte). Trotz dieser Einschränkung 
-wird die grundsätzliche Vorgehensweise der statistischen
-Hypothesentests zunächst in allgemeiner Form vorgestellt.
-In den Wahlpflichtmodulen **Advanced Statistics** und
-**Econometrics** und in dem VWL-Pflichtmodul 
-**Empirical Economics** lernen Sie, wie man mit
-anderen Hypothesen umgeht. Die prinzipielle Vorgehensweise ist
-jedoch gleich. Ein tieferes Verständnis der Erwartungswerttests 
-ist wertvoll, weil man dann auch andere Tests leichter 
-verstehen kann.
+wir ausführlich eine relativ einfache, aber besonders wichtige Art
+von Hypothesen, nämlich Hypothesen über Erwartungswerte
+(@sec-erwwerttests). Anschließend behandeln wird zwei weitere
+Klassen von Tests, nämlich Unabhängigkeitstests und
+Anpassungstests (@sec-weiteretests). Schließlich 
+wird in @sec-bootstrap eine computer- bzw. simulationsbasierte
+Herangehensweise an Hypothesentests vorgestellt.
+Zunächst wird jedoch die grundsätzliche 
+Vorgehensweise der statistischen Hypothesentests 
+in allgemeiner Form Schritt für Schritt erläutert
+In dem Bachelor-Wahlpflichtmodul **Econometrics** und 
+in dem VWL-Pflichtmodul **Empirical Economics** 
+lernen Sie, wie man mit Hypothesen über Koeffizienten
+in multiplen Regressionsmodellen umgeht. Die 
+prinzipielle Vorgehensweise ist jedoch sehr ähnlich. 
 
 Die Gegenstücke zu den Behauptungen von Rechtanwältin und 
 Staatsanwalt heißen **Nullhypothese** und **Alternativhypothese**
@@ -86,9 +106,9 @@ H_0: \theta &=\theta_0\\
 H_1: \theta &\neq \theta_0.
 \end{align*}
 $$
-Die Nullhypothese entspricht der Unschuldsvermutung der
-Rechtsanwältin, die Alternative behauptet wie der
-Staatsanwalt: "schuldig". 
+Die Nullhypothese entspricht der Unschuldsbehauptung der
+Rechtsanwältin, wohingegen die Alternativhypothese wie der
+Staatsanwalt auf "schuldig" plädiert.
 
 Wenn in der Nullhypothese eine Gleichheit behauptet wird, 
 spricht man von einem **zweiseitigen Test**. Es ist auch möglich, 
@@ -124,15 +144,18 @@ gewählt, dass sie die "Beweislage" möglichst gut zusammenfasst.
 
 Da die Teststatistik eine Zufallsvariable ist, hat sie eine
 Verteilung. Man leitet nun her, wie die Verteilung der
-Teststatistik *unter Gültigkeit der Nullhypothese* aussieht.
+Teststatistik **unter Gültigkeit der Nullhypothese** aussieht.
+Manchmal ist das exakt möglich, häufig nur approximativ.
+Die Herleitung der (approximativen) Verteilung ist gewöhnlich
+der schwierigste Schritt der Testentwickung.
 Die Verteilung unter der Nullhypothese gibt an, in welchem
-Bereich die Teststatistik vermutlich liegt, wenn die Nullhypothese
+Bereich die Teststatistik typischerweise liegt, wenn die Nullhypothese
 stimmt. Umgekehrt folgt aus der Verteilung auch, in welchem
 Bereich die Teststatistik eher nicht liegen wird, wenn die
 Nullhypothese stimmt. Diesen Bereich nennt man den
-**kritischen Bereich** (engl. critical region). Die Festlegung des 
-kritischen Bereichs ist meist der schwierigste Schritt. Wir gehen
-später ausführlicher darauf ein und nehmen an dieser Stelle
+**kritischen Bereich** (engl. critical region). Wir gehen
+später ausführlicher darauf ein, wie man den kritischen
+Bereich bestimmt, und nehmen an dieser Stelle
 erst einmal einfach an, dass der kritische Bereich
 gegeben ist.
 
@@ -156,19 +179,20 @@ wird freigesprochen.
 
 Bei einem Strafprozess will man sicherstellen, dass 
 Unschuldige möglichst nicht verurteilt werden. Dafür nimmt
-man in Kauf, dass Schuldige freigesprochen werden. 
+man in Kauf, dass einige Schuldige freigesprochen werden. 
 Welche Art von Fehler ist in der Wissenschaft schlimmer?
 Auch hier handelt es sich um ein Werturteil, das sich
 aus dem wissenschaftlichen Verfahren heraus ergibt: Ein
 Fehler erster Art ist schlimmer als ein Fehler zweiter
 Art, weil eine abgelehnt Hypothese quasi aus dem
 wissenschaftlichen "Rennen" aussortiert wird. Dagegen
-ist eine Hypothese, die nicht als falsch gilt, nicht
-unbedingt wahr. Sie bleibt "im Rennen", wird aber
-möglicherweise irgendwann in Zukunft als falsch erkannt 
-werden.
+wird eine Hypothese, die nicht als falsch gilt, auch
+nicht als gesichert wahr angesehen. Sie bleibt 
+"im Rennen", wird aber möglicherweise irgendwann in 
+Zukunft als falsch erkannt werden.
 
-Wenn ein Fehler erster Art schlimmer ist als ein Fehler
+Wenn ein Fehler erster Art in der wissenschaftlichen
+Community für schlimmer gehalten wird als ein Fehler
 zweiter Art, dann sollte der kritische Bereich so
 festgelegt werden, dass ein Fehler erster Art nur
 mit einer kleinen (vorgegebenen) Wahrscheinlichkeit
@@ -191,94 +215,90 @@ auch die Teststatistik $T$,
 $$
 t=T(x_1,\ldots,x_n).
 $$
-Die Realisation nennt man **Wert der Teststatistik** 
-oder **Testgröße**.
+Die Realisation nennt man **Wert der Teststatistik**.
 
-## Erwartungswerttests
+Für die **Testentscheidung** untersucht man, ob der Wert der
+Teststatistik $t$ in den kritischen Bereich fällt:
 
-Das allgemeine Vokabular wird besser verständlich, wenn man 
-konkrete Tests durchspielt. In diesem Abschnitt sehen
-wir uns mehrere Tests für Erwartungswerte an. Sie laufen
-alle nach einem ähnlichen Schema ab, die Unterschiede sind
-marginal. Ähnlich wie bei der Intervallschätzung starten
-wir mit einer sehr unrealistischen Situation. Die
-restriktiven Annahmen werden anschließend Schritt für
-Schritt aufgeweicht.
+- Wenn das der Fall ist, wird die Nullhypothese abgelehnt. In diesem 
+Fall sagt man, dass die Daten auf einem Signifikanzniveau
+von $\alpha$ statistisch signifikant gegen die Nullhypothese sprechen.
 
-### Normalverteiung mit bekannter Varianz {.unnumbered}
+- Wenn der Wert der Teststatistik nicht im kritischen Bereich
+liegt, wird die Nullhypothese nicht verworfen. Der Parameter $\theta$
+weicht in diesem Fall nicht signifikant von $\theta_0$ ab.
 
-Als erstes betrachten wir einen Test für den unbekannten
-Erwartungswert $\mu$ einer Zufallsvariable $X$, von der
-man weiß, dass sie einer Normalverteilung mit der
-Varianz $\sigma^2$ folgt. Die Null- und Alternativhypothesen 
-des zweiseitigen Tests lauten
-$$
-\begin{align*}
-H_0: \mu&=\mu_0\\
-H_1: \mu&\neq\mu_0.
-\end{align*}
-$$
-Dabei ist $\mu_0\in\mathbb{R}$ der (vorgegebene) Wert, gegen den getestet 
-werden soll. Um etwas über den Erwartungswert zu lernen, bietet
-es sich an, eine Stichprobe $X_1,\ldots,X_n$ zu ziehen und 
-das Stichprobenmittel $\bar X$ zu nutzen. Wir wissen bereits
-(aus @sec-statistiken), dass
-$$
-\sqrt{n}\frac{\bar X-\mu}{\sigma}\sim N(0,1).
-$$
-Diese Aussage hilft aber nicht weiter, weil $\mu$ unbekannt ist.
-Unter der Nullhypothese ist der Erwartungswert jedoch bekannt,
-er beträgt dann $\mu_0$. Unter der Nullhypothese gilt also
-$$
-\sqrt{n}\frac{\bar X-\mu_0}{\sigma}\sim N(0,1).
-$$
-Diese Größe nutzen wir als Teststatistik, d.h.
-$$
-T=\sqrt{n}\frac{\bar X-\mu_0}{\sigma}.
-$$
-Da die Teststatistik unter der Nullhypothese einer Standardnormalverteilung
-folgt, liegt sie mit einer Wahrscheinlichkeit von $(1-\alpha)$ in dem
-Intervall $[-u_{1-\alpha/2},u_{1-\alpha/2}]$ (vgl. @sec-intervallschaetzung).
-Für das typische Signifikanzniveau $\alpha=0.05$ sind die Intervallgrenzen
-```{r}
-alpha <- 0.05
--qnorm(1-alpha/2)
-qnorm(1-alpha/2)
-```
+Ähnlich wie das Urteil in einem Prozess, sind die beiden Testergebnisse 
+unterschiedlich stark belastbar. Es gibt eine
+ausgeprägte **Asymmetrie in der Interpretation**: Eine Ablehnung der
+Nullhypothese entspricht einer Verurteilung. Dieses Ergebnis
+ist belastbar. Es ist zwar kein Beweis dafür, dass die Nullhypothese 
+tatsächlich falsch ist, aber ein deutlicher Hinweis, denn die
+Daten sind kaum mit der Gültigkeit der Nullhypothese vereinbar.
+Praktisch gesehen kann man davon ausgehen, dass die Nullhypothese
+falsch ist, auch wenn man immer im Hinterkopf behalten sollte, dass eine 
+Testentscheidung (wie ein Gerichtsurteil) falsch sein kann.
 
-Der kritische Bereich ist also 
-$$
-K=(-\infty,-u_{1-\alpha/2}]\cup [u_{1-\alpha/2},\infty).
-$$
-Mit anderen Worten: Wenn die Nullhypothese gilt, dann ist es nicht
-weiter verwunderlich, wenn die Teststatistik in dem Intervall 
-$[-1.96,1.96]$ liegt. Wenn die Teststatistik dagegen aus diesem Intervall
-herausfällt, dann spricht das gegen die Gültigkeit der Nullhypothese.
-In diesem Fall verwirft man $H_0$. 
+Wenn die Nullhypothese nicht abgelehnt wird, ist die Testentscheidung
+wenig belastbar. Denn eine Nichtablehnung bedeutet nur, dass die
+Daten nicht klar genug gegen die Nullhypothese sprechen, so wie
+bei einem Freispruch die Beweise nicht klar genug für die Schuld
+sprechen. Die Nullhypothese kann durchaus falsch sein, es liegt
+nur nicht ausreichend starke empirische Evidenz vor, dass es
+wirklich so ist. Es wäre fahrlässig, die Nullhypothese als wahr
+anzusehen, nur weil sie nicht abgelehnt wird. Aus diesem Grund 
+sagt man nie, dass die Nullhypothese "angenommen" wird, sondern
+nur, dass sie "nicht abgelehnt" wird. Das mag wie eine sprachliche
+Spitzfindigkeit erscheinen, ist aber sinnvoll, um die Asymmetrie
+in der Bewertung der Testentscheidungen zu verdeutlichen.
 
-Die Wahrscheinlichkeit, dass die Nullhypothese abgelehnt wird,
-obwohl sie wahr ist, beträgt
-$$
-\begin{align*}
-P(T\in K||H_0\text{ ist wahr}) 
-&= P\left(T<-u_{1-\alpha/2})+P(T> u_{1-\alpha/2}\right)\\
-&= P\left(T<-u_{1-\alpha/2})+1-P(T\le u_{1-\alpha/2}\right)\\
-&= \frac{\alpha}{2}+1-\left(1-\frac{\alpha}{2}\right)\\
-&= \alpha.
-\end{align*}
-$$
-Die Fehlerwahrscheinlichkeit erster Art entspricht also dem vorgegebenen 
-Signifikanzniveau.
+## p-Wert
 
-Um die Fehlerwahrscheinlichkeit zweiter Art zu berechnen, brauchen
-wir eine Annahme über den wahren Wert von $\mu$. Wenn die Nullhypothese
-nicht wahr ist, dann kann $\mu$ alle Werte außer $\mu_0$ annehmen. 
+Die Testentscheidung (also die Ablehnung oder Nichtablehnung der
+Nullhypothese) hängt vom Signifikanzniveau ab. Das liegt
+daran, dass der kritische Bereich umso kleiner ist, je 
+niedriger das Signifikanzniveau $\alpha$ ist. Das ist
+plausibel: Wenn die Fehlerwahrscheinlichkeit erster Art
+sehr klein sein soll, dann darf man die Nullhypothese
+nur verwerfen, wenn die Teststatistik einen wirklich
+extremen Wert annimmt. Es kann also passieren, dass der Test
+auf einem Signifikanzniveau von 0.05 die Nullhypothese
+ablehnt, auf einem Signifikanzniveau von 0.01 jedoch nicht.
 
+Die Wahl des Signifikanzniveaus kann man jedoch auch
+den Lesern einer empirischen Untersuchung überlassen. Dann
+kann jeder selbst entscheiden, ob der Wert der Teststatistik
+zu einer Ablehnung der Nullhypothese führen soll oder nicht.
+Person A möchte vielleicht ein Signifikanzniveau von 
+$\alpha=0.05$, Person B möchte hingegen $\alpha=0.01$.
+Hier kommt der sogenannte p-Wert ins Spiel.
 
+::: callout-note
+## Definition: p-Wert
 
-### Beliebige Verteilung mit bekannter Varianz {.unnumbered}
+Der **p-Wert** (engl. p-value) ist das kleinste
+Signifikanzniveau, auf dem die Nullhypothese gerade
+noch abgelehnt wird.
+:::
 
-### Normalverteiung mit unbekannter Varianz {.unnumbered}
+Eine andere Interpretation des p-Werts ist: Der
+p-Wert gibt die Wahrscheinlichkeit an, dass die
+(zufällige) Teststatistik einen Wert annimmt, der
+mindestens so stark gegen die Nullhypothese spricht
+wie der tatsächlich realisierte Wert der Teststatistik.
+Falsch ist hingegen die Interpretation des p-Werts
+als "Wahrscheinlichkeit, dass die Nullhypothese
+stimmt". 
 
-### Beliebige Verteilung mit unbekannter Varianz {.unnumbered}
-
+Anstelle einer Testentscheidung für ein vorgegebenes
+Signifikanzniveau wird bei der Verwendung des p-Werts
+zur Kommunikation der p-Wert mitgeteilt. Wenn
+der p-Wert niedriger ist als das Signifikanzniveau,
+das man als Leser gern hätte, lehnt man die 
+Nullhypothese ab. Wenn der p-Wert größer ist als
+das Signifikanzniveau, lehnt man die Nullhypothese
+nicht ab. Bei sehr großen p-Werten (z.B. größer
+als 10 Prozent) würde vermutlich niemand die
+Nullhypothese verwerfen, bei sehr kleinen Werten
+von weniger als 1 Prozent würde vermutlich jeder die
+Nullhypothese verwerfen.

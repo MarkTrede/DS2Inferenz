@@ -1,0 +1,264 @@
+---
+title: "Data Science 2"
+format: beamer
+date: today
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\textbf{Grenzwertsätze}
+\medskip
+\begin{itemize}
+\item Gegeben sei eine Folge von unabhängigen, identisch
+verteilten Zufallsvariablen (i.i.d.)
+\[ X_{1},X_{2},X_{3},\ldots , \]
+\item Die Folgenelemente $X_{1},X_{2},\ldots $ heißen auch 
+unabhängige Wiederholungen von $X$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{itemize}
+\item Für gegebenes $n$ ist das arithmetische Mittel
+$$
+\bar{X}_{n}=\frac{1}{n}\sum_{i=1}^{n}X_{i}
+$$
+\item Achtung: $\bar{X}_{n}$ ist eine \textbf{Zufallsvariable}!
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{itemize}
+\item Was passiert mit der Verteilung von $\bar{X}_n$, 
+wenn $n\rightarrow \infty $ geht?
+\item Sei $E(X)=\mu $ und $Var(X)=\sigma ^{2}$
+\item Dann gilt
+\begin{align*}
+E(\bar{X}_{n}) &=\mu  \\
+Var(\bar{X}_{n}) &=\frac{\sigma ^{2}}{n}
+\end{align*}
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+$E(\bar{X}_n)=$
+\vspace*{3cm}
+
+$Var(\bar{X}_{n}) =$
+\vspace*{2cm}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{block}{Schwaches Gesetz der großen Zahl}
+Für jedes (noch so kleine) $\varepsilon >0$ gilt
+$$
+\lim_{n\rightarrow \infty}P(|\bar{X}_{n}-\mu|\geq \varepsilon) =0
+$$
+\end{block}
+Alternative Schreibweise
+$$
+\text{plim}_{n\rightarrow \infty }\bar{X}_{n}=\mu
+$$
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{itemize}
+\item Anschaulich: Die Verteilung von $\bar{X}_{n}$ zieht sich immer mehr
+auf $\mu $ zusammen
+\item Spezialfall: $X$ sei Bernoulli-verteilt mit Parameter $P(X=1)=\pi $
+\item Dann ist $\bar{X}_{n}$ die relative Häufigkeit der Erfolge
+\item Wegen $E(X)=\pi $ gilt
+$$
+\lim_{n\rightarrow \infty }P\left( \left\vert \bar{X}_{n}-\pi \right\vert
+\geq \varepsilon \right) =0
+$$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{exampleblock}{Beispiel: Ein Würfel wird geworfen}
+Sei 
+$$
+X=\left\{ 
+\begin{array}{ll}
+0 & \quad \text{wenn Augenzahl nicht 5 ist} \\ 
+1 & \quad \text{wenn Augenzahl 5 ist}
+\end{array}\right.
+$$
+Es gilt
+$$
+P(X=1)=\frac{1}{6}
+$$
+\end{exampleblock}
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{exampleblock}{Forts. Beispiel: Ein Würfel wird geworfen}
+\begin{itemize}
+\item Der Würfel wird nun sehr oft geworfen ($n$ Mal)
+\item $X_{1},X_{2},\ldots $ geben jeweils an, ob eine 5 geworfen wurde
+\item $\bar{X}_{n}$ ist der Anteil der Fünfen
+\item Für großes $n$ geht $\bar{X}_{n}$ gegen $1/6$
+\item Simulation in R: [\texttt{wlln.R}]
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{exampleblock}{Beispiel: Produktgewicht}
+\begin{itemize}
+\item Die Zufallsvariable $X\sim N(201,4)$
+sei das tatsächliche Gewicht einer 200g-Tafel Schokolade
+\item $X_i$ ist das Gewicht der $i$-ten Tafel, $i=1,2,\ldots $
+\item $\bar{X}_{n}$ ist das Durchschnittsgewicht dieser Tafeln
+\item Für großes $n$ geht $\bar{X}_n$ gegen 201\hfill [\texttt{wlln.R}]
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{itemize}
+\item Zentraler Grenzwertsatz (Begründung für die 
+extreme Wichtigkeit der Normalverteilung)
+\item Definiere das standardisierte arithmetische Mittel
+$$
+U_{n}=\frac{\bar{X}_{n}-\mu}{\sqrt{\sigma^2/n}}
+=\sqrt{n}\frac{\bar{X}_n-\mu}{\sigma}
+$$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{block}{Zentraler Grenzwertsatz}
+Für alle $u\in \mathbb{R}$ gilt
+$$
+\lim_{n\rightarrow \infty }P(U_n\leq u)=\Phi(u),
+$$
+wobei $\Phi$ die Verteilungsfunktion der $N(0,1)$ ist
+\end{block}
+Für großes $n$ gilt approximativ
+$$
+U_n\overset{appr}{\sim }N(0,1)
+$$
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{itemize}
+\item Folglich gilt auch
+$$
+\sum_{i=1}^{n}X_{i}\overset{appr}{\sim }N(n\mu ,n\sigma ^{2})
+$$
+und
+$$
+\bar{X}_{n}\overset{appr}{\sim }N\left( \mu ,\frac{\sigma ^{2}}{n}\right)
+$$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{itemize}
+\item Die Summe und der Durchschnitt von $n$ 
+\textbf{beliebig verteilten} Zufallsvariablen ist 
+approximativ normalverteilt, wenn $n$ groß genug ist!
+\item Es gibt einige einschränkende Bedingungen, aber 
+in den meisten Situationen gilt der zentrale Grenzwertsatz
+\item Simulationen in R
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{itemize}
+\item Spezialfall: $X$ Bernoulli-verteilt mit $\pi$
+\begin{align*}
+E(X) &=\pi  \\
+V(X) &=\pi \left( 1-\pi \right) 
+\end{align*}
+und daher
+$$
+\sum_{i=1}^{n}X_i\overset{appr}{\sim }N(n\pi,n\pi (1-\pi))
+$$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{itemize}\item Approximation der Binomialverteilung durch die 
+Normalverteilung (De Moivre, 1733)
+\item Wegen 
+$$
+\sum_{i=1}^{n}X_i\overset{appr}{\sim }N(n\pi ,n\pi (1-\pi))
+$$
+gilt
+$$
+P\left( \sum_{i=1}^{n}X_{i}\leq b\right) 
+\approx \Phi \left( \frac{b-n\pi }{\sqrt{n\pi \left( 1-\pi \right) }}\right)
+$$
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Zentraler Grenzwertsatz}
+\begin{exampleblock}{Beispiel: Marketing}
+Eine Marketing-Abteilung verschickt an $n=500$ zufällig ausgewählte 
+Kunden Fragebögen.\medskip
+
+$X_{i}$ sind Bernoulli-verteilt mit Parameter $\pi =0.2$
+$$
+X_{i}=\left\{ 
+\begin{array}{ll}
+1 & \quad \text{wenn Kunde }i\text{ antwortet} \\ 
+0 & \quad \text{wenn Kunde }i\text{ nicht antwortet}
+\end{array}
+\right. 
+$$
+Sei $Y=\sum_{i=1}^{500}X_{i}$ die Zahl der Antworten.
+\end{exampleblock}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+\begin{exampleblock}{Forts. Beispiel: Marketing}
+Die Wahrscheinlichkeit, dass zwischen 95 und 105 Kunden antworten, ist
+\vspace*{4cm}
+\end{exampleblock}
+

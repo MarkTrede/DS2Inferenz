@@ -1,0 +1,389 @@
+---
+title: "Data Science 2"
+format: beamer
+date: today
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+
+# Zufallsvektoren
+\framesubtitle{Definition}
+\textbf{Zufallsvektoren:}
+\medskip
+
+Für viele interessante Anwendungen braucht man mehrere 
+Zufallsvariablen (Vereinfachung: $n=2$)
+\medskip
+
+\begin{exampleblock}{Beispiele:}
+\begin{itemize}
+\item $X$: Haushaltsgröße, $Y$: Anzahl Autos
+\item $X$: Aktienrendite Siemens, $Y$: Aktienrendite Zalando
+\item $X$: kleinere Augenzahl, $Y$: größere Augenzahl
+von zwei Würfeln
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Verteilungsfunktion}
+\begin{block}{Gemeinsame Verteilungsfunktion}
+Seien $X:\Omega \longrightarrow \mathbb{R}$ und 
+$Y:\Omega\longrightarrow \mathbb{R}$
+zwei Zufallsvariablen. Dann ist
+$$
+F_{X,Y}(x,y) =P(X\leq x,Y\leq y)
+$$
+die gemeinsame Verteilungsfunktion von $X$ und $Y$
+\end{block}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Verteilungsfunktion}
+\textbf{Eigenschaften der gemeinsamen Verteilungsfunktion:}
+\medskip
+\begin{itemize}
+\item $F_{X,Y}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend
+in $x$ und $y$
+\item Es gilt $F_{X,Y}(-\infty ,y) =F_{XY}(x,-\infty)=0$
+\item Es gilt $F_{X,Y}(+\infty ,+\infty) =1$
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{block}{Gemeinsam diskrete Zufallsvariablen}
+$X$ und $Y$ heißen gemeinsam diskret, wenn es endlich viele
+oder abzählbar unendlich viele Werte $x_{1,}x_{2,}\ldots$
+und $y_{1,}y_{2,}\ldots $ gibt, so dass 
+\[ \sum_{j}\sum_{k}p_{jk}=1 \]
+mit $p_{jk}=P(X=x_{j},Y=y_{k})$
+\end{block}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{itemize}
+\item Gemeinsame Wahrscheinlichkeitsfunktion
+$$
+f_{X,Y}(x,y) =\left\{ 
+\begin{array}{ll}
+p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\ 
+0 & \quad \text{sonst}
+\end{array}\right.
+$$
+\item Darstellung als Wahrscheinlichkeitstabelle
+$$
+\begin{tabular}{c|ccc|}
+$X\backslash Y$ & $y_{1}$ & $\ldots $ & $y_{K}$ \\ \hline
+$x_{1}$ & $p_{11}$ & $\ldots $ & $p_{1K}$ \\ 
+$\vdots $ & $\vdots $ &  & $\vdots $ \\ 
+$x_{J}$ & $p_{J1}$ & $\ldots $ & $p_{JK}$
+\end{tabular}
+$$
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Haushalte}
+Sei $X$: Haushaltsgröße; $Y$: Anzahl Autos
+\bigskip
+
+\begin{tabular}{c|ccc}
+$X\backslash Y$ & 0 & 1 & 2 \\ \hline
+1 & \color<2>{red}0.10 & \color<2>{red}0.14 & 0.01 \\ 
+2 & \color<2>{red}0.05 & \color<2>{red}0.15 & 0.10 \\ 
+3 & \color<2>{red}0.02 & \color<2>{red}0.10 & 0.08 \\ 
+4 & 0.02 & 0.06 & 0.07 \\ 
+5 & 0.01 & 0.05 & 0.04
+\end{tabular}
+\bigskip
+
+Wie groß ist $F_{X,Y}(3,1)$ ? \uncover<2>{
+$P(X\le 3,Y\le 1)=0.56$}
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Haushalte}
+Sei $X$: Haushaltsgröße; $Y$: Anzahl Autos
+\bigskip
+
+\begin{tabular}{c|ccc}
+$X\backslash Y$ & 0 & 1 & 2 \\ \hline
+1 & \color<2>{red}0.10 & \color<2>{red}0.14 & \color<2>{red}0.01 \\ 
+2 & 0.05 & 0.15 & 0.10 \\ 
+3 & 0.02 & 0.10 & 0.08 \\ 
+4 & 0.02 & 0.06 & 0.07 \\ 
+5 & 0.01 & 0.05 & 0.04
+\end{tabular}
+\bigskip
+
+Wie groß ist $F_{XY}(1.5,3.2)$ ?\uncover<2>{
+$P(X\le 1.5,Y\le 3.2)=0.25$}
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
+\begin{block}{Gemeinsam stetige Zufallsvariablen}
+$X$ und $Y$ heißen gemeinsam stetig, 
+falls es eine Funktion $f_{X,Y}$ gibt mit 
+$$
+F_{X,Y}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{X,Y}(u,v)dudv
+$$
+\end{block}
+Die Funktion $f_{X,Y}$ heißt gemeinsame Dichte (Dichtefunktion)
+
+
+
+# Zufallsvektoren
+\begin{itemize}
+\item Bei partieller Differenzierbarkeit gilt
+$$
+f_{X,Y}(x,y)=\frac{\partial^2}{\partial x\partial y}F_{X,Y}(x,y)
+$$
+\item Für $x,y\in\mathbb{R}$ gilt $f_{X,Y}(x,y)\geq 0$
+\item Das Volumen unter der Dichte ist 
+$$
+\int_{-\infty }^{\infty }\int_{-\infty }^{\infty }f_{X,Y}(x,y)dxdy=1
+$$
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\begin{itemize}
+\item Durch Doppel-Integrale der Dichte erhält man
+Wahrscheinlichkeiten, so ist beispielsweise
+\begin{align*}
+&P(a_1\leq X\leq b_1,a_2\leq Y\leq b_2)\\[1ex]
+&=\int_{a_2}^{b_2}\int_{a_1}^{b_1}f_{XY}(x,y)dxdy
+\end{align*}
+\item Wegen der Stetigkeit spielt es keine Rolle, 
+ob die Ungleichungen strikt sind oder nicht
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\textbf{Visualisierung einer gemeinsamen Dichte:}
+\medskip
+\begin{itemize}
+\item Plot als 3D-"Gebirge"
+\item Höhenlinien (Contour-Plot)
+\item Farben als dritte Dimension (Image-Plot)
+\item Beispiel: 
+$$
+f_{X,Y}(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}
+$$
+\end{itemize}
+
+
+
+# Zufallsvektoren
+```{r}
+#| echo: FALSE
+#| fig-align: "center"
+#| fig-width: 4
+f <- function(x,y) (2*exp(-x-y)/(1+exp(-x)+exp(-y))^3)
+x <- y <- seq(-4,4,length=30)
+z <- matrix(0,length(x),length(y))
+for(i in 1:length(x)){
+    for(j in 1:length(y)){
+        z[i,j] <- f(x[i],y[j])
+    }
+}
+persp(x,y,z,
+      col="light green",
+      zlab="f(x,y)",
+      theta=35,
+      phi=25)
+```
+
+
+
+# Zufallsvektoren
+```{r}
+#| echo: FALSE
+#| fig-align: "center"
+#| fig-height: 6
+#| fig-width: 5.5
+f <- function(x,y) (2*exp(-x-y)/(1+exp(-x)+exp(-y))^3)
+x <- y <- seq(-4,4,length=101)
+z <- matrix(0,length(x),length(y))
+for(i in 1:length(x)){
+    for(j in 1:length(y)){
+        z[i,j] <- f(x[i],y[j])
+    }
+}
+par(mar=c(5,4,4,0.5)+0.5)
+contour(x,y,z,xlab="x",ylab="y")
+```
+
+
+
+# Zufallsvektoren
+```{r}
+#| echo: FALSE
+#| fig-align: "center"
+#| fig-height: 5
+#| fig-width: 5.5
+par(mar=c(5,4,4,0.5))
+filled.contour(x,y,z,xlab="x",ylab="y")
+```
+
+
+
+# Zufallsvektoren
+\framesubtitle{Randverteilungen}
+\textbf{Randverteilungen}
+\begin{itemize}
+\item Wie ist die eine Zufallsvariable verteilt, wenn man die andere ignoriert?
+\item Randverteilungsfunktionen $F_{X}$ und $F_{Y}$
+\begin{align*}
+F_{X}(x) &=F_{X,Y}(x, \infty) =\lim_{y\rightarrow \infty }F_{X,Y}(x,y) \\
+F_{Y}(y) &=F_{X,Y}(\infty ,y) =\lim_{x\rightarrow \infty }F_{X,Y}(x,y)
+\end{align*}
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Randverteilungen}
+Randverteilungen gemeinsam diskreter Zufallsvariablen
+\begin{eqnarray*}
+p_{j\cdot } &=&P(X=x_{j})=\sum\limits_{k}p_{jk} \\
+p_{\cdot k} &=&P(Y=y_{k})=\sum\limits_{j}p_{jk}
+\end{eqnarray*}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Randverteilungen}
+Randdichten gemeinsam stetiger Zufallsvariablen
+\begin{align*}
+f_{X}(x) &=\int_{-\infty }^{+\infty }f_{X,Y}(x,y)dy \\
+f_{Y}(y) &=\int_{-\infty }^{+\infty }f_{X,Y}(x,y)dx
+\end{align*}
+\bigskip
+(die jeweils andere Variable wird "rausintegriert")
+
+
+
+# Zufallsvektoren
+\framesubtitle{Unabhängigkeit}
+\begin{block}{Unabhängigkeit}
+Zwei Zufallsvariablen $X$ und $Y$ heißen (stochastisch)
+unabhängig, falls für alle $x,y\in \mathbb{R}$
+$$
+F_{X,Y}(x,y) =F_{X}(x) \cdot F_{Y}(y)
+$$
+\end{block}
+Randverteilungen $F_{X}$ und $F_{Y}$ ergeben sich aus 
+der gemeinsamen Verteilung $F_{X,Y}$, aber $F_{X,Y}$ ist 
+im Allgemeinen nicht eindeutig durch $F_{X}$ und $F_{Y}$ 
+bestimmt
+
+
+
+# Zufallsvektoren
+\framesubtitle{Unabhängigkeit}
+\begin{itemize}
+\item Gemeinsam diskrete $X$ und $Y$ sind unabhängig, 
+wenn für alle $j=1,2,\ldots $und $k=1,2,\ldots $ 
+$$
+P(X=x_{j},Y=y_{k})=P(X=x_{j})\cdot P(Y=y_{k})
+$$
+\item Gemeinsam stetige $X$ und $Y$ sind unabhängig, 
+wenn für alle $x,y\in \mathbb{R}$ 
+$$
+f_{X,Y}(x,y)=f_{X}(x)\cdot f_{Y}(y)
+$$
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Gemeinsam diskrete Verteilung}
+Zwei Würfel werden geworfen, $X$: kleinere Augenzahl, $Y$: größere Augenzahl
+$$
+\begin{array}{c|cccccc|c}
+X\backslash Y & 1 & 2 & 3 & 4 & 5 & 6 & f_X\\ \hline
+1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{11}{36}\\
+2 & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{9}{36}\\
+3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{7}{36}\\
+4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{5}{36}\\
+5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{3}{36}\\
+6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{1}{36}\\ \hline
+f_Y &\frac{1}{36} & \frac{3}{36} & \frac{5}{36} & \frac{7}{36} & \frac{9}{36} & \frac{11}{36} &1\\
+\end{array}
+$$
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Sei $(X,Y)$ gemeinsam stetig verteilt
+$$
+f_{X,Y}(x,y) =\left\{ 
+\begin{array}{ll}
+x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
+0 & \quad \text{sonst}
+\end{array}
+\right.
+$$
+Randdichte von $X$:
+\uncover<2>{
+\begin{align*}
+f_{X}(x)&= \int_{0}^{1}f_{X,Y}(x,y)dy = \int_0^1 (x+y)dy\\
+&= x + \int_0^1 ydy= x+[0.5y^2]_0^1= x+\frac{1}{2}
+\end{align*}
+}
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Sei $(X,Y)$ gemeinsam stetig verteilt
+$$
+f_{X,Y}(x,y) =\left\{ 
+\begin{array}{ll}
+x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
+0 & \quad \text{sonst} 
+\end{array}
+\right.
+$$
+$X$ und $Y$ sind abhängig, weil:
+\uncover<2>{
+\begin{align*}
+f_{X}(0.2) \cdot f_{Y}(0.2)  &= (0.2+0.5) (0.2+0.5) =0.49 \\
+f_{XY}(0.2,0.2)  &=0.2+0.2=0.4
+\end{align*}
+}
+\end{exampleblock}
+

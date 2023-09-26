@@ -8,18 +8,21 @@ Zusammenhang gewöhnlich durch die Kovarianz beschrieben.
 ## Definition
 
 ::: callout-note
-Die **Kovarianz** zweier gemeinsam verteilter Zufallsvariablen 
-$X$ und $Y$ ist
+## Definition: Kovarianz
+
+Die **Kovarianz** (engl. covariance) zweier gemeinsam 
+verteilter Zufallsvariablen $X$ und $Y$ ist
 $$
 Cov(X,Y)=E[(X-E(X))(Y-E(Y))].
 $$
+Oft wird die Kovarianz auch als $\sigma_{X,Y}$ notiert.
 :::
 
 Die Kovarianz ist also letztlich ein Erwartungswert, und zwar der
 Erwartungswert eines Produkts. Die beiden Faktoren sind die beiden
 zentrierten Zufallsvariablen $(X-E(X))$ und $(Y-E(Y))$. Wenn der
 Faktor $(X-E(X))$ positiv ist, bedeutet das, dass $X$ größer ist
-als im Erwartungswert. Das Produkt ist immer dann positiv, wenn
+als sein Erwartungswert. Das Produkt ist immer dann positiv, wenn
 $X$ größer (kleiner) als sein Erwartungswert ist und gleichzeitig
 auch $Y$ größer (kleiner) als sein Erwartungswert ist. Mit anderen
 Worten: Wenn $X$ und $Y$ tendenziell gleichzeitig überdurchschnittlich
@@ -50,14 +53,14 @@ $$
 
 Die Kovarianz spielt in den Wirtschaftswissenschaften immer dann eine sehr
 wichtige Rolle, wenn es um Risiko geht, also vor allem in den Bereichen
-Portfolio-Management, Risiko-Management, Banken und Versicherung. 
+Portfolio-Management, Risiko-Management, Banken und Versicherungen. 
 
-Bei einer linearen Transformation von $X$ und $Y$ gilt
+Bei linearen Transformationen von $X$ und $Y$ gilt
 $$
 Cov(aX+b,cY+d)=a\,c\, Cov(X,Y),
 $$
 d.h. die additiven Konstanten $b$ und $d$ fallen einfach weg, während
-die multiplikativen Kontanten vor die Kovarianz gezogen werden können.
+die multiplikativen Konstanten vor die Kovarianz gezogen werden können.
 Bei der Herleitung dieser Formel werden die Rechenregeln für den
 Erwartungswert mehrmals angewendet (s. @sec-lintrans):
 $$
@@ -91,16 +94,17 @@ Folglich gilt für die Kovarianz unabhängiger $X$ und $Y$, dass
 $$
 Cov(X,Y)=E(X)E(Y)-E(X)E(Y)=0.
 $$
-*Achtung:* Umgekehrt folgt aus einer Kovarianz von 0 nicht unbedingt,
+<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="right" width=10%" style="padding-left:15px;padding-top:5px;"/>
+**Achtung:** Umgekehrt folgt aus einer Kovarianz von 0 nicht unbedingt,
 dass $X$ und $Y$ unabhängig sind! Sie können durchaus abhängig sein
 und trotzdem eine Kovarianz von 0 aufweisen.
 
-## Summe zweier Zufallsvariablen
+## Summe zweier Zufallsvariablen {#sec-summe2zv}
 
 Die Kovarianz wird gebraucht, wenn man sich für die Verteilung
 von Summen von Zufallsvariablen interessiert. Wir beginnen mit
 dem einfachen Fall einer Summe von zwei Zufallsvariablen und
-verallgemeinern dies anschließend Schritt für Schritt.
+verallgemeinern ihn anschließend Schritt für Schritt.
 
 Seien $X$ und $Y$ gemeinsam stetig verteilte Zufallsvariablen
 (für gemeinsam diskret verteilte Zufallsvariable laufen die
@@ -143,17 +147,17 @@ Var(Z) &= E[(Z-E(Z))^2]\\
 \end{align*}
 $$
 Zur Erklärung: Der Schritt von der vierten zur fünften und sechsten Zeile
-ist eine Anwendung der ersten binomischen Formel ($(a+b)^2=a^2+2ab+b^2$).
+ist eine Anwendung der ersten binomischen Formel.
 Im Schritt danach wird ausgenutzt, dass der Erwartungswert einer Summe
 die Summe der Erwartungswerte ist. 
 
 Die Varianz einer Summe von zwei Zufallsvariablen ist also
-im allgemeinen *nicht* nur die Summe ihrer Varianzen! Es gibt einen
+im allgemeinen *nicht* die Summe ihrer Varianzen! Es gibt einen
 weiteren Term, nämlich die Kovarianz. Da die Kovarianz sowohl positiv
 als auch negativ sein kann, ist es möglich, dass die Varianz der
 Summe größer oder kleiner als die Summe der beiden Einzelvarianzen
 ist. Es kann sogar passieren, dass die Varianz der Summe
-*kleiner als die kleinere der beiden Einzelvarianzen ist*!
+kleiner als die kleinere der beiden Einzelvarianzen ist!
 
 Wenn $X$ und $Y$ unabhängig sind, dann haben sie eine Kovarianz
 von Null. In diesem Fall gilt also, dass die Varianz der Summe die
@@ -189,8 +193,10 @@ Anteil des Vermögens sein soll, der in Wertpapier A angelegt
 wird, wenn das Risiko minimiert werden soll. Das Risiko wird
 gewöhnlich durch die Varianz (bzw. die Standardabweichung)
 gemessen. Die Beraterin
-kennt die folgenden Kennzahlen (woher sie diese Informationen
-hat, sei an dieser Stelle dahingestellt):
+kennt die folgenden Kennzahlen. Woher sie diese Informationen
+hat, sei an dieser Stelle dahingestellt; wer sich näher für
+die Schätzung von Finanzmarktgrößen interessiert, kann im
+Masterstudium das Modul **Financial Econometrics** belegen.
 $$
 \begin{align*}
 E(X) &= 0.02\\
@@ -200,10 +206,10 @@ Var(Y) &= 0.04 \\
 Cov(X,Y) &= -0.002
 \end{align*}
 $$
-Die erwartete Rendite von Wertpapier A ist also niedriger,
+Die erwartete Rendite von Wertpapier A ist also niedriger als von B,
 sie beträgt nur 2 Prozent per annum (p.a.). Dafür ist Papier A
-jedoch auch weniger riskant, die Standardabweichung beträgt
-0.1, wohin gegen Wertpapier 2 eine Standardabweichung von
+jedoch auch weniger riskant als B, die Standardabweichung beträgt
+0.1, wohin gegen Wertpapier B eine Standardabweichung von
 0.2 hat, allerdings mit 6 Prozent p.a. auch einen höheren 
 Erwartungswert bietet. Die Renditen der beiden Wertpapiere
 sind leicht gegenläufig, d.h. wenn die Rendite von Papier A
@@ -214,15 +220,16 @@ Wie hoch soll der Anteil des Vermögens sein, der in Papier
 A investiert wird, wenn das Ziel eine Minimierung des
 Gesamtrisikos ist? Sei $a$ der Anteil, der in Papier A
 investiert wird. Dann ist $1-a$ der in Papier B investierte
-Anteil. Die Gesamtrendite dieses kleinen Portfolios ist
+Anteil. Die Gesamtrendite des Portfolios ist
 $$
 R=aX+(1-a)Y.
 $$
-Die erwartete Portfoliorendite beträgt 
+Die Portfoliorendite ist eine Zufallsvariable. Ihr 
+Erwartungswert beträgt 
 $$
 E(R)=aE(X)+(1-a)E(Y)=a\cdot 0.02+(1-a)\cdot 0.06.
 $$
-Das Risiko der Portfoliorendite, gemessen durch seine Varianz, beträgt
+Das Risiko der Portfoliorendite, gemessen durch ihre Varianz, beträgt
 $$
 \begin{align*}
 Var(R) &= a^2Var(X)+(1-a)^2Var(Y)+2a(1-a)Cov(X,Y)\\
@@ -253,21 +260,21 @@ Var(R) &=0.00733.
 \end{align*}
 $$
 Es ist also möglich, eine Rendite zu erreichen, deren Erwartungswert
-höher ist als der kleinere der beiden Einzelrenditen, und gleichzeitig 
-eine Varianz, die niedriger ist als die kleinere der beiden 
-Einzelvarianzen! Es wäre also geradezu dumm, sein ganzes Vermögen
+höher ist als der kleinere Erwartungswert der beiden Einzelrenditen, 
+und gleichzeitig eine Varianz, die niedriger ist als die kleinere 
+der beiden Einzelvarianzen! Es wäre also unklug, sein ganzes Vermögen
 vollständig in dem sichereren Wertpapier A anzulegen. Durch eine
 geschickte Diversifikation auf beide Assets lässt sich das Risiko noch 
 weiter verringern und trotzdem eine höhere erwartete Rendite erreichen!
 :::
 
-## Summe vieler Zufallsvariablen
+## Summe vieler Zufallsvariablen {#sec-summenzv}
 
 Natürlich ist eine ernsthafte Portfolioanalyse nicht sinnvoll, wenn
 nur zwei Assets betrachtet werden können. 
 Darum untersuchen wir nun, wie sich der Erwartungswert und die
 Varianz einer Summe von vielen Zufallsvariablen zu den
-einzelnen Erwartungswerten und Varianzen (und Kovarianzen!) verhält. 
+einzelnen Erwartungswerten, Varianzen und Kovarianzen verhält. 
 
 Im allgemeinen Fall gibt es nicht nur zwei, sondern 
 $n$ Zufallsvariablen. Wir bezeichnen sie mit $X_1,\ldots,X_n$.
@@ -290,8 +297,8 @@ oder unabhängig voneinander sind.
 
 Auf die ausführliche Herleitung wird an dieser Stelle 
 verzichtet. Sie verläuft analog zum Fall zweier Zufallsvariablen,
-ist jedoch in der Notation komplexer. In dem (englischsprachigen) 
-Bachelor-Modul **Advanced Statistics** werden multivariate
+ist jedoch in der Notation komplexer. In dem 
+Bachelor-Wahlpflichtmodul **Advanced Statistics** werden multivariate
 Zufallsvektoren ausführlicher behandelt.
 
 Wie lässt sich die Varianz der Summe bestimmen? Dazu formen
@@ -331,8 +338,8 @@ Var\left(\sum_{i=1}^n X_i\right)&= \sum_{i=1}^n\sum_{j=1}^n Cov(X_i,X_j)\\
 &\quad +2\sum_{i=1}^{n-1}\sum_{j=i+1}^n Cov(X_i,X_j)
 \end{align*}
 $$
-Das die letzte Umformung korrekt ist, erkennt man am leichtesten,
-wenn man alle Kovarianzen in Matrixform anordnet:
+Das die letzte Umformung korrekt ist, erkennt man am besten,
+wenn man alle Kovarianzen in einem quadratischen Tableau anordnet:
 $$
 \begin{array}{ccccc}
 Cov(X_1,X_1) & Cov(X_1,X_2) & Cov(X_1,X_3) & \ldots & Cov(X_1,X_n)\\
@@ -347,16 +354,16 @@ sich, indem man die Einträge in der Matrix zeilenweise addiert
 (zuerst alle Summanden in der ersten Zeile, dazu dann alle
 Summanden der zweiten Zeile etc.). Aber natürlich lässt sich die
 Summe aller Einträge auch anders finden, z.B. indem man zuerst
-alle Elemente der Diagonale addiert (das sind gerade die
-Varianzen). Anschließend addiert man alle Einträge der ersten
-Nebendiagonale hinzu etc. Da alle Elemente oberhalb
+alle Elemente der Diagonale addiert - das sind gerade die
+Varianzen. Anschließend addiert man alle Einträge der ersten
+oberen Nebendiagonale hinzu etc. Da alle Elemente oberhalb
 der Diagonale wegen der Symmetrie auch unterhalb der
 Diagonale vorkommen, verdoppelt man diese Einträge. 
 
 Wenn die Zufallsvariablen $X_1,\ldots,X_n$ unabhängig
 voneinander sind, dann vereinfacht sich die Formel für
 die Varianzen, weil alle Kovarianzen 0 sind. Übrig
-bleibt also im Fall der Unabhängigkeit
+bleibt also im Fall der Unabhängigkeit nur
 $$
 Var\left(\sum_{i=1}^n X_i\right)=\sum_{i=1}^n Var(X_i).
 $$
@@ -379,37 +386,10 @@ Operator ist.
 Für die Varianz der gewichteten Summe gilt
 $$
 Var(Z)=\sum_{i=1}^n a_i^2 Var(X_i)+2\sum_{i=1}^{n-1}
-\sum_{j=1}^n a_ia_j\, Cov(X_i,X_j).
+\sum_{j=i+1}^n a_ia_j\, Cov(X_i,X_j).
 $$
 Diese Formel ist zentral für das Risikomanagement und 
 die Portfolioplanung. Das wird an dem folgenden Beispiel deutlich.
-
-::: { .callout-tip collapse="true"}
-Beispiel: Binomialverteilung
-
-Zur Erinnerung: Eine Zufallsvariable $X$ ist binomialverteilt,
-$X\sim B(n,\pi)$, wenn
-$$
-X=\sum_{i=1}^n 1_{A_i},
-$$
-wobei $1_{A_1},\ldots,1_{A_n}$ identisch und unabhängig
-Bernoulli-verteilte Zufallsvariablen sind. Für jedes $1_{A_i}$
-gilt
-$$
-\begin{align*}
-E(1_{A_i}) &= \pi \\
-Var(1_{A_i}) &= \pi(1-\pi).
-\end{align*}
-$$
-Daher gilt für Erwartungswert und Varianz der
-binomialverteilten Zufallsvariable $X\sim B(n,\pi)$,
-$$
-\begin{align*}
-E(X) &= n\pi \\
-Var(X) &= n\pi(1-\pi).
-\end{align*}
-$$
-:::
 
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Aktienportfolio
@@ -433,7 +413,7 @@ gesamten Portfoliorendite errechnet werden kann. In diesem
 Beispiel geht es nicht um eine Portfolio-Optimierung.
 Die Anteile, mit denen die Vermögensarten eingehen, 
 sind fest vorgegeben. Die Methoden, die für eine Optimierung
-benötigt werden, können Sie in den Wahlmodulen
+benötigt werden, können Sie in den Bachelor-Wahlpflichtmodulen
 **Lineare Algebra** und **Advanced Statistics** erlernen.
 
 Das Vermögen wird auf fünf Assets (A, B, C, D, E) aufgeteilt.
@@ -484,7 +464,7 @@ E(R)&=0.2\cdot 0.02+0.2\cdot 0.06+0.2\cdot 0.10\\
 \end{align*}
 $$
 Die Varianz ist etwas mühevoller zu berechnen. Da die Gewichte
-alle gleich (nämlich 0.2) sind, vereinfacht sich die Varianzformel
+alle gleich sind (nämlich 0.2), vereinfacht sich die Varianzformel
 zu
 $$
 Var(R)=0.2^2\cdot\sum_{i\in\{A,\ldots,E\}}\sum_{j\in\{A,\ldots,E\}} Cov(X_i,X_j).
@@ -506,10 +486,69 @@ In diesem Portfolio ist das Risiko also etwas höher als die
 kleinste Varianz der Einzelrenditen. Dafür ist die erwartete
 Rendite aber auch mehr als doppelt so hoch wie die 
 erwartete Rendite des Assets mit dem kleinsten Risiko
-(nämlich 4.6 Prozent im Vergleich zu 2 Prozent).
+(nämlich 4.6 Prozent im Vergleich zu nur 2 Prozent).
 :::
+
+Zum Schluss holen wir mit den neu erworbenen Rechenregeln für
+Summen von Zufallsvariablen die Herleitungen von
+Erwartungswert und Varianz der Binomialverteilung nach,
+die wir in @sec-binom übersprungen haben. 
+Zur Erinnerung: Eine Zufallsvariable $X$ ist binomialverteilt,
+$X\sim B(n,\pi)$, wenn
+$$
+X=\sum_{i=1}^n 1_{A_i},
+$$
+wobei $1_{A_1},\ldots,1_{A_n}$ identisch und unabhängig
+Bernoulli-verteilte Zufallsvariablen sind. Für jedes $1_{A_i}$
+gilt
+$$
+\begin{align*}
+E(1_{A_i}) &= \pi \\
+Var(1_{A_i}) &= \pi(1-\pi).
+\end{align*}
+$$
+Daher gilt für den Erwartungswert von $X\sim B(n,\pi)$,
+$$
+E(X)= n\pi.
+$$
+Wegen der Unabhängigkeit gilt für die Varianz
+$$
+Var(X)=n\pi(1-\pi).
+$$
 
 ## Korrelationskoeffizient
 
-???XXX???
+Die Kovarianz hat viele Vorteile, aber auch einen großen Nachteil:
+Sie ist nicht normiert. Es ist also schwierig, den Wert der Kovarianz sinnvoll
+zu interpretieren. Es gibt jedoch eine normierte Version der Kovarianz,
+und zwar den Korrelationskoeffizienten. 
 
+::: callout-note
+## Definition: Korrelationskoeffizient
+
+Der **Korrelationskoeffizient** (engl. coefficient of correlation) 
+der Zufallsvariablen $X$ und $Y$ ist
+$$
+Corr(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)\cdot Var(Y)}}.
+$$
+Eine häufige alternative Notation für den Korrelationskoeffizienten ist 
+$\rho_{X,Y}$.
+:::
+
+Wie die Kovarianz ist auch der Korrelationskoeffizient symmetrisch,
+d.h. $Corr(X,Y)=Corr(Y,X)$. Der Korrelationskoeffizient einer Zufallsvariable
+mit sich selbst nimmt immer den Wert 1 an, $Corr(X,X)=1$. Wenn $X$ und $Y$
+unabhängig sind, gilt $Corr(X,Y)=0$. Wie schon bei der Kovarianz folgt jedoch
+aus der Unkorreliertheit nicht unbedingt die Unabhängigkeit.
+Die wichtigste Eigenschaft des Korrelationskoeffizienten ist jedoch, dass
+er normiert ist,
+$$
+-1\le Corr(X,Y)\le 1.
+$$
+Wenn $Corr(X,Y)=1$ ist, dann existiert zwischen $X$ und $Y$ eine exakte,
+steigende lineare Beziehung, d.h. $Y=aX+b$ mit $a>0$. Wenn der Wert $-1$ ist,
+gibt es auch eine exakte lineare Beziehung, aber sie ist dann mit
+$a<0$ fallend. Liegen die Werte betragsmäßig nahe an der 1 
+(z.B. 0.8), dann ist der lineare Zusammenhang etwas verrauscht. Je
+kleiner der Betrage des Korrelationskoeffizienten ist, desto 
+stärker ist der lineare Zusammenhang durch Rauschen überlagert.

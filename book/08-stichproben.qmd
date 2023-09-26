@@ -1,13 +1,14 @@
 # Stichproben {#sec-stichproben}
 
-In diesem Kapitel schlagen wir die Brücke von der rein theoretischen
+In diesem Kapitel schlagen wir eine Brücke von der rein theoretischen
 Wahrscheinlichkeitsrechnung zur Empirie. Ein großer Vorteil 
 der Wahrscheinlichkeitstheorie besteht nämlich darin, dass sie
 es uns erlaubt, Aussagen über Zufallsvariablen oder Populationen zu machen, 
 von denen wir keine vollständigen Informationen haben, sondern nur einen
 Teil beobachten können. Man sagt, dass man von einer Stichprobe 
-auf die Population schließt, und spricht daher auch von statistischer
-Inferenz (engl. statistical inference). Leider entspricht die
+auf die Population schließt, und spricht daher auch von 
+**statistischer Inferenz** (engl. statistical inference). 
+Leider entspricht die
 Definition einer Stichprobe nicht dem umgangssprachlichen Gebrauch
 des Worts. Tatsächlich ist es nicht leicht - aber wichtig -, die formale 
 Definition einer Stichprobe tief zu verstehen. In diesem Kurs
@@ -18,16 +19,17 @@ Stichprobe.
 
 Ausgangspunkt unserer Überlegungen ist eine Zufallsvariable $X$. Es
 kann sich dabei um eine beliebige Zufallsvariable mit einer
-beliebigen Verteilung handeln. 
+beliebigen Verteilung handeln. Die Zufallsvariable $X$ steht für die
+Population.
 
 ::: { .callout-tip collapse="true"}
 ## Beispiele: Populationen
 
-Mögliche Zufallsvariablen $X$ sind zum Beispiel:
+Mögliche Zufallsvariablen sind zum Beispiel:
 
 - $X$ ist die Dauer, die eine Geschirrspülmaschine fehlerfrei funktioniert. 
 
-- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer Population.
+- $X$ ist das Nettomonatseinkommen eines zufällig ausgewählten Haushalts einer festgelegten Population.
 
 - $X$ ist eine normalverteilte Zufallsvariable mit Erwartungswert $\mu=5$
 und Standardabweichung $\sigma=2$.
@@ -37,6 +39,8 @@ Zu der Zufallsvariable $X$ gehört eine Stichprobe $X_1,X_2,\ldots,X_n$ des
 Umfangs $n$.
 
 ::: callout-note
+## Definition: Einfache Stichprobe
+
 Die Folge von Zufallsvariablen $X_1,X_2,\ldots,X_n$ heißt **einfache Stichprobe** 
 (engl. simple random sample) aus $X$, wenn
 
@@ -49,8 +53,10 @@ Neben dem englischen Terminus "simple random sample" spricht man auch
 von einem "i.i.d. sample", wobei die Abkürzung für
 "identical and independently distributed" steht.
 
-Im Gegensatz zur umgangssprachlichen Bedeutung des Worts "Stichprobe"
-handelt es sich also *nicht* um tatsächlich beobachtete Daten! Eine
+<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="right" width=10%" style="padding-left:15px;padding-top:5px;"/>
+**Achtung:** Im Gegensatz zur umgangssprachlichen 
+Bedeutung des Worts "Stichprobe"
+handelt es sich nicht um tatsächlich beobachtete Daten! Eine
 Stichprobe im Sinne der formalen Definition besteht aus Zufallsvariablen. 
 Man kann sich eine Stichprobe vorstellen als die erhobenen Daten,
 bevor sie tatsächlich erhoben wurden. Sobald die Stichprobe (also die
@@ -59,20 +65,34 @@ Daten. Um sie von der Stichprobe zu unterscheiden, schreibt man sie
 meist mit Kleinbuchstaben, $x_1,x_2,\ldots,x_n$, und man spricht von
 der **konkreten Stichprobe** (oder realisierten Stichprobe).
 
+Beim Blick auf die tatsächlich vorliegenden Daten sollte man sich
+immer klar machen:
+
+>
+> Es hätte auch anders kommen können.
+>
+
+Würde man die Stichprobe erneut ziehen, erhielte man eine andere
+konkrete Stichprobe. Der Zufall spielt immer eine Rolle, sei es
+weil der Prozess inhärent zufällig ist wie ein Würfelwurf, sei
+es weil wir nicht ganz genau wissen, warum es zu einer bestimmten
+Realisation kommt, wie beispielsweise bei der Entwicklung von 
+Aktienkursen.
+
 ::: { .callout-tip collapse="true"}
-## Beispiel: Stichprobe
+## Beispiel: Stichprobe von Lebensdauern
 
 Wie sieht eine Stichprobe aus für die Zufallsvariable 
 $X$: "Dauer, die eine Geschirrspülmaschine fehlerfrei funktioniert"? 
 Als Stichprobenumfang setzen wir $n=10$. Aus der
 Produktion werden nun zufällig 10 Geschirrspülmaschinen
 ausgewählt. Jede dieser Maschinen lässt man laufen, bis sie
-zum ersten Mal einen Fehler aufweisen. Für die $i$-te Maschine
+zum ersten Mal einen Fehler aufweist. Für die $i$-te Maschine
 sei $X_i$ die Dauer (z.B. in Stunden) bis zum Fehler.
 
 Da alle 10 Maschinen dasselbe Produktionsverfahren
 durchlaufen haben, ist es plausibel anzunehmen, dass
-die Verteilungen identisch sind.
+die Verteilungen der Lebensdauer identisch sind.
 Ob eine Maschine länger oder kürzer hält, hat 
 plausiblerweise keinen Einfluss auf die Laufzeit einer 
 anderen Maschine. Die Dauern sind also unabhängig
@@ -83,13 +103,13 @@ Bevor diese Messungen tatsächlich durchgeführt werden,
 ist $X_1,\ldots,X_{10}$ die Stichprobe. Es handelt sich
 noch um Zufallsvariablen. Sobald die Messungen
 durchgeführt wurden (und folglich alle 10 Maschinen kaputt
-bzw. fehlerhaft sind), liegt die konkrete Stichprobe 
+sind), liegt die konkrete Stichprobe 
 $x_1,\ldots,x_{10}$ vor. Bei der konkreten Stichprobe
 handelt es sich um 10 Zahlen. 
 :::
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Stichprobe
+## Beispiel: Stichprobe von Nettoeinkommen
 
 Wie sieht eine Stichprobe aus für die Zufallsvariable 
 $X$: "Nettomonatseinkommen eines zufällig ausgewählten Haushalts"?
@@ -100,10 +120,12 @@ haben. Das Nettoeinkommen des gezogenen Haushalts ist $X_1$.
 Nun wird aus der gleichen Population (also inklusive dem
 zuerst gezogenen Haushalt) wieder ein Haushalt ausgewählt.
 Sein Nettoeinkommen ist $X_2$. Das wird bis $X_{1000}$
-wiederholt. Es ist also durchaus erlaubt und möglich, dass
-ein Haushalt mehrfach in einer einfachen Stichprobe vorkommt.
+wiederholt. Es ist also durchaus erlaubt und möglich
+(wenn auch in großen Populationen unwahrscheinlich), dass
+derselbe Haushalt mehrfach in einer einfachen Stichprobe 
+vorkommt. 
 
-Da in jedem der 1000 Ziehungen aus der gleichen Population
+Da in jeder der 1000 Ziehungen aus der gleichen Population
 gezogen wird, sind alle Zufallsvariablen identisch verteilt.
 Ob in Schritt $i$ ein reicher oder armer Haushalt gezogen
 wird, hat keinen Einfluss darauf, ob im nächsten Schritt
@@ -119,10 +141,10 @@ Stichprobe besteht aus den 1000 Zahlen $x_1,\ldots,x_{1000}$.
 :::
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Stichprobe
+## Beispiel: Stichprobe aus einer Normalverteilung
 
-Wie sieht eine Stichprobe aus für die Zufallsvariable
-$X\sim N(5,2^2)$? Als Stichprobenumfang setzen wir $n=50$.
+Wie sieht eine Stichprobe für die Zufallsvariable
+$X\sim N(5,2^2)$ aus? Als Stichprobenumfang setzen wir $n=50$.
 Wir ziehen nun 50 Mal unabhängig voneinander aus der
 Normalverteilung $N(5,2^2)$. Die Stichprobe besteht aus den
 Zufallsvariablen $X_1,\ldots,X_{50}$. Sobald die
@@ -131,6 +153,7 @@ konkrete Stichprobe $x_1,\ldots,x_{50}$ vor.
 
 In R kann man mit dem Befehl
 ```{r eval=FALSE}
+n <- 50
 x <- rnorm(n, mean=5, sd=2)
 ```
 eine einfache Stichprobe aus $N(5,2^2)$ ziehen. Bevor
@@ -144,30 +167,49 @@ Als Vorbereitung auf die eigentliche statistische Inferenz
 dient die folgende Definition.
 
 ::: callout-note
+## Definition: Statistik
+
 Wenn $X_1,\ldots,X_n$ eine einfache Stichprobe aus $X$
 ist und $g$ eine reellwertige Funktion mit $n$ Argumenten,
 dann heißt die Zufallsvariable
 $$
-T=g(X_1,\ldots,X_n)
+Z=g(X_1,\ldots,X_n)
 $$
 **Statistik** (engl. statistic).
 :::
 
-Eine Statistik im engen Sinne dieser Definition ist also
+Eine Statistik im Sinne dieser Definition ist also
 eine Funktion einer Stichprobe. Da die Stichprobenelemente
-Zufallsvariablen sind, ist auch die Statistik $T$ eine
-Zufallsvariable. 
+Zufallsvariablen sind, ist auch die Statistik $Z$ eine
+Zufallsvariable. Daher hat die Statistik - wie jede Zufallsvariable -
+eine Verteilung, einen Erwartungswert, eine Varianz etc. 
+Um die Verteilung der Statistik herzuleiten, muss man 
+die Verteilung der Population bzw. der Stichprobenelemente kennen.
+In realen Anwendungen kennt man die Verteilung der Population 
+natürlich nicht, sonst würde man ja keine statistische Inferenz
+betreiben wollen! Trotzdem ist es für das tiefere Verständnis der
+Inferenzverfahren sinnvoll, sich zu überlegen, wie eine
+Statistik verteilt ist, wenn die Populationsverteilung 
+(also die Verteilung von $X$) bekannt ist. In einigen Spezialfällen
+kann man das analytisch tun Wenn eine analytische Lösung nicht
+möglich oder zu umständlich ist, bieten sich
+Monte-Carlo-Simulationen (@sec-mc1) an. Sie sind praktisch immer relativ
+leicht umzusetzen, sie haben nur den Nachteil, dass sie für eine
+hohe Genauigkeit sehr viele Simulationsdurchläufe brauchen und 
+daher relativ langsam sind.
 
-Die mit großem Abstand wichtigste Statistik ist das Stichprobenmittel
-(das gewöhnlich nicht mit $T$, sondern mit $\bar X$ bezeichnet wird),
+::: { .callout-tip collapse="true"}
+## Beispiel: Stichprobenmittel einer Normalverteilung
+
+Die mit Abstand wichtigste Statistik ist das Stichprobenmittel
+(das gewöhnlich nicht mit $Z$, sondern mit $\bar X$ bezeichnet wird),
 $$
 \bar X=\frac{1}{n}\sum_{i=1}^n X_i.
 $$
 Das Stichprobenmittel ist eine Zufallsvariable, weil es eine
 Funktion der Stichprobe ist. Wie wir bereits hergeleitet haben
-(in @sec-lln), sind $E(\bar X)=\mu$ und $Var(\bar X)=\sigma^2/n$,
+(in @sec-lln), gilt $E(\bar X)=\mu$ und $Var(\bar X)=\sigma^2/n$,
 wobei $\mu=E(X)$ und $\sigma^2=Var(X)$ sind. 
-
 Wenn die Population einer Normalverteilung folgt, d.h. wenn
 $X\sim N(\mu,\sigma^2)$, dann folgt aus den Eigenschaften der
 Normalverteilung, dass
@@ -175,14 +217,83 @@ $$
 \bar X\sim N\left(\mu,\frac{\sigma^2}{n}\right).
 $$
 Bei einer normalverteilten Population kennt man also nicht nur
-Erwartungswert und Varianz des Stichprobenmittels, sondern 
-zusätzlich auch noch die exakte Verteilung. 
+Erwartungswert und Varianz des Stichprobenmittels, sondern auch 
+die exakte Verteilung. 
+:::
 
-Eine weitere wichtige Statistik ist die Stichprobenvarianz
-$$
-S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2.
-$$
-Warum bei der Definition der Stichprobenvarianz im Nenner des
-Bruchs nicht $n$, sondern $n-1$ steht, wird in Abschnitt XXX
-begründet.
+::: { .callout-tip collapse="true"}
+## Beispiel: Stichprobenstandardabweichung einer Paretoverteilung
 
+Die Stichprobenstandardabweichung
+$$
+S=\sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2}
+$$
+ist eine Statistik, da sie aus den $n$ Stichprobenelementen errechnet
+wird. Es handelt sich bei $S$ folglich um eine Zufallsvariable. 
+Wie ist $S$ verteilt, wenn die Population $X$ einer Paretoverteilung mit
+den Parametern $x_{min}=1$ und $k=5$ folgt und wenn eine Stichprobe
+vom Umfang $n=50$ gezogen wird? Das lässt sich leicht
+durch eine Monte-Carlo-Simulation herausfinden. Die Dichte von $S$ kann 
+durch ein Histogramm sehr vieler Realisationen von $S$ ermittelt werden,
+z.B. $R=10000$. In jedem Simulationsdurchlauf wird eine Stichprobe `x`
+vom Umfang $n=50$ aus der Paretoverteilung (mit den gegebenen Parametern) 
+gezogen und die Stichprobenstandardabweichung `sd(x)` für diese
+Stichprobe berechnet und in einen Vektor `smpl_sd` geschrieben. 
+Der Vektor wird vor dem Schleifenstart initialisiert, z.B. durch die
+`rep`-Funktion. Für die 
+Ziehung einer Stichprobe aus der Paretoverteilung aktivieren wir das
+Paket `distributionsrd`. Das Paket stellt die Funktion `rpareto`
+zur Vefügung.
+```{r}
+library(distributionsrd)
+
+R <- 10000
+smpl_sd <- rep(0,R)
+
+n <- 50
+xmin <- 1
+k <- 5
+
+for(r in 1:R){
+  
+  x <- rpareto(n, xmin=xmin, k=k)
+  smpl_sd[r] <- sd(x)
+  
+}
+hist(smpl_sd, breaks=50, xlim=c(0,2))
+```
+Die Stichprobenstandardabweichung liegt also in den allermeisten Fällen 
+unterhalb von 0.5, es gibt aber Ausreißer, die teilweise deutlich größer sind.
+Das 0.999-Quantil ist
+```{r}
+quantile(smpl_sd, prob=0.999)
+```
+Als Mittelwert des Vektors `smpl_sd` ergibt sich
+```{r}
+mean(smpl_sd)
+```
+Der Erwartungswert $E(S)$ der Stichprobenstandardabweichung einer Stichprobe 
+vom Umfang $n=50$ aus einer Paretoverteilung mit den Parametern $x_{min}=1$ und 
+$k=5$ beträgt also (ungefähr) `r round(mean(smpl_sd),3)`.
+:::
+
+Im restlichen Verlauf dieses Kurses lernen Sie die drei wichtigsten
+Arten von Statistiken kennen:
+
+- Statistiken, die dazu dienen aus der Stichprobe eine Schätzung für 
+einen Parameter der Population zu gewinnen. Zum Beispiel kann man
+den Erwartungswert durch das Stichprobenmittel schätzen oder die
+Standardabweichung durch die Stichprobenstandardabweichung. 
+Solche Statistiken nennt man Punktschätzer. Sie werden in 
+@sec-punktschaetzung behandelt.
+
+- Statistiken, die eine Unter- oder Obergrenze für ein Intervall
+darstellen, in dem ein unbekannter Parameter einer Population mit großer
+Wahrscheinlichkeit liegt. Solche Intervalle nennt man
+Konfidenzintervalle. Sie werden in @sec-intervallschaetzung
+behandelt.
+
+- Statistiken, die als Entscheidungsgrundlage für eine empirische
+Überprüfung von Hypothesen über Populationsparameter dienen. Sie heißen
+Teststatistik und werden in @sec-hypothesentests bis
+@sec-bootstrap behandelt.

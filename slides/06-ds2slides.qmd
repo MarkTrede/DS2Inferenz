@@ -1,0 +1,335 @@
+---
+title: "Data Science 2"
+format: beamer
+date: today
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Kovarianz
+\framesubtitle{Definition}
+\begin{block}{Kovarianz}
+Die Kovarianz zwischen $X$ und $Y$ ist definiert als
+$$
+Cov(X,Y) =E[(X-E(X))(Y-E(Y))]
+$$
+\end{block}
+Messung des Zusammenhangs zwischen $X$ und $Y$
+
+Notation häufig auch $\sigma_{XY}$
+
+
+
+# Kovarianz
+\framesubtitle{Definition}
+Nützliche Formel $Cov(X,Y) =E(XY)-E(X)E(Y)$
+
+\uncover<2>{
+\begin{align*}
+&Cov(X,Y)\\
+&=E((X-E(X))(Y-E(Y)))\\
+&= E(XY-X E(Y)-E(X)Y+ E(X)E(Y))\\
+&= E(XY)-E(XE(Y))-E(E(X)Y)+E(E(X)E(Y))\\
+&= E(XY)- E(X)E(Y)- E(X)E(Y)+ E(X)E(Y)\\
+&= E(XY)-E(X)E(Y)
+\end{align*}
+}
+
+
+
+# Kovarianz
+\framesubtitle{Definition}
+\begin{itemize}
+\item Gemeinsam diskret verteilte Zufallsvariable
+$$
+Cov(X,Y)=\sum_{j=1}^J\sum_{k=1}^K(x_j-E(X))(y_k-E(Y))p_{jk}
+$$
+\item Gemeinsam stetig verteilte Zufallsvariable
+$$
+Cov(X,Y)\!=\!\int\limits_{-\infty }^{+\infty}
+\int\limits_{-\infty }^{+\infty}
+(x\!-\!E(X))(y\!-\!E(Y))f(x,y)dxdy
+$$
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Definition}
+\textbf{Eigenschaften der Kovarianz:}\medskip
+\begin{itemize}
+\item Symmetrie: $Cov(X,Y)=Cov(Y,X)$
+\item Lineare Transformation: 
+$$
+Cov(aX+b,cY+d)=a\cdot c\cdot Cov(X,Y)
+$$
+\item Wenn $X$ und $Y$ unabhängig sind, gilt $Cov(X,Y)=0$
+\item $Cov(X,X)=Var(X)$
+\item Die Kovarianz ist schlecht zu interpretieren
+\end{itemize}
+
+
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\textbf{Erwartungswert und Varianz einer Summe:}\medskip
+\begin{itemize}
+\item Seien $X$ und $Y$ zwei Zufallsvariablen
+\item $X+Y$ ist ebenfalls eine Zufallsvariable
+\item Erwartungswert der Summe
+$$
+E(X+Y)=E(X)+E(Y)
+$$
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{itemize}
+\item Varianz der Summe
+$$
+Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y)
+$$
+\item Bei Unkorreliertheit (insb. Unabhängigkeit)
+$$
+Var(X+Y)=Var(X)+Var(Y)
+$$
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+Herleitung $Var(X+Y)=\ldots$
+\uncover<2>{
+\begin{align*}
+\ldots &= E([(X+Y)-E(X+Y)]^2)\\
+&= E([X+Y-E(X)-E(Y))]^2)\\
+&= E([(X-E(X))+(Y-E(Y))]^2)\\
+&= E((X-E(X))^2+(Y-E(Y))^2\\
+&\quad +2(X-E(X))(Y-E(Y)))\\
+&= E((X-E(X))^2)+E((Y-E(Y))^2)\\
+&\quad +2E((X-E(X))(Y-E(Y)))\\
+&= Var(X)+Var(Y)+2Cov(X,Y)
+\end{align*}
+}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Varianz einer Summe}
+Eine Person wird zufällig aus der Bevölkerung 
+ausgewählt, sei $X$  das monatliche Arbeitseinkommen 
+und $Y$ das monatliche Vermögenseinkommen; gegeben sei
+\begin{align*}
+E(X)&=2500 & Var(X)&=4000000 \\ 
+E(Y)&=300 & Var(Y)&=160000 \\ 
+Cov(X,Y)&=240000 & &
+\end{align*}
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Varianz einer Summe}
+$E(X)=2500, Var(X)=4000000, E(Y)=300$, 
+$Var(Y)=160000, Cov(X,Y)=240000$
+
+Erwartungswert und Varianz des Gesamteinkommens
+
+\uncover<2>{
+\begin{align*}
+E(X+Y) &=E(X)+E(Y) \\
+&=2\,500+300 \\
+&=2\,800 \\
+Var(X+Y) &=Var(X)+Var(Y)+2Cov(X,Y) \\
+&=4\,000\,000+160\,000+2\cdot 240\,000 \\
+&=4\,640\,000
+\end{align*}
+}
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\textbf{Erwartungswert und Varianz einer gewichteten Summe}\medskip
+\begin{itemize}
+\item Seien $X$ und $Y$ zwei Zufallsvariablen, dann ist $aX+bY$ ebenfalls
+eine Zufallsvariable
+\item Erwartungswert und Varianz 
+\begin{align*}
+E(aX+bY)&=aE(X)+bE(Y)\\
+Var(aX+bY) &= a^{2}Var(X)+b^{2}Var(Y) \\
+&\quad +2ab\cdot Cov(X,Y)
+\end{align*}
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Risikominimierung}
+$X$ und $Y$ seien Jahresrenditen von zwei Wertpapieren mit
+\begin{align*}
+E(X) &= 0.02 & E(Y) &= 0.06\\
+Var(X) &= 0.01 & Var(Y) &= 0.04 \\
+Cov(X,Y) &= -0.002
+\end{align*}
+Wie hoch soll der Anteil $a$ des Vermögens sein, der in Papier
+A investiert wird, wenn das Gesamtrisiko minimiert werden soll?
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Forts. Beispiel: Risikominimierung}
+Portfolio-Rendite
+$$
+R=aX+(1-a)Y
+$$
+mit Erwartungswert und Varianz
+\begin{align*}
+E(R)&=aE(X)+(1-a)E(Y)\\
+&=a\cdot 0.02+(1-a)\cdot 0.06\\
+Var(R) &= a^2Var(X)+(1-a)^2Var(Y)\\
+& \quad +2a(1-a)Cov(X,Y)\\
+&= a^2\cdot 0.01+(1-a)^2\cdot 0.04+2a(1-a)\cdot(-0.002)
+\end{align*}
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Forts. Beispiel: Risikominimierung}
+Minimiere
+$$
+Var(R)=0.054\cdot a^2 - 0.084\cdot a + 0.04
+$$
+bzgl. $a$. Ableitung:
+$$
+\frac{\partial Var(R)}{\partial a}=0.108\cdot a-0.084
+$$
+Nullsetzen und Auflösen nach $a$:
+$$
+a=\frac{0.084}{0.108}\approx 0.778.
+$$
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe zweier Zufallsvariablen}
+\begin{exampleblock}{Forts. Beispiel: Risikominimierung}
+Das Risiko des Gesamtportfolios wird minimal, wenn 77.8 Prozent
+des Vermögens in Papier A und 22.2 Prozent in Papier B investiert
+werden. Dann gilt
+\begin{align*}
+E(R) &= 0.02888\\
+Var(R) &=0.00733.
+\end{align*}
+Es wäre also unklug, sein ganzes Vermögen
+vollständig in dem sichereren Wertpapier A anzulegen!
+\end{exampleblock}
+
+
+
+# Kovarianz
+\framesubtitle{Summe vieler Zufallsvariablen}
+\textbf{Verallgemeinerung auf $n$ Zufallsvariablen}
+\medskip
+\begin{itemize}
+\item Seien $X_{1},\ldots ,X_{n}$ Zufallsvariablen 
+\item Erwartungswert der Summe 
+$$
+E\left( \sum_{i=1}^{n}X_{i}\right) =\sum_{i=1}^{n}E(X_{i})
+$$
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe vieler Zufallsvariablen}
+\begin{itemize}
+\item Varianz der Summe
+\begin{align*}
+&Var\left(\sum_{i=1}^{n}X_{i}\right)\\
+&=\sum_{i=1}^n\sum_{j=1}^n Cov(X_i,X_j)\\
+&=Cov(X_1,X_1)+Cov(X_1,X_2)+\ldots+Cov(X_1,X_n)\\
+&+Cov(X_2,X_1)+Cov(X_2,X_2)+\ldots+Cov(X_2,X_n)\\
+&\vdots\\
+&+Cov(X_n,X_1)+Cov(X_n,X_2)+\ldots+Cov(X_n,X_n)
+\end{align*}
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe vieler Zufallsvariablen}
+\begin{itemize}
+\item Varianz der Summe
+\begin{align*}
+Var\left(\sum_{i=1}^{n}X_{i}\right)&=\sum_{i=1}^{n}Var(X_i)\\
+&\quad +2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}Cov(X_i,X_j)
+\end{align*}
+\item Bei Unabhängigkeit 
+$$
+Var\left(\sum_{i=1}^{n}X_{i}\right)=\sum_{i=1}^{n}Var(X_i)
+$$
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Summe vieler Zufallsvariablen}
+\textbf{Erwartungswert und Varianz einer gewichteten Summe}\medskip
+\begin{itemize}
+\item Seien $X_1,\ldots,X_n$ Zufallsvariablen und $a_1,\ldots,a_n$ reelle Zahlen
+\item Erwartungswert und Varianz der gewichteten Summe
+\begin{align*}
+E\left(\sum_{i=1}^n a_iX_i\right) &= \sum_{i=1}^n a_iE(X_i)\\
+Var\left(\sum_{i=1}^n a_iX_i\right) &= \sum_{i=1}^n a_i^2 Var(X_i)\\
+&\quad +\sum_{i=1}^{n-1}\sum_{j=i+1}^n a_i a_j Cov(X_i,X_j)
+\end{align*}
+\end{itemize}
+
+
+
+# Kovarianz
+\framesubtitle{Korrelationskoeffizient}
+\begin{block}{Korrelationskoeffizient}
+Der Korrelationskoeffizient ist definiert als 
+\[ \rho _{XY}=\frac{Cov(X,Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}
+=\frac{\sigma_{XY}}{\sigma_X\cdot\sigma_Y} \]
+\end{block}
+Der Korrelationskoeffizient ist die normierte Kovarianz
+
+
+
+# Kovarianz
+\framesubtitle{Korrelationskoeffizient}
+\textbf{Eigenschaften des Korrelationskoeffizienten}\medskip
+\begin{itemize}
+\item Der Korrelationskoeffizient ist dimensionslos
+\item Symmetrie: Es gilt $\rho _{XY}=\rho _{YX}$
+\item Normierung: Es gilt $-1\leq \rho _{XY}\leq 1$
+\item Invarianz bzgl.\ linearer Transformationen
+\item Falls $X$ und $Y$ unabhängig sind, dann ist $\rho _{XY}=0$
+\item $Cov(X,Y)=\rho_{XY}\cdot\sigma_X\cdot\sigma_Y$
+\end{itemize}

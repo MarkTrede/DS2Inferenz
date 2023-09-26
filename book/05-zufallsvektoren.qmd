@@ -7,16 +7,18 @@ Zufallsvariablen, die jedoch alle vom gleichen zugrundeliegenden
 Zufallsvorgang abhängen und auf dem gleichen Ergebnisraum $\Omega$
 basieren. Ordnet man diese Zufallsvariablen in Form eines
 Vektors an, dann spricht man von einem **Zufallsvektor** 
-(engl. random vector). Man sagt
-auch, dass die Zufallsvariablen eine **gemeinsame Verteilung** 
-(engl. joint distribution) haben.
+(engl. random vector). Man sagt auch, dass die Zufallsvariablen 
+eine **gemeinsame Verteilung** (engl. joint distribution) haben.
+Auch die beiden Begriffe **univariat** und **multivariat**
+werden häufig verwendet, wenn von einer oder mehreren
+Zufallsvariablen die Rede ist.
 
 Gemeinsame Verteilungen sind erheblich interessanter und vielseitiger
 als eindimensionale Zufallsvariablen, weil sie auch Zusammenhänge
 und Abhängigkeiten zwischen den Variablen beschreiben können.
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Zwei Würfel
+## Beispiel: Kleinere und größere Augenzahl
 
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die
 kleinere Augenzahl, die Zufallsvariable $Y$ die größere Augenzahl.
@@ -47,7 +49,11 @@ $$
 
 Wir betrachten die Tagesrenditen von zwei Aktien an einem zukünftigen Tag. 
 Sei $X$ die Tagesrendite der Volkswagenaktie und $Y$ die Tagesrendite von
-BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung.
+BASF. Dann haben $X$ und $Y$ eine gemeinsame Verteilung. Die gemeinsame
+Verteilung hat mehr Informationen als die beiden einzelnen Verteilungen
+für sich genommen. In der gemeinsamen Verteilung stecken auch Informationen
+über die Art des Zusammenhangs. Das ist z.B. wichtig, wenn man das Risiko
+seines Portfolios managen will.
 :::
 
 Im folgenden gehen wir Schritt für Schritt fast genauso vor wie bei den 
@@ -61,17 +67,19 @@ Wie lässt sich die Idee einer Verteilungsfunktion auf
 Zufallsvektoren übertragen? 
 
 ::: callout-note
+## Definition: Gemeinsame Verteilungsfunktion
+
 Sei $\Omega$ eine Ergebnismenge, seien $X:\Omega \longrightarrow \mathbb{R}$ 
 und $Y:\Omega\longrightarrow \mathbb{R}$ zwei Zufallsvariablen. Dann ist
 $$
-F_{XY}(x,y) =P(X\leq x,Y\leq y)
+F_{X,Y}(x,y) =P(X\leq x,Y\leq y)
 $$
 die **gemeinsame Verteilungsfunktion** (engl. joint cumulative
 distribution function) von $X$ und $Y$.
 :::
 
 Wenn aus dem Kontext eindeutig hervorgeht, um welchen Zufallsvektor
-bzw. um welche Zufallsvariablen es sich handelt, kann der Subindex entfallen.
+bzw. um welche Zufallsvariablen es sich handelt, können die Subindizes entfallen.
 Die gemeinsame Verteilungsfunktion lässt sich leicht auf mehr als zwei
 Zufallsvariablen verallgemeinern. Da die Notation dann etwas unübersichtlicher
 wird, beschränken wir uns auf den Fall von zwei Zufallsvariablen. Alle
@@ -79,12 +87,12 @@ wichtigen Konzepte lassen sich auch gut in diesem Fall verstehen.
 
 Eigenschaften der gemeinsamen Verteilungsfunktion:
 
-- $F_{XY}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend 
+- $F_{X,Y}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend 
 (aber nicht unbedingt streng monoton steigend) in $x$ und $y$.
 
-- Es gilt $\lim_{x\to -\infty}F_{XY}(x,y)$ und $\lim_{y\to -\infty}F_{XY}(x,y)=0$.
+- Es gilt $\lim_{x\to -\infty}F_{X,Y}(x,y)=0$ und $\lim_{y\to -\infty}F_{X,Y}(x,y)=0$.
 
-- Es gilt $\lim_{z\to \infty}F_{XY}(z,z) =1$.
+- Es gilt $\lim_{z\to \infty}F_{X,Y}(z,z) =1$.
 
 ## Gemeinsam diskrete Zufallsvariablen
 
@@ -93,10 +101,12 @@ beschränkt, nämlich diskrete und stetige Zufallsvariablen. Das
 lässt sich leicht auf den mehrdimensionalen Fall verallgemeinern. 
 
 ::: callout-note
+## Definition: Gemeinsam diskrete Zufallsvariablen
+
 Zwei Zufallsvariablen $X$ und $Y$ heißen **gemeinsam diskret**
 (engl. jointly discrete),  wenn es endlich viele oder 
 abzählbar unendlich viele Werte 
-$x_1,x_2,\ldots$ und $y_1,y_2,\ldots $ gibt, so dass 
+$x_1,x_2,\ldots$ und $y_1,y_2,\ldots$ gibt, so dass 
 $$
 \sum_{j}\sum_{k}p_{jk}=1
 $$
@@ -107,9 +117,9 @@ Gemeinsam diskrete Zufallsvariablen haben eine
 **gemeinsame Wahrscheinlichkeitsfunktion**
 (engl. joint probability function), nämlich
 $$
-f_{XY}(x,y) =\left\{ 
+f_{X,Y}(x,y) =\left\{ 
 \begin{array}{ll}
-p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\ 
+p_{jk} & \quad \text{wenn }x=x_{j}\text{ und }y=y_{k} \\ 
 0 & \quad \text{sonst.}
 \end{array}\right.
 $$
@@ -127,7 +137,7 @@ x_{J} & p_{J1} & \ldots  & p_{JK}
 $$
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Zwei Würfel
+## Beispiel: Kleinere und größere Augenzahl
 
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
@@ -150,19 +160,21 @@ indem man alle Wahrscheinlichkeiten aus der Tabelle addiert,
 die in den ersten beiden Spalten ($Y\le 2$) und in den
 ersten fünf Zeilen ($X\le 5.3$) stehen. Man erhält
 $$
-F_{XY}(5.3,2)=\frac{1}{36}+\frac{2}{36}+\frac{1}{36}=\frac{4}{36}=\frac{1}{9}.
+F_{X,Y}(5.3,2)=\frac{1}{36}+\frac{2}{36}+\frac{1}{36}=\frac{4}{36}=\frac{1}{9}.
 $$
 :::
 
 ## Gemeinsam stetige Zufallsvariablen
 
 ::: callout-note
+## Definition: Gemeinsam stetige Zufallsvariablen
+
 Die Zufallsvariablen $X$ und $Y$ heißen **gemeinsam stetig**
-(engl. jointly continuous), falls es eine Funktion $f_{XY} $ gibt mit 
+(engl. jointly continuous), falls es eine Funktion $f_{X,Y}$ gibt mit 
 $$
-F_{XY}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{XY}(u,v)dudv.
+F_{X,Y}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{X,Y}(u,v)dudv.
 $$
-Die Funktion $f_{XY}$ heißt **gemeinsame Dichte** oder Dichtefunktion
+Die Funktion $f_{X,Y}$ heißt **gemeinsame Dichte** oder Dichtefunktion
 (engl. joint density function) von $X$ und $Y$.
 :::
 
@@ -170,17 +182,17 @@ Wenn die Verteilungsfunktion partiell differenzierbar ist, dann
 erhält man die Dichte, indem man die Verteilungsfunktion nach beiden
 Argumenten ableitet,
 $$
-f_{XY}(x,y)=\frac{\partial^2}{\partial x\partial y}F_{XY}(x,y).
+f_{X,Y}(x,y)=\frac{\partial^2}{\partial x\partial y}F_{X,Y}(x,y).
 $$
 Da die Verteilungsfunktion monoton steigend ist, kann die Dichte
 nie negativ sein (sie kann jedoch in einigen Bereichen 0 sein). Für
 $x,y\in\mathbb{R}$ gilt also
 $$
-f_{XY}(x,y)\ge 0.
+f_{X,Y}(x,y)\ge 0.
 $$
 Das gesamte Volumen unter der Dichte beträgt 1,
 $$
-\int_{-\infty }^{\infty }\int_{-\infty }^{\infty }f_{XY}(x,y)dxdy=1.
+\int_{-\infty }^{\infty }\int_{-\infty }^{\infty }f_{X,Y}(x,y)dxdy=1.
 $$
 Die gemeinsame Dichte zweier Zufallsvariablen kann man sich als
 Gebirge mit einem Volumen von 1 vorstellen. Die Bereiche $(x,y)$, 
@@ -202,18 +214,25 @@ Außerdem ist eine leichte Asymmetrie zu erkennen. Es ist sehr
 unwahrscheinlich, dass sowohl $X$ als auch in $Y$ beide größer als
 3 sind. Hingegen kann es (wenn auch mit eher kleiner Wahrscheinlichkeit)
 passieren, dass beide Zufallsvariable kleiner als $-3$ sind.
-```{r echo=FALSE}
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
 library(rgl)
-x <- y <- seq(-4,4,length=101)
-f <- matrix(0,length(x),length(y))
+x <- seq(-4, 4, length=101)
+y <- seq(-4, 4, length=101)
+f <- matrix(0, length(x), length(y))
+
 for(i in 1:length(x)){
     for(j in 1:length(y)){
         f[i,j] <- (2*exp(-x[i])*exp(-y[j]))/(1+exp(-x[i])+exp(-y[j]))^3
     }
 }
-persp3d(x,y,f,col="light green",
-        xlab="x",ylab="y",zlab="f(x,y)")
+
+persp3d(x, y, f, col="light green",
+        xlab="x", ylab="y", zlab="f(x,y)")
 rglwidget()
+```
+```{r echo=FALSE}
 close3d()
 ```
 
@@ -223,15 +242,25 @@ der Dichtefunktion wie auf einer normalen Landkarte. In einem Image-Plot
 werden die Höhen durch Farben repräsentiert. 
 
 Der Contour-Plot für die obige Dichte sieht so aus:
-```{r echo=FALSE, fig.asp=1}
-contour(x,y,f,
-        xlab="x",ylab="y")
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+#| fig.asp: 1
+# Die Vektoren x und y und die Matrix f wurden weiter oben berechnet.
+
+contour(x, y, f,
+        xlab="x", ylab="y")
 ```
 Ein Vorteil des Contour-Plots besteht darin, dass man leicht erkennen kann,
 wo die Dichte hoch ist. Ein farbiger Image-Plot der gleichen Dichte zeigt folgendes Bild:
-```{r fig.asp=1, echo=FALSE}
-filled.contour(x,y,f,
-               xlab="x",ylab="y")
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+#| fig.asp: 0.9
+# Die Vektoren x und y und die Matrix f wurden weiter oben berechnet.
+
+filled.contour(x, y, f,
+               xlab="x", ylab="y")
 ```
 
 Wenn man sich für die Wahrscheinlichkeit interessiert, dass die
@@ -240,15 +269,14 @@ das Volumen der Dichte über diesem Bereich berechnen. Für
 einen rechteckigen Bereich $[a_1,b_1]\times [a_2,b_2]$
 berechnet man das Doppel-Integral
 $$
-P(a_1< X \le b_1, a_2 < X\le b_2)=\int_{a_2}^{b_2}\int_{a_1}^{b_1}
+P(a_1< X \le b_1, a_2 < Y\le b_2)=\int_{a_2}^{b_2}\int_{a_1}^{b_1}
 f(x,y)dxdy.
 $$
 Lässt man das Rechteck unendlich groß werden, ergibt sich das
 Gesamtvolumen 1. Die Herleitung des Doppelintegrals ist in vielen
 Fällen umständlich, in manchen Fällen sogar in geschlossener Form
-unmöglich. Numerische Approximationsverfahren (die wir in diesem
-Kurs aber nicht behandeln) erlauben jedoch so gut wie immer eine
-sehr genaue Berechnung der Wahrscheinlichkeit. In dem folgenden
+unmöglich. Numerische Verfahren erlauben jedoch 
+eine approximative Berechnung der Wahrscheinlichkeit. In dem folgenden
 Beispiel ist die Dichte des Zufallsvektors von einer Form, die
 eine geschlossene Herleitung des Doppelintegrals erlaubt.
 
@@ -260,12 +288,12 @@ gemeinsame Dichtefunktion
 $$
 f(x,y)=\left\{
 \begin{array}{ll}
-x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+x+y^2 & \text{ wenn }0\le x \le 1.11963\text{ und }0\le y\le 1\\
 0 & \text{ sonst.}
 \end{array}
 \right.
 $$
-Die obere Intervallgrenze (1.11963) für $x$ ist gerundet, streng genommen 
+Die obere Intervallgrenze ($1.11963$) für $x$ ist gerundet, streng genommen 
 lautet die Obergrenze $(\sqrt{19}-1)/3)$. Dieser Wert stellt sicher,
 dass das gesamte Volumen unter der Dichte 1 ergibt. 
 
@@ -300,17 +328,20 @@ für die gemeinsame Verteilung, sondern nur für die Verteilung einer
 der beiden Variablen. 
 
 ::: callout-note
-Als **Randverteilung** bezeichnet man die Verteilung einer
+## Definition: Randverteilung
+
+Als **Randverteilung** (engl. marginal distribution) 
+bezeichnet man die Verteilung einer
 Zufallsvariablen eines Zufallsvektors, wenn die restlichen
 Zufallsvariablen des Zufallsvektors ignoriert werden.
 :::
 
 Die Randverteilungen lassen sich besonders einfach aus der gemeinsamen
-Verteilungsfunktion $F_{XY}(x,y)$ ableiten. Es gilt nämlich
+Verteilungsfunktion $F_{X,Y}(x,y)$ ableiten. Es gilt nämlich
 $$
 \begin{align*}
-F_X(x)&=F_{XY}(x,\infty)=\lim_{y\to\infty}F_{X,Y}(x,y)\\
-F_Y(y)&=F_{XY}(\infty,y)=\lim_{x\to\infty}F_{X,Y}(x,y),
+F_X(x)&=F_{X,Y}(x,\infty)=\lim_{y\to\infty}F_{X,Y}(x,y)\\
+F_Y(y)&=F_{X,Y}(\infty,y)=\lim_{x\to\infty}F_{X,Y}(x,y),
 \end{align*}
 $$
 wobei $F_X$ und $F_Y$ die Randverteilungsfunktionen von $X$ und $Y$
@@ -328,7 +359,7 @@ p_{\cdot k}&=P(Y=y_k)=\sum_j p_{jk}.
 $$
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Gemeinsame Wahrscheinlichkeitsfunktion
+## Beispiel: Kleinere und größere Augenzahl
 
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
@@ -376,9 +407,9 @@ zu erhalten, und umgekehrt.
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
-f(x,y)=\left\{
+f_{X,Y}(x,y)=\left\{
 \begin{array}{ll}
-x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+x+y^2 & \text{ wenn }0\le x \le 1.11963\text{ und }0\le y\le 1\\
 0 & \text{ sonst.}
 \end{array}
 \right.
@@ -389,7 +420,7 @@ $[0,1.11963]$ liegt, ist die Randdichte offensichtlich 0. Wir betrachten
 darum nur den Fall, dass $x$ in dem Intervall liegt. Dann gilt
 $$
 \begin{align*}
-f_X(x) &= \int_{-\infty}^\infty f(x,y)dy \\
+f_X(x) &= \int_{-\infty}^\infty f_{X,Y}(x,y)dy \\
 &= \int_0^1 (x+y^2) dy\\
 &= x+\left. \frac{1}{3}y^3\right|_0^1 \\
 &= x+\frac{1}{3}.
@@ -398,7 +429,7 @@ $$
 Nun bestimmen wir die Randdichte von $Y$, indem wir über $x$ integrieren.
 $$
 \begin{align*}
-f_Y(y) &= \int_{-\infty}^\infty f(x,y)dx \\
+f_Y(y) &= \int_{-\infty}^\infty f_{X,Y}(x,y)dx \\
 &= \int_0^{1.11963} (x+y^2) dx\\
 &= 1.11963\cdot y^2 + \left. \frac{1}{2}x^2\right|_0^{1.11963} \\
 &= 1.11963\cdot y^2+0.62679
@@ -410,10 +441,13 @@ für $y\in [0,1]$. Für $y\not\in [0,1]$ ist die Dichte $f_Y(y)=0$.
 ## Unabhängigkeit {#sec-unabhaengig2}
 
 ::: callout-note
+## Definition: Unabhängigkeit
+
 Zwei Zufallsvariablen $X$ und $Y$ heißen **stochastisch unabhängig**
-oder **unabhängig**, wenn für alle $x,y\in\mathbb{R}$ gilt
+oder **unabhängig** (engl. independent), 
+wenn für alle $x,y\in\mathbb{R}$ gilt
 $$
-F_{XY}(x,y)=F_X(x)\cdot F_Y(y).
+F_{X,Y}(x,y)=F_X(x)\cdot F_Y(y).
 $$
 :::
 
@@ -431,7 +465,7 @@ p_{jk}=p_{j\cdot}\cdot p_{\cdot k}.
 $$
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Unabhängigkeit (diskret)
+## Beispiel: Unabhängigkeit diskreter Zufallsvariablen
 
 Zwei Würfel werden geworfen. Die gemeinsame Wahrscheinlichkeitsfunktion 
 der beiden Zufallsvariablen $X$: "kleinere Augenzahl" und 
@@ -448,18 +482,18 @@ Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, ergibt sich bei
 Unabhängigkeit die gemeinsame Dichte als Produkt der beiden
 Randdichten,
 $$
-f_{XY}(x,y)=f_X(x)\cdot f_Y(y).
+f_{X,Y}(x,y)=f_X(x)\cdot f_Y(y).
 $$
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Unabhängigkeit (stetig)
+## Beispiel: Unabhängigkeit stetiger Zufallsvariablen
 
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
-f(x,y)=\left\{
+f_{X,Y}(x,y)=\left\{
 \begin{array}{ll}
-x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+x+y^2 & \text{ wenn }0\le x \le 1.11963\text{ und }0\le y\le 1\\
 0 & \text{ sonst.}
 \end{array}
 \right.
@@ -473,7 +507,7 @@ f_X(2/3) &= x+\frac{1}{3} = 1\\
 f_Y(0.2) &= 1.11963\cdot 0.2^2+0.62679=0.67158.
 \end{align*}
 $$
-Das Produkt ist also 0.67158. Setzt man $x=2/3$ und $y=0.2$
+Das Produkt ist also $0.67158$. Setzt man $x=2/3$ und $y=0.2$
 in die gemeinsame Dichte ein, erhält man
 $$
 f(2/3, 0.2)=2/3+0.2^2=0.70667.
@@ -491,7 +525,10 @@ sich bei bedingten Verteilungen die Frage, wie eine Zufallsvariable verteilt
 ist, wenn man den Wert der anderen Zufallsvariable kennt (oder annimmt). 
 
 ::: callout-note
-Als **bedingte Verteilung** bezeichnet man die Verteilung einer
+## Definition: Bedingte Verteilung
+
+Als **bedingte Verteilung** (engl. conditional distribution) 
+bezeichnet man die Verteilung einer
 Zufallsvariable einer gemeinsamen Verteilung, wenn die andere
 Zufallsvariable auf einen bestimmten Wert fixiert wird.
 :::
@@ -500,8 +537,8 @@ Wie ist $X$ (die bedingte Variable) verteilt, wenn man weiß
 (oder annimmt), dass $Y$ (die bedingende Variable) den Wert $y$ 
 hat? Oder umgekehrt: Wie ist $Y$ (bedingte Variable) verteilt, 
 wenn man $X$ kennt (bedingende Variable)? Bedingte Verteilungen 
-sind deswegen in der Ökonomik wichtig, weil man durch sie 
-Informationsstände abbilden kann. Die Bedingung gibt an, welche
+sind deswegen in der Ökonomik wichtig, weil sie 
+Informationsstände abbilden können. Die Bedingung gibt an, welche
 Information ein ökonomischer Agent hat. 
 
 Für gemeinsam diskrete Verteilungen mit 
@@ -526,21 +563,21 @@ $$
 Ein Blick auf die Wahrscheinlichkeitstabelle zeigt, dass die bedingte
 Verteilung sich aus einer Zeile oder Spalte der Tabelle ergibt, indem
 man diese Zeile oder Spalte durch den zugehörigen Wert der 
-Randverteilung dividiert. Aus der rot markierten Spalte erhält
+Randverteilung dividiert. Aus der fett markierten ersten Spalte erhält
 man beispielsweise die bedingte Verteilung von $X$ gegeben $Y=y_1$,
 indem man die Spalteneinträge durch $p_{\cdot 1}$ teilt.
 $$
 \begin{array}{c|ccc|c}
 X\backslash Y & y_{1} & \ldots & y_{K} & \\ \hline
-x_{1} & \color{red}{p_{11}} & \ldots  & p_{1K}& p_{1\cdot}\\ 
-\vdots& \color{red}\vdots &  & \vdots  &\vdots\\ 
-x_{J} & \color{red}{p_{J1}} & \ldots  & p_{JK}& p_{J\cdot} \\\hline
-& \color{red}{p_{\cdot 1}} & \ldots & p_{\cdot K}
+x_{1} & \boldsymbol{p_{11}} & \ldots  & p_{1K}& p_{1\cdot}\\ 
+\vdots& \boldsymbol{\vdots} &  & \vdots  &\vdots\\ 
+x_{J} & \boldsymbol{p_{J1}} & \ldots  & p_{JK}& p_{J\cdot} \\\hline
+& \boldsymbol{p_{\cdot 1}} & \ldots & p_{\cdot K}
 \end{array}
 $$
 
 Für gemeinsam stetige Verteilungen mit der gemeinsamen Dichte
-$f_{X,Y}(x,y)$ gilt: Die bedingte Dichte von $X$ gegeben $Y=y$ist
+$f_{X,Y}(x,y)$ gilt: Die bedingte Dichte von $X$ gegeben $Y=y$ ist
 $$
 f_{X|Y=y}(x)=\frac{f_{X,Y}(x,y)}{f_Y(y)}.
 $$
@@ -579,12 +616,25 @@ welchen Wert $Y$ annimmt (und umgekehrt).
 Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
 gemeinsame Dichtefunktion
 $$
-f(x,y)=\left\{
+f_{X,Y}(x,y)=\left\{
 \begin{array}{ll}
-x+y^2 & \text{ für }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+x+y^2 & \text{ wenn }0\le x \le 1.11963\text{ und }0\le y\le 1\\
 0 & \text{ sonst.}
 \end{array}
 \right.
 $$
-Die lautet die bedingte Dichtefunktion von $Y$ gegeben $X=0.8$?
+Wie sieht die bedingte Dichte von $Y$ gegeben $X=0.8$ aus? Für die
+Herleitung braucht man die Randdichte von $X$. Sie wurde bereits hergeleitet,
+$$
+f_X(x)=x+\frac{1}{3}.
+$$
+Man erhält als bedingte Dichte von $Y$ gegeben $X=0.8$
+$$
+\begin{align*}
+f_{Y|X=0.8}(y) &=\frac{f_{X,Y}(0.8, y)}{f_X(0.8)}\\[2ex]
+&=\frac{0.8+y^2}{0.8+1/3}\\[2ex]
+&=\frac{0.8+y^2}{1.13333}
+\end{align*}
+$$
+für $0\le y \le 1$.
 :::

@@ -1,0 +1,141 @@
+\section[Schätzung]{Punktsch\"{a}tzung und Intervallsch\"{a}tzung}
+
+\begin{enumerate}
+\item Laden Sie den Datensatz \texttt{mrendite.csv}. Der Datensatz enth\"{a}%
+lt die Monatsrenditen der Aktien Allianz, BASF, Bayer und Volkswagen sowie
+des DAX100 von Oktober 1997 bis zum September 2002. Betrachten Sie zun\"{a}%
+chst nur die Allianz-Aktie. Die (unbekannte) Monatsrendite f\"{u}r einen zuk%
+\"{u}nftigen Monat beschreiben wir durch die Zufallsvariable $X^{ALV}.$
+Gehen Sie davon aus, dass die Monatsrenditen in dem Datensatz Realisierungen
+einer einfachen Stichprobe $X_{1}^{ALV},\ldots ,X_{60}^{ALV}$ sind.
+
+Hinweis: Die Renditen sind so definiert, dass die durchschnittliche Rendite
+als arithmetisches Mittel berechnet werden kann.
+
+\begin{enumerate}
+\item Sch\"{a}tzen Sie den Erwartungswert von $X^{ALV}$ mit einem
+erwartungstreuen Sch\"{a}tzer.
+\item Sch\"{a}tzen Sie die Varianz von $X^{ALV}$ mit einem erwartungstreuen
+Sch\"{a}tzer.
+\item Sch\"{a}tzen Sie die Erwartungswerte und Varianzen der \"{u}%
+brigen Aktien und des DAX100.
+\item Sch\"{a}tzen Sie die Kovarianzen und Korrelationskoeffizienten der
+vier Aktien untereinander (es gibt jeweils sechs) und stellen Sie sie in
+matrizieller Form dar.
+\item Sch\"{a}tzen Sie die Kovarianzen und Korrelationskoeffizienten der
+Renditen der vier Aktien mit der DAX100-Rendite.
+\end{enumerate}
+
+\item Die Marketingabteilung einer Bank m\"{o}chte ermitteln, wie die
+Informationsbrosch\"{u}re \"{u}ber ihre Investmentfonds gestaltet werden
+soll, damit m\"{o}glichst viele angeschriebene Kunden die Fonds zeichnen. 
+Die Brosch\"{u}re wird in drei
+Versionen (V1, V2, V3) an Testgruppen unterschiedlichen Alters (jung,
+mittel, alt) verschickt. Die folgende Tabelle zeigt die Anzahl der
+angeschriebenen Kunden und die Anzahl der Abschl\"{u}sse aufgeschl\"{u}sselt
+nach Version der Brosch\"{u}re und Alter der Kunden.
+
+%TCIMACRO{\TeXButton{BC}{\begin{center}}}%
+%BeginExpansion
+\begin{center}%
+%EndExpansion
+\begin{tabular}{|c|c|c|c|}
+\hline
+Alter & Version & Angeschriebene & Abschl\"{u}sse \\ \hline
+jung & V1 & 10000 & 315 \\ 
+& V2 & 5000 & 97 \\ 
+& V3 & 5000 & 43 \\ \hline
+mittel & V1 & 5000 & 185 \\ 
+& V2 & 10000 & 542 \\ 
+& V3 & 5000 & 260 \\ \hline
+alt & V1 & 5000 & 141 \\ 
+& V2 & 5000 & 209 \\ 
+& V3 & 10000 & 438 \\ \hline
+\end{tabular}
+%TCIMACRO{\TeXButton{EC}{\end{center}}}%
+%BeginExpansion
+\end{center}%
+%EndExpansion
+
+Erstellen Sie eine Tabelle mit den gesch\"{a}tzten Abschlussquoten. Welche
+Schlussfolgerung sollte die Marketingabteilung ziehen?
+
+\item Die Dosiermaschine eines Pharma-Produzenten soll in jede hergestellte
+Tablette 1 mg eines Wirkstoffs f\"{u}llen. Sei $X$ die tats\"{a}chlich abgef%
+\"{u}llte Menge. Gehen Sie davon aus, dass $X$ normalverteilt ist mit einer
+bekannten Standardabweichung von $\sigma =0.075$ mg. Eine Zufallsstichprobe von 
+$n=101$ Tabletten wird untersucht. Sie finden die Ergebnisse der
+Untersuchung in der Datei \texttt{pharma.csv}.
+
+Geben Sie ein konkretes 0.95-Konfidenzintervall f\"{u}r den Erwartungswert
+von $X$ an.
+
+\item Ein Versandhaus ermittelt aufgrund einer einfachen Zufallsauswahl vom
+Umfang $n=60$ aus den innerhalb eines Monats eingegangenen Bestellungen
+einen Anteil in H\"{o}he von 25 Prozent f\"{u}r Bestellungen mit einem
+Warenwert von \"{u}ber 200 Euro.
+
+\begin{enumerate}
+\item Bestimmen Sie die Grenzen des konkreten Konfidenzintervalls f\"{u}r
+die Wahrscheinlichkeit einer Bestellungen mit einem Warenwert von \"{u}ber
+200 Euro (das Konfidenzniveau sei $1-\alpha =0.9$).
+
+\item Geben Sie das entsprechende Konfidenzintervall f\"{u}r die Anzahl der
+eingegangenen Bestellungen an, wenn insgesamt 10000 Bestellungen eintreffen?
+
+\item Wie wirkt sich -- unter sonst gleichbleibenden Voraussetzungen -- eine
+Erh\"{o}hung des Konfidenzniveaus auf die Breite des Konfidenzintervalls aus?
+\end{enumerate}
+
+\item Auf einer Maschine werden Werkst\"{u}cke hergestellt, deren L\"{a}nge
+normalverteilt ist. Eine Zufallsstichprobe von 10 St\"{u}ck ergab folgende
+Werte in mm:
+
+%TCIMACRO{\TeXButton{BC}{\begin{center}}}%
+%BeginExpansion
+\begin{center}%
+%EndExpansion
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+42.8 & 36.9 & 41.2 & 39.3 & 40.4 & 35.7 & 37.6 & 43.5 & 35.6 & 36.8 \\ \hline
+\end{tabular}
+%TCIMACRO{\TeXButton{EC}{\end{center}}}%
+%BeginExpansion
+\end{center}%
+%EndExpansion
+
+Berechnen Sie die Grenzen des konkreten Konfidenzintervalls f\"{u}r den
+unbekannten Erwartungswert der Fertigung ($1-\alpha =0.95$).
+
+\item Aus einer Produktionsserie von 5000 Widerst\"{a}nden wird eine
+einfache Zufallsstichprobe vom Umfang $n=225$ gezogen. Bei der \"{U}berpr%
+\"{u}fung der Funktionsf\"{a}higkeit der Widerst\"{a}nde in der Stichprobe
+wird festgestellt, dass 45 von ihnen defekt sind. Berechnen Sie ein
+konkretes Konfidenzintervall
+
+\begin{enumerate}
+\item f\"{u}r den Anteil der defekten Widerst\"{a}nde in der
+Produktionsserie ($1-\alpha =0.95$).
+
+\item f\"{u}r die Anzahl der defekten Widerst\"{a}nde in der
+Produktionsserie ($1-\alpha =0.95$).
+\end{enumerate}
+
+\item F\"{u}r eine Wahlprognose soll eine einfache Stichprobe vom Umfang $n$
+aus den W\"{a}hlern und W\"{a}hlerinnen befragt werden, welche Partei sie w%
+\"{a}hlen w\"{u}rden, wenn am n\"{a}chsten Sonntag Bundestagswahlen w\"{a}%
+ren.
+\begin{enumerate}
+\item Wie gro\ss\ muss $n$ gew\"{a}hlt werden, damit auf einem
+Konfidenzniveau von $1-\alpha =0.95$ der Anteil der SPD-Stimmen mit einem
+maximalen Fehler von $\pm 2\%$ gesch\"{a}tzt wird? Benutzen Sie als
+Vorinformation \"{u}ber den Anteil der SPD-Stimmen das letzte Wahlergebnis
+von XXX\%.
+\item Wie gro\ss\ muss $n$ gew\"{a}hlt werden, damit auf einem
+Konfidenzniveau von $1-\alpha =0.95$ der Anteil der FDP-Stimmen mit einem
+maximalen Fehler von $\pm 1\%$ gesch\"{a}tzt wird? Benutzen Sie als
+Vorinformation \"{u}ber den Anteil der FDP-Stimmen das letzte Wahlergebnis
+von XXX\%.
+\end{enumerate}
+\end{enumerate}
+	

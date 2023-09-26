@@ -1,0 +1,226 @@
+\section[Stetige Verteilungen]{Spezielle stetige Verteilungen}
+
+\begin{enumerate}
+\item Sei $X$ eine normalverteilte Zufallsvariable mit
+Erwartungswert 20 und Standardabweichung 10. 
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass $X$ einen negativen Wert
+annimmt?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass $X$ einen Wert zwischen
+15 und 25 annimmt?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass $X$ einen Wert von
+mindestens 22 annimmt?
+\item Berechnen Sie das 0.1-Quantil, das 0.5-Quantil und das 0.975-Quantil
+von $X$.
+\end{enumerate}
+
+\item Ein Hausratversicherer wei\ss\ aus Erfahrung, dass die Schadenh%
+\"{o}he in 30.5\% aller Schadenf\"{a}lle h\"{o}chstens 1100 DM und in 16.6\%
+mehr als 2000 DM betr\"{a}gt. Die Schadenh\"{o}he pro Schadenfall sei
+normalverteilt.
+\begin{enumerate}
+\item Berechnen Sie den Mittelwert und die Standardabweichung f\"{u}r die
+Schadenh\"{o}he pro Schadenfall.
+\item Geben Sie f\"{u}r die Schadenh\"{o}he pro Schadenfall das 0.2-Quantil
+an.
+\item Wie gro\ss\ ist die Wahrscheinlichkeit daf\"{u}r, dass die Schadenh%
+\"{o}he pro Schadenfall genau 1500 DM betr\"{a}gt?
+\end{enumerate}
+
+\item Die Zufallsvariable $X$ beschreibe die Lebensdauer eines
+Monitors (in Stunden). Gehen Sie davon aus, dass $X$
+exponentialverteilt ist mit dem Parameter $\lambda =0.00025$.
+\begin{enumerate}
+\item Bestimmen Sie den Erwartungswert von $X.$
+\item Bestimmen Sie den Median von $X$.
+\item Erstellen Sie eine Grafik der Dichtefunktion von $X$.
+\item Der Verk\"{a}ufer gibt eine Garantie, dass der Monitor in den ersten
+1000 Stunden nicht kaputt geht. Wie hoch ist die Wahrscheinlichkeit, dass
+ein verkauftes Ger\"{a}t die Garantie nicht erf\"{u}llt?
+\end{enumerate}
+
+\item Value-at-Risk: @@@ ACHTUNG Diese Aufgabe muss \"{u}%
+berarbeitet werden @@@
+
+Sei $X$ die Tagesrendite (in \%) der Aktie der Deutschen Bank. Mit $Y=-X$
+bezeichnen wir den prozentualen Verlust der Aktie an einem B\"{o}rsentag.
+Die obere Flanke von $Y$ l\"{a}sst sich sehr gut durch eine Paretoverteilung
+mit den Parametern $\alpha =3.4$ und $c=0.8$ modellieren, die
+Verteilungsfunktion von $Y$ ist%
+\begin{equation*}
+F_{Y}(y)=1-\left( \frac{c}{y}\right) ^{\alpha }.
+\end{equation*}
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass die Aktie der Deutschen
+Bank morgen um mehr als 5\% an Wert verliert?
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass die Aktie der Deutschen
+Bank morgen zwischen 5\% und 7\% an Wert verliert?
+\item Bestimmen Sie das 0.99-Quantil von $Y$. Was sagt es aus? Solche
+Quantile werden im Finance-Bereich auch als Value-at-Risk bezeichnet.
+\item Angenommen, die Aktie f\"{a}llt morgen um mehr als 5\%. Wie gro\ss\ %
+ist die Wahrscheinlichkeit, dass\ sie sogar um mehr als 7\% f\"{a}llt?
+\end{enumerate}
+
+\item Anreize oder: Wie eine erfolgsabh\"{a}ngige
+Manager-Entlohnung schiefgehen kann.
+
+Der Manager eines Unternehmens kann zwei Strategien einschlagen: eine
+riskante und eine sichere. Die Zufallsvariable $X\sim N\left( \mu ,\sigma
+^{2}\right) $ ist der Gewinn des Unternehmens (in Mio. EUR). Die Verteilung
+von $X$ h\"{a}ngt von der gew\"{a}hlten Strategie ab, und zwar wie folgt:%
+\begin{equation*}
+\begin{array}{lll}
+\text{sichere Strategie:} & \mu _{s}=6, & \sigma _{s}^{2}=9 \\ 
+\text{riskante Strategie:} & \mu _{r}=5, & \sigma _{r}^{2}=25%
+\end{array}%
+\end{equation*}%
+Das Gehalt $Y$ (in 10\thinspace 000 EUR) des Managers ist erfolgsabh\"{a}%
+ngig (abh\"{a}ngig vom Gewinn). Es betr\"{a}gt%
+\begin{equation*}
+Y=\left\{ 
+\begin{array}{rl}
+3 & \quad \text{wenn }X\leq 0 \\ 
+10 & \quad \text{wenn }0<X\leq 10 \\ 
+25 & \quad \text{wenn }X>10.%
+\end{array}%
+\right.
+\end{equation*}
+
+\begin{enumerate}
+\item Erg\"{a}nzen Sie die folgende Tabelle:
+
+%TCIMACRO{\TeXButton{BC}{\begin{center}}}%
+%BeginExpansion
+\begin{center}%
+%EndExpansion
+\begin{tabular}{|l|c|c|}
+\hline
+& \multicolumn{2}{|c|}{Strategie} \\ \cline{2-3}
+\rule{2cm}{0cm} & sicher & riskant \\ \hline
+\multicolumn{1}{|c|}{$y$} & \multicolumn{1}{|l|}{$P\left( Y=y\right) $} & 
+\multicolumn{1}{|l|}{$P\left( Y=y\right) $} \\ \hline
+\rule{0cm}{3cm} & \multicolumn{1}{|l|}{} & \multicolumn{1}{|l|}{} \\ \hline
+\end{tabular}%
+%TCIMACRO{\TeXButton{EC}{\end{center}}}%
+%BeginExpansion
+\end{center}%
+%EndExpansion
+\medskip
+
+\item Berechnen Sie den Erwartungswert des Manager-Gehalts $Y$ f\"{u}r beide
+Strategien. Welche Strategie wird der Manager einschlagen, wenn er den
+Erwartungswert seines Einkommens maximieren will?
+\end{enumerate}
+
+\item Der Preis der Streuung oder: Vom Vorteil sicherer Umwege.
+
+Die Reisedauer mit dem Auto von A nach B h\"{a}ngt von vielen Zufallseinfl%
+\"{u}ssen ab. Gehen Sie davon aus, dass die Reisedauer $X$ (in Std.) eine
+normalverteilte Zufallsvariable ist mit Erwartungswert $\mu =6$ und einer
+Standardabweichung von $\sigma =1$.
+\begin{enumerate}
+\item Wie gro\ss\ ist die Wahrscheinlichkeit, dass die Reise weniger als 3
+Stunden dauert?
+\item Sie sind in A. Um 16 Uhr haben Sie einen wichtigen Termin in B. Wann m%
+\"{u}ssen Sie losfahren, damit Sie mit einer Wahrscheinlichkeit von 0.9 p%
+\"{u}nktlich sind?
+\item Wenn Sie einen Umweg \"{u}ber eine Autobahn fahren, verl\"{a}ngert
+sich die erwartete Reisedauer auf $\mu =6.5$, aber wegen der besser
+ausgebauten Stra\ss e verringert sich die Standardabweichung der Reisedauer
+auf $\sigma =0.1$. Sie sind wieder in A und haben wieder um 16 Uhr einen
+wichtigen Termin in B. Wann m\"{u}ssen Sie losfahren, damit Sie mit einer
+Wahrscheinlichkeit von 0.9 p\"{u}nktlich sind?
+\end{enumerate}
+
+\item Sei $X\sim N(\mu ,\sigma ^{2})$. Definieren Sie die
+Zufallsvariable $Y=e^{X}$. Man nennt $Y$ lognormalverteilt mit den
+Parametern $\mu $ und $\sigma ^{2}$ und schreibt $Y\sim LN(\mu ,\sigma
+^{2}). $ Dies ist das einfachste Standardmodell f\"{u}r die Verteilung zuk%
+\"{u}nftiger Aktienkurse. Es bildet unter anderem eine wichtige Grundlage f%
+\"{u}r die Optionsbewertung. Zeigen Sie, dass gilt%
+\begin{equation*}
+E(Y)=e^{\mu +\sigma ^{2}/2}.
+\end{equation*}%
+Hinweis: Diese Aufgabe ist schwierig. Wegen $E(Y)=E(e^{X})$ k\"{o}nnen Sie
+den Erwartungswert \"{u}ber die Formel $E(g(X))=\int_{-\infty }^{\infty
+}g(x)f(x)dx$ berechnen. Fassen Sie dann alle Exponentialfunktionsausdr\"{u}%
+cke geeignet zusammen und nutzen Sie die Tatsache, dass f\"{u}r jede Dichte $%
+\int_{-\infty }^{\infty }f(x)dx=1$ gilt.
+
+\item Aktienoptionen:
+
+Die Verteilung von Aktienkursen, die etwas weiter entfernt in der Zukunft
+liegen (z.B. einen Monat oder l\"{a}nger), l\"{a}sst sich recht gut durch
+eine Lognormalverteilung beschreiben. Sei $S_{0}=100$ der heutige Kurs einer
+Aktie. Der Kurs in einem Jahr, $S_{1}$, ist nat\"{u}rlich noch unbekannt und
+wird daher als Zufallsvariable aufgefasst. Wir nehmen an, dass $S_{1}$
+lognormalverteilt ist: $S_{1}\sim LN(\mu ,\sigma ^{2})$ mit den
+(vorgegebenen) Parametern $\mu =4.685$ und $\sigma ^{2}=0.2$.
+\begin{enumerate}
+\item Eine Kauf-Option bietet das Recht, zu einem vereinbarten zuk\"{u}%
+nftigen Zeitpunkt eine Aktie zu einem vereinbarten Kurs (Aus\"{u}bungspreis)
+zu kaufen -- unabh\"{a}ngig vom dann geltenden Aktienkurs. Nach der ber\"{u}%
+hmten Formel von Black und Scholes kann der heutige Wert $C_{0}$ einer
+Kauf-Option bestimmt werden als%
+\begin{eqnarray*}
+C_{0} &=&S_{0}\Phi \left( \frac{\ln \left( S_{0}/K\right) +\left( \rho
++\sigma ^{2}/2\right) T}{\sigma \sqrt{T}}\right) \\
+&&-e^{-\rho T}K\Phi \left( \frac{\ln \left( S_{0}/K\right) +\left( \rho
+-\sigma ^{2}/2\right) T}{\sigma \sqrt{T}}\right) ,
+\end{eqnarray*}%
+wobei $S_{0}$ der aktuelle Aktienkurs ist, $K$ der Aus\"{u}bungspreis, $\rho 
+$ der sichere (und als konstant angenommene) Zinssatz, $\sigma ^{2}$ die
+Varianz der Rendite (das entspricht in unserem hier behandelten Fall dem
+Parameter $\sigma ^{2}$ der Lognormalverteilung) und $T$ die Laufzeit der
+Option.
+
+Berechnen Sie den heutigen Wert der Option $C_{0}$ f\"{u}r einen Aus\"{u}%
+bungspreis von $K=105$, einen Zinssatz von 5\% p.a. und eine Restlaufzeit
+von $T=1$ (Jahr).
+
+\item In einem Jahr ist der Wert der Option, $C_{1}$, nat\"{u}rlich abh\"{a}%
+ngig vom dann geltenden Aktienkurs. Daher k\"{o}nnen wir $C_{1}$ ebenso wie $%
+S_{1}$ als Zufallsvariable auffassen. Wenn $S_{1}\leq K$ ist, dann ist die
+Option offenbar wertlos (d.h. $C_{1}=0$). Wenn hingegen $S_{1}>K$ ist, dann
+ist der Wert der Option gerade $C_{1}=S_{1}-K$.
+
+Bestimmen Sie die Wahrscheinlichkeit, dass $C_{1}=0$ ist.
+
+\item Bestimmen Sie den Median von $S_{1}$.
+
+\item Bestimmen Sie den Median von $C_{1}$.
+\end{enumerate}
+
+\item Weibull-Verteilung oder: Abnutzungserscheinungen.
+
+Betrachten Sie wieder die Zufallsvariable $X$ aus Aufgabe 3: $X$ beschreibt
+die Lebensdauer eines Fernsehger\"{a}ts (in Stunden). Gehen Sie davon aus,
+dass $X$ exponentialverteilt ist mit dem Parameter $\lambda =0.00025$.
+
+\begin{enumerate}
+\item Zeigen Sie: Die Wahrscheinlichkeit, dass der Fernseher mehr als 6000
+Stunden h\"{a}lt, wenn er bereits 4000 Stunden gehalten hat, ist genauso gro%
+\ss\ wie die Wahrscheinlichkeit, dass der Fernseher mehr als 10000 Stunden h%
+\"{a}lt, wenn er bereits 8000 Stunden gehalten hat.
+\item Zeigen Sie allgemein: $P(X>a|X>b)$ mit $a,b\in \mathbb{R}$ und $a>b$ h%
+\"{a}ngt bei einer Exponentialverteilung nur von der Differenz $a-b$ ab.
+\item Um eine mit dem Alter steigende Ausfallwahrscheinlichkeit zu
+modellieren, verwendet man h\"{a}ufig die Weibull-Verteilung. Eine
+Zufallsvariable $Y$ hei\ss t Weibull-verteilt mit den Parametern $\beta >0$
+und $k>0$, wenn ihre Verteilungsfunktion f\"{u}r $y\geq 0$%
+\begin{equation*}
+F_{Y}(y)=1-e^{-(y/\beta )^{k}}
+\end{equation*}%
+lautet. F\"{u}r $y<0$ ist $F_{Y}(y)=0$.
+\item Bestimmen Sie die Formel f\"{u}r die Dichtefunktion von $Y$.
+\item Die Lebensdauer des Fernsehger\"{a}ts (in Stunden) beschreiben wir nun
+durch eine Weibull-verteilte Zufallsvariable $Y$ mit den Parametern $\beta
+=4431$ und $k=1.5.$ Zeichnen Sie die Dichtefunktion von $Y$ (z.B. mit dem
+Statistik-Programm R).
+\item Berechnen und vergleichen Sie nun die beiden folgenden bedingten
+Wahrscheinlichkeiten: Die Wahrscheinlichkeit, dass der Fernseher mehr als
+6000 Stunden h\"{a}lt, wenn er bereits 4000 Stunden gehalten hat. Die
+Wahrscheinlichkeit, dass der Fernseher mehr als 10000 Stunden h\"{a}lt, wenn
+er bereits 8000 Stunden gehalten hat.
+\end{enumerate}
+\end{enumerate}

@@ -1,0 +1,106 @@
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Zufallsvorgang}
+\begin{block}{Zufallsvorgang}
+Ein Zufallsvorgang ist ein Vorgang, 
+\begin{itemize}
+\item bei dem im Voraus feststeht,
+welche möglichen Ergebnisse er haben kann,
+\item das tatsächliche Ergebnis im Voraus jedoch nicht bekannt ist.
+\end{itemize}
+\end{block}
+\medskip
+Zufallsexperiment: kontrolliert wiederholbarer Zufallsvorgang
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ergebnisraum}
+\begin{block}{Ergebnisraum}
+Die Menge aller Ergebnisse nennen wir Ergebnisraum\\
+(oder Ergebnismenge) $\Omega$.
+\end{block}
+\begin{itemize}
+\item Ein Element $\omega \in \Omega $ heißt Ergebnis 
+\item $|\Omega|$ ist die Anzahl der Elemente in $\Omega $
+\item Beispiel: Werfen eines Würfels, $\Omega =\{1,2,3,4,5,6\}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ereignis}
+\begin{block}{Ereignis}
+Teilmengen von $\Omega$ heißen Ereignisse.
+\end{block}
+\begin{itemize}
+\item Notation: $A$, $B$, $C$, $\ldots $ oder $A_{1},A_{2},\ldots $
+\item Ereignis $A$ tritt ein, falls $\omega \in A$
+\item Ein Zufallsvorgang hat nur ein einziges Ergebnis,\\
+aber es treten immer viele Ereignisse ein!
+\item $\Omega$ heißt sicheres Ereignis, $\varnothing$ heißt unmögliches Ereignis
+\item Wenn $A\cap B=\varnothing$, heißen $A$ und $B$ disjunkt
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ereignis}
+\begin{exampleblock}{Beispiel: Würfelwurf}
+Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$
+\begin{align*}
+A &= \{2,4,6\},\text{ eine gerade Zahl würfeln}\\
+B &= \{2\},\text{ eine 2 würfeln} \\
+C &= \{1,2,3\},\text{ weniger als 4 würfeln} \\
+D &= \{5,6\},\text{ mehr als 4 würfeln}
+\end{align*}
+Wird eine 2 gewürfelt, treten $A$, $B$ und $C$ ein, aber $D$ nicht.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ereignis}
+Verknüpfungen von Ereignissen:\medskip
+\begin{itemize}
+\item $A\cap B$ tritt ein, wenn $A$ \textbf{und} $B$ eintreten
+\item $A\cup B$ tritt ein, wenn $A$ \textbf{oder} $B$ eintritt
+\item $\bar{A}$ tritt ein, wenn $A$ \textbf{nicht} eintritt
+\item $A\backslash B$ tritt ein, wenn $A$ \textbf{ohne} $B$ eintritt, d.h.\ $A\cap\bar B$
+\item $\bigcap_{i=1}^{n}A_{i}$ tritt ein, wenn \textbf{alle} $A_{i}$ eintreten
+\item $\bigcup_{i=1}^{n}A_{i}$ tritt ein, wenn \textbf{mindestens ein} $A_{i}$ eintritt
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ereignis}
+\begin{exampleblock}{Beispiel: Würfelwurf}
+Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$
+\begin{align*}
+A &= \{2,4,6\}\\
+B &= \{1,2,3\}\\
+A\cap B &=\{2\}\\
+A\cup B&=\{1,2,3,4,6\}
+\end{align*}
+Wird eine 2 gewürfelt, treten $A$, $B$, $A\cap B$ und $A\cup B$ ein.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufall}
+\framesubtitle{Ereignis}
+\textbf{Rechenregeln für Mengen:}
+\begin{itemize}
+\item Distributivgesetz
+\begin{eqnarray*}
+A\cup (B\cap C) &=&(A\cup B)\cap(A\cup C)\\
+A\cap (B\cup C) &=&(A\cap B)\cup(A\cap C)
+\end{eqnarray*}
+\item de Morgansche Regeln:
+\begin{eqnarray*}
+\overline{A\cup B} &=&\overline{A}\cap \overline{B} \\
+\overline{A\cap B} &=&\overline{A}\cup \overline{B}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}

@@ -1,0 +1,50 @@
+---
+title: "Blatt 5"
+author: "Data Science 2"
+date: "Sommersemester 2023"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Aufgabe 1:
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# Aufgabe 2:
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# Aufgabe 3
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# Aufgabe 4: Pi raten
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# 

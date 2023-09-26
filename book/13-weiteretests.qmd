@@ -1,0 +1,702 @@
+# Weitere Hypothesentests {#sec-weiteretests}
+
+Erwartungswerttests spielen eine wichtige Rolle in vielen Bereichen
+der Wirtschaftswissenschaften. Es gibt jedoch viele weitere Arten
+von Hypothesentests. In diesem Kapitel werden konkret zwei weitere
+Tests vorgestellt. Zum einen ist das der Unabhängigkeitstest, mit
+dem die Nullhypothese getestet werden kann, dass zwei Variablen unabhängig 
+voneinander sind. Zum anderen ist es der Anpassungstest, mit dem
+man untersuchen kann, ob die Daten einer Stichprobe einer bestimmten
+Verteilung folgen.
+
+## Die $\chi^2$-Verteilung
+
+Sowohl der Unabhängigkeitstest als auch der Anpassungstest basieren
+auf der $\chi^2$-Verteilung (sprich: chi-Quadrat, 
+engl. $\chi^2$-distribution, sprich: kai squared). Es handelt sich
+dabei um eine stetige Verteilung mit positivem Träger. 
+Eine Zufallsvariable $X$ heißt $\chi^2$-verteilt mit dem 
+Parameter $n$, wenn sie die Dichtefunktion 
+$$
+f(x)=\left\{
+\begin{array}{ll}
+C_n\cdot x^{\frac{n}{2}-1}\exp(-\frac{x}{2}) & \text{ wenn }x \ge 0\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+hat. Der Parameter $n$ wird Zahl der Freiheitsgrade (engl. degrees of freedom) 
+genannt. Die Konstante $C_n$ dient nur der Normierung, ihre genaue 
+Definition spielt hier keine Rolle, da wir ohnehin die R-Funktionen für die
+Berechnung der Dichte-, Verteilungs- und Quantilfunktion verwenden. Die 
+gängige Kurzschreibweise für eine $\chi^2$-verteilte Zufallsvariable mit $n$ 
+Freiheitsgraden ist $X\sim \chi^2_n$.
+
+Die Abbildung zeigt die Dichtefunktion einer $\chi^2$-Verteilung mit
+3, 5 und 10 Freiheitsgraden.
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=0, to=25, length=300)
+plot(x, dchisq(x, df=3),
+     type="l",
+     main="Dichte der chi^2-Verteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.25))
+
+lines(x, dchisq(x, df=5), col="red")
+lines(x, dchisq(x, df=10), col="blue")
+
+legend("topright",
+       fill=c("black", "red", "blue"),
+       legend=c("df=3", "df=5", "df=10"))
+```
+
+Erwartungswert und Varianz sind
+$$
+\begin{align*}
+E(X) &= n\\
+Var(X) &= 2n.
+\end{align*}
+$$
+
+In R ist die Abkürzung für die $\chi^2$-Verteilung `chisq`. Die Funktionen
+für die Dichte, Verteilungs- und Quantilfunktion sind:
+
+- `dchisq(x, df=nu)`
+- `pchisq(x, df=nu)`
+- `qchisq(p, df=nu)`
+
+ Die Parameter-Abkürzung `df` steht für "degrees of freedom".
+ 
+## Unabhängigkeitstest {#sec-unabhtest}
+
+Sind zwei Zufallsvariablen $X$ und $Y$ stochastisch unabhängig voneinander?
+Diese Frage taucht in den Wirtschaftswissenschaften oft auf, denn wenn
+keine Unabhängigkeit vorliegt, stellt sich natürlich die Frage, wie es
+zu einer Abhängigkeit kommt? Das ist dann möglicherweise der Ausgangspunkt 
+für eine neue Theorie. Die Nullhypothese und Alternativhypothese, um 
+die es in diesem Abschnitt geht, sind nicht von der Form, die
+in @sec-vokabular beschrieben wurde. Sie lauten nun
+$$
+\begin{align*}
+H_0&: X\text{ und }Y \text{ sind unabhängig}\\
+H_1&: X\text{ und }Y \text{ sind abhängig.}
+\end{align*}
+$$
+
+Wie lässt sich testen, ob zwischen $X$ und $Y$ Unabhängigkeit vorliegt, 
+wenn man die gemeinsame Populationsverteilung nicht kennt? Ohne Kenntnis 
+der gemeinsamen Wahrscheinlichkeitsfunktion (oder Dichte- oder 
+Verteilungsfunktion) kann die Unabhängigkeitsbedingung aus 
+@sec-unabhaengig2 offensichtlich nicht einfach rechnerisch geprüft 
+werden. Um etwas über die gemeinsame Verteilung zu lernen, brauchen 
+wir daher Daten, also eine Stichprobe.
+
+Eine einfache Stichprobe für zwei Zufallsvariablen $(X,Y)$ 
+besteht aus $n$ identisch und unabhängig verteilten 
+Zufallsvektoren
+$$
+(X_1,Y_1),(X_2,Y_2),\ldots,(X_n,Y_n).
+$$
+Es handelt sich bei der Stichprobe also um Zufallsvektoren bzw.
+Paare von Zufallsvariablen. 
+Erst wenn die Stichprobe tatsächlich
+erhoben wurde, liegen die Realisierungen der Stichprobenelemente
+vor. Die konkrete Stichprobe besteht dann aus Paaren
+reeller Zahlen.
+
+Für das Testverfahren, das nun vorgestellt wird, brauchen wir eine
+Partition der Träger $T_X$ und $T_Y$. Es handelt sich quasi um
+eine Diskretisierung der beiden Träger, so dass sowohl $X$ als
+auch $Y$ nur noch eine moderate Zahl von Ausprägungen haben. Die
+Partition für $X$ bezeichnen wir mit $A_1,\ldots,A_J$, die
+für $Y$ mit $B_1,\ldots,B_K$. Für das intuitive Verständnis ist es 
+hilfreich erst einmal so zu tun, als ob $X$ und $Y$ gemeinsam 
+diskret verteilt sind und $A_1,\ldots,A_J$ der Träger von $X$ ist 
+und $B_1,\ldots,B_K$ der Träger von $Y$.
+
+Um die Nullhypothese zu testen, brauchen wir eine Teststatistik.
+An der Teststatistik soll erkennbar sein, ob die Nullhypothese
+noch plausibel ist oder ob die Daten so gravierend gegen die
+Nullhypothese sprechen, dass sie verworfen werden sollte. Für die
+Entwicklung der Teststatistik betrachten wir die Häufigkeitstabelle
+$$
+\begin{array}{|cc|cccc|c|}\hline
+&&&Y\in&&&\\
+&&B_1&B_2&\ldots&B_K&\sum \\\hline
+&A_1&N_{11}&N_{12}&\ldots&N_{1K}&N_{1\cdot}\\
+&A_2&N_{21}&N_{22}&\ldots&N_{2K}&N_{2\cdot}\\
+X\in&\vdots&\vdots&\vdots&&\vdots\\
+&A_J&N_{J1}&N_{J2}&\ldots&N_{JK}&N_{J\cdot}\\\hline
+&\sum&N_{\cdot 1}&N_{\cdot 2}&\ldots&N_{\cdot K}&n\\\hline
+\end{array}
+$$
+Die Einträge $N_{jk}$ für $j=1,\ldots,J$ und $k=1,\ldots,K$ geben an, 
+wie oft in der Stichprobe die Kombination $(A_j,B_k)$ vorkommt. Die
+Randeinträge $N_{j\cdot}$ geben die Zeilensummen an, die Randeinträge
+$N_{\cdot k}$ die Spaltensummen. Diese Art von Häufigkeitstabelle
+kennen Sie schon, wenn Sie das Modul "Data Science 1" gehört haben. 
+Es gibt jedoch einen wichtigen Unterschied: Alle Tabelleneinträge 
+sind jetzt Zufallsvariablen, weil sie aus der Stichprobe 
+ermittelt werden. Die einzige Ausnahme ist der Stichprobenumfang
+$n$ unten rechts in der Tabelle. Er ist nicht zufällig, sondern
+vorgegeben. 
+
+Als Teststatistik nutzen wir
+$$
+T= \sum_{j=1}^J \sum_{k=1}^K
+\frac{\left(N_{jk}-\frac{N_{j\cdot}N_{\cdot k}}{n}\right)^2}{\frac{N_{j\cdot}N_{\cdot k}}{n}}.
+$$
+Dieser Ausdruck sieht auf den ersten Blick komplex aus, ist aber
+eigentlich recht einfach aufgebaut. Zum Verständnis ist es nützlich, sich
+die Definition der deskriptiven Unabhängigkeit aus dem Modul "Data Science 1"
+in Erinnerung zu rufen. Zwei Variablen sind deskriptiv unabhängig, wenn
+sich aus den beiden Randverteilungen die gemeinsame Verteilung wie folgt 
+ergibt:
+$$
+n_{jk}=\frac{n_{j\cdot}n_{\cdot k}}{n}.
+$$
+Der Ausdruck $N_{j\cdot}N_{\cdot k}/n$ in der Teststatistik $T$ ist also 
+der Wert, der in der Tabelle an der Stelle $(j,k)$ stehen müsste, 
+wenn $X$ und $Y$ (deskriptiv) unabhängig sind. Für die Berechnung der
+Teststatistik werden nun die normierten quadrierten Abweichungen aller
+Einträge von diesen hypothetischen "Unabhängigkeitseinträgen" aufsummiert.
+
+Man kann zeigen, dass die Teststatistik unter der Nullhypothese 
+approximativ einer $\chi^2$-Verteilung mit $(J-1)(K-1)$ 
+Freiheitsgraden folgt,
+$$
+T\sim \chi^2_{(J-1)(K-1)}.
+$$
+Die Approximation ist umso besser, je größer der Stichprobenumfang
+ist. Werte am oberen Ende der Verteilung der Teststatistik sprechen gegen 
+die Gültigkeit der Nullhypothese. Wenn die Nullhypothese korrekt ist,
+wird die Teststatistik mit einer Wahrscheinlichkeit von
+$(1-\alpha)$ unterhalb des $(1-\alpha)$-Quantils der
+$\chi^2_{(J-1)(K-1)}$-Verteilung liegen. Überschreitet die
+Teststatistik dieses Quantil, wird die Nullhypothese verworfen.
+Die Ablehnung der Nullhypothese (auf einem Signifikanzniveau
+von $\alpha$) ist zwar kein Beweis, aber doch eine belastbare 
+statistische Untermauerung der Abhängigkeit von $X$ und $Y$.
+Wird die Nullhypothese nicht abgelehnt, ist das hingegen kein
+Nachweis und auch keine statistische Untermauerung der 
+Unabhängigkeit. Man kann dann nur schließen, dass die Daten
+nicht eklatant gegen die Unabhängigkeitshypothese sprechen.
+
+Die Realisation der Teststatistik berechnet man aus der
+konkreten Stichprobe,
+$$
+t= \sum_{j=1}^J \sum_{k=1}^K
+\frac{\left(n_{jk}-\frac{n_{j\cdot}n_{\cdot k}}{n}\right)^2}{\frac{n_{j\cdot}n_{\cdot k}}{n}}.
+$$
+Diese Größe ist formal identisch zu der Größe $\chi^2$, die im Modul
+"Data Science 1" für die Berechnung des Kontingenzkoeffizienten definiert wurde.
+
+Der p-Wert des Tests kann wie folgt bestimmt werden. Der p-Wert
+gibt an, wie hoch die Wahrscheinlichkeit ist, dass die Teststatistik
+(die Zufallsvariable $T$) unter der Nullhypothese stärker gegen die 
+Nullhypothese spricht als der tatsächliche Wert der Teststatistik
+(die Realisation $t$). Im hier vorliegenden Fall stellt sich also
+die Frage, wie hoch die Wahrscheinlichkeit ist, dass eine 
+$\chi^2$-verteilte Zufallsvariable den Wert der Teststatistik $t$
+übersteigt. In etwas unsauberer Notation:
+$$
+\text{p-Wert} = P(\chi^2_{(J-1)(K-1)}>t).
+$$
+Die Gegenwahrscheinlichkeit ist gerade der Wert der Verteilungsfunktion 
+an der Stelle $t$. In R würde man den p-Wert wie folgt berechnen:
+```{r eval=FALSE}
+pWert <- 1 - pchisq(teststat, df)
+```
+
+Bei der Herleitung des Unabhängigkeitstests wurden die Partitionen
+$A_1,\ldots,A_J$ und $B_1,\ldots,B_J$ als gegeben angenommen. 
+Vor der Durchführung des Tests müssen sie jedoch im allgemeinen
+erst festgelegt werden. Wie sollte man die Träger $T_X$ und $T_Y$
+für den Unabhängigkeitstest partitionieren? Als Faustregel wird 
+oft gefordert, dass
+$$
+\frac{n_{j\cdot}n_{\cdot k}}{n}>5
+$$
+für alle $j=1,\ldots,J$ und $k=1,\ldots,K$. Wenn einzelne Randhäufigkeiten
+zu klein sind, sollte man benachbarte Ausprägungen zusammenfassen.
+Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, bildet man Intervalle.
+Die Anzahl der Intervalle sollte nicht zu klein sein, damit die
+Verteilung durch die Diskretisierung nicht zu stark vergröbert wird.
+Andererseits dürfen es nicht zu viele Intervalle sein, weil sonst
+die Faustregel nicht erfüllt ist. In dem nachfolgenden Beispiel wird 
+konkret gezeigt, wie Intervalle gebildet werden können und wie der
+Test in R durchgeführt wird.
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Tagesrenditen zweier Aktien
+
+<img src="images/AdobeStock_437318696b_DAX.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
+Wir betrachten die Tagesrenditen der Aktien von Siemens und Zalando.
+Die Tagesrenditen am Handelstag $t$ bezeichnen wir mit $S_t$ und $Z_t$.
+Die Aktien gehören zu unterschiedlichen Branchen: Siemens stellt
+überwiegend Industrieprodukte her, Zalando ist im Online-Handel tätig.
+Hängen die Tagesrenditen der beiden Aktien trotz dieser unterschiedlichen
+Ausrichtung miteinander zusammen oder bewegen sich die Kurse 
+unabhängig voneinander? Als Nullhypothese und Alternativhypothese
+formulieren wir
+$$
+\begin{align*}
+H_0&: \text{Die Tagesrenditen sind unabhängig}\\
+H_1&: \text{Die Tagesrenditen sind abhängig.}
+\end{align*}
+$$
+Zum Testen braucht man eine einfache Stichprobe aus $(S_t,Z_t)$.
+Wir nehmen an, dass die Tagesrenditen über die Zeit hinweg identisch
+und unabhängig verteilt sind. Diese Annahme ist nicht ganz korrekt,
+aber die dadurch entstehenden Fehler sind vermutlich sehr klein. 
+Welche alternativen, besseren Wege es gibt, mit Finanzmarktdaten 
+zu arbeiten, wird ausführlich in dem Mastermodul **Financial Econometrics** 
+behandelt.
+
+<img src="images/eikon-logo.jpeg" align="right" width="20%"
+style="padding-left:20px"/> 
+Aus der Datenbank [Refinitiv Eikon](https://eikon.refinitiv.com/) wurden
+die Tagesrenditen vom 1. Juli 2022 bis zum 1. September 2023 heruntergeladen.
+Die Daten sind im Learnweb des Kurses zum Herunterladen verfügbar. 
+Die Tagesrenditen werden in R eingelesen. Die Renditen sind in Prozent
+angegeben und auf vier Stellen nach dem Komma gerundet. Die ersten sechs 
+Beobachtungen sind
+```{r}
+renditen <- read.csv("../data/tagesrenditen.csv")
+head(renditen)
+```
+Die Siemens-Renditen werden in den Vektor `s` geschrieben, 
+die Zalando-Renditen in den Vektor `z`. Der Zugriff auf einzelne
+Spalten des Dataframes `renditen` erfolgt durch das Dollarzeichen
+(gefolgt vom Namen der Spalte).
+```{r}
+s <- renditen$siemens
+z <- renditen$zalando
+```
+Die Anzahl der Beobachtungen ist 
+```{r}
+n <- length(s)
+print(n)
+```
+Die Intervalle legen wir so fest, dass ungefähr gleich viele Beobachtungen 
+in jedem Intervall liegen. Setzt man die Zahl der Intervalle auf 6, liegen
+in jedem Intervall also etwa 50 Beobachtungen, so dass die Faustregel
+wegen $50\cdot 50/300\approx 8.3$ erfüllt ist. 
+
+Als Intervalle für Siemens wählen wir
+$$
+\begin{align*}
+A_1 &= (-\infty, -1.4] \\
+A_2 &= (-1.4, -0.6] \\
+A_3 &= (-0.6, 0.1]\\
+A_4 &= (0.1, 0.9]\\
+A_5 &= (0.9, 1.6]\\
+A_6 &= (1.6, \infty)
+\end{align*}
+$$
+und für Zalando setzen wir die Intervalle auf
+$$
+\begin{align*}
+B_1 &= (-\infty, -3] \\
+B_2 &= (-3, -1.5] \\
+B_3 &= (-1.5, 0]\\
+B_4 &= (0, 1.3]\\
+B_5 &= (1.3, 3.1]\\
+B_6 &= (3.1, \infty)
+\end{align*}
+$$
+Die Diskretisierung der Renditen kann leicht durch die Funktion `cut`
+erzielt werden. Die diskretisierten Vektoren speichern wir unter
+den Namen `s_d` und `z_d`.
+```{r}
+A_breaks <- c(-Inf, -1.4, -0.6, 0.1, 0.9, 1.6, Inf)
+B_breaks <- c(-Inf, -3, -1.5, 0, 1.3, 3.1, Inf)
+
+s_d <- cut(s, A_breaks)
+z_d <- cut(z, B_breaks)
+```
+Mit der `table`-Funktion erhält man anschließend
+die Randhäufigkeiten. Wir speichern sie unter den
+Namen `N_siemens` und `N_zalando` ab.
+```{r}
+N_siemens <- table(s_d)
+N_zalando <- table(z_d)
+N_siemens
+N_zalando
+```
+Die Faustregel für die Mindestbesetzung der Klassen ist also erfüllt.
+Im nächsten Schritt ermitteln wir die Häufigkeitstabelle mit 
+der Funktion `table`. Sie liefert eine Häufigkeitstabelle als
+Output, wenn man zwei Variablen als Argumente eingibt. Damit wir
+später wieder auf die Häufigkeitstabelle zugreifen können,
+speichern wir sie (unter dem Namen `N`) ab.
+```{r}
+N <- table(s_d, z_d)
+print(N)
+```
+An dieser Tabelle kann man beispielsweise ablesen, dass es im
+Beobachtungszeitraum 16 Tage gab, an denen die Siemens-Rendite im
+Intervall (0.9,1.6] und die Zalando-Rendite im Intervall (1.3,3.1] 
+lagen.
+
+An der Häufigkeitstabelle kann man bereits erkennen, dass hohe
+(niedrige) Renditen der einen Aktie meist mit hohen (niedrigen) 
+Renditen der anderen Aktie einhergehen. Unabhängigkeit ist mit
+dieser Beobachtung nicht vereinbar. Könnte dieser scheinbare
+Zusammenhang rein zufällig zustandegekommen sein? Um das zu
+beantworten, berechnen wir die Teststatistik.
+```{r}
+teststat <- 0
+for(j in 1:6){
+  for(k in 1:6){
+    aux <- N_siemens[j]*N_zalando[k]/n
+    teststat <- teststat + (N[j,k]-aux)^2/(aux)
+  }
+}
+```
+Zur Erklärung: Zuerst wird die Teststatistik auf den Wert 0 gesetzt.
+Die Doppelschleife entspricht der Doppelsumme in der Definition
+der Teststatistik. Bei jedem Durchlauf der Doppelschleife wird
+die Hilfsgröße `aux` berechnet, nämlich $N_{j\cdot}N_{\cdot k}/n$.
+Die Teststatistik wird jedesmal um die normierte quadrierte
+Abweichung erhöht. Am Ende erhält man als Wert der Teststatistik
+```{r}
+teststat <- as.numeric(teststat)
+teststat
+```
+(Hinweis: Mit der Funktion `as.numeric` wird der Datentyp auf "numerisch"
+gesetzt. Das hat nur kosmetische Gründe. Ohne diese Funktion hätte 
+`teststat` den Datentyp "table" und beim Ausdrucken würde immer
+eine unsinnige Überschrift gezeigt werden.)
+
+Ist dieser Wert so groß, dass die Nullhypothese verworfen werden muss?
+Unter $H_0$ ist die Teststatistik $\chi^2$-verteilt mit 
+```{r}
+df <- (length(N_siemens)-1)*(length(N_zalando)-1)
+df
+```
+Freiheitsgraden. Das 0.95-Quantil dieser Verteilung ist
+```{r}
+qchisq(0.95, df)
+```
+Da die Teststatistik deutlich größer ist als der kritische Wert,
+wird die Nullhypothese abgelehnt. Die Tagesrenditen sind statistisch
+signifikant abhängig voneinander.
+
+Wie hoch ist der p-Wert des Tests? Die Wahrscheinlichkeit,
+dass eine $\chi^2$-Verteilung den Wert `r round(teststat,1)`
+übersteigt, ist
+```{r}
+pWert <- 1 - pchisq(teststat, df)
+pWert
+```
+Die wissenschaftliche Notation `e-16` steht für $\times 10^{-16}$.
+Dieser Wert ist kleiner als jedes vernünftige Signifikanzniveau.
+Die Nullhypothese wird also auf jedem normalen Niveau verworfen.
+
+Alternativ könnte man die eingebaute R-Funktion `chisq.test` auf
+die Häufigkeitstabelle `N` anwenden. Dann ergibt sich
+```{r}
+chisq.test(N)
+```
+Als Output erhält man den Wert der Teststatistik (`X-squared`),
+die Anzahl der Freiheitsgrade (`df`) und den p-Wert. 
+(Hinweis: Der p-Wert weicht etwas von dem Wert ab, den wir weiter
+oben bestimmt haben. Der Grund dafür sind numerische Ungenauigkeiten
+in den extremen Flanken der Verteilung. In den Bereichen, in 
+denen der p-Wert nicht so extrem klein ist, treten diese
+Ungenauigkeiten nicht auf.)
+:::
+
+## Anpassungstest {#sec-anpassung}
+
+Wenn $X$ eine Zufallsvariable ist, dann stellt sich oft die Frage,
+ob $X$ einer bestimmten Verteilung folgt. Kann man beispielsweise
+den Produktionsfehler einer Maschine wirklich gut durch eine 
+Normalverteilung modellieren? Folgt die Zahl der Kunden, die
+innerhalb einer bestimmten Zeitspanne eintreffen, wirklich einer
+Poissonverteilung? Das sind empirische Fragen, die durch einen
+statistischen Hypothesentest überprüft werden können. In diesem 
+Abschnitt wird erklärt, wie man einen sogenannten Anpassungstest
+durchführt (engl. goodness-of-fit test).
+
+Für den Anpassungstest braucht man - wie auch für den 
+Unabhängigkeitstest - eine Partition des Trägers $T_X$. 
+Mit der Diskretisierung soll erreicht werden, dass $X$ 
+nur noch eine moderate Zahl von Ausprägungen hat. Die
+Partition bezeichnen wir mit $A_1,\ldots,A_J$. Wenn $X$
+bereits diskret verteilt ist, kann auf die Partitionierung
+verzichtet werden. Man setzt dann einfach 
+$A_j=\{x_j\}$. Die Null- und Alternativhypothesen lauten
+$$
+\begin{align*}
+H_0&: ~P(X\in A_j)=\pi_j,\quad j=1,\ldots,J\\
+H_1&: ~\text{nicht }H_0.
+\end{align*}
+$$
+Wie kann man die Nullhypothese testen? Dazu zieht man wie üblich 
+eine einfache Stichprobe $X_1,\ldots,X_n$. Wenn die Nullhypothese
+stimmt, ist die Anzahl der Stichprobenelement, die in $A_j$ liegen,
+im Erwartungswert $n\pi_j$. Natürlich kann die tatsächliche
+Anzahl zufällig höher oder niedriger als der Erwartungswert sein.
+Mit
+$$
+N_j=\sum_{i=1}^n 1_{X_i\in A_j}
+$$
+bezeichnen wir die Anzahl von Stichprobenelementen, die in
+$A_j$ liegen. Da die Stichprobe aus Zufallsvariablen besteht,
+ist auch $N_j$ eine Zufallsvariable. Ihr Erwartungswert ist
+$E(N_j)=n\pi_j$.
+
+Als Teststatistik verwendet man
+$$
+T=\sum_{j=1}^J \frac{(N_j-n\pi_j)^2}{n\pi_j}.
+$$
+Unter der Nullhypothese folgt sie approximativ einer
+$\chi^2$-Verteilung mit $J-1$ Freiheitsgraden,
+$$
+T\sim \chi^2_{J-1}.
+$$
+Die Approximation ist umso besser, je größer der Stichprobenumfang 
+ist. Außerdem sollte als Faustregel für alle $j=1,\ldots,J$
+gelten, dass $n\pi_j>5$ ist. Gegebenenfalls sollte die Partitionierung
+vergröbert werden, um die Mindestgrößen sicherzustellen.
+
+Kleine Werte der Teststatistik sind mit der Nullhypothese vereinbar,
+sehr große Werte sprechen gegen die Nullhypothese. Der kritische
+Wert ist das $(1-\alpha)$-Quantil der $\chi^2$-Verteilung. Man
+lehnt also die Nullhypothese ab, wenn $T$ größer ist als
+das $(1-\alpha)$-Quantil der $\chi^2$-Verteilung mit $J-1$
+Freiheitsgraden.
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Anzahl der Kundenanrufe
+
+Es soll getestet werden, ob die Anzahl 
+von Kunden, die innerhalb von 15 Minuten bei
+einer Hotline anrufen, durch eine Poisson-Verteilung mit
+dem Parameter $\lambda=4$ modelliert werden kann. Über einen
+Zeitraum von 100 Stunden (bzw. 400 Viertelstunden) wurden 
+die Daten erhoben. Dabei ergaben sich folgende (fiktive) 
+Häufigkeiten:
+```{r}
+x_j <- 0:9
+n_j <- c(6,27,78,81,72,64,33,23,9,7)
+
+J <- length(x_j)
+n <- sum(n_j)
+```
+Es gab also 6 Viertelstunden ohne Anruf, 27 Viertelstunden mit
+genau einem Anruf etc. Die theoretischen Wahrscheinlichkeiten sind
+```{r}
+pi_j <- c(dpois(0:8, lambda=4),
+          1-ppois(8, lambda=4))
+```
+Für $x_j\in\{0,1,\ldots,8\}$ bestimmt man die Wahrscheinlichkeit, dass
+diese Werte exakt angenommen werden. Die letzte Klasse enthält jedoch
+nicht nur die Wahrscheinlichkeit, dass $X=9$ ist, sondern 
+$$
+P(X\ge 9)=1-P(X\le 8),
+$$
+weil der Träger von $X$ alle natürlichen Zahlen (und die Null) umfasst.
+
+Zum Überprüfen der Faustregel berechnet man
+```{r}
+n*pi_j
+```
+Da alle Werte größer als 5 sind, ist die Faustregel erfüllt. Die Klassen
+brauchen nicht zusammengelegt zu werden.
+
+Der Wert der Teststatistik beträgt
+```{r}
+teststat <- sum((n_j - n*pi_j)^2/(n*pi_j))
+teststat
+```
+Auf einem Signifikanzniveau von 5 Prozent ist der kritische Wert
+```{r}
+qchisq(0.95, df=J-1)
+```
+Die Teststatistik überschreitet den kritischen Wert nicht.
+Die Nullhypothese wird also nicht abgelehnt. Die Daten sind
+mit der Hypothese vereinbar, dass $X$ einer Poisson-Verteilung
+mit dem Parameter $\lambda=4$ folgt. Es ist wichtig, dass
+dies *keine* statistische Untermauerung dafür ist, dass
+die Aussage "$X\sim Po(4)$" wahr ist.
+
+In R kann der Anpassungstest auch mit der eingebauten
+Funktion `chisq.test` durchgeführt werden. Für den 
+Anpassungstest erwartet die Funktion als erstes Argument
+einen Vektor der beobachteten Häufigkeiten 
+$(n_1,\ldots,n_J)$. Das zweite Argument `p` ist ein
+Vektor gleicher Länge, in dem die Wahrscheinlichkeiten
+enthalten sind, also $(\pi_1,\ldots,\pi_J)$. Das
+zweite Argument muss dabei mit dem Argumentnamen (`p=`)
+angegeben werden.
+```{r}
+chisq.test(n_j, p=pi_j)
+```
+Als Ergebnis erhält man den Wert der Teststatistik, die
+Anzahl der Freiheitsgrade und den p-Wert. Da der p-Wert
+hier größer ist als das vorgegebene Signifikanzniveau von
+0.05, wird die Nullhypothese ebenfalls nicht abgelehnt.
+:::
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Betrugsaufdeckung in der Wirtschaftsprüfung
+
+<img src="images/AdobeStock_52792277b_Logarithmen.jpeg" align="right" width=45%" style="padding-left:15px;"/>
+Die Benford-Verteilung gibt an, mit welcher Wahrscheinlichkeit
+die erste Ziffer von irgendwelchen Zahlen auftritt. Wenn man
+beispielsweise aus der Zeitung eine beliebige Zahl zufällig auswählt, 
+ist ihre erste Ziffer mit einer Wahrscheinlichkeit von rund 30 Prozent 
+eine 1. (Der Astronom Newcomb hat 1881 bemerkt, dass in 
+Logarithmentafeln die vorderen Seiten besonders stark
+abgegriffen sind. Das war der Ausgangspunkt für seine
+Herleitung der Verteilung. 1938 hat Benford die Verteilung 
+wiederentdeckt und popularisiert, seitdem nennt
+man sie die Benford-Verteilung.)
+
+Die Wahrscheinlichkeit, dass die führende Ziffer $j$ ist,
+beträgt für $j=1,\ldots,9$
+$$
+\pi_j=\log_{10}\left(1+\frac{1}{j}\right).
+$$
+Da Betrüger diese Gesetzmäßigkeit nicht gut in gefälschte
+Buchhaltungen einbauen können, nutzen Finanzverwaltungen
+statistisch signifikante Abweichungen von der Benford-Verteilung 
+als Warnhinweis auf Manipulationen in der Buchhaltung.
+
+Wir spielen mit einem fiktiven Datensatz durch, wie die
+Finanzverwaltung vorgeht. Aus der Buchhaltung eines
+Unternehmens werden zufällig $n=1000$ Buchungssätze
+ausgewählt und ihre ersten Ziffern notiert und tabelliert.
+Daraus ergeben sich die folgenden Häufigkeiten.
+```{r}
+j <- 1:9
+n_j <- c(271, 204, 145, 90, 81, 48, 47, 66, 48)
+print(data.frame(j=j, n_j=n_j))
+```
+Die theoretischen Wahrscheinlichkeiten sind
+```{r}
+pi_j <- log10(1+1/j)
+print(data.frame(j=j, pi_j=pi_j))
+```
+Deuten die Zahlen darauf hin, dass die Buchhaltung
+manipuliert wurde? Die Nullhypothese lautet, dass die
+ersten Ziffern der Benford-Verteilung folgen, dass also
+die 1 mit einer Wahrscheinlichkeit von $\pi_1$ auftritt,
+die 2 mit $\pi_2$ etc. Die Alternativhypothese 
+behauptet, dass die ersten Ziffern nicht der 
+Benford-Verteilung folgen. 
+
+Der Wert der Teststatistik ist
+```{r}
+n <- sum(n_j)
+teststat <- sum((n_j - n*pi_j)^2/(n*pi_j))
+teststat
+```
+Der kritische Wert ist
+```{r}
+qchisq(0.95, df=8)
+```
+Die Teststatistik liegt also über dem kritischen
+Wert. Die Nullhypothese wird abgelehnt. Die Verteilung der
+ersten Ziffern weicht statistisch signifikant von der
+Benford-Verteilung ab. Ob der Grund für die Abweichung eine
+Manipulation der Buchhaltung ist oder ob es andere
+Gründe gibt, muss die Finanzverwaltung nun genauer untersuchen.
+:::
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Größenverteilung von Großstädten
+
+Die Größe von Städten (meist gemessen durch die Einwohnerzahl im
+Einzugsgebiet) folgt angeblich recht gut einer Gesetzmäßigkeit, die
+als "Zipf's law" bezeichnet wird. Das gilt zumindest, wenn die
+Städte eine gewisse Mindestgröße haben. Formal lässt sich das
+wie folgt ausdrücken. Sei $X$ die Größe einer zufällig ausgewählten
+Stadt aus der Gesamtheit aller Städte mit einer gegebenen
+Mindestgröße $x_{min}$. Dann folgt $X$ gemäß Zipf's law einer 
+Paretoverteilung mit den Parametern $x_{min}$ und $k=1$. 
+
+Ob diese Gesetzmäßigkeit wirklich existiert, soll nun durch
+einen Anpassungstest überprüft werden. Dazu laden wir die 
+Bevölkerungszahlen der Städte mit mehr als 2 Mio. Einwohnern. 
+```{r}
+x <- read.csv("../data/largecities.csv")
+```
+Die Daten stammen aus dem frei zugänglichen Datensatz [Worldcities](https://simplemaps.com/data/us-cities) und
+sind leicht aufbereitet worden. Der aufbereitete Datensatz
+enthält
+```{r}
+n <- dim(x)[1]
+n
+```
+Städte. Sie sind der Größe nach absteigend sortiert. 
+Die ersten Beobachtungen sind
+```{r}
+head(x)
+```
+Der Träger von $X$ sind die reellen Zahlen größer als 2 Mio.
+Wir partitionieren den Träger in 10 Intervalle. Als 
+Intervallgrenzen wählen wir die theoretischen Quantile für 
+$p=0.1, 0.2, \ldots, 0.9$ (die sogenannten Dezile). Da $X$ unter der
+Nullhypothese einer Paretoverteilung mit $x_{min}=2000000$
+und $k=1$ folgt, ist das $p$-Quantil (vgl. @sec-pareto)
+$$
+F^{-1}(p)=2000000\cdot (1-p)^{-1}.
+$$
+Damit ergeben sich die 9 Intervallgrenzen
+```{r}
+p <- seq(from=0.1, to=0.9, by=0.1)
+grenzen <- 2000000*(1-p)^(-1)
+grenzen
+```
+Das unterste Intervall startet bei 2 Mio., das oberste Intervall
+ist nach oben offen. Wir ergänzen den Vektor der Grenzen unten
+und oben um die Untergrenze des ersten Intervalls und die
+Obergrenze des letzten Intervalls. Anstelle von `Inf` könnte man
+jeden beliebigen Wert setzen, der größer ist als die Einwohnerzahl von
+Tokyo.
+```{r}
+grenzen <- c(2000000, grenzen, Inf)
+```
+Die Untergrenze des $j$-ten Intervalls ist jetzt `grenzen[j]`,
+die Obergrenze ist `grenzen[j+1]`. Nun wird in einer Schleife 
+gezählt, wie viele Städte in jedes Intervall fallen.
+```{r}
+n_j <- rep(0, 10)
+
+for(j in 1:10){
+  n_j[j] <- sum(grenzen[j] < x$population & x$population <= grenzen[j+1])
+}
+
+print(data.frame(Untergrenze=grenzen[1:10],
+                 Obergrenze=grenzen[2:11],
+                 n_j=n_j))
+```
+Da die Intervallgrenzen die Dezile sind, ist die
+theoretische Wahrscheinlichkeit für jedes der 10 Intervalle
+gerade 10 Prozent. Damit ergibt sich als Wert der
+Teststatistik
+```{r}
+teststat <- sum((n_j - 0.1*n)^2/(0.1*n))
+teststat
+```
+Der kritische Wert (für das Signifikanzniveau 0.01) 
+ist das 0.99-Quantil der $\chi^2$-Verteilung mit 
+9 Freiheitsgraden,
+```{r}
+qchisq(0.99, df=9)
+```
+Der Wert der Teststatistik ist größer als der kritische
+Wert. Die Nullhypothese wird also auf dem Niveau 0.01 abgelehnt.
+Die Verteilung weicht statistisch signifikant von der
+Paretoverteilung mit $k=1$ ab. Die Größenverteilung der 
+weltweiten Großstädte wird also nicht gut durch Zipf's law
+beschrieben.
+:::

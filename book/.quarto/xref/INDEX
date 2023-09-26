@@ -1,14 +1,92 @@
 {
   "index.qmd": {
-    "index.html": "bb3b4a85"
+    "index.html": "c4a549a5"
   },
   "01-zufall.qmd": {
-    "01-zufall.html": "e7a19ccd"
+    "01-zufall.html": "99be6c1f"
   },
   "02-wahrscheinlichkeit.qmd": {
-    "02-wahrscheinlichkeit.html": "05454443"
+    "02-wahrscheinlichkeit.html": "7c737f45"
   },
   "03-zufallsvariablen.qmd": {
-    "03-zufallsvariablen.html": "20688c64"
+    "03-zufallsvariablen.html": "873ea0bd"
+  },
+  "04-verteilungen.qmd": {
+    "04-verteilungen.html": "a48dd3ef"
+  },
+  "05-zufallsvektoren.qmd": {
+    "05-zufallsvektoren.html": "366c29e1"
+  },
+  "06-grenzwerte.qmd": {
+    "06-grenzwerte.html": "e66f7e33"
+  },
+  "07-stichproben.qmd": {
+    "07-stichproben.html": "34e2bd5b"
+  },
+  "08-punktschaetzung.qmd": {
+    "08-punktschaetzung.html": "83ee1dcb"
+  },
+  "09-intervallschaetzung.qmd": {
+    "09-intervallschaetzung.html": "146b5de0"
+  },
+  "10-hypothesentests.qmd": {
+    "10-hypothesentests.html": "8f044738"
+  },
+  "11-programmieren.qmd": {
+    "11-programmieren.html": "14050e6f"
+  },
+  "12-literatur.qmd": {
+    "12-literatur.html": "53de375d"
+  },
+  "06-kovarianz.qmd": {
+    "06-kovarianz.html": "dd84b7ea"
+  },
+  "07-grenzwerte.qmd": {
+    "07-grenzwerte.html": "33901654"
+  },
+  "08-stichproben.qmd": {
+    "08-stichproben.html": "d55d81ef"
+  },
+  "09-punktschaetzung.qmd": {
+    "09-punktschaetzung.html": "1c339d50"
+  },
+  "10-intervallschaetzung.qmd": {
+    "10-intervallschaetzung.html": "13972dda"
+  },
+  "11-hypothesentests.qmd": {
+    "11-hypothesentests.html": "2a36651b"
+  },
+  "12-programmieren.qmd": {
+    "12-programmieren.html": "46e0bd2a"
+  },
+  "13-literatur.qmd": {
+    "13-literatur.html": "bb7018b9"
+  },
+  "12-erwartungswerttests.qmd": {
+    "12-erwartungswerttests.html": "cc308d7c"
+  },
+  "13-programmieren.qmd": {
+    "13-programmieren.html": "5d7e9ae1"
+  },
+  "14-literatur.qmd": {
+    "14-literatur.html": "235a4792"
+  },
+  "13-weiteretests.qmd": {
+    "13-weiteretests.html": "69455178"
+  },
+  "14-programmieren.qmd": {
+    "14-programmieren.html": "a8630e23"
+  },
+  "15-literatur.qmd": {
+    "15-literatur.html": "a2f1337f"
+  },
+  "14-bootstrap.qmd": {
+    "14-bootstrap.html": "3f779fe9"
+  },
+  "15-programmieren.qmd": {
+    "15-programmieren.html": "01464f62"
+  },
+  "16-literatur.qmd": {
+    "16-literatur.html": "a3a22fe8"
   }
 }

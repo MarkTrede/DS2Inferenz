@@ -1,0 +1,68 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{bbm}
+\usepackage[T1]{fontenc}
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{slashed}
+\setlength{\parindent}{0pt}
+
+\usepackage[lastexercise]{exercise}%noanswer
+
+\renewcommand{\ExerciseHeader}{{\medskip\noindent\textbf{\normalsize
+                \ExerciseName\ \ExerciseHeaderNB\ExerciseHeaderTitle
+               \ExerciseHeaderOrigin\medskip\\}}}
+
+\renewcommand{\AnswerHeader}{{\bigskip\noindent \textbf{\normalsize Lösung zu \ExerciseName\ \ExerciseHeaderNB\medskip\\}}}
+
+\makeatletter
+\renewcommand{\@@@ExeEnv}{%
+    \vskip\ExerciseSkipBefore \@QuestionLevel1 \refstepExecounter%
+    \begingroup%
+        \@getExerciseInfo\ExerciseHeader%
+    \endgroup%
+}
+\makeatother
+
+\renewcommand{\QuestionNB}{\alph{Question})\ }
+\renewcommand{\subQuestionNB}{\roman{subQuestion})\ }
+\renewcommand{\subsubQuestionNB}{\arabic{subsubQuestion})\ }
+
+\addto\captionsngerman{%
+ \def\listexercisename{Liste der {\"U}bungen}%
+ \def\ExerciseName{Aufgabe}%
+ \def\AnswerName{L{\"o}sung zu Aufgabe}%
+ \def\ExerciseListName{{\"U}b.}%
+ \def\AnswerListName{L{\"o}sung}%
+ \def\ExePartName{Teil}%
+ \def\ArticleOf{von\ }%
+ }
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+    pdftitle = {Hausaufgabe \nr},
+    pdfauthor = {me}
+}
+
+
+
+
+\begin{document}
+\noindent
+{\small{\textbf {Data Science 2}} (Wintersemester 23/24)\hfill \woche \\
+Prof.~Dr.~Mark Trede\\
+Fabian Apostel B.~Sc.\\
+Daniel Stroth B.~Sc.}
+\vspace{0.1cm}
+\hrule
+
+
+\vspace{0,5cm}
+\begin{center}
+{\Large{\textbf {Hausaufgabe \nr}}}\\[0.3cm] 
+{\small{\textit {\thema}}}\\[1cm]
+\end{center}

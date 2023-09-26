@@ -1,0 +1,832 @@
+\section{Hypothesentests}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\textbf{Hypothesentests}\medskip
+\begin{itemize}
+\item Sei $X$ eine Zufallsvariable mit unbekannter\\
+Verteilungsfunktion $F(x)$
+\item Sei $X_{1},\ldots ,X_{n}$ eine einfache Stichprobe aus $X$
+\item Wir interessieren uns für einen Parameter $\theta$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Sei $\Theta $ die Menge aller möglichen Parameterwerte
+\item Testproblem für $\Theta _{0}\subset \Theta $:
+\begin{eqnarray*}
+H_{0} &:&\theta \in \Theta _{0} \\
+H_{1} &:&\theta \in \Theta \setminus \Theta _{0}
+\end{eqnarray*}
+\item $H_{0}$ heißt Nullhypothese
+\item $H_{1}$ heißt Alternativhypothese
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Wenn $|\Theta _{0}|=1$, heißt $H_{0}$ einfach; sonst heißt 
+$H_{0} $ zusammengesetzt (entsprechend für $H_{1}$)
+\item Sei $\theta _{0}$ eine vorgegebene reelle Zahl
+\item Für $\Theta \subset \mathbb{R}$ heißt
+\begin{eqnarray*}
+H_{0} &:&\theta =\theta _{0} \\
+H_{1} &:&\theta \neq \theta _{0}
+\end{eqnarray*}
+zweiseitiges Testproblem
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Einseitiges (rechtsseitiges) Testproblem
+\begin{eqnarray*}
+H_{0} &:&\theta \leq \theta _{0} \\
+H_{1} &:&\theta >\theta _{0}
+\end{eqnarray*}
+\item Einseitiges (linksseitiges) Testproblem
+\begin{eqnarray*}
+H_{0} &:&\theta \geq \theta _{0} \\
+H_{1} &:&\theta <\theta _{0}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Test: Mit Hilfe einer Stichprobe wird entschieden, ob $H_{0}$
+zugunsten von $H_{1}$ abgelehnt wird oder nicht
+\item Teststatistik $T\left( X_{1},\ldots ,X_{n}\right) $
+\item Kritischer Bereich $K\subset \mathbb{R}$
+\item Testentscheidung:
+\begin{eqnarray*}
+T &\in &K\quad \Longrightarrow \quad H_{0}\text{ wird abgelehnt} \\
+T &\notin &K\quad \Longrightarrow \quad H_{0}\text{ wird nicht abgelehnt}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+Achtung: Die Testentscheidung ist zufällig \\
+(weil $T(X_1,\ldots,X_n) $ eine Zufallsvariable ist)
+\begin{block}{Fehler 1.\ Art}
+$H_0$ wird abgelehnt, obwohl sie richtig ist
+\end{block}
+\begin{block}{Fehler 2.\ Art}
+$H_0$ wird nicht abgelehnt, obwohl sie falsch ist
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Wahrscheinlichkeit für einen Fehler erster Art
+\[ \alpha =\sup\limits_{\theta \in \Theta _{0}}
+P(T(X_1,\ldots,X_n)\in K) \]
+\item Wahrscheinlichkeit für einen Fehler zweiter Art
+\[ \beta =\sup\limits_{\theta \in \Theta \backslash \Theta _{0}}
+P\left(T(X_{1},\ldots ,X_{n})\in \bar{K}\right) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{block}{Powerfunktion, Gütefunktion}
+Die Powerfunktion liefert die Wahrscheinlichkeit\\
+$H_{0}$ abzulehnen als Funktion des wahren Parameters $\theta$
+\[ G(\theta) =P\left( T(X_{1},\ldots ,X_{n})\in K\right) \]
+\end{block}
+\begin{itemize}
+\item Wähle den kritischen Bereich $K$ so, dass $\alpha $ einen
+vorgegebenen (kleinen) Wert annimmt
+\item Realisation (Wert) der Teststatistik: $t=T(x_{1},\ldots ,x_{n})$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\begin{itemize}
+\item Wird die Nullhypothese abgelehnt, kann man mit 
+einigem Recht davon ausgehen, dass sie falsch ist
+\item Eine Nichtablehnung impliziert nicht, dass die
+Nullhypothese tatsächlich wahr ist
+\item Nichtablehnung heißt nur: die Daten widersprechen $H_{0}$ nicht allzu eklatant
+\item Es ist nicht gleichgültig, wie man $H_{0}$ und $H_{1}$ wählt
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.1}
+\textbf{Wichtige Tests I: Erwartungswerttests}\\\medskip
+\begin{itemize}
+\item Hat eine Zufallsvariable einen bestimmten Erwartungswert?
+\item Haben zwei Zufallsvariablen den gleichen Erwartungswert?
+\item Gauß-Test (bekannte Varianz, Normalverteilung),
+$t$-Test (unbekannte Varianz, Normalverteilung)
+\item Tests für große Stichproben
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.2}
+\textbf{Wichtige Tests II: Wahrscheinlichkeits- und Anteilswerttests}\\\medskip
+\begin{itemize}
+\item Tests über die Höhe einer Wahrscheinlichkeit\\
+(oder eines Anteils)
+\item Tests über den Vergleich zweier Wahrscheinlichkeiten\\
+(oder Anteile)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hypothesentests}
+\framesubtitle{Kap.~6.2}
+\textbf{Wichtige Tests III: Unabhängigkeits- und Anpassungstests}\\\medskip
+\begin{itemize}
+\item Unabhängigkeitstest: Sind zwei Zufallsvariablen unabhängig
+voneinander?
+\item Anpassungstest: Hat eine Zufallsvariable eine bestimmte
+Verteilung?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Tests für Erwartungswerte}\\\medskip
+\begin{itemize}
+\item Ausgangspunkte:
+\[\begin{array}{ll}
+\displaystyle \sqrt{n}\frac{\bar{X}-\mu }{\sigma} \sim N(0,1) &
+\displaystyle \sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }}\sim t_{n-1} \\[4ex]
+\displaystyle \sqrt{n}\frac{\bar{X}-\mu }{\sigma} \overset{appr}{\sim} N(0,1)\qquad &
+\displaystyle \sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }}\overset{appr}{\sim} N(0,1)
+\end{array}\]
+\item Beispiel: Herleitung für $\sqrt{n}(\bar X-\mu)/\sigma$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Tests für Erwartungswerte einer Normalverteilung}\\\medskip
+\begin{itemize}
+\item Gauß-Test: $X\sim N(\mu,\sigma^2)$ mit $\sigma^2$ bekannt
+\item Null- und Alternativhypothese
+\begin{eqnarray*}
+H_0&:&\mu =\mu_0\\
+H_1&:&\mu\neq\mu_0
+\end{eqnarray*}
+(zweiseitiger Gauß-Test)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Einfache Stichprobe $X_{1},\ldots ,X_{n}$ aus $X$
+\item Teststatistik
+\[ T=\sqrt{n}\frac{\bar{X}-\mu _{0}}{\sigma } \]
+\item Wenn $H_{0}$ gültig ist (d.h. $\mu =\mu _{0}$), dann gilt
+\[ T\sim N\left( 0,1\right) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+Dichtefunktion der Teststatistik $T$ unter $H_0$
+\begin{center}
+\includegraphics[width=10cm]{tstat.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Kritischer Bereich
+\[ K=\{t\in \mathbb{R}:|t|>u_{1-\frac{\alpha }{2}}\} \]
+\item Wert der Teststatistik
+\[ t=\sqrt{n}\frac{\bar{x}-\mu _{0}}{\sigma } \]
+\item Lehne $H_{0}$ ab, wenn $|t|>u_{1-\frac{\alpha }{2}}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Zweiseitiger Gauß-Test} 
+\begin{itemize}
+\item Sei $X\sim N(\mu ,4) $ das tatsächliche Gewicht\\
+(in Gramm) einer 200g-Tafel Schokolade
+\item Eine einfache Stichprobe liefert $n=8$ Werte:
+\begin{equation*}
+\begin{array}{llll}
+201.15 & \quad 197.57 & \quad 203.15 & \quad 198.99 \\ 
+201.38 & \quad 200.50 & \quad 199.92 & \quad 203.44
+\end{array}
+\end{equation*}
+\item Hypothesen: $H_{0}:\mu =200$ vs. $H_{1}:\mu \neq 200$
+\item Signifikanzniveau sei 5\%
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Zweiseitiger Gauß-Test} 
+\begin{itemize}
+\item Teststatistik
+\[ T=\sqrt{n}\frac{\bar{X}-\mu _{0}}{\sigma } \]
+\item Wert der Teststatistik:
+\vspace*{1.5cm}
+\item Entscheidung: 
+\vspace*{1.5cm}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Einseitiger Gauß-Test (linksseitig)
+\item Hypothesen
+\[ H_{0}:\mu \geq \mu _{0}\quad \text{vs\quad }H_{1}:\mu <\mu _{0} \]
+\item Teststatistik
+\[ T=\sqrt{n}\frac{\bar{X}-\mu _{0}}{\sigma } \]
+\item Wenn $\mu=\mu_0$ ist, gilt $T\sim N(0,1)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+Dichtefunktion der Teststatistik $T$ unter $\mu=\mu_0$
+\begin{center}
+\includegraphics[width=10cm]{tstat2.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Kritischer Bereich
+\[ K=\{t\in \mathbb{R}:t<-u_{1-\alpha }\} \]
+\item Wert der Teststatistik
+\[ t=\sqrt{n}\frac{\bar{x}-\mu _{0}}{\sigma } \]
+\item Lehne $H_{0}$ ab, wenn $t<-u_{1-\alpha }$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Rechtsseitiger Gauß-Test
+\[ H_{0}:\mu \leq \mu _{0}\quad \text{vs\quad }H_{1}:\mu >\mu _{0} \]
+\item Teststatistik und Wert der Teststatistik wie gehabt
+\item Kritischer Bereich
+\[ K=\{t\in \mathbb{R}:t>u_{1-\alpha }\} \]
+\item Lehne $H_{0}$ ab, wenn $t>u_{1-\alpha }$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Einseitiger Gauß-Test}
+\begin{itemize}
+\item Sei $X\sim N(\mu ,4) $ das tatsächliche Gewicht\\
+(in Gramm) einer 200g-Tafel Schokolade
+\item Eine einfache Stichprobe liefert $n=8$ Werte:
+\begin{equation*}
+\begin{array}{llll}
+201.15 & \quad 197.57 & \quad 203.15 & \quad 198.99 \\ 
+201.38 & \quad 200.50 & \quad 199.92 & \quad 203.44
+\end{array}
+\end{equation*}
+\item Hypothesen: $H_{0}:\mu \leq 198$ vs. $H_{1}:\mu >198$
+\item Signifikanzniveau sei 1\%
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Einseitiger Gauß-Test}
+\begin{itemize}
+\item Teststatistik
+\[ T=\sqrt{n}\frac{\bar{X}-\mu _{0}}{\sigma } \]
+\item Wert der Teststatistik:
+\vspace*{1.5cm}
+\item Entscheidung: 
+\vspace*{1.5cm}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+
+%\begin{frame}
+%	\frametitle{Tests für Erwartungswerte}
+%	\framesubtitle{Shiny - Tests für Erwartungswerte}
+%	\begin{figure}
+%		\includegraphics[height=\textheight]{shiny-logo}
+%	\end{figure}
+%\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Power (Güte) des Gauß-Tests}\medskip
+\begin{itemize}
+\item Rechtsseitiger Gauß-Test
+\[ H_{0}:\mu \leq \mu _{0}\quad \text{vs\quad }H_{1}:\mu >\mu _{0} \]
+\item Die Wahrscheinlichkeit, $H_{0}$ abzulehnen, ist 
+\[ G\left( \mu \right) =P\left( T(X_{1},\ldots ,X_{n})\in K\right) \]
+(Gütefunktion)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+Die Power hängt ab vom wahren Wert $\mu $ des Parameters:\\[2ex]
+$P(T\in K) = P(T>u_{1-\alpha}) = \ldots$
+\vspace*{4cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Power des Gauß-Tests}
+\begin{itemize}
+\item Sei $X\sim N\left( \mu ,4\right) $ das tatsächliche Gewicht\\
+(in Gramm) einer 200g-Tafel Schokolade
+\item Hypothesen: $H_{0}:\mu \leq 198$ vs. $H_{1}:\mu >198$ bei einem
+Signifikanzniveau von $\alpha =0.05$
+\item Stichprobenumfang $n=8$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Power des Gauß-Tests}
+Tatsächlich sei $\mu =201$; wie groß ist die Wahrscheinlichkeit, 
+dass $H_0$ als falsch erkannt wird?\\
+\vspace*{5cm}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Tests für Erwartungswerte einer Normalverteilung}\\\medskip
+\begin{itemize}
+\item $t$-Test: $X\sim N(\mu,\sigma^2)$ mit $\sigma^2$ unbekannt
+\item Hypothesen (zweiseitig)
+\begin{eqnarray*}
+H_0 &:& \mu=\mu_0\\
+H_1 &:& \mu\neq\mu_0
+\end{eqnarray*}
+\item Einfache Stichprobe $X_1,\ldots ,X_n$ aus $X$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Teststatistik
+\[ T = \sqrt{n}\frac{\bar{X}-\mu_0}{S^{\ast}} \]
+\item Wenn $H_{0}$ gültig ist (d.h. $\mu =\mu _{0}$), dann gilt
+\[ T\sim t_{n-1} \]
+\item Vorgehen exakt analog zum Gauß-Test!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Der kritische Bereich ist
+\[ K=\{t\in \mathbb{R}:|t|>t_{n-1,1-\frac{\alpha }{2}}\} \]
+\item Wert der Teststatistik
+\[ t=\sqrt{n}\frac{\bar{x}-\mu _{0}}{s^{\ast }} \]
+\item Lehne $H_{0}$ ab, wenn $|t| > t_{n-1,1-\frac{\alpha }{2}}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Zweiseitiger $t$-Test}
+\begin{itemize}
+\item Sei $X\sim N(\mu ,\sigma^2)$ mit unbekanntem Erwartungswert $\mu $
+und unbekannter Varianz $\sigma^2$
+\item Zweiseitiger $t$-Test mit $\alpha =0.05$
+\begin{eqnarray*}
+H_{0} &:&\mu =6 \\
+H_{1} &:&\mu \neq 6
+\end{eqnarray*}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Zweiseitiger $t$-Test}
+\begin{itemize}
+\item Eine einfache Stichprobe mit $n=8$ ergab
+\begin{center}
+\begin{tabular}{cccc}
+1.661 & 4.567 & 1.277 & 5.341 \\
+3.622 & 7.664 & 2.666 & 3.803
+\end{tabular}
+\end{center}
+\item Man errechnet 
+\begin{eqnarray*}
+\bar{x}&=&3.825\\
+s^{\ast }&=&2.075
+\end{eqnarray*}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Zweiseitiger $t$-Test}
+Wert der Teststatistik:\\
+\vspace*{3cm}
+Testentscheidung:\\
+\vspace*{2cm}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Einseitige Tests:}\\\medskip
+\begin{itemize}
+\item Linksseitig: $H_{0}:\mu \geq \mu _{0}$ vs $H_{1}:\mu <\mu _{0}$\\\medskip
+Lehne $H_{0}$ ab, wenn $t<-t_{n-1,1-\alpha }$
+\item Rechtsseitig: $H_{0}:\mu \leq \mu _{0}$ vs $H_{1}:\mu >\mu _{0}$\\\medskip
+Lehne $H_{0}$ ab, wenn $t>t_{n-1,1-\alpha }$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Anmerkungen:}\medskip
+\begin{itemize}
+\item Wegen des zentralen Grenzwertsatzes gilt bei beliebig verteiltem 
+$X$ für großen Stichprobenumfang
+\[ \sqrt{n}\frac{\bar{X}-\mu }{\sigma }\overset{appr}{\sim }N\left( 0,1\right) \]
+und auch
+\[ \sqrt{n}\frac{\bar{X}-\mu }{S^{\ast }}\overset{appr}{\sim }N\left( 0,1\right) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Der Gauß-Test ist daher praktisch immer anwendbar,\\
+wenn $n$ groß ist!
+\item Auch der $t$-Test ist praktisch immer anwendbar,\\
+wenn $n$ groß ist!
+\item Die kritischen Werte sind in vielen\\
+Statistik-Programmen implementiert (z.B. R)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Zusammenfassung: Erwartungswerttests}\medskip
+\begin{itemize}
+\item Ist $n$ groß?\pause\ Ist $X$ normalverteilt?\pause\ Ist $\sigma^2$ bekannt?\pause
+\item Teststatistiken
+\[ \sqrt{n}\frac{\bar{X}-\mu _{0}}{\sigma }\quad 
+\text{oder\quad }\sqrt{n}\frac{\bar{X}-\mu _{0}}{S^{\ast }} \]\pause
+\item Aus der Verteilung der Teststatistiken unter $H_{0}$ ergeben sich die
+kritischen Bereiche
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Zweistichproben-Tests für Erwartungswerte}\\\medskip
+\begin{itemize}
+\item Approximativer Zweistichproben-Gauß-Test
+\item Man zieht eine \textbf{zweifache} Stichprobe
+\begin{eqnarray*}
+&&X_{1},\ldots ,X_{n} \\
+&&Y_{1},\ldots ,Y_{m}
+\end{eqnarray*}
+\item Die $n+m$ Zufallsvariablen seien unabhängig
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Sowohl $n$ als auch $m$ sei groß (so dass \\
+der zentrale Grenzwertsatz greift)
+\item Zu testende Hypothesen
+\begin{eqnarray*}
+H_{0} &:&\mu _{X}=\mu _{Y} \\
+H_{1} &:&\mu _{X}\neq \mu _{Y}
+\end{eqnarray*}
+\item Die Varianzen $\sigma _{X}^{2}$ und $\sigma _{Y}^{2}$ seien
+unbekannt
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Die Zufallsvariablen
+\[ \bar{X} \overset{appr}{\sim} N\left(\mu_X,\frac{\sigma_X^2}{n}\right)\]
+und
+\[ \bar{Y} \overset{appr}{\sim} N\left(\mu_Y,\frac{\sigma_Y^2}{m}\right) \]
+sind unabhänigig
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Unter $H_{0}:\mu _{X}=\mu _{Y}$ gilt
+\[ \bar{X}-\bar{Y}\overset{appr}{\sim }
+N\left( 0,\frac{\sigma _{X}^{2}}{n}+\frac{\sigma _{Y}^{2}}{m}\right) \]
+\item Folglich gilt
+\[ T=\frac{\bar{X}-\bar{Y}}{\sqrt{\frac{S_{X}^{\ast 2}}{n}+\frac{S_{Y}^{\ast 2}}{m}}}
+\overset{appr}{\sim }N\left( 0,1\right) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Ersetze die Schätzer $\bar X$, $\bar Y$, $S^{\ast}_X$ und $S^{\ast}_Y$ 
+durch ihre Realisierungen $\bar x$, $\bar y$, $s^{\ast}_X$ und $s^{\ast}_Y$
+\item Testentscheidung: Lehne $H_{0}$ ab, wenn
+\[ |t|=\frac{\left\vert \bar{x}-\bar{y}\right\vert }{\sqrt{\frac{s_{X}^{\ast 2}}{n}
++\frac{s_{Y}^{\ast 2}}{m}}}>u_{1-\frac{\alpha }{2}} \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Stundenlöhne} 
+\begin{itemize}
+\item $X$ und $Y$: Stundenlöhne in zwei Branchen A und B
+\item Die Erwartungswerte $\mu_X$, $\mu_Y$ und 
+die Varianzen $\sigma_X^2$, $\sigma_Y^2$ seien unbekannt
+\item Teste auf einem Niveau von $\alpha=0.05$
+\begin{eqnarray*}
+H_{0} &:&\mu_X = \mu_Y \\
+H_{1} &:&\mu_X \neq \mu_Y
+\end{eqnarray*}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Stundenlöhne} 
+\begin{itemize}
+\item Die Teststatistik lautet
+\[ T=\frac{\bar{X}-\bar{Y}}{\sqrt{\frac{S_{X}^{\ast 2}}{n}+\frac{S_{Y}^{\ast 2}}{m}}} \]
+\item Zwei unabhängige große Stichproben mit\\
+$n_X=250$ und $n_Y=300$
+\item Unter Gültigkeit der Nullhypothese gilt \\
+approximativ $T\sim N(0,1)$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Stundenlöhne} 
+\begin{itemize}
+\item Aus den konkreten Stichproben errechnet man\\
+$\bar x = 50.01$,\quad $s^{\ast 2}_x = 94.93$,\quad $\bar y = 52.32$,\quad $s^{\ast 2}_y = 201.18$\\[1ex]
+\item Wert der Teststatistik:\vspace*{2cm}
+\item Entscheidung:\vspace*{1cm}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Tests für Wahrscheinlichkeiten oder Anteile}\medskip
+\begin{itemize}
+\item Sei $X$ Bernoulli-verteilt mit unbekanntem Parameter $\pi $,
+sei $X_{1},\ldots ,X_{n}$ eine einfache Stichprobe aus $X$
+\item Hypothesen
+\begin{eqnarray*}
+H_0 &:&\pi=\pi _0\quad \text{vs}\quad H_1:\pi\neq \pi_0 \\
+H_0 &:&\pi\leq \pi_0\quad \text{vs}\quad H_1:\pi>\pi_0 \\
+H_0 &:&\pi\geq \pi_0\quad \text{vs}\quad H_1:\pi<\pi_0
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Unter Gültigkeit von $H_{0}$ ist $V(X)=\pi _{0}(1-\pi_0)$
+\item Teststatistik
+\[ T=\sqrt{n}\frac{\hat\pi-\pi_0}{\sqrt{\pi_0(1-\pi_0) }}
+\overset{appr}{\sim}N(0,1) \]
+\item Kritische Bereiche wie beim Gauß-Test
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Wahlumfrage}
+\begin{itemize}
+\item Anteil der SPD-Wähler in NRW; $X$ ist Bernoulli-verteilt mit
+unbekanntem $\pi$
+\item Der Anteil der SPD-Wähler in einer konkreten Stichprobe vom Umfang 
+$n=1000$ sei $\hat{\pi}=0.3$
+\item Hypothese $H_{0}:\pi \leq 0.25$ vs $H_{1}:\pi >0.25$;
+Signifikanzniveau $\alpha =0.05$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Wahlumfrage}
+\begin{itemize}
+\item Wert der Teststatistik\vspace*{2cm}
+\item Testentscheidung:\vspace*{2cm}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\textbf{Zweistichproben-Test für Wahrscheinlichkeiten}\medskip
+\begin{itemize}
+\item Sei $X$ Bernoulli-verteilt mit unbekanntem $\pi_X$,\\
+sei $Y$ Bernoulli-verteilt mit unbekanntem $\pi_Y$
+\item Man zieht eine zweifache Stichprobe
+\begin{eqnarray*}
+&&X_{1},\ldots ,X_{n} \\
+&&Y_{1},\ldots ,Y_{m}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Die $n+m$ Zufallsvariablen seien unabhängig
+\item Sowohl $n$ als auch $m$ sei groß (so dass\\
+der zentrale Grenzwertsatz greift)
+\item Hypothesen
+\begin{eqnarray*}
+H_0 &:&\pi_X=\pi _{Y}\quad \text{vs}\quad H_{1}:\pi _{X}\neq \pi _{Y} \\
+H_0 &:&\pi_X\leq \pi _{Y}\quad \text{vs}\quad H_{1}:\pi _{X}>\pi _{Y} \\
+H_0 &:&\pi_X\geq \pi _{Y}\quad \text{vs}\quad H_{1}:\pi _{X}<\pi _{Y}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Approximativer Zweistichproben-Gauß-Tests
+\item Geschätzte Varianzen sind
+\begin{eqnarray*}
+S_{X}^{2} &=&\hat{\pi}_{X}\left( 1-\hat{\pi}_{X}\right) \\
+S_{Y}^{2} &=&\hat{\pi}_{Y}\left( 1-\hat{\pi}_{Y}\right)
+\end{eqnarray*}
+\item Teststatistik
+\[ T=\frac{\hat\pi_X-\hat\pi_Y}{\sqrt{\frac{\hat\pi_X(1-\hat\pi_X)}{n}
++\frac{\hat\pi_Y(1-\hat\pi_Y)}{m}}} \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{itemize}
+\item Unter Gültigkeit von $H_{0}$ gilt 
+\[ T\overset{appr}{\sim }N(0,1) \]
+\item Kritische Bereiche wie beim approximativen Zweistichproben-Gauß-Test
+\item Beim zweiseitigen Test wird $H_{0}$ auf einem Signifikanzniveau 
+von $\alpha$ abgelehnt, wenn $|t|>u_{1-\alpha /2}$ ist
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Beispiel: Auswertung einer Marketing-Aktion}
+\begin{itemize}
+\item An $n=2000$ zufällig ausgewählte Kunden wird ein 
+Werbebrief für ein neues Produkt geschickt
+\item $n$ Zufallsvariablen
+\[ X_{i}=\left\{ 
+\begin{array}{ll}
+1 & \quad \text{wenn Kunde }i\text{ Produkt kauft } \\ 
+0 & \quad \text{sonst}
+\end{array} \right. \]
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Auswertung einer Marketing-Aktion}
+\begin{itemize}
+\item Außerdem werden $m=3000$ zufällig ausgewählte Kunden
+beobachtet, die \textbf{nicht} beworben wurden (Kontrollgruppe)
+\item $m$ Zufallsvariablen
+\[ Y_{j}=\left\{ 
+\begin{array}{ll}
+1 & \quad \text{wenn Kunde }j\text{ Produkt kauft } \\ 
+0 & \quad \text{sonst}
+\end{array}\right.\]
+\item Hypothesen: $H_0:\pi_X\leq \pi_Y$ vs $H_1:\pi_X>\pi_Y$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Auswertung einer Marketing-Aktion}
+\begin{itemize}
+\item Signifikanzniveau $\alpha =0.05$
+\item Ergebnisse der konkreten Stichprobe
+\begin{eqnarray*}
+\hat{\pi}_{X} &=&\frac{\sum_{i=1}^{n}X_{i}}{n}=\frac{113}{2000}=0.0565 \\
+\hat{\pi}_{Y} &=&\frac{\sum_{j=1}^{m}Y_{j}}{m}=\frac{141}{3000}=0.0470
+\end{eqnarray*}
+\item Ist der Vorsprung der Werbegruppe statistisch signifikant?
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests für Erwartungswerte}
+\framesubtitle{Kap.~6.2}
+\begin{exampleblock}{Forts. Beispiel: Auswertung einer Marketing-Aktion}
+\begin{itemize}
+\item Wert der Teststatistik:\vspace*{3cm}
+\item Entscheidung:\vspace*{1cm}
+\end{itemize}
+\end{exampleblock}
+\end{frame}

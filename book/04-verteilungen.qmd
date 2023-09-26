@@ -7,36 +7,38 @@ library(ggplot2)
 Für viele Anwendungsfälle gibt es **Standardverteilungen**, die bestimmte Zufallsvorgänge sehr gut beschreiben können. Eine 
 übersichtliche Liste wichtiger Standardverteilungen finden Sie auf
 der deutschsprachigen Wikipedia-Seite 
-
-- [Liste univariater Wahrscheinlichkeitsverteilungen](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen).
-
-Die entsprechende [englischsprachige Seite](https://en.wikipedia.org/wiki/List_of_probability_distributions) listet noch mehr Verteilungen auf, stellt ihre
+([-> Link](https://de.wikipedia.org/wiki/Liste_univariater_Wahrscheinlichkeitsverteilungen)).
+Die entsprechende englischsprachige Seite ([-> Link](https://en.wikipedia.org/wiki/List_of_probability_distributions)) listet noch mehr Verteilungen auf, stellt ihre
 Eigenschaften aber nicht so übersichtlich dar. In diesem
 Kurs lernen Sie exemplarisch einige ausgewählte diskrete und 
-stetige Standardverteilungen kennen. 
+stetige Standardverteilungen kennen. Der Transfer auf 
+beliebige weitere Standardverteilungen fällt dann leicht.
 
 ## Standardverteilungen in R
 
-Diese Verteilungen (und noch viele weitere) sind in R
-implementiert oder lassen leicht durch R-Pakete ergänzen.
-Es gibt R-Funktionen, mit denen man die Verteilungsfunktion,
-die Quantilfunktion oder auch die Dichte- bzw. Wahrscheinlichkeitsfunktion
-auswerten kann. Außerdem stellt R Funktionen bereit, mit denen sich
-Realisationen von standardverteilten Zufallsvariablen generieren lassen.
+Die meisten Standardverteilungen sind in R implementiert oder 
+lassen sich leicht durch R-Pakete ergänzen. Zu jeder 
+Standardverteilung gibt es R-Funktionen, mit denen man ihre 
+Verteilungs- und Quantilfunktion sowie die Dichte- bzw. 
+Wahrscheinlichkeitsfunktion auswerten kann. Außerdem stellt 
+R Funktionen bereit, mit denen sich Realisationen von 
+Zufallsvariablen generieren lassen, die einer 
+Standardverteilung folgen.
 
 Die Syntax der R-Funktionen ist sehr einfach und für alle 
-Standardverteilung nahezu gleich:
+Standardverteilungen nahezu gleich:
 
-- `pVERTEILUNG(x, PARAMETER)`: Verteilungsfunktion
-- `qVERTEILUNG(p, PARAMETER)`: Quantilfunktion
 - `dVERTEILUNG(x, PARAMETER)`: Dichte- oder Wahrscheinlichkeitsfunktion
+- `pVERTEILUNG(q, PARAMETER)`: Verteilungsfunktion
+- `qVERTEILUNG(p, PARAMETER)`: Quantilfunktion
 
 Dabei ist `VERTEILUNG` eine Abkürzung für den Namen der Standardverteilung
 und `PARAMETER` ist der Parameter der Verteilung (bzw. die Parameter,
-wenn es mehrere sind). Mit `x` wird die Stelle bezeichnet, an der die
-Verteilungs-, Dichte- oder Wahrscheinlichkeitsfunktion ausgewertet werden
-soll, und `p` ist die Stelle, an der die Quantilfunktion ausgewertet
-werden soll.
+wenn es mehrere sind). Mit `x`, `q` und `p` werden die Stellen bezeichnet, 
+an denen die Dichte- oder Wahrscheinlichkeitsfunktion, die Verteilungsfunktion
+und die Quantilfunktion ausgewertet werden sollen. 
+Im @sec-funktionsaufrufe wird genauer erklärt, auf welche Weisen
+man Funktionsargumente eingeben kann.
 
 Um Realisationen der Zufallsvariable zu ziehen, nutzt man die
 R-Funktionen
@@ -60,7 +62,7 @@ Zufallszahlen sogenannte Monte-Carlo-Simulationen durchführt.
 
 ## Diskrete Verteilungen {#sec-diskret}
 
-### Bernoulli-Verteilung
+### Bernoulli-Verteilung {#sec-bernoulli}
 
 Ein Zufallsexperiment heißt **Bernoulli-Experiment**, wenn es nur darauf
 ankommt, ob etwas eintritt ("Erfolg", $A$) oder nicht eintritt
@@ -74,18 +76,20 @@ Die Indikatorvariable $1_A$ ist eine Zufallsvariable mit
 $$
 1_A=\left\{
 \begin{array}{ll}
-1 & \text{ wenn }A\text{ eintritt (Erfolg)}\\
-0 & \text{ wenn }\bar A\text{ eintritt (Misserfolg)}\\
+1 & \text{ wenn }A\text{ eintritt}\\
+0 & \text{ wenn }\bar A\text{ eintritt}\\
 \end{array}
 \right.
 $$
-Die Zufallsvariable $1_A$ heißt **Bernoulli-verteilt** mit Parameter $\pi$.
+Die Zufallsvariable $1_A$ heißt **Bernoulli-verteilt** 
+(engl. Bernoulli distributed) mit Parameter $\pi$.
 Die Wahrscheinlichkeitsfunktion lautet
 $$
-f(x)=P(1_A=x)=\left\{
+f(x)=\left\{
 \begin{array}{ll}
-0 & \text{ mit Wahrscheinlichkeit }1-\pi\\
-1 & \text{ mit Wahrscheinlichkeit }\pi
+1-\pi & \text{ wenn }x=0\\
+\pi & \text{ wenn }x=1\\
+0 & \text{ sonst.}
 \end{array}
 \right.
 $$
@@ -104,8 +108,9 @@ Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot \pi\\
 &=\pi (1-\pi).
 \end{align*}
 $$
+
 ::: { .callout-tip collapse="true"}
-## Beispiel: Befragung
+## Beispiel: Befragung zu Startups
 
 Eine zufällig aus einer Population ausgewählte Person wird
 befragt, ob sie in einem Startup arbeitet. Die Antwort
@@ -114,19 +119,21 @@ $$
 X=\left\{
 \begin{array}{ll}
 0 & \text{ wenn die Person nicht in einem Startup arbeitet}\\
-1 & \text{ wenn die Person in einem Startup arbeitet}
+1 & \text{ wenn die Person in einem Startup arbeitet.}
 \end{array}
 \right.
 $$
 Die Zufallsvariable $X$ ist Bernoulli-verteilt. Der Parameter $\pi$ ist
 die Wahrscheinlichkeit dafür, dass die Person in einem Startup arbeitet.
 Da eine Person zufällig aus der Population gezogen wird, entspricht diese
-Wahrscheinlichkeit dem Anteil der Personen, die in einem Startup arbeiten.
+Wahrscheinlichkeit dem Anteil der Personen in der Population, 
+die in einem Startup arbeiten.
 :::
 
-### Binomialverteilung
+### Binomialverteilung {#sec-binom}
 
-Eine Zufallsvariable $X$ heißt **binomialverteilt** mit den Parametern
+Eine Zufallsvariable $X$ folgt einer **Binomialverteilung** 
+(engl. binomial distribution) mit den Parametern
 $n$ und $\pi$, wenn der Träger 
 $$
 T_X=\{0,1,2,\ldots,n\}
@@ -151,8 +158,8 @@ Misserfolg aufgetreten ist. Dazu werden die $n$ Zufallsvariablen
 $$
 1_{A_i}=\left\{
 \begin{array}{ll}
-1 & \text{ wenn }A_i\text{ eintritt (Erfolg)}\\
-0 & \text{ wenn }\bar A_i\text{ eintritt (Misserfolg)}
+1 & \text{ wenn }A_i\text{ eintritt}\\
+0 & \text{ wenn }\bar A_i\text{ eintritt}
 \end{array}
 \right.
 $$
@@ -162,7 +169,8 @@ X=\sum_{i=1}^n 1_{A_i}
 $$
 eine binomialverteilte Zufallsvariable. Sie gibt an, wie viele Erfolge bei den
 $n$ Wiederholungen aufgetreten sind. Die Verteilung von $X$ hängt davon ab,
-welche Werte $n$ und $\pi$ annehmen.
+welche Werte $n$ und $\pi$ annehmen. Für $n=1$ ergibt sich als Spezialfall
+die Bernoulli-Verteilung mit Parameter $\pi$.
 
 Die übliche Kurzschreibweise für eine binomialverteilte Zufallsvariable 
 mit den Parametern $n$ und $\pi$ lautet
@@ -193,17 +201,18 @@ pbinom(x, size=n, prob=p)
 ```
 Und die Quantilfunktion kann in R ausgewertet werden mit der R-Funktion
 ```{r eval=FALSE}
-qbinom(p, size=n, prob=p)
+qbinom(q, size=n, prob=p)
 ```
-Diese Funktion berechnet das $p$-Quantil.
+Diese Funktion berechnet das $q$-Quantil.
 
 Alle drei Funktionen können auch an mehreren Stellen gleichzeitig ausgewertet
-werden, indem man für `k`, `x` oder `p` einen Vektor einsetzt.
+werden, indem man für `k`, `x` oder `q` einen Vektor einsetzt.
 
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Urnenmodell
 
-Die idealtypische Anwendung der Binomialverteilung hat zwar keinen ökonomischen
+<img src="images/UrnWithRedWhiteBalls.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
+Die prototypische Anwendung der Binomialverteilung hat keinen ökonomischen
 Bezug, ist aber trotzdem für das Verständnis hilfreich. Es geht um das
 Ziehen von Kugeln aus einer Urne mit Zurücklegen. Als Beispiel betrachten
 wir eine Urne mit 10 Kugeln, von denen 3 rot und 7 weiß sind. Aus dieser
@@ -220,7 +229,7 @@ Die Wahrscheinlichkeit, dass genau 2 rote Kugeln gezogen werden, beträgt $P(X=2
 ```{r}
 dbinom(2, size=5, prob=0.3)
 ```
-Die Wahrscheinlichkeit, dass höchstens 1 rote Kugel geogen wird, ist
+Die Wahrscheinlichkeit, dass höchstens 1 rote Kugel gezogen wird, ist
 $P(X\le 1)$,
 ```{r}
 pbinom(1, size=5, prob=0.3)
@@ -235,12 +244,68 @@ erhält man die komplette Wahrscheinlichkeitsfunktion,
 ```{r}
 dbinom(0:5, size=5, prob=0.3)
 ```
-Die Summe dieser Wahrscheinlichkeiten ist 1.
+Die Summe dieser Wahrscheinlichkeiten ist 1. 
+
+Warum wird eine gezogene Kugel
+vor der nächsten Ziehung wieder in die Urne zurückgelegt? Eine Binomialverteilung
+liegt nur vor, wenn die einzelnen Ziehungen identisch und unabhängig
+Bernoulli-verteilt sind. Würde man eine gezogene Kugel nicht wieder
+zurücklegen, dann würden sich die Anteile bei jedem Zug verändern. Wenn aus
+der Urne in diesem Beispiel beim ersten Zug eine rote Kugel gezogen würde,
+dann wäre der Anteil roter Kugeln beim zweiten Zug nicht mehr 3/10, sondern
+2/9. Und wenn beim ersten Zug eine weiße Kugel gezogen würde, hätte man
+anschließend einen Anteil roter Kugeln von 3/9. Die Verteilungen wären also 
+nicht mehr identisch. Natürlich kann man sich trotzdem überlegen, wie
+die Verteilung aussieht, wenn die Kugeln nicht zurückgelegt werden. Das
+Ergebnis ist dann aber keine Binomialverteilung mehr.
 :::
 
-### Poisson-Verteilung
+::: { .callout-tip collapse="true"}
+## Beispiel: Überbuchung eines Flugzeugs
 
-Eine Zufallsvariable $X$ heißt **Poisson-verteilt** mit dem Parameter $\lambda$, 
+<img src="images/AdobeStock_369056257b_Flugzeugkabine.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+Die Plätze in einem Flugzeug werden gewöhnlich überbucht.
+Es werden mehr Passagiere gebucht als Plätze vorhanden sind.
+Das hat einen einfachen Grund: Erfahrungsgemäß kommen nicht
+alle Passagiere, die einen Platz gebucht haben. Es gibt
+einen gewissen Anteil an "no-shows". Die Überbuchung hilft,
+dass nicht regelmäßig Plätze ungenutzt bleiben. 
+
+Für einen Flug von Münster nach München ist eine Maschine mit
+90 Plätzen vorgesehen. Angenommen, die Wahrscheinlichkeit eines 
+"no-shows" beträgt für jeden Passagier 0.08. Die Wahrscheinlichkeit,
+dass ein gebuchter Passagier wirklich kommt, ist also 0.92.
+Ferner nehmen wir an, dass das 
+Erscheinen jedes Passagiers stochastisch unabhängig ist vom Erscheinen der 
+übrigen Passagiere. Die Anzahl der tatsächlich erscheinenden Passagiere
+$X$ ist dann binomialverteilt,
+$$
+X\sim B(N,0.92),
+$$
+wobei $N$ die Zahl der gebuchten Passagiere ist. Wie hoch ist die 
+Wahrscheinlichkeit, dass die Maschine überbucht ist, wenn die
+Fluggesellschaft $N=94$ Passagiere bucht? Zu einer Überbuchung kommt es,
+wenn $X>90$ ist. Die Wahrscheinlichkeit beträgt
+$$
+P(X>90)=1-P(X\le 90).
+$$
+In R erhält man
+```{r}
+1-pbinom(90, size=94, prob=0.92)
+```
+Wie groß ist die Wahrscheinlichkeit, dass genau zwei Personen zu viel
+erscheinen (und dann von der Fluggesellschaft entschädigt werden müssen)?
+Die Wahrscheinlichkeit für $X=92$ ist
+```{r}
+dbinom(92, size=94, prob=0.92)
+```
+:::
+
+
+### Poisson-Verteilung {#sec-poisson}
+
+Eine Zufallsvariable $X$ heißt **Poisson-verteilt** 
+(engl. Poisson distributed) mit dem Parameter $\lambda$, 
 wenn sie die Wahrscheinlichkeitsfunktion 
 $$
 P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}
@@ -271,7 +336,8 @@ Und die Quantilfunktion ist
 qpois(p, lambda)
 ```
 
-Es gibt zwei Anwendungen, für die die Poisson-Verteilung besonders gut geeignet
+Es gibt zwei Anwendungsbereiche, in denen die 
+Poisson-Verteilung besonders gut zur Modellierung geeignet
 ist. Zum einen ist es die Approximation einer Binomialverteilung, wenn die
 Zahl der Ziehungen groß und die Wahrscheinlichkeit eines Erfolgs klein ist.
 Zum anderen kann die Poisson-Verteilung gut zur Modellierung von 
@@ -285,20 +351,20 @@ In diesem Fall gilt
 $$
 P(X=x)={n\choose x}\pi^x (1-\pi)^{n-x}\approx e^{-\lambda}\frac{\lambda^x}{x!}
 $$
-mit $\lambda=n\pi$, d.h. der Parameter $\mu$ der Poisson-Verteilung wird
+mit $\lambda=n\pi$, d.h. der Parameter $\lambda$ der Poisson-Verteilung wird
 bei der Approximation auf den Erwartungswert der Binomialverteilung gesetzt.
 Die folgende Tabelle zeigt die Wahrscheinlichkeiten $P(X=k)$ für $k=0,1,\ldots,5$
 bei einigen Binomialverteilungen und ihre Approximation durch eine
 Poisson-Verteilung.
 
-```{r}
+```{r echo=FALSE}
 D <- data.frame(k=0:5,V1=0:5,V2=0:5,V3=0:5,V4=0:5)
 D[[2]] <- dbinom(0:5,size=10,prob=0.1)
 D[[3]] <- dbinom(0:5,size=100,prob=0.01)
 D[[4]] <- dbinom(0:5,size=1000,prob=0.001)
 D[[5]] <- dpois(0:5,lambda=1)
-names(D) <- c("k","B(10,0.1)","B(100,0.01)","B(1000,0.001)","Po(1)")
-round(D,5)
+names(D) <- c("k","B(10, 0.1)","B(100, 0.01)","B(1000, 0.001)","Po(1)")
+knitr::kable(round(D,5))
 ```
 
 Man erkennt, dass selbst bei $n=10$ und $\pi=0.1$ die Approximation schon
@@ -306,19 +372,21 @@ einigermaßen gut ist. Für $n=1000$ und $\pi=0.001$ sind die Unterschiede
 zwischen Binomial- und Poisson-Verteilung vernachlässigbar.
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Werbepost
+## Beispiel: Postwurfsendungen
 
 <img src="images/AdobeStock_181000278b_Postwurf.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Ein Unternehmen verschickt einen Werbebrief an 10000 Personen. Wie viele 
 Kunden tatsächlich auf den Brief reagieren, ist vor der Werbeaktion nicht
 bekannt. Die Zufallsvariable $X$ sei die Anzahl der Personen, die auf den
 Brief reagieren. Die Reaktionen der Personen seien unabhängig voneinander.
-Die Reaktionswahrscheinlichkeit sei für jede Person 0.0003, d.h. der 
-Erwartungswert der Anzahl der Reaktionen beträgt 3. Natürlich ist die
+Die Reaktionswahrscheinlichkeit sei für jede Person 0.0003, d.h. bei
+10000 Briefen ist der Erwartungswert der Anzahl 
+der Reaktionen 3. Natürlich ist die
 tatsächliche Reaktionswahrscheinlichkeit in der Praxis nicht bekannt.
 Wie man damit umgeht, dass der Parameter (oder die Parameter) einer
 Verteilung unbekannt sind und aus Daten geschätzt werden müssen,
-wird ausführlich in dem Bachelor-Modul **Advanced Statistics** behandelt.
+wird ausführlich in dem Bachelor-Wahlpflicht-Modul 
+**Advanced Statistics** behandelt.
 
 Die Anzahl der Reaktionen ist binomialverteilt mit
 $$
@@ -366,12 +434,12 @@ zu der Veränderung der Intervalllänge.
 Die Wahrscheinlichkeit, dass in der Zeit von 10:00 bis 10:15 genau sechs
 Passagiere ankommen, beträgt
 ```{r}
-dpois(6, lambda=8)
+dpois(6, lambda=9)
 ```
 Die Wahrscheinlichkeit, dass zwischen 14:30 und 14:35 mehr als 7 
-Passagiere eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
+Passagiere eintreffen, ist $P(Y>7)=1-P(Y\le 7)$,
 ```{r}
-1 - ppois(7, lambda=4)
+1 - ppois(7, lambda=3)
 ```
 :::
 
@@ -379,14 +447,22 @@ Passagiere eintreffen, ist $P(Y>10)=1-P(Y\le 10)$,
 
 ### Normalverteilung {#sec-norm}
 
-Die mit großem Abstand wichtigste Verteilung überhaupt ist die Normalverteilung,
-manchmal auch Gauß-Verteilung genannt. Sie ist aus zwei Gründen so wichtig.
+Die mit großem Abstand wichtigste Verteilung überhaupt ist die Normalverteilung
+(engl. normal distribution), manchmal auch Gauß-Verteilung (engl. Gaussian 
+distribution) genannt. Sie ist aus zwei Gründen so wichtig.
 Zum einen lassen sich viele empirische Phänomene sehr gut durch eine
 Normalverteilung modellieren, z.B. biometrische Größen (Körpergröße und -gewicht),
 ökonomische Größen (Jahresrenditen von Aktien oder Anleihen), Messfehler und
 Produktionsabweichungen. Zum anderen spielt die Normalverteilung  eine extrem 
 wichtige Rolle in der Schätz- und Testtheorie, die später in diesem Kurs
-in @ch-intervallschaetzung und @ch-hypothesentests behandelt werden.
+in @sec-intervallschaetzung und @sec-hypothesentests behandelt werden.
+
+>
+> Everybody believes in the normal distribution: the
+> experimenters because they think it is a mathematical
+> theorem and the mathematicians because they think
+> it is an experimental fact.
+> (Quelle nicht rekonstruierbar.)
 
 Bevor die allgemeine Normalverteilung eingeführt wird, definieren wir
 zuerst die **Standardnormalverteilung**. Eine Zufallsvariable $U$ 
@@ -394,60 +470,67 @@ heißt standardnormalverteilt, wenn sie für $u\in\mathbb{R}$ die Dichte
 $$
 \phi(u)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)
 $$
-hat. Die Kurzschreibweise lautet $U\sim N(0,1)$. Das Symbol $\phi$ ist die
+hat. Die Kurzschreibweise lautet $U\sim N(0,1)$. Das Symbol 
+$\phi$ ("klein phi") ist die
 gängige Notation für die Dichte der Standardnormalverteilung.
 
 Das "Herz" der Standardnormalverteilung ist die Funktion $e^{-u^2}$. Alle 
-anderen Bestandteile der Dichte dienen nur der Normierung. Ein Plot der Dichte
+anderen Bestandteile der Dichte dienen letztlich 
+nur der Normierung. Ein Plot der Dichte
 zeigt, dass sie eine Glockenkurve beschreibt, die symmetrisch um die
 Null herum verläuft.
-```{r echo=FALSE}
-curve(dnorm(x),
-      from=-4,
-      to=4,
-      n=201,
-      main="Dichte der Standardnormalverteilung",
-      xlab="x",
-      ylab=expression(phi(x)),
-      yaxs="i",
-      ylim=c(0,0.45))
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=-4, to=4, length=200)
+plot(x, dnorm(x),
+     type="l",
+     main="Dichte der Standardnormalverteilung",
+     xlab="x",
+     ylab=expression(phi(x)),
+     yaxs="i",
+     ylim=c(0,0.45))
 abline(v=0)
 ```
 
-Die zugehörige Verteilungsfunktion wird mit $\Phi(u)=P(U\le u)$ bezeichnet,
+Die zugehörige Verteilungsfunktion wird mit $\Phi(u)=P(U\le u)$ 
+("groß phi") bezeichnet,
 $$
 \Phi(u)=\int_{-\infty}^u \phi(t)dt.
 $$
 Die Funktion $\Phi(u)$ ist auf ganz $\mathbb{R}$
 streng monoton wachsend, jedoch sind Werte betragsmäßig größer als 4
 extrem unwahrscheinlich, wie man an der folgenden Abbildung erkennt.
-```{r echo=FALSE}
-curve(pnorm(x),
-      from=-4,
-      to=4,
-      n=201,
-      main="Verteilungsfunktion der Standardnormalverteilung",
-      xlab="x",
-      ylab=expression(Phi(x)),
-      yaxs="i",
-      ylim=c(0,1.1))
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=-4, to=4, length=200)
+plot(x, pnorm(x),
+     type="l",
+     main="Verteilungsfunktion der Standardnormalverteilung",
+     xlab="x",
+     ylab=expression(Phi(x)),
+     yaxs="i",
+     ylim=c(0,1.1))
 abline(v=0)
-abline(h=1, lty="dotted")
+abline(h=1, 
+       lty="dotted")
 ```
 Wegen der Symmetrie der Standardnormalverteilung um die Null herum gilt
 $$
 \Phi(u)=1-\Phi(-u).
 $$
 Die Inverse der Verteilungsfunktion ist die Quantilfunktion $\Phi^{-1}(p)$,
-```{r echo=FALSE}
-curve(qnorm(x),
-      from=0.001,
-      to=0.999,
-      n=201,
-      main="Quantilfunktion der Standardnormalverteilung",
-      xlab="x",
-      ylab=expression(Phi^-1 (x)),
-      xaxs="i")
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=0.001, to=0.999, length=200)
+plot(x, qnorm(x),
+     type="l",
+     main="Quantilfunktion der Standardnormalverteilung",
+     xlab="x",
+     ylab=expression(Phi^-1 (x)),
+     xaxs="i")
 abline(h=0)
 ```
 Auch hier gibt es eine Symmetriebeziehung, nämlich
@@ -465,8 +548,9 @@ Leider gibt es keine geschlossene Formel für das Integral der Dichtefunktion.
 Die Verteilungsfunktion $\Phi(u)$ kann daher nicht einfach formelmäßig notiert
 werden. Dennoch lassen sich Dichte-, Verteilungs- und
 Quantilfunktion in R sehr einfach berechnen. 
-
-Die Abkürzung für die Normalverteilung ist `norm`. 
+Die Abkürzung in R für die Normalverteilung ist `norm`. Genauere
+Hinweise zu Funktionsaufrufen finden Sie in
+@sec-funktionsaufrufe.
 
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Standardnormalverteilung
@@ -493,44 +577,51 @@ Normalverteilung ist
 $$
 f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right).
 $$
-Die Kurzschreibweise für eine Zufallsvariable, die normalverteilt ist mit
-den Parametern $\mu\in\mathbb{R}$ und $\sigma^2>0$ lautet: $X\sim N(\mu,\sigma^2)$.
+Die Kurzschreibweise für eine normalverteilte Zufallsvariable
+mit den Parametern $\mu\in\mathbb{R}$ und $\sigma^2>0$ lautet: 
+$X\sim N(\mu,\sigma^2)$.
 
 Der Parameter $\mu$ bewirkt eine Verschiebung der Dichte. Für positive Werte
 von $\mu$ liegt die Dichte weiter rechts, für negative Werte weiter links.
 Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf. Die
 Abbildung zeigt drei Dichten von $N(\mu,1)$ für $\mu=-1,1,5$.
-```{r echo=FALSE}
-x <- seq(-4,9,length=500)
-plot(x,dnorm(x,-1,1),
-     t="l",
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=-4, to=9, length=500)
+plot(x,dnorm(x, mean=-1, sd=1),
+     type="l",
      col="red",
      yaxs="i",
-     ylim=c(0,0.45),
+     ylim=c(0, 0.45),
      ylab="Dichten",
      main=expression(paste("Einfluss von ",mu)))
-lines(x,dnorm(x,1,1),col="green")
-lines(x,dnorm(x,5,1),col="blue")
+lines(x,dnorm(x, mean=1, sd=1), col="green")
+lines(x,dnorm(x, mean=5, sd=1), col="blue")
 legend("topright",
-       fill=c("red","green","blue"),
-       legend=c(expression(mu==1),expression(mu==2),expression(mu==3)))
+       fill=c("red", "green", "blue"),
+       legend=c(expression(mu==-1),
+                expression(mu==1),
+                expression(mu==5)))
 ```
 Der Parameter $\sigma^2$ hat einen Einfluss auf die Form der Dichte.
 Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte schmal und
 hoch und nah um den Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, 
 desto breiter und flacher ist die Dichte. Die Abbildung zeigt
 drei Dichten von $N(0,\sigma^2)$ für $\sigma^2=0.3,1,3$.
-```{r echo=FALSE}
-x <- seq(-7,7,length=500)
-plot(x,dnorm(x,0,sqrt(0.3)),
-     t="l",
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=-7, to=7, length=500)
+plot(x, dnorm(x, mean=0, sd=sqrt(0.3)),
+     type="l",
      col="red",
      yaxs="i",
-     ylim=c(0,0.8),
+     ylim=c(0, 0.8),
      ylab="Dichten",
      main=expression(paste("Einfluss von ",sigma^2)))
-lines(x,dnorm(x,0,1),col="green")
-lines(x,dnorm(x,0,sqrt(3)),col="blue")
+lines(x,dnorm(x, mean=0, sd=1), col="green")
+lines(x,dnorm(x, mean=0, sd=sqrt(3)), col="blue")
 legend("topright",
        fill=c("red","green","blue"),
        legend=c(expression(sigma^2==0.3),
@@ -542,7 +633,7 @@ $$
 f(x)=\phi\left(\frac{x-\mu}{\sigma}\right).
 $$
 Die Verteilungsfunktion der allgemeinen Normalverteilung $N(\mu,\sigma^2)$ wird 
-indirekt durch die Vertelungsfunktion der Standardnormalverteilung 
+indirekt durch die Verteilungsfunktion der Standardnormalverteilung 
 $N(0,1)$ ausgedrückt. Sie ist 
 $$
 F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right).
@@ -550,9 +641,9 @@ $$
 Das bedeutet, dass eine standardisierte Normalverteilung einer
 Standardnormalverteilung folgt (die Begriffe sind also gut gewählt).
 Wegen dieses Zusammenhangs ist es möglich, die Verteilungsfunktion einer
-beliebigen Normalverteilung selbst dann auswerten, wenn man nur die
-Verteilungsfunktion des Standardnormalverteilung kennt. In alten Lehrbüchern
-zur Statistik finden Sie deshalb im Anhang Tabellen mit den Funktionswerten
+beliebigen Normalverteilung selbst dann auszuwerten, wenn man nur die
+Verteilungsfunktion der Standardnormalverteilung kennt. In älteren Lehrbüchern
+zur Statistik findet man deshalb im Anhang Tabellen mit den Funktionswerten
 der Verteilungsfunktion der Standardnormalverteilung. Mit ihrer Hilfe
 konnte man früher die Verteilungsfunktion jeder Normalverteilung bestimmen.
 Heutzutage ist das nicht mehr nötig, da die Verteilungsfunktion der
@@ -572,11 +663,12 @@ Var(X) &= \sigma^2.
 \end{align*}
 $$
 
-<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="right" width=10%" style="padding-right:15px;padding-top:5px;padding-bottom:15px;"/>
 In R verwendet man für die allgemeine Normalverteilung die gleichen Funktionen
 wie für die Standardnormalverteilung. Nur die beiden Parameter $\mu$ 
 (`mean`) und $\sigma$ (`sd`) werden als zusätzliche Argumente angefügt. 
-*Achtung*: Anstelle der Varianz $\sigma^2$ erwarten die R-Funktionen 
+
+<img src="images/AdobeStock_458950051b_AttentionSign.jpeg" align="right" width=10%" style="padding-left:5px;padding-top:5px;"/>
+**Achtung**: Anstelle der Varianz $\sigma^2$ erwarten die R-Funktionen 
 zur Normalverteilung als Argument die Standardabweichung $\sigma$! 
 Es ist ein häufiger und leider leicht zu übersehender Fehler, als Parameter 
 die Varianz anzugeben.
@@ -622,16 +714,42 @@ Die Wahrscheinlichkeit, eine Tafel zu ziehen, die leichter als 197.7g
 ist, beträgt nur 5 Prozent.
 :::
 
+::: { .callout-tip collapse="true"}
+## Beispiel: Hitzetage
+
+An einer Wetterstation wird unter anderem die maximale Tagestemperatur 
+erfasst. An einem zufällig ausgewählten Juli-Tag kann die 
+Maximaltemperatur (in C) an dieser Station recht gut durch die 
+normalverteilte Zufallsvariable 
+$$
+X\sim N(24.3, 4.8^2)
+$$
+modelliert werden. Der Erwartungswert ist 24.3 Grad, die Standardabweichung
+ist 4.8 Grad. Die Wahrscheinlichkeit, dass es an einem zufällig ausgewählten
+Julitag mehr als 32 Grad warm wird, beträgt
+```{r}
+1 - pnorm(32, mean=24.3, sd=4.8)
+```
+Wenn das gesamte Temperaturniveau um 2 Grad ansteigt, ändert sich
+die Wahrscheinlichkeit für einen sehr heißen Tag mit mehr als 32 Grad
+Maximaltemperatur auf
+```{r}
+1 - pnorm(32, mean=24.3 + 2, sd=4.8)
+```
+Die erwartete Zahl der Hitzetage steigt also auf
+mehr als das Doppelte.
+:::
+
 ### Exponentialverteilung {#sec-exp}
 
 Die Exponentialverteilung ist oft gut geeignet zur Modellierung von 
 Wartezeiten oder Dauern. Eine Zufallsvariable $X$ heißt **exponentialverteilt** 
-mit Parameter $\lambda>0$, wenn ihre Dichte
+(engl. exponentially distributed) mit Parameter $\lambda>0$, wenn ihre Dichte
 $$
 f(x)=\left\{
 \begin{array}{ll}
-\lambda e^{-\lambda x} & \text{ für }x\ge 0\\
-0 & \text{ für }x<0.
+\lambda e^{-\lambda x} & \text{ wenn }x\ge 0\\
+0 & \text{ wenn }x<0.
 \end{array}
 \right.
 $$
@@ -639,18 +757,19 @@ ist. Die Kurzschreibweise für eine exponentialverteilte Zufallsvariable
 ist $X\sim Exp(\lambda)$.
 
 Der Plot zeigt den Verlauf der Dichtefunktion von $Exp(1)$.
-```{r echo=FALSE}
-curve(dexp(x),
-      from=0.0001,
-      to=5,
-      n=201,
-      main="Dichte der Exponentialverteilung",
-      xlab="x",
-      ylab="Dichte",
-      yaxs="i",
-      ylim=c(0,1.1),
-      xlim=c(-0.5,5))
-lines(c(0,0),c(0,1),lty="dotted")
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=0.0001, to=5, length=200)
+plot(x, dexp(x),
+     type="l",
+     main="Dichte der Exponentialverteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 1.1),
+     xlim=c(-0.5, 5))
+lines(c(0,0), c(0,1), lty="dotted")
 ```
 Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
 muss die Verteilungsfunktion an der Stelle 0 den Wert 0 annehmen. Für
@@ -658,8 +777,8 @@ die Verteilungsfunktion ergibt sich
 $$
 F(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<0\\
-1-e^{-\lambda x}& \text{ für }x\ge 0.
+0 & \text{ wenn }x<0\\
+1-e^{-\lambda x}& \text{ wenn }x\ge 0.
 \end{array}
 \right.
 $$
@@ -698,7 +817,7 @@ für die Dichte, Verteilungs- und Quantilfunktion sind:
 
 <img src="images/AdobeStock_593020754b_Boerse.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Mit der Zufallsvariable $X$ sei die Dauer in Sekunden bis zur nächsten
-Transaktion einer Volkswagenaktie an der Xetra-Börse bezeichnet. Die
+Transaktion einer bestimmten Aktie an der Xetra-Börse bezeichnet. Die
 Dauer wird modelliert durch eine Exponentialverteilung mit Parameter
 $\lambda=0.04$. Wie groß ist die Wahrscheinlichkeit, dass man bis zur
 nächsten Transaktion mehr als 1 Minute warten muss?
@@ -720,9 +839,11 @@ Die Hälfte der Transaktionsdauern ist also geringer als
 
 ### Paretoverteilung {#sec-pareto}
 
-Die Paretoverteilung kann in vielen Anwendungen extreme Ereignisse gut
+Die Paretoverteilung (engl. Pareto distribution) 
+kann in vielen Anwendungen extreme Ereignisse gut
 beschreiben. Beispielsweise folgt die Vermögensverteilung bei den Superreichen
-einer Paretoverteilung. Auch extreme Aktienrenditen können gut durch eine
+einer Paretoverteilung. Auch extreme Aktienrenditen 
+oder extreme Schadensereignisse können gut durch eine
 Paretoverteilung beschrieben werden.
 
 Die Paretoverteilung hat zwei Parameter, und zwar $x_{min}>0$ und $k>0$.
@@ -730,26 +851,29 @@ Die Dichte lautet
 $$
 f(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<x_{min}\\
-\frac{k}{x_{min}}\left(\frac{x_{min}}{x}\right)^{k+1}& \text{ für }x\ge x_{min}.
+0 & \text{ wenn }x<x_{min}\\
+\frac{k}{x_{min}}\left(\frac{x_{min}}{x}\right)^{k+1}& \text{ wenn }x\ge x_{min}.
 \end{array}
 \right.
 $$
 Für $x_{min}=1$ und $k=2$ ergibt sich folgendes Bild:
-```{r echo=FALSE}
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
 k <- 2
 xmin <- 1
-curve((k/xmin)*(xmin/x)^(k+1),
-      from=1,
-      to=5,
-      n=201,
-      main="Dichte der Paretoverteilung",
-      xlab="x",
-      ylab="Dichte",
-      yaxs="i",
-      ylim=c(0,2.2),
-      xlim=c(0,5))
-lines(c(xmin,xmin),c(0,2), lty="dotted")
+x <- seq(from=1, to=5, length=200)
+plot(x, (k/xmin)*(xmin/x)^(k+1),
+     type="l",
+     main="Dichte der Paretoverteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 2.2),
+     xlim=c(0, 5))
+lines(c(xmin, xmin),
+      c(0, 2), 
+      lty="dotted")
 ```
 Der Verlauf der Dichte ist auf den ersten Blick ähnlich wie bei
 der Exponentialverteilung. Jedoch fällt die Dichte der Paretoverteilung 
@@ -759,12 +883,12 @@ Ein weiterer Unterschied zur Exponentialverteilung besteht darin,
 dass die Paretoverteilung als Untergrenze den Parameter $x_{min}>0$ hat,
 die Exponentialverteilung startet hingegen immer bei 0.
 
-Duch Integration der Dichte erhält man die Verteilungsfunktion.
+Durch Integration der Dichte erhält man die Verteilungsfunktion.
 $$
 F(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<x_{min}\\
-1-\left(\frac{x_{min}}{x}\right)^k & \text{ für }x\ge x_{min}.
+0 & \text{ wenn }x<x_{min}\\
+1-\left(\frac{x_{min}}{x}\right)^k & \text{ wenn }x\ge x_{min}.
 \end{array}
 \right.
 $$
@@ -781,11 +905,28 @@ Var(X) &= \frac{k x_{min}^2}{(k-2)(k-1)^2}.
 \end{align*}
 $$
 Der Erwartungswert ist nur definiert, wenn der $k>1$ ist,
-die Varianz ist sogar nur dann definiert, wenn $k>2$ ist.
+die Varianz ist sogar nur dann definiert, wenn $k>2$ ist. Wie kann es
+passieren, dass die Varianz oder der Erwartungswert nicht existieren?
+Der Grund dafür liegt im Flankenverhalten von Zufallsvariablen mit
+einem unendlichen Träger (z.B. $\mathbb{R}$). Das Integral für den
+Erwartungswert,
+$$
+\int_{-\infty}^\infty xf_X(x)dx,
+$$
+ist streng genommen ein Grenzwert, bei dem man die Integralgrenzen gegen
+(minus) unendlich gehen lässt. Für $x\to\infty$ wächst $x$, während die
+Dichte $f_X(x)$ schrumpft. Wenn nun $x$ schneller wächst als $f_X(x)$
+schrumpft, dann wird der Ausdruck unter dem Integral immer größer und die
+gesamte Fläche divergiert gegen unendlich. Für die Varianz gilt das
+analog. Kurz gesagt: Es kann passieren, dass eine Zufallsvariable mit
+unendlichem Träger keine Varianz oder keinen Erwartungswert besitzt. Zum
+Glück kommt das in den Wirtschaftswissenschaften nicht sehr oft vor,
+so dass wir dieses Problem in diesem Kurs weitgehend ignorieren können.
 
 In R gibt es die Funktionen für die Dichte, Verteilungsfunktion und
-Quantilfunktion nur in Zusatzpaketen. Installieren und aktivieren
-Sie das Paket `distributionsrd`. Nun stehen die Funktionen
+Quantilfunktion der Paretoverteilung nur in Zusatzpaketen. 
+Installieren und aktivieren Sie das Paket `distributionsrd`. 
+Nun stehen die Funktionen
 
 - `dpareto(x, k, xmin)`
 - `ppareto(x, k, xmin)`
@@ -806,8 +947,8 @@ von $x_{min}=250000$ Euro. Die Paretoverteilung approximiert
 die sehr hohen Einkommen sehr gut, als Flankenparameter
 setzen wir $k=1.5$. 
 
-Wie groß ist die Wahrscheinlichkeit, dass der zufällig
-ausgewählte Haushalt ein Einkommen von mehr als 1 Million
+Wie groß ist die Wahrscheinlichkeit, dass ein zufällig
+ausgewählter Haushalt ein Einkommen von mehr als 1 Million
 Euro hat?
 
 Die gesuchte Wahrscheinlichkeit $P(X>1000000)=1-P(X\le 1000000)$ beträgt
@@ -826,7 +967,8 @@ also die Hälfte sogar mehr als knapp 400000 Euro.
 
 ### Rechteckverteilung {#sec-unif}
 
-Mit einer Rechteckverteilung kann beispielsweise die
+Mit einer Rechteckverteilung (manchmal auch 
+Gleichverteilung genannt) kann beispielsweise die
 Wartezeit an einer Ampel (oder im ÖPNV) modelliert werden.
 Die Ampel springt in regelmäßigen Abständen auf Grün (bzw.
 die U-Bahn kommt alle 10 Minuten). Wenn man ohne genaue
@@ -839,11 +981,11 @@ Zufallszahlen ist.
 
 Eine Zufallsvariable $X$ heißt **rechteckverteilt** 
 (engl. uniformly distributed) mit den Parametern 
-$a$ und $b$ ($a<b$), wenn ihre Dichte
+$a$ und $b$ (wobei $a<b$ ist), wenn ihre Dichte
 $$
 f(x)=\left\{
 \begin{array}{ll}
-\frac{1}{b-a} & \text{ für }a\le x\le b\\
+\frac{1}{b-a} & \text{ wenn }a\le x\le b\\
 0 & \text{ sonst}
 \end{array}
 \right.
@@ -852,16 +994,18 @@ ist. Die Kurzschreibweise für eine rechteckverteilte Zufallsvariable
 ist $X\sim U(a,b)$.
 
 Der Plot zeigt den Verlauf der Dichtefunktion von $U(1,2)$.
-```{r echo=FALSE}
-plot(c(0.5,2.5),c(0,1.1),
-     t="n",
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+plot(c(0.5, 2.5),c(0, 1.1),
+     type="n",
      main="Dichte der Rechteckverteilung",
      xlab="x",
      ylab="Dichte",
      yaxs="i")
-lines(c(1,2),c(1,1))
-lines(c(1,1),c(0,1),lty="dotted")
-lines(c(2,2),c(0,1),lty="dotted")
+lines(c(1,2), c(1,1))
+lines(c(1,1), c(0,1), lty="dotted")
+lines(c(2,2), c(0,1), lty="dotted")
 ```
 Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
 muss die Verteilungsfunktion an der Stelle $a$ den Wert 0 annehmen. Für
@@ -869,21 +1013,23 @@ die Verteilungsfunktion ergibt sich
 $$
 F(x)=\left\{
 \begin{array}{ll}
-0 & \text{ für }x<a\\
-\frac{x-a}{b-a}& \text{ für }a\le x\le b\\
-1 & \text{ für }x>b.\\
+0 & \text{ wenn }x<a\\
+\frac{x-a}{b-a}& \text{ wenn }a\le x\le b\\
+1 & \text{ wenn }x>b.\\
 \end{array}
 \right.
 $$
 Die Verteilungsfunktion von $U(1,2)$ sieht wie folgt aus.
-```{r echo=FALSE}
-plot(c(0.5,2.5),c(0,1.1),
-     t="n",
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+plot(c(0.5, 2.5), c(0, 1.1),
+     type="n",
      main="Verteilungsfunktion der Rechteckverteilung",
      xlab="x",
      ylab="F(x)",
      yaxs="i")
-lines(c(0.5,1,2,2.5),c(0,0,1,1))
+lines(c(0.5, 1, 2, 2.5),c(0, 0, 1, 1))
 ```
 
 Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
@@ -958,32 +1104,23 @@ Der Plot zeigt den Verlauf der Dichtefunktion einer t-Verteilung
 mit $\nu=2$ Freiheitsgraden (schwarze Linie) und $\nu=10$
 Freiheitsgraden (rote Linie). Zum Vergleich ist auch die Dichte
 der Standardnormalverteilung eingefügt (gepunktete blaue Linie).
-```{r echo=FALSE}
-curve(dt(x,df=2),
-      from=-5,
-      to=5,
-      n=301,
-      main="Dichte der t-Verteilung",
-      xlab="x",
-      ylab="Dichte",
-      yaxs="i",
-      ylim=c(0,0.4))
-curve(dt(x,df=10),
-      from=-5,
-      to=5,
-      n=301,
-      add=TRUE,
-      col="red")
-curve(dnorm(x),
-      from=-5,
-      to=5,
-      n=301,
-      add=TRUE,
-      col="blue",
-      lty="dotted")
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(from=-5, to=5, length=300)
+plot(x, dt(x,df=2),
+     type="l",
+     main="Dichte der t-Verteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.43))
+lines(x, dt(x, df=10), col="red")
+lines(x, dnorm(x), col="blue", lty="dotted")
 ```
 Je größer die Zahl der Freiheitsgrade, desto ähnlicher ist die t-Verteilung der
-Standardnormalverteilung. Bei sinkenden Freiheitsgraden werden die Flanken der Verteilung immer stärker, d.h. es gibt immer mehr extreme Werte (Ausreißer). 
+Standardnormalverteilung. Bei sinkenden Freiheitsgraden werden die Flanken der 
+Verteilung immer stärker, d.h. es gibt immer mehr extreme Werte (Ausreißer). 
 
 Die Verteilungsfunktion lässt sich (wie schon bei der Normalverteilung) 
 nicht durch elementare Integrationsregeln herleiten. Sie ist jedoch 
@@ -997,17 +1134,6 @@ Var(X) &= \frac{\nu}{\nu-2}.
 \end{align*}
 $$
 
-<img src="images/AdobeStock_512216945b_Guiness.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
-Übrigens: Die t-Verteilung wurde 1908 von William Gosset hergeleitet, der
-als Brauer und Statistiker für die Qualitätssicherung in der Guinessbrauerei 
-zuständig war. Damit konkurrierende Brauereien nichts über die Verfahren der 
-Qualitätssicherung erfahren, durfte er seine Forschungsergebnisse nicht unter
-seinem eigenen Namen veröffentlichen. Er hat sie unter dem Pseudonym
-"Student" publiziert. Daher nennt man die t-Verteilung oft auch die
-Studentsche Verteilung (engl. Student's t-distribution). Sie 
-spielt auch in der statistischen Inferenz eine wichtige Rolle 
-(vor allem in @sec-intervallschaetzung und @sec-hypothesentests).
-
 In R ist die Abkürzung für die t-Verteilung `t`. Die Funktionen
 für die Dichte, Verteilungs- und Quantilfunktion sind:
 
@@ -1018,8 +1144,19 @@ für die Dichte, Verteilungs- und Quantilfunktion sind:
  Die Parameter-Abkürzung `df` steht für "degrees of freedom", also 
 die Zahl der Freiheitsgrade.
 
+<img src="images/AdobeStock_512216945b_Guiness.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
+**Übrigens**: Die t-Verteilung wurde 1908 von William Gosset hergeleitet, der
+als Brauer und Statistiker für die Qualitätssicherung in der Guinessbrauerei 
+zuständig war. Damit konkurrierende Brauereien nichts über die Verfahren der 
+Qualitätssicherung erfahren, durfte er seine Forschungsergebnisse nicht unter
+seinem eigenen Namen veröffentlichen. Er hat sie unter dem Pseudonym
+"Student" publiziert. Daher nennt man die t-Verteilung oft auch die
+Studentsche Verteilung (engl. Student's t-distribution). Sie 
+spielt auch in der statistischen Inferenz eine wichtige Rolle 
+(vor allem in @sec-intervallschaetzung und @sec-hypothesentests).
+
 ::: { .callout-tip collapse="true"}
-## Beispiel: Crypto-Währungen
+## Beispiel: Rendite von Crypto-Währungen
 
 <img src="images/AdobeStock_422468616b_Bitcoin.jpeg" align="right" width=40%" style="padding-left:15px;padding-top:5px;"/>
 Die Zufallsvariable $X$: "Tagesrendite einer Kryptowährung" soll
@@ -1027,7 +1164,7 @@ durch eine t-Verteilung mit 3 Freiheitsgraden modelliert werden.
 (In einer vollwertigen Anwendung würde man die t-Verteilung
 noch umskalieren und etwas verschieben, das ignorieren wir hier
 jedoch zur Vereinfachung. Daher Vorsicht: Dieses Beispiel ist nicht
-ernsthaft empirisch untermauert.) Die Tagesrendite folgt also $X\sim t_3$.
+ernsthaft empirisch fundiert.) Die Tagesrendite folgt also $X\sim t_3$.
 Im Finance-Bereich wird das Risiko gewöhnlich durch die
 Standardabweichung per annum ausgedrückt (also auf ein Jahr
 hochgerechnet), die im Finance-Bereich meist als "Volatilität" 
@@ -1049,6 +1186,11 @@ mit nur ca. 0.1 Prozent ziemlich klein.
 
 Wie hoch ist die Wahrscheinlichkeit, dass der Kurs betragsmäßig 
 sich an einem Tag um nicht mehr als 2 Prozent verändert?
+Gesucht ist 
+$$
+P(|X|\le 2)=P(X\le 2)-P(X\le -2).
+$$
+In R erhält man
 ```{r}
 pt(2, df=3) - pt(-2, df=3)
 ```
@@ -1059,7 +1201,7 @@ Die Wahrscheinlichkeit beträgt also 86 Prozent.
 
 In den Wirtschaftswissenschaften (und allgemein in den Sozialwissenschaften)
 interessiert man sich sehr oft für empirische Verteilungen: Wie sind bestimmte
-Größen in der Popoulation verteilt? Wie sieht die Einkommensverteilung
+Größen in der Population verteilt? Wie sieht die Einkommensverteilung
 oder die Vermögensverteilung aus? Wie ist die Altersstruktur der Bevölkerung?
 Welche Parteienpräferenzen gibt es in der wahlberechtigten Population? 
 Wie hoch ist der Anteil der Kunden, die ihren Versicherungsvertrag
@@ -1134,4 +1276,28 @@ Var(X)&=\sum_{i=1}^N (x_i^*-\bar x)^2 P(X=x_i^*)\\
 $$
 Es handelt sich also um die Populationsvarianz $s^2$ aus
 dem Kurs "Data Science 1". 
+
+In R dient die Funktion `sample` dazu, zufällig Elemente 
+aus einem Vektor zu ziehen. Wenn `x_star` der Vektor mit
+den Populationswerten $x_1^*,\ldots,x_N^*$ ist, dann
+erhält man mit
+```{r eval=FALSE}
+x <- sample(x_star, size=n, replace=TRUE)
+```
+eine einfache Stichprobe $X_1,\ldots,X_n$ vom Umfang $n$
+aus der empirischen Verteilung. 
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Monatsbudgets von Studierenden
+
+In einer Umfrage unter allen Studierenden der Vorlesung
+"Data Science 1" im Sommer 2023 wurde unter anderem nach dem
+verfügbaren Monatsbudget gefragt. Die Frage wurde von 467
+Studierenden beantwortet. Diese Studierenden seien die Population.
+Als Zufallsvariable $X$ definieren wir das Monatsbudget einer Person,
+die zufällig aus der Population gezogen wird. Der Erwartungswert
+der Zufallsvariablen entspricht dem Populationsmittelwert. Er
+ist 824 Euro. Die Standardabweichung von $X$ ist gerade
+die Populationsstandardabweichung, und zwar 438 Euro.
+:::
 

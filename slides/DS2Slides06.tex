@@ -1,0 +1,717 @@
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Definition}
+\textbf{Zufallsvektoren:}
+\medskip
+
+Für viele interessante Anwendungen braucht man mehrere 
+Zufallsvariablen (Vereinfachung: $n=2$)\\[2ex]
+\begin{exampleblock}{Beispiele:}
+\begin{itemize}
+\item $X$: Haushaltsgröße, $Y$: Anzahl Autos
+\item $X$: Aktienrendite Siemens, $Y$: Aktienrendite Zalando
+\item $X$: kleinere Augenzahl, $Y$: größere Augenzahl\\ 
+von zwei Würfeln
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Verteilungsfunktion}
+\begin{block}{Gemeinsame Verteilungsfunktion}
+Seien $X:\Omega \longrightarrow \mathbb{R}$ und 
+$Y:\Omega\longrightarrow \mathbb{R}$
+zwei Zufallsvariablen. Dann ist
+\[ F_{X,Y}(x,y) =P(X\leq x,Y\leq y) \]
+die gemeinsame Verteilungsfunktion von $X$ und $Y$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Verteilungsfunktion}
+\textbf{Eigenschaften der gemeinsamen Verteilungsfunktion:}\medskip
+\begin{itemize}
+\item $F_{X,Y}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend\\ 
+in $x$ und $y$
+\item Es gilt $F_{X,Y}(-\infty ,y) =F_{XY}(x,-\infty)=0$
+\item Es gilt $F_{X,Y}(+\infty ,+\infty) =1$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{block}{Gemeinsam diskrete Zufallsvariablen}
+$X$ und $Y$ heißen gemeinsam diskret, wenn es endlich viele\\
+oder abzählbar unendlich viele Werte $x_{1,}x_{2,}\ldots$ \\
+und $y_{1,}y_{2,}\ldots $ gibt, so dass 
+\[ \sum_{j}\sum_{k}p_{jk}=1 \]
+mit $p_{jk}=P(X=x_{j},Y=y_{k})$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{itemize}
+\item Gemeinsame Wahrscheinlichkeitsfunktion
+\[ f_{X,Y}(x,y) =\left\{ 
+\begin{array}{ll}
+p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\ 
+0 & \quad \text{sonst}
+\end{array}\right.\]
+\item Darstellung als Wahrscheinlichkeitstabelle
+\[ \begin{tabular}{c|ccc|}
+$X\backslash Y$ & $y_{1}$ & $\ldots $ & $y_{K}$ \\ \hline
+$x_{1}$ & $p_{11}$ & $\ldots $ & $p_{1K}$ \\ 
+$\vdots $ & $\vdots $ &  & $\vdots $ \\ 
+$x_{J}$ & $p_{J1}$ & $\ldots $ & $p_{JK}$
+\end{tabular} \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Haushalte}
+Sei $X$: Haushaltsgröße; $Y$: Anzahl Autos\\[1ex]
+\begin{tabular}{c|ccc}
+$X\backslash Y$ & 0 & 1 & 2 \\ \hline
+1 & 0.10 & 0.14 & 0.01 \\ 
+2 & 0.05 & 0.15 & 0.10 \\ 
+3 & 0.02 & 0.10 & 0.08 \\ 
+4 & 0.02 & 0.06 & 0.07 \\ 
+5 & 0.01 & 0.05 & 0.04
+\end{tabular}\\[1ex]
+Wie groß ist $F_{X,Y}(3,1)$ ?
+
+\uncover<2>{
+$P(X\le 3,Y\le 1)=0.1+0.05+0.02+0.14+0.15+0.1=0.56$
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Gemeinsam diskrete Zufallsvariablen}
+\begin{exampleblock}{Beispiel: Haushalte}
+Sei $X$: Haushaltsgröße; $Y$: Anzahl Autos\\[1ex]
+\begin{tabular}{c|ccc}
+$X\backslash Y$ & 0 & 1 & 2 \\ \hline
+1 & 0.10 & 0.14 & 0.01 \\ 
+2 & 0.05 & 0.15 & 0.10 \\ 
+3 & 0.02 & 0.10 & 0.08 \\ 
+4 & 0.02 & 0.06 & 0.07 \\ 
+5 & 0.01 & 0.05 & 0.04
+\end{tabular}\\[1ex]
+Wie groß ist $F_{XY}(1.5,3.2)$ ?
+
+\uncover<2>{
+$P(X\le 1.5,Y\le 3.2)=0.10+0.14+0.01=0.25$
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
+\begin{block}{Gemeinsam stetige Zufallsvariablen}
+$X$ und $Y$ heißen gemeinsam stetig, 
+falls es eine Funktion $f_{X,Y}$ gibt mit 
+\[ F_{X,Y}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{X,Y}(u,v)dudv \]
+\end{block}
+Die Funktion $f_{X,Y}$ heißt gemeinsame Dichte (Dichtefunktion) von $X$ und $Y$
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\begin{itemize}
+\item Bei partieller Differenzierbarkeit gilt
+\[ f_{X,Y}(x,y)=\frac{\partial^2}{\partial x\partial y}F_{X,Y}(x,y) \]
+\item Für $x,y\in\mathbb{R}$ gilt $f_{X,Y}(x,y)\geq 0$
+\item Das Volumen unter der Dichte ist 
+\[ \int_{-\infty }^{\infty }\int_{-\infty }^{\infty }f_{X,Y}(x,y)dxdy=1 \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\begin{itemize}
+\item Durch Doppel-Integrale der Dichte erhält man
+Wahrscheinlichkeiten, so ist beispielsweise
+\begin{eqnarray*}
+&&P(a_1\leq X\leq b_1,a_2\leq Y\leq b_2)\\[1ex]
+&=&\int_{a_2}^{b_2}\int_{a_1}^{b_1}f_{XY}(x,y)dxdy
+\end{eqnarray*}
+\item Wegen der Stetigkeit spielt es keine Rolle, 
+ob die Ungleichungen strikt sind oder nicht
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\textbf{Visualisierung einer gemeinsamen Dichte:}\medskip
+\begin{itemize}
+\item Plot als 3D-"Gebirge"
+\item Höhenlinien (Contour-Plot)
+\item Farben als dritte Dimension (Image-Plot)
+\item Beispiel: 
+$$
+f_{X,Y}(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\begin{center}
+\includegraphics[width=10cm]{./plots/bvdensity1.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\begin{center}
+\includegraphics[width=6cm]{./plots/bvdensity2.pdf}
+\end{center}
+\end{frame}
+\begin{frame}
+
+\frametitle{Zufallsvektoren}
+\begin{center}
+\includegraphics[width=7cm]{./plots/bvdensity3.pdf}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Randverteilungen}
+\textbf{Randverteilungen}
+\begin{itemize}
+\item Wie ist die eine Zufallsvariable verteilt, wenn man die andere ignoriert?
+\item Randverteilungsfunktionen $F_{X}$ und $F_{Y}$
+\begin{align*}
+F_{X}(x) &=F_{X,Y}(x, \infty) =\lim_{y\rightarrow \infty }F_{X,Y}(x,y) \\
+F_{Y}(y) &=F_{X,Y}(\infty ,y) =\lim_{x\rightarrow \infty }F_{X,Y}(x,y)
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Randverteilungen}
+Randverteilungen gemeinsam diskreter Zufallsvariablen
+\begin{eqnarray*}
+p_{j\cdot } &=&P(X=x_{j})=\sum\limits_{k}p_{jk} \\
+p_{\cdot k} &=&P(Y=y_{k})=\sum\limits_{j}p_{jk}
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Randverteilungen}
+Randdichten gemeinsam stetiger Zufallsvariablen
+\begin{align*}
+f_{X}(x) &=\int_{-\infty }^{+\infty }f_{X,Y}(x,y)dy \\
+f_{Y}(y) &=\int_{-\infty }^{+\infty }f_{X,Y}(x,y)dx
+\end{align*}
+\bigskip
+(die jeweils andere Variable wird ``rausintegriert'')
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Unabhängigkeit}
+\begin{block}{Unabhängigkeit}
+Zwei Zufallsvariablen $X$ und $Y$ heißen stochastisch 
+unabhängig, falls für alle $x,y\in \mathbb{R}$
+\[ F_{XY}(x,y) =F_{X}(x) \cdot F_{Y}(y) \]
+\end{block}
+Randverteilungen $F_{X}$ und $F_{Y}$ ergeben sich aus 
+der gemeinsamen Verteilung $F_{XY}$, aber $F_{XY}$ ist 
+im Allgemeinen nicht eindeutig durch $F_{X}$ und $F_{Y}$ 
+bestimmt
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Unabhängigkeit}
+\begin{itemize}
+\item Gemeinsam diskrete $X$ und $Y$ sind unabhängig, wenn für alle $j=1,2,\ldots $und $k=1,2,\ldots $ 
+\[ P(X=x_{j},Y=y_{k})=P(X=x_{j})\cdot P(Y=y_{k}) \]
+\item Gemeinsam stetige $X$ und $Y$ sind unabhängig, falls für alle 
+$x,y\in \mathbb{R}$ 
+\[ f_{XY}(x,y)=f_{X}(x)\cdot f_{Y}(y) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Sei $(X,Y)$ gemeinsam stetig verteilt
+\[ f_{XY}\left( x,y\right) =\left\{ 
+\begin{array}{ll}
+x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
+0 & \quad \text{sonst.} \end{array}
+\right. \]
+Randdichte von $X$:\vspace*{2cm}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Sei $(X,Y)$ gemeinsam stetig verteilt
+\[ f_{XY}\left( x,y\right) =\left\{ 
+\begin{array}{ll}
+x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
+0 & \quad \text{sonst.} \end{array}
+\right. \]
+$X$ und $Y$ sind stochastisch abhängig, weil ...\vspace*{2cm}
+\end{exampleblock}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Zufallsvektoren}
+%\framesubtitle{Kap.~3.1}
+%\begin{exampleblock}{Beispiel: Gemeinsam diskrete Verteilung}
+%$X$: Haushaltsgröße; $Y$: Anzahl Autos\bigskip
+%
+%\begin{minipage}[t]{0.6\textwidth}
+%\begin{tabular}{c|ccc|c}
+%$X\backslash Y$ & 0 & 1 & 2 &  \\ \hline
+%1 & \color<4>{red}0.10 & 0.14 & 0.01 & \color<4>{red}0.25 \\ 
+%2 & 0.05 & 0.15 & 0.10 & 0.30 \\ 
+%3 & 0.02 & 0.10 & 0.08 & 0.20 \\ 
+%4 & 0.02 & 0.06 & 0.07 & 0.15 \\ 
+%5 & 0.01 & 0.05 & 0.04 & 0.10 \\ \hline
+%& \color<2,4>{red}0.20 & \color<2>{red}0.50 & \color<2>{red}0.30 & 1.00
+%\end{tabular}
+%\end{minipage}
+%\begin{minipage}[t]{0.35\textwidth}
+%\only<1>{Randverteilung\\ von $Y$?}
+%\only<2>{\begin{tabular}{c|c}
+%$y_{k}$ & $p_{\cdot k}$ \\ \hline
+%0 & 0.20 \\ 
+%1 & 0.50 \\ 
+%2 & 0.30 \\ \hline
+%& 1.00
+%\end{tabular}}
+%\only<3>{Sind $X$ und $Y$\\
+%unabhängig?}
+%\only<4>{Nein, denn\\
+%$0.10\neq 0.25\cdot 0.20$}
+%\end{minipage}
+%\end{exampleblock}
+%\end{frame}
+
+
+\begin{frame}
+	\frametitle{Zufallsvektoren}
+	\framesubtitle{Kap.~3.1}
+	\begin{exampleblock}{Beispiel: Gemeinsam diskrete Verteilung}
+		$X$: Haushaltsgröße; $Y$: Anzahl Autos\bigskip
+		
+		\begin{minipage}[t]{0.6\textwidth}
+			\begin{tabular}{c|ccc|c}
+				$X\backslash Y$ & 0 & 1 & 2 &  \\ \hline
+				1 & \color<4>{red}0.10 & 0.14 & 0.01 & \color<4>{red}0.25 \\ 
+				2 & 0.05 & 0.15 & 0.10 & 0.30 \\ 
+				3 & 0.02 & 0.10 & 0.08 & 0.20 \\ 
+				4 & 0.02 & 0.06 & 0.07 & 0.15 \\ 
+				5 & 0.01 & 0.05 & 0.04 & 0.10 \\ \hline
+				  &      &      &      & 1.00
+			\end{tabular}\vspace{10pt}
+		Sind $X$ und $Y$ unabhängig?
+		\end{minipage}
+%		\begin{minipage}[t]{0.35\textwidth}
+%			\only<1>{Randverteilung\\ von $Y$?}
+%			\only<2>{\begin{tabular}{c|c}
+%					$y_{k}$ & $p_{\cdot k}$ \\ \hline
+%					0 & 0.20 \\ 
+%					1 & 0.50 \\ 
+%					2 & 0.30 \\ \hline
+%					& 1.00
+%			\end{tabular}}
+%			\only<3>{Sind $X$ und $Y$\\
+%				unabhängig?}
+%			\only<4>{Nein, denn\\
+%				$0.10\neq 0.25\cdot 0.20$}
+%		\end{minipage}
+	\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Bedingte Verteilungen}\medskip
+\begin{itemize}
+\item Wie ist eine Zufallsvariable $X$ verteilt, wenn über die Werte
+einer Zufallsvariablen $Y$ Angaben (oder Annahmen) vorliegen?
+\item Erinnerung: Bedingte Wahrscheinlichkeit 
+\[ P(A|B)=P(A\cap B)/P(B) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{block}{Bedingte Wahrscheinlichkeit}
+Bei gemeinsam diskreten Verteilungen ist die bedingte 
+Wahrscheinlichkeit für $X=x_{j}$\ unter 
+der Bedingung $Y=y_{k}$
+\[ P(X=x_{j}|Y=y_{k})=\frac{P(X=x_{j},Y=y_{k})}{P(Y=y_{k})} \]
+für $j=1,2,\ldots $
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{block}{Bedingte Dichtefunktion}
+Bei gemeinsam stetigen Verteilungen ist die bedingte 
+Dichtefunktion von $X$\ unter der Bedingung $Y=y$
+\[ f_{X|Y=y}(x)=\frac{f_{XY}(x,y)}{f_{Y}(y)} \]
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+Bedingte Verteilungsfunktion, bedingte Erwartungswerte, bedingte
+Varianzen, z.B. 
+\begin{eqnarray*}
+E(X|Y=y_k) &=& \sum_{j=1}^{J}x_{j}P(X=x_{j}|Y=y_{k}) \\
+E(X|Y=y) &=& \int_{-\infty }^{\infty }x\;f_{X|Y=y}(x)dx
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Haushalte}
+$X$: Haushaltsgröße; $Y$: Anzahl Autos
+\begin{equation*}
+\begin{tabular}{c|ccc|c}
+$X\backslash Y$ & 0 & 1 & 2 &  \\ \hline
+1 & 0.10 & 0.14 & 0.01 & 0.25 \\ 
+2 & \color<2>{red}0.05 & \color<2>{red}0.15 & \color<2>{red}0.10 & \color<2>{red}0.30 \\ 
+3 & 0.02 & 0.10 & 0.08 & 0.20 \\ 
+4 & 0.02 & 0.06 & 0.07 & 0.15 \\ 
+5 & 0.01 & 0.05 & 0.04 & 0.10 \\ \hline
+& 0.20 & 0.50 & 0.30 & 1.00%
+\end{tabular}
+\end{equation*}
+Bedingter Erwartungswert von $Y$ unter der Bedingung $X=2$?
+\end{exampleblock}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Zufallsvektoren}
+%\framesubtitle{Kap.~3.1}
+%\begin{exampleblock}{Beispiel: Haushalte}
+%\begin{center}
+%\begin{tabular}{c|c}
+%$y_k$ & $P(Y=y_k|X=2)$ \\ \hline
+%0 & \only<1>{$0.05/0.30$}\only<2-3>{$0.167$} \\ 
+%1 & \only<1>{$0.15/0.30$}\only<2-3>{$0.500$} \\ 
+%2 & \only<1>{$0.10/0.30$}\only<2-3>{$0.333$} \\ \hline
+%  & $1.000$
+%\end{tabular}
+%\end{center}
+%und $E(Y|X\!=\!2)=\only<3>{0\cdot 0.167\!+\!1\cdot 0.5\!+\!2\cdot 0.333=1.166}$
+%\end{exampleblock}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Zufallsvektoren}
+	\framesubtitle{Kap.~3.1}
+	\begin{exampleblock}{Beispiel: Haushalte}
+		\begin{center}
+			\begin{tabular}{c|c}
+				$y_k$ & $P(Y=y_k|X=2)$ \\ \hline
+				0 & \only<1>{$0.05/0.30$} \\ 
+				1 & \only<1>{$0.15/0.30$} \\ 
+				2 & \only<1>{$0.10/0.30$} \\ \hline
+				& $1.000$
+			\end{tabular}
+		\end{center}
+%		und $E(Y|X\!=\!2)=\only<3>{0\cdot 0.167\!+\!1\cdot 0.5\!+\!2\cdot 0.333=1.166}$
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{block}{Kovarianz}
+Die Kovarianz zwischen $X$ und $Y$ ist definiert als
+\[ Cov(X,Y) =E[(X-E(X))(Y-E(Y))] \]
+\end{block}
+\begin{itemize}
+\item Messung des Zusammenhangs zwischen $X$ und $Y$
+\item Nützliche Umformung
+\[ Cov(X,Y) =E(XY)-E(X)E(Y) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+Herleitung $Cov(X,Y) =E(XY)-E(X)E(Y)$\\
+\vspace*{5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{itemize}
+\item Gemeinsam diskret verteilte Zufallsvariable
+\[ Cov(X,Y)=\sum_{j=1}^J\sum_{k=1}^K(x_j\!-\!E(X))(y_k\!-\!E(Y))p_{jk} \]
+\item Gemeinsam stetig verteilte Zufallsvariable
+\[ Cov(X,Y) =\!\int\limits_{-\infty }^{+\infty }\int\limits_{-\infty }^{+\infty }
+(x\!-\!E(X))(y\!-\!E(Y))f_{XY}(x,y)dxdy \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Eigenschaften der Kovarianz:}\medskip
+\begin{itemize}
+\item Symmetrie: $Cov(X,Y)=Cov(Y,X)$
+\item Lineare Transformation: 
+\[ Cov(aX+b,cY+d)=a\cdot c\cdot Cov(X,Y) \]
+\item Wenn $X$ und $Y$ unabhängig sind, gilt $Cov(X,Y)=0$
+\item Die Kovarianz ist schlecht zu interpretieren
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{block}{Korrelationskoeffizient}
+Der Korrelationskoeffizient ist definiert als 
+\[ \rho _{XY}=\frac{Cov(X,Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}. \]
+\end{block}
+\begin{itemize}
+\item Der Korrelationskoeffizient ist die normierte Kovarianz
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Eigenschaften des Korrelationskoeffizienten}\medskip
+\begin{itemize}
+\item Der Korrelationskoeffizient ist dimensionslos
+\item Symmetrie: Es gilt $\rho _{XY}=\rho _{YX}$
+\item Normierung: Es gilt $-1\leq \rho _{XY}\leq 1$
+\item Invarianz bzgl.\ linearer Transformationen
+\item Falls $X$ und $Y$ unabhängig sind, dann ist $\rho _{XY}=0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Erwartungswert und Varianz einer Summe:}\medskip
+\begin{itemize}
+\item Seien $X$ und $Y$ zwei Zufallsvariablen
+\item $X+Y$ ist ebenfalls eine Zufallsvariable
+\item Erwartungswert der Summe
+\[ E(X+Y)=E(X)+E(Y) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{itemize}
+\item Varianz der Summe
+\[ Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y) \]
+\item Bei Unkorreliertheit (insb. Unabhängigkeit)
+\[ Var(X+Y)=Var(X)+Var(Y) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+Herleitung $Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y)$\\
+\vspace*{5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Varianz einer Summe}
+Eine Person wird zufällig aus der Bevölkerung 
+ausgewählt, sei $X$  das monatliche Arbeitseinkommen 
+und $Y$ das monatliche Vermögenseinkommen, gegeben sei
+\begin{equation*}
+\begin{array}{ll}
+E(X)=2\,500 & Var(X)=4\,000\,000 \\ 
+E(Y)=300 & Var(Y)=160\,000 \\ 
+Cov(X,Y)=240\,000 & 
+\end{array}
+\end{equation*}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Varianz einer Summe}
+Erwartungswert und Varianz des Gesamteinkommens\\[1ex]
+$E(X+Y)=$\vspace*{2cm}\\
+$Var(X+Y)=$\vspace*{2cm}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Erwartungswert und Varianz einer gewichteten Summe}\medskip
+\begin{itemize}
+\item Seien $X$ und $Y$ zwei Zufallsvariablen, dann ist $aX+bY$ ebenfalls
+eine Zufallsvariable
+\item Erwartungswert der gewichteten Summe
+\[ E(aX+bY)=aE(X)+bE(Y) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{itemize}
+\item Varianz der gewichteten Summe
+\begin{eqnarray*}
+Var(aX+bY) &=&a^{2}Var(X)+b^{2}Var(Y) \\[1ex]
+&&+2ab\cdot Cov(X,Y)
+\end{eqnarray*}
+\item Wegen $Cov(X,Y)=\rho _{XY}\sqrt{Var(X)}\sqrt{Var(Y)}$
+gilt auch
+\begin{eqnarray*}
+Var(aX+bY) &=&a^{2}Var(X)+b^{2}Var(Y) \\[1ex]
+&&+2ab\rho _{XY}\sqrt{Var(X)}\sqrt{Var(Y)}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Portfolio}
+In einem Portfolio sind zwei Aktien enthalten
+\begin{itemize}
+\item Sei $X$ die Jahresrendite von Aktie A (in\%)
+\item Sei $Y$ die Jahresrendite von Aktie B (in\%)
+\item $a=70\%$ des Vermögens sind in A investiert
+\item $b=30\%$ des Vermögens sind in B investiert
+\item Die Jahresrendite des Portfolios ist $Z=aX+bY$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Portfolio}
+\begin{itemize}
+\item Gegeben sei
+\begin{align*}
+E(X)&=7  &\sqrt{Var(X)} &=25 \\ 
+E(Y)&=15 &\sqrt{Var(Y)}&=45 \\ 
+\rho_{XY}&=-0.4
+\end{align*}
+\item Was sind Erwartungswert und Varianz von
+\[ Z=aX+bY\quad ?\]
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Portfolio}
+$EX=7, Var(X)=25, EY=15,  Var(Y)=45, \rho=-0.4$\\[1ex]
+$E(Z)=$\vspace*{2cm}\\
+$Var(Z)=$\vspace*{2cm}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{exampleblock}{Beispiel: Portfolio}
+Vergleich der Standardabweichungen:\medskip
+\begin{itemize}
+\item Standardabweichung Aktie A $\sqrt{Var(X)}=25\%$
+\item Standardabweichung Aktie B $\sqrt{Var(Y)}=45\%$
+\item Standardabweichung Portfoliorendite $\sqrt{Var(Z)}=17.31\%$
+\end{itemize}
+\pause
+\bigskip
+\begin{center}
+\textbf{Das Portfolio-Risiko ist kleiner\\
+als das kleinste Einzelrisiko!}
+\end{center}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Verallgemeinerung auf $n$ Zufallsvariablen}\medskip
+\begin{itemize}
+\item Seien $X_{1},\ldots ,X_{n}$ Zufallsvariablen und $a_{1},\ldots,a_{n}$ reelle Zahlen
+\item Erwartungswert der gewichteten Summe 
+\[ E\left( \sum_{i=1}^{n}a_{i}X_{i}\right) =\sum_{i=1}^{n}a_{i}E(X_{i}) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{itemize}
+\item Varianz der gewichteten Summe
+\only<1>{\begin{eqnarray*}
+Var\left(\sum_{i=1}^{n}a_{i}X_{i}\right)&=&\sum_{i=1}^{n}a_{i}^{2}Var(X_{i}) \\
+&& +\sum_{i=1}^{n}\sum_{j=1, j\neq i}^n a_i a_j Cov(X_i,X_j)
+\end{eqnarray*}}
+\only<2>{\begin{eqnarray*}
+Var\left(\sum_{i=1}^{n}a_{i}X_{i}\right)&=&\sum_{i=1}^{n}a_{i}^{2}Var(X_{i})\\
+&& +2\sum_{i=1}^{n}\sum_{j=i+1}^{n}a_{i}a_{j}Cov(X_{i},X_{j})
+\end{eqnarray*}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\textbf{Reproduktivitätseigenschaft der Normalverteilung}\medskip
+\begin{itemize}
+\item Seien $a_1,\ldots ,a_n$ reelle Zahlen und $X_{1},\ldots ,X_{n}$
+unabhängige normalverteilte Zufallsvariable
+\[ X_{i}\sim N(\mu_i,\sigma_i^2) \]
+\item Was ist die Verteilung von
+\[ Y=\sum_{i=1}^{n}a_{i}X_{i} ?\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zufallsvektoren}
+\framesubtitle{Kap.~3.1}
+\begin{itemize}
+\item Es gilt
+\[ Y=\sum_{i=1}^n a_i X_i\sim N(\mu,\sigma^2) \]
+mit 
+\[ \mu=\sum_{i=1}^{n}a_i\mu_i, \qquad \sigma^2 =\sum_{i=1}^{n}a_i^2\sigma_i^2 \]
+\end{itemize}
+\end{frame}

@@ -1,0 +1,290 @@
+\section[Zufallsvariablen]{Zufallsvariablen, Erwartungswert, Varianz}
+
+\begin{enumerate}
+\item Sei $X$ eine diskrete Zufallsvariable mit Tr\"{a}ger $T_{X}=\left\{
+1,2,3,4,5,6\right\} $ und der Wahrscheinlichkeitsfunktion 
+\begin{equation*}
+P\left( X=x\right) =\left\{ 
+\begin{array}{ll}
+0.1 & \quad \text{f\"{u}r }x=1,2,3,4,5 \\ 
+0.5 & \quad \text{f\"{u}r }x=6.%
+\end{array}
+\right.
+\end{equation*}
+\begin{enumerate}
+\item Skizzieren Sie die Verteilungsfunktion von $X$.
+\item Skizzieren Sie die Verteilungsfunktion von $Y=X^{2}$.
+\item Berechnen Sie den Erwartungswert von $Y$.
+\item Berechnen Sie die Varianz von $Y$.
+\end{enumerate}
+
+\item Die Dichte einer stetigen Zufallsvariablen $X$ ist 
+\begin{equation*}
+f(x)=\left\{ 
+\begin{array}{ll}
+x+0.5 & \qquad \text{f\"{u}r }0<x<1 \\ 
+0 & \qquad \text{sonst.}%
+\end{array}%
+\right.
+\end{equation*}%
+Errechnen Sie den Erwartungswert, den Median und die Varianz von $X$.
+\item Bestimmen Sie $c$ so, dass 
+\begin{equation*}
+f(x)=\left\{ 
+\begin{array}{ll}
+cx^{2} & \qquad \text{f\"{u}r }0<x<2 \\ 
+0 & \qquad \text{sonst}%
+\end{array}%
+\right.
+\end{equation*}
+eine Dichtefunktion wird. Die stetige Zufallsvariable $X$ habe die oben
+angegebene Dichte.
+\begin{enumerate}
+\item Berechnen Sie den Erwartungswert von $X$.
+\item Berechnen Sie das 10\%-Quantil von $X$.
+\end{enumerate}
+
+\item Von der Verteilungsfunktion $F$ einer Zufallsvariablen $X$ ist
+bekannt, dass $F(x)=x^{2}$ f\"{u}r $0<x<1$ gilt.
+\begin{enumerate}
+\item Welche Werte muss $F$ f\"{u}r $x<0$, $x=0$, $x=1$, $x>1$ annehmen?
+Skizzieren Sie die gesamte Verteilungsfunktion $F$.
+\item Berechnen Sie die Dichtefunktion von $X$.
+\item Errechnen Sie $E(X)$.
+\item Errechnen Sie $Var(X)$.
+\item Errechnen Sie den Median von $X$.
+\item Bestimmen Sie $P(X=0.5)$.
+\end{enumerate}
+
+\item Bei einer Tombola enth\"{a}lt eine Lostrommel 2000 Lose, von denen
+80\% Nieten und 20\% Gewinnlose sind. 10\% der Gewinnlose bringen eine
+Auszahlung von jeweils 100 Euro, die Auszahlung der \"{u}brigen 90\% der
+Gewinnlose betr\"{a}gt jeweils 10 Euro.
+
+Wie hoch sind Erwartungswert und die Varianz des Gewinns beim Kauf eines
+Loses, wenn ein Los 5 Euro kostet?
+
+\item Ein Kunde einer Bank will einen Kredit haben. Der Kredit soll
+100\thinspace 000 Euro betragen, \"{u}ber ein Jahr laufen und am Ende des
+Jahres getilgt werden. Die Bank stellt Nachforschungen \"{u}ber die Bonit%
+\"{a}t des Kunden an und erf\"{a}hrt, dass das Kreditausfallrisiko bei 10\%
+liegt (d.h. die Wahrscheinlichkeit, dass der Kunde weder Zinsen noch Tilgung
+zahlt, ist 10\%; mit einer Wahrscheinlichkeit von 90\% wird korrekt zur\"{u}%
+ckgezahlt).
+
+Welchen Zinssatz muss die Bank fordern, damit sie eine erwartete Rendite von
+6\% erzielt? Wie hoch ist bei diesem Zinssatz die Varianz der Rendite?
+
+\item Ein Kunde einer Bank will einen Kredit haben. Der Kredit soll 1 Mio.\
+Euro betragen, \"{u}ber ein Jahr laufen und am Ende des Jahres getilgt
+werden. Die Bank stellt Nachforschungen \"{u}ber die Bonit\"{a}t des Kunden
+an und erf\"{a}hrt,
+
+\begin{itemize}
+\item dass der Kunde mit einer Wahrscheinlichkeit von 70\% Zinsen und Tilgung zahlt,
+\item dass der Kunde mit einer Wahrscheinlichkeit von 10\% weder Zinsen noch Tilgung zahlt,
+\item dass der Kunde mit einer Wahrscheinlichkeit von 20\% zwar keine Zinsen
+zahlt, aber einen Betrag von $X$ tilgt, wobei $X$ eine stetige
+Zufallsvariable ist (in Mio.\ Euro) mit Dichtefunktion%
+\begin{equation*}
+f_{X}\left( x\right) =\left\{ 
+\begin{array}{ll}
+0 & \quad \text{f\"{u}r }x<0 \\ 
+2x & \quad \text{f\"{u}r }0\leq x\leq 1 \\ 
+0 & \quad \text{f\"{u}r }x>1.%
+\end{array}%
+\right.
+\end{equation*}
+\end{itemize}
+
+Welchen Zinssatz m\"{u}sste die Bank fordern, damit sie eine erwartete
+Rendite von 6\% erzielt?
+
+\item Petersburger Paradoxon:\footnote{%
+Dieses Paradox wurde von Daniel Bernoulli in dem Aufsatz \quotedblbase
+Specimen Theoriae Novae de Mensura Sortis\textquotedblright , Commentarii
+Academiae Scientiarum Imperialis Petropolitanae, Tomus V [Papers of the
+Imperial Academy of Sciences in Petersburg, Vol. V], 1738, pp. 175-192,
+behandelt. Eine englische \"{U}bersetzung der Arbeit erschien 1954 in:
+Econometrica, vol. 22, pp. 23-36.}
+
+Ein Spiel hei\ss t fair, wenn der erwartete Gewinn 0 ist. Betrachten Sie
+folgendes Spiel: Eine M\"{u}nze wird so oft geworfen, bis zum ersten Mal
+Zahl erscheint. Wenn schon beim ersten Wurf Zahl erscheint, werden 2 Euro
+ausgezahlt. Wenn beim zweiten Wurf Zahl erscheint, werden 4 Euro ausgezahlt.
+Wenn beim dritten Wurf Zahl erscheint, werden 8 Euro ausgezahlt. Allgemein
+werden $2^{i}$ Euro ausgezahlt, wenn beim $i$-ten Wurf zum ersten Mal Zahl
+erscheint.
+\begin{enumerate}
+\item Wie hoch m\"{u}sste der Einsatz sein, damit das Spiel fair ist?
+\item Bernoulli hat argumentiert, dass nicht die Auszahlung eines Spiels,
+sondern der Nutzen der Auszahlung entscheidend ist. Als Nutzen $u$ einer
+Auszahlung von $x$ Euro nahm Bernoulli $u\left( x\right) =\ln \left(
+x\right) $ an (der Grenznutzen ist also fallend). Wieviel ist jemand mit
+dieser Nutzenfunktion bereit, f\"{u}r das Spiel zu zahlen?
+
+Hinweis: Berechnen Sie zun\"{a}chst den Erwartungswert des Nutzens des
+Gewinns; dabei k\"{o}nnen Sie die Gleichheit $\sum_{i=1}^{\infty }i/2^{i}=2$
+ausnutzen. Ein Wirtschaftssubjekt zahlt f\"{u}r das Spiel maximal einen
+Einsatz, dessen Nutzen dem Erwartungswert des Nutzens des Gewinns entspricht.
+\end{enumerate}
+
+\item Customer Lifetime Value oder Kundenwertrechnung:
+
+Als Lebensdeckungsbeitrag bezeichnet man die Summe aller diskontierten j\"{a}%
+hrlichen Deckungsbeitr\"{a}ge \"{u}ber die gesamte Dauer einer
+Kundenbeziehung. Die folgende Tabelle zeigt die K\"{u}%
+ndigungswahrscheinlichkeiten und die j\"{a}hrlichen Deckungsbeitr\"{a}ge
+eines Kunden. Die K\"{u}ndigungswahrscheinlichkeiten geben an, wie gro\ss\ %
+die Wahrscheinlichkeit ist, dass der Kunde nach genau x Jahren k\"{u}ndigt.
+Vernachl\"{a}ssigen Sie im Folgenden die Abdiskontierung (der Zinssatz sei
+0\%).
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Dauer & K\"{u}ndigungs- & j\"{a}hrlicher \\ 
+& wahrscheinlichk. & Deckungsbeitr. \\ \hline
+1 Jahr & 0.5 & $-5$ \\ 
+2 Jahre & 0.0 & $+8$ \\ 
+3 Jahre & 0.5 & $-5$ \\ \hline
+\end{tabular}
+\end{center}
+\begin{enumerate}
+\item Berechnen Sie die erwartete Dauer der Kundenbeziehung.
+\item Berechnen Sie den Lebensdeckungsbeitrag des Kunden, wenn die Dauer der
+Kundenbeziehung gerade der erwarteten Dauer der Kundenbeziehung entspricht.
+\item Berechnen Sie den erwarteten Lebensdeckungsbeitrag.
+\end{enumerate}
+
+\item Sinnloses Jugend-Marketing:
+
+Eine Bank will Jugend-Marketing betreiben. Der Datensatz \texttt{jugend.csv}
+zeigt die einj\"{a}hrigen Deckungsbeitr\"{a}ge von Bankkunden sowie ihre einj%
+\"{a}hrigen K\"{u}ndigungswahrscheinlichkeiten\footnote{%
+Unter der einj\"{a}hrigen K\"{u}ndigungswahrscheinlichkeit versteht man die
+bedingte Wahrscheinlichkeit, dass jemand innerhalb eines Jahres k\"{u}ndigt,
+der bislang noch nicht gek\"{u}ndigt hat.} in Abh\"{a}ngigkeit vom Alter.
+\begin{enumerate}
+\item Die gro\ss\ ist die Wahrscheinlichkeit, dass ein 15-j\"{a}hriger
+Neukunde im Alter von 35 Jahren immer noch Kunde der Bank ist?
+\item Der Diskontierungssatz sei 4\%. Wie gro\ss\ ist der erwartete
+Lebensdeckungsbeitrag eines 15-j\"{a}hrigen Neukunden? Lohnt sich unter
+diesen Umst\"{a}nden das Jugendmarketing?
+\item Wie gro\ss\ ist der erwartete Lebensdeckungsbeitrag eines 40-j\"{a}%
+hrigen Neukunden?
+\end{enumerate}
+
+\item Insiderhandel oder: Warum es schlau sein kann zu gucken, was die anderen tun.
+
+Stellen Sie sich vor, Sie seien Market Maker an einer Wertpapierb\"{o}rse
+und daher verpflichtet, Liquidit\"{a}t bereitzustellen, d.h. einem H\"{a}%
+ndler Aktien zu verkaufen, wenn er Aktien kaufen m\"{o}chte, und einem H\"{a}%
+ndler Aktien abzukaufen, wenn er Aktien verkaufen m\"{o}chte.
+
+Ihnen ist bekannt, dass 10\% aller Marktteilnehmer Insider sind. Insider
+kennen den zu\-k\"{u}nf\-ti\-gen Aktienkurs $K_{1}$, sie werden daher nur
+handeln, wenn sie ihren Informationsvorteil kapitalisieren k\"{o}nnen. Die
+uninformierten H\"{a}ndler (die oft auch Noise-Trader genannt werden)
+hingegen kaufen und verkaufen unabh\"{a}ngig vom Aktienkurs mit einer
+Wahrscheinlichkeit von jeweils 50\%. Die H\"{a}ndler d\"{u}rfen nur
+begrenzte Mengen handeln. Leider k\"{o}nnen Sie die Insider nicht von den
+uninformierten H\"{a}ndlern unterscheiden.
+
+Den zuk\"{u}nftigen Aktienkurs kennen Sie als Market Maker nicht. F\"{u}r
+Sie ist $K_{1}$ eine Zufallsvariable, deren Verteilung zur Vereinfachung 
+\begin{equation*}
+P(K_{1}=95)=P(K_{1}=105)=0.5
+\end{equation*}%
+sei. Der aktuelle Aktienkurs, zu dem Sie als Market Maker kaufen und
+verkaufen, sei $K_{0}=100$. Die n\"{a}chste Order, die Sie erhalten, ist
+eine Kauf-Order.
+
+\begin{enumerate}
+\item Revidieren Sie Ihre Wahrscheinlichkeitsverteilung von $K_{1}$ unter Ber%
+\"{u}cksichtigung der Tatsache, dass Sie eine Kauf-Order (und keine
+Verkauf-Order) erhalten haben. Hinweise: Definieren Sie geeignete Ereignisse
+und nutzen Sie den Satz von Bayes sowie den Satz der totalen
+Wahrscheinlichkeit. Strukturieren Sie Ihre L\"{o}sung mit Hilfe eines
+Wahrscheinlichkeitsbaums.
+\item Welchen Erwartungswert hat (aus Ihrer Sicht als Market Maker) die
+Zufallsvariable $K_{1}$ nach Eingang der Kauf-Order?
+\end{enumerate}
+
+\item Unterschiedliche Meinungen oder: Wenn zwei sich nicht einig sind,
+sollten sie wetten.
+
+Wahrscheinlichkeiten k\"{o}nnen subjektive Einsch\"{a}tzungen repr\"{a}%
+sentieren. Betrachten Sie im folgenden zwei Personen, die die
+Wahrscheinlichkeit des Eintretens eines Ereignisses $A$ unterschiedlich
+einsch\"{a}tzen. (Um es konkret zu machen: sei $A$ das Ereignis
+\quotedblbase In einem Monat steht der Dollar h\"{o}her als
+heute\textquotedblright .) Person 1 glaubt, dass $P_{1}(A)=0.9$ betr\"{a}gt.
+Person 2 glaubt, dass $P_{2}(A)=0.3$.
+
+Beide Personen haben identische Nutzenfunktionen $u(y)=-1/y$, die den Nutzen
+eines Einkommens in H\"{o}he von $y$ angeben.\footnote{%
+Falls Sie in Mikro\"{o}konomik die Erwartungsnutzentheorie noch nicht
+behandelt haben, nehmen Sie die Existenz einer solchen Nutzenfunktion
+einfach als gegeben hin. Dass negative Nutzenwerte vorkommen, ist
+unproblematisch. Wichtig ist nur, dass h\"{o}here Nutzenwerte besser sind
+als niedrigere.} Beide Personen haben ein sicheres Einkommen von $y_{0}=5$.
+Da die Personen unterschiedlicher Meinung sind, macht es Sinn, eine Wette zu
+vereinbaren. Sei $X$ der Betrag $b>0$, den Person 2 an Person 1 zahlt, wenn $%
+A$ eintritt. Falls $\bar{A}$ eintritt, empf\"{a}ngt Person 2 eine Zahlung
+von Person 1 (d.h. $X$ ist negativ);%
+\begin{equation*}
+X=\left\{ 
+\begin{array}{ll}
++b & \quad \text{wenn }A \\ 
+-b & \quad \text{wenn }\bar{A}.%
+\end{array}%
+\right.
+\end{equation*}%
+Die Einkommen der beiden Personen sind nun nicht mehr sicher, sondern zuf%
+\"{a}llig. Ebenso sind auch die beiden Nutzen Zufallsvariablen: der Nutzen
+von Person 1 ist $u(y_{0}+X)$, und der Nutzen von Person 2 ist $u(y_{0}-X)$.
+\begin{enumerate}
+\item Berechnen Sie den erwarteten Nutzen der beiden Personen als Funktion
+von $b$. Achten Sie auf die richtigen Wahrscheinlichkeiten bei der
+Berechnung der Erwartungswerte.
+\item Skizzieren Sie die beiden erwarteten Nutzen in Abh\"{a}ngigkeit vom
+Wetteinsatz $b$.
+\item Auf welchen Wetteinsatz werden sich die beiden Personen einigen?
+\end{enumerate}
+
+\item Dynamische Optimierung oder: Vom Wert des Wartens.
+
+Diese Aufgabe basiert auf einem einf\"{u}hrenden Beispiel des Buches
+\quotedblbase Investment under Uncertainty\textquotedblright\ von Dixit und
+Pindyck, 1994, S. 27f. Sie sollen entscheiden, ob eine Fabrik zur
+Herstellung eines bestimmten Produkts gebaut werden soll. Die Investition,
+also der Bau der Fabrik, kostet 1600 Euro. Das Produkt hat heute (in $t=0$)
+einen Preis von 200 Euro. In der n\"{a}chsten Periode ($t=1$) \"{a}ndert
+sich jedoch der Preis des Produkts. Mit einer Wahrscheinlichkeit von 0.5
+steigt er auf 300 Euro und mit einer Wahrscheinlichkeit von 0.5 sinkt er auf
+100 Euro. Danach bleibt der Preis f\"{u}r alle Zeiten konstant (also f\"{u}r 
+$t=2,3,\ldots $). Der Zinssatz sei 10\%. Die Fabrik kann jede Periode eine
+Einheit des Produkts herstellen; die Herstellung verursacht keine Kosten.
+Die Investition kann nicht wieder r\"{u}ckg\"{a}ngig gemacht werden, wenn
+sie einmal durchgef\"{u}hrt wurde. (Die teilweise sehr unrealistischen
+Annahmen dienen allein dazu, den Blick auf den wesentlichen Kern dieses
+Beispiels zu lenken.)
+
+\begin{enumerate}
+\item Unter dem Nettobarwert (net present value) versteht man die Summe
+aller abgezinsten erwarteten Kosten und Erl\"{o}se. Berechnen Sie den
+Nettobarwert der Investition. Sollte die Investition durchgef\"{u}hrt werden?
+\item Eine m\"{o}gliche Handlungsoption wurde unter (a) ignoriert: Man kann
+die Entscheidung f\"{u}r oder gegen die Investition aufschieben. Berechnen
+Sie den Nettobarwert (f\"{u}r $t=0$), wenn in $t=0$ abgewartet wird, wie
+sich der Preis entwickelt, und wenn in $t=1$ nur dann investiert wird, falls
+der Preis auf 300 Euro steigt. F\"{a}llt der Preis, wird nicht investiert.
+\end{enumerate}
+
+\item Jensens Ungleichung:
+
+Sei $X$ eine Zufallsvariable und $g$ eine konvexe Funktion. Jensens
+Ungleichung besagt, dass $E(g(X))\geq g(E(X))$ ist. Illustrieren Sie die G%
+\"{u}ltigkeit der Ungleichung durch ein einfaches Beispiel mit einer
+diskreten Zufallsvariable.
+\end{enumerate}

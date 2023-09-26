@@ -1,0 +1,344 @@
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+\begin{block}{Wahrscheinlichkeit}
+Eine Abbildung
+\[ P:A\longmapsto P(A) \]
+heißt Wahrscheinlichkeit, wenn gilt:
+\begin{enumerate}
+\item Nichtnegativität: Für alle $A$ gilt $P(A) \geq 0$
+\item Normierung: $P(\Omega)=1$
+\item Additivität: Für $A\cap B=\varnothing$ gilt $P(A\cup B)=P(A)+P(B)$
+\end{enumerate}
+\end{block}
+Die drei Bedingungen sind Axiome.
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+Aus den Axiome folgt z.B.\\\medskip
+\begin{itemize}
+\item Komplementärereignis
+\[ P(\bar{A})=1-P(A) \]
+\item Additionssatz
+\[ P(A\cup B)=P(A)+P(B)-P(A\cap B) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+\begin{exampleblock}{Beispiel: Zwei Ereignisse} 
+Gegeben seien zwei Ereignisse $A$ und $B$ mit den Wahrscheinlichkeiten
+\begin{itemize}
+\item $P(A)=0.6$
+\item $P(B)=0.5$
+\item $P(A\text{ oder } B)=P(A\cup B)=0.9$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+\begin{exampleblock}{Forts. Beispiel: Zwei Ereignisse}
+$P(A)=0.6, P(B)=0.5, P(A\cup B)=0.9$\\[1ex]
+Die Wahrscheinlichkeit, dass $A$ und $B$ beide eintreten, ist
+\uncover<2>{
+\begin{align*}
+P(A\cap B) &= P(A)+P(B)- P(A\cup B)\\
+&= 0.6+0.5-0.9 \\
+&= 0.2
+\end{align*}
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+\begin{exampleblock}{Forts. Beispiel: Zwei Ereignisse}
+$P(A)=0.6, P(B)=0.5, P(A\cup B)=0.9$\\[1ex]
+Die Wahrscheinlichkeit, dass weder $A$ noch $B$ eintritt, ist
+\uncover<2>{
+\begin{align*}
+P(\bar A\cap \bar B) &= P(\overline{A\cup B})\\
+&= 1-P(A\cup B)\\
+&= 1-0.9 \\
+&= 0.1
+\end{align*}
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Definition}
+\begin{exampleblock}{Forts. Beispiel: Zwei Ereignisse}
+$P(A)=0.6, P(B)=0.5, P(A\cup B)=0.9, P(A\cap B)=0.2$\\[1ex]
+Die Wahrscheinlichkeit, dass entweder $A$ oder $B$ eintritt\\ (aber nicht beide), ist
+\uncover<2>{
+\begin{align*}
+P((A\cup B)\backslash (A\cap B)) &= P(A\cup B)-P((A\cup B)\cap (A\cap B))\\
+&= P(A\cup B)-P(A\cap B)\\
+&= 0.9-0.2\\
+&= 0.7
+\end{align*}
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Laplace-Experimente}
+\begin{block}{Laplace-Experimente}
+Ein Zufallsexperiment heißt Laplace-Experiment, wenn
+$\Omega $ endlich ist und wenn alle Elementarereignisse
+als gleich wahrscheinlich angenommen werden können.
+\end{block}
+\medskip
+Für jedes $\omega\in\Omega$ gilt $P(\{\omega\})=1/n$
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Laplace-Experimente}
+\begin{itemize}
+\item Laplace-Wahrscheinlichkeit: Für $A\subset \Omega $ gilt 
+\[P(A)=\frac{|A|}{|\Omega|}=\frac{\text{Anzahl der günstigen Ergebnisse}}{\text{Anzahl der möglichen Ergebnisse}} \]
+\item Zur Berechnung der Wahrscheinlichkeit muss 
+man die günstigen Ergebnisse und die möglichen Ergebnisse zählen
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Laplace-Experimente}
+\begin{exampleblock}{Beispiel: Würfelwurf}
+Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$\medskip
+\begin{itemize}
+\item Jedes Elementarereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
+\item Wahrscheinlichkeit von $A$: "`Eine gerade Zahl würfeln"'
+\uncover<2>{
+\[P(A)=\frac{|A|}{|\Omega|}=\frac{|\{2,4,6\}|}{|\{1,2,3,4,5,6\}|}=\frac{3}{6}=\frac{1}{2}\]
+}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{block}{Bedingte Wahrscheinlichkeit}
+Für $A,B$ mit $P(B)>0$ heißt
+\[ P(A|B)=\frac{P(A\cap B)}{P(B)} \]
+die bedingte Wahrscheinlichkeit von $A$ unter der Bedingung $B$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{itemize}
+\item Wie ist $P(A)$ zu modifizieren, wenn man weiß oder annimmt, dass $B$ eingetreten ist?
+\item Die bedingte Wahrscheinlichkeit $P(\cdot|B)$ ist eine Wahrscheinlichkeit im Sinne der Definition
+\item Die üblichen Rechenregeln für Wahrscheinlichkeiten gelten weiterhin,
+z.B.\ $P(A|B)=1-P(\bar A|B)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\textbf{Multiplikationssatz für Wahrscheinlichkeiten:}\medskip
+\begin{itemize}
+\item Aus
+\[ P(A|B)=\frac{P(A\cap B)}{P(B)} \]
+folgt
+\[ P(A\cap B)=P(A)P(B|A) \]
+\item Drei Ereignisse
+\[ P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{exampleblock}{Beispiel: Überlebenswahrscheinlichkeit}
+\begin{itemize}
+\item Ereignisse: $A_i$ ``Person überlebt Jahr $i$'' für $i=1,2,3$
+\item Gegeben seien die (bedingten) Wahrscheinlichkeiten
+\begin{align*}
+P(A_1) &= 0.8 \\
+P(A_2|A_1) &= 0.9\\
+P(A_3|A_2)&= 0.95
+\end{align*}
+\item Wie hoch ist die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 überlebt?
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{exampleblock}{Forts. Beispiel: Überlebenswahrscheinlichkeit}
+Die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 überlebt, beträgt
+\uncover<2>{
+\begin{align*}
+P(A_1\cap A_2\cap A_3) &= P(A_1)P(A_2|A_1)P(A_3|A_2\cap A_1) \\
+&= 0.8 \times 0.9\times 0.95\\
+&=0.684
+\end{align*}
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{block}{Partition}
+Die Ereignisse $A_1,\ldots ,A_n$ bilden eine Partition\\ 
+(vollständige Zerlegung) von $\Omega$, wenn 
+\begin{itemize}
+\item $\bigcup_{i=1}^{n}A_{i}=\Omega $ 
+\item und $A_{i}\cap A_{j}=\varnothing$ für $i\neq j$ 
+\item und $A_{i}\neq \varnothing $ für alle $i=1,\ldots ,n$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Bedingte Wahrscheinlichkeit}
+\begin{center}
+\includegraphics[width=7cm]{../book/images/AdobeStock_101998556b_ButcherGuide.jpeg}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Totale Wahrscheinlichkeit}
+\textbf{Satz von der totalen Wahrscheinlichkeit}\medskip
+\begin{itemize}
+\item Sei\ $A_1,\ldots ,A_n$ eine Partition von $\Omega$
+und $B$ ein Ereignis
+\item Dann gilt
+\[ P(B) = \sum_{i=1}^{n}P(B|A_i)\cdot P(A_i) \]
+\item Gewichtete Summe der bedingten Wahrscheinlichkeiten
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Totale Wahrscheinlichkeit}
+Begründung: Aus $B=(B\cap A_1)\cup\ldots\cup (B\cap A_n)$ folgt
+\begin{align*}
+P(B) &= P\left(\bigcup_{i=1}^n (B\cap A_i)\right) \\
+&= \sum_{i=1}^n P(B\cap A_i)\\
+&= \sum_{i=1}^n P(B|A_i)P(A_i)
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Totale Wahrscheinlichkeit}
+\begin{exampleblock}{Beispiel: Totale Wahrscheinlichkeit}
+Eine Person wird zufällig aus einer Population ausgewählt
+\begin{align*}
+B &\text{: Person ist arbeitslos } \\
+A_{1} &\text{: Person hat keine/niedrige Ausbildung} \\
+A_{2} &\text{: Person hat mittlere Ausbildung} \\
+A_{3} &\text{: Person hat hohe Ausbildung}
+\end{align*}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Totale Wahrscheinlichkeit}
+\begin{exampleblock}{Forts. Beispiel: Totale Wahrscheinlichkeit}
+Gegeben seien
+\begin{align*}
+P(B|A_{1}) &=0.25,&P(B|A_{2}) &=0.10,& P(B|A_{3}) &=0.05\\
+P(A_1) &=0.15,    &P(A_2)     &=0.65,& P(A_3) &=0.20 
+\end{align*}
+Wahrscheinlichkeit, dass die ausgewählte Person arbeitslos ist:
+\uncover<2>{
+\[ P(B)= 0.25\cdot 0.15+0.10\cdot 0.65+0.05\cdot 0.20= 0.1125 \]
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Satz von Bayes}
+\begin{block}{Satz von Bayes}
+Es gilt
+\[ P(A|B)=\frac{P(B|A) P(A)}{P(B)} \]
+\end{block}
+\medskip
+Regel zum Vertauschen von Bedingung und Bedingtem
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Satz von Bayes}
+\begin{exampleblock}{Beispiel: Bayes}
+Ereignisse:
+\begin{align*}
+A &:\text{ Kind studiert} &P(A)&=0.25\\
+B &:\text{ "`Akademisches Elternhaus"'}&P(B)&=0.35
+\end{align*}
+Folgende bedingte Wahrscheinlichkeit wird berichtet:
+\[ P(B|A) =0.60 \]
+Wie hoch ist die interessantere Wahrscheinlichkeit  $P(A|B)$?
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Satz von Bayes}
+\begin{exampleblock}{Forts. Beispiel: Bayes}
+Die Wahrscheinlichkeit, dass das "`Kind studiert"' (A), wenn es aus einem 
+"`akademischen Elternhaus"' (B) kommt, ist
+\uncover<2>{
+\begin{align*}
+P(A|B)&= \frac{P(B|A)P(A)}{P(B)}\\
+&= \frac{0.60\cdot 0.25}{0.35}\\
+&= 0.4286
+\end{align*}
+}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Unabhängigkeit}
+\begin{block}{Unabhängigkeit}
+Zwei Ereignisse $A$ und $B$ heißen (stochastisch) unabhängig, wenn
+\[ P(A\cap B) =P(A)\cdot P(B) \]
+\end{block}
+\begin{itemize}
+\item (Fast) äquivalent: $A$ und $B$ sind unabhängig genau dann, wenn
+$P(A|B)=P(A)$ bzw. $P(B|A)=P(B)$
+\item Unabhängigkeit und Disjunktheit sind nicht dasselbe!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wahrscheinlichkeit}
+\framesubtitle{Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Unabhängigkeit}
+Ereignisse:
+\begin{align*}
+A &:\text{ Kind studiert} &P(A)&=0.25\\
+B &:\text{ Akademisches Elternhaus}&P(B)&=0.35
+\end{align*}
+Gegeben ist auch $P(B|A) =0.60$. 
+\medskip
+
+Wegen $P(B|A)\neq P(B)$ sind $A$ und $B$ abhängig
+\end{exampleblock}
+\end{frame}
+
