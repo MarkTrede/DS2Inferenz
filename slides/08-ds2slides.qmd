@@ -1,0 +1,266 @@
+---
+title: "Data Science 2"
+subtitle: "Stichproben und Statistiken"
+format: beamer
+date: 2023-11-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\textbf{Stichproben}\medskip
+\begin{itemize}
+\item Sei $X$ eine Zufallsvariable; wir interessieren uns für die
+Verteilung von $X$, kennen aber die Verteilungsfunktion $F(x)$ nicht
+\item Um Informationen über die Verteilung zu gewinnen,\\
+muss man $X$ beobachten
+\item Eine einzelne Beobachtung von $X$ reicht nicht aus,\\
+um Informationen über die Verteilung zu gewinnen
+\end{itemize}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{block}{Einfache Stichprobe}
+$X_{1},X_{2},\ldots ,X_{n}$ heißt einfache Stichprobe aus $X$\\ 
+vom Umfang $n$, wenn
+\begin{enumerate}
+\item jedes $X_{i}$ wie $X$ verteilt ist und
+\item $X_{1},X_{2},\ldots ,X_{n}$ stochastisch unabhängig sind
+\end{enumerate}
+\end{block}
+i.i.d.-Stichprobe (independent and identically distributed)
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{itemize}
+\item \textbf{Achtung}: Die Definition stimmt nicht mit der 
+umgangssprachlichen Verwendung des Wortes Stichprobe überein
+\item Eine Stichprobe besteht \textbf{nicht} aus den tatsächlich
+beobachteten Daten
+\item Die tatsächlich beobachteten Daten seien $x_{1},\ldots ,x_{n}$\\ 
+(Realisierung der Stichprobe, konkrete Stichprobe)
+\end{itemize}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{exampleblock}{Beispiel: Löhne}
+\begin{itemize}
+\item Sei $X$ der Lohn einer zufällig ausgewählten 
+vollzeitbeschäftigten Person in Deutschland
+\item Wir interessieren uns für $E(X)$\\
+(also für den Durchschnittslohn in Deutschland)
+\item Es sollen $n=100$ Personen befragt werden
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{exampleblock}{Forts. Beispiel: Löhne}
+\begin{itemize}
+\item Jede Person soll die gleiche Auswahlwahrscheinlichkeit haben
+\item Sei $X_{i}$ das Einkommen der $i$-ten befragten Person
+\item Die $X_{1},\ldots ,X_{n}$ sollen unabhängig sein
+\item Die tatsächlich erhobenen Daten sind $x_{1},\ldots ,x_{n}$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{exampleblock}{Beispiel: Wahlumfrage}
+\begin{itemize}
+\item Wir interessieren uns für den Anteil der SPD-Wähler in NRW
+\item Die Zufallsvariable
+\[ X=\left\{ 
+\begin{array}{ll}
+0 & \quad \text{befragte Person wählt nicht SPD} \\ 
+1 & \quad \text{befragte Person wählt SPD}
+\end{array}\right.\]
+ist Bernoulli-verteilt
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{exampleblock}{Fort. Beispiel: Wahlumfrage}
+\begin{itemize}
+\item Wir suchen den Wert des Parameters $\pi $
+\item Bei einer Umfrage sollen $n=1000$ Personen befragt werden
+\item Sei $X_{i}$ die Wahlabsicht der $i$-ten befragten Person
+\item Die tatsächlich erhobenen Daten sind $x_{1},\ldots ,x_{n}$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Stichproben
+\framesubtitle{Einfache Stichprobe}
+\begin{exampleblock}{Beispiel: Normalverteilung}
+\begin{itemize}
+\item Sei $X\sim N(\mu ,\sigma ^{2})$ mit $\mu =201$ und $\sigma ^{2}=4$
+\item Ziehe eine Stichprobe vom Umfang $n=75$ 
+\item In R
+\[ \texttt{x <- rnorm(n=75, mean=201, sd=2)} \]
+\item Vor der Ausführung ist \texttt{x} die Stichprobe,
+danach die konkrete Stichprobe
+\end{itemize}
+\end{exampleblock}
+
+
+# Statistiken
+\framesubtitle{Definition}
+Sei $X_{1},\ldots ,X_{n}$ eine einfache Stichprobe aus $X$
+und $g$ eine reellwertige Funktion mit $n$ Argumenten
+\begin{block}{Statistik}
+Die Zufallsvariable 
+\[ Z=g(X_1,\ldots ,X_n) \]
+heißt Statistik
+\end{block}
+
+
+
+# Statistiken
+\framesubtitle{Definition}
+\begin{exampleblock}{Beispiel: Stichprobenmittel}
+\[ \bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i} \]
+\end{exampleblock}
+\begin{exampleblock}{Beispiel: Stichprobenvarianz}
+\[ S^{2}=\frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\bar{X}\right) ^{2} \]
+\end{exampleblock}
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+\begin{itemize}
+\item Eine Statistik ist eine Zufallsvariable, d.h. sie hat eine Verteilung, einen Erwartungswert, eine Varianz etc. 
+\item Um die \textbf{Verteilung der Statistik} herzuleiten, muss man die Verteilung von $X$ bzw. $X_1,\ldots,X_n$ kennen
+\item Natürlich kennt man die Verteilung der Population nicht
+\item Trotzdem ist die Frage sinnvoll: Wie wäre eine Statistik verteilt, wenn die Verteilung von $X$ bekannt wäre?
+\item Analytischer Ansatz oder Monte-Carlo-Simulationen
+\end{itemize}
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+\begin{exampleblock}{Beispiel: Analytischer Ansatz}
+Wenn $X\sim N(\mu,\sigma^2)$, dann hat das Stichprobenmittel
+\[ \bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i} \]
+die Verteilung
+\[ \bar X\sim N\left(\mu, \frac{\sigma^2}{n}\right)\]
+\end{exampleblock}
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+\begin{exampleblock}{Beispiel: Monte-Carlo-Simulation}
+\begin{itemize}
+\item Die Population habe die Verteilung 
+\[ X\sim Pareto(k=5,x_{min}=1) \]
+\item Einfache Stichprobe $X_1,\ldots,X_n$ vom Umfang $n=50$
+\item Wie ist die Stichprobenstandardabweichung $S$ verteilt?
+\item Analytische Lösung praktisch nicht möglich
+\item $\longrightarrow$ Monte-Carlo-Simulation
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+```{r eval=FALSE}
+library(distributionsrd)
+R <- 10000
+smpl_sd <- rep(0,R)
+
+n <- 50
+xmin <- 1
+k <- 5
+
+for(r in 1:R){
+    x <- rpareto(n, xmin=xmin, k=k)
+    smpl_sd[r] <- sd(x)
+}
+hist(smpl_sd, breaks=50, probability=TRUE)
+```
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+```{r echo=FALSE}
+library(distributionsrd)
+R <- 10000
+smpl_sd <- rep(0,R)
+n <- 50
+xmin <- 1
+k <- 5
+for(r in 1:R){
+    x <- rpareto(n, xmin=xmin, k=k)
+    smpl_sd[r] <- sd(x)
+}
+par(cex=1.5)
+hist(smpl_sd, breaks=50, probability=TRUE, xlim=c(0,1.5))
+```
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+Erwartungswert $E(S)$
+```{r}
+mean(smpl_sd)
+```
+Standardabweichung $\sqrt{Var(S)}$
+```{r}
+sd(smpl_sd)
+```
+
+
+
+# Statistiken
+\framesubtitle{Verteilung}
+Median von $S$
+```{r}
+quantile(smpl_sd, 0.5)
+```
+Quantil $F_S^{-1}(0.99)$
+```{r}
+quantile(smpl_sd, 0.99)
+```
+
+
+
+# Statistiken
+\framesubtitle{Arten von Statistiken}
+In diesem Kurs behandeln wir drei Arten von Statistiken:\medskip
+\begin{itemize}
+\item\textbf{Punktschätzer}: Statistiken, die dazu dienen aus der 
+Stichprobe eine Schätzung für einen Parameter der Population zu gewinnen
+\item\textbf{Intervallschätzer}: Statistiken, die eine Unter- oder Obergrenze für ein Intervall darstellen, in dem ein unbekannter Parameter einer Population mit großer Wahrscheinlichkeit liegt
+\item\textbf{Teststatistiken}: Statistiken, die als Entscheidungsgrundlage für eine empirische Überprüfung von Hypothesen über Populationsparameter dienen
+\end{itemize}

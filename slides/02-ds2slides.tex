@@ -1,14 +1,42 @@
+\documentclass[12pt,show notes]{beamer} 
+%\documentclass[12pt,handout]{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{eurosym}
+\usepackage[ngerman]{babel}
+\usepackage[ansinew]{inputenc}
+
+\usetheme{Rochester}
+\usecolortheme{beaver}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[text line]{} 
+\graphicspath{{../plots/}}
+
+\begin{document}
+
+\title{Data Science 2}
+\subtitle{Wahrscheinlichkeit}
+\author{Prof.~Dr.~Mark Trede}
+\institute[]{Institut f\"ur \"Okonometrie und Wirtschaftsstatistik}
+\date{Oktober 2023}
+\maketitle
+
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Definition}
 \begin{block}{Wahrscheinlichkeit}
 Eine Abbildung
 \[ P:A\longmapsto P(A) \]
-heißt Wahrscheinlichkeit, wenn gilt:
+heiï¿½t Wahrscheinlichkeit, wenn gilt:
 \begin{enumerate}
-\item Nichtnegativität: Für alle $A$ gilt $P(A) \geq 0$
+\item Nichtnegativitï¿½t: Fï¿½r alle $A$ gilt $P(A) \geq 0$
 \item Normierung: $P(\Omega)=1$
-\item Additivität: Für $A\cap B=\varnothing$ gilt $P(A\cup B)=P(A)+P(B)$
+\item Additivitï¿½t: Fï¿½r $A\cap B=\varnothing$ gilt 
+\[ P(A\cup B)=P(A)+P(B) \]
 \end{enumerate}
 \end{block}
 Die drei Bedingungen sind Axiome.
@@ -19,7 +47,7 @@ Die drei Bedingungen sind Axiome.
 \framesubtitle{Definition}
 Aus den Axiome folgt z.B.\\\medskip
 \begin{itemize}
-\item Komplementärereignis
+\item Komplementï¿½rereignis
 \[ P(\bar{A})=1-P(A) \]
 \item Additionssatz
 \[ P(A\cup B)=P(A)+P(B)-P(A\cap B) \]
@@ -93,33 +121,33 @@ P((A\cup B)\backslash (A\cap B)) &= P(A\cup B)-P((A\cup B)\cap (A\cap B))\\
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Laplace-Experimente}
 \begin{block}{Laplace-Experimente}
-Ein Zufallsexperiment heißt Laplace-Experiment, wenn
+Ein Zufallsexperiment heiï¿½t Laplace-Experiment, wenn
 $\Omega $ endlich ist und wenn alle Elementarereignisse
-als gleich wahrscheinlich angenommen werden können.
+als gleich wahrscheinlich angenommen werden kï¿½nnen.
 \end{block}
 \medskip
-Für jedes $\omega\in\Omega$ gilt $P(\{\omega\})=1/n$
+Fï¿½r jedes $\omega\in\Omega$ gilt $P(\{\omega\})=1/n$
 \end{frame}
 
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Laplace-Experimente}
 \begin{itemize}
-\item Laplace-Wahrscheinlichkeit: Für $A\subset \Omega $ gilt 
-\[P(A)=\frac{|A|}{|\Omega|}=\frac{\text{Anzahl der günstigen Ergebnisse}}{\text{Anzahl der möglichen Ergebnisse}} \]
+\item Laplace-Wahrscheinlichkeit: Fï¿½r $A\subset \Omega $ gilt 
+\[P(A)=\frac{|A|}{|\Omega|}=\frac{\text{Anzahl der gï¿½nstigen Ergebnisse}}{\text{Anzahl der mï¿½glichen Ergebnisse}} \]
 \item Zur Berechnung der Wahrscheinlichkeit muss 
-man die günstigen Ergebnisse und die möglichen Ergebnisse zählen
+man die gï¿½nstigen Ergebnisse und die mï¿½glichen Ergebnisse zï¿½hlen
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Laplace-Experimente}
-\begin{exampleblock}{Beispiel: Würfelwurf}
+\begin{exampleblock}{Beispiel: Wï¿½rfelwurf}
 Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$\medskip
 \begin{itemize}
 \item Jedes Elementarereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
-\item Wahrscheinlichkeit von $A$: "`Eine gerade Zahl würfeln"'
+\item Wahrscheinlichkeit von $A$: "`Eine gerade Zahl wï¿½rfeln"'
 \uncover<2>{
 \[P(A)=\frac{|A|}{|\Omega|}=\frac{|\{2,4,6\}|}{|\{1,2,3,4,5,6\}|}=\frac{3}{6}=\frac{1}{2}\]
 }
@@ -131,7 +159,7 @@ Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$\medskip
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Bedingte Wahrscheinlichkeit}
 \begin{block}{Bedingte Wahrscheinlichkeit}
-Für $A,B$ mit $P(B)>0$ heißt
+Fï¿½r $A,B$ mit $P(B)>0$ heiï¿½t
 \[ P(A|B)=\frac{P(A\cap B)}{P(B)} \]
 die bedingte Wahrscheinlichkeit von $A$ unter der Bedingung $B$
 \end{block}
@@ -141,9 +169,9 @@ die bedingte Wahrscheinlichkeit von $A$ unter der Bedingung $B$
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Bedingte Wahrscheinlichkeit}
 \begin{itemize}
-\item Wie ist $P(A)$ zu modifizieren, wenn man weiß oder annimmt, dass $B$ eingetreten ist?
+\item Wie ist $P(A)$ zu modifizieren, wenn man weiï¿½ oder annimmt, dass $B$ eingetreten ist?
 \item Die bedingte Wahrscheinlichkeit $P(\cdot|B)$ ist eine Wahrscheinlichkeit im Sinne der Definition
-\item Die üblichen Rechenregeln für Wahrscheinlichkeiten gelten weiterhin,
+\item Die ï¿½blichen Rechenregeln fï¿½r Wahrscheinlichkeiten gelten weiterhin,
 z.B.\ $P(A|B)=1-P(\bar A|B)$
 \end{itemize}
 \end{frame}
@@ -151,7 +179,7 @@ z.B.\ $P(A|B)=1-P(\bar A|B)$
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Bedingte Wahrscheinlichkeit}
-\textbf{Multiplikationssatz für Wahrscheinlichkeiten:}\medskip
+\textbf{Multiplikationssatz fï¿½r Wahrscheinlichkeiten:}\medskip
 \begin{itemize}
 \item Aus
 \[ P(A|B)=\frac{P(A\cap B)}{P(B)} \]
@@ -165,16 +193,16 @@ folgt
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Bedingte Wahrscheinlichkeit}
-\begin{exampleblock}{Beispiel: Überlebenswahrscheinlichkeit}
+\begin{exampleblock}{Beispiel: ï¿½berlebenswahrscheinlichkeit}
 \begin{itemize}
-\item Ereignisse: $A_i$ ``Person überlebt Jahr $i$'' für $i=1,2,3$
+\item Ereignisse: $A_i$ ``Person ï¿½berlebt Jahr $i$'' fï¿½r $i=1,2,3$
 \item Gegeben seien die (bedingten) Wahrscheinlichkeiten
 \begin{align*}
 P(A_1) &= 0.8 \\
 P(A_2|A_1) &= 0.9\\
 P(A_3|A_2)&= 0.95
 \end{align*}
-\item Wie hoch ist die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 überlebt?
+\item Wie hoch ist die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 ï¿½berlebt?
 \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -182,8 +210,8 @@ P(A_3|A_2)&= 0.95
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Bedingte Wahrscheinlichkeit}
-\begin{exampleblock}{Forts. Beispiel: Überlebenswahrscheinlichkeit}
-Die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 überlebt, beträgt
+\begin{exampleblock}{Forts. Beispiel: ï¿½berlebenswahrscheinlichkeit}
+Die Wahrscheinlichkeit, dass die Person (mindestens) bis zum Ende von Jahr 3 ï¿½berlebt, betrï¿½gt
 \uncover<2>{
 \begin{align*}
 P(A_1\cap A_2\cap A_3) &= P(A_1)P(A_2|A_1)P(A_3|A_2\cap A_1) \\
@@ -199,11 +227,11 @@ P(A_1\cap A_2\cap A_3) &= P(A_1)P(A_2|A_1)P(A_3|A_2\cap A_1) \\
 \framesubtitle{Bedingte Wahrscheinlichkeit}
 \begin{block}{Partition}
 Die Ereignisse $A_1,\ldots ,A_n$ bilden eine Partition\\ 
-(vollständige Zerlegung) von $\Omega$, wenn 
+(vollstï¿½ndige Zerlegung) von $\Omega$, wenn 
 \begin{itemize}
 \item $\bigcup_{i=1}^{n}A_{i}=\Omega $ 
-\item und $A_{i}\cap A_{j}=\varnothing$ für $i\neq j$ 
-\item und $A_{i}\neq \varnothing $ für alle $i=1,\ldots ,n$
+\item und $A_{i}\cap A_{j}=\varnothing$ fï¿½r $i\neq j$ 
+\item und $A_{i}\neq \varnothing $ fï¿½r alle $i=1,\ldots ,n$
 \end{itemize}
 \end{block}
 \end{frame}
@@ -232,7 +260,7 @@ und $B$ ein Ereignis
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Totale Wahrscheinlichkeit}
-Begründung: Aus $B=(B\cap A_1)\cup\ldots\cup (B\cap A_n)$ folgt
+Begrï¿½ndung: Aus $B=(B\cap A_1)\cup\ldots\cup (B\cap A_n)$ folgt
 \begin{align*}
 P(B) &= P\left(\bigcup_{i=1}^n (B\cap A_i)\right) \\
 &= \sum_{i=1}^n P(B\cap A_i)\\
@@ -244,7 +272,7 @@ P(B) &= P\left(\bigcup_{i=1}^n (B\cap A_i)\right) \\
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Totale Wahrscheinlichkeit}
 \begin{exampleblock}{Beispiel: Totale Wahrscheinlichkeit}
-Eine Person wird zufällig aus einer Population ausgewählt
+Eine Person wird zufï¿½llig aus einer Population ausgewï¿½hlt
 \begin{align*}
 B &\text{: Person ist arbeitslos } \\
 A_{1} &\text{: Person hat keine/niedrige Ausbildung} \\
@@ -263,7 +291,7 @@ Gegeben seien
 P(B|A_{1}) &=0.25,&P(B|A_{2}) &=0.10,& P(B|A_{3}) &=0.05\\
 P(A_1) &=0.15,    &P(A_2)     &=0.65,& P(A_3) &=0.20 
 \end{align*}
-Wahrscheinlichkeit, dass die ausgewählte Person arbeitslos ist:
+Wahrscheinlichkeit, dass die ausgewï¿½hlte Person arbeitslos ist:
 \uncover<2>{
 \[ P(B)= 0.25\cdot 0.15+0.10\cdot 0.65+0.05\cdot 0.20= 0.1125 \]
 }
@@ -314,22 +342,22 @@ P(A|B)&= \frac{P(B|A)P(A)}{P(B)}\\
 
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
-\framesubtitle{Unabhängigkeit}
-\begin{block}{Unabhängigkeit}
-Zwei Ereignisse $A$ und $B$ heißen (stochastisch) unabhängig, wenn
+\framesubtitle{Unabhï¿½ngigkeit}
+\begin{block}{Unabhï¿½ngigkeit}
+Zwei Ereignisse $A$ und $B$ heiï¿½en (stochastisch) unabhï¿½ngig, wenn
 \[ P(A\cap B) =P(A)\cdot P(B) \]
 \end{block}
 \begin{itemize}
-\item (Fast) äquivalent: $A$ und $B$ sind unabhängig genau dann, wenn
+\item (Fast) ï¿½quivalent: $A$ und $B$ sind unabhï¿½ngig genau dann, wenn
 $P(A|B)=P(A)$ bzw. $P(B|A)=P(B)$
-\item Unabhängigkeit und Disjunktheit sind nicht dasselbe!
+\item Unabhï¿½ngigkeit und Disjunktheit sind nicht dasselbe!
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
-\framesubtitle{Unabhängigkeit}
-\begin{exampleblock}{Beispiel: Unabhängigkeit}
+\framesubtitle{Unabhï¿½ngigkeit}
+\begin{exampleblock}{Beispiel: Unabhï¿½ngigkeit}
 Ereignisse:
 \begin{align*}
 A &:\text{ Kind studiert} &P(A)&=0.25\\
@@ -338,7 +366,8 @@ B &:\text{ Akademisches Elternhaus}&P(B)&=0.35
 Gegeben ist auch $P(B|A) =0.60$. 
 \medskip
 
-Wegen $P(B|A)\neq P(B)$ sind $A$ und $B$ abhängig
+Wegen $P(B|A)\neq P(B)$ sind $A$ und $B$ abhï¿½ngig
 \end{exampleblock}
 \end{frame}
 
+\end{document}

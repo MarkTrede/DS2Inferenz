@@ -9,6 +9,7 @@
     "02-wahrscheinlichkeit.html": "7c737f45"
   },
   "03-zufallsvariablen.qmd": {
+<<<<<<< Updated upstream
     "03-zufallsvariablen.html": "873ea0bd"
   },
   "04-verteilungen.qmd": {
@@ -88,5 +89,14 @@
   },
   "16-literatur.qmd": {
     "16-literatur.html": "a3a22fe8"
+=======
+    "03-zufallsvariablen.html": "20688c64"
+  },
+  "04-verteilungen.qmd": {
+    "04-verteilungen.html": "0c2ec13c"
+  },
+  "05-zufallsvektoren.qmd": {
+    "05-zufallsvektoren.html": "d05382cf"
+>>>>>>> Stashed changes
   }
 }

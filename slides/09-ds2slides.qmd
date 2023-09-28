@@ -1,0 +1,120 @@
+---
+title: "Data Science 2"
+subtitle: "Punktschätzung"
+format: beamer
+date: 2023-11-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Punktschätzung
+\framesubtitle{Definition}
+\begin{itemize}
+\item Sei $X$ eine Zufallsvariable mit unbekannter Verteilungsfunktion $F_X(x)$
+\item Wir interessieren uns meist für einen (oder mehrere) Parameter von $X$,
+z.B. $E(X)$, $Var(X)$, Quantile, Dichte, \ldots
+\item Die Parameter werden mit Hilfe einer Stichprobe $X_{1},\ldots ,X_{n}$ geschätzt
+\end{itemize}
+
+
+
+# Punktschätzung
+\framesubtitle{Definition}
+\begin{block}{Schätzer}
+Sei $\theta $ ein unbekannter Parameter. Eine Statistik 
+$\hat{\theta}(X_1,\ldots ,X_n)$ heißt Schätzer für $\theta$
+\end{block}
+\bigskip
+
+\begin{block}{Schätzwert}
+Die Realisierung $\hat{\theta}(x_1,\ldots ,x_n)$ eines 
+Schätzers heißt Schätzwert
+\end{block}
+
+
+
+# Punktschätzung
+\framesubtitle{Definition}
+\begin{itemize}
+\item Der Schätzer $\hat\theta=\hat\theta(X_1,\ldots,X_n)$ 
+ist eine Zufallsvariable!
+\item Der Schätzwert $\hat\theta=\hat\theta(x_1,\ldots,x_n)$ 
+ist \textbf{keine} Zufallsvariable!
+\item Achtung: Die abkürzende Notation $\hat\theta$ bezeichnet
+entweder den Schätzer $\hat{\theta}(X_{1},\ldots ,X_{n})$
+oder den Schätzwert $\hat{\theta}(x_{1},\ldots ,x_{n})$
+(das ergibt sich meist aus dem Kontext)
+\end{itemize}
+
+
+
+# Punktschätzung
+\framesubtitle{Definition}
+\begin{block}{Standardfehler}
+Die Standardabweichung eines Schätzers 
+$$
+\sqrt{Var(\hat{\theta}(X_1,\ldots ,X_n))}
+$$ 
+heißt Standardfehler $se(\hat\theta)$ (auch wenn
+die Standardabweichung nur geschätzt wird)
+\end{block}
+\medskip
+
+Je kleiner der Standardfehler, desto präziser die Schätzung
+
+
+
+# Punktschätzung
+\framesubtitle{Schätzer für den Erwartungswert}
+\textbf{Schätzung des Erwartungswerts}\medskip
+\begin{itemize}
+\item Der Erwartungswert $E(X)$ wird durch das Stichprobenmittel
+$$
+\bar X=\frac{1}{n}\sum_{i=1}^n X_i
+$$
+geschätzt. Der Schätzwert ist
+$$
+\bar x=\frac{1}{n}\sum_{i=1}^n x_i
+$$
+\end{itemize}
+
+
+
+# Punktschätzung
+\framesubtitle{Schätzer für den Erwartungswert}
+\begin{itemize}
+\item Der Standardfehler des Stichprobenmittels ist
+\begin{align*}
+se(\bar X)&=\sqrt{Var(\bar X)}\\
+&= \sqrt{\frac{\sigma^2}{n}} \\
+&= \frac{\sigma}{\sqrt{n}}
+\end{align*}
+\item Je größer der Stichprobenumfang, desto präziser ist der Schätzer
+$\bar X$ für den Erwartungswert $E(X)$
+\end{itemize}
+
+
+
+# Punktschätzung
+\framesubtitle{Schätzer für den Erwartungswert}
+Die Stichprobe sei im Vektor x gespeichert
+```{r eval=FALSE}
+n <- length(x)
+```
+Punktschätzer $\bar X$ für den Erwartungswert
+```{r eval=FALSE}
+mean(x)
+```
+Standardfehler $se(\bar X)$
+```{r eval=FALSE}
+sd(x)/sqrt(n)
+```

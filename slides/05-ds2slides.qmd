@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Zufallsvektoren"
 format: beamer
-date: today
+date: 2023-11-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -387,3 +388,6 @@ f_{XY}(0.2,0.2)  &=0.2+0.2=0.4
 }
 \end{exampleblock}
 
+
+
+XXXX bedingte Verteilungen und bedingte Erwartungswerte XXXX

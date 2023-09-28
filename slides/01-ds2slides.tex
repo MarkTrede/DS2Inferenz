@@ -1,3 +1,30 @@
+\documentclass[12pt,show notes]{beamer} 
+%\documentclass[12pt,handout]{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{eurosym}
+\usepackage[ngerman]{babel}
+\usepackage[ansinew]{inputenc}
+
+\usetheme{Rochester}
+\usecolortheme{beaver}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[text line]{} 
+\graphicspath{{../plots/}}
+
+\begin{document}
+
+\title{Data Science 2}
+\subtitle{Zufallsvorgï¿½nge}
+\author{Prof.~Dr.~Mark Trede}
+\institute[]{Institut f\"ur \"Okonometrie und Wirtschaftsstatistik}
+\date{Oktober 2023}
+\maketitle
+
 \begin{frame}
 \frametitle{Zufall}
 \framesubtitle{Zufallsvorgang}
@@ -5,8 +32,8 @@
 Ein Zufallsvorgang ist ein Vorgang, 
 \begin{itemize}
 \item bei dem im Voraus feststeht,
-welche möglichen Ergebnisse er haben kann,
-\item das tatsächliche Ergebnis im Voraus jedoch nicht bekannt ist.
+welche mï¿½glichen Ergebnisse er haben kann,
+\item das tatsï¿½chliche Ergebnis im Voraus jedoch nicht bekannt ist.
 \end{itemize}
 \end{block}
 \medskip
@@ -21,9 +48,9 @@ Die Menge aller Ergebnisse nennen wir Ergebnisraum\\
 (oder Ergebnismenge) $\Omega$.
 \end{block}
 \begin{itemize}
-\item Ein Element $\omega \in \Omega $ heißt Ergebnis 
+\item Ein Element $\omega \in \Omega $ heiï¿½t Ergebnis 
 \item $|\Omega|$ ist die Anzahl der Elemente in $\Omega $
-\item Beispiel: Werfen eines Würfels, $\Omega =\{1,2,3,4,5,6\}$
+\item Beispiel: Werfen eines Wï¿½rfels, $\Omega =\{1,2,3,4,5,6\}$
 \end{itemize}
 \end{frame}
 
@@ -31,37 +58,37 @@ Die Menge aller Ergebnisse nennen wir Ergebnisraum\\
 \frametitle{Zufall}
 \framesubtitle{Ereignis}
 \begin{block}{Ereignis}
-Teilmengen von $\Omega$ heißen Ereignisse.
+Teilmengen von $\Omega$ heiï¿½en Ereignisse.
 \end{block}
 \begin{itemize}
 \item Notation: $A$, $B$, $C$, $\ldots $ oder $A_{1},A_{2},\ldots $
 \item Ereignis $A$ tritt ein, falls $\omega \in A$
 \item Ein Zufallsvorgang hat nur ein einziges Ergebnis,\\
 aber es treten immer viele Ereignisse ein!
-\item $\Omega$ heißt sicheres Ereignis, $\varnothing$ heißt unmögliches Ereignis
-\item Wenn $A\cap B=\varnothing$, heißen $A$ und $B$ disjunkt
+\item $\Omega$ heiï¿½t sicheres Ereignis, $\varnothing$ heiï¿½t unmï¿½gliches Ereignis
+\item Wenn $A\cap B=\varnothing$, heiï¿½en $A$ und $B$ disjunkt
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Zufall}
 \framesubtitle{Ereignis}
-\begin{exampleblock}{Beispiel: Würfelwurf}
+\begin{exampleblock}{Beispiel: Wï¿½rfelwurf}
 Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$
 \begin{align*}
-A &= \{2,4,6\},\text{ eine gerade Zahl würfeln}\\
-B &= \{2\},\text{ eine 2 würfeln} \\
-C &= \{1,2,3\},\text{ weniger als 4 würfeln} \\
-D &= \{5,6\},\text{ mehr als 4 würfeln}
+A &= \{2,4,6\},\text{ eine gerade Zahl wï¿½rfeln}\\
+B &= \{2\},\text{ eine 2 wï¿½rfeln} \\
+C &= \{1,2,3\},\text{ weniger als 4 wï¿½rfeln} \\
+D &= \{5,6\},\text{ mehr als 4 wï¿½rfeln}
 \end{align*}
-Wird eine 2 gewürfelt, treten $A$, $B$ und $C$ ein, aber $D$ nicht.
+Wird eine 2 gewï¿½rfelt, treten $A$, $B$ und $C$ ein, aber $D$ nicht.
 \end{exampleblock}
 \end{frame}
 
 \begin{frame}
 \frametitle{Zufall}
 \framesubtitle{Ereignis}
-Verknüpfungen von Ereignissen:\medskip
+Verknï¿½pfungen von Ereignissen:\medskip
 \begin{itemize}
 \item $A\cap B$ tritt ein, wenn $A$ \textbf{und} $B$ eintreten
 \item $A\cup B$ tritt ein, wenn $A$ \textbf{oder} $B$ eintritt
@@ -75,7 +102,7 @@ Verknüpfungen von Ereignissen:\medskip
 \begin{frame}
 \frametitle{Zufall}
 \framesubtitle{Ereignis}
-\begin{exampleblock}{Beispiel: Würfelwurf}
+\begin{exampleblock}{Beispiel: Wï¿½rfelwurf}
 Ergebnismenge $\Omega =\{1,2,3,4,5,6\}$
 \begin{align*}
 A &= \{2,4,6\}\\
@@ -83,14 +110,14 @@ B &= \{1,2,3\}\\
 A\cap B &=\{2\}\\
 A\cup B&=\{1,2,3,4,6\}
 \end{align*}
-Wird eine 2 gewürfelt, treten $A$, $B$, $A\cap B$ und $A\cup B$ ein.
+Wird eine 2 gewï¿½rfelt, treten $A$, $B$, $A\cap B$ und $A\cup B$ ein.
 \end{exampleblock}
 \end{frame}
 
 \begin{frame}
 \frametitle{Zufall}
 \framesubtitle{Ereignis}
-\textbf{Rechenregeln für Mengen:}
+\textbf{Rechenregeln fï¿½r Mengen:}
 \begin{itemize}
 \item Distributivgesetz
 \begin{eqnarray*}
@@ -104,3 +131,5 @@ A\cap (B\cup C) &=&(A\cap B)\cup(A\cap C)
 \end{eqnarray*}
 \end{itemize}
 \end{frame}
+
+\end{document}
