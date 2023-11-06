@@ -1,0 +1,258 @@
+---
+title: "Data Science 2"
+subtitle: "Weitere Hypothesentests"
+format: beamer
+date: 2023-12-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Weitere Hypothesentests
+\framesubtitle{$\chi^2$-Verteilung}
+\textbf{Die $\chi^2$-Verteilung}
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt $\chi^2$-verteilt mit
+$\nu$ Freiheitsgraden, wenn sie die folgende Dichte hat,
+$$
+f_X(x)=\left\{
+\begin{array}{ll}
+C_\nu\cdot x^{\frac{\nu}{2}-1}\exp(-\frac{x}{2}) & \text{ wenn }x \ge 0\\
+0 & \text{ sonst}
+\end{array}
+\right.
+$$
+\item Kurzschreibweise $X\sim \chi^2_\nu$
+\item Erwartungswert $E(X)=\nu$, Varianz $Var(X)=2\nu$
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{$\chi^2$-Verteilung}
+```{r}
+#| echo: FALSE
+x <- seq(from=0, to=25, length=300)
+par(cex=1.7)
+plot(x, dchisq(x, df=3),
+     type="l",
+     main="Dichte der chi^2-Verteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.25))
+lines(x, dchisq(x, df=5), col="red")
+lines(x, dchisq(x, df=10), col="blue")
+legend("topright",
+       fill=c("black", "red", "blue"),
+       legend=c("df=3", "df=5", "df=10"))
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{$\chi^2$-Verteilung}
+Dichte-, Verteilungs- und Quantilfunktion der $\chi^2$-Verteilung\newline
+mit $\nu$ Freiheitsgraden in R:
+\bigskip
+
+```{r}
+#| eval: FALSE
+dchisq(x, df=nu)
+pchisq(q, df=nu)
+qchisq(p, df=nu)
+
+rchisq(n, df=nu)
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+\textbf{Unabhängigkeitstest}\medskip
+\begin{itemize}
+\item Sind zwei Zufallsvariablen $X$ und $Y$ unabhängig voneinander?
+\item Hypothesen
+\begin{align*}
+H_0&: X\text{ und }Y\text{ sind unabhängig}\\
+H_1&: X\text{ und }Y\text{ sind abhängig}
+\end{align*}
+\item Einfache Stichprobe aus $(X,Y)$, d.h.
+$$
+(X_1,Y_1),\ldots,(X_n,Y_n)
+$$
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+Wie kann man die Unabhängigkeit testen?\medskip
+\begin{itemize}
+\item Partitionierung der Träger $T_X$ und $T_Y$
+\item Partition für $X$: $A_1,\ldots,A_J$
+\item Partition für $Y$: $B_1,\ldots,B_K$
+\item Diskretisierung der beiden Träger
+\item Diskrete Zufallsvariablen müssen oft nicht partitioniert werden
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+\begin{itemize}
+\item Häufigkeitstabelle
+$$
+\begin{array}{|cc|cccc|c|}\hline
+&&&Y\in&&&\\
+&&B_1&B_2&\ldots&B_K&\sum \\\hline
+&A_1&N_{11}&N_{12}&\ldots&N_{1K}&N_{1\cdot}\\
+&A_2&N_{21}&N_{22}&\ldots&N_{2K}&N_{2\cdot}\\
+X\in&\vdots&\vdots&\vdots&&\vdots&\vdots\\
+&A_J&N_{J1}&N_{J2}&\ldots&N_{JK}&N_{J\cdot}\\\hline
+&\sum&N_{\cdot 1}&N_{\cdot 2}&\ldots&N_{\cdot K}&n\\\hline
+\end{array}
+$$
+\item Teststatistik
+$$
+T= \sum_{j=1}^J \sum_{k=1}^K
+\frac{\left(N_{jk}-\frac{N_{j\cdot}N_{\cdot k}}{n}\right)^2}{\frac{N_{j\cdot}N_{\cdot k}}{n}}
+$$
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+\begin{itemize}
+\item Unter Gültigkeit der Nullhypothese gilt (approximativ)
+$$
+T\sim \chi^2_{(J-1)(K-1)}
+$$
+\item Kleine Werte der Teststatistik sind mit der Unabhängigkeitshypothese vereinbar
+\item Sehr große Werte sprechen gegen die Nullhypothese
+\item Kritische Grenze: $(1-\alpha)$-Quantil der $\chi^2_{(J-1)(K-1)}$-Verteilung
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+\begin{itemize}
+\item Die Nullhypothese wird verworfen, wenn der Wert der Teststatistik 
+die kritische Grenze überschreitet
+\item Die Ablehnung von $H_0$ ist eine belastbare statistische 
+Untermauerung der Abhängigkeit von $X$ und $Y$ (wenn auch kein Beweis)
+\item Achtung: Die Nichtablehnung ("Annahme") von $H_0$ 
+ist keine statistische Untermauerung der Unabhängigkeit!
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+\begin{exampleblock}{Beispiel: Studentisches Wohnen}
+\begin{itemize}
+\item Umfrage in Data Science 1
+\item Interpretation der Umfrage als einfache Stichprobe
+\item Hängen Wohntyp und Wohnzufriedenheit zusammen?
+\item Hypothesen:
+\begin{align*}
+H_0&: \text{Wohntyp und Wohnzufriedenheit sind unabhängig}\\
+H_1&: \text{Wohntyp und Wohnzufriedenheit sind abhängig}
+\end{align*}
+\item Beide Zufallsvariablen sind diskret
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+#| echo: FALSE
+library(readr)
+x <- read_csv("../data/wohnen.csv", col_types = "cc")
+x$Wohnzufriedenheit <- factor(x$Wohnzufriedenheit,
+                              levels=c("(sehr) unzufr.", 
+                                       "es ist okay", 
+                                       "zufrieden",
+                                       "sehr zufrieden"),
+                              ordered=TRUE)
+options(width=58)
+```
+```{r}
+N_Wzufr <- table(x$Wohnzufriedenheit) 
+N_Wzufr  # Randverteilung Wohnzufriedenheit
+J <- length(N_Wzufr)
+J
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+N_Wtyp <- table(x$Wohntyp) 
+N_Wtyp  # Randverteilung Wohntyp
+K <- length(N_Wtyp)
+K
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+N <- table(x$Wohnzufriedenheit, x$Wohntyp)
+N  # gemeinsame Verteilung
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+n <- sum(N) # Stichprobenumfang
+teststat <- 0
+
+for(j in 1:J){
+  for(k in 1:K){
+    aux <- N_Wzufr[j]*N_Wtyp[k]/n
+    teststat <- teststat + (N[j,k]-aux)^2/(aux)
+  }
+}
+teststat <- as.numeric(teststat)
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+# Wert der Teststatistik
+teststat
+
+# p-Wert
+1-pchisq(teststat, df=(J-1)*(K-1))
+```
+Da der p-Wert größer ist als jedes normale Signifikanzniveau,\newline
+wird die Unabhängigkeitshypothese \textbf{nicht abgelehnt}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhänigigkeitstest}
+```{r}
+chisq.test(x$Wohntyp, x$Wohnzufriedenheit)
+```
+

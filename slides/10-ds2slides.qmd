@@ -1,0 +1,442 @@
+---
+title: "Data Science 2"
+subtitle: "Konfidenzintervalle"
+format: beamer
+date: 2023-11-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Konfidenzintervalle
+\framesubtitle{Definition}
+Sei $X$ eine Zufallsvariable, $\theta$ ein unbekannter Parameter 
+und $X_1,\ldots ,X_n$ eine einfache Stichprobe
+\bigskip
+\begin{block}{Konfidenzintervall}
+Ein Intervall $[\hat\theta_u(X_1,\ldots,X_n);\hat\theta_o(X_1,\ldots,X_n)]$ mit
+$$
+P(\hat\theta_u\leq \theta \leq \hat\theta_o) =1-\alpha
+$$
+heißt Konfidenzintervall für $\theta$ zum Niveau $1-\alpha$
+\end{block}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Definition}
+\begin{itemize}
+\item Das Intervall $[\hat{\theta}_{u}\left( x_{1},\ldots ,x_{n}\right) ;
+\hat{\theta}_{o}\left( x_{1},\ldots ,x_{n}\right) ]$ heißt konkretes
+Konfidenzintervall 
+\item Die Grenzen $\hat{\theta}_{u}$ und $\hat{\theta}_{o}$ des
+Konfidenzintervalls sind Zufallsvariablen
+\item Die Grenzen $\hat{\theta}_{u}$ und $\hat{\theta}_{o}$ des konkreten 
+Konfidenzintervalls sind reelle Zahlen
+\item \textbf{Achtung:} Wahrscheinlichkeitsaussagen kann man nur über Konfidenzintervalle
+machen, nicht über konkrete Konfidenzintervalle!
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+\textbf{Konfindenzintervalle für Erwartungswert $\mu$}\medskip
+\begin{itemize}
+\item Wie findet man ein Konfidenzintervall für den Erwartungswert $\mu$
+einer Zufallsvariablen $X$?
+\item Die Verteilung von $X$ sei unbekannt
+\item Einfache Stichprobe $X_1,\ldots,X_n$
+\item Punktschätzer für $\mu$ ist $\bar X$
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+\begin{itemize}
+\item Für große $n$ gilt nach dem zentralen Grenzwertsatz
+$$
+\sqrt{n}\frac{\bar{X}-\mu}{\sigma}\stackrel{appr}{\sim} N(0,1)
+$$
+\item Für große $n$ gilt auch
+$$
+\sqrt{n}\frac{\bar{X}-\mu}{S}\stackrel{appr}{\sim} N(0,1)
+$$
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+```{r}
+#| echo: FALSE
+x <- seq(from=-3.5, to=3.5, length=200)
+par(cex=1.6)
+plot(x, dnorm(x), 
+     type="l", 
+     axes=FALSE,
+     ylim=c(0,0.45),
+     yaxs="i",
+     xlab="x", 
+     ylab=expression(phi(x)),
+     main="Dichte der N(0,1)")
+
+axis(1, 
+     at=c(-4, -1.65, 0, 1.65, 4), 
+     labels=FALSE)
+axis(2, 
+     pos=0, 
+     at=c(0, 0.5), 
+     labels=FALSE)
+abline(v=c(-1.65, 1.65))
+
+mtext(expression(-u[1-alpha/2]),
+      at=-1.5, 
+      side=1, 
+      line=0.5,
+      cex=1.8)
+mtext(expression(u[1-alpha/2]),
+      at=1.9, 
+      side=1, 
+      line=0.5,
+      cex=1.8)
+mtext(0, 
+      side=1, 
+      line=1,
+      cex=1.8)
+
+for(x in seq(1.65, 4, by=0.05)){
+  lines(c(-x, -x), c(0, dnorm(x)), col="red")
+  lines(c(x, x), c(0, dnorm(x)), col="red")
+}
+for(y in seq(0, dnorm(0), by=0.008)){
+  lines(c(max(-1.65, -sqrt(-2*log(y*sqrt(2*pi)))),
+          min(1.65, sqrt(-2*log(y*sqrt(2*pi))))),
+        c(y, y), col="lightblue")
+}
+
+text(-2.4,0.08,
+     expression(alpha/2))
+text(0.4,0.25,
+     expression(1-alpha))
+text(2.4,0.08,
+     expression(alpha/2))
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+Umformen von
+$$
+P\left(-u_{1-\alpha/2}\le \sqrt{n}\frac{\bar{X}-\mu}{S}\le u_{1-\alpha/2}\right)=1-\alpha
+$$
+führt auf
+$$
+P\left( \bar{X}-u_{1-\alpha/2}\frac{S}{\sqrt{n}}\le 
+\mu \le \bar{X}+u_{1-\alpha/2}\frac{S}{\sqrt{n}}\right) =1-\alpha
+$$
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+Konfidenzintervall zum Niveau $\alpha$
+$$
+\left[\bar X-u_{1-\alpha/2}\cdot\frac{S}{\sqrt{n}}; 
+\bar X+u_{1-\alpha/2}\cdot\frac{S}{\sqrt{n}}\right]
+$$
+oder
+$$
+\bar X\pm \text{Quantil}\cdot se(\bar X)
+$$
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+\begin{itemize}
+\item Das Konfidenzintervall ist symmetrisch um $\bar X$
+\item Je größer $S$, desto breiter ist das Intervall
+\item Je größer $n$, desto schmaler ist das Intervall \newline
+(proportional zu $1/\sqrt{n}$)
+\item Je kleiner $\alpha$, desto breiter ist das Intervall
+\item Gängige Werte für $\alpha$ sind: 0.05, 0.01, 0.1
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+\begin{itemize}
+\item Konkretes $(1-\alpha)$-Konfidenzintervall
+$$
+\left[\bar x-u_{1-\alpha/2}\cdot\frac{s}{\sqrt{n}}; \bar x+u_{1-\alpha/2}\cdot\frac{s}{\sqrt{n}}\right]
+$$
+\item Achtung: Wahrscheinlichkeitsaussagen über konkrete Konfidenzintervalle sind sinnlos
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+\begin{exampleblock}{Beispiel: Wohnkosten}
+\begin{itemize}
+\item Sei $X$ die Höhe der Wohnkosten von Studierenden
+\item Einfache Stichprobe vom Umfang $n=564$
+\item Der Erwartungswert $\mu=E(X)$ soll geschätzt werden
+\item 0.95-Konfidenzintervall für $\mu$ ?
+\end{itemize}
+\end{exampleblock}
+```{r}
+W <- read.csv("../data/wohnkosten.csv")
+x <- W$wohnkosten
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+```{r}
+head(x)
+n <- length(x)
+n
+mean(x)
+alpha <- 0.05
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Konfindenzintervalle für den Erwartungswert}
+```{r}
+# Untergrenze des konkreten Konf.intervalls
+mean(x) - qnorm(1-alpha/2) * sd(x)/sqrt(n)
+# Obergrenze des konkreten Konf.intervalls
+mean(x) + qnorm(1-alpha/2) * sd(x)/sqrt(n)
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Normalverteilung}
+\textbf{Spezialfall: Normalverteilung}\medskip
+\begin{itemize}
+\item Wenn $X$ normalverteilt ist, gilt exakt
+$$
+\sqrt{n}\frac{\bar X-\mu}{S}\sim t_{n-1}
+$$
+\item Konfidenzintervall
+$$
+\left[\bar X-t_{n-1,1-\alpha/2}\cdot\frac{S}{\sqrt{n}}; 
+\bar X+t_{n-1,1-\alpha/2}\cdot\frac{S}{\sqrt{n}}\right]
+$$
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Normalverteilung}
+\begin{exampleblock}{Beispiel: Produktgewicht}
+\begin{itemize}
+\item Sei $X$ das tatsächliche Gewicht (in Gramm) einer 200g-Tafel Schokolade
+\item Annahme: $X$ ist normalverteilt
+\item Der Erwartungswert $\mu=E(X)$ soll geschätzt werden
+\item Einfache Stichprobe vom Umfang $n=8$
+\item 0.95-Konfidenzintervall für $\mu$ ?
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Normalverteilung}
+```{r}
+x <- c(201.15, 197.57, 199.92, 198.99,
+       201.38, 203.15, 203.44, 200.50)
+n <- length(x)
+alpha <- 0.05
+
+mean(x) - qt(1-alpha/2, df=n-1) * sd(x)/sqrt(n)
+mean(x) + qt(1-alpha/2, df=n-1) * sd(x)/sqrt(n)
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Anteile}
+\textbf{Spezialfall: Anteile}\medskip
+\begin{itemize}
+\item Wenn $X$ Bernoulli-verteilt ist, dann ist $E(X)=\pi$
+\item Der Schätzer $\bar X$ ist der Stichprobenanteil 
+\item Die übliche Notation ist in diesem Spezialfall
+$$
+\hat\pi=\frac{\text{Anzahl }X_i\text{ mit der Eigenschaft}}{n}
+$$
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Anteile}
+\begin{itemize}
+\item Konfidenzintervall für einen Anteil
+$$
+\left[
+\hat\pi-u_{1-\alpha/2}\cdot\sqrt{\frac{\hat\pi (1-\hat\pi)}{n}};
+\hat\pi+u_{1-\alpha/2}\cdot\sqrt{\frac{\hat\pi (1-\hat\pi)}{n}}
+\right]
+$$
+\item Identische Notation für konkretes Konfidenzintervall
+\item Bedeutung ergibt sich aus dem Kontext
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Anteile}
+\begin{exampleblock}{Beispiel: Nebenjob}
+\begin{itemize}
+\item Umfrage unter Studierenden zu Nebenjobs
+\item $X$: 0=kein Nebenjob, 1=Nebenjob 
+\item Der Anteil $\pi$ soll geschätzt werden (wie viel Prozent
+der Studierenden haben einen Nebenjob?)
+\item 0.95-Konfidenzintervall für $\pi$ ?
+\end{itemize}
+\end{exampleblock}
+```{r}
+N <- read.csv("../data/nebenjob.csv")
+x <- N$nebenjob
+n <- length(x)
+n
+```
+
+
+# Konfidenzintervalle
+\framesubtitle{Spezialfall: Anteile}
+```{r}
+alpha <- 0.05
+pidach <- mean(x)
+pidach # Punktschätzwert
+pidach - qnorm(1-alpha/2) * sqrt(pidach*(1-pidach)/n)
+pidach + qnorm(1-alpha/2) * sqrt(pidach*(1-pidach)/n)
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+\textbf{Monte-Carlo-Simulation von Konfidenzintervallen:}\medskip
+\begin{itemize}
+\item Monte-Carlo-Simulationen erleichtern das Verständnis von Konfidenzintervallen
+\item Festlegung der Populationsverteilung 
+\item In der Simulation tut man so, als sei die Verteilung unbekannt
+\item Man zieht viele Stichproben und berechnet jedesmal das Konfidenzintervall
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+Schleife über $r=1,\ldots,R$:
+\begin{itemize}
+\item Ziehe Stichprobe \texttt{x} der Länge \texttt{n}
+\item Berechne die Grenzen \texttt{k\_unten} und \texttt{k\_oben}
+\item Prüfe, ob der wahre Wert $\mu$ zwischen \texttt{k\_unten} und \texttt{k\_oben} liegt
+\item Wenn ja, erhöhe einen Zähler \texttt{z}
+\end{itemize}
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+\begin{exampleblock}{Beispiel: Simulation}
+\begin{itemize}
+\item Sei $X\sim N(63, 4^2)$
+\item Die Normalverteilung wird als bekannt angenommen
+\item Stichprobenumfang $n=8$
+\item Niveau $\alpha=0.05$
+\item Anzahl Durchläufe $R=10000$
+\end{itemize}
+\end{exampleblock}
+```{r}
+mu <- 63
+sigma <- 4
+n <- 8
+alpha <- 0.05
+R <- 10000
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+```{r}
+q <- qt(1-alpha/2, df=n-1)
+z <- 0 
+for(r in 1:R){
+
+  x <- rnorm(n, mean=mu, sd=sigma)
+
+  k_unten <- mean(x) - q * sd(x)/sqrt(n)
+  k_oben <- mean(x) + q * sd(x)/sqrt(n)
+
+  if(k_unten <= mu & mu <= k_oben){
+    z <- z+1
+  }
+}
+```
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+```{r}
+# Anteil der Überdeckungen
+
+mean(z/R)
+```
+
+Das Konfidenzintervall überdeckt den wahren Wert ($\mu=63$)
+ziemlich exakt in $(1-\alpha)\times 100$ Prozent der Simulationsdurchläufe
+
+
+
+# Konfidenzintervalle
+\framesubtitle{Monte-Carlo-Simulation}
+```{r}
+#| echo: FALSE
+R <- 50
+
+# Vorbereitung einer leeren Grafik
+par(cex=1.7, mar=c(4.5,4.5,0.5,0.5))
+plot(c(56,70), c(0,R),
+     type="n",
+     xlab="mu", 
+     ylab="Durchlauf")
+
+# Einzeichnen des wahren Erwartungswerts
+abline(v=mu)
+
+for(r in 1:R){
+
+  x <- rnorm(n, mean=mu, sd=sigma)
+  k_unten <- mean(x) - q * sd(x)/sqrt(n)
+  k_oben <- mean(x) + q * sd(x)/sqrt(n)
+  if(k_unten <= mu & mu <= k_oben){
+    lines(x=c(k_unten, k_oben), y=c(r, r))
+  } else {
+    lines(x=c(k_unten, k_oben), y=c(r, r), col="red")
+  }
+}
+```
+

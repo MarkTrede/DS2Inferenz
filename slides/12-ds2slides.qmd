@@ -1,0 +1,662 @@
+---
+title: "Data Science 2"
+subtitle: "Erwartungswerttests"
+format: beamer
+date: 2023-12-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+\textbf{t-Test}
+\medskip
+\begin{itemize}
+\item Test für den Erwartungswert $\mu$ einer Zufallsvariable $X$
+\item Hypothesen
+\begin{align*}
+H_0: \mu&=\mu_0\\
+H_1: \mu&\neq\mu_0
+\end{align*}
+\item Stichprobe $X_1,\ldots,X_n$, Stichprobenmittel $\bar X$
+\item Testidee: Lehne $H_0$ an, wenn $\bar X$ "weit weg" von $\mu_0$ liegt
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+\begin{itemize}
+\item Für große Stichproben gilt approximativ
+$$
+\sqrt{n}\frac{\bar X-\mu}{S}\sim N(0,1)
+$$
+\item Also gilt unter der Nullhypothese
+$$
+\sqrt{n}\frac{\bar X-\mu_0}{S}\sim N(0,1)
+$$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+\begin{itemize}
+\item Teststatistik
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{S}
+$$
+\item Unter $H_0$ gilt (approximativ) $T\sim N(0,1)$
+\item Bestimmung des kritischen Bereichs: Wo liegt die Teststatistik
+nur mit kleiner Wahrscheinlichkeit $\alpha$, wenn $H_0$ wahr ist?
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+```{r}
+#| echo: FALSE
+par(cex=1.5)
+x <- seq(from=-3.5, to=3.5, length=200)
+plot(x, dnorm(x),
+     type="l",
+     main="Kritische Grenzen für alpha=0.05",
+     xlab="Teststatistik T",
+     ylab="Dichte unter H0",
+     yaxs="i", ylim=c(0,0.45))
+abline(v=0)
+abline(v=qnorm(c(0.025,0.975)),col="red")
+for(x in seq(from=qnorm(0.975), to=3.5, length=40)){
+  lines(c(x,x), c(0,dnorm(x)), col="red")
+  lines(-c(x,x), c(0,dnorm(x)), col="red")
+}
+text(-2.8,0.05,"2.5%",cex=1.8)
+text(2.8,0.05,"2.5%",cex=1.8)
+text(-0.05,0.18,"95%",cex=1.8)
+```
+
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+```{r}
+alpha <- 0.05
+```
+
+Die kritischen Grenzen sind
+```{r}
+-qnorm(1-alpha/2)
+qnorm(1-alpha/2)
+```
+
+Wenn der Betrag der Teststatistik größer als 1.96 ist, wird die Nullhypothese 
+auf dem Signifikanzniveau 0.05 verworfen
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+Bestimmung des p-Werts: \medskip
+\begin{itemize}
+\item Wie hoch ist unter $H_0$ die Wahrscheinlichkeit,
+dass die Teststatistik $T$ stärker gegen $H_0$ spricht als der 
+realisierte Wert der Teststatistik $t$?
+\item Die Wahrscheinlichkeit ist
+\begin{align*}
+\text{p-Wert}&=P(T < -|t|\text{ oder }T > |t|)\\
+&=\ldots\\
+&=2(1-\Phi(|t|))
+\end{align*}
+\end{itemize}
+
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+```{r}
+#| echo: FALSE
+par(cex=1.5)
+x <- seq(from=-3.5, to=3.5, length=200)
+plot(x, dnorm(x),
+     type="l",
+     main="p-Wert",
+     xlab="Teststatistik T",
+     ylab="Dichte unter H0",
+     yaxs="i", ylim=c(0,0.45))
+
+abline(v=0)
+
+mtext("|t|",1,0.5,at=1.5,cex=2)
+mtext("-|t|",1,0.5,at=-1.5,cex=2)
+
+lines(c(1.5,1.5), c(0,dnorm(1.5)), col="red", lwd=3)
+lines(c(-1.5,-1.5), c(0,dnorm(1.5)), col="red", lwd=3)
+
+for(x in seq(1.5,3.5,length=40)){
+  lines(c(x,x), c(0,dnorm(x)),col="red")
+  lines(-c(x,x), c(0,dnorm(x)),col="red")
+}
+
+text(-2.9,0.11,
+     expression(Phi(-group("|",t,"|"))),cex=1.3)
+text(2.9,0.1,
+     expression(1-Phi(group("|",t,"|"))),cex=1.3)
+arrows(-2.7,0.08,-2,0.03,length=0.1)
+arrows(2.7,0.08,2,0.03,length=0.1)
+```
+
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+\begin{exampleblock}{Beispiel: Medienvertrauen}
+\begin{itemize}
+\item Studentische Umfrage in Data Science 1
+\item "Wie sehr vertrauen Sie Statistiken in Medien (Zeitungen, Nachrichten, etc.) hinsichtlich ihres Wahrheitsgehalts?" 
+\item Interpretation der Umfrage als Stichprobe aus der Population 
+aller Studierenden ($X$)
+\item $n=667$ Antworten auf Skala 0-100
+\item Hypothese: $\mu=50$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+```{r}
+D <- read.csv("../data/StudentischeUmfrage2023.csv")
+x <- D$Medienvertrauen
+x <- x[!is.na(x)]
+n <- length(x)
+head(x, 10)
+mean(x)
+```
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test}
+```{r}
+mu0 <- 50
+alpha <- 0.05
+
+teststat <- sqrt(n)*(mean(x) - mu0)/sd(x)
+teststat
+
+qnorm(1-alpha/2)
+```
+Die Teststatistik liegt außerhalb des Intervalls $[-1.96,1.96]$; folglich 
+wird $H_0:\mu=50$ abgelehnt (bei $\alpha=0.05$). Das mittlere Vertrauen in
+Statistiken weicht signifikant von 50 ab.
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test bei Normalverteilung}
+\textbf{t-Test bei Normalverteilung}\medskip
+\begin{itemize}
+\item Manchmal ist bekannt, dass $X$ normalverteilt ist (z.B. Fehler)
+\item In diesem Fall ist die Verteilung der Teststatistik
+exakt und auch in kleinen Stichproben bekannt
+\item Unter $H_0$ gilt
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{S}\sim t_{n-1}
+$$
+\item Kritischer Bereich: $(-\infty,-t_{n-1,1-\alpha/2}]\cup [t_{n-1,1-\alpha/2},\infty)$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test bei Normalverteilung}
+$t_{n-1,1-\alpha/2}$: Quantil der t-Verteilung mit $n-1$ Freiheitsgraden
+```{r}
+alpha <- 0.05
+n <- 10
+qt(1-alpha/2, df=n-1)
+n <- 100
+qt(1-alpha/2, df=n-1)
+qnorm(1-alpha/2)
+```
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test bei Normalverteilung}
+\begin{exampleblock}{Beispiel: t-Test bei Normalverteilung}
+Qualitätskontrolle:
+\begin{itemize}
+\item Sei $X$ das Gewicht einer 200g-Tafel Schokolade, die aus der laufenden Produktion gezogen wird
+\item Annahme: $X\sim N(\mu,\sigma^2)$
+\item Es soll geprüft werden, ob $\mu=200$ ist
+\item $H_0:\mu=200$, $H_1.\mu\neq 200$, $\alpha=0.1$
+\item Einfache Stichprobe vom Umfang $n=10$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{t-Test bei Normalverteilung}
+```{r}
+x <- c(199.47,197.19,197.02,197.53,198.78,
+       202.52,195.74,199.11,200.3,195.74)
+n <- length(x)
+alpha <- 0.1
+mu0 <- 200
+teststat <- sqrt(n) * (mean(x) - mu0)/sd(x)
+teststat
+
+qt(1-alpha/2, df=n-1) # Quantil der t_9
+```
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+\textbf{Einseitige Tests}\medskip
+\begin{itemize}
+\item Null- und Alternativhypothese
+\begin{align*}
+H_0: \mu &\le \mu_0 & H_1: \mu &>\mu_0\\
+\text{oder}&&\text{oder}&\\
+H_0: \mu &\ge \mu_0 & H_1: \mu &<\mu_0\\
+\end{align*}
+\item Die Frage ``Wie ist die Teststatistik unter $H_0$ verteilt?'' ist
+jetzt nicht mehr leicht zu beantworten
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+\begin{itemize}
+\item Der kritische Bereich muss so festgelegt werden,
+dass das Signifikanzniveau $\alpha$ auch im ``worst case''
+eingehalten wird
+\item ``Worst case'': $\mu=\mu_0$
+\item Im ``worst case'' folgt die Teststatistik
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{S}
+$$
+(approximativ) der $N(0,1)$ (oder exakt der $t_{n-1}$)
+\item Festlegung des kritischen Bereichs, wenn $H_0:\mu\le\mu_0$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+```{r echo=FALSE}
+par(cex=1.7)
+curve(dnorm(x),from=-3.5,to=3.5,
+      main="Kritische Grenze",
+      xlab="Teststatistik T",
+      ylab="Dichte unter mu=mu_0",
+      yaxs="i", ylim=c(0,0.45))
+abline(v=0)
+abline(v=qnorm(0.95),col="red")
+for(x in seq(qnorm(0.95),3.5,length=40)){
+  lines(c(x,x),c(0,dnorm(x)),col="red")
+}
+text(2.6,0.07,"5%",cex=1.8)
+text(-0.05,0.18,"95%",cex=1.8)
+```
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+$H_0:\mu\le\mu_0$
+\begin{itemize}
+\item Kritische Grenze: $u_{1-\alpha}$
+\item Wenn $T>u_{1-\alpha}$ ist, lehnt man $H_0:\mu\le\mu_0$ ab
+\item p-Wert: $P(T>t)=1-\Phi(t)$
+\end{itemize}
+\medskip
+$H_0:\mu\ge\mu_0$
+\begin{itemize}
+\item Kritische Grenze: $u_\alpha=-u_{1-\alpha}$
+\item Wenn $T< -u_{1-\alpha}$ ist, lehnt man $H_0:\mu\ge\mu_0$ ab
+\item p-Wert: $P(T<t)=\Phi(t)$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+Wahl der Nullhypothese:\medskip
+\begin{itemize}
+\item Belastbarkeit der Testentscheidungen ist asymmetrisch
+\item[$\longrightarrow$] die Wahl der Nullhypothese ist \textbf{nicht gleichgültig}!
+\item Eine abgelehnte Nullhypothese ist ein belastbares Ergebnis
+\item Eine nicht abgelehnte Nullhypothese ist nicht belastbar
+\item Eine Aussage kann (nur) statistisch untermauert werden, wenn sie in der Alternativhypothese steht
+\end{itemize}
+
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+\begin{exampleblock}{Beispiel: Einseitiger Test}
+Qualitätskontrolle:
+\begin{itemize}
+\item Gerstelieferungen an eine Brauerei
+\item Sei $X\sim N(\mu,\sigma^2)$ der Kohlenhydratanteil der Gerste
+\item Ziehung einer einfachen Stichprobe $X_1,\ldots,X_{10}$ aus der Lieferung
+\item Die Brauerei möchte sicher sein, dass $\mu>61$ Prozent ist
+\item Ihre Hypothesen sind daher
+$$
+H_0:\mu\le 61,\qquad H_1:\mu>61
+$$
+\item Die Lieferung wird nicht angenommen, wenn $H_0$ nicht verworfen wird
+\item Der mittlere Kohlenhydratanteil der Stichprobe muss signifikant größer 
+sein als 61 Prozent ($\alpha=0.1$)
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+```{r}
+# Stichprobe
+x <- c(63.55, 59.40, 65.96, 62.35, 60.17,
+       60.65, 62.16, 59.53, 66.71, 61.81)
+n <- length(x)
+mean(x)
+```
+Ist dieses Stichprobenmittel signifikant größer als 61 Prozent?\newline
+(Könnte der Wert auch zufällig zustande gekommen sein?)
+
+
+
+# Erwartungswerttests
+\framesubtitle{Einseitige Tests}
+```{r}
+teststat <- sqrt(n)*(mean(x) - 61)/sd(x)
+teststat
+
+# 0.9-Quantil of t_9
+qt(0.9, df=n-1)
+```
+Da die Teststatistik größer ist als der kritische Wert, wird
+die Nullhypothese verworfen. Die Alternative (d.h. $\mu>61$)
+wird statistisch untermauert.
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\textbf{Tests für zwei Erwartungswerte}\medskip
+\begin{itemize}
+\item Zwei Zufallsvariablen $X$ und $Y$
+\item Vergleich der Erwartungswerte $\mu_X$ und $\mu_Y$
+\item Hypothesen
+\begin{align*}
+H_0:\mu_X=\mu_Y   && H_0:\mu_X\ge \mu_Y && H_0:\mu_X\le \mu_Y\\
+H_1:\mu_X\neq\mu_Y&& H_1:\mu_X< \mu_Y   && H_1:\mu_X> \mu_Y
+\end{align*}
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{itemize}
+\item Stichproben $X_1,\ldots,X_m$ und $Y_1,\ldots,Y_n$
+\item Approximativ gilt $\bar X\sim N(\mu_X,\sigma_X^2)$
+und $\bar Y\sim N(\mu_Y,\sigma_Y^2)$
+\item Teststatistik
+$$
+T=\frac{\bar X-\bar Y}{\sqrt{\frac{S_X^2}{m}+\frac{S_Y^2}{n}}}
+$$
+\item Unter $H_0$ gilt (approximativ) $T\sim N(0,1)$
+\item Kritischer Bereich zum Signifikanzniveau $\alpha$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{exampleblock}{Beispiel: Monatsbudgets}
+\begin{itemize}
+\item Umfrage in Data Science 1
+\item Interpretation der Umfrage als einfache Stichprobe
+\item Wie hoch ist das Monatsbudget?
+\item Unterteilung in BWL/VWL
+\item Sind die durchschnittlichen Monatsbudgets gleich?\newline
+$H_0:\mu_\text{BWL}=\mu_\text{VWL}$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+```{r}
+x <- read.csv("../data/monatsbudgets.csv")
+head(x)
+```
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+```{r}
+yBWL <- x$Monatsbudget[x$Studiengang == "BWL"]
+yVWL <- x$Monatsbudget[x$Studiengang == "VWL"]
+paste(mean(yBWL), mean(yVWL))
+nBWL <- length(yBWL)
+nVWL <- length(yVWL)
+paste(nBWL, nVWL)
+```
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+```{r}
+teststat <- (mean(yBWL)-mean(yVWL))/
+            sqrt(var(yBWL)/nBWL+var(yVWL/nVWL))
+teststat
+
+alpha <- 0.05
+qnorm(1-alpha/2)
+```
+Der Wert der Teststatistik liegt nicht im kritischen Bereich.
+Die Nullhypothese gleich hoher durchschnittlicher Monatsbudgets
+wird also (auf dem Niveau 0.05) **nicht abgelehnt**.
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\textbf{Randomisierte Experimente}\medskip
+\begin{itemize}
+\item Effekt von (Politik-)Maßnahmen
+\item Randomisiertes Experiment
+\item Zufällige Zuordnung in Treatment-Gruppe / Kontrollgruppe
+\item Für die Mitglieder der Treatment-Gruppe wird
+die Politikmaßnahme umgesetzt, für die Mitglieder der Kontrollgruppe nicht
+\item Gibt es einen statistisch signifikanten Unterschied?
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{exampleblock}{Beispiel: Spendenbereitschaft}
+\begin{itemize}
+\item Kann die Spendenbereitschaft durch
+ein kleines Geschenk im Anschreiben erhöht werden?
+(Falk, 2007)
+\item Bernoulli-verteilte Zufallsvariablen
+\item $X$: Person ohne Geschenk spendet/spendet nicht
+\item $Y$: Person mit Geschenk spendet/spendet nicht
+\item Spendenwahrscheinlichkeiten $\pi_X$, $\pi_Y$
+\item Hypothesen
+\begin{align*}
+H_0:\pi_X&\ge \pi_Y\\
+H_1:\pi_X&<\pi_Y
+\end{align*}
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{exampleblock}{Beispiel: Spendenbereitschaft}
+\begin{itemize}
+\item Daten:
+\bigskip
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+& kein & kleines\\
+& Geschenk & Geschenk\\\hline
+\# Anschreiben & 3262 & 3237\\
+\# Spenden & 397 & 465\\ \hline
+\end{tabular}
+\end{center}
+\bigskip
+\item Punktschätzer der Spendenwahrscheinlichkeiten
+\begin{align*}
+\hat\pi_X &= 397/3262 = 0.1217 \\
+\hat\pi_Y &= 465/3237 = 0.1437
+\end{align*}
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{exampleblock}{Beispiel: Spendenbereitschaft}
+\begin{itemize}
+\item Wert der Teststatistik
+\begin{align*}
+t &=\frac{\hat\pi_X-\hat\pi_Y}{\sqrt{\frac{\hat\pi_X(1-\hat\pi_X)}{m}
++\frac{\hat\pi_Y(1-\hat\pi_Y)}{n}}}\\[2ex]
+&= \frac{0.1217-0.1437)}{\sqrt{\frac{0.1217\cdot(1-0.1217)}{3262}
++\frac{0.1437\cdot (1-0.1437)}{3237}}}\\[2ex]
+&= -2.615.
+\end{align*}
+\item p-Wert: $\Phi(-2.615)=0.004461$ (=\texttt{pnorm(-2.615)})
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{exampleblock}{Beispiel: Spendenbereitschaft}
+\begin{itemize}
+\item Der Unterschied der Anteile (12.17\% vs 14.37\%) ist
+klein, aber statistisch signifikant
+\item Das Experiment zeigt also, dass ein kleines
+Geschenk im Anschreiben die Spendenwahrscheinlichkeit
+erhöht
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Monte-Carlo-Simulation}
+\textbf{Monte-Carlo-Simulation}\medskip
+\begin{itemize}
+\item Genaue Spezifikation der (wahren) Verteilung(en)
+und der Hypothesen
+\item Wiederholte Stichprobenziehungen
+\item Berechne die Teststatistik in jedem Durchlauf
+\item Zähle mit, wie oft die Teststatistik im kritischen Bereich liegt
+\item Ermittlung der Fehlerwahrscheinlichkeiten bzw. der Power
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Monte-Carlo-Simulation}
+\begin{exampleblock}{Beispiel: Test auf Gleichheit zweier Erwartungswerte}
+\begin{itemize}
+\item Wahre Verteilungen
+\begin{align*}
+X &\sim Exp(0.25)\\
+Y &\sim Exp(0.28)
+\end{align*}
+\item Hypothesen
+\begin{align*}
+H_0: \mu_X &=\mu_Y\\
+H_1: \mu_X&\neq \mu_Y
+\end{align*}
+\item Ermittle die Power (d.h. die Wahrscheinlichkeit, dass die
+falsche Nullhypothese als falsch erkannt wird)
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Monte-Carlo-Simulation}
+\begin{exampleblock}{Beispiel: Test auf Gleichheit zweier Erwartungswerte}
+\begin{itemize}
+\item Zwei Stichproben
+$$
+X_1,\ldots,X_m,Y_1,\ldots,Y_n
+$$
+\item Setze $m=200$, $n=300$
+\item Signifikanzniveau $\alpha=0.05$
+\item Anzahl Monte-Carlo-Simulationsdurchläufe $R=10000$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Monte-Carlo-Simulation}
+```{r}
+#| eval: FALSE
+m <- 200
+n <- 300
+
+alpha <- 0.05
+R <- 10000
+qnt <- qnorm(1-alpha/2)
+
+z <- 0 # Initialisierung eines Zählers
+```
+
+
+# Erwartungswerttests
+\framesubtitle{Monte-Carlo-Simulation}
+```{r}
+#| eval: FALSE
+for(r in 1:R){
+  x <- rexp(m, rate=0.25)
+  y <- rexp(n, rate=0.28)
+  
+  teststat <- (mean(x)-mean(y)) / 
+              sqrt(var(x)/m + var(y)/n)
+  
+  if(teststat < -qnt | teststat > qnt){
+    z <- z+1
+  }
+}
+print(z/R)  # -> RStudio
+```

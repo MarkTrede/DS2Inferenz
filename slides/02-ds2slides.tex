@@ -1,3 +1,30 @@
+\documentclass[12pt,show notes]{beamer} 
+%\documentclass[12pt,handout]{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{eurosym}
+\usepackage[ngerman]{babel}
+\usepackage[ansinew]{inputenc}
+
+\usetheme{Rochester}
+\usecolortheme{beaver}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[text line]{} 
+\graphicspath{{../plots/}}
+
+\begin{document}
+
+\title{Data Science 2}
+\subtitle{Wahrscheinlichkeit}
+\author{Prof.~Dr.~Mark Trede}
+\institute[]{Institut f\"ur \"Okonometrie und Wirtschaftsstatistik}
+\date{Oktober 2023}
+\maketitle
+
 \begin{frame}
 \frametitle{Wahrscheinlichkeit}
 \framesubtitle{Definition}
@@ -8,7 +35,8 @@ heißt Wahrscheinlichkeit, wenn gilt:
 \begin{enumerate}
 \item Nichtnegativität: Für alle $A$ gilt $P(A) \geq 0$
 \item Normierung: $P(\Omega)=1$
-\item Additivität: Für $A\cap B=\varnothing$ gilt $P(A\cup B)=P(A)+P(B)$
+\item Additivität: Für $A\cap B=\varnothing$ gilt 
+\[ P(A\cup B)=P(A)+P(B) \]
 \end{enumerate}
 \end{block}
 Die drei Bedingungen sind Axiome.
@@ -156,7 +184,7 @@ z.B.\ $P(A|B)=1-P(\bar A|B)$
 \item Aus
 \[ P(A|B)=\frac{P(A\cap B)}{P(B)} \]
 folgt
-\[ P(A\cap B)=P(A)P(B|A) \]
+\[ P(A\cap B)=P(B)P(A|B) \]
 \item Drei Ereignisse
 \[ P(A\cap B\cap C)=P(A)P(B|A)P(C|A\cap B) \]
 \end{itemize}
@@ -342,3 +370,4 @@ Wegen $P(B|A)\neq P(B)$ sind $A$ und $B$ abhängig
 \end{exampleblock}
 \end{frame}
 
+\end{document}

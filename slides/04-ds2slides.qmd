@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Standardverteilungen"
 format: beamer
-date: today
+date: 2023-10-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -43,10 +44,10 @@ Befehlssystematik in R:
 
 ```{r eval=FALSE}
 dVERTEILUNG(x, PARAMETER) # f(x), Dichte, W.fkt.
-pVERTEILUNG(x, PARAMETER) # F(x), Vert.fkt
+pVERTEILUNG(q, PARAMETER) # F(q), Vert.fkt
 qVERTEILUNG(p, PARAMETER) # Q(x), Quantilfkt.
 
-rVERTEILUNG(n, PARAMETER) # Zufallszahlengenerator
+rVERTEILUNG(n, PARAMETER) # Zufallszahlen
 ```
 
 
@@ -94,20 +95,16 @@ f_{1_A}(x)&=0 \text{ sonst}
 
 \begin{itemize}
 \item Erwartungswert 
-\uncover<2>{
 $$
 E(1_A)=0\cdot (1-\pi)+1\cdot \pi=\pi
 $$
-}
 \item Varianz 
-\uncover<2>{
 \begin{align*}
 Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot\pi \\
 &=\pi^2\cdot (1-\pi)+(1-2\pi+\pi^2)\cdot\pi \\
 &=\pi^2-\pi^3+\pi-2\pi^2+\pi^3 \\
 &=\pi(1-\pi)
 \end{align*}
-}
 \end{itemize}
 
 
@@ -116,8 +113,9 @@ Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot\pi \\
 \framesubtitle{Bernoulli-Verteilung}
 
 \begin{exampleblock}{Beispiel: Bernoulli-Verteilung}
-Eine zufällig ausgewählte Person wird befragt,
-ob sie arbeitslos ist; sei $X$ der Status
+Aus der Population der Erwerbspersonen wird zufällig
+eine Person ausgewählt und befragt, ob sie arbeitslos ist; 
+sei $X$ der Status
 $$
 X=\left\{
 \begin{array}{ll}
@@ -161,26 +159,9 @@ $$
 X=\sum\limits_{i=1}^{n}1_{A_{i}}
 $$
 heißt binomialverteilt mit Parametern $n$ und $\pi$
+\item $X$ ist die Anzahl der Erfolge bei $n$ Ziehungen
 \item Notation: $X\sim B(n,\pi )$
 \end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Diskrete Verteilungen
-\framesubtitle{Binomialverteilung}
-
-Wahrscheinlichkeits-, Verteilungs- und Quantilfunktion 
-sowie Zufallszahlengenerator der Binomialverteilung mit 
-den Parametern `n` und `pi` in R:
-\bigskip
-
-```{r eval=FALSE}
-dbinom(x, size=n, prob=pi)
-pbinom(q, size=n, prob=pi)
-qbinom(p, size=n, prob=pi)
-
-rbinom(N, size=n, prob=pi)
-```
 
 
 <!-- ------------------------------------------- -->
@@ -224,6 +205,25 @@ $$
 \end{itemize}
 
 
+
+<!-- ------------------------------------------- -->
+# Diskrete Verteilungen
+\framesubtitle{Binomialverteilung}
+
+Wahrscheinlichkeits-, Verteilungs- und Quantilfunktion 
+sowie Zufallszahlengenerator der Binomialverteilung mit 
+den Parametern `n` und `pi` in R:
+\bigskip
+
+```{r eval=FALSE}
+dbinom(x, size=n, prob=pi)
+pbinom(q, size=n, prob=pi)
+qbinom(p, size=n, prob=pi)
+
+rbinom(N, size=n, prob=pi)
+```
+
+
 <!-- ------------------------------------------- -->
 # Diskrete Verteilungen
 \framesubtitle{Binomialverteilung}
@@ -242,6 +242,10 @@ Man zieht mit Zurücklegen $n=5$ Kugeln
 Sei $X$ die Anzahl der gezogenen roten Kugeln
 \end{exampleblock}
 
+\begin{center}
+$\color{red}\bullet\color{black}~~\circ~~\circ~~\color{red} \bullet\color{black}~~\circ$\\
+$\circ~~\color{red} \bullet\color{black}~~\circ~~\circ~~\circ$
+\end{center}
 
 <!-- ------------------------------------------- -->
 # Diskrete Verteilungen
@@ -310,23 +314,6 @@ $$
 \end{itemize}
 
 
-<!-- ------------------------------------------- -->
-# Diskrete Verteilungen
-\framesubtitle{Poisson-Verteilung}
-
-Wahrscheinlichkeits-, Verteilungs- und Quantilfunktion
-sowie Zufallszahlengenerator der Poisson-Verteilung 
-mit Parameter `lambda` in R:
-\bigskip
-
-```{r eval=FALSE}
-dpois(x, lambda)
-ppois(q, lambda)
-qpois(p, lambda)
-
-rpois(n, lambda)
-```
-
 
 <!-- ------------------------------------------- -->
 # Diskrete Verteilungen
@@ -351,6 +338,24 @@ Var(X) &=\lambda
 # Diskrete Verteilungen
 \framesubtitle{Poisson-Verteilung}
 
+Wahrscheinlichkeits-, Verteilungs- und Quantilfunktion
+sowie Zufallszahlengenerator der Poisson-Verteilung 
+mit Parameter `lambda` in R:
+\bigskip
+
+```{r eval=FALSE}
+dpois(x, lambda)
+ppois(q, lambda)
+qpois(p, lambda)
+
+rpois(n, lambda)
+```
+
+
+<!-- ------------------------------------------- -->
+# Diskrete Verteilungen
+\framesubtitle{Poisson-Verteilung}
+
 **Approximation:**
 \medskip
 \begin{itemize}
@@ -361,6 +366,7 @@ $$
 \binom{n}{x}\pi ^{x}(1-\pi )^{n-x}\approx e^{-\lambda}\cdot \frac{\lambda^{x}}{x!}
 $$
 \end{itemize}
+
 
 
 <!-- ------------------------------------------- -->
@@ -377,6 +383,8 @@ sei $X$ die Anzahl der Reaktionen
 approximativ $X\sim Po(3)$
 \end{itemize}
 \end{exampleblock}
+
+
 
 
 <!-- ------------------------------------------- -->
@@ -498,18 +506,16 @@ $$
 # Stetige Verteilungen
 \framesubtitle{Standardnormalverteilung}
 
-Dichte-, Verteilungs- und Quantilfunktion sowie 
-Zufallszahlengenerator der Standardnormalverteilung
-in R:
-\bigskip
-
-```{r eval=FALSE}
-dnorm(x)
-pnorm(q)
-qnorm(p)
-
-rnorm(n)
-```
+**Standardnormalverteilung:**
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $U$ heißt standardnormalverteilt, wenn sie für $u\in \mathbb{R}$ die folgende Dichte hat
+$$
+\varphi(u) =\frac{1}{\sqrt{2\pi}}\color{red}\exp\color{black}
+\left(\color{red}-\color{black}\frac{1}{2}\color{red}u^2\color{black}\right)
+$$
+\item Notation: $U\sim N(0,1)$
+\end{itemize}
 
 
 <!-- ------------------------------------------- -->
@@ -556,6 +562,24 @@ Verteilungsfunktion und die Quantilfunktion
 \item Früher: Tabellen in Statistik(lehr)büchern
 \item Numerische Implementation in Software (z.B. R)
 \end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Standardnormalverteilung}
+
+Dichte-, Verteilungs- und Quantilfunktion sowie 
+Zufallszahlengenerator der Standardnormalverteilung
+in R:
+\bigskip
+
+```{r eval=FALSE}
+dnorm(x)
+pnorm(q)
+qnorm(p)
+
+rnorm(n)
+```
 
 
 <!-- ------------------------------------------- -->
@@ -643,6 +667,24 @@ $$
 # Stetige Verteilungen
 \framesubtitle{Normalverteilung}
 
+**Normalverteilung:**
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt normalverteilt mit Parametern
+$\mu\in\mathbb{R}$ und $\sigma^2>0$, falls für $x\in\mathbb{R}$
+$$
+f_X(x) =\frac{1}{\sqrt{2\pi}\sigma}\color{red}\exp\color{black}
+\left(\color{red}-\color{black}\frac{1}{2}\color{red}
+\left(\color{black}\frac{x-\mu}{\sigma}\color{red}\right)^2\color{black}\right)
+$$
+\item Notation: $X\sim N(\mu,\sigma^2)$
+\end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Normalverteilung}
+
 Dichte-, Verteilungs- und Quantilfunktion sowie
 Zufallszahlengenerator der Normalverteilung
 mit den Parametern `mu` und `sigma` in R:
@@ -689,7 +731,7 @@ plot(x,dnorm(x, mean=-1, sd=1),
      yaxs="i",
      ylim=c(0, 0.45),
      ylab="Dichten",
-     main="Einfluss von mu")
+     main="Einfluss von mu (wenn sigma=1)")
 lines(x,dnorm(x, mean=1, sd=1), col="black", lwd=4)
 lines(x,dnorm(x, mean=5, sd=1), col="blue", lwd=4)
 legend("topright",
@@ -711,7 +753,7 @@ plot(x, dnorm(x, mean=0, sd=sqrt(0.3)),
      yaxs="i",
      ylim=c(0, 0.8),
      ylab="Dichten",
-     main="Einfluss von sigma^2")
+     main="Einfluss von sigma^2 (wenn mu=0)")
 lines(x,dnorm(x, mean=0, sd=1), col="black", lwd=4)
 lines(x,dnorm(x, mean=0, sd=sqrt(3)), col="blue", lwd=4)
 legend("topright",
@@ -747,9 +789,9 @@ $$
 $$
 F_X(x) =\Phi\left( \frac{x-\mu}{\sigma}\right)
 $$
-\item Quantilfunktion, Erwartungswert und Varianz
+\item $p$-Quantil: $x_p=\mu +\sigma \cdot u_p$
+\item Erwartungswert und Varianz
 \begin{align*}
-x_p &=\mu +\sigma \cdot u_{p}\\
 E(X)&=\mu\\
 Var(X)&=\sigma^2
 \end{align*}
@@ -781,7 +823,7 @@ Wie groß ist die Wahrscheinlichkeit, dass die Tafel
 weniger als 200g wiegt?\medskip
 
 Gesucht ist der Wert der Verteilungsfunktion von $X\sim N(201,2^2)$
-an der Stelle 200
+an der Stelle 200, $F_X(200)$
 \end{exampleblock}
 
 ```{r}
@@ -804,101 +846,8 @@ qnorm(0.05, mean=201, sd=2)
 ```
 
 
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Exponentialverteilung}
-
-**Exponentialverteilung:**
-\medskip
-\begin{itemize}
-\item Eine Zufallsvariable $X$ heißt exponential-verteilt
-mit Parameter $\lambda>0$, wenn
-$$
-f_X(x)=\left\{ 
-\begin{array}{ll}
-\lambda e^{-\lambda x} & \quad x\geq 0\\ 
-0 & \quad x<0
-\end{array} \right.
-$$
-\item Notation: $X\sim Exp(\lambda)$
-\item Modellierung von Wartezeiten, Dauern etc.
-\end{itemize}
 
 
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Exponentialverteilung}
-Dichte-, Verteilungs- und Quantilfunktion sowie
-Zufallszahlengenerator der Exponentialverteilung
-mit Parameter `lambda` in R:
-\bigskip
-
-```{r eval=FALSE}
-dexp(x, rate=lambda)
-pexp(q, rate=lambda)
-qexp(p, rate=lambda)
-
-rexp(n, rate=lambda)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Exponentialverteilung}
-
-```{r echo=FALSE}
-x <- seq(0,3,length=200)
-par(cex=1.5)
-plot(x, dexp(x,rate=2), 
-     type="l",
-     yaxs="i",
-     ylim=c(0,2.2),
-     xlim=c(-0.5,3),
-     main="Dichte der Exp(2)",
-     ylab=expression(f(x)))
-lines(c(0,0),c(0,dexp(0,2)),lty="dotted")
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Exponentialverteilung}
-
-\begin{itemize}
-\item Verteilungsfunktion
-$$
-F(x)=\left\{ 
-\begin{array}{ll}
-1-e^{-\lambda x} & \quad x\geq 0\\
-0 & \quad x<0
-\end{array}\right.
-$$
-\item Erwartungswert und Varianz
-\begin{align*}
-E(X) &=\frac{1}{\lambda }\\
-Var(X) &=\frac{1}{\lambda^2}
-\end{align*}
-\end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Exponentialverteilung}
-
-\begin{exampleblock}{Beispiel: Arbeitslosigkeitsdauer}
-Sei $X\sim Exp(0.2)$ die Arbeitslosigkeitsdauer (in Monaten) 
-eines gerade gekündigten Arbeitnehmers.
-\medskip
-
-Die Wahrscheinlichkeit von Langzeitarbeitslosigkeit ist
-$$
-P(X>12)=1-P(X\le 12)=1-F_X(12)
-$$
-\end{exampleblock}
-
-```{r}
-1 - pexp(12, rate=0.2)
-```
 
 
 <!-- ------------------------------------------- -->
@@ -986,7 +935,6 @@ Var(X) &=\frac{kx_{min}^2}{(k-2)(k-1)^2}
 \framesubtitle{Paretoverteilung}
 
 Quantilfunktion: $F_X(x)=p$ nach $x$ auflösen
-\uncover<2>{
 \begin{align*}
 1-\left(\frac{x_{min}}{x}\right)^k &= p\\
 \left(\frac{x_{min}}{x}\right)^k &= 1-p\\
@@ -994,7 +942,6 @@ Quantilfunktion: $F_X(x)=p$ nach $x$ auflösen
 x&=\frac{x_{min}}{(1-p)^{1/k}}\\
 F_X^{-1}(p)&=\frac{x_{min}}{(1-p)^{1/k}}
 \end{align*}
-}
 
 
 <!-- ------------------------------------------- -->
@@ -1035,232 +982,6 @@ $$
 
 ```{r}
 qpareto(0.99, k=1.5, xmin=10^6)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-
-**Rechteckverteilung:**
-\medskip
-\begin{itemize}
-\item Eine Zufallsvariable $X$ heißt rechteck-verteilt
-mit den Parametern $a$ und $b$, wenn
-$$
-f_X(x)=\left\{ 
-\begin{array}{ll}
-\frac{1}{b-a} & \quad a\le x\le b\\ 
-0 & \quad \text{sonst}
-\end{array} \right.
-$$
-\item Notation: $X\sim U(a,b)$
-\item Modellierung von Wartezeiten bei regelmäßigen Ereignissen;
-wichtig für Computersimulationen
-\end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-Dichte-, Verteilungs- und Quantilfunktion sowie
-Zufallszahlengenerator der Rechteckverteilung
-mit den Parametern `a` und `b` in R
-\bigskip
-
-```{r eval=FALSE}
-dunif(x, min=a, max=b)
-punif(q, min=a, max=b)
-qunif(p, min=a, max=b)
-
-runif(n, min=a, max=b)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-
-```{r echo=FALSE}
-par(cex=1.5)
-plot(c(0.5, 2.5),c(0, 1.1),
-     type="n",
-     main="Dichte der Rechteckverteilung U(1,2)",
-     xlab="x",
-     ylab="Dichte",
-     yaxs="i")
-lines(c(1,2), c(1,1))
-lines(c(1,1), c(0,1), lty="dotted")
-lines(c(2,2), c(0,1), lty="dotted")
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-
-\begin{itemize}
-\item Verteilungsfunktion
-$$
-F_X(x)=\left\{ 
-\begin{array}{ll}
-0 & \quad x<a\\
-\frac{x-a}{b-a} & \quad a\le x\le b\\
-1 & \quad x>b
-\end{array}\right.
-$$
-\item Erwartungswert und Varianz
-\begin{align*}
-E(X) &=\frac{b-a}{2}\\
-Var(X) &=\frac{(b-a)^2}{12}
-\end{align*}
-\end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-
-Quantilfunktion: $F_X(x)=p$ nach $x$ auflösen
-\uncover<2>{
-\begin{align*}
-\frac{x-a}{b-a} &= p\\
-x-a &= p(b-a)\\
-x &= a+p(b-a)\\
-F_X^{-1}(p)&=a+p(b-a)
-\end{align*}
-}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{Rechteckverteilung}
-
-\begin{exampleblock}{Beispiel: Auf den Bus warten}
-Sei $X\sim U(0,10)$ die Wartezeit (in Minuten) an einer Bushaltestelle
-\medskip
-
-Die Wahrscheinlichkeit, mehr als 8 Minuten zu warten, ist
-$$
-P(X>8)=1-P(X\le 8)=1-F_X(8)=1-\frac{8-0}{10-0}=0.2
-$$
-\end{exampleblock}
-
-```{r}
-1 - punif(8, min=0, max=10)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-**t-Verteilung:**
-\medskip
-\begin{itemize}
-\item Eine Zufallsvariable $X$ heißt t-verteilt
-mit $\nu$ Freiheitsgraden, wenn für $x\in\mathbb{R}$
-$$
-f(x)=C_\nu \cdot \left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}
-$$
-\item Notation: $X\sim t_\nu$
-\item Modellierung von Renditen volatiler Assets; 
-wichtig für Hypothesentests
-\end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-Dichte-, Verteilungs- und Quantilfunktion sowie
-Zufallszahlengenerator der t-Verteilung
-mit `nu` Freiheitsgraden (degrees of freedom)
-\bigskip
-
-```{r eval=FALSE}
-dt(x, df=nu)
-pt(q, df=nu)
-qt(p, df=nu)
-
-rt(n, df=nu)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-```{r echo=FALSE}
-par(cex=1.5)
-x <- seq(from=-5, to=5, length=300)
-plot(x, dt(x,df=2),
-     type="l",
-     main="Dichte der t-Verteilung",
-     xlab="x",
-     ylab="Dichte",
-     yaxs="i",
-     ylim=c(0, 0.43))
-lines(x, dt(x, df=10), col="red")
-lines(x, dnorm(x), col="blue", lty="dotted")
-legend("topright",col=c("black","red","blue"),
-       lty=c("solid","solid","dotted"),
-       lwd=c(3,3,3),
-       legend=c("nu=2","nu=10","N(0,1)"))
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-\begin{itemize}
-\item Erwartungswert und Varianz
-\begin{align*}
-E(X) &= 0\\
-Var(X) &= \frac{\nu}{\nu-2}
-\end{align*}
-\item Was passiert, wenn $\nu\le 2$ ist?
-\end{itemize}
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-\begin{exampleblock}{Beispiel: Tagesrendite Kryptowährung}
-Sei $X\sim t_{2.5}$ die Tagesrendite einer (fiktiven) Kryptowährung
-\medskip
-
-Wahrscheinlichkeit einer Tagesrendite von betragsmäßig 
-weniger als 2 Prozent?
-$$
-P(|X|<2)=P(-2<X\le 2)=F_X(2)-F_X(-2)
-$$
-\end{exampleblock}
-
-```{r}
-pt(2, df=2.5) - pt(-2, df=2.5)
-```
-
-
-<!-- ------------------------------------------- -->
-# Stetige Verteilungen
-\framesubtitle{t-Verteilung}
-
-\begin{exampleblock}{Beispiel: Tagesrendite Kryptowährung}
-Sei $X\sim t_{2.5}$ die Tagesrendite einer (fiktiven) Kryptowährung
-\medskip
-
-Welche Tagesrendite wird nur mit einer Wahrscheinlichkeit 
-von 1 Prozent unterschritten ("value-at-risk")?
-$$
-F_X^{-1}(0.01)
-$$
-\end{exampleblock}
-
-```{r}
-qt(0.01, df=2.5)
 ```
 
 
@@ -1342,4 +1063,294 @@ ecdf(xstar)(x)
 quantile(xstar, prob=p)
 
 sample(xstar, size=n, replace=TRUE)
+```
+
+
+
+<!-- ------------------------------------------- --> 
+# Stetige Verteilungen
+\framesubtitle{Exponentialverteilung}
+
+**Exponentialverteilung:**
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt exponential-verteilt
+mit Parameter $\lambda>0$, wenn
+$$
+f_X(x)=\left\{
+\begin{array}{ll}
+\lambda e^{-\lambda x} & \quad x\geq 0\\
+0 & \quad x<0
+\end{array} \right.
+$$
+\item Notation: $X\sim Exp(\lambda)$
+\item Modellierung von Wartezeiten, Dauern etc.
+\end{itemize}
+
+
+<!-- ------------------------------------------- --> 
+# Stetige Verteilungen
+\framesubtitle{Exponentialverteilung}
+
+```{r echo=FALSE}
+x <- seq(0,3,length=200)
+par(cex=1.5)
+plot(x, dexp(x,rate=2),
+     type="l",
+     yaxs="i",
+     ylim=c(0,2.2),
+     xlim=c(-0.5,3),
+     main="Dichte der Exp(2)",
+     ylab=expression(f(x)))
+lines(c(0,0),c(0,dexp(0,2)),lty="dotted")
+```
+
+
+<!-- ------------------------------------------- --> 
+# Stetige Verteilungen
+\framesubtitle{Exponentialverteilung}
+
+\begin{itemize}
+\item Verteilungsfunktion
+$$
+F(x)=\left\{
+\begin{array}{ll}
+1-e^{-\lambda x} & \quad x\geq 0\\
+0 & \quad x<0
+\end{array}\right.
+$$
+\item Erwartungswert und Varianz
+\begin{align*}
+E(X) &=\frac{1}{\lambda }\\
+Var(X) &=\frac{1}{\lambda^2}
+\end{align*}
+\end{itemize}
+
+
+
+<!-- ------------------------------------------- --> 
+# Stetige Verteilungen
+\framesubtitle{Exponentialverteilung}
+Dichte-, Verteilungs- und Quantilfunktion sowie
+Zufallszahlengenerator der Exponentialverteilung
+mit Parameter `lambda` in R:
+\bigskip
+
+```{r eval=FALSE}
+dexp(x, rate=lambda)
+pexp(q, rate=lambda)
+qexp(p, rate=lambda)
+
+rexp(n, rate=lambda)
+```
+
+
+<!-- ------------------------------------------- --> 
+# Stetige Verteilungen
+\framesubtitle{Exponentialverteilung}
+
+\begin{exampleblock}{Beispiel: Arbeitslosigkeitsdauer}
+Sei $X\sim Exp(0.2)$ die Arbeitslosigkeitsdauer (in Monaten)
+eines gerade gekündigten Arbeitnehmers.
+\medskip
+
+Die Wahrscheinlichkeit von Langzeitarbeitslosigkeit ist
+$$
+P(X>12)=1-P(X\le 12)=1-F_X(12)
+$$
+\end{exampleblock}
+
+```{r}
+1 - pexp(12, rate=0.2)
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Rechteckverteilung}
+
+**Rechteckverteilung:**
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt rechteck-verteilt
+mit den Parametern $a$ und $b$, wenn
+$$
+f_X(x)=\left\{ 
+\begin{array}{ll}
+\frac{1}{b-a} & \quad a\le x\le b\\[2ex]
+0 & \quad \text{sonst}
+\end{array} \right.
+$$
+\item Notation: $X\sim U(a,b)$
+\item Modellierung von Wartezeiten bei regelmäßigen Ereignissen;
+wichtig für Computersimulationen
+\end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Rechteckverteilung}
+
+```{r echo=FALSE}
+par(cex=1.5)
+plot(c(0.5, 2.5),c(0, 1.1),
+     type="n",
+     main="Dichte der Rechteckverteilung U(1,2)",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i")
+lines(c(1,2), c(1,1))
+lines(c(1,1), c(0,1), lty="dotted")
+lines(c(2,2), c(0,1), lty="dotted")
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Rechteckverteilung}
+
+\begin{itemize}
+\item Verteilungsfunktion
+$$
+F_X(x)=\left\{ 
+\begin{array}{ll}
+0 & \quad x<a\\
+\frac{x-a}{b-a} & \quad a\le x\le b\\
+1 & \quad x>b
+\end{array}\right.
+$$
+\item Erwartungswert und Varianz
+\begin{align*}
+E(X) &=\frac{b-a}{2}\\
+Var(X) &=\frac{(b-a)^2}{12}
+\end{align*}
+\end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Rechteckverteilung}
+Dichte-, Verteilungs- und Quantilfunktion sowie
+Zufallszahlengenerator der Rechteckverteilung
+mit den Parametern `a` und `b` in R
+\bigskip
+
+```{r eval=FALSE}
+dunif(x, min=a, max=b)
+punif(q, min=a, max=b)
+qunif(p, min=a, max=b)
+
+runif(n, min=a, max=b)
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{Rechteckverteilung}
+
+\begin{exampleblock}{Beispiel: Auf den Bus warten}
+Sei $X\sim U(0,10)$ die Wartezeit (in Minuten) an einer Bushaltestelle
+\medskip
+
+Die Wahrscheinlichkeit, mehr als 8 Minuten zu warten, ist
+$$
+P(X>8)=1-P(X\le 8)=1-F_X(8)=1-\frac{8-0}{10-0}=0.2
+$$
+\end{exampleblock}
+
+```{r}
+1 - punif(8, min=0, max=10)
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{t-Verteilung}
+
+**t-Verteilung:**
+\medskip
+\begin{itemize}
+\item Eine Zufallsvariable $X$ heißt t-verteilt
+mit $\nu$ Freiheitsgraden, wenn für $x\in\mathbb{R}$
+$$
+f(x)=C_\nu \cdot \left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}
+$$
+\item Notation: $X\sim t_\nu$
+\item Modellierung von Renditen volatiler Assets; 
+wichtig für Hypothesentests
+\end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{t-Verteilung}
+
+```{r echo=FALSE}
+par(cex=1.5)
+x <- seq(from=-5, to=5, length=300)
+plot(x, dt(x,df=2),
+     type="l",
+     main="Dichte der t-Verteilung",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.43))
+lines(x, dt(x, df=10), col="red")
+lines(x, dnorm(x), col="blue", lty="dotted")
+legend("topright",col=c("black","red","blue"),
+       lty=c("solid","solid","dotted"),
+       lwd=c(3,3,3),
+       legend=c("nu=2","nu=10","N(0,1)"))
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{t-Verteilung}
+
+\begin{itemize}
+\item Erwartungswert und Varianz
+\begin{align*}
+E(X) &= 0\\
+Var(X) &= \frac{\nu}{\nu-2}
+\end{align*}
+\item Was passiert, wenn $\nu\le 2$ ist?
+\end{itemize}
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{t-Verteilung}
+
+Dichte-, Verteilungs- und Quantilfunktion sowie
+Zufallszahlengenerator der t-Verteilung
+mit `nu` Freiheitsgraden (degrees of freedom)
+\bigskip
+
+```{r eval=FALSE}
+dt(x, df=nu)
+pt(q, df=nu)
+qt(p, df=nu)
+
+rt(n, df=nu)
+```
+
+
+<!-- ------------------------------------------- -->
+# Stetige Verteilungen
+\framesubtitle{t-Verteilung}
+
+\begin{exampleblock}{Beispiel: Tagesrendite Kryptowährung}
+Sei $X\sim t_{2.5}$ die Tagesrendite einer (fiktiven) Kryptowährung
+\medskip
+
+Welche Tagesrendite wird nur mit einer Wahrscheinlichkeit 
+von 1 Prozent unterschritten ("value-at-risk")?
+$$
+F_X^{-1}(0.01)
+$$
+\end{exampleblock}
+
+```{r}
+qt(0.01, df=2.5)
 ```

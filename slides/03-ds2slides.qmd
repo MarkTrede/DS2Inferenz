@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Zufallsvariablen"
 format: beamer
-date: today
+date: 2023-10-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -60,26 +61,6 @@ nicht über die Realisation $x$
 
 
 # Zufallsvariable
-\framesubtitle{Definition}
-\begin{itemize}
-\item Ihre erste Frage sollte immer lauten:
-\medskip
-\begin{center}
-\textbf{Was ist die Zufallsvariable $X$?}
-\bigskip
-\end{center}
-\end{itemize}
-\begin{exampleblock}{Beispiele: Zufallsvariable}
-\begin{itemize}
-\item Beispiel 1: $X:$ Gewinn der Volkswagen AG 2024
-\item Beispiel 2: $X:$ codiert Erwerbsstatus (0/1)
-\item Beispiel 3: $X:$ Monatsgehalt zufällig ausgewählter Person
-\end{itemize}
-\end{exampleblock}
-
-
-
-# Zufallsvariable
 \framesubtitle{Verteilungsfunktion}
 \begin{block}{Verteilungsfunktion}
 Die Funktion
@@ -116,10 +97,12 @@ auch beispielsweise $F_X(t)=P(X\leq t)$ schreiben
 \framesubtitle{Diskrete Zufallsvariable}
 \begin{block}{Diskrete Zufallsvariable}
 Eine Zufallsvariable $X$ heißt diskret, wenn es
+\medskip
 \begin{itemize}
 \item endlich viele Punkte $x_{1},\ldots ,x_{J}$
 \item oder abzählbar unendlich viele Punkte $x_{1},x_{2},\ldots $
 \end{itemize}
+\medskip
 gibt mit der Eigenschaft
 $$
 p_j=P(X=x_j)>0 \quad \text{und}\quad\sum_{j=1}^J p_j=1
@@ -310,7 +293,7 @@ P(-0.2<X\le 0.3)&=P(X\le 0.3)-P(X\le -0.2)\\
 
 # Zufallsvariable
 \framesubtitle{Numerische Integration}
-\textbf{Numerische Integration:}\\\medskip
+\textbf{Numerische Integration:}\medskip
 \begin{itemize}
 \item Manchmal sind Integrale mühsam oder gar nicht analytisch zu berechnen
 \item Approximation durch numerische Verfahren

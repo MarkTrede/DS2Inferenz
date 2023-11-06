@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Zufallsvektoren"
 format: beamer
-date: today
+date: 2023-11-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -57,7 +58,7 @@ die gemeinsame Verteilungsfunktion von $X$ und $Y$
 \begin{itemize}
 \item $F_{X,Y}(x,y)=P(X\leq x,Y\leq y)$ ist monoton steigend
 in $x$ und $y$
-\item Es gilt $F_{X,Y}(-\infty ,y) =F_{XY}(x,-\infty)=0$
+\item Es gilt $F_{X,Y}(-\infty ,y) =F_{X,Y}(x,-\infty)=0$
 \item Es gilt $F_{X,Y}(+\infty ,+\infty) =1$
 \end{itemize}
 
@@ -88,12 +89,12 @@ p_{jk} & \quad \text{für }x=x_{j}\text{ und }y=y_{k} \\
 $$
 \item Darstellung als Wahrscheinlichkeitstabelle
 $$
-\begin{tabular}{c|ccc|}
-$X\backslash Y$ & $y_{1}$ & $\ldots $ & $y_{K}$ \\ \hline
-$x_{1}$ & $p_{11}$ & $\ldots $ & $p_{1K}$ \\ 
-$\vdots $ & $\vdots $ &  & $\vdots $ \\ 
-$x_{J}$ & $p_{J1}$ & $\ldots $ & $p_{JK}$
-\end{tabular}
+\begin{array}{c|ccc|}
+X\backslash Y & y_1 & \ldots & y_K \\ \hline
+x_1 & p_{11} & \ldots & p_{1K} \\ 
+\vdots & \vdots &  & \vdots \\ 
+x_J & p_{J1} & \ldots & p_{JK}
+\end{array}
 $$
 \end{itemize}
 
@@ -137,7 +138,7 @@ $X\backslash Y$ & 0 & 1 & 2 \\ \hline
 \end{tabular}
 \bigskip
 
-Wie groß ist $F_{XY}(1.5,3.2)$ ?\uncover<2>{
+Wie groß ist $F_{X,Y}(1.5,3.2)$ ?\uncover<2>{
 $P(X\le 1.5,Y\le 3.2)=0.25$}
 \end{exampleblock}
 
@@ -149,7 +150,7 @@ $P(X\le 1.5,Y\le 3.2)=0.25$}
 $X$ und $Y$ heißen gemeinsam stetig, 
 falls es eine Funktion $f_{X,Y}$ gibt mit 
 $$
-F_{X,Y}(x,y)=\int_{-\infty }^{y}\int_{-\infty }^{x}f_{X,Y}(u,v)dudv
+F_{X,Y}(x,y)=\int_{-\infty }^y\int_{-\infty }^x f_{X,Y}(u,v)dudv
 $$
 \end{block}
 Die Funktion $f_{X,Y}$ heißt gemeinsame Dichte (Dichtefunktion)
@@ -157,6 +158,7 @@ Die Funktion $f_{X,Y}$ heißt gemeinsame Dichte (Dichtefunktion)
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 \begin{itemize}
 \item Bei partieller Differenzierbarkeit gilt
 $$
@@ -172,12 +174,13 @@ $$
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 \begin{itemize}
 \item Durch Doppel-Integrale der Dichte erhält man
 Wahrscheinlichkeiten, so ist beispielsweise
 \begin{align*}
 &P(a_1\leq X\leq b_1,a_2\leq Y\leq b_2)\\[1ex]
-&=\int_{a_2}^{b_2}\int_{a_1}^{b_1}f_{XY}(x,y)dxdy
+&=\int_{a_2}^{b_2}\int_{a_1}^{b_1}f_{X,Y}(x,y)dxdy
 \end{align*}
 \item Wegen der Stetigkeit spielt es keine Rolle, 
 ob die Ungleichungen strikt sind oder nicht
@@ -186,6 +189,7 @@ ob die Ungleichungen strikt sind oder nicht
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 \textbf{Visualisierung einer gemeinsamen Dichte:}
 \medskip
 \begin{itemize}
@@ -201,6 +205,7 @@ $$
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 ```{r}
 #| echo: FALSE
 #| fig-align: "center"
@@ -223,6 +228,7 @@ persp(x,y,z,
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 ```{r}
 #| echo: FALSE
 #| fig-align: "center"
@@ -243,6 +249,7 @@ contour(x,y,z,xlab="x",ylab="y")
 
 
 # Zufallsvektoren
+\framesubtitle{Gemeinsam stetige Zufallsvariablen}
 ```{r}
 #| echo: FALSE
 #| fig-align: "center"
@@ -326,17 +333,17 @@ $$
 # Zufallsvektoren
 \framesubtitle{Unabhängigkeit}
 \begin{exampleblock}{Beispiel: Gemeinsam diskrete Verteilung}
-Zwei Würfel werden geworfen, $X$: kleinere Augenzahl, $Y$: größere Augenzahl
+Zwei Würfel, $X$: kleinere Augenzahl, $Y$: größere Augenzahl
 $$
 \begin{array}{c|cccccc|c}
-X\backslash Y & 1 & 2 & 3 & 4 & 5 & 6 & f_X\\ \hline
-1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{11}{36}\\
-2 & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{9}{36}\\
-3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{7}{36}\\
-4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{5}{36}\\
-5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{3}{36}\\
-6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{1}{36}\\ \hline
-f_Y &\frac{1}{36} & \frac{3}{36} & \frac{5}{36} & \frac{7}{36} & \frac{9}{36} & \frac{11}{36} &1\\
+{\color<2>{red} X}\backslash {\color<3>{red} Y} & \color<3>{red}1 & \color<3>{red}2 & \color<3>{red}3 & \color<3>{red}4 & \color<3>{red}5 & \color<3>{red}6 & \color<2>{red}f_X\\ \hline
+\color<2>{red} 1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \color<2>{red}\frac{11}{36}\\
+\color<2>{red} 2 & \color<4>{red}0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \color<2,4>{red}\frac{9}{36}\\
+\color<2>{red} 3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \color<2>{red}\frac{7}{36}\\
+\color<2>{red} 4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \color<2>{red}\frac{5}{36}\\
+\color<2>{red} 5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \color<2>{red}\frac{3}{36}\\
+\color<2>{red} 6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36} & \color<2>{red}\frac{1}{36}\\ \hline
+\color<3>{red}f_Y &\color<3,4>{red}\frac{1}{36} & \color<3>{red}\frac{3}{36} & \color<3>{red}\frac{5}{36} & \color<3>{red}\frac{7}{36} & \color<3>{red}\frac{9}{36} & \color<3>{red}\frac{11}{36} &1\\
 \end{array}
 $$
 \end{exampleblock}
@@ -356,12 +363,10 @@ x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
 \right.
 $$
 Randdichte von $X$:
-\uncover<2>{
 \begin{align*}
 f_{X}(x)&= \int_{0}^{1}f_{X,Y}(x,y)dy = \int_0^1 (x+y)dy\\
 &= x + \int_0^1 ydy= x+[0.5y^2]_0^1= x+\frac{1}{2}
 \end{align*}
-}
 \end{exampleblock}
 
 
@@ -379,11 +384,177 @@ x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
 \right.
 $$
 $X$ und $Y$ sind abhängig, weil:
-\uncover<2>{
 \begin{align*}
 f_{X}(0.2) \cdot f_{Y}(0.2)  &= (0.2+0.5) (0.2+0.5) =0.49 \\
-f_{XY}(0.2,0.2)  &=0.2+0.2=0.4
+f_{X,Y}(0.2,0.2)  &=0.2+0.2=0.4
 \end{align*}
-}
 \end{exampleblock}
 
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\textbf{Bedingte Verteilung}:\medskip
+\begin{itemize}
+\item Wie ist die Zufallsvariable $X$ verteilt, wenn über die Werte
+der Zufallsvariablen $Y$ Angaben (oder Annahmen) vorliegen?
+\item Erinnerung: Bedingte Wahrscheinlichkeit 
+\[ P(A|B)=P(A\cap B)/P(B) \]
+\item Bedingte Erwartungswerte: Wie hoch ist der Erwartungswert
+von $X$, wenn $Y$ den Wert $y$ annimmt?
+\end{itemize}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{block}{Bedingte Wahrscheinlichkeit}
+Bei gemeinsam diskreten Verteilungen ist die bedingte 
+Wahrscheinlichkeit für $X=x_{j}$ unter 
+der Bedingung $Y=y_{k}$
+$$
+P(X=x_{j}|Y=y_{k})=\frac{P(X=x_{j},Y=y_{k})}{P(Y=y_{k})}
+$$
+für $j=1,2,\ldots $
+\end{block}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+Bedingter Erwartungswert
+$$
+E(X|Y=y_k)=\sum_{j=1}^J x_j P(X=x_j|Y=y_k)
+$$
+Zum Vergleich: (unbedingter) Erwartungswert
+$$
+E(X)=\sum_{j=1}^J x_j P(X=x_j)
+$$
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{block}{Bedingte Dichte}
+Bei gemeinsam stetigen Verteilungen ist die bedingte 
+Dichtefunktion von $X$ unter der Bedingung $Y=y$
+$$
+f_{X|Y=y}(x)=\frac{f_{X,Y}(x,y)}{f_Y(y)}
+$$
+\end{block}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+Bedingter Erwartungswert
+$$
+E(X|Y=y)=\int_{-\infty}^\infty x f_{X|Y=y}(x)dx
+$$
+Zum Vergleich: (unbedingter) Erwartungswert
+$$
+E(X)=\int_{-\infty}^\infty x f_{X}(x)dx
+$$
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{exampleblock}{Beispiel: Gemeinsam diskrete Verteilung}
+Zwei Würfel, $X$: kleinere Augenzahl, $Y$: größere Augenzahl
+$$
+\begin{array}{c|cccccc|c}
+X\backslash Y & 1 & 2 & 3 & 4 & 5 & 6 & f_X\\ \hline
+1 & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{11}{36}\\
+2 & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{9}{36}\\
+3 & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{2}{36} & \frac{7}{36}\\
+4 & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{2}{36} & \frac{5}{36}\\
+5 & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{2}{36} & \frac{3}{36}\\
+6 & 0            & 0            & 0            & 0            & 0            & \frac{1}{36} & \frac{1}{36}\\ \hline
+f_Y &\frac{1}{36} & \frac{3}{36} & \frac{5}{36} & \frac{7}{36} & \frac{9}{36} & \frac{11}{36} &1\\
+\end{array}
+$$
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{exampleblock}{Forts. Beispiel: Gemeinsam diskrete Verteilung}
+Bedingte Verteilung von $Y$ (größere Augenzahl) gegeben $X=2$
+$$
+\begin{array}{c|c}
+y_k & P(Y=y_k|X=2)\\\hline
+1& 0\\
+2& 1/9\\
+3& 2/9\\
+4& 2/9\\
+5& 2/9\\
+6& 2/9
+\end{array}
+$$
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{exampleblock}{Forts. Beispiel: Gemeinsam diskrete Verteilung}
+Bedingter Erwartungswert 
+$$
+E(Y|X=2)=1\cdot 0
++2\cdot \frac{1}{9}
++3\cdot \frac{2}{9}
++4\cdot \frac{2}{9}
++5\cdot \frac{2}{9}
++6\cdot \frac{2}{9}=4.2222
+$$
+Der unbedingte Erwartungswert der größeren Augenzahl ist
+$$
+E(Y)=
+1\cdot\frac{1}{36}
++2\cdot\frac{3}{36}
++3\cdot\frac{5}{36}
++4\cdot\frac{7}{36}
++5\cdot\frac{9}{36}
++6\cdot\frac{11}{36}=4.4722
+$$
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Sei $(X,Y)$ gemeinsam stetig verteilt
+$$
+f_{X,Y}(x,y) =\left\{ 
+\begin{array}{ll}
+x+y & \quad \text{für }0\leq x\leq 1,0\leq y\leq 1 \\
+0 & \quad \text{sonst} 
+\end{array}
+\right.
+$$
+Randdichte von $X$ ist 
+$$
+f_X(x)=x+1/2
+$$
+Bedingte Dichte von $Y$ gegeben $X=x$ für die $0\le y\le 1$
+$$
+f_{Y|X=x}(y)=\frac{x+y}{x+1/2}
+$$
+\end{exampleblock}
+
+
+
+# Zufallsvektoren
+\framesubtitle{Bedingte Verteilung}
+\begin{exampleblock}{Beispiel: Gemeinsam stetige Verteilung}
+Bedingte Dichte von $Y$ gegeben $X=x$ für die $0\le y\le 1$
+\begin{align*}
+E(Y|X=x)&=\int_{-\infty}^\infty y f_{Y|X=x}(y)dy\\
+&=\int_0^1 y \frac{x+y}{x+1/2}dy\\
+&=\ldots\\
+&=\frac{3x+2}{6x+3}
+\end{align*}
+\end{exampleblock}

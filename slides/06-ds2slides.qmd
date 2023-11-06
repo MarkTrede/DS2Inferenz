@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Kovarianz"
 format: beamer
-date: today
+date: 2023-11-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -32,8 +33,6 @@ Notation häufig auch $\sigma_{XY}$
 # Kovarianz
 \framesubtitle{Definition}
 Nützliche Formel $Cov(X,Y) =E(XY)-E(X)E(Y)$
-
-\uncover<2>{
 \begin{align*}
 &Cov(X,Y)\\
 &=E((X-E(X))(Y-E(Y)))\\
@@ -42,7 +41,6 @@ Nützliche Formel $Cov(X,Y) =E(XY)-E(X)E(Y)$
 &= E(XY)- E(X)E(Y)- E(X)E(Y)+ E(X)E(Y)\\
 &= E(XY)-E(X)E(Y)
 \end{align*}
-}
 
 
 
@@ -113,7 +111,6 @@ $$
 # Kovarianz
 \framesubtitle{Summe zweier Zufallsvariablen}
 Herleitung $Var(X+Y)=\ldots$
-\uncover<2>{
 \begin{align*}
 \ldots &= E([(X+Y)-E(X+Y)]^2)\\
 &= E([X+Y-E(X)-E(Y))]^2)\\
@@ -124,7 +121,6 @@ Herleitung $Var(X+Y)=\ldots$
 &\quad +2E((X-E(X))(Y-E(Y)))\\
 &= Var(X)+Var(Y)+2Cov(X,Y)
 \end{align*}
-}
 
 
 
@@ -150,8 +146,6 @@ $E(X)=2500, Var(X)=4000000, E(Y)=300$,
 $Var(Y)=160000, Cov(X,Y)=240000$
 
 Erwartungswert und Varianz des Gesamteinkommens
-
-\uncover<2>{
 \begin{align*}
 E(X+Y) &=E(X)+E(Y) \\
 &=2\,500+300 \\
@@ -160,7 +154,6 @@ Var(X+Y) &=Var(X)+Var(Y)+2Cov(X,Y) \\
 &=4\,000\,000+160\,000+2\cdot 240\,000 \\
 &=4\,640\,000
 \end{align*}
-}
 \end{exampleblock}
 
 
@@ -305,7 +298,7 @@ $$
 \begin{align*}
 E\left(\sum_{i=1}^n a_iX_i\right) &= \sum_{i=1}^n a_iE(X_i)\\
 Var\left(\sum_{i=1}^n a_iX_i\right) &= \sum_{i=1}^n a_i^2 Var(X_i)\\
-&\quad +\sum_{i=1}^{n-1}\sum_{j=i+1}^n a_i a_j Cov(X_i,X_j)
+&\quad +2\sum_{i=1}^{n-1}\sum_{j=i+1}^n a_i a_j Cov(X_i,X_j)
 \end{align*}
 \end{itemize}
 

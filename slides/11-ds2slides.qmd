@@ -1,0 +1,178 @@
+---
+title: "Data Science 2"
+subtitle: "Hypothesentests"
+format: beamer
+date: 2023-12-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+---
+
+# Hypothesentests
+\framesubtitle{``Philosophie'' der Tests}
+
+\textbf{``Philosophie'' der Hypothesentests}
+\medskip
+\begin{itemize}
+\item Analogie zu einem Strafprozess
+\item Einem Angeklagten wird ein Vergehen vorgeworfen
+\item Ob er schuldig ist, weiß die Richterin nicht
+\item Staatsanwalt: plädiert auf schuldig
+\item Rechtsanwältin: plädiert auf unschuldig
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{``Philosophie'' der Tests}
+Urteil:\medskip
+\begin{itemize}
+\item Beweisaufnahme ist Grundlage für das Urteil
+\item Urteil: schuldig/unschuldig
+\item Das Urteil kann richtig oder falsch sein
+\medskip
+\begin{center}
+\begin{tabular}{l|ll}
+Urteil$\backslash$Schuld & unschuldig & schuldig \\\hline
+Freispruch   & korrekt & Irrtum (2) \\
+Verurteilung & Irrtum (1) & korrekt
+\end{tabular}
+\end{center}
+\medskip
+\item Welche Art von Fehlurteil ist schlimmer?
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{``Philosophie'' der Tests}
+Ethische Überlegungen:\medskip
+\begin{itemize}
+\item Unschuldige sollen nicht verurteilt werden
+\item In dubio pro reo - im Zweifel für den Angeklagten
+\item Gewollte Asymmetrie: Verurteilung nur, wenn die Beweise ``sehr deutlich'' für die Schuld sprechen
+\item Justizirrtümer, bei denen jemand irrtümlich verurteilt wird, sind deswegen selten
+\item Der Preis dafür: Manche Schuldige werden freigesprochen
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{``Philosophie'' der Tests}
+Interpretation des Urteils:\medskip
+\begin{itemize}
+\item Verurteilung ist ein belastbares Ergebnis: Es ist ziemlich sicher, dass ein verurteilter Angeklagter tatsächlich schuldig ist
+\item Die Beweislage wiegt so schwer, dass es trotz der Unschuldsvermutung zu einer Verurteilung kommt.
+\item Freispruch ist keine belastbare Aussage über die Unschuld
+\item Man wäre nicht überrascht, wenn ein freigesprochener Angeklagter in Wirklichkeit schuldig ist
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+Hypothesenformulierung ("Anklageerhebung"):\medskip
+\begin{itemize}
+\item Unbekannter Parameter $\theta$ einer Zufallsvariable $X$
+\item Nullhypothese und Alternativhypothese
+\begin{align*}
+H_0:\theta &= \theta_0\\
+H_1:\theta &\neq \theta_0
+\end{align*}
+\item Nullhypothese entspricht der Unschuldsvermutung
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+\begin{itemize}
+\item Einseitige Tests
+\begin{align*}
+H_0:\theta &= \theta_0\\
+H_1:\theta &\neq \theta_0
+\end{align*}
+\item Zweiseitige Tests
+\begin{align*}
+H_0:\theta &\ge\theta_0\qquad \text{oder}\qquad H_0:\theta\le \theta_0\\
+H_1:\theta &<\theta_0\qquad \text{oder}\qquad H_1:\theta > \theta_0
+\end{align*}
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+Datenerhebung ("Beweisaufnahme"):\medskip
+\begin{itemize}
+\item Stichprobenerhebung: $X_1,\ldots,X_n$
+\item Teststatistik
+$$
+T=T(X_1,\ldots,X_n)
+$$
+\item Die Teststatistik ist eine Zufallsvariable
+\item Wie ist die Teststatistik unter Gültigkeit der Nullhypothese verteilt?
+\item Welche Werte würde man erwarten, wenn $H_0$ stimmt?
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+Testentscheidung ("Urteil"):\medskip
+\begin{itemize}
+\item Wenn die Teststatistik im kritischen Bereich ist, lehnt man die Nullhypothese ab ("Verurteilung")
+\item Wenn die Teststatistik nicht im kritischen Bereich ist, lehnt man die Nullhypothese nicht ab ("Freispruch")
+\item Fehler 1.~Art: $H_0$ wird abgelehnt, obwohl sie wahr ist
+\item Fehler 2.~Art: $H_0$ wird nicht abgelehnt, obwohl sie falsch ist
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+Erkenntnistheoretische Überlegungen:\medskip
+\begin{itemize}
+\item Fehler 1.~Art sind schlimmer als Fehler 2.~Art
+\item Konsequenz: Wähle den kritischen Bereich so,\\
+dass ein Fehler 1.~Art nur mit einer kleinen\\
+Wahrscheinlichkeit $\alpha$ eintritt (Signifikanzniveau)
+\item Meist ist $\alpha=0.05$ (oder 0.01, 0.1)
+\item Die Wahrscheinlichkeit, dass eine falsche Nullhypothese als falsch
+erkannt wird, heißt Power (oder Güte)
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{Terminologie}
+Asymmetrie der Interpretation:\medskip
+\begin{itemize}
+\item Eine Ablehnung von $H_0$ ("Verurteilung") ist belastbar
+\item Man geht davon aus, dass $H_0$ falsch ist, auch wenn man im Hinterkopf behalten sollte, dass die Testentscheidung falsch sein könnte
+\item Eine Nichtablehnung ("Freispruch") ist nicht belastbar
+\item Die Daten sprechen nicht stark genug gegen die Nullhypothese
+\item Es wäre fahrlässig, $H_0$ als wahr anzusehen, nur weil sie nicht abgelehnt wird. 
+\end{itemize}
+
+
+
+# Hypothesentests
+\framesubtitle{p-Wert}
+\textbf{p-Wert}\medskip
+\begin{itemize}
+\item Nachteil des Testverfahrens: Entscheidung hängt vom vorgegebenen Signifikanzniveau $\alpha$ ab
+\item Alternative Vorgehensweise: p-Wert berechnen
+\item Definition: Der p-Wert ist das kleinste Signifikanzniveau, 
+auf dem die Nullhypothese gerade noch abgelehnt wird
+\item Interpretation des p-Werts: Wahrscheinlichkeit, dass die Teststatistik stärker gegen die Nullhypothese spricht als der tatsächlich realisierte Wert der Teststatistik
+\item Lehne $H_0$ ab, wenn der p-Wert kleiner als $\alpha$ ist
+\end{itemize}

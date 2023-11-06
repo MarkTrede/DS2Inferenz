@@ -1,7 +1,8 @@
 ---
 title: "Data Science 2"
+subtitle: "Grenzwertsätze und Monte-Carlo-Simulation"
 format: beamer
-date: today
+date: 2023-11-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -47,11 +48,11 @@ $$
 \begin{itemize}
 \item Was passiert mit der Verteilung von $\bar{X}_n$, 
 wenn $n\rightarrow \infty $ geht?
-\item Sei $E(X)=\mu $ und $Var(X)=\sigma ^{2}$
+\item Sei $E(X)=\mu $ und $Var(X)=\sigma^2$
 \item Dann gilt
 \begin{align*}
-E(\bar{X}_{n}) &=\mu  \\
-Var(\bar{X}_{n}) &=\frac{\sigma ^{2}}{n}
+E(\bar{X}_n) &=\mu  \\
+Var(\bar{X}_n) &=\frac{\sigma^2}{n}
 \end{align*}
 \end{itemize}
 
@@ -60,10 +61,24 @@ Var(\bar{X}_{n}) &=\frac{\sigma ^{2}}{n}
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
 $E(\bar{X}_n)=$
-\vspace*{3cm}
+\begin{align*}
+&= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+&= \frac{1}{n}\sum_{i=1}^n E\left(X_i\right) \\
+&= \frac{1}{n}\sum_{i=1}^n \mu\\
+&= \mu
+\end{align*}
 
-$Var(\bar{X}_{n}) =$
-\vspace*{2cm}
+
+
+# Grenzwertsätze
+\framesubtitle{Gesetz der großen Zahl}
+$Var(\bar{X}_{n})=$
+\begin{align*}
+&= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\\
+&= \frac{1}{n^2}Var\left(\sum_{i=1}^n X_i\right)\\
+&= \frac{1}{n^2}\sum_{i=1}^n Var\left(X_i\right)\\
+&= \frac{1}{n^2}\sum_{i=1}^n \sigma^2= \frac{\sigma^2}{n}
+\end{align*}
 
 
 
@@ -85,70 +100,224 @@ $$
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
 \begin{itemize}
-\item Anschaulich: Die Verteilung von $\bar{X}_{n}$ zieht sich immer mehr
-auf $\mu $ zusammen
-\item Spezialfall: $X$ sei Bernoulli-verteilt mit Parameter $P(X=1)=\pi $
-\item Dann ist $\bar{X}_{n}$ die relative Häufigkeit der Erfolge
-\item Wegen $E(X)=\pi $ gilt
-$$
-\lim_{n\rightarrow \infty }P\left( \left\vert \bar{X}_{n}-\pi \right\vert
-\geq \varepsilon \right) =0
-$$
+\item \textbf{Der Durchschnitt konvergiert gegen den Erwartungswert!}
+\item Die Varianz der Folgenelemente konvergiert gegen die
+Populationsvarianz
+\item Die empirische Verteilungsfunktion der Folgenelemente
+konvergiert gegen die Verteilungsfunktion $F_X$
+\item Das Histogramm der Folgenelemente konvergiert gegen
+die Dichte $f_X$
 \end{itemize}
 
 
 
 # Grenzwertsätze
-\framesubtitle{Gesetz der großen Zahl}
-\begin{exampleblock}{Beispiel: Ein Würfel wird geworfen}
-Sei 
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Eine wichtige Konsequenz des Gesetzes der großen Zahl:
+\begin{itemize}
+\item Um die Verteilung einer Zufallsvariable zu kennen, muss man nicht unbedingt die Verteilungsfunktion, Dichte oder Wahrscheinlichkeitsfunktion kennen, ...
+\item ... sondern es reicht aus, wenn man einen \textbf{Algorithmus} zur Verfügung hat, der viele unabhängige Ziehungen aus der Zufallsvariable liefert. 
+\item \textbf{Monte-Carlo-Simulation}
+\end{itemize}
+Solche Algorithmen gibt es in R! 
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+
+Syntax für einen Vektor mit `n` Zufallszahlen:
+```{r eval=FALSE}
+rVERTEILUNG(n, PARAMETER)
+
+rbinom(n, size, prob) # Binomial
+rpois(n, lambda)      # Poisson
+rnorm(n, mean, sd)    # Normal
+rexp(n, rate)         # Exponential
+runif(n, min, max)    # Rechteck (uniform)
+rt(n, df)             # t
+rpareto(n, k, xmin)   # Pareto (im Paket distributionsrd)
+```
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Beispiel: $X\sim N(10,3^2)$
+```{r}
+x <- rnorm(n=100000, mean=10, sd=3)
+```
+Erwartungswert ($\mu=10$)
+```{r}
+mean(x)
+```
+Varianz ($\sigma^2=9$)
+```{r}
+var(x)
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Standardabweichung ($\sigma=3$)
+```{r}
+sd(x)
+```
+Quantile ($x_{0.05}=5.065439,x_{0.5}=10,x_{0.975}=15.879892$)
+```{r}
+quantile(x, prob=c(0.05,0.5,0.975))
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Plot der Verteilungsfunktion
+```{r eval=FALSE}
+plot(ecdf(x), 
+     main="Verteilungsfunktion")
+
+g <- seq(from=-5, 
+         to=25, 
+         length=200)
+
+lines(g, 
+      pnorm(g, mean=10, sd=3), 
+      col="red")
+```
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+```{r echo=FALSE}
+par(cex=1.7)
+plot(ecdf(x), 
+     main="Verteilungsfunktion")
+g <- seq(from=-5, to=25, length=200)
+lines(g, pnorm(g, mean=10, sd=3), col="red")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Dichte (Histogramm)
+```{r eval=FALSE}
+hist(x, 
+     breaks=50,
+     probability=TRUE,
+     main="Dichtefunktion")
+
+lines(g, 
+      dnorm(g, mean=10, sd=3), 
+      col="red")
+```
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+```{r echo=FALSE}
+par(cex=1.7)
+hist(x, 
+     breaks=50,
+     probability=TRUE,
+     main="Dichtefunktion")
+lines(g, dnorm(g, mean=10, sd=3), col="red")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Monte-Carlo-Simulationen sind extrem hilfreich,
+\begin{itemize}
+\item wenn es schwierig oder aufwendig ist, die theoretischen Größen zu bestimmen,
+\item aber leicht und schnell Zufallszahlen erzeugt werden können aus der Verteilung, die einen interessiert
+\end{itemize}
+$\longrightarrow$ transformierte Standardverteilungen
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+\begin{exampleblock}{Beispiel: Nettoeinkommensverteilung}
+\begin{itemize}
+\item Bruttoeinkommen wird modelliert durch
 $$
-X=\left\{ 
+Y=e^X
+$$
+mit $X\sim N(8,0.5)$
+\item Steuern und Abgaben 
+$$
+S(y)=\left\{ 
 \begin{array}{ll}
-0 & \quad \text{wenn Augenzahl nicht 5 ist} \\ 
-1 & \quad \text{wenn Augenzahl 5 ist}
-\end{array}\right.
+0 & \text{ falls }y\le 2000\\
+0.35(y-2000) & \text{ falls }y> 2000\\
+\end{array}
+\right.
 $$
-Es gilt
+\item Nettoeinkommen 
 $$
-P(X=1)=\frac{1}{6}
+Z=Y-S(Y)
 $$
-\end{exampleblock}
-
-
-# Grenzwertsätze
-\framesubtitle{Gesetz der großen Zahl}
-\begin{exampleblock}{Forts. Beispiel: Ein Würfel wird geworfen}
-\begin{itemize}
-\item Der Würfel wird nun sehr oft geworfen ($n$ Mal)
-\item $X_{1},X_{2},\ldots $ geben jeweils an, ob eine 5 geworfen wurde
-\item $\bar{X}_{n}$ ist der Anteil der Fünfen
-\item Für großes $n$ geht $\bar{X}_{n}$ gegen $1/6$
-\item Simulation in R: [\texttt{wlln.R}]
 \end{itemize}
 \end{exampleblock}
 
 
 
 # Grenzwertsätze
-\framesubtitle{Gesetz der großen Zahl}
-\begin{exampleblock}{Beispiel: Produktgewicht}
-\begin{itemize}
-\item Die Zufallsvariable $X\sim N(201,4)$
-sei das tatsächliche Gewicht einer 200g-Tafel Schokolade
-\item $X_i$ ist das Gewicht der $i$-ten Tafel, $i=1,2,\ldots $
-\item $\bar{X}_{n}$ ist das Durchschnittsgewicht dieser Tafeln
-\item Für großes $n$ geht $\bar{X}_n$ gegen 201\hfill [\texttt{wlln.R}]
-\end{itemize}
-\end{exampleblock}
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+```{r}
+n <- 500000
+x <- rnorm(n, mean=8, sd=0.5)
+y <- exp(x)
+s <- ifelse(y <= 2000, 0, 0.35*(y-2000))
+z <- y-s
+mean(z) # Mittleres Nettoeinkommen
+```
+```{r eval=FALSE}
+hist(z, breaks=100, probability=TRUE, 
+     xlim=c(0,10000), main="Nettoeinkommen")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+```{r echo=FALSE}
+par(cex=1.7)
+hist(z, breaks=100, probability=TRUE, 
+     xlim=c(0,10000), main="Nettoeinkommen")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (I)}
+Alternative: Verwendung einer `for`-Schleife
+```{r eval=FALSE}
+z <- rep(100000, 0)
+for(i in 1:n){
+  x <- rnorm(1, mean=8, sd=0.5)
+  y <- exp(x)
+  if(y <= 2000){
+    s <- 0
+  } else {
+    s <- 0.35*(y-2000)
+  }
+  z[i] <- y-s
+}
+# Der Vektor z enthält n=100000 Realisationen
+```
 
 
 
 # Grenzwertsätze
 \framesubtitle{Zentraler Grenzwertsatz}
+\textbf{Zentraler Grenzwertsatz}:\medskip
 \begin{itemize}
-\item Zentraler Grenzwertsatz (Begründung für die 
-extreme Wichtigkeit der Normalverteilung)
+\item Zentraler Grenzwertsatz: Begründung für die 
+extreme Wichtigkeit der Normalverteilung
 \item Definiere das standardisierte arithmetische Mittel
 $$
 U_{n}=\frac{\bar{X}_{n}-\mu}{\sqrt{\sigma^2/n}}
@@ -179,11 +348,11 @@ $$
 \begin{itemize}
 \item Folglich gilt auch
 $$
-\sum_{i=1}^{n}X_{i}\overset{appr}{\sim }N(n\mu ,n\sigma ^{2})
+\bar{X}_{n}\overset{appr}{\sim }N\left( \mu ,\frac{\sigma^2}{n}\right)
 $$
 und
 $$
-\bar{X}_{n}\overset{appr}{\sim }N\left( \mu ,\frac{\sigma ^{2}}{n}\right)
+\sum_{i=1}^{n}X_i\overset{appr}{\sim }N(n\mu ,n\sigma^2)
 $$
 \end{itemize}
 
@@ -195,9 +364,10 @@ $$
 \item Die Summe und der Durchschnitt von $n$ 
 \textbf{beliebig verteilten} Zufallsvariablen ist 
 approximativ normalverteilt, wenn $n$ groß genug ist!
-\item Es gibt einige einschränkende Bedingungen, aber 
-in den meisten Situationen gilt der zentrale Grenzwertsatz
-\item Simulationen in R
+\item Bedingungen: Folgenelemente sind unabhängig und
+identisch (i.i.d.) verteilt; die Varianz $\sigma^2$ existiert
+\item In den meisten Situationen, die in der Ökonomik
+relevant sind, gilt der zentrale Grenzwertsatz
 \end{itemize}
 
 
@@ -258,7 +428,175 @@ Sei $Y=\sum_{i=1}^{500}X_{i}$ die Zahl der Antworten.
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
 \begin{exampleblock}{Forts. Beispiel: Marketing}
-Die Wahrscheinlichkeit, dass zwischen 95 und 105 Kunden antworten, ist
-\vspace*{4cm}
+Die Wahrscheinlichkeit, dass zwischen 95 und 105 Kunden 
+antworten, ist ungefähr
+\begin{align*}
+P(95\leq Y\leq 105)  &=\Phi \left( \frac{105-0.2\cdot 500}
+{\sqrt{500\cdot 0.2\cdot 0.8}}\right)  \\
+&-\Phi \left( \frac{95-0.2\cdot 500}{\sqrt{500\cdot 0.2\cdot 0.8}}\right)  \\
+&=0.4238
+\end{align*}
 \end{exampleblock}
 
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+\textbf{Monte-Carlo-Simulationen zum zentralen Grenzwertsatz}\medskip
+\begin{itemize}
+\item Die Verteilung von $U_n$ konvergiert für $n\to\infty$ gegen $N(0,1)$
+\item $U_n$ ergibt sich aus $\bar X_n$ bzw. $X_1,\ldots,X_n$
+\item Um die Verteilung von $U_n$ zu finden, braucht man\\ 
+\textbf{für gegebenes }$n$ viele Ziehungen aus $U_n$
+$$
+U_{n,1},U_{n,2},\ldots,U_{n,R}
+$$
+\item Für jede Ziehung $U_{n,r}$ muss eine neue Folge $X_1,\ldots,X_n$
+generiert werden
+\end{itemize}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+\textbf{Illustration in R:}\medskip
+\begin{itemize}
+\item Annahme: $X\sim Exp(2)$
+\item Erwartungswert $E(X)=0.5$
+\item Standardabweichung $\sqrt{Var(x)}=0.5$
+\item Folgenlänge $n=30$
+\item Simulation von $U_n=\sqrt{n}(\bar X_n-0)/\sqrt{2}$
+\item Anzahl Ziehungen $R=10000$
+\end{itemize}
+
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r eval=FALSE}
+R <- 10000
+u <- rep(0, R)
+mu <- 0.5
+sigma <- 0.5
+n <- 30
+for(r in 1:R){
+  x <- rexp(n, rate=2)
+  xquer <- mean(x)
+  u[r] <- sqrt(n)*(xquer - mu)/sigma
+}
+hist(u, breaks=50, probability=TRUE)
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r echo=FALSE}
+R <- 10000
+u <- rep(0, R)
+mu <- 0.5
+sigma <- 0.5
+n <- 30
+for(r in 1:R){
+  x <- rexp(n, rate=2)
+  xquer <- mean(x)
+  u[r] <- sqrt(n)*(xquer - mu)/sigma
+}
+par(cex=1.5)
+hist(u, breaks=50, probability=TRUE,xlim=c(-4,4),
+     main="Histogram of u (n=30)")
+g <- seq(-4,4, length=200)
+lines(g, dnorm(g), col="red")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r echo=FALSE}
+R <- 10000
+u <- rep(0, R)
+mu <- 0.5
+sigma <- 0.5
+n <- 3
+for(r in 1:R){
+  x <- rexp(n, rate=2)
+  xquer <- mean(x)
+  u[r] <- sqrt(n)*(xquer - mu)/sigma
+}
+par(cex=1.5)
+hist(u, breaks=50, probability=TRUE,xlim=c(-4,4),
+     main="Histogram of u (n=3)")
+g <- seq(-4,4, length=200)
+lines(g, dnorm(g), col="red")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r echo=FALSE}
+R <- 10000
+u <- rep(0, R)
+mu <- 0.5
+sigma <- 0.5
+n <- 300
+for(r in 1:R){
+  x <- rexp(n, rate=2)
+  xquer <- mean(x)
+  u[r] <- sqrt(n)*(xquer - mu)/sigma
+}
+par(cex=1.5)
+hist(u, breaks=50, probability=TRUE, xlim=c(-4,4),
+     main="Histogram of u (n=300)")
+g <- seq(-4,4, length=200)
+lines(g, dnorm(g), col="red")
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r eval=FALSE}
+mu <- 0.5
+sigma <- 0.5
+R <- 5000
+plot(c(-3,3), c(0,1), type="n",main="Vert.fkt.")
+for(n in c(2,5,10,20,50)){
+  u <- rep(0, R)
+  for(r in 1:R){
+    x <- rexp(n, rate=2)
+    xquer <- mean(x)
+    u[r] <- sqrt(n)*(xquer - mu)/sigma
+  }
+  lines(ecdf(u))
+}
+```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen (II)}
+```{r echo=FALSE}
+mu <- 0.5
+sigma <- 0.5
+R <- 10000
+cols <- c("#44AF69","#F8333C","#FCAB10","#2B9EB3","#DBD5B5")
+par(cex=1.5)
+plot(c(-3,3), c(0,1), type="n",main="Vert.fkt.")
+j <- 1
+for(n in c(2,5,10,20,50)){
+  u <- rep(0, R)
+  for(r in 1:R){
+    x <- rexp(n, rate=2)
+    xquer <- mean(x)
+    u[r] <- sqrt(n)*(xquer - mu)/sigma
+  }
+  lines(ecdf(u),col=cols[j])
+  j <- j+1
+}
+g <- seq(-3, 3, length=200)
+lines(g, pnorm(g), lwd=3)
+legend(-3,0.95,fill=c(cols,"black"),legend=c("n=2","n=5","n=10","n=20","n=50","N(0,1)"))
+```
