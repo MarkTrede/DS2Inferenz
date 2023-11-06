@@ -1,0 +1,262 @@
+# Mengen {#sec-mengen}
+
+In der Wahrscheinlichkeitstheorie werden einige Grundbegriffe aus der 
+Mengenlehre verwendet. Sie werden hier auf nicht formale Weise
+kurz dargestellt. Die Beschreibung orientiert sich an Kapitel 2.5
+des Lehrbuchs "Probability Theory and Statistical Inference" (2019), 
+2nd ed., von Aris Spanos. 
+
+## Definition
+
+Unter einer **Menge** (engl. set) versteht man eine Zusammenfassung
+von unterschiedlichen Objekten, die man die Elemente (engl. elements)
+der Menge nennt. Die Objekte können reale physische Objekte oder
+imaginäre Objekte sein. Die Elemente einer Menge können Zahlen sein,
+aber es müssen keine Zahlen sein. Wichtig ist, dass die Objekte
+einer Menge unterscheidbar sind. 
+
+Die Elemente einer Menge kann man explizit aufzählen oder durch
+ihre Eigenschaften definieren. In beiden Fällen werden die Elemente
+einer Menge durch geschweifte Klammern umfasst. Die Reihenfolge
+der Elemente in der Menge spielt keine Rolle. Mengen dürfen auch
+Mengen enthalten.
+
+::: {.callout-tip title="Beispiele"}
+$A=\{a, b, c, d, e\}$; $B=\{b,d\}$;
+$C=\{x:x\text{ ist eine gerade Zahl}\}$.
+:::
+
+Wenn ein Objekt $x$ Elemente einer Menge $A$ ist, schreibt man
+$x\in A$ ("$x$ ist Element von $A$, engl. $x$ belongs to $A$). 
+Wenn $x$ kein Element ist, schreibt man $x\not\in A$.
+
+::: {.callout-tip title="Beispiele"}
+$c\in A$, aber $5\not\in A$; $-1\in B$, aber
+$0\not\in B$; $8\in C$, aber $0.5\not\in C$.
+:::
+
+Eine Menge kann endlich (engl. finite) viele oder 
+unendliche (engl. infinite) viele Elemente
+enthalten. Bei Mengen mit unendlich vielen Elementen unterscheidet
+man verschiedene "Stufen" von Unendlichkeit. Wenn die Elemente
+im Prinzip mit den natürlichen Zahlen durchnummeriert werden
+können, nennt man die Menge abzählbar (engl. countable) unendlich. 
+Wenn das nicht geht, heißt sie überabzählbar (engl. uncountable) 
+unendlich. Die Mengen $\mathbb{N}$ (natürliche Zahlen),
+$\mathbb{Z}$ (ganze Zahlen), $\mathbb{B}$ (Brüche) sind
+abzählbar unendlich. Die Menge der reellen Zahlen $\mathbb{R}$
+oder Intervalle von reellen Zahlen sind überabzählbar unendlich.
+
+Eine Menge darf auch leer sein. Man nennt sie dann die
+leere Menge und schreibt $\{\}$ oder $\emptyset$.
+
+## Mengenoperationen
+
+Eine Menge $A$ heißt **Teilmenge** (engl. subset) der Menge $B$, wenn 
+alle Elemente von $A$ auch Element von $B$ sind. Man schreibt dann
+$A\subset B$. Nach dieser Definition gilt auch $A\subset A$.
+Auch die leere Menge ist immer Teilmenge einer Menge.
+Wenn $A$ keine Teilmenge von $B$ ist, schreibt man $A\not\subset B$.
+
+::: {.callout-tip title="Beispiele"}
+Seien $A=\{a, b, c, d, e\}$, $B=\{b,d\}$ und
+$C=\{x:x\text{ ist eine gerade Zahl}\}$. Dann gilt
+$\{a,d,e\}\subset A$, $B\subset A$, $A\not\subset B$,
+$\{100,102,104\}\subset C$, $\emptyset\subset C$.
+:::
+
+Die Definition der Teilmenge benutzt man auch, um die Gleichheit
+zweier Mengen zu definieren. Zwei Mengen $A$ und $B$ sind
+gleich, wenn $A\subset B$ und $B\subset A$. Man
+schreibt $A=B$. Will man
+explizit deutlich machen, dass bei $A\subset B$
+auch die Gleichheit mitgemeint ist, wird manchmal die 
+(eigentlich redundante) Notation $A\subseteq B$ verwendet. 
+
+Die **Vereinigungsmenge** (engl. union) von zwei Mengen $A$
+und $B$ enthält alle Elemente, die in $A$ oder $B$ (oder in
+beiden) enthalten sind. Man schreibt $A\cup B$. Da alle
+Elemente einer Menge unterscheidbar sein müssen, kommen
+Elemente, die sowohl in $A$ als auch in $B$ enthalten sind,
+in der Vereinigungsmenge nur einmal vor.
+
+::: {.callout-tip title="Beispiele"}
+Seien $A=\{a, b, c, d, e\}$, $B=\{b,d\}$. 
+Dann gilt $\{a,b,x,y,z\}\cup A=\{a,b,c,d,e,x,y,z\}$, $A\cup B=A$, 
+:::
+
+Die **Schnittmenge** (engl. intersection) von zwei Mengen
+$A$ und $B$ enthält alle Elemente, die sowohl in $A$ als 
+auch in $B$ enthalten sind. Man schreibt $A\cap B$.
+
+::: {.callout-tip title="Beispiele"}
+Seien $A=\{a, b, c, d, e\}$, $B=\{b,d\}$. 
+Dann gilt $A\cap B=B$, $\{a,b,x,y,z\}\cap A=\{a,b\}$,
+$\{x,y,z\}\cap B=\emptyset$.
+:::
+
+Sowohl die Vereinigungsmenge als auch die Schnittmenge kann
+auf mehr als zwei Mengen verallgemeinert werden. Beispielsweise
+schreibt man $A\cup B\cup C$ für die Vereinigungsmenge von
+$A$, $B$ und $C$ und entsprechend $A\cap B\cap C$ für die
+Schnittmenge. Wenn sehr viele Mengen vereinigt oder geschnitten
+werden, nutzt man eine Notation, die dem Summenzeichen ähnelt,
+nämlich
+$$
+\bigcup_{i=1}^n A_i
+$$
+für die Vereinigung der Mengen $A_1,A_2,\ldots, A_n$ und
+$$
+\bigcap_{i=1}^n A_i
+$$
+für ihre Schnittmenge.
+
+Als **Komplementärmenge** (engl. complementation) einer Menge
+$A$ relativ zu einer Menge $\Omega$ bezeichnet man alle 
+Elemente aus $\Omega$, die nicht in $A$ enthalten sind.
+Man schreibt $\bar A$ und spricht "nicht $A$" 
+(die Menge $\Omega$ wird also nicht 
+explizit erwähnt, sie muss sich aus dem Kontext ergeben).
+
+::: {.callout-tip title="Beispiel"}
+Sei $C=\{x:x\text{ ist eine gerade Zahl}\}$.
+Wenn $\Omega$ die Menge aller natürlichen Zahlen ist 
+(d.h. $\Omega=\mathbb{N}$), dann ist $\bar C$ die Menge
+aller ungeraden Zahlen.
+:::
+
+Sowohl Vereinigungs- als auch Schnittmenge sind kommutativ, d.h.
+\begin{align*}
+A\cup B &= B\cup A\\
+A\cap B &= B\cap A.
+\end{align*}
+
+Außerdem sind sie assoziativ, d.h.
+\begin{align*}
+A\cup (B \cup C)&= (A\cup B) \cup C\\
+A\cap (B \cap C)&= (A\cap B) \cap C.
+\end{align*}
+
+Auch das Distributivgesetz gilt,
+\begin{align*}
+A\cup (B \cap C)&= (A\cup B) \cap (A\cup C)\\
+A\cap (B \cup C)&= (A\cap B) \cup (A\cap C).
+\end{align*}
+
+Als Rechenregel nützlich ist oft die Regel von de Morgan.
+Sie zeigt, wie die Komplementärmenge einer Vereinigungsmenge
+oder Schnittmenge aussieht,
+\begin{align*}
+\overline{A \cup B} &= \bar A \cap \bar B\\
+\overline{A \cap B} &= \bar A \cup \bar B.
+\end{align*}
+Es ist also möglich, die Schnittmengenbildung durch 
+die Vereinigung zusammen mit der Komplementärbildung
+auszudrücken. 
+
+## Venn-Diagramme
+
+Mengen - und vor allem Mengenoperationen - können auch
+grafisch repräsentiert werden. Eine oft genutzte Methode sind
+die sogenannten **Venn-Diagramme**. In einem Venn-Diagramm
+werden Mengen durch Flächen dargestellt, oft durch Kreise.
+Die Elemente der Mengen können dann in die Flächen
+eingetragen werden. Oft interessieren einen jedoch die
+einzelnen Elemente gar nicht so, sondern man möchte nur die
+Funktionsweise der Mengenoperationen veranschaulichen.
+
+Am Beispiel von zwei Mengen $A$ und $B$ ist das gut
+zu sehen. Die beiden Mengen werden durch Kreise
+repräsentiert, der sie umgebende Kasten steht für die
+Menge $\Omega$, die für die Komplementärmengen relevant 
+ist.
+
+```{r}
+#| echo: FALSE
+#| fig.align: center
+library(venn)
+venn(2)
+```
+Will man ausdrücklich $A$ zeigen, zeichnet man
+```{r}
+#| echo: FALSE
+#| fig.align: center
+venn("1-")
+```
+Entsprechend zeigt
+```{r}
+#| echo: FALSE
+#| fig.align: center
+venn("-1")
+```
+nur die Menge $B$. Die Vereinigungsmenge $A\cup B$ ist
+```{r}
+#| echo: FALSE
+#| fig.align: center
+venn("1- + -1")
+```
+Die Schnittmenge $A\cap B$ ist 
+```{r}
+#| echo: FALSE
+#| fig.align: center
+venn("11")
+```
+Die Komplementärmenge $\bar A$ ist
+```{r}
+#| echo: FALSE
+#| fig.align: center
+venn("0-")
+```
+Die grafische Darstellung durch Venn-Diagramme kann man
+auch nutzen, um etwas komplexe Zusammenhänge zu illustrieren,
+z.B. das Distributivgesetz
+$$
+A\cup (B \cap C)= (A\cup B) \cap (A\cup C).
+$$
+Zuerst zeichnen wir die beiden Ausdrücke auf der linken Seite der
+Gleichung: In der linken oberen Grafik sieht man $A$, rechts oben
+$B\cap C$. In der Mitte darunter ist die Vereinigungsmenge zu sehen.
+```{r}
+#| echo: FALSE
+#| fig.align: center
+layout(matrix(c(1,2,3,3),2,2,byrow=TRUE))
+venn("1--")
+venn("-11")
+venn("1-- + -11")
+```
+Auf der rechten Seite der Gleichung stehen ebenfalls zwei Ausdrücke,
+nämlich $A\cup B$ und $A\cup C$. Sie sind in den folgenden beiden
+oberen Abbildungen zu sehen. Darunter sieht man die Schnittmenge.
+```{r}
+#| echo: FALSE
+#| fig.align: center
+layout(matrix(c(1,2,3,3),2,2,byrow=TRUE))
+venn("1-- + -1-")
+venn("1-- + --1")
+venn("1-- + -11")
+```
+Auf ähnliche Weise kann man sich die de Morgansche Regel
+$$
+\overline{A \cup B} = \bar A \cap \bar B
+$$
+veranschaulichen. Wir beginnen mit der linken Seite der Gleichung.
+Die Vereinigung $A\cup B$ ist im linken Bild zu sehen. Das
+Komplement dazu steht rechts.
+```{r}
+#| echo: FALSE
+#| fig.align: center
+layout(matrix(c(1,2),1,2))
+venn("1- + -1")
+venn("00")
+```
+Nun betrachten wir die rechte Seite der Gleichung, also $\bar A \cap \bar B$.
+Oben links ist $\bar A$ abgebildet, oben rechts $\bar B$. Ihre Schnittmenge
+ist im unteren Bild gezeigt.
+```{r}
+#| echo: FALSE
+#| fig.align: center
+layout(matrix(c(1,2,3,3),2,2,byrow=TRUE))
+venn("0-")
+venn("-0")
+venn("00")
+```

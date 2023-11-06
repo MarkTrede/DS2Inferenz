@@ -12,12 +12,12 @@ Zufallsvariable $X$. Wir gehen zunächst davon aus, dass wir nichts weiter
 über die Verteilung von $X$ wissen. Das ist offensichtlich eine sehr 
 realistische Annahme Die Null- und Alternativhypothesen 
 des zweiseitigen t-Tests lauten
-$$
+
 \begin{align*}
 H_0: \mu&=\mu_0\\
 H_1: \mu&\neq\mu_0.
 \end{align*}
-$$
+
 Dabei ist $\mu_0\in\mathbb{R}$ der (hypothetische) Wert, gegen den 
 getestet werden soll. Um etwas über den Erwartungswert zu lernen, 
 bietet es sich an, eine Stichprobe $X_1,\ldots,X_n$ aus $X$ zu ziehen und 
@@ -67,7 +67,7 @@ gegen die Gültigkeit der Nullhypothese. In diesem Fall verwirft man $H_0$.
 
 Die Wahrscheinlichkeit, dass die Nullhypothese abgelehnt wird,
 obwohl sie wahr ist, beträgt
-$$
+
 \begin{align*}
 P(T\in K||H_0\text{ ist wahr}) 
 &= P\left(T<-u_{1-\alpha/2})+P(T> u_{1-\alpha/2}\right)\\
@@ -75,7 +75,7 @@ P(T\in K||H_0\text{ ist wahr})
 &= \frac{\alpha}{2}+1-\left(1-\frac{\alpha}{2}\right)\\
 &= \alpha.
 \end{align*}
-$$
+
 Die Fehlerwahrscheinlichkeit erster Art entspricht also in der Tat 
 dem vorgegebenen Signifikanzniveau. Das lässt sich auch grafisch darstellen.
 In der folgenden Grafik sind die beiden kritischen Grenzen $u_{0.025}$
@@ -110,7 +110,7 @@ annimmt. Der p-Wert ist die Wahrscheinlichkeit, dass die Teststatistik
 unter der Nullhypothese "noch stärker" gegen $H_0$ spricht als $t$.
 Da wir einen zweiseitigen Test untersuchen, kann "noch stärker" heißen,
 dass die Teststatistik besonders klein oder besonders groß ist, d.h.
-$$
+
 \begin{align*}
 \text{p-Wert}&=P(T < -|t| \text{ oder }T > |t|)\\
 &= P(T< -|t|)+P(T>|t|)\\
@@ -119,7 +119,7 @@ $$
 &= 1-\Phi(|t|)+1-\Phi(|t|)\\
 &= 2(1-\Phi(|t|)).
 \end{align*}
-$$
+
 Grafisch lässt sich das wie folgt veranschaulichen.
 ```{r}
 #| code-fold: true
@@ -226,12 +226,12 @@ männlich ist? Das Geschlecht kann durch eine bernoulli-verteilte
 Zufallsvariable beschrieben werden (z.B. 0=weiblich, 1=männlich).
 Der unbekannte Parameter $\pi$ ist dann die Wahrscheinlichkeit,
 dass ein Neugeborenes männlich ist. Die Hypothesen lauten
-$$
+
 \begin{align*}
 H_0: \pi &= 0.5\\
 H_1: \pi &\neq 0.5.
 \end{align*}
-$$
+
 Als Signifikanzniveau setzen wir $\alpha=0.01$. 
 Um die Nullhypothese zu testen, werten wir Daten der 
 Statistikabteilung der Stadt Münster zum
@@ -423,14 +423,14 @@ erster Art sogar kleiner als das vorgegebene Signifikanzniveau.
 
 Im nächsten Schritt überlegen wir uns, wie der
 kritische Bereich bei einem einseitigen Test aussieht. 
-Examplarisch spielen wir das für die folgende Null- und
+Exemplarisch spielen wir das für die folgende Null- und
 Alternativhypothese durch,
-$$
+
 \begin{align*}
 H_0: \mu&\le\mu_0\\
-H_1: \mu&\gt\mu_0.
+H_1: \mu&> \mu_0.
 \end{align*}
-$$
+
 Die Teststatistik ist
 $$
 T=\sqrt{n}\frac{\bar X-\mu_0}{S}.
@@ -478,12 +478,12 @@ $$
 $$
 
 Der einseitige Test in die andere Richtung mit den Hypothesen
-$$
+
 \begin{align*}
 H_0: \mu&\ge\mu_0\\
-H_1: \mu&\lt\mu_0
+H_1: \mu&< \mu_0
 \end{align*}
-$$
+
 wird vollkommen analog durchgeführt. Der kritische Bereich liegt nun links.
 Man lehnt $H_0$ ab, wenn die Teststatistik kleiner ist als das
 $\alpha$-Quantil der Standardnormalverteilung (also kleiner als $-1.6449$, 
@@ -520,7 +520,7 @@ mindestens 95 Prozent für Reisen (inkl. Umstiege) im Fernverkehr vor.
 Ob das Verkehrsunternehmen die Vorgabe erfüllt, soll getestet werden.
 Aus den möglichen Reiserouten wird eine einfache Stichprobe 
 vom Umfang $n=80$ gezogen. Anschließend wird für jede ausgewählte 
-Route ein Testfahrer losgeschickt, um festzustellen,
+Route {{< var ein >}} {{< var Testfahrer >}} losgeschickt, um festzustellen,
 ob das Reiseziel pünktlich erreicht wird. Die 
 Zufallsvariable $X$: "Für eine zufällig ausgewählte Reiseroute
 wird das Ziel pünktlich erreicht" ist Bernoulli-verteilt. Der
@@ -539,20 +539,20 @@ Die Regulierungsbehörde möchte (auf einem Signifikanzniveau
 von 5 Prozent) zeigen, dass die Zielvorgabe statistisch 
 signifikant nicht eingehalten wurde. Die Null- und 
 Alternativhypothesen lauten
-$$
+
 \begin{align*}
 H_0: \pi&\ge 0.95\\
 H_1: \pi& <0.95.
 \end{align*}
-$$
+
 Der Wert der Teststatistik ist
-$$
+
 \begin{align*}
 t&=\sqrt{n}\frac{\hat\pi-0.95}{\sqrt{\hat\pi (1-\hat\pi)}}\\
 &=\sqrt{80}\cdot\frac{0.8875-0.95}{\sqrt{0.8875(1-0.8875)}}\\
 &= -1.7692.
 \end{align*}
-$$
+
 Der kritische Bereich des einseitigen Tests liegt wegen der
 Alternativhypothese $H_1:\pi<0.95$ am unteren Ende der
 Standardnormalverteilung. Das 0.05-Quantil ist
@@ -567,12 +567,12 @@ nicht.
 
 Das Fernverkehrsunternehmen hätte die Nullhypothese vermutlich
 anders herum formuliert, nämlich
-$$
+
 \begin{align*}
 H_0: \pi&\le 0.95\\
 H_1: \pi& >0.95.
 \end{align*}
-$$
+
 Der kritische Bereich wäre dann am oberen Ende der
 Standardnormalverteilung, also auf einem Niveau von
 5 Prozent oberhalb von 1.6449. Die Teststatistik und auch der
@@ -586,12 +586,12 @@ natürlich offensichtlich und auch ohne einen formalen
 Hypothesentest sofort erkennbar.
 
 Für das Fernverkehrsunternehmen wäre die Formulierung
-$$
+
 \begin{align*}
 H_0: \pi&\le 0.95\\
 H_1: \pi& >0.95.
 \end{align*}
-$$
+
 vor allem dann empfehlenswert, wenn es zeigen will
 (und kann!), dass die Pünktlichkeitsquote statistisch signifikant
 besser als die vorgegebene Mindestquote ist.
@@ -615,9 +615,9 @@ sondern für zwei Erwartungswerte. Ist der mittlere Lohn von Gruppe A höher
 als der mittlere Lohn von Gruppe B? Erreicht Produktionsverfahren A eine
 niedrigere Fehlerquote als Produktionsverfahren B? Kann man mit der
 Wärmepumpe der Firma A effizienter heizen als mit der Pumpe von Firma B?
-Kaufen Kunden, die einer Werbemaßnahme ausgesetzt waren, 
-mehr von dem beworbenen Produkt als Kunden, die keine Werbemaßnahme gesehen 
-haben?
+Kaufen {{< var KundenPL >}}, die einer Werbemaßnahme ausgesetzt waren, 
+mehr von dem beworbenen Produkt als {{< var KundenPL >}}, 
+die keine Werbemaßnahme gesehen haben?
 
 Derartige Fragen lassen sich immer durch Erwartungswerte von *zwei*
 Zufallsvariablen ausdrücken, $X$ und $Y$. Wir gehen direkt von der
@@ -640,29 +640,29 @@ bestehen aus Zufallsvariablen.
 Wenn $m$ und $n$ groß sind, greift der zentrale Grenzwertsatz für die beiden
 Stichprobenmittel $\bar X$ und $\bar Y$. Es gilt dann approximativ
 (vgl. @sec-clt)
-$$
+
 \begin{align*}
 \bar X &\stackrel{appr}{\sim} N\left(\mu_X,\frac{\sigma_X^2}{m}\right)\\
 \bar Y &\stackrel{appr}{\sim} N\left(\mu_Y,\frac{\sigma_Y^2}{m}\right).
 \end{align*}
-$$
+
 Im folgenden wird darauf verzichtet, jedesmal explizit zu schreiben, dass
 es sich nur um einen approximativen Zusammenhang handelt. 
 Auf einem vorgegebenen Signifikanzniveau von $\alpha$ soll 
-$$
+
 \begin{align*}
 H_0:\mu_X&=\mu_Y\\
 H_1:\mu_X&\neq \mu_Y
 \end{align*}
-$$
+
 getestet werden. Es handelt sich um einen zweiseitigen Test. Das wird noch
 deutlicher, wenn man die Hypothesen umformuliert,
-$$
+
 \begin{align*}
 H_0:\mu_X-\mu_Y &=0\\
 H_1:\mu_X-\mu_Y&\neq 0.
 \end{align*}
-$$
+
 Die Differenz der Erwartungswerte schätzen wir durch die Differenz
 der Stichprobenmittel $\bar X-\bar Y$. Wegen der Unabhängigkeit der
 Stichproben gilt für diese Differenz
@@ -853,14 +853,14 @@ In dem Artikel von Fehr (2007) sind die folgenden Zahlen gegeben:
 | Anzahl Spenden     |            397|               465|
 
 Daraus ergeben sich die beiden Stichprobenmittel (Anteile),
-$$
+
 \begin{align*}
 \hat\pi_X &= \frac{397}{3262}=0.1217\\
 \hat\pi_X &= \frac{465}{3237}=0.1437.
 \end{align*}
-$$
+
 Der Wert der Teststatistik ist folglich
-$$
+
 \begin{align*}
 t &=\frac{\hat\pi_X-\hat\pi_Y}{\sqrt{\frac{\hat\pi_X(1-\hat\pi_X)}{m}
 +\frac{\hat\pi_Y(1-\hat\pi_Y)}{n}}}\\[2ex]
@@ -868,7 +868,7 @@ t &=\frac{\hat\pi_X-\hat\pi_Y}{\sqrt{\frac{\hat\pi_X(1-\hat\pi_X)}{m}
 +\frac{0.1437\cdot (1-0.1437)}{3237}}}\\[2ex]
 &= -2.615.
 \end{align*}
-$$
+
 Der p-Wert dieses Tests entspricht der Wahrscheinlichkeit, dass eine
 standardnormalverteilte Zufallsvariable kleiner ist als der Wert
 der Teststatistik. In R erhält man
@@ -885,37 +885,37 @@ die Spendenbereitschaft also statistisch signifikant.
 Für ein tieferes Verständnis von Hypothesentests ist es hilfreich, 
 Monte-Carlo-Simulationen zu programmieren und durchzuführen. Am Beispiel
 des Tests auf Gleichheit von zwei Erwartungswerten mit
-$$
+
 \begin{align*}
 H_0: \mu_X &= \mu_Y\\
 H_1: \mu_X &\neq \mu_Y
 \end{align*}
-$$
+
 wird das im folgenden
 vorgestellt. Es gibt zwei Zufallsvariablen $X$ und $Y$, deren Verteilung
 für die Simulationen vorgegeben ist. Beide Zufallsvariablen folgen einer
 Exponentialverteilung, jedoch mit unterschiedlichen Parametern,
-$$
+
 \begin{align*}
 X &\sim Exp(0.25)\\
 Y &\sim Exp(0.28)
 \end{align*}
-$$
+
 Die wahren Erwartungswerte sind (vgl. @sec-exp)
-$$
+
 \begin{align*}
 \mu_X &= 1/0.25 =4\\
 \mu_Y &= 1/0.28 =3.571.
 \end{align*}
-$$
+
 Für die Simulation tut man so, als ob die wahren Erwartungswerte
 unbekannt sind. Die Hypothesen seien
-$$
+
 \begin{align*}
 H_0: \mu_X &\le \mu_Y\\
 H_1: \mu_X &> \mu_Y.
 \end{align*}
-$$
+
 Die Nullhypothese ist also tatsächlich falsch, denn der wahre
 Erwartungswert von $X$ ist größer als der von $Y$. Mit Hilfe
 einer Monte-Carlo-Simulation können wir leicht ermitteln,

@@ -205,6 +205,9 @@ der beiden Zufallsvariablen $X$ und $Y$ sei für $x,y\in\mathbb{R}$
 $$
 f(x,y)=\frac{2e^{-x-y}}{(1+e^{-x}+e^{-y})^3}.
 $$
+
+
+::: {.content-visible when-format="html"}
 In der folgenden 3D-Abbildung, die Sie mit der Maus bewegen können
 (allerdings leider nicht auf einem Tablet), erkennt man, dass die
 Dichte um den Punkt $(0,0)$ herum besonders hoch ist. Die 
@@ -214,6 +217,7 @@ Außerdem ist eine leichte Asymmetrie zu erkennen. Es ist sehr
 unwahrscheinlich, dass sowohl $X$ als auch in $Y$ beide größer als
 3 sind. Hingegen kann es (wenn auch mit eher kleiner Wahrscheinlichkeit)
 passieren, dass beide Zufallsvariable kleiner als $-3$ sind.
+
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -224,17 +228,45 @@ f <- matrix(0, length(x), length(y))
 
 for(i in 1:length(x)){
     for(j in 1:length(y)){
-        f[i,j] <- (2*exp(-x[i])*exp(-y[j]))/(1+exp(-x[i])+exp(-y[j]))^3
+        f[i,j] <- (2*exp(-x[i])*exp(-y[j]))/
+                  (1+exp(-x[i])+exp(-y[j]))^3
     }
 }
 
 persp3d(x, y, f, col="light green",
         xlab="x", ylab="y", zlab="f(x,y)")
 rglwidget()
-```
-```{r echo=FALSE}
 close3d()
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+In der folgenden 3D-Abbildung erkennt man, dass die
+Dichte um den Punkt $(0,0)$ herum besonders hoch ist. Die 
+gemeinsame Realisation von $X$ und $Y$ wird also mit hoher
+Wahrscheinlichkeit irgendwo in der Nähe des Nullpunkts liegen. 
+Außerdem ist eine leichte Asymmetrie zu erkennen. Es ist sehr
+unwahrscheinlich, dass sowohl $X$ als auch in $Y$ beide größer als
+3 sind. Hingegen kann es (wenn auch mit eher kleiner Wahrscheinlichkeit)
+passieren, dass beide Zufallsvariable kleiner als $-3$ sind.
+
+```{r}
+#| code-fold: true
+#| code-summary: "R-Code zeigen"
+x <- seq(-4, 4, length=51)
+y <- seq(-4, 4, length=51)
+f <- matrix(0, length(x), length(y))
+
+for(i in 1:length(x)){
+    for(j in 1:length(y)){
+        f[i,j] <- (2*exp(-x[i])*exp(-y[j]))/
+                  (1+exp(-x[i])+exp(-y[j]))^3
+    }
+}
+
+persp(x, y, f, col="light green")
+```
+:::
 
 Weitere Möglichkeiten, ein Dichtegebirge grafisch darzustellen,
 sind Contour-Plots und Image-Plots. In einem Contour-Plot sieht man die Höhenlinien 
@@ -338,12 +370,12 @@ Zufallsvariablen des Zufallsvektors ignoriert werden.
 
 Die Randverteilungen lassen sich besonders einfach aus der gemeinsamen
 Verteilungsfunktion $F_{X,Y}(x,y)$ ableiten. Es gilt nämlich
-$$
+
 \begin{align*}
 F_X(x)&=F_{X,Y}(x,\infty)=\lim_{y\to\infty}F_{X,Y}(x,y)\\
 F_Y(y)&=F_{X,Y}(\infty,y)=\lim_{x\to\infty}F_{X,Y}(x,y),
 \end{align*}
-$$
+
 wobei $F_X$ und $F_Y$ die Randverteilungsfunktionen von $X$ und $Y$
 sind. Man erhält also die Randverteilungsfunktionen, indem man die
 jeweils andere Variable gegen unendlich gehen lässt. 
@@ -351,12 +383,11 @@ jeweils andere Variable gegen unendlich gehen lässt.
 Wenn $X$ und $Y$ gemeinsam diskret verteilt sind, ergeben sich die
 Randwahrscheinlichkeitsfunktionen aus der gemeinsamen
 Wahrscheinlichkeitsfunktion,
-$$
+
 \begin{align*}
 p_{j\cdot}&=P(X=x_j)=\sum_k p_{jk}\\
 p_{\cdot k}&=P(Y=y_k)=\sum_j p_{jk}.
 \end{align*}
-$$
 
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Kleinere und größere Augenzahl
@@ -392,12 +423,12 @@ $$
 
 Wenn $X$ und $Y$ gemeinsam stetig verteilt sind, erhält man
 die Randdichten aus der gemeinsamen Dichte wie folgt.
-$$
+
 \begin{align*}
 f_X(x)&=\int_{-\infty}^\infty f_{X,Y}(x,y)dy\\
 f_Y(y)&=\int_{-\infty}^\infty f_{X,Y}(x,y)dx.
 \end{align*}
-$$
+
 Man sagt auch, dass man $y$ "herausintegriert", um die Randdichte von $X$
 zu erhalten, und umgekehrt.
 
@@ -418,23 +449,23 @@ Wie sehen die beiden Randdichten aus? Die Randdichte von $X$ erhält man,
 indem man $y$ "herausintegriert". Wenn $x$ nicht in dem Interval
 $[0,1.11963]$ liegt, ist die Randdichte offensichtlich 0. Wir betrachten
 darum nur den Fall, dass $x$ in dem Intervall liegt. Dann gilt
-$$
+
 \begin{align*}
 f_X(x) &= \int_{-\infty}^\infty f_{X,Y}(x,y)dy \\
 &= \int_0^1 (x+y^2) dy\\
 &= x+\left. \frac{1}{3}y^3\right|_0^1 \\
 &= x+\frac{1}{3}.
 \end{align*}
-$$
+
 Nun bestimmen wir die Randdichte von $Y$, indem wir über $x$ integrieren.
-$$
+
 \begin{align*}
 f_Y(y) &= \int_{-\infty}^\infty f_{X,Y}(x,y)dx \\
 &= \int_0^{1.11963} (x+y^2) dx\\
 &= 1.11963\cdot y^2 + \left. \frac{1}{2}x^2\right|_0^{1.11963} \\
 &= 1.11963\cdot y^2+0.62679
 \end{align*}
-$$
+
 für $y\in [0,1]$. Für $y\not\in [0,1]$ ist die Dichte $f_Y(y)=0$.
 :::
 
@@ -501,12 +532,12 @@ $$
 Sind $X$ und $Y$ unabhängig? Die beiden Randdichten wurden bereits
 weiter oben ermittelt. Wir werten sie an den beiden willkürlich
 ausgewählten Stellen $x=2/3$ und $y=0.2$ aus.
-$$
+
 \begin{align*}
 f_X(2/3) &= x+\frac{1}{3} = 1\\
 f_Y(0.2) &= 1.11963\cdot 0.2^2+0.62679=0.67158.
 \end{align*}
-$$
+
 Das Produkt ist also $0.67158$. Setzt man $x=2/3$ und $y=0.2$
 in die gemeinsame Dichte ein, erhält man
 $$
@@ -539,7 +570,7 @@ hat? Oder umgekehrt: Wie ist $Y$ (bedingte Variable) verteilt,
 wenn man $X$ kennt (bedingende Variable)? Bedingte Verteilungen 
 sind deswegen in der Ökonomik wichtig, weil sie 
 Informationsstände abbilden können. Die Bedingung gibt an, welche
-Information ein ökonomischer Agent hat. 
+Information {{< var ein >}} {{< var Agent >}} hat. 
 
 Für gemeinsam diskrete Verteilungen mit 
 $$
@@ -629,12 +660,96 @@ $$
 f_X(x)=x+\frac{1}{3}.
 $$
 Man erhält als bedingte Dichte von $Y$ gegeben $X=0.8$
-$$
+
 \begin{align*}
 f_{Y|X=0.8}(y) &=\frac{f_{X,Y}(0.8, y)}{f_X(0.8)}\\[2ex]
 &=\frac{0.8+y^2}{0.8+1/3}\\[2ex]
 &=\frac{0.8+y^2}{1.13333}
 \end{align*}
-$$
+
 für $0\le y \le 1$.
+:::
+
+Bedingte Verteilungen sind **univariate** Verteilungen. Für
+jeden Wert der bedingenden Zufallsvariable ergibt sich eine
+univariate Verteilung. Im Allgemeinen sind sie alle
+unterschiedlich, aber das muss nicht unbedingt so sein. Wenn
+$X$ und $Y$ unabhängig sind, dann sind die univariaten
+bedingten Verteilungen alle gleich. 
+
+Für univariate Verteilungen kann man all die Parameter
+berechnen, die in @sec-zufallsvariablen eingeführt wurden,
+z.B. den Erwartungswert oder die Varianz. Man
+spricht dann von bedingten Erwartungswerten und bedingten
+Varianzen. Die gängige Notation ist $E(X|Y=y)$ und 
+$Var(X|Y=y)$. Für jeden Wert der bedingenden Zufallsvariable 
+$(Y=y)$ erhält man einen bedingten Erwartungswert und eine 
+bedingte Varianz. Es handelt sich quasi um Funktionen
+von $y$. Für gemeinsam stetige Zufallsvariablen
+berechnet man den bedingten Erwartungswert als
+$$
+E(X|Y=y)=\int_{-\infty}^\infty x f_{X|Y=y}(x)dx
+$$
+und die bedingte Varianz als
+$$
+Var(X|Y=y)=\int_{-\infty}^\infty (x-E(X|Y=y))^2 f_{X|Y=y}(x)dx.
+$$
+Die Formeln sind vollständig analog zu den Formeln
+in @sec-erwartungswert und @sec-varianz. Nur wird die
+Dichte durch die auf $Y=y$ bedingte Dichte ersetzt (und
+im Fall der Varianz der Erwartungswert durch den
+bedingten Erwartungswert). Für gemeinsam diskret verteilte 
+Zufallsvariablen geht man analog vor. 
+
+::: { .callout-tip collapse="true"}
+## Beispiel: Bedingte Erwartungswerte
+
+Der gemeinsam stetig verteilte Zufallsvektor $(X,Y)$ hat die
+gemeinsame Dichtefunktion
+$$
+f_{X,Y}(x,y)=\left\{
+\begin{array}{ll}
+x+y^2 & \text{ wenn }0\le x \le 1.11963\text{ und }0\le y\le 1\\
+0 & \text{ sonst.}
+\end{array}
+\right.
+$$
+Zur Berechnung des bedingten Erwartungswerts von $Y$ gegeben $X=x$
+benötigt man die bedingte Dichte. Wir haben sie im letzten Beispiel hergeleitet. Sie ist für gegebenes $x$
+
+\begin{align*}
+f_{Y|X=x}(y) &=\frac{f_{X,Y}(x, y)}{f_X(x)}\\[2ex]
+&=\frac{x+y^2}{x+1/3}
+\end{align*}
+
+für $0\le y \le 1$. Damit ergibt sich der bedingte 
+Erwartungswert
+
+\begin{align*}
+E(Y|X=x)&=\int_{-\infty}^\infty y f_{Y|X=x}(y)dy\\
+&=\int_0^1 y \frac{x+y^2}{x+1/3}dy\\
+&=\frac{x}{x+1/3}\int_0^1 ydy+\frac{1}{x+1/3}\int_0^1y^3dy\\
+&=\frac{x}{x+1/3}\cdot\frac{1}{2}+\frac{1}{x+1/3}\cdot\frac{1}{4}\\
+&=\frac{2x}{4x+4/3}+\frac{1}{4x+4/3}\\
+&=\frac{2x+1}{4x+4/3}\\
+&=\frac{6x+3}{12x+4}.
+\end{align*}
+
+Für jeden Wert von $x$ in dem Intervall $[0,1.11963]$ erhält man
+einen anderen bedingten Erwartungswert für $Y$. Grafisch lässt sich
+das so darstellen:
+```{r}
+x <- seq(from=0, to=1.11963, length=200)
+plot(x, (6*x+3)/(12*x+4), 
+     type="l",
+     xlab="x", 
+     ylab="E(Y|X=x)",
+     main="Bedingte Erwartungswerte von Y")
+```
+
+Der Erwartungswert von $Y$ ist also bei kleinen Werten von $x$
+größer als bei großen Werten. Wenn bekannt ist, dass $X$ den
+Wert 1 annimmt, dann erwartet man für $Y$ im Mittel ungefähr den
+Wert 0.55. Ist $X$ dagegen nur knapp über 0, dann erwartet man
+im Mittel für $Y$ fast 0.75.
 :::

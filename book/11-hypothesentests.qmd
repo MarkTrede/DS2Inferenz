@@ -13,35 +13,31 @@ Prozesses aufzeigen.
 ## Prozesse {#sec-prozess}
 
 <img src="images/AdobeStock_155565861b_Richter.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
-Am Beginn des Strafverfahrens steht die Anklage. Dem Angeklagten
-wird ein Vergehen vorgeworfen. Ob die Anklage wahr oder falsch ist,
-d.h. ob der Angeklagte die Tat wirklich begangen hat oder nicht,
-weiß die Richterin nicht. Die Anwältin des Angeklagten behauptet,
-dass er unschuldig ist. Der Staatsanwalt behauptet hingegen, dass
-der Angeklagte schuldig ist. Damit die Richterin ein Urteil fällen 
-kann, braucht sie Zeugenaussagen und Beweise. 
+Am Beginn des Strafverfahrens steht die Anklage. 
+{{< var Dem >}} {{< var Angeklagten >}} wird ein Vergehen vorgeworfen. 
+Ob die Anklage wahr oder falsch ist, d.h. ob {{< var der >}} Angeklagte die Tat wirklich begangen hat oder nicht, weiß {{< var die >}} {{< var Richterin >}} nicht. 
+{{< var Die >}} {{< var Anwältin >}} {{< var des >}} Angeklagten behauptet, dass {{< var er >}} unschuldig ist. 
+{{< var Der >}} {{< var Staatsanwalt >}} behauptet hingegen, dass {{< var der >}} Angeklagte schuldig ist. 
+Damit {{< var die >}} {{< var Richterin >}} ein Urteil fällen kann, braucht {{< var sie >}} {{< var Zeugenaussagen >}} und Beweise. 
 
-Im Allgemeinen hilft die Beweisaufnahme, ein genaueres Bild der 
-möglichen Tat zu gewinnen. Auf Grundlage der Beweise fällt
-die Richterin ihr Urteil. Sie kann den Angeklagten verurteilen
-oder freisprechen. Natürlich wäre es wünschenswert, wenn 
-der Angeklagte verurteilt wird, sofern er schuldig ist, und
-freigesprochen wird, sofern er unschuldig ist. Aber selbst mit den 
-Beweisen bleibt immer noch eine gewisse Restunsicherheit, ob der 
-Angeklagte die Tat wirklich begangen hat. Es kann also passieren, 
-dass die Richterin den Angeklagten verurteilt, obwohl er unschuldig 
-ist. Es kann passieren, dass er freigesprochen wird, obwohl er 
-schuldig ist. In beiden Fällen liegt ein Irrtum vor und es
-kommt zu einem Fehlurteil.
+Im Allgemeinen hilft die Beweisaufnahme, ein genaueres Bild der möglichen Tat zu gewinnen. 
+Auf Grundlage der Beweise fällt {{< var die >}} {{< var Richterin >}} {{< var ihr >}} Urteil. 
+{{< var Sie >}} kann {{< var den >}} {{< var Angeklagten >}} verurteilen oder freisprechen. 
+Natürlich wäre es wünschenswert, wenn {{< var der >}} Angeklagte verurteilt wird, sofern {{< var er >}} schuldig ist, und freigesprochen wird, sofern {{< var er >}} unschuldig ist. 
+Aber selbst mit den Beweisen bleibt immer noch eine gewisse Restunsicherheit, ob {{< var der >}} Angeklagte die Tat wirklich begangen hat. 
+Es kann also passieren, dass {{< var die >}} {{< var Richterin >}} {{< var den >}} {{< var Angeklagten >}} verurteilt, obwohl {{< var er >}} unschuldig ist. 
+Es kann passieren, dass {{< var er >}} freigesprochen wird, obwohl {{< var er >}} schuldig ist. 
+In beiden Fällen liegt ein Irrtum vor und es kommt zu einem Fehlurteil.
 
 Welches Art von Fehlurteil ist schlimmer? Ist es schlimmer, wenn
-ein Schuldiger freigesprochen wird? Oder ist es schlimmer,
-wenn ein Unschuldiger verurteilt wird? Bei dieser Abwägung
+{{< var ein >}} {{< var Schuldiger >}} freigesprochen wird? Oder ist es schlimmer,
+wenn {{< var ein >}} {{< var Unschuldiger >}} verurteilt wird? Bei dieser Abwägung
 handelt es sich um ein Werturteil. In unserem Rechtssystem ist
 die Antwort klar: Unschuldige sollen nicht verurteilt werden.
 Damit das soweit wie möglich sichergestellt ist, nimmt man 
 in Kauf, dass auch Schuldige freigesprochen werden: In dubio
-pro reo - im Zweifel für den Angeklagten. Diese Asymmetrie 
+pro reo - im Zweifel für {{< var den >}} {{< var Angeklagten >}}. 
+Diese Asymmetrie 
 führt dazu, dass Justizirrtümer, bei denen jemand irrtümlich 
 verurteilt wird, selten vorkommen. Der Preis dafür ist, dass es 
 relativ leicht passieren kann, dass Schuldige freigesprochen 
@@ -54,16 +50,16 @@ aus, wenn die Beweise nur "ein wenig" oder "eher" für die Schuld
 sprechen.
 
 Die Asymmetrie hat auch Konsequenzen für die Einschätzung der
-Schuld nach einem Urteil. Wenn der Angeklagte freigesprochen
+Schuld nach einem Urteil. Wenn {{< var der >}} Angeklagte freigesprochen
 wird, heißt das nur, dass die Beweise nicht für eine
 Verurteilung ausreichen. Ein Freispruch ist keine wirklich
-belastbare Aussage über die Unschuld des Angeklagten. Man wäre
-nicht sehr überrascht, wenn sich herausstellt, dass ein
-freigesprochener Angeklagter in Wirklichkeit schuldig ist.
+belastbare Aussage über die Unschuld {{< var des >}} Angeklagten. Man wäre
+nicht sehr überrascht, wenn sich herausstellt, dass {{< var ein >}}
+{{< var freigesprochener >}} {{< var Angeklagter >}} in Wirklichkeit schuldig ist.
 Umgekehrt ist eine Verurteilung jedoch ein belastbares
 Ergebnis. Man kann zwar nicht hundertprozentig, aber doch
-ziemlich sicher sein, dass der Angeklagte tatsächlich schuldig 
-ist, wenn er verurteilt wird. Die Beweislage wiegt so schwer,
+ziemlich sicher sein, dass {{< var der >}} Angeklagte tatsächlich schuldig 
+ist, wenn {{< var er >}} verurteilt wird. Die Beweislage wiegt so schwer,
 dass es trotz der Unschuldsvermutung zu einer Verurteilung 
 kommt.
 
@@ -91,8 +87,8 @@ lernen Sie, wie man mit Hypothesen über Koeffizienten
 in multiplen Regressionsmodellen umgeht. Die 
 prinzipielle Vorgehensweise ist jedoch sehr ähnlich. 
 
-Die Gegenstücke zu den Behauptungen von Rechtanwältin und 
-Staatsanwalt heißen **Nullhypothese** und **Alternativhypothese**
+Die Gegenstücke zu den Behauptungen von {{< var Rechtsanwältin >}} und 
+{{< var Staatsanwalt >}} heißen **Nullhypothese** und **Alternativhypothese**
 (engl. null hypothesis, alternative hypothesis; der
 Plural von hypothesis ist hypotheses).
 Sie werden mit $H_0$ und $H_1$ abgekürzt. Typischerweise
@@ -100,12 +96,12 @@ besagt die Nullhypothese, dass der unbekannte Parameter $\theta$
 einen bestimmten Wert vorgegebenen Wert $\theta_0$ annimmt,
 während die typische Alternative behauptet, dass das nicht
 so ist.
-$$
+
 \begin{align*}
 H_0: \theta &=\theta_0\\
 H_1: \theta &\neq \theta_0.
 \end{align*}
-$$
+
 Die Nullhypothese entspricht der Unschuldsbehauptung der
 Rechtsanwältin, wohingegen die Alternativhypothese wie der
 Staatsanwalt auf "schuldig" plädiert.
@@ -114,19 +110,19 @@ Wenn in der Nullhypothese eine Gleichheit behauptet wird,
 spricht man von einem **zweiseitigen Test**. Es ist auch möglich, 
 eine Ungleichung in der Nullhypothese zu formulieren. Dann spricht 
 man von einem **einseitigen Test**. Einseitige Tests sind also
-$$
+
 \begin{align*}
 H_0: \theta &\ge\theta_0\\
 H_1: \theta &< \theta_0
 \end{align*}
-$$
+
 oder
-$$
+
 \begin{align*}
 H_0: \theta &\le\theta_0\\
 H_1: \theta &> \theta_0.
 \end{align*}
-$$
+
 Einseitige Tests sind ein klein wenig schwieriger zu 
 verstehen, daher konzentrieren wir uns zunächst auf 
 zweiseitige Tests.
@@ -161,21 +157,22 @@ gegeben ist.
 
 Wenn die Teststatistik im kritischen Bereich liegt, wird
 die Nullhypothese abgelehnt. Das Analogon in einem Strafverfahren
-ist eine Beweislage, die deutlich für die Schuld des
-Angeklagten spricht. Deshalb verurteilt die Richterin den
-Angeklagten. Wenn die Teststatistik nicht im kritischen Bereich 
-liegt, wird die Nullhypothese nicht abgelehnt. Der Angeklagte
-wird mangels Beweisen nicht verurteilt.
+ist eine Beweislage, die deutlich für die Schuld {{< var des >}}
+Angeklagten spricht. Deshalb verurteilt {{< var die >}} {{< var Richterin >}}
+{{< var den >}} {{< var Angeklagten >}}. 
+Wenn die Teststatistik nicht im kritischen Bereich 
+liegt, wird die Nullhypothese nicht abgelehnt. {{< var Der >}}
+Angeklagte wird mangels Beweisen nicht verurteilt.
 
 Wie in einem Prozess kann es auch bei einem Hypothesentest
 zu einem Fehlurteil kommen. Man spricht von einem 
 **Fehler erster Art** (engl. error of the first kind), 
 wenn die Nullhypothese verworfen wird,
-obwohl sie wahr ist. Ein Unschuldiger wird verurteilt.
+obwohl sie wahr ist. {{< var Ein >}} {{< var Unschuldiger >}} wird verurteilt.
 Ein **Fehler zweiter Art** (engl. error of the second kind) 
 tritt auf, wenn die Nullhypothese
-nicht abgelehnt wird, obwohl sie falsch ist. Ein Schuldiger
-wird freigesprochen.
+nicht abgelehnt wird, obwohl sie falsch ist. {{< var Ein >}}
+{{< var Schuldiger >}} wird freigesprochen.
 
 Bei einem Strafprozess will man sicherstellen, dass 
 Unschuldige möglichst nicht verurteilt werden. Dafür nimmt
@@ -266,8 +263,8 @@ auf einem Signifikanzniveau von 0.05 die Nullhypothese
 ablehnt, auf einem Signifikanzniveau von 0.01 jedoch nicht.
 
 Die Wahl des Signifikanzniveaus kann man jedoch auch
-den Lesern einer empirischen Untersuchung überlassen. Dann
-kann jeder selbst entscheiden, ob der Wert der Teststatistik
+den {{< var Lesern >}} einer empirischen Untersuchung überlassen. Dann
+kann {{< var jeder >}} selbst entscheiden, ob der Wert der Teststatistik
 zu einer Ablehnung der Nullhypothese führen soll oder nicht.
 Person A möchte vielleicht ein Signifikanzniveau von 
 $\alpha=0.05$, Person B möchte hingegen $\alpha=0.01$.
@@ -294,7 +291,7 @@ Anstelle einer Testentscheidung für ein vorgegebenes
 Signifikanzniveau wird bei der Verwendung des p-Werts
 zur Kommunikation der p-Wert mitgeteilt. Wenn
 der p-Wert niedriger ist als das Signifikanzniveau,
-das man als Leser gern hätte, lehnt man die 
+das man als {{< var Leser >}} gern hätte, lehnt man die 
 Nullhypothese ab. Wenn der p-Wert größer ist als
 das Signifikanzniveau, lehnt man die Nullhypothese
 nicht ab. Bei sehr großen p-Werten (z.B. größer

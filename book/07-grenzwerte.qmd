@@ -35,23 +35,23 @@ ebenfalls eine Zufallsvariable.
 Da der Durchschnitt $\bar X_n$ eine Zufallsvariable ist, kann man
 seinen Erwartungswert und seine Varianz ausrechnen. Sie sind mit den
 Rechenregeln aus @sec-summenzv leicht zu finden. Es gilt
-$$
+
 \begin{align*}
 E(\bar X_n) &= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
 &= \frac{1}{n}\sum_{i=1}^n E(X_i) \\
 &= \frac{1}{n}\sum_{i=1}^n \mu \\
 &= \mu
 \end{align*}
-$$
+
 und
-$$
+
 \begin{align*}
 Var(\bar X_n) &= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
 &= \frac{1}{n^2}\sum_{i=1}^n Var(X_i) \\
 &= \frac{1}{n^2}\sum_{i=1}^n \sigma^2 \\
 &= \frac{\sigma^2}{n}.
 \end{align*}
-$$
+
 Mit anderen Worten: Wenn man den Durchschnitt aus immer mehr
 Folgenelementen bildet, dann ist der Erwartungswert des
 Durchschnitts immer $\mu$, aber seine Varianz 
@@ -130,6 +130,8 @@ lauten die Funktionsnamen:
 - `rpois(n, lambda)`
 - `rnorm(n, mean, sd)`
 - `rexp(n, rate)`
+- `runif(n, min, max)`
+- `rt(n, df)`
 
 Für die Paretoverteilung gibt es keinen vorgefertigten Algorithmus.
 Das Paket `distributionsrd` stellt jedoch die Funktion 
@@ -343,12 +345,12 @@ die **Folge der standardisierten Durchschnitte**. Dazu subtrahiert man den
 Erwartungswert und dividiert durch die Standardabweichung. Zur 
 Erinnerung: Der Erwartungswert und die Standardabweichung 
 von $\bar X_n$ sind
-$$
+
 \begin{align*}
 E(\bar X_n) &= \mu \\
 \sqrt{Var(\bar X_n)}&=\sqrt{\frac{\sigma^2}{n}}=\frac{\sigma}{\sqrt{n}}.
 \end{align*}
-$$
+
 Die Folge der standardisierten Durchschnitte bezeichnen wir mit
 $$
 U_n=\frac{\bar X_n-\mu}{\sqrt{\sigma^2/n}}.
@@ -456,12 +458,12 @@ $$
 X\sim Exp(2).
 $$
 Erwartungswert und Standardabweichung sind (vgl. @sec-exp)
-$$
+
 \begin{align*}
 E(X) &= \mu=\frac{1}{2}\\
 \sqrt{Var(X)}& =\sigma=\sqrt{\frac{1}{4}}=\frac{1}{2}.
 \end{align*}
-$$
+
 Der R-Code sieht folgendermaßen aus:
 ```{r}
 mu <- 1/2
@@ -490,7 +492,7 @@ $U_{n,1},\ldots,U_{n,R}$ kann trotz des noch kleinen
 Umfang $n=50$ schon recht gut durch eine Standardnormalverteilung
 approximiert werden.
 ```{r}
-hist(u, prob=TRUE, breaks=50)
+hist(u, probability=TRUE, breaks=50)
 
 g <- seq(from=-4, to=4, length=200)
 lines(g, dnorm(g), col="red")

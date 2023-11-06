@@ -76,8 +76,8 @@ In fast allen Fällen wird die Funktion
 $X:\Omega\to\mathbb{R}$ nicht explizit angegeben, sondern implizit als
 vorhanden vorausgesetzt. Auch die Ergebnismenge wird im allgemeinen nicht 
 ausdrücklich aufgeschrieben. Trotzdem ist es wichtig zu erkennen, dass 
-Zufallsvariablen auf dem mengentheoretischen Fundament aufbauen, dass
-wir in den vorangegangenen Kapiteln gelegt haben und deshalb eine
+Zufallsvariablen auf dem mengentheoretischen Fundament aufbauen, das
+wir in den vorangegangenen Kapiteln gelegt haben, und deshalb eine
 saubere mathematische Grundlage haben.
 
 ::: { .callout-tip collapse="true"}
@@ -126,7 +126,7 @@ kennen und vor allem verstehen,
 damit die enge Verbindung zwischen Zufallsvariablen und 
 Ereignissen klar ist.  Die Verteilungsfunktion einer Zufallsvariable ist sehr nützlich, 
 weil durch sie die Verteilung der Zufallsvariable eindeutig charakterisiert wird. 
-Kennt man die Verteiliungsfunktion, dann weiß man alles über die Vertelung, was 
+Kennt man die Verteiliungsfunktion, dann weiß man alles über die Verteilung, was 
 wichtig ist.
 
 Die Verteilungsfunktion ist - wie der Name schon sagt - eine Funktion. Ihr
@@ -219,8 +219,10 @@ Treppenfunktion. Der Träger der Zufallsvariable gibt an, an welchen
 Stellen die Treppenstufen liegen. Die erste Stufe ist an der Stelle $x_1$,
 die zweite an der Stelle $x_2$ etc. Die Stufenhöhen sind $p_1, p_2,\ldots,$.
 
-Die folgenden Abbildung zeigt die Verteilungsfunktion einer Zufallsvariablen $X$.
+::: {.content-visible when-format="html"}
+Die folgende Abbildung zeigt die Verteilungsfunktion einer Zufallsvariablen $X$.
 Hier und bei den folgenden Abbildungen im Rest dieses eLehrbuchs können Sie den R-Code, mit dem die Grafiken erzeugt werden, aufklappen. Er wird jedoch nicht näher erklärt und ist zum Verständnis des Inhalts auch nicht notwendig.
+
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -233,6 +235,29 @@ plot(stepfun(x, y),
      ylab="F(x)",
      main="Verteilungsfunktion")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+Die folgende Abbildung zeigt die Verteilungsfunktion einer Zufallsvariablen $X$.
+In der Online-Version dieses eLehrbuchs können Sie auch den R-Code ansehen,
+mit dem diese Grafik erzeugt wurde. Das gilt ebenso für die restlichen
+Grafiken in diesem Buch.
+
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion"
+par(cex=0.7)
+x <- c(0, 3, 4, 9)
+y <- c(0, 0.3, 0.4, 0.6, 1)
+plot(stepfun(x, y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)",
+     main="")
+```
+:::
+
 An dieser Verteilungsfunktion lässt sich ablesen, dass
 
 - $X$ diskret verteilt ist, denn die Verteilungsfunktion ist eine Treppenfunktion,
@@ -247,7 +272,7 @@ wenn man von der Sprungstelle ein winziges Stück nach rechts wandert, ändert
 sich der Funktionswert nicht. Wandert man ein winziges Stück nach links,
 springt man auf die tiefere Stufe zurück.
 
-::: { .callout-tip collapse="true"}
+:::: { .callout-tip collapse="true"}
 ## Beispiel: Anzahl der Sechsen bei zwei Würfeln
 
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
@@ -275,6 +300,24 @@ F(x)=\left\{
 \right.
 $$
 bzw. als Grafik
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion"
+par(cex=0.7)
+x <- c(0, 1, 2)
+y <- c(0, 25/36, 35/36, 1)
+plot(stepfun(x,y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)", 
+     main="")
+```
+:::
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -288,6 +331,8 @@ plot(stepfun(x,y),
      main="Verteilungsfunktion")
 ```
 :::
+
+::::
 
 ## Stetige Zufallsvariablen
 
@@ -311,7 +356,7 @@ Die Dichte hat folgende Eigenschaften:
 - Die Dichte kann nicht negativ sein, da sonst die Verteilungsfunktion
 nicht mehr monoton wachsend wäre. Es gilt also $f(x)\le 0$ für alle $x\in\mathbb{R}$.
 
-- Die Fläche unter der Dichte muss 1 ergeben, da jede Verteiliungsfunktion $F(x)$
+- Die Fläche unter der Dichte muss 1 ergeben, da jede Verteilungsfunktion $F(x)$
 für $x\to\infty$ gegen 1 konvergiert. Es gilt also
 $$
 \int_{-\infty}^\infty f(x)dx=1.
@@ -356,7 +401,7 @@ einem Dichte-Plot sofort, in in welchen Bereichen die Zufallsvariable
 mit großer Wahrscheinlichkeit liegen wird und wo es eher unwahrscheinlich
 ist.
 
-::: { .callout-tip collapse="true"}
+:::: { .callout-tip collapse="true"}
 ## Beispiel: Dichte- und Verteilungsfunktion
 
 Die Dichte der Zufallsvariable $X$ sei 
@@ -375,6 +420,8 @@ $[-0.56, 1.1]$ liegen wird. Es ist eher unwahrscheinlich, dass ein Wert
 sehr nah an der rechten Grenzen realisiert wird. Auch der Bereich
 um die 0 herum ist etwas weniger wahrscheinlich als die Bereiche
 um die 0.75 herum oder nah an der linken Grenze.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -389,16 +436,35 @@ plot(x, f, t="l", lwd=3,
      xlab="x", ylab="f(x)",
      main="Dichte")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichtefunktion"
+par(cex=0.7)
+x <- c(-1, -0.56, NA,
+       seq(-0.56, 1.1, length=100),
+       NA, 1.1, 1.8)
+
+f <- 0.5-x^4+x^2
+f[c(1, 2, 105, 106)] <- 0
+
+plot(x, f, t="l", lwd=3,
+     xlab="x", ylab="f(x)", main="")
+```
+:::
+
 Wie hoch ist die Wahrscheinlichkeit, dass die Zufallsvariable $X$
 in dem Intervall $[0.1,0.8]$ liegt? Um diese Frage zu beantworten,
 berechnen wir das Integral
-$$
+
 \begin{align*}
 \int_{0.1}^{0.8} f(x)dx&=\int_{0.1}^{0.8} (-x^4+x^2+0.5) dx\\
 &= \left. -\frac{1}{5}x^5+\frac{1}{3}x^3+\frac{1}{2}x \right|_{0.1}^{0.8}\\[2ex]
 &= 0.4548.
 \end{align*}
-$$
+
 Die Verteilungsfunktion erhält man durch Integration der Dichte.
 $$
 F(x)=\left\{
@@ -418,6 +484,8 @@ mit höherer Wahrscheinlichkeit in einem Bereich, in dem die Verteilungsfunktion
 steil ist, als in einem Bereich, in dem sie flacher verläuft. Bereiche,
 in denen die Verteilungsfunktion gar nicht ansteigt, gehören nicht zum
 Träger der Zufallsvariable.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -434,6 +502,26 @@ plot(x, f, t="l", lwd=3,
      main="Verteilungsfunktion")
 ```
 :::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion"
+par(cex=0.7)
+x <- c(-1, -0.56, 
+       seq(-0.56, 1.1, length=100),
+       1.1, 1.8)
+f <- x^3/3-x^5/5+x/2+0.3275
+
+f[1:2] <- 0
+f[103:104] <- 1
+
+plot(x, f, t="l", lwd=3,
+     xlab="x", ylab="F(x)", main="")
+```
+:::
+
+::::
 
 ## Numerische Integration {#sec-numintegration}
 
@@ -462,6 +550,7 @@ $$
 f(x)=0.5-x^4+x^2.
 $$
 
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -489,6 +578,38 @@ for(i in 1:(length(g)-1)){
         c(0, f(g[i]), f(g[i]), 0))
 }
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Approximation des Integrals"
+par(cex=0.7)
+x <- c(-1, -0.56, NA,
+       seq(-0.56, 1.1, length=100),
+       NA, 1.1, 1.8)
+
+f <- function(x){
+  return(0.5-x^4+x^2)
+}
+
+ff <- f(x)
+ff[c(1, 2, 105, 106)] <- 0
+
+plot(x, ff, t="l", lwd=3,
+     xlab="x", ylab="f(x)", main="")
+
+abline(h=0)
+dx <- 0.05
+
+g <- seq(0.1,0.8,by=dx)
+for(i in 1:(length(g)-1)){
+  lines(c(g[i], g[i], g[i]+dx, g[i]+dx),
+        c(0, f(g[i]), f(g[i]), 0))
+}
+```
+:::
+
 Die Fläche der Rechtecke lässt sich sehr leicht bestimmen, selbst wenn es 
 viele sind. Wenn die Gitterpunkte zwischen $a$ und $b$ mit $x_1,\ldots,x_R$
 bezeichnet werden und der Abstand zwischen zwei benachbarten Gitterpunkten
@@ -557,13 +678,15 @@ durch Invertieren finden. Das geht leicht, wenn die Verteilungsfunktion
 streng monoton steigend verläuft. Aufpassen muss man jedoch, wenn
 sie Sprünge aufweist oder in einigen Bereichen flach verläuft.
 
-::: { .callout-tip collapse="true"}
+:::: { .callout-tip collapse="true"}
 ## Beispiel: Anzahl der Sechsen bei zwei Würfeln
 
 Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Die Verteilungsfunktion ist eine Treppenfunktion
 mit den Sprungstellen 0, 1 und 2, die hier noch einmal 
 gezeigt wird. 
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -577,6 +700,25 @@ plot(stepfun(x, y),
      ylab="F(x)",
      main="Verteilungsfunktion")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion"
+par(cex=0.7)
+x <- c(0, 1, 2)
+y <- c(0, 25/36, 35/36, 1)
+
+plot(stepfun(x, y),
+     verticals=FALSE, 
+     pch=19,
+     xlab="x",
+     ylab="F(x)", 
+     main="")
+```
+:::
+
 Wie sieht die zugehörige Quantilfunktion aus? Um das zu beantworten,
 wandern wir langsam die y-Achse hoch und schauen jeweils, welches 
 Quantil zu dem Wert gehört. Für Werte von $0<p\le 25/36$ landet man
@@ -592,6 +734,8 @@ F^{-1}(p)=\left\{
 \right.
 $$
 bzw. als Grafik
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -612,6 +756,31 @@ for(i in 2:length(Q)){
 points(p[2:3], Q[1:2], pch=19)
 ```
 :::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Quantilfunktion"
+par(cex=0.7)
+p <- c(0, 25/36, 35/36, 1)
+Q <- c(0, 1, 2)
+
+plot(p[1:2], Q[c(1,1)],
+     t="l",
+     xlab="x",
+     ylab="F(x)",
+     xlim=c(0,1),
+     ylim=c(0,2),
+     main="")
+
+for(i in 2:length(Q)){
+  lines(p[c(i,i+1)], Q[c(i,i)])
+}
+points(p[2:3], Q[1:2], pch=19)
+```
+:::
+
+::::
 
 Im Gegensatz zur Verteilungsfunktion ist die Quantilfunktion nicht
 rechtsstetig, sondern linksstetig. Der Funktionswert an einer Sprungstelle
@@ -635,14 +804,14 @@ das Intervall $[1,2]$ zu betrachten, weil die Werte 0 und
 1 nicht im Definitionsbereich der Quantilfunktion liegen.
 Zum Invertieren setzt man die Verteilungsfunktion auf 
 den Wert $p$ und löst dann nach $x$ auf.
-$$
+
 \begin{align*}
 &&F(x) &= p \\
 \Leftrightarrow&& (x-1)^2 &= p\\
 \Leftrightarrow&& x-1 &= \sqrt{p}\\
 \Leftrightarrow&& x &= 1+\sqrt{p}
 \end{align*}
-$$
+
 Folglich lautet die Quantilfunktion
 $$
 F^{-1}(p)=1+\sqrt{p}.
@@ -717,7 +886,7 @@ f(x)=\left\{
 \right.
 $$
 Der Erwartungswert dieser Zufallsvariable beträgt
-$$
+
 \begin{align*}
 E(X) &= \int_{-\infty}^\infty x f(x) dx\\
 &=\int_{-0.56}^{1.1} x f(x) dx\\
@@ -727,7 +896,7 @@ E(X) &= \int_{-\infty}^\infty x f(x) dx\\
 &=0.3732-0.0978\\[1ex]
 &=0.2754.
 \end{align*}
-$$
+
 Der Erwartungswert einer stetige Zufallsvariable ist ein Integral.
 Es ist daher auch möglich, den Erwartungswert in R numerisch 
 zu approximieren. Die Vorgehensweise ist analog zu @sec-numintegration:
@@ -792,21 +961,21 @@ Zwei Würfel werden geworfen. Die Zufallsvariable $X$ sei die Anzahl
 der Sechsen. Wie hoch ist die Varianz von $X$? Für die Berechnung nutzen
 wir den Streuungsverschiebungssatz. Der Erwartungswert von $X^2$ wird
 analog zum Erwartungswert berechnet. Es ergibt sich
-$$
+
 \begin{align*}
 E(X^2)&=\sum_{j:x_j\in T_X} x_j^2f(x_j)\\
 &=0^2\cdot\frac{25}{36}+1^2\cdot\frac{10}{36}+2^2\cdot\frac{1}{36}=\frac{7}{18}.
 \end{align*}
-$$
+
 Der Erwartungswert $E(X)$ wurde bereits im vorherigen Abschnitt berechnet,
 nämlich $E(X)=1/3$. Die Varianz ist folglich
-$$
+
 \begin{align*}
 Var(X) &= E(X^2)-(E(X))^2\\
 &=\frac{7}{18}-\frac{1}{9}\\
 &= \frac{5}{18}.
 \end{align*}
-$$
+
 :::
 
 ::: { .callout-tip collapse="true"}
@@ -825,7 +994,7 @@ x^2-x^4+0.5 & \text{ wenn }-0.56 \le x < 1.1\\
 \right.
 $$
 Der Erwartungswert von $X^2$ beträgt
-$$
+
 \begin{align*}
 E(X^2) &= \int_{-\infty}^\infty x^2f(x)dx\\
 &=\int_{-0.56}^{1.1} x^2 (-x^4+x^2+0.5)dx\\
@@ -835,16 +1004,16 @@ E(X^2) &= \int_{-\infty}^\infty x^2f(x)dx\\
 &=0.2655-(-0.0378)\\[1ex]
 &=0.3033.
 \end{align*}
-$$
+
 Der Erwartungswert von $X$ wurde bereits im letzten Abschnitt berechnet,
 und zwar $E(X)=0.2754$. Damit ergibt sich die Varianz als
-$$
+
 \begin{align*}
 Var(X) &= E(X^2)-(E(X))^2\\
 &=0.3033-0.2754^2\\
 &= 0.2275.
 \end{align*}
-$$
+
 So wie der Erwartungswert kann auch die Varianz numerisch
 approximiert werden, denn auch die Varianz einer stetigen
 Zufallsvariable ist letztlich ein Integral. Wir nutzen
@@ -883,7 +1052,7 @@ Transformation auf die Verteilungsfunktion, den Erwartungswert und die
 Varianz auswirkt.
 
 Die Verteilungsfunktion von $Y$ ist für $a>0$
-$$
+
 \begin{align*}
 F_Y(y) &= P(Y\le y)\\
 &= P(aX+b \le y)\\
@@ -891,9 +1060,9 @@ F_Y(y) &= P(Y\le y)\\
 &= P\left(X \le \frac{y-b}{a}\right)\\
 &= F_X\left(\frac{y-b}{a}\right).
 \end{align*}
-$$
+
 Für $a<0$ dreht sich die Ungleichung bei der Division durch $a$ um, also gilt dann
-$$
+
 \begin{align*}
 F_Y(y) &= P(Y\le y)\\
 &= P(aX+b \le y)\\
@@ -901,7 +1070,7 @@ F_Y(y) &= P(Y\le y)\\
 &= P\left(X \ge \frac{y-b}{a}\right)\\
 &= 1-P\left(X <\frac{y-b}{a}\right).
 \end{align*}
-$$
+
 Wie die Beziehung des letzten Terms zur Verteilungsfunktion von $X$ aussieht,
 lässt sich nicht einfach allgemein beantworten. Wenn $X$ stetig verteilt ist,
 macht es keinen Unterschied, ob in der Ungleichung ein "$<$" oder ein "$\le$"
@@ -913,7 +1082,7 @@ Wie wirkt sich eine lineare Transformation $Y=aX+b$ auf den Erwartungswert aus?
 Wir untersuchen diskrete und stetige Zufallsvariablen getrennt voneinander.
 Zuerst betrachten wir eine diskrete Zufallsvariable $X$ und $a,b\in\mathbb{R}$.
 Der Erwartungswert von $Y$ ist
-$$
+
 \begin{align*}
 E(Y) &= E(aX+b)\\
 &= \sum_{j\in T_X}(ax_j+b)f(x_j)\\
@@ -921,10 +1090,10 @@ E(Y) &= E(aX+b)\\
 &= a\sum_{j\in T_X}x_j f(x_j) + b\sum_{j\in T_X}f(x_j)\\
 &= aE(X)+b,
 \end{align*}
-$$
+
 denn $\sum_{j\in T_X}f(x_j)=1$. Wenn $X$ eine stetige Zufallsvariable ist,
 dann gilt für den Erwartungswert der linearen Transformation
-$$
+
 \begin{align*}
 E(Y) &= E(aX+b)\\
 &= \int_{-\infty}^\infty (ax+b)f(x)dx\\
@@ -932,7 +1101,7 @@ E(Y) &= E(aX+b)\\
 &= a\int_{-\infty}^\infty x f(x)dx + b\int_{-\infty}^\infty f(x)dx\\
 &= aE(X)+b,
 \end{align*}
-$$
+
 weil $\int_{-\infty}^\infty f(x)dx=1$.
 
 Es gilt also sowohl für diskrete als auch für stetige Zufallsvariablen, 
@@ -952,7 +1121,7 @@ $$
 Die Ergebnisse zum Erwartungswert können wir nun benutzen, um die
 Varianz einer linear transformierten Zufallsvariable zu untersuchen.
 Es gilt
-$$
+
 \begin{align*}
 Var(Y) &= E((Y-E(Y))^2)\\
 &= E((aX+b-E(aX+b))^2)\\
@@ -963,7 +1132,7 @@ Var(Y) &= E((Y-E(Y))^2)\\
 &= a^2 E((X-E(X))^2)\\
 &= a^2 Var(X).
 \end{align*}
-$$
+
 Diese Herleitung gilt sowohl für diskrete als auch für stetige Zufallsvariablen.
 Offensichtlich wirkt sich eine additive Verschiebung um $b$ überhaupt nicht
 auf die Varianz aus. Eine Multiplikation mit $a$ verändert die Varianz jedoch,

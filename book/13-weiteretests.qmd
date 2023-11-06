@@ -16,21 +16,21 @@ auf der $\chi^2$-Verteilung (sprich: chi-Quadrat,
 engl. $\chi^2$-distribution, sprich: kai squared). Es handelt sich
 dabei um eine stetige Verteilung mit positivem Träger. 
 Eine Zufallsvariable $X$ heißt $\chi^2$-verteilt mit dem 
-Parameter $n$, wenn sie die Dichtefunktion 
+Parameter $\nu$, wenn sie die Dichtefunktion 
 $$
-f(x)=\left\{
+f_X(x)=\left\{
 \begin{array}{ll}
-C_n\cdot x^{\frac{n}{2}-1}\exp(-\frac{x}{2}) & \text{ wenn }x \ge 0\\
-0 & \text{ sonst.}
+C_\nu\cdot x^{\frac{\nu}{2}-1}\exp(-\frac{x}{2}) & \text{ wenn }x \ge 0\\
+0 & \text{ sonst}
 \end{array}
 \right.
 $$
-hat. Der Parameter $n$ wird Zahl der Freiheitsgrade (engl. degrees of freedom) 
-genannt. Die Konstante $C_n$ dient nur der Normierung, ihre genaue 
+hat. Der Parameter $\nu$ wird Zahl der Freiheitsgrade (engl. degrees of freedom) 
+genannt. Die Konstante $C_\nu$ dient nur der Normierung, ihre genaue 
 Definition spielt hier keine Rolle, da wir ohnehin die R-Funktionen für die
 Berechnung der Dichte-, Verteilungs- und Quantilfunktion verwenden. Die 
-gängige Kurzschreibweise für eine $\chi^2$-verteilte Zufallsvariable mit $n$ 
-Freiheitsgraden ist $X\sim \chi^2_n$.
+gängige Kurzschreibweise für eine $\chi^2$-verteilte Zufallsvariable mit $\nu$ 
+Freiheitsgraden ist $X\sim \chi^2_\nu$.
 
 Die Abbildung zeigt die Dichtefunktion einer $\chi^2$-Verteilung mit
 3, 5 und 10 Freiheitsgraden.
@@ -55,12 +55,11 @@ legend("topright",
 ```
 
 Erwartungswert und Varianz sind
-$$
+
 \begin{align*}
-E(X) &= n\\
-Var(X) &= 2n.
+E(X) &= \nu\\
+Var(X) &= 2\nu.
 \end{align*}
-$$
 
 In R ist die Abkürzung für die $\chi^2$-Verteilung `chisq`. Die Funktionen
 für die Dichte, Verteilungs- und Quantilfunktion sind:
@@ -80,12 +79,11 @@ zu einer Abhängigkeit kommt? Das ist dann möglicherweise der Ausgangspunkt
 für eine neue Theorie. Die Nullhypothese und Alternativhypothese, um 
 die es in diesem Abschnitt geht, sind nicht von der Form, die
 in @sec-vokabular beschrieben wurde. Sie lauten nun
-$$
+
 \begin{align*}
 H_0&: X\text{ und }Y \text{ sind unabhängig}\\
 H_1&: X\text{ und }Y \text{ sind abhängig.}
 \end{align*}
-$$
 
 Wie lässt sich testen, ob zwischen $X$ und $Y$ Unabhängigkeit vorliegt, 
 wenn man die gemeinsame Populationsverteilung nicht kennt? Ohne Kenntnis 
@@ -129,7 +127,7 @@ $$
 &&B_1&B_2&\ldots&B_K&\sum \\\hline
 &A_1&N_{11}&N_{12}&\ldots&N_{1K}&N_{1\cdot}\\
 &A_2&N_{21}&N_{22}&\ldots&N_{2K}&N_{2\cdot}\\
-X\in&\vdots&\vdots&\vdots&&\vdots\\
+X\in&\vdots&\vdots&\vdots&&\vdots&\vdots\\
 &A_J&N_{J1}&N_{J2}&\ldots&N_{JK}&N_{J\cdot}\\\hline
 &\sum&N_{\cdot 1}&N_{\cdot 2}&\ldots&N_{\cdot K}&n\\\hline
 \end{array}
@@ -243,12 +241,12 @@ Hängen die Tagesrenditen der beiden Aktien trotz dieser unterschiedlichen
 Ausrichtung miteinander zusammen oder bewegen sich die Kurse 
 unabhängig voneinander? Als Nullhypothese und Alternativhypothese
 formulieren wir
-$$
+
 \begin{align*}
 H_0&: \text{Die Tagesrenditen sind unabhängig}\\
 H_1&: \text{Die Tagesrenditen sind abhängig.}
 \end{align*}
-$$
+
 Zum Testen braucht man eine einfache Stichprobe aus $(S_t,Z_t)$.
 Wir nehmen an, dass die Tagesrenditen über die Zeit hinweg identisch
 und unabhängig verteilt sind. Diese Annahme ist nicht ganz korrekt,
@@ -288,7 +286,7 @@ in jedem Intervall also etwa 50 Beobachtungen, so dass die Faustregel
 wegen $50\cdot 50/300\approx 8.3$ erfüllt ist. 
 
 Als Intervalle für Siemens wählen wir
-$$
+
 \begin{align*}
 A_1 &= (-\infty, -1.4] \\
 A_2 &= (-1.4, -0.6] \\
@@ -297,9 +295,9 @@ A_4 &= (0.1, 0.9]\\
 A_5 &= (0.9, 1.6]\\
 A_6 &= (1.6, \infty)
 \end{align*}
-$$
+
 und für Zalando setzen wir die Intervalle auf
-$$
+
 \begin{align*}
 B_1 &= (-\infty, -3] \\
 B_2 &= (-3, -1.5] \\
@@ -308,7 +306,7 @@ B_4 &= (0, 1.3]\\
 B_5 &= (1.3, 3.1]\\
 B_6 &= (3.1, \infty)
 \end{align*}
-$$
+
 Die Diskretisierung der Renditen kann leicht durch die Funktion `cut`
 erzielt werden. Die diskretisierten Vektoren speichern wir unter
 den Namen `s_d` und `z_d`.
@@ -417,7 +415,7 @@ Ungenauigkeiten nicht auf.)
 Wenn $X$ eine Zufallsvariable ist, dann stellt sich oft die Frage,
 ob $X$ einer bestimmten Verteilung folgt. Kann man beispielsweise
 den Produktionsfehler einer Maschine wirklich gut durch eine 
-Normalverteilung modellieren? Folgt die Zahl der Kunden, die
+Normalverteilung modellieren? Folgt die Zahl der {{< var KundenPL >}}, die
 innerhalb einer bestimmten Zeitspanne eintreffen, wirklich einer
 Poissonverteilung? Das sind empirische Fragen, die durch einen
 statistischen Hypothesentest überprüft werden können. In diesem 
@@ -432,12 +430,12 @@ Partition bezeichnen wir mit $A_1,\ldots,A_J$. Wenn $X$
 bereits diskret verteilt ist, kann auf die Partitionierung
 verzichtet werden. Man setzt dann einfach 
 $A_j=\{x_j\}$. Die Null- und Alternativhypothesen lauten
-$$
+
 \begin{align*}
 H_0&: ~P(X\in A_j)=\pi_j,\quad j=1,\ldots,J\\
 H_1&: ~\text{nicht }H_0.
 \end{align*}
-$$
+
 Wie kann man die Nullhypothese testen? Dazu zieht man wie üblich 
 eine einfache Stichprobe $X_1,\ldots,X_n$. Wenn die Nullhypothese
 stimmt, ist die Anzahl der Stichprobenelement, die in $A_j$ liegen,
@@ -474,10 +472,10 @@ das $(1-\alpha)$-Quantil der $\chi^2$-Verteilung mit $J-1$
 Freiheitsgraden.
 
 ::: { .callout-tip collapse="true"}
-## Beispiel: Anzahl der Kundenanrufe
+## Beispiel: Anzahl von Anrufen
 
 Es soll getestet werden, ob die Anzahl 
-von Kunden, die innerhalb von 15 Minuten bei
+von {{< var KundenPL >}}, die innerhalb von 15 Minuten bei
 einer Hotline anrufen, durch eine Poisson-Verteilung mit
 dem Parameter $\lambda=4$ modelliert werden kann. Über einen
 Zeitraum von 100 Stunden (bzw. 400 Viertelstunden) wurden 
@@ -550,7 +548,7 @@ hier größer ist als das vorgegebene Signifikanzniveau von
 
 <img src="images/AdobeStock_52792277b_Logarithmen.jpeg" align="right" width=45%" style="padding-left:15px;"/>
 Die Benford-Verteilung gibt an, mit welcher Wahrscheinlichkeit
-die erste Ziffer von irgendwelchen Zahlen auftritt. Wenn man
+die erste Ziffer von "irgendwelchen" Zahlen auftritt. Wenn man
 beispielsweise aus der Zeitung eine beliebige Zahl zufällig auswählt, 
 ist ihre erste Ziffer mit einer Wahrscheinlichkeit von rund 30 Prozent 
 eine 1. (Der Astronom Newcomb hat 1881 bemerkt, dass in 
@@ -565,7 +563,7 @@ beträgt für $j=1,\ldots,9$
 $$
 \pi_j=\log_{10}\left(1+\frac{1}{j}\right).
 $$
-Da Betrüger diese Gesetzmäßigkeit nicht gut in gefälschte
+Da {{< var Betrüger >}} diese Gesetzmäßigkeit nicht gut in gefälschte
 Buchhaltungen einbauen können, nutzen Finanzverwaltungen
 statistisch signifikante Abweichungen von der Benford-Verteilung 
 als Warnhinweis auf Manipulationen in der Buchhaltung.
@@ -614,7 +612,7 @@ Gründe gibt, muss die Finanzverwaltung nun genauer untersuchen.
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Größenverteilung von Großstädten
 
-Die Größe von Städten (meist gemessen durch die Einwohnerzahl im
+Die Größe von Städten (meist gemessen durch die Bevölkerungszahl im
 Einzugsgebiet) folgt angeblich recht gut einer Gesetzmäßigkeit, die
 als "Zipf's law" bezeichnet wird. Das gilt zumindest, wenn die
 Städte eine gewisse Mindestgröße haben. Formal lässt sich das
@@ -660,7 +658,7 @@ Das unterste Intervall startet bei 2 Mio., das oberste Intervall
 ist nach oben offen. Wir ergänzen den Vektor der Grenzen unten
 und oben um die Untergrenze des ersten Intervalls und die
 Obergrenze des letzten Intervalls. Anstelle von `Inf` könnte man
-jeden beliebigen Wert setzen, der größer ist als die Einwohnerzahl von
+jeden beliebigen Wert setzen, der größer ist als die Bevölkerungszahl von
 Tokyo.
 ```{r}
 grenzen <- c(2000000, grenzen, Inf)

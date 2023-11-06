@@ -1,0 +1,40 @@
+# Literatur {#sec-literatur}
+
+<img src="images/AdobeStock_236346950b_Literatur.jpeg" width=100%" style="padding-bottom:10px;"/>
+
+Es gibt eine sehr große Zahl von guten Lehrbüchern zur Wahrscheinlichkeitstheorie und zur statistischen Inferenz im Bereich Data Science. Die folgende Auswahl ist in keiner Weise erschöpfend. Sollten Sie ein anderes Lehrbuch kennen und nutzen, dass Ihnen besonders gut gefällt, können Sie den Titel gerne an mark.trede@uni-muenster.de schicken.
+
+- Günter Bamberg, Franz Baur und Michael Krapp,
+  *Statistik*, 18. Aufl., 2017.  
+  
+  <small>Dieses Lehrbuch können Sie im Uni-Netz
+  als [Online-Ressource](https://www.degruyter.com/document/doi/10.1515/9783110495720/html)
+  lesen oder in einer etwas älteren Auflage im Lehrbuch-Magazin unter
+  der Signatur `MAT 7:Bam` finden.</small>
+
+- Andreas Behr, *Grundwissen Induktive Statistik*, 2018.   
+
+  <small>Im Lehrbuchmagazin der ULB hat dieses Buch die Signatur `OEK 9.2:Beh`.
+  Wahrscheinlichkeitstheoretische Grundlagen werden in diesem 
+  Lehrbuch jedoch nicht behandelt.</small>
+  
+- Bradley Efron und Trevor Hastie, *Computer Age Statistical Inferenz*, 2016. 
+
+  <small>Dieses Fachbuch ist fortgeschritten. Es ist im Uni-Netz als 
+  Online-Ressource vorhanden.</small>
+
+- Karl Mosler und Friedrich Schmid, *Wahrscheinlichkeitsrechnung
+  und schließende Statistik*, 4. Aufl., 2011.   
+  
+  <small>An diesem Lehrbuch orientiert sich der Kurs
+  "Data Science 2" sowohl hinsichtlich des Aufbaus
+  als auch der Notation. Die zweite Auflage ist in der ULB
+  als [Online-Ressource](https://link.springer.com/book/10.1007/3-540-29441-4)
+  vorhanden. Im Lehrbuch-Magazin der ULB finden Sie das Buch
+  unter der Signatur `OEK 9.2:Mos`.</small>
+  
+- Aris Spanos, *Probability Theory and Statistical Inference*, 2nd ed., 2019.
+
+  <small>Dieses Buch ist eine sehr umfangreiche und gründliche
+  Einführung in die Wahrscheinlichkeitstheorie und statistische
+  Inferenz.</small>

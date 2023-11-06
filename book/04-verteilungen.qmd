@@ -98,7 +98,7 @@ $$
 E(1_A)=0\cdot (1-\pi)+1\cdot \pi=\pi.
 $$
 Und die Varianz beträgt
-$$
+
 \begin{align*}
 Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot \pi\\
 &=\pi^2(1-\pi)+(1-\pi)^2\pi\\
@@ -107,7 +107,7 @@ Var(1_A)&=(0-\pi)^2\cdot (1-\pi)+(1-\pi)^2\cdot \pi\\
 &=\pi-\pi^2\\
 &=\pi (1-\pi).
 \end{align*}
-$$
+
 
 ::: { .callout-tip collapse="true"}
 ## Beispiel: Befragung zu Startups
@@ -178,12 +178,12 @@ $$
 X\sim B(n,\pi).
 $$
 Der Erwartungswert und die Varianz betragen
-$$
+
 \begin{align*}
 E(X) &= n\pi\\
 Var(X) &= n\pi (1-\pi).
 \end{align*}
-$$
+
 Auf die Herleitungen verzichten wir an dieser Stelle. Sie sind 
 sehr einfach mit den Methoden durchführbar, die in 
 @sec-kovarianz behandelt werden.
@@ -265,26 +265,29 @@ Ergebnis ist dann aber keine Binomialverteilung mehr.
 
 <img src="images/AdobeStock_369056257b_Flugzeugkabine.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Die Plätze in einem Flugzeug werden gewöhnlich überbucht.
-Es werden mehr Passagiere gebucht als Plätze vorhanden sind.
+Es werden mehr {{< var Passagiere >}} gebucht als Plätze vorhanden sind.
 Das hat einen einfachen Grund: Erfahrungsgemäß kommen nicht
-alle Passagiere, die einen Platz gebucht haben. Es gibt
+alle {{< var Passagiere >}}, die einen Platz gebucht haben. Es gibt
 einen gewissen Anteil an "no-shows". Die Überbuchung hilft,
 dass nicht regelmäßig Plätze ungenutzt bleiben. 
 
 Für einen Flug von Münster nach München ist eine Maschine mit
 90 Plätzen vorgesehen. Angenommen, die Wahrscheinlichkeit eines 
-"no-shows" beträgt für jeden Passagier 0.08. Die Wahrscheinlichkeit,
-dass ein gebuchter Passagier wirklich kommt, ist also 0.92.
-Ferner nehmen wir an, dass das 
-Erscheinen jedes Passagiers stochastisch unabhängig ist vom Erscheinen der 
-übrigen Passagiere. Die Anzahl der tatsächlich erscheinenden Passagiere
+"no-shows" beträgt für {{< var jeden >}} {{< var Passagier >}} 
+0.08. Die Wahrscheinlichkeit, dass {{< var ein >}} 
+{{< var gebuchter >}} {{< var Passagier >}} tatsächlich erscheint, 
+ist also 0.92. Ferner nehmen wir an, dass das 
+Erscheinen {{< var jedes >}} {{< var Passagiers >}} 
+stochastisch unabhängig ist vom Erscheinen der 
+übrigen {{< var Passagiere >}}. 
+Die Anzahl der tatsächlich erscheinenden {{< var Passagiere >}}
 $X$ ist dann binomialverteilt,
 $$
 X\sim B(N,0.92),
 $$
-wobei $N$ die Zahl der gebuchten Passagiere ist. Wie hoch ist die 
+wobei $N$ die Zahl der gebuchten {{< var Passagiere >}} ist. Wie hoch ist die 
 Wahrscheinlichkeit, dass die Maschine überbucht ist, wenn die
-Fluggesellschaft $N=94$ Passagiere bucht? Zu einer Überbuchung kommt es,
+Fluggesellschaft $N=94$ {{< var Passagiere >}} bucht? Zu einer Überbuchung kommt es,
 wenn $X>90$ ist. Die Wahrscheinlichkeit beträgt
 $$
 P(X>90)=1-P(X\le 90).
@@ -314,12 +317,12 @@ für $x=0,1,2,\ldots$ hat. Die übliche Kurzschreibweise ist $X\sim Po(\lambda)$
 
 Der Träger der Poisson-Verteilung besteht aus allen natürlichen Zahlen (und
 der Null). Erwartungswert und Varianz sind beide
-$$
+
 \begin{align*}
 E(X) &= \lambda\\
 Var(X) &= \lambda.
 \end{align*}
-$$
+
 In R ist die Abkürzung für die Poisson-Verteilung `pois`. 
 Die R-Funktion zur Berechnung der Wahrscheinlichkeitsfunktion
 $P(X=x)$ einer Poisson-verteilten Zufallsvariable $X$ mit dem Parameter
@@ -423,7 +426,7 @@ sich proportional zur Länge der Zeitspanne.
 ## Beispiel: Kunden treffen ein
 <img src="images/AdobeStock_218091505b_Warteschlange.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
 Sei $X\sim Po(\lambda)$ 
-die Zahl der Flugpassagiere, die innerhalb einer Viertelstunde am Terminal
+die Zahl der {{< var Passagiere >}}, die innerhalb einer Viertelstunde am Terminal
 ankommen. Wir nehmen an, dass die erwartete Zahl $\lambda=9$
 beträgt. Sei nun $Y$ die Anzahl der Ankommenden innerhalb von fünf Minuten,
 dann gilt $Y\sim Po(3)$. Allgemein bleibt bei einer Verlängerung
@@ -432,12 +435,12 @@ und der Parameter $\lambda$ wächst oder schrumpft proportional
 zu der Veränderung der Intervalllänge.
 
 Die Wahrscheinlichkeit, dass in der Zeit von 10:00 bis 10:15 genau sechs
-Passagiere ankommen, beträgt
+{{< var Passagiere >}} ankommen, beträgt
 ```{r}
 dpois(6, lambda=9)
 ```
 Die Wahrscheinlichkeit, dass zwischen 14:30 und 14:35 mehr als 7 
-Passagiere eintreffen, ist $P(Y>7)=1-P(Y\le 7)$,
+{{< var Passagiere >}} eintreffen, ist $P(Y>7)=1-P(Y\le 7)$,
 ```{r}
 1 - ppois(7, lambda=3)
 ```
@@ -534,12 +537,11 @@ plot(x, qnorm(x),
 abline(h=0)
 ```
 Auch hier gibt es eine Symmetriebeziehung, nämlich
-$$
+
 \begin{align*}
 \Phi^{-1}(p) &= -\Phi^{-1}(1-p)\\
 \text{bzw.}\qquad u_p &= -u_{1-p}.
 \end{align*}
-$$
 
 Der Erwartungswert der Standardnormalverteilung ist $E(U)=0$, die
 Varianz ist $Var(U)=1$. Die Zufallsvariable $U$ ist also standardisiert.
@@ -656,12 +658,11 @@ $$
 F^{-1}(p) = \mu+\sigma \cdot\Phi^{-1}(p).
 $$
 Erwartungswert und Varianz der $N(\mu,\sigma^2)$ sind
-$$
+
 \begin{align*}
 E(X) &= \mu\\
 Var(X) &= \sigma^2.
 \end{align*}
-$$
 
 In R verwendet man für die allgemeine Normalverteilung die gleichen Funktionen
 wie für die Standardnormalverteilung. Nur die beiden Parameter $\mu$ 
@@ -784,7 +785,7 @@ F(x)=\left\{
 $$
 Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
 Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
-$$
+
 \begin{align*}
 &&F(x)&=p\\
 \Leftrightarrow &&1-e^{-\lambda x}&=p \\
@@ -792,18 +793,17 @@ $$
 \Leftrightarrow &&\ln(1-p)&=-\lambda x \\
 \Leftrightarrow &&x &=-\frac{1}{\lambda}\ln(1-p).
 \end{align*}
-$$
+
 Die Quantilfunktion lautet also
 $$
 F^{-1}(p)=-\frac{1}{\lambda}\ln(1-p).
 $$
 Der Erwartungswert und die Varianz sind
-$$
+
 \begin{align*}
 E(X) &= \frac{1}{\lambda}\\
 Var(X) &= \frac{1}{\lambda^2}.
 \end{align*}
-$$
 
 In R ist die Abkürzung für die Exponentialverteilung `exp`. Die Funktionen
 für die Dichte, Verteilungs- und Quantilfunktion sind:
@@ -898,12 +898,12 @@ $$
 F^{-1}(p)=x_{min}(1-p)^{-1/k}.
 $$
 Erwartungswert und Varianz der Paretoverteilung sind
-$$
+
 \begin{align*}
 E(X) &= \frac{k x_{min}}{k-1}\\
 Var(X) &= \frac{k x_{min}^2}{(k-2)(k-1)^2}.
 \end{align*}
-$$
+
 Der Erwartungswert ist nur definiert, wenn der $k>1$ ist,
 die Varianz ist sogar nur dann definiert, wenn $k>2$ ist. Wie kann es
 passieren, dass die Varianz oder der Erwartungswert nicht existieren?
@@ -1034,25 +1034,24 @@ lines(c(0.5, 1, 2, 2.5),c(0, 0, 1, 1))
 
 Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
 Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
-$$
+
 \begin{align*}
 &&F(x)&=p\\
 \Leftrightarrow &&\frac{x-a}{b-a}&=p \\
 \Leftrightarrow &&x &=a+(b-a)p.
 \end{align*}
-$$
+
 Eine Fallunterscheidung ist hier nicht nötig, weil $0<p<1$ ist.
 Die Quantilfunktion lautet
 $$
 F^{-1}(p)=a+(b-a)p.
 $$
 Als Erwartungswert und Varianz errechnet man
-$$
+
 \begin{align*}
 E(X) &= \frac{b-a}{2}\\[1ex]
 Var(X) &= \frac{(b-a)^2}{12}.
 \end{align*}
-$$
 
 In R ist die Abkürzung für die Rechteckverteilung `unif`. Die Funktionen
 für die Dichte, Verteilungs- und Quantilfunktion sind:
@@ -1127,12 +1126,11 @@ nicht durch elementare Integrationsregeln herleiten. Sie ist jedoch
 numerisch lösbar und in den meisten Computerprogrammen implementiert.
 
 Erwartungswert und Varianz der t-Verteilung sind (für $\nu>2$)
-$$
+
 \begin{align*}
 E(X) &= 0\\
 Var(X) &= \frac{\nu}{\nu-2}.
 \end{align*}
-$$
 
 In R ist die Abkürzung für die t-Verteilung `t`. Die Funktionen
 für die Dichte, Verteilungs- und Quantilfunktion sind:
@@ -1204,7 +1202,7 @@ interessiert man sich sehr oft für empirische Verteilungen: Wie sind bestimmte
 Größen in der Population verteilt? Wie sieht die Einkommensverteilung
 oder die Vermögensverteilung aus? Wie ist die Altersstruktur der Bevölkerung?
 Welche Parteienpräferenzen gibt es in der wahlberechtigten Population? 
-Wie hoch ist der Anteil der Kunden, die ihren Versicherungsvertrag
+Wie hoch ist der Anteil der {{< var Kunden >}}, die ihren Versicherungsvertrag
 stornieren wollen? Nur in den seltensten Fällen kann man diese Fragen
 exakt beantworten, indem man alle Populationsmitglieder untersucht oder
 befragt, denn die Untersuchung (oder Befragung) ist oft aufwendig und
@@ -1257,23 +1255,23 @@ f_X(x)=\left\{
 $$
 Da $X$ eine (diskrete) Zufallsvariable ist, können wir ihren 
 Erwartungswert und ihre Varianz berechnen. Für den Erwartungswert gilt
-$$
+
 \begin{align*}
 E(X)&=\sum_{i=1}^N x_i^* P(X=x_i^*)\\
 &= \frac{1}{N}\sum_{i=1}^N x_i^*.
 \end{align*}
-$$
+
 Mit anderen Worten: Der Erwartungswert einer empirischen Verteilung
 entspricht gerade dem Populationsmittel $\bar x$ aus dem Kurs
 "Data Science 1".
 
 Die Varianz von $X$ ist
-$$
+
 \begin{align*}
 Var(X)&=\sum_{i=1}^N (x_i^*-\bar x)^2 P(X=x_i^*)\\
 &= \frac{1}{N}\sum_{i=1}^N (x_i^*-\bar x)^2.
 \end{align*}
-$$
+
 Es handelt sich also um die Populationsvarianz $s^2$ aus
 dem Kurs "Data Science 1". 
 

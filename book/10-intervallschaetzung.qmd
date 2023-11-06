@@ -6,8 +6,9 @@ dass ein Punktschätzer zwar interessant ist, dass man aber nicht
 erkennt, wie zuverlässig die Schätzung ist. Darf man davon ausgehen, 
 dass der Schätzer dicht am wahren Parameter liegt? Oder ist zu 
 befürchten, dass die Schätzung vielleicht deutlich daneben liegt? 
-Einen Bogenschützen kann man bitten, mehrfach auf die Zielscheibe
-zu schießen, damit seine Zielgenauigkeit gemessen werden kann. Eine
+{{< var Einen >}} {{< var Bogenschützen >}} kann man 
+bitten, mehrfach auf die Zielscheibe zu schießen, 
+damit {{< var seine >}} Zielgenauigkeit gemessen werden kann. Eine
 Stichprobe wird jedoch in der Realität nicht wiederholt gezogen,
 sondern nur einmal. Kann man dennoch allein auf Grundlage einer 
 einzelnen Stichprobe die Schätzgenauigkeit bewerten? In diesem Kapitel
@@ -77,7 +78,7 @@ die Varianz oder Standardabweichung oder auch für ein
 Quantil zu erstellen. In vielen Anwendungen interessiert man
 sich besonders für Zusammenhangsmaße, z.B. für den
 Korrelationskoeffizienten. Auch dafür gibt es
-Konfidenzintervalle. In vielen ökonomischen Studien werden
+Konfidenzintervalle. In ökonomischen Studien werden oft
 Modelle mit (vielen) Parametern geschätzt, und auch dafür
 können Konfidenzintervalle konstruiert werden. Ein gutes
 Verständnis der Konfidenzintervalle für Erwartungswerte
@@ -189,36 +190,36 @@ stehen zwei Ungleichungen.
 Diese Ungleichungen formen wir nun Schritt für
 Schritt so um, dass am Ende der unbekannte Erwartungswert $\mu$
 alleine in der Mitte steht.
-$$
+
 \begin{align*}
 P\left(-u_{1-\alpha/2}\le \sqrt{n}\frac{\bar X-\mu}{S}\le u_{1-\alpha/2}\right)&=1-\alpha\\
 P\left(-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\le \bar X-\mu\le u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right)&=1-\alpha\\
 P\left(-\bar X-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\le -\mu\le -\bar X+u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right)&=1-\alpha\\
 &= \ldots
 \end{align*}
-$$
+
 Wir haben nun zwar erreicht, dass der unbekannte Parameter $\mu$ alleine
 in der Mitte steht. Aber leider hat er das falsche Vorzeichen.
 Deshalb multiplizieren wir nun die Ungleichungen mit $(-1)$. Dabei
 drehen sich die Ungleichungszeichen um (denn 2 ist zwar kleiner als 3,
 aber $-2$ ist größer als $-3$),
-$$
+
 \begin{align*}
 \ldots &=\\
 P\left(-\bar X-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\le -\mu\le -\bar X+u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right)&=1-\alpha\\
 P\left(\bar X+u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\ge \mu\ge \bar X-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right)&=1-\alpha\\
 &= \ldots
 \end{align*}
-$$
+
 In einem letzten Schritt ändern wir noch die Reihenfolge der 
 drei Ausdrücke, so dass der kleinste Ausdruck auf der 
 linken Seite steht. Das dient der besseren Lesbarkeit.
-$$
+
 \begin{align*}
 \ldots &=\\
 P\left(\bar X-u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\le \mu\le \bar X+u_{1-\alpha/2}\cdot \frac{S}{\sqrt{n}}\right)&=1-\alpha.
 \end{align*}
-$$
+
 Mit anderen Worten: Wenn $\alpha$ auf einen kleinen Wert (z.B. 0.05) gesetzt
 wird, dann wird mit einer hohen Wahrscheinlichkeit von $1-\alpha$ (z.B. 0.95) der
 wahre Erwartungswert $\mu$ in dem (zufälligen) Konfidenzintervall
@@ -279,12 +280,12 @@ weil hier nichts Zufälliges mehr vorkommt.
 <img src="images/AdobeStock_506814234b_Netzwerk.jpeg" align="right" width=45%" style="padding-left:15px;padding-top:5px;"/>
 Für eine Studie soll das Arbeitsklima in einem großen
 Unternehmen untersucht werden. Dazu wird eine einfache
-Stichprobe vom Umfang $n=50$ aus allen Arbeitnehmern des 
+Stichprobe vom Umfang $n=50$ aus allen {{< var Arbeitnehmern >}} des 
 Unternehmens gezogen. Jede Person wird befragt, zu wie vielen 
-Arbeitskollegen sie eine "gute Beziehung" hat (in der
+{{< var Arbeitskollegen >}} sie eine "gute Beziehung" hat (in der
 Studie wird genauer definiert, was darunter zu verstehen
 ist). Die Zufallsvariable $X$ ist also die Anzahl an
-Kollegen, zu denen eine gute Beziehung besteht, von
+{{< var Arbeitskollegen >}}, zu denen eine gute Beziehung besteht, von
 einer zufällig aus der Population ausgewählten Person.
 Die Realisation der Stichprobe $X_1,\ldots,X_n$ liegt
 als Vektor `gut` in R vor. Die ersten sechs Werte sind
@@ -469,9 +470,9 @@ Anteil der Wahlberechtigten ist, der die SPD wählen will. Die
 "interessierende Eigenschaft" ist also: "die befragte Person will die
 SPD wählen". Aus der Wahlpopulation wird eine einfache Stichprobe vom
 Umfang $n=1000$ erhoben. Jede Person wird befragt, ob sie die SPD
-wählen will. Der Anteil der SPD-Wähler in der konkreten 
+wählen will. Der Anteil der {{< var SPD-Wähler >}} in der konkreten 
 Stichprobe ist $\hat\pi=0.273$. Das konkrete 0.95-Konfidenzintervall 
-für den Populationsanteil der SPD-Wähler ist
+für den Populationsanteil der {{< var SPD-Wähler >}} ist
 ```{r}
 n <- 1000
 alpha <- 0.05

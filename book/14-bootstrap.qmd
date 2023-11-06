@@ -1,31 +1,34 @@
 # Bootstrap {#sec-bootstrap}
 
+<img src="images/Bootstrap.jpeg" align="right" width=35%" style="padding-left:15px;"/>
 Die bisherige Darstellung der Hypothesentests hat möglicherweise
 den Eindruck erweckt, dass es eine Reihe von vorgefertigten 
-Testverfahren gibt, die man als Nutzer heraussuchen und anwenden 
+Testverfahren gibt, die man als {{< var Nutzer >}} heraussuchen und anwenden 
 kann. Tatsächlich stellt sich in vielen ökonomischen Anwendungen
 und vor allem in der empirischen akademischen Forschung oft die
 Frage, wie man eine Hypothese testen kann, für die es noch
-keinen vorgefertigten Test gibt. Ökonomen sollten also nicht nur
+keinen vorgefertigten Test gibt. {{< var Ökonomen >}} sollten also nicht nur
 vorgefertigte Tests verstehen und anwenden können, sondern auch in 
 der Lage sein, neue Tests zu entwickeln.
-
-In diesem Kapitel wird ein computer-gestützter Ansatz für
+In diesem Kapitel wird ein sehr flexibler, genereller, 
+computer-gestützter Ansatz für
 Hypothesentests vorgestellt, bei dem Monte-Carlo-Simulationen
 eingesetzt werden. Man nennt diese Methode **Bootstrap**
-(oder Bootstrapping). 
+(oder Bootstrapping). Die Bezeichnung bezieht sich auf die
+englische Redensart "to pull oneself up by one's bootstraps".
+Warum das ein passender Name ist, wird im folgenden deutlich. 
 
 ## Monte-Carlo-Simulation der kritischen Grenzen
 
 Um die Grundidee des Bootstraps zu beschreiben, betrachten wir
 ein konkretes Testbeispiel, das in @sec-t_test bereits ausführlich 
 besprochen wurde, nämlich einen Erwartungswerttest mit den Hypothesen
-$$
+
 \begin{align*}
 H_0: \mu&=\mu_0\\
 H_1: \mu&\neq\mu_0.
 \end{align*}
-$$
+
 Die Teststatistik für diesen Test ist 
 $$
 T=\sqrt{n}\frac{\bar X-\mu_0}{S}.
@@ -134,14 +137,14 @@ $$
 Die Wahrscheinlichkeitsfunktion von $X^b$ versieht jeden dieser Werte
 mit der Wahrscheinlichkeit $1/n$. Der Erwartungswert von $X^b$
 ist (vgl. @sec-empverteilung)
-$$
+
 \begin{align*}
 E(X^b)&=\frac{1}{n}\sum_{i=1}^n x_i^b\\
 &= \frac{1}{n}\sum_{i=1}^n (x_i+\mu_0-\bar x)\\
 &= \mu_0+\frac{1}{n}\sum_{i=1}^n x_i -\bar x\\
 &= \mu_0,
 \end{align*}
-$$
+
 so dass die Nullhypothese erfüllt ist.
 
 Nun ermittelt man die Verteilung der Teststatistik mit Hilfe
@@ -353,12 +356,12 @@ In diesem Abschnitt wird gezeigt, wie man einen Bootstrap-Test
 in einer neuen Situation anwenden kann. Wir möchten testen,
 ob die Varianz von $X$ einen vorgegebenen Wert $\sigma_0^2$ annimmt.
 Die Hypothesen sind
-$$
+
 \begin{align*}
 H_0: \sigma^2 &= \sigma_0^2\\
 H_1: \sigma^2 &\neq \sigma_0^2.
 \end{align*}
-$$
+
 Wie könnte eine Teststatistik aussehen? Die einfachste Lösung
 ist die Stichprobenvarianz
 $$
@@ -526,12 +529,12 @@ $$
 A_1,\ldots,A_J.
 $$
 Die Null- und Alternativhypothesen sind
-$$
+
 \begin{align*}
 H_0&: ~P(X\in A_j)=\pi_j,\quad j=1,\ldots,J\\
 H_1&: ~\text{nicht }H_0,
 \end{align*}
-$$
+
 wobei sich die theoretischen Wahrscheinlichkeiten $\pi_1,\ldots,\pi_J$
 aus der zu testenden Verteilungsannahme und der Partition errechnen
 lassen. 
@@ -543,7 +546,7 @@ der Nullhypothese behauptet wird.
 
 Zur Illustration wiederholen wir ein Beispiel aus
 @sec-anpassung. Die Nullhypothese behauptet, dass die Anzahl 
-der Kunden, die innerhalb einer Viertelstunde bei einer
+der {{< var KundenPL >}}, die innerhalb einer Viertelstunde bei einer
 Hotline anrufen, einer Poisson-Verteiung mit dem Parameter
 $\lambda=4$ folgt. Aus den Daten der Original-Stichprobe
 sind die folgenden Häufigkeiten bekannt:

@@ -83,20 +83,20 @@ Ein Würfel wird geworfen. Es handelt sich um ein Laplace-Experiment.
 Die Anzahl der Ergebnisse in $\Omega$ beträgt 6. Sei $A$ das
 Ereignis "Eine gerade Zahl wird geworfen", also $A=\{2,4,6\}$. Dann
 ist 
-$$
+
 \begin{align*}
 P(A)&=\frac{|A|}{|\Omega|}\\
 &=\frac{3}{6}\\
 &=0.5.
 \end{align*}
-$$
+
 :::
 
 ::: {.callout-tip collapse="true"}
 ## Beispiel: Zwei Würfel als Laplace-Experiment
 Zwei gleich aussehende Würfel werden geworfen. Nun spielt es eine
 Rolle, wie man die Ergebnismenge festlegt. Wir wählen 
-$$
+
 \begin{align*}
 \Omega=\{&11,12,13,14,15,16,\\
 &21,22,23,24,25,26,\\
@@ -105,7 +105,7 @@ $$
 &51,52,53,54,55,56,\\
 &61,62,63,64,65,66\}
 \end{align*}
-$$ 
+
 weil es sich dann um ein Laplace-Experiment handelt. Die
 Ergebnisse "24" und "42" sind zwar nicht unterscheidbar, wenn die
 Würfel gleich aussehen, aber wir können den zuerst geworfenen Würfel
@@ -119,16 +119,15 @@ $$
 A=\{13,24,31,35,42,46,53,64\}.
 $$ 
 Dann gilt 
-$$
 \begin{align*}
 P(A)&=\frac{|A|}{|\Omega|}\\
 &=\frac{8}{36}\\
 &=\frac{2}{9}\\
 &\approx 0.2222.
 \end{align*}
-$$ 
+
 Da die beiden Würfel nicht unterscheidbar sind, wäre als Ergebnismenge auch 
-$$
+
 \begin{align*}
 \Omega=\{
 &11,12,13,14,15,16,\\
@@ -138,7 +137,7 @@ $$
 &55,56,\\
 &66\}
 \end{align*}
-$$ 
+
 möglich gewesen. Die Ergebnismenge hätte dann 21 Elemente. Die Annahme 
 eines Laplace-Experiments wäre jedoch in diesem Fall nicht
 mehr korrekt, denn die Elementarereignisse "11" und "12" sind
@@ -147,7 +146,7 @@ Erfahrung, dass ein Pasch seltener auftritt.
 :::
 
 Die Wahl der Ergebnismenge sollte immer so erfolgen, dass das weitere
-Vorgehen möglichst einfach und elegant ist. Wenn die Ergebnismenge so
+Vorgehen **möglichst einfach und elegant** ist. Wenn die Ergebnismenge so
 gewählt werden kann, dass ein Laplace-Experiment vorliegt, sollte man
 das tun.
 
@@ -185,21 +184,21 @@ Wahrscheinlichkeit (engl. unconditional probability).
 Ein Würfel wird geworfen. Wir betrachten die beiden Ereignisse
 $A=\{2,4,6\}$ ("gerade Zahl"), und $B=\{3,4,5,6\}$ ("eine Zahl größer
 als 2"). Die bedingte Wahrscheinlichkeit von $A$ gegeben $B$ beträgt
-$$
+
 \begin{align*}
 P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
 &=\frac{P(\{4,6\})}{P(\{3,4,5,6\})}\\
 &=\frac{1}{2}
 \end{align*}
-$$ 
+
 und die bedingte Wahrscheinlichkeit von $B$ gegeben $A$ lautet 
-$$
+
 \begin{align*}
 P(B|A)&=\frac{P(B\cap A)}{P(A)}\\
 &=\frac{P(\{4,6\})}{P(\{2,4,6\})}\\
 &=\frac{2}{3}.
 \end{align*}
-$$
+
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -211,24 +210,25 @@ dass ein 6er-Pasch geworfen wurde?
 
 Sei $A$ das Ereignis "6er-Pasch" und $B$ das Ereignis
 "mindest eine Sechs wurde geworfen", d.h.
-$$
+
 \begin{align*}
 A &= \{66\}\\
 B &= \{16,26,36,46,56,61,62,63,64,65,66\}.
 \end{align*}
-$$
+
 Daher gilt
-$$
+
 \begin{align*}
 P(A|B)&=\frac{P(A\cap B)}{P(B)}\\
 &=\frac{P(\{66\})}{P(\{16,26,36,46,56,61,62,63,64,65,66\})}\\
 &=1/11.
 \end{align*}
-$$ 
+
 :::
 
 ::: {.callout-tip collapse="true"}
 ## Beispiel: Erwerbsstatus und Geschlecht
+
 <img src="images/AdobeStock_172088861b_Umfrage.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;padding-bottom:5px;"/>
 Bei einer Umfrage werden Personen zufällig ausgewählt und befragt.
 Sei $A$ das Ereignis "die befragte Person ist weiblich". Sei $B$ das
@@ -297,12 +297,12 @@ $$
 P(A\cap B)={P(B)P(A|B)}.
 $$
 Das lässt sich auf mehr als zwei Ereignisse erweitern: 
-$$
+
 \begin{align*}
 P(A\cap B \cap C)&=P(C)P(B|C)P(A|B\cap C)\\
 P(A\cap B\cap C\cap D)&=P(D)P(C|D)P(B|C\cap D)P(A|B\cap C\cap D)
 \end{align*}
-$$ 
+
 Diese Formeln sind bei näherer Betrachtung intuitiv: Die
 Wahrscheinlichkeit, dass $A$, $B$ und $C$ gemeinsam eintreten, ergibt
 sich, indem man zuerst eine der unbedingten Wahrscheinlichkeiten nimmt
@@ -320,26 +320,27 @@ Für jede Reihenfolge gelangt man zum gleichen Ergebnis.
 ::: {.callout-tip collapse="true"}
 ## Beispiel: Kündigungswahrscheinlichkeiten
 <img src="images/AdobeStock_19427911b_Sparbuch.jpeg" align="right" width=50%" style="padding-left:15px;padding-top:5px;"/>
-Eine Bank möchte die Dauer ihrer Kundenbeziehungen modellieren. 
-Dazu definiert sie die Ereignisse $A_d$: "die Kundenbeziehung besteht seit $d$ Jahren"
+Eine Bank möchte die Dauer ihrer Geschäftsbeziehungen modellieren. 
+Dazu definiert sie die Ereignisse $A_d$: "die Geschäftsbeziehung besteht seit $d$ Jahren"
 für $d=0,1,\ldots,D$. Die Bank kennt (aus Erfahrung) die
-Wahrscheinlichkeit für eine Kündigung in Abhängigkeit von der Kundendauer
+Wahrscheinlichkeit für eine Kündigung in Abhängigkeit von der Dauer
 (und geht davon aus, dass sich diese Wahrscheinlichkeiten im
 Laufe der Zeit nicht verändern).
-Mit $k_{d,d+1}$ wird die Wahrscheinlichkeit bezeichnet, dass ein
-Kunde, der schon seit $d$ Jahren Kunde ist, innerhalb des nächsten
-Jahres kündigt. Es handelt sich also um die bedingten Wahrscheinlichkeiten
+Mit $k_{d,d+1}$ wird die Wahrscheinlichkeit bezeichnet, dass {{< var ein >}}
+{{< var Kunde >}}, {{< var der >}} schon seit $d$ Jahren {{< var Kunde >}}
+ist, innerhalb des nächsten Jahres kündigt. 
+Es handelt sich also um die bedingten Wahrscheinlichkeiten
 $$
 k_{d,d+1}=1-P(A_{d+1}|A_d).
 $$
-Die Wahrscheinlichkeit, dass ein Neukunde ($d=0$) nach 5 Jahren immer
-noch Kunde ist, beträgt
-$$
+Die Wahrscheinlichkeit, dass {{< var ein >}} {{< var Neukunde >}} ($d=0$) nach 5 Jahren immer
+noch {{< var Kunde >}} ist, beträgt
+
 \begin{align*}
 P(A_5)&=P(A_5|A_4)P(A_4|A_3)P(A_3|A_2)P(A_2|A_1)P(A_1|A_0)\\
 &=(1-k_{4,5})(1-k_{3,4})(1-k_{2,3})(1-k_{1,2})(1-k_{0,1}).
 \end{align*}
-$$
+
 :::
 
 ## Totale Wahrscheinlichkeit {#sec-total}
@@ -372,13 +373,13 @@ $$
 :::
 
 Zur Begründung: Da $A_1, A_2, \ldots, A_n$ eine Partition ist, gilt
-$$
+
 \begin{align*}
 P(B) &= P((B\cap A_1)\cup (B\cap A_2)\cup\ldots\cup(B\cap A_n))\\
 &= P(B\cap A_1)+P(B\cap A_2)+\ldots+P(B\cap A_n)\\
 &= P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+\ldots+P(B|A_n)P(A_n).
 \end{align*}
-$$
+
 Eine besonders simple Partition ist die Unterteilung in
 $A$ und $\bar A$. Dann lautet die Formel
 $$
@@ -407,13 +408,13 @@ $B$: "Kredit wird zurückgezahlt". Gegeben sind die bedingten Wahrscheinlichkeit
 $P(B|A)=0.95$ und $P(B|\bar A)=0.8$. Außerdem ist $P(A)=0.75$
 bekannt. Damit ergibt sich die Wahrscheinlichkeit einer
 Rückzahlung als
-$$
+
 \begin{align*}
 P(B)&=P(B|A)P(A)+P(B|\bar A)P(\bar A)\\
 &=0.95\cdot 0.75+0.8\cdot 0.25\\
 &=0.9125
 \end{align*}
-$$
+
 :::
 
 ## Satz von Bayes {#sec-bayes}
@@ -435,12 +436,12 @@ Um die Bedingung und das Bedingte zu vertauschen, braucht man also
 die beiden unbedingten Wahrscheinlichkeiten. Die Herleitung des Satzes von
 Bayes ergibt sich aus der Definition der bedingten Wahrscheinlichkeit.
 Wegen 
-$$
+
 \begin{align*}
 P(A|B) &= \frac{P(A\cap B)}{P(B)}\\
 P(B|A) &= \frac{P(A\cap B)}{P(A)}
 \end{align*}
-$$ 
+
 gilt 
 $$
 P(A|B)P(B)=P(B|A)P(A).
@@ -463,14 +464,14 @@ $$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
 $$
 Nach dem Satz der totalen Wahrscheinlichkeit berechnet man
-$$
+
 \begin{align*}
 P(B) &=P(B|A)P(A)+P(B|\bar A)P(\bar A)\\
 &= P(B|A)P(A)+[1-P(\bar B|\bar A)][1-P(A)]\\
 &= 0.99\cdot 0.001+[1-0.99]\cdot [1-0.001]\\
 &= 0.01098.
 \end{align*}
-$$
+
 Die Wahrscheinlichkeit, dass eine Person mit einem positiven Testergebnis
 tatsächlich infiziert ist, ist folglich immer noch sehr klein, obwohl der
 Test scheinbar sehr genau arbeitet. 

@@ -166,7 +166,7 @@ Mögliche Beispiele:
 Wie hoch ist der Anteil der Firmen, 
 die eine Verlagerung ihrer Produktion ins Ausland planen? 
 Wie hoch ist der Anteil der fehlerhaften Produkte eines Betriebs?
-Wie hoch ist der Anteil der SPD-Wähler in NRW? 
+Wie hoch ist der Anteil der {{< var SPD-Wähler >}} in NRW? 
 Wie hoch ist der Anteil der Studierenden, die
 mit ihrem Studium unzufrieden sind? 
 
@@ -210,9 +210,9 @@ Anteil der Wahlberechtigten in NRW ist, der die SPD wählen will. Die
 SPD wählen". Aus der Wahlpopulation wird eine einfache Stichprobe vom
 Umfang $n=1000$ erhoben. Jede Person wird befragt, ob sie die SPD
 wählen will. Die (fiktive) Anzahl an Personen, die angeben, die
-SPD wählen zu wollen, betrage 273. Der Anteil der SPD-Wähler in der 
+SPD wählen zu wollen, betrage 273. Der Anteil der {{< var SPD-Wähler >}} in der 
 konkreten Stichprobe ist folglich $\hat\pi=0.273$. Der geschätzte Anteil 
-der SPD-Wähler in der Population ist also rund 27 Prozent.
+der {{< var SPD-Wähler >}} in der Population ist also rund 27 Prozent.
 :::
 
 ### Varianz
@@ -290,22 +290,16 @@ ist recht zuverlässig.
 ## Unverzerrtheit {#sec-unverzerrtheit}
 
 <img src="images/AdobeStock_391798b_Bogenschiessen.jpeg" align="right" width=30%" style="padding-left:15px;padding-top:5px;"/>
-Man kann sich einen Schätzer als Bogenschützen vorstellen, der
-auf eine Zielscheibe schießt, auch wenn die Analogie Grenzen hat. 
-Der wahre Parameter $\theta$ liegt im Zentrum
-der Zielscheibe. Der Bogenschütze trifft natürlich nicht bei jedem 
-Schuss exakt ins Zentrum, er liegt manchmal zu weit oben oder unten,
-zu weit links oder rechts. Die Einschlagstelle des Pfeils in der Zielscheibe
-entspricht dem Schätzer bzw. dem Schätzwert $\hat\theta$.
+Man kann sich einen Schätzer als {{< var Bogenschützen >}} vorstellen, {{< var der >}} auf eine Zielscheibe schießt, auch wenn die Analogie Grenzen hat. 
+Der wahre Parameter $\theta$ liegt im Zentrum der Zielscheibe. {{< var Der >}} {{< var Bogenschütze >}} trifft natürlich nicht bei jedem Schuss exakt ins Zentrum, {{< var er >}} liegt manchmal zu weit oben oder unten, zu weit links oder rechts. 
+Die Einschlagstelle des Pfeils in der Zielscheibe entspricht dem Schätzer bzw. dem Schätzwert $\hat\theta$.
 
-In einem **Gedankenexperiment** können wir uns vorstellen, dass nicht nur
-*eine* Stichprobe vom Umfang $n$ gezogen wird, sondern dass unabhängig
-voneinander *mehrere* Stichproben jeweils vom Umfang $n$ gezogen werden.
-Die Analogie des Bogenschützen wären mehrere Schüsse auf die Zielscheibe.
+In einem **Gedankenexperiment** können wir uns vorstellen, dass nicht nur *eine* Stichprobe vom Umfang $n$ gezogen wird, sondern dass unabhängig voneinander *mehrere* Stichproben jeweils vom Umfang $n$ gezogen werden.
 
-Die folgende Abbildung zeigt die Einschläge von vier Bogenschützen,
-die jeweils 20 Pfeile mit dem Ziel abschießen, möglichst dicht an
-dem schwarzen Punkt in der Mitte zu landen.
+Die Analogie {{< var des >}} {{< var Bogenschützen >}} wären mehrere Schüsse auf die Zielscheibe.
+
+Die folgende Abbildung zeigt die Einschläge von vier {{< var BogenschützenPL >}}, die jeweils 20 Pfeile mit dem Ziel abschießen, möglichst dicht an dem schwarzen Punkt in der Mitte zu landen.
+
 ```{r echo=FALSE,out.width="70%",fig.asp=1,fig.align='center'}
 library(DescTools)
 bogen <- function(n,mx,my,sd){
@@ -340,15 +334,10 @@ xy <- bogen(20,0.3,0.35,0.15)
 points(xy)
 ```
 
-Welcher Schütze ist der beste? Offenbar trafen die Pfeile von (a)
-besonders nahe am Zielpunkt. Der Schütze (a) hat zwar das Ziel nicht
-exakt getroffen, aber seine Pfeile lagen nicht systematisch zu hoch
-oder niedrig oder zu weit links oder rechts. Außerdem liegen alle
-Pfeile nahe beieinander. Im Gegensatz dazu hat (b) zwar auch alle 
-Pfeile nahe beieinander platziert, aber sie liegen systematisch zu 
-weit links unten. Die Pfeile der Schützen (c) und (d) streuen 
-deutlich mehr. Während (c) gleichmäßig um das Ziel herum getroffen
-hat, liegt (d) systematisch zu weit links unten. 
+{{< var Welcher >}} {{< var Schütze >}} ist der beste? 
+Offenbar trafen die Pfeile von (a) besonders nahe am Zielpunkt. {{< var Der >}} {{< var Schütze >}} (a) hat zwar das Ziel nicht exakt getroffen, aber {{< var seine >}} Pfeile lagen nicht systematisch zu hoch oder niedrig oder zu weit links oder rechts. 
+Außerdem liegen alle Pfeile nahe beieinander. Im Gegensatz dazu hat (b) zwar auch alle Pfeile nahe beieinander platziert, aber sie liegen systematisch zu weit links unten.
+Die Pfeile der {{< var SchützenPL >}} (c) und (d) streuen deutlich mehr. Während (c) gleichmäßig um das Ziel herum getroffen hat, liegt (d) systematisch zu weit links unten. 
 
 Diese Überlegungen lassen sich auf Schätzer übertragen. Ein
 Qualitätskriterium für Schätzer ist die Erwartungstreue
@@ -367,8 +356,9 @@ $$
 Der Schätzer $\hat\theta$ darf zwar um den wahren Wert $\theta$
 herum streuen, aber er soll im Erwartungswert nicht zu hoch oder
 zu niedrig sein, sondern den wahren Wert "im Mittel" treffen.
-Die Schützen (a) und (c) wären in Analogie erwartungstreu,
-die Schützen (b) und (d) hingegen nicht. Der Schütze in (a) hat
+Die {{< var SchützenPL >}} (a) und (c) wären in Analogie erwartungstreu,
+die {{< var SchützenPL >}} (b) und (d) hingegen nicht. {{< var Der >}}
+{{< var Schütze >}} in (a) hat
 einen kleineren Standardfehler als (c), denn die
 Einschläge streuen weniger.
 
@@ -392,7 +382,7 @@ In die Definition des Schätzers fügen wir den Ausdruck
 $-\mu+\mu$ ein. Dadurch verändert sich das Ergebnis natürlich
 nicht, aber der Term unter dem Quadrat lässt sich auf eine
 neue Art schreiben.
-$$
+
 \begin{align*}
 E(S^2) &= E\left(\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2\right)\\
 &= E\left(\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\mu+\mu-\bar X)^2\right)\\
@@ -406,34 +396,34 @@ E(S^2) &= E\left(\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2\right)\\
 &\quad +\underbrace{\frac{n}{n-1}E((\bar{X}-\mu)^2)}_{(II)} \\[2ex]
 &\quad -\underbrace{\frac{2}{n-1}\sum_{i=1}^{n}E((X_i-\mu)(\bar{X}-\mu))}_{(III)}.
 \end{align*}
-$$
+
 Der Schritt von Zeile 3 zu Zeile 4 ist eine Anwendung der
 ersten binomischen Formel. Danach werden die üblichen Rechenregeln
 für Erwartungswerte angewendet. Die drei Summanden werden nun 
 einzeln weiter betrachtet. Der erste Summand ist
-$$
+
 \begin{align*}
 (I)&= \frac{1}{n-1}\sum_{i=1}^{n}E((X_i-\mu)^2)\\  
 &=\frac{1}{n-1}\sum_{i=1}^{n}Var(X_i) \\
 &=\frac{1}{n-1}\sum_{i=1}^{n}\sigma^2 \\
 &=\frac{n}{n-1}\sigma^2.
 \end{align*}
-$$
+
 Dabei wurde die Definition der Varianz (vgl. @sec-varianz) genutzt.
 
 Der zweite Summand ist 
-$$
+
 \begin{align*}
 (II)&=\frac{n}{n-1}E((\bar{X}-\mu)^2) \\
 &=\frac{n}{n-1}Var(\bar{X}) \\
 &=\frac{n}{n-1}\frac{\sigma^2}{n}\\
 &=\frac{\sigma^2}{n-1}.
 \end{align*}
-$$
+
 Die Varianz des Stichprobenmittels wurde bereits in @sec-lln hergeleitet. 
 
 Der dritte Summand ist
-$$
+
 \begin{align*}
 (III)&=\frac{2}{n-1}\sum_{i=1}^{n}E((X_i-\mu)(\bar{X}-\mu)) \\
 &= \frac{2n}{n-1} E((X_1-\mu)(\bar{X}-\mu))  \\
@@ -442,7 +432,7 @@ $$
 &= \frac{2}{n-1}\sum_{i=1}^{n}Cov(X_1,X_i) \\
 &= \frac{2}{n-1}\sigma^2.
 \end{align*}
-$$
+
 Hier ist der erste Schritt der schwierigste. Da alle Stichprobenelemente
 $X_i$ identisch verteilt sind, ist der Ausdruck
 $$
@@ -458,14 +448,14 @@ für $i\neq 1$. Die Kovarianzen sind 0, weil die Stichprobenelemente
 annahmegemäß unabhängig voneinander sind.
 
 Führt man die drei Terme wieder zusammen, ergibt sich
-$$
+
 \begin{align*}
 E(S^2) &= (I)+(II)-(III)\\ &=\frac{n}{n-1}\sigma^2+\frac{\sigma^2}{n-1}-\frac{2}{n-1}\sigma^2 \\
 &= \left(\frac{n}{n-1}+\frac{1}{n-1}-\frac{2}{n-1}\right)\sigma^2 \\
 &= \left(\frac{n+1-2}{n-1}\right)\sigma^2 \\
 &= \sigma^2.
 \end{align*}
-$$
+
 Der Schätzer $S^2$ ist also erwartungstreu für die Varianz $\sigma^2$.
 Diese Herleitung erklärt auch, warum der Varianzschätzer im Nenner
 $n-1$ stehen hat. Würde durch $n$ geteilt werden, dann wäre der

@@ -549,9 +549,9 @@ mögliche Werte sind `lty="solid"` (default, durchgezogene Linie),
 Mit der `plot`-Funktion kann man sehr einfach den Verlauf
 einer Funktion zeichnen. Als Beispiel zeigt der 
 folgende Plot den Verlauf der Funktion 
-\[
+$$
 f(x)=\exp(-x^2)
-\]
+$$
 in dem Intervall $[-4,4]$. Zuerst wird ein Gitter
 von x-Werten erzeugt, anschließend wird die Funktion 
 an den Gitterpunkten berechnet.
