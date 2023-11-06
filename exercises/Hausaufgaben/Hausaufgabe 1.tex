@@ -72,8 +72,6 @@ Es ergibt sich dann folgende Rechnung:
 	\Question $P(\emptyset)=0$,
 	\Question $0\leq P(A)\leq1$,
 	\Question $P(A\setminus B)=P(A)-P(A\cap B)$. Wie verändert sich diese Regel, wenn $B\subset A$?
-	\Question $P(A\cup B)=P(A)+P(B)-P(A\cap B)$,
-	\Question $P(A \cup B \cup C )=P(A)+P(B)+P(C)-P(A\cap B)-P(A\cap C)-P(B\cap C)+P(A\cap B\cap C)$.
 \end{Exercise}
 
 \begin{Answer}
@@ -159,7 +157,7 @@ an. Mit $A$ wird das Ereignis ``Treffer'' bezeichnet. Woher diese bedingten Wahr
 Aus der Spieltheorie ist bekannt, dass es die beste Strategie für den Schützen ist, seine Schüsse zu randomisieren, das heißt, dass er mit einer bestimmten Wahrscheinlichkeit $s_L$ auf die linke Seite und mit $s_R=1-s_L$ auf die rechte Seite schießt.Auf die gleiche Weise ist die beste Strategie für den Torwart seine Entscheidung ebenfalls zu randomisieren (mit Wahrscheinlichkeiten $t_L$ und $t_R$). In der Spieltheorie nennt man diese Strategien gemischte Strategien.
 Bestimmen Sie die optimale gemischte Strategie für den Schützen und den Torwart.
 
-\textit{Hinweis: Im Gleichgewicht wählt der Torwart $t_L$ und $t_R=1-t_L$ so, dass -- gegeben die bedingten Wahrscheinlichkeiten in der obigen Tabelle -- die Trefferwahrscheinlichkeit für den Schützen gleich ist, unabhängig davon, ob er nach links oder rechts schießt. Gleichermaßen wählt der Schütze $s_L$ und $s_R=1-s_L$ so, dass der Torwart indifferent zwischen rechts und links ist.}
+\textit{Hinweis: Im Gleichgewicht (das ist der Zustand, in welchem Torwart und Schütze ihre optimale gemischte Strategie spielen,) wählt der Torwart $t_L$ und $t_R=1-t_L$ so, dass -- gegeben die bedingten Wahrscheinlichkeiten in der obigen Tabelle -- die Trefferwahrscheinlichkeit für den Schützen gleich ist, unabhängig davon, ob er nach links oder rechts schießt. Gleichermaßen wählt der Schütze $s_L$ und $s_R=1-s_L$ so, dass der Torwart indifferent zwischen rechts und links ist.}
 \end{Exercise}
 
 \begin{Answer}
@@ -247,7 +245,7 @@ s_R &= 1-s_L= 0.6146.
 			&=&\frac{P(G\cap A_4)}{P(A_4)}\cdot P(A_4)+\frac{P(G\cap A_1)}{P(A_1)}\cdot P(A_1)\\
 			&=&\frac{P(B_5\cap A_4)}{P(A_4)}\cdot P(A_4)+\frac{P(A_1)}{P(A_1)}\cdot P(A_1)\\
 			&=&\frac{P(B_5)\cdot P(A_4)}{P(A_4)}P(A_4)+P(A_1)\\
-			&=&P(B_5)P(A4)+P(A_1)\\
+			&=&P(B_5)P(A_4)+P(A_1)\\
 			&=&\frac{1}{2}\cdot \frac{b}{6}+ \frac{6-b}{b}\\
 			&=&\frac{12-b}{12}
 		\end{eqnarray*}
@@ -259,7 +257,7 @@ s_R &= 1-s_L= 0.6146.
 
 
 \begin{Exercise}
-	In dieser Aufgabe betrachten wir eine bestimmte Anzahl an Familien in der Grundgesamtheit. Gegeben seien folgende Ereignisse für $i\in\left\lbrace 0,1,\dots 5\right\rbrace$:
+	In dieser Aufgabe betrachten wir eine bestimmte Anzahl $n\in\mathbb{N}$ an Familien. Gegeben seien folgende Ereignisse für $i\in\left\lbrace 0,1,\dots 5\right\rbrace$:
 	\begin{equation*}
 		F_i:=\left\lbrace \text{Familie hat } i \text{ Kinder}\right\rbrace
 	\end{equation*} 
@@ -272,14 +270,14 @@ s_R &= 1-s_L= 0.6146.
 		P(F_4)&=&0.1,\\
 		P(F_5)&=&0.05.
 	\end{eqnarray*}\\
-	Wie groß ist die Wahrscheinlichkeit, dass ein aus diesen Familien zufällig ausgewählter Junge mindestens eine Schwester hat? Gehen Sie bei dieser Aufgabe, davon aus, dass die Wahrscheinlichkeiten für Jungen- und Mädchengeburt gleichgroß sind.
+	Wie groß ist die Wahrscheinlichkeit, dass ein aus diesen Familien zufällig ausgewählter Junge mindestens eine Schwester hat? Gehen Sie bei dieser Aufgabe, davon aus, dass der Junge bereits ausgewählt wurde und, dass die Wahrscheinlichkeiten für Jungen- und Mädchengeburt gleichgroß sind und sich durch das Ziehen des Jungen diese Wahrscheinlichkeiten auch nicht ändern.
 \end{Exercise}
 \begin{Answer}
 	Zunächst bestimmen wir die Wahrscheinlichkeit, dass ein Junge aus einer Familie mit $k\in\left\lbrace 0,1,\dots, 5\right.\rbrace$ Kindern kommt. Wir bezeichnen dieses Ereignis mit 
 	\begin{equation*}
 		J_k:=\left\lbrace \text{Zufällig ausgewählter Junge stammt aus Familie mit } k \text{ Kindern}\right\rbrace
 	\end{equation*}
-	Nimmt man an, dass es insgesamt $n\in\mathbb{N}$ Familien gibt, so gibt es insgesamt $\sum_{i=0}^5 k \cdot P(F_k)\cdot n=n\cdot\sum_{i=0}^5 k \cdot P(F_k)=n\cdot 1.7$ Kindern. Es gibt des Weiteren insgesamt $k\cdot P(F_k)\cdot n$ Kinder, die aus einer Familie mit $k$ Kindern stammen. Da es sich hier um eine Laplace Wahrscheinlichkeit handelt, gilt somit: $P(J_k)=\frac{k\cdot P(F_k)\cdot n}{n\cdot 1.7}=\frac{k\cdot P(F_k)}{1.7}$.\\
+	Nimmt man an, dass es insgesamt $n\in\mathbb{N}$ Familien gibt, so gibt es insgesamt $\sum_{i=0}^5 k \cdot P(F_k)\cdot n=n\cdot\sum_{k=0}^5 k \cdot P(F_k)=n\cdot 1.7$ Kindern. Es gibt des Weiteren insgesamt $k\cdot P(F_k)\cdot n$ Kinder, die aus einer Familie mit $k$ Kindern stammen. Da es sich hier um eine Laplace Wahrscheinlichkeit handelt, gilt somit: $P(J_k)=\frac{k\cdot P(F_k)\cdot n}{n\cdot 1.7}=\frac{k\cdot P(F_k)}{1.7}$.\\
 	Sei nun 
 	\begin{equation*}
 		A:=\left\lbrace\text{ Zufällig ausgewählter Junge hat mindestens eine Schwester}\right\rbrace.
@@ -291,7 +289,8 @@ s_R &= 1-s_L= 0.6146.
 	Wir beobachten nun, dass $P(A\vert J_0)=0$, da ein Junge nicht aus einer Familie mit 0 Kindern stammen kann. Für $k>0$ gilt dann:
 	\begin{eqnarray*}
 		P(A\vert J_k)&=&1-P(\overline{A}\vert J_k)\\
-		&=&1-P(\left\lbrace \text{Zufällig ausgewählter Junge hat } k-1 \text{ Brüder}\right\rbrace)\\
+		&=&1-P(\left\lbrace \text{Zufällig ausgewählter Junge hat } k-1 \text{ Brüder}\right\rbrace\\
+		&&\vert\left\lbrace \text{Zufällig ausgewählter Junge kommt aus Familie mit } k \text{ Kindern.}\right\rbrace)\\
 		&=& 1-\left(\frac{1}{2}\right)^{k-1}.
 	\end{eqnarray*}
 	Mit dem Satz der totalen Wahrscheinlichkeit ergibt sich nun:
@@ -300,7 +299,7 @@ s_R &= 1-s_L= 0.6146.
 		&=&\sum_{k=1}^5P(A\vert J_k)\cdot \frac{k\cdot P(F_k)}{1.7}\\
 		&=&\frac{1}{1.7}\cdot \left(\left(1-\left(\frac{1}{2}\right)^0\right)\cdot 1 \cdot 0.2+\left(1-\left(\frac{1}{2}\right)^1\right)\cdot 2 \cdot 0.2+\left(1-\left(\frac{1}{2}\right)^2\right)\cdot 3 \cdot 0.15\right.\\
 		&&\left. +\left(1-\left(\frac{1}{2}\right)^3\right)\cdot 4 \cdot 0.1+\left(1-\left(\frac{1}{2}\right)^4\right)\cdot 5 \cdot 0.05\right)\\
-		&\approx&0.6667
+		&\approx&0.66
 	\end{eqnarray*}
 \end{Answer}
 \end{document}
