@@ -1,0 +1,421 @@
+---
+title: "Blatt 4"
+author: "Data Science 2"
+date: "Wintersemester 2023/2024"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+*Hinweis:* Halten Sie Ihre Lösungen (insbesondere R-Code) hier und auch bei allen künftigen Aufgaben kurz, verständlich und übersichtlich. Für mathematische Notation bietet sich die Latex-Syntax an, die beispielsweise im Anhang B des eLehrbuchs zu Data Science 1 (bookdown.org/marktrede/DS1Deskription) knapp zusammengefasst ist. 
+
+# Aufgabe 1:
+
+Sei $X \sim Po(100)$. Sei $f(x):=10x^2 +3$ für $x \in \mathbb{R}$. Der Träger der Zufallsvariable $f(X)$ ist also 
+$$
+T_{f(X)}:= \left\lbrace 10\cdot z^{2} + 3 : z \in \mathbb{N}_0 \right\rbrace.
+$$
+
+a)  Ermitteln Sie den Erwartungswert sowie die Varianz der Zufallsvariablen $f(X)$ mittels Monte-Carlo-Simulation, indem Sie $10\,000$ unabhängige Realisationen der Zufallsvariable $X$ generieren. 
+
+b)  Ermitteln Sie den Erwarungswert von $f(X)$ analytisch. Wie groß ist die Abweichung zu dem unter a) ermittelten Erwartungswert?
+
+c)  Stellen Sie die Dichte von $f(X)$ mittels Monte-Carlo-Simulation anhand von $10\,000$ unabhängigen Realisationen der Zufallsvariable $X$ als Histogramm dar.
+
+d)  Zeigen Sie, dass 
+$$
+P\left(f(X)=n\right)=e^{-\lambda}\frac{\lambda^{\sqrt{(x-3)/10}}}{\left(\sqrt{\frac{x-3}{10}}\right)!}~~~\text{ für } n\in T_{f(X)}.
+$$
+Berechnen Sie den Unterschied zur simulierten Wahrscheinlichkeitsfunktion (an den Stellen, die in der Simulation vorkommen). Zur Berechnung des Unterschieds nutzen Sie bitte die mittlere absolute Abweichung $\frac{1}{n}\sum_{k=1}^{n}|g(x_k)-h(x_k)|$ für zwei Wahrscheinlichkeitsfunktionen $g$ und $h$.
+
+## Lösung
+
+## zu a)
+Wir erzeugen zunächst die benötigten Zufallsvariablen und vergewissern uns der korrekten Erzeugung mittels eines Histogramms.
+```{r}
+n <- 10^4
+lambda <- 100
+x <- rpois(n, lambda)
+hist(x,breaks=100,probability=TRUE)
+```
+Wir erkennen die korrekte Verteilung und fahren fort. Nun berechnen wir Erwartungswert und Varianz von $f(X)$ auf Basis der erzeuten Zufallsvariablen:
+
+```{r}
+x_f <- 10*x^2+3
+print(paste("Es gelten E(f(X))=", mean(x_f), "und Var(f(X)) =", var(x_f)))
+```
+
+
+## zu b)
+Wir setzen die Formel für $f$ ein und nutzen die Linearität des Erwarungswerts aus.
+$$ E(f(X))=E(10X^2+3)= 10E(X^2)+3 $$
+
+Wir wissen, dass $Var(X)=E(X^2)-(E(X))^2$ gilt. Da wir Varianz und Erwarungswert der Exponentialverteilung bereits kennen, nutzen wir diese Gleichung in Umgestellter Form:
+$$E(X^2) = Var(X) + (E(X))^2 = \frac{1}{\lambda^2} + \left(\frac{1}{\lambda}\right)^2 = \frac{2}{\lambda^2} $$ für $X \sim Exp(\lambda)$
+
+Wir schlussfolgern
+
+$$E(f(X)) = 10\cdot\frac{2}{\lambda^2}+3= 20 \lambda^{-2} +3$$
+
+Mit $\lambda = 100$ ergibt sich:
+
+```{r}
+result <- 20*lambda^(-2)+3
+print(paste("E(f(X)) =", result))
+```
+
+
+## zu c)
+Wir stellen die Wahrscheinlichkeitsfunktion von $f(X)$ mittels Monte-Carlo-Simulation in einem Histogramm dar.
+
+```{r}
+hist(x_f,breaks=100,probability=TRUE)
+```
+
+
+## zu d) <- ueberarbeiten!
+Sei $n\in\mathbb{N}_0$. Es gilt:
+$$ P\left(F(X)=n\right) = P\left(10X^2+3=n\right) = P\left(X=\sqrt{\frac{n-3}{10}}\right)$$
+In der letzten Gleichheit haben wir ausgenutzt, dass $P(X \geq 0 ) = 1$ gilt, da $X \sim Po(\lambda)$ ist. Könnte $X$ auch negative Werte annehmen, so müssten wir die negative Wurzel entsprechend ergänzen.
+
+Nun gilt entsprechend der Poissonverteilung falls 
+$$n \in M:= \left\lbrace 10\cdot z^{2} + 3 : z \in \mathbb{N}_0 \right\rbrace $$ liegt, 
+so gilt
+$$ P(F(X)=n) = \exp(-\lambda)\lambda^{\sqrt{(x-3)/10}}\cdot\frac{1}{(\sqrt{\frac{n-3}{10}})!}$$.
+Hierbei sei erwähnt, dass $n \in M$ bedeutet, dass $\sqrt{\frac{x-3}{10}} \in \mathbb{N}_0$ liegt.
+
+Falls $n \not \in M$ liegt, gilt $P(F(X)=n)=0$.
+
+```{r}
+Fn <- ecdf(x_f)
+distr_f <- ppois(sqrt((unique(x_f)-3)/10),lambda,length(unique(x_f)))
+```
+Der Unterschied der beiden Verteilungsfunktionen ist nun:
+```{r}
+(1/n)*(sum(abs(Fn(unique(x_f)) - distr_f)))
+```
+
+
+# Aufgabe 2: - entfällt
+
+Sei $X_n \sim B(n,p)$ mit $n=10^4$ und $p=10^{-4}$.
+
+a)  Welche Verteilung nimmt $\lim_{n\rightarrow \infty} \frac{X_n-np}{\sqrt{np(1-p)}}$ an. Durch welche Verteilung könnte man die Verteilung von $X_n$ also approximieren?
+b)  Ermitteln Sie die Wahrscheinlichkeitsfunktion der Zufallsvariablen $\frac{X_n-np}{\sqrt{np(1-p)}}$ mittels Monte-Carlo-Simulation unter Zuhilfenahme von $10\,000$ Realisationen.
+c)  Erstellen Sie ein Histogramm zur simulierten Wahrscheinlichkeitsfunktion und ergänzen Sie die Dichte einer normalverteilten Zufallsvariable mit entsprechend angepassten Paramteren.
+d)  Erstellen Sie ein Histogramm zur simulierten Wahrscheinlichkeitsfunktion und ergänzen Sie die Wahrscheinlichkeitsfunktion einer poissonverteilten Zufallsvariable mit entsprechend angepasstem Parameter.
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+
+
+# Aufgabe 2
+
+Die Verteilung des zu versteuernden (Jahres-)Einkommens in Deutschland soll durch eine lognormalverteilte Zufallsvariable $V$ modelliert werden. In R gibt es für die Lognormalverteilung die Funktionen \texttt{dlnorm} (Dichte), \texttt{plnorm} (Verteilungsfunktion), \texttt{qlnorm} (Quantile) und \texttt{rlnorm} (Zufallszahlen). Die Parameter der Lognormalverteilung heißen in R \texttt{meanlog} und \texttt{sdlog}. Um das zu versteuernde Einkommen zu modellieren, werden die beiden Parameter auf \texttt{meanlog}=10.2
+und \texttt{sdlog}=1.6 gesetzt.
+
+Legen Sie für die weitere Bearbeitung der Aufgabe § 32a Absatz 1 des Einkommensteuergesetzes (EStG) unter Vernachlässigung der §§ 32b, 32d, 34, 34a, 34b und 34c EStG zu Grunde. Sie finden § 32a Absatz 1 EStG unter: \url{https://www.gesetze-im-internet.de/estg/__32a.html}. 
+
+a) Bestimmen Sie den Erwartungswert $E(V)$ und die Standardabweichung $\sqrt{Var(V)}$ des zu versteuernden Einkommens.
+
+b) Stellen Sie die Dichte des \emph{logarithmierten} zu versteuernden Einkommens $\ln(V)$ dar. 
+
+c) Bestimmen Sie die Verteilungsfunktion der tariflichen Einkommensteuer $s(V)$, wobei $s(.)$ die im EStG genannte Steuerfunktion ist.
+
+d) Zeichnen Sie die Dichte des Nettoeinkommens (definiert als zu versteuerndes Einkommen minus tarifliche Einkommensteuer).
+
+*Hinweise:* Die R-Funktion zum Abrunden lautet \texttt{floor}. Nutzen Sie für alle vier Aufgabenteile Monte-Carlo-Simulationen.
+
+
+## Lösung
+
+Wir stellen zuerst die in § 32a EStG genannten Größen mathematisch dar. Sei $b$ das zu versteuernde Einkommen einer Person.
+$$
+x = \lfloor b \rfloor
+$$
+$$
+y = \frac{\max(x - 10\,908 \, ,\,0)}{10^4}
+$$
+
+$$
+z = \frac{\max(x - 15\,999 \, ,\,0)}{10^4}
+$$
+
+```{r}
+# überarbeiten! Funktionsdefinition überprüfen; anschließend Funktion zu normalem R-Code überarbeiten.
+my_estg <- function(verst_einkommen){ 
+  x = floor(verst_einkommen)
+  if (x <= 10908){
+    sum = 0
+  }
+  if (10909 <= x & x <= 15999){
+    y = (x-10908)/10**4
+    sum = (979.18 * y + 1400) * y
+  }
+  if (16000 <= x & x <= 62809){ # else if nutzen?
+    z = (x-15999)/10**4
+    sum = (192.59 * z + 2397)*z + 966.53
+  }
+  if (62810 <= x & x <= 277825 ){
+    sum =  0.42*x - 9972.98 
+  }
+  if (277826 <= x ){
+    sum =  0.45 * x - 18307.73
+  }
+  return(floor(sum))
+}
+
+my_estg(25759.45)
+
+
+```
+
+
+```{r}
+my_estg(62810)
+
+```
+
+
+
+# Aufgabe 3
+
+Seien $X_1,X_2,\ldots,X_{20}$ unabhängige Wiederholungen von $X\sim t_4$
+(d.h. eine t-Verteilung mit 4 Freiheitsgraden). Es gilt $E(X)=0$. 
+Die Varianz von $X$ beträgt $Var(X)=2$. Mit $Y_n$ bezeichnen wir 
+die Partialsummen
+$$
+Y_n=\sum_{i=1}^n X_i
+$$
+für $n=1,\ldots,20$.
+
+a) Leiten Sie für $n,m\in\{1,2,\ldots,20\}$ mit $m\le n$ die Kovarianz $Cov(Y_m,Y_n)$ analytisch her. 
+
+b) Führen Sie eine Monte-Carlo-Simulation durch, um das 0.1-Quantil
+von $Y_{20}$ zu bestimmen. 
+
+c) Bestimmen Sie mit Hilfe einer Monte-Carlo-Simulation die Wahrscheinlichkeit,
+dass sowohl $Y_{10}$ als auch $Y_{20}$ positiv sind.
+
+d) Wie hoch ist der bedingte Erwartungswert von $Y_{20}$, wenn $Y_{10}$ positiv ist? Ermitteln Sie den Wert mit Hilfe einer Monte-Carlo-Simulation.
+
+
+# Aufgabe 4: Pi raten
+
+Eine Möglichkeit die Kreiszahl $\pi$ zu schätzen besteht darin sehr viele (hier $n$) Kugeln unabhängig voneinander gleichverteilt in einen Sandkasten mit quadratischer Grundfläche fallen zu lassen. Stellen Sie sich dafür vor, dass Sie ein Koordinatensystem über diesen Sandkasten legen, sodass der Mittelpunkt auf der Koordinate $(0,0)$ liegt, dabei bedeutet die Gleichverteilung in diesem Sandkasten, das der Aufprallpunkt der Kugeln durch den Zufallsvektor $(X,Y)$ beschrieben werden kann, wobei $X$ und $Y$ unabhängig und Rechteckverteilt sind. Gehen Sie außerdem davon aus, dass die Seitenlänge dieses Sandkastens 1 beträgt. Sie ziehen nun einen Kreis um den Mittelpunkt des Sandkastens mit Radius $\frac{1}{2}$. Wir notieren die Koordinaten $(x,y)$ der Aufprallpunkte der Kugeln und ermitteln, wie groß der Anteil der in den Innenkreis des Quadrats gefallenen Kugeln an den insgesamt fallen gelassenen Kugeln ist. Eine Kugel ist in den Innenkreis des Quadrats gefallen, falls für ihre Koordinaten $x^2 + y^2\le(1/2)^2$ gilt. Die Idee hinter dem Vorgehen besteht darin auszunutzen, dass $P(K) = \pi(1/2)^2$ mit $K$="Der Aufprallpunkt erfüllt die Kreisvorschrift" gilt. Außerdem nutzen wir aus, dass nach dem Gesetz der großen Zahl der Anteil nährungsweise der Wahrscheinlichkeit $P(K)$ entspricht, wenn sehr viele Kugeln geworfen werden.
+
+a) Beschreiben Sie verbal einen Algorithmus, mit nach dem oben beschriebenen Verfahren eine Approximation von $\pi$ ermittelt werden kann.
+
+b)  Approximieren Sie $\pi$, indem Sie den Algorithmus in R implementieren und ausführen. Erläutern Sie Ihr Vorgehen und geben Sie Zwischenergebnisse aus. Setzen Sie die Anzahl der Kugeln auf $n=10^5$.
+
+c)  Ändern Sie den Algorithmus dahingehend, dass so lange Kugeln fallen gelassen werden, bis die Abweichung von der R-internen Konstante \texttt{pi} kleiner als $10^{-4}$ ist.
+
+d)  Wo und wie wurde in dieser Aufgabe das Gesetz der großen Zahl angewendet? (Bonusaufgabe)
+
+## Lösung
+
+### zu a)
+Seien $X_1, X_2, \ldots \sim U[-\frac{1}{2},\frac{1}{2}]$ sowie $Y_1, Y_2, \ldots \sim U[-\frac{1}{2},\frac{1}{2}]$ allesamt voneinander unabhängige Zufallsvariablen. Dann entspricht $(X_i,Y_i)$ dem Aufprallpunkt der $i$-ten Kugel.
+Somit gilt
+$$K_i:= \textrm{"i-te Kugel fällt in den Innenkreis"} = \{ (X_i-m_1)^2 + (Y_i-m_2)^2 \leq \left(\frac{d}{2}\right)^2  \}$$
+
+Die Zufallsvariable $\frac{1}{n}(1_{K_1}+1_{K_2}+\ldots+1_{K_n})$ misst also das gesuchte Verhältnis.
+
+### zu b)
+Wir erzeugen zunächst die benötigten Zufallsvariablen und vergewissern uns ihrer korrekten Erzeugung mittels eines Histogramms.
+```{r}
+n <- 10^4
+
+x <- runif(n, min=-1/2,max=1/2) # x-koordinaten der Aufprallpunkte
+hist(x)
+```
+```{r}
+y <- runif(n, min=-1/2, max=1/2)
+hist(y)
+```
+
+Dann ermitteln wir den Anteil der in den Kreis gefallenen Kugeln, indem wir
+1. prüfen, ob der quadratische Abstand zum Mittelpunkt <= (1/2)^2 ist.
+2. die im Vektor enthaltenen TRUE-Werte aufsummieren und durch die Länge des Vektors teilen.
+```{r}
+ratio <- mean( x^2+y^2 <= (1/2)^2)
+ratio
+```
+
+Zu guter letzt bestimmen wir unseren approximativen Wert für $\pi$:
+
+```{r}
+ratio*4
+```
+
+
+
+### zu c)
+```{r}
+
+
+tolerance <- 10^(-4)
+error <- 1
+n <- 0
+my_pi <- NA
+while( error > tolerance ){
+  n <- n + 1
+  x <- runif(n, min=-1/2, max=1/2)
+  y <- runif(n, min=-1/2, max=1/2)
+  my_pi <- mean( x^2+y^2 <= (1/2)^2)*4
+ 
+  error <- abs(pi - my_pi )
+}
+```
+In diesem Algorithmus, müssen
+
+```{r}
+print(n)
+```
+Kugeln geworfen werden, damit der Fehler mit
+```{r}
+print(error)
+```
+innerhalb des Toleranzbereiches liegt. Wir haben in diesem Fall folgenden Wert für $\pi$ approximiert:
+```{r}
+print(my_pi)
+```
+
+
+### zu d)
+Es gilt:
+
+$$ plim_{n\rightarrow \infty} \frac{1}{n}(1_{K_1}+1_{K_2}+\ldots+1_{K_n}) = E(1_{K_1}) = 0\cdot P(1_{K_1}=0) + 1\cdot P(1_{K_1}=1) = P(K_1) $$
+wobei wir zuerst das Gesetz der großen Zahlen und dann die Definition für den Erwartungswert von diskret verteilten Zufallsvariablen genutzt haben.
+
+
+# Aufgabe 5:
+
+Seien $Y \sim U[-5,5]$, $Z \sim U[20,40]$ und $S \sim B(1,p)$ mit $p=0.5$ drei unabhängige Zufallsvariablen. $X$ sei eine weitere Zufallsvariable. Sie nimmt den Wert von $Y$ an, falls $S=1$ und den Wert von $Z$, falls $S=0$. Sei $X_1,\dots,X_n$ eine einfache Stichprobe aus $X$.
+
+a) Wie hoch ist der Erwartungswert $E(X)$? Wie hoch wäre der Erwartungswert von $X$, wenn der Parameter $p$ der bernoulli-verteilten Zufallsvariable $S$ den Wert 0.9 hätte? Gehen Sie in den folgenden Teilaufgaben wieder von $p=0.5$ aus.
+
+b)  Bestimmen Sie die Dichte der Zufallsvariable $X$, indem Sie ein Histogramm auf Basis einer Monte-Carlo-Simulation mit $100000$ Realisationen erstellen
+
+c) Bestimmen Sie die Dichte der Zufallsvariable $X_1+\ldots+X_n$ mittels Monte-Carlo-Simulation anhand von $100000$ Realisationen und plotten Sie die zugehörigen Histogramme für $n=2,3,10,100$. 
+
+d) Zeigen Sie durch eine Monte-Carlo-Simulation, dass die Dichte der Zufallsvariable 
+$$
+\frac{\bar X_n-E(X)}{S}
+$$
+für $n=100$ gut durch eine Standardnormalverteilung approximiert werden kann. Die Stichprobenstandardabweichung
+$$
+S = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X_n)^2}
+$$
+kann in R \texttt{sd} berechnet werden.
+
+
+## Lösung
+
+### zu a)
+```{r}
+n <- 10^4
+p <- 0.5
+B <- rbinom(n,1,p)
+Y <- runif(n, -5, 5)
+Z <- runif(n, 20, 40)
+X <- B*Y+(1-B)*Z
+hist(X, breaks=100, probability=TRUE)
+```
+### zu b)
+Wir können die Gleichung wie folgt ergänzen:
+
+$$ \lim_{m\rightarrow \infty} P\left(\frac{X_1+X_2+\ldots+X_m - mE(X)}{m\sqrt{Var(X)}} \leq u \right) = \Phi(u) $$
+Alternativ könnte man auch schreiben:
+$$ \lim_{m\rightarrow \infty} P\left(\frac{\frac{X_1+X_2+\ldots+X_m}{m} - E(X)}{\sqrt{Var(X)}} \leq u \right) = \Phi(u) $$
+Wir schätzen den Erwartungswert $E(X)$ hierbei mit
+```{r}
+mean(X)
+```
+und die Varianz mit
+```{r}
+var(X)
+```
+
+
+
+### zu c)
+Für $m=1$ ergibt sich:
+```{r}
+summands <- 1 # für m=1, also einen Summanden
+
+limit_variable <- c(1:n)*0
+for(k in 1:n){
+  B <- rbinom(summands,1,p)
+  Y <- runif(summands, -5, 5)
+  Z <- runif(summands, 20, 40)
+  X <- B*Y+(1-B)*Z
+  limit_variable[k] <- sum(X)
+}
+hist(limit_variable , breaks=100, probability=TRUE)
+```
+
+Für $m=2$ ergibt sich:
+```{r}
+summands <- 2
+
+limit_variable <- c(1:n)*0
+for(k in 1:n){
+  B <- rbinom(summands,1,p)
+  Y <- runif(summands, -5, 5)
+  Z <- runif(summands, 20, 40)
+  X <- B*Y+(1-B)*Z
+  limit_variable[k] <- sum(X)
+}
+hist(limit_variable , breaks=100, probability=TRUE)
+```
+
+Für $m=3$ ergibt sich:
+```{r}
+summands <- 3
+
+limit_variable <- c(1:n)*0
+for(k in 1:n){
+  B <- rbinom(summands,1,p)
+  Y <- runif(summands, -5, 5)
+  Z <- runif(summands, 20, 40)
+  X <- B*Y+(1-B)*Z
+  limit_variable[k] <- sum(X)
+}
+hist(limit_variable , breaks=100, probability=TRUE)
+```
+
+
+Für $m=10$ ergibt sich:
+```{r}
+summands <- 10
+
+limit_variable <- c(1:n)*0
+for(k in 1:n){
+  B <- rbinom(summands,1,p)
+  Y <- runif(summands, -5, 5)
+  Z <- runif(summands, 20, 40)
+  X <- B*Y+(1-B)*Z
+  limit_variable[k] <- sum(X)
+}
+hist(limit_variable , breaks=100, probability=TRUE)
+```
+
+Für $m=100$ ergibt sich:
+```{r}
+summands <- 100
+
+limit_variable <- c(1:n)*0
+for(k in 1:n){
+  B <- rbinom(summands,1,p)
+  Y <- runif(summands, -5, 5)
+  Z <- runif(summands, 20, 40)
+  X <- B*Y+(1-B)*Z
+  limit_variable[k] <- sum(X)
+}
+hist(limit_variable , breaks=100, probability=TRUE)
+```

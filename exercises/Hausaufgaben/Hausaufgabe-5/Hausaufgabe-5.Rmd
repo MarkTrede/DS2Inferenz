@@ -1,0 +1,80 @@
+---
+title: "Blatt 5"
+author: "Data Science 2"
+date: "Sommersemester 2023"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Auf diesem Blatt arbeiten wir mit realen Daten. Die Dateien "strafvollzug.csv" bzw. "arbeitsstellen_gemeldet.csv" enthalten Daten des Bundeskriminalamt in Wiesbaden bzw. der Bundesagentur für Arbeit in Nürnberg. Sie finden die csv-Dateien auf der Learnweb-Seite.
+
+Bei Interesse können Sie weitere Informationen über diese Datensätze mittels der Codes 24911-0001 bzw. 13211-0007 auf www.genesis.destatis.de in Erfahrung bringen.
+
+# Aufgabe 1: Erwartungstreue Schätzer
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# Aufgabe 2: Hypothesentests und Konfidenzintervalle
+**Entwurf**
+
+a)    Lesen Sie den Datensatz "straftaten.csv" ein. Gehen Sie davon aus, dass der Anteil $\gamma$ der aufgeklärten Straftaten an den beanntgewordenen Straftaten Jahr für Jahr identisch verteilt ist sowie die Jahre voneinander unabhängig sind. Geben Sie ein (asymptotisches) zweiseitiges 95%-Konfidenzintervall für den genannten Anteil $\gamma$ an.
+
+
+b) Ihre Vorgesetzte behauptet, dass der Anteil $\gamma$ vom Wert $0.5$ signifikant abweicht. Prüfen Sie diese Aussage zum Niveau $\alpha = 0.05$. 
+
+
+*Hinweis:*
+
+Wählen Sie den Parameter `delim` bzw. `sep` passend.
+
+## Lösung
+
+```{r}
+library(readr)
+library(dplyr)
+data_straf <- read.csv("strafvollzug.csv", sep=";")
+data_straf
+```
+
+# Aufgabe 3: Hypothesentests
+**Entwurf**
+
+a)    Lesen Sie den Datensatz "arbeitsstellen_gemeldet.csv" ein. Bestimmen Sie das arithmetische Mittel und die Stichprobenvarianz der jährlichen Änderung an gemeldeten Arbeitsstellen für Nordrhein-Westfalen (NRW).
+
+b)    Nehmen Sie an, dass diese Änderung je Bundesland einer Normalverteilung mit unbekanntem Mittelwert und unbekannter Varianz folgt und dass die Änderungen je Bundesland und je Jahr voneinander unabhängig sind.
+Testen Sie folgende Aussage zum Niveau $\alpha = 0.05$:
+
+"In Baden-Württemberg (BW) existieren im Mittel mehr Arbeitsstellen als in NRW".
+
+c)    Prüfen Sie, ab welchem Niveau $\alpha$ die in b) angenommene Unabhängigkeit zwischen den Bundesländern NRW und BW verworfen werden sollte.
+
+d)    Prüfen Sie, ab welchem Niveau $\alpha$ die Normalverteilungsannahme aus b) bezüglich NRW verworfen werden sollte.
+
+
+*Hinweis:* -
+
+## Lösung
+
+```{r}
+data <- read.csv("arbeitsstellen_gemeldet.csv", sep=";")
+data %>% select( "Jahr" , "Aend_Gemeldete_Arbeitsstellen_BW", "Aend_Gemeldete_Arbeitsstellen_NRW")
+```
+
+# Aufgabe 4: Bootstrap
+
+
+
+*Hinweis:* -
+
+## Lösung
+
+\-\--
+
+# 

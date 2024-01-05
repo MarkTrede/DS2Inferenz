@@ -95,12 +95,12 @@ H_1:\theta &\neq \theta_0
 # Hypothesentests
 \framesubtitle{Terminologie}
 \begin{itemize}
-\item Einseitige Tests
+\item Zweiseitige Tests
 \begin{align*}
 H_0:\theta &= \theta_0\\
 H_1:\theta &\neq \theta_0
 \end{align*}
-\item Zweiseitige Tests
+\item Einseitige Tests
 \begin{align*}
 H_0:\theta &\ge\theta_0\qquad \text{oder}\qquad H_0:\theta\le \theta_0\\
 H_1:\theta &<\theta_0\qquad \text{oder}\qquad H_1:\theta > \theta_0

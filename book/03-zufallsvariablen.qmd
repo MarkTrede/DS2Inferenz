@@ -126,7 +126,7 @@ kennen und vor allem verstehen,
 damit die enge Verbindung zwischen Zufallsvariablen und 
 Ereignissen klar ist.  Die Verteilungsfunktion einer Zufallsvariable ist sehr nützlich, 
 weil durch sie die Verteilung der Zufallsvariable eindeutig charakterisiert wird. 
-Kennt man die Verteiliungsfunktion, dann weiß man alles über die Verteilung, was 
+Kennt man die Verteilungsfunktion, dann weiß man alles über die Verteilung, was 
 wichtig ist.
 
 Die Verteilungsfunktion ist - wie der Name schon sagt - eine Funktion. Ihr
@@ -245,7 +245,7 @@ Grafiken in diesem Buch.
 
 ```{r}
 #| echo: FALSE
-#| fig-cap: "Verteilungsfunktion"
+#| fig-cap: "Verteilungsfunktion einer diskreten Zufallsvariable"
 par(cex=0.7)
 x <- c(0, 3, 4, 9)
 y <- c(0, 0.3, 0.4, 0.6, 1)
@@ -506,7 +506,7 @@ plot(x, f, t="l", lwd=3,
 ::: {.content-visible when-format="pdf"}
 ```{r}
 #| echo: FALSE
-#| fig-cap: "Verteilungsfunktion"
+#| fig-cap: "Verteilungsfunktion der stetigen Zufallsvariable"
 par(cex=0.7)
 x <- c(-1, -0.56, 
        seq(-0.56, 1.1, length=100),

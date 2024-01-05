@@ -36,6 +36,7 @@ um Informationen über die Verteilung zu gewinnen
 \begin{block}{Einfache Stichprobe}
 $X_{1},X_{2},\ldots ,X_{n}$ heißt einfache Stichprobe aus $X$\\ 
 vom Umfang $n$, wenn
+\medskip
 \begin{enumerate}
 \item jedes $X_{i}$ wie $X$ verteilt ist und
 \item $X_{1},X_{2},\ldots ,X_{n}$ stochastisch unabhängig sind
@@ -52,8 +53,8 @@ i.i.d.-Stichprobe (independent and identically distributed)
 umgangssprachlichen Verwendung des Wortes Stichprobe überein
 \item Eine Stichprobe besteht \textbf{nicht} aus den tatsächlich
 beobachteten Daten
-\item Die tatsächlich beobachteten Daten seien $x_{1},\ldots ,x_{n}$\\ 
-(Realisierung der Stichprobe, konkrete Stichprobe)
+\item Die tatsächlich beobachteten Daten $x_{1},\ldots ,x_{n}$ nennt
+man Realisierung der Stichprobe oder konkrete Stichprobe
 \end{itemize}
 
 
@@ -77,9 +78,11 @@ vollzeitbeschäftigten Person in Deutschland
 \begin{exampleblock}{Forts. Beispiel: Löhne}
 \begin{itemize}
 \item Jede Person soll die gleiche Auswahlwahrscheinlichkeit haben
+\item Man zieht "mit Zurücklegen", damit die $X_{1},\ldots ,X_{n}$ unabhängig sind
 \item Sei $X_{i}$ das Einkommen der $i$-ten befragten Person
-\item Die $X_{1},\ldots ,X_{n}$ sollen unabhängig sein
-\item Die tatsächlich erhobenen Daten sind $x_{1},\ldots ,x_{n}$
+\item Die Stichprobe ist $X_1,\ldots,X_{100}$
+\item Die tatsächlich erhobenen Daten sind $x_{1},\ldots ,x_{100}$\\
+(konkrete Stichprobe)
 \end{itemize}
 \end{exampleblock}
 
@@ -147,7 +150,7 @@ heißt Statistik
 \[ \bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i} \]
 \end{exampleblock}
 \begin{exampleblock}{Beispiel: Stichprobenvarianz}
-\[ S^{2}=\frac{1}{n}\sum_{i=1}^{n}\left( X_{i}-\bar{X}\right) ^{2} \]
+\[ S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left( X_{i}-\bar{X}\right) ^{2} \]
 \end{exampleblock}
 
 
@@ -157,7 +160,7 @@ heißt Statistik
 \begin{itemize}
 \item Eine Statistik ist eine Zufallsvariable, d.h. sie hat eine Verteilung, einen Erwartungswert, eine Varianz etc. 
 \item Um die \textbf{Verteilung der Statistik} herzuleiten, muss man die Verteilung von $X$ bzw. $X_1,\ldots,X_n$ kennen
-\item Natürlich kennt man die Verteilung der Population nicht
+\item Im Allgemeinen kennt man die Verteilung der Population nicht
 \item Trotzdem ist die Frage sinnvoll: Wie wäre eine Statistik verteilt, wenn die Verteilung von $X$ bekannt wäre?
 \item Analytischer Ansatz oder Monte-Carlo-Simulationen
 \end{itemize}
@@ -193,13 +196,13 @@ die Verteilung
 # Statistiken
 \framesubtitle{Verteilung}
 ```{r eval=FALSE}
-library(distributionsrd)
-R <- 10000
-smpl_sd <- rep(0,R)
-
+library(distributionsrd) # für Paretoverteilung
 n <- 50
 xmin <- 1
 k <- 5
+
+R <- 10000
+smpl_sd <- rep(0,R)
 
 for(r in 1:R){
     x <- rpareto(n, xmin=xmin, k=k)
@@ -223,6 +226,7 @@ for(r in 1:R){
     x <- rpareto(n, xmin=xmin, k=k)
     smpl_sd[r] <- sd(x)
 }
+smpl_sd <- smpl_sd[smpl_sd < 1.5]
 par(cex=1.5)
 hist(smpl_sd, breaks=50, probability=TRUE, xlim=c(0,1.5))
 ```

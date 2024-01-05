@@ -251,8 +251,9 @@ unwahrscheinlich, dass sowohl $X$ als auch in $Y$ beide größer als
 passieren, dass beide Zufallsvariable kleiner als $-3$ sind.
 
 ```{r}
-#| code-fold: true
-#| code-summary: "R-Code zeigen"
+#| echo: FALSE
+#| fig-cap: "Quantilfunktion der Standardnormalverteilung"
+par(cex=0.7)
 x <- seq(-4, 4, length=51)
 y <- seq(-4, 4, length=51)
 f <- matrix(0, length(x), length(y))
@@ -274,6 +275,8 @@ der Dichtefunktion wie auf einer normalen Landkarte. In einem Image-Plot
 werden die Höhen durch Farben repräsentiert. 
 
 Der Contour-Plot für die obige Dichte sieht so aus:
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -283,8 +286,23 @@ Der Contour-Plot für die obige Dichte sieht so aus:
 contour(x, y, f,
         xlab="x", ylab="y")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Contour-Plot"
+#| fig.asp: 1
+par(cex=0.7)
+contour(x, y, f,
+        xlab="x", ylab="y")
+```
+:::
+
 Ein Vorteil des Contour-Plots besteht darin, dass man leicht erkennen kann,
 wo die Dichte hoch ist. Ein farbiger Image-Plot der gleichen Dichte zeigt folgendes Bild:
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -294,6 +312,18 @@ wo die Dichte hoch ist. Ein farbiger Image-Plot der gleichen Dichte zeigt folgen
 filled.contour(x, y, f,
                xlab="x", ylab="y")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Image-Plot"
+#| fig.asp: 0.9
+par(cex=0.7)
+filled.contour(x, y, f,
+               xlab="x", ylab="y")
+```
+:::
 
 Wenn man sich für die Wahrscheinlichkeit interessiert, dass die
 Zufallsvariable in einem bestimmten Bereich landet, muss man
@@ -738,6 +768,8 @@ E(Y|X=x)&=\int_{-\infty}^\infty y f_{Y|X=x}(y)dy\\
 Für jeden Wert von $x$ in dem Intervall $[0,1.11963]$ erhält man
 einen anderen bedingten Erwartungswert für $Y$. Grafisch lässt sich
 das so darstellen:
+
+::: {.content-visible when-format="html"}
 ```{r}
 x <- seq(from=0, to=1.11963, length=200)
 plot(x, (6*x+3)/(12*x+4), 
@@ -746,6 +778,20 @@ plot(x, (6*x+3)/(12*x+4),
      ylab="E(Y|X=x)",
      main="Bedingte Erwartungswerte von Y")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Bedingte Erwartungswerte von Y"
+par(cex=0.7)
+x <- seq(from=0, to=1.11963, length=200)
+plot(x, (6*x+3)/(12*x+4), 
+     type="l",
+     xlab="x", 
+     ylab="E(Y|X=x)")
+```
+:::
 
 Der Erwartungswert von $Y$ ist also bei kleinen Werten von $x$
 größer als bei großen Werten. Wenn bekannt ist, dass $X$ den

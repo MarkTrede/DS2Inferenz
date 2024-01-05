@@ -1,0 +1,12 @@
+name: ds2inferenz
+title: ds2inferenz
+username: marktrede
+account: marktrede
+server: bookdown.org
+hostUrl: https://bookdown.org/__api__
+appId: 12974
+bundleId: 92124
+url: https://bookdown.org/marktrede/ds2inferenz/
+asMultiple: FALSE
+asStatic: TRUE
+ignoredFiles: Data-Science-2.pdf

@@ -3,9 +3,9 @@
 setwd("/home/tredem/sciebo/DataScience2/data")
 
 x <- read.csv("StudentischeUmfrage2023.csv")
-x <- x[,c("Geschlecht","ErwartetesGehalt")]
+x <- x[,c("Geschlecht","ErwartetesGehalt","Nebenjob")]
 
-x <- x[!is.na(x$Geschlecht) & !is.na(x$ErwartetesGehalt),]
+x <- x[!is.na(x$Geschlecht) & !is.na(x$ErwartetesGehalt) &!is.na(x$Nebenjob),]
 x <- x[!x$Geschlecht=="divers",]
 
 x$ErwartetesGehalt <- ifelse(x$ErwartetesGehalt < 15000,

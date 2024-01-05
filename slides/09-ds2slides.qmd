@@ -29,13 +29,13 @@ z.B. $E(X)$, $Var(X)$, Quantile, Dichte, \ldots
 
 # Punktschätzung
 \framesubtitle{Definition}
-\begin{block}{Schätzer}
+\begin{block}{Schätzer (estimator)}
 Sei $\theta $ ein unbekannter Parameter. Eine Statistik 
 $\hat{\theta}(X_1,\ldots ,X_n)$ heißt Schätzer für $\theta$
 \end{block}
 \bigskip
 
-\begin{block}{Schätzwert}
+\begin{block}{Schätzwert (estimate)}
 Die Realisierung $\hat{\theta}(x_1,\ldots ,x_n)$ eines 
 Schätzers heißt Schätzwert
 \end{block}
@@ -48,7 +48,7 @@ Schätzers heißt Schätzwert
 \item Der Schätzer $\hat\theta=\hat\theta(X_1,\ldots,X_n)$ 
 ist eine Zufallsvariable!
 \item Der Schätzwert $\hat\theta=\hat\theta(x_1,\ldots,x_n)$ 
-ist \textbf{keine} Zufallsvariable!
+ist keine Zufallsvariable!
 \item Achtung: Die abkürzende Notation $\hat\theta$ bezeichnet
 entweder den Schätzer $\hat{\theta}(X_{1},\ldots ,X_{n})$
 oder den Schätzwert $\hat{\theta}(x_{1},\ldots ,x_{n})$
@@ -59,7 +59,7 @@ oder den Schätzwert $\hat{\theta}(x_{1},\ldots ,x_{n})$
 
 # Punktschätzung
 \framesubtitle{Definition}
-\begin{block}{Standardfehler}
+\begin{block}{Standardfehler (standard error)}
 Die Standardabweichung eines Schätzers 
 $$
 \sqrt{Var(\hat{\theta}(X_1,\ldots ,X_n))}
@@ -77,11 +77,11 @@ Je kleiner der Standardfehler, desto präziser die Schätzung
 \framesubtitle{Schätzer für den Erwartungswert}
 \textbf{Schätzung des Erwartungswerts}\medskip
 \begin{itemize}
-\item Der Erwartungswert $E(X)$ wird durch das Stichprobenmittel
+\item Der Erwartungswert $E(X)$ wird durch das Stichprobenmittel geschätzt,
 $$
 \bar X=\frac{1}{n}\sum_{i=1}^n X_i
 $$
-geschätzt. Der Schätzwert ist
+\item Der Schätzwert ist
 $$
 \bar x=\frac{1}{n}\sum_{i=1}^n x_i
 $$
@@ -106,13 +106,14 @@ $\bar X$ für den Erwartungswert $E(X)$
 
 # Punktschätzung
 \framesubtitle{Schätzer für den Erwartungswert}
-\textbf{Beispiel:} Erwartetes Gewicht einer Schale Erdbeeren
+\begin{exampleblock}{Beispiel: Erwartetes Gewicht einer Schale Erdbeeren}
+\end{exampleblock}
 ```{r}
 x <- c(509.2,504.6,492.8,508.0,500.2,508.4,502.6,
        518.0,494.4,487.1,510.8,504.2,519.9,488.3,
        509.2,513.8,511.2,506.1,505.7,493.3)
-
 n <- length(x) # Umfang
+
 mean(x) # Stichprobenmittel
 sd(x)/sqrt(n) # Standardfehler
 ```
@@ -139,17 +140,22 @@ $$
 
 # Punktschätzung
 \framesubtitle{Schätzer für einen Anteil}
-\textbf{Beispiel:} Anteil von Firmen, die abwandern wollen
+\begin{exampleblock}{Beispiel: Anteil von Firmen, die abwandern wollen}
 \begin{itemize}
 \item Umfrage: Einfache Stichprobe vom Umfang $n=500$ aus
 der Population aller relevanten Firmen
 \item Bernoulli-Verteilung (0=nicht abwandern, 1=abwandern)
 \item Anzahl an Firmen in der Stichprobe, die abwandern wollen: 
 $$
-\sum_{i=1}^{500} x_i=65
+\sum\nolimits_{i=1}^{500} x_i=65
 $$
 \item Stichprobenanteil: $\hat\pi=\frac{65}{500}=0.13$
+\item Standardfehler: 
+$$
+\sqrt{\hat\pi (1-\hat\pi)/n}=\sqrt{0.13\cdot (1-0.13)/500}=0.015
+$$
 \end{itemize}
+\end{exampleblock}
 
 
 
@@ -157,11 +163,11 @@ $$
 \framesubtitle{Schätzer für die Varianz}
 \textbf{Schätzung der Varianz}\medskip
 \begin{itemize}
-\item Die Varianz wird durch die Stichprobenvarianz
+\item Die Varianz wird durch die Stichprobenvarianz geschätzt,
 $$
 S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2
 $$
-geschätzt. Der Schätzwert ist
+\item Der Schätzwert ist
 $$
 s^2=\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar x)^2
 $$
@@ -171,7 +177,8 @@ $$
 
 # Punktschätzung
 \framesubtitle{Schätzer für die Varianz}
-\textbf{Beispiel:} Varianz des Gewichts einer Schale Erdbeeren
+\begin{exampleblock}{Beispiel: Varianz des Gewichts einer Schale Erdbeeren}
+\end{exampleblock}
 ```{r}
 x <- c(509.2,504.6,492.8,508.0,500.2,508.4,502.6,
        518.0,494.4,487.1,510.8,504.2,519.9,488.3,
@@ -188,7 +195,8 @@ sd(x) # Stichproben-Standardabweichung
 \textbf{Unverzerrtheit:}\medskip
 \begin{itemize}
 \item Gedankenexperiment: Wiederholte Stichprobe
-\item Aus jeder Stichprobe wird der Erwartungswert geschätzt
+\item Aus jeder Stichprobe wird der Erwartungswert durch
+das Stichprobenmittel $\bar X$ geschätzt
 \item Analogie zu einem Bogenschützen
 \end{itemize}
 
@@ -207,25 +215,25 @@ n <- 20
 par(mfrow=c(2,2),mar=c(0.3,0.3,1.5,0.3),cex=1.7)
 plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(a)")
 DrawCircle(0.5,0.5,0.5)
-points(0.5,0.5,pch=19)
+points(0.5,0.5,pch=19,col="red")
 xy <- bogen(n,0.5,0.5,0.05)
 points(xy)
 
 plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(b)")
 DrawCircle(0.5,0.5,0.5)
-points(0.5,0.5,pch=19)
+points(0.5,0.5,pch=19,col="red")
 xy <- bogen(20,0.3,0.35,0.05)
 points(xy)
 
 plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(c)")
 DrawCircle(0.5,0.5,0.5)
-points(0.5,0.5,pch=19)
+points(0.5,0.5,pch=19,col="red")
 xy <- bogen(20,0.5,0.5,0.15)
 points(xy)
 
 plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(d)")
 DrawCircle(0.5,0.5,0.5)
-points(0.5,0.5,pch=19)
+points(0.5,0.5,pch=19,col="red")
 xy <- bogen(20,0.3,0.35,0.15)
 points(xy)
 ```
@@ -234,16 +242,16 @@ points(xy)
 
 # Punktschätzung
 \framesubtitle{Unverzerrtheit}
-\begin{block}{Unverzerrtheit}
+\begin{block}{Unverzerrtheit (unbiasedness)}
 Ein Schätzer $\hat\theta$ heißt unverzerrt oder erwartungstreu, wenn
 $E(\hat\theta)=\theta$
 \end{block}
-\bigskip
-$\bar X$ und $S^2$ sind beide erwartungstreu: Wenn $E(X)=\mu$ und $Var(X)=\sigma^2$, dann 
+\medskip
+$\bar X$ und $S^2$ sind erwartungstreu: Wenn $E(X)=\mu$ und $Var(X)=\sigma^2$, dann 
 gilt 
 \begin{align*}
-E(\bar X)&=\mu\\
-E(S^2)&=\sigma^2
+E(\bar X)&=E\left(\frac{1}{n}\sum_{i=1}^n X_i\right)=\mu\\
+E(S^2)&=E\left(\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2\right)=\sigma^2
 \end{align*}
 
 
@@ -254,24 +262,27 @@ E(S^2)&=\sigma^2
 \begin{itemize}
 \item Sei $\hat\theta$ ein Schätzer
 \item Die Verteilung von $\hat\theta$ kann man durch eine Monte-Carlo-Simulation
-beliebig genau annähern
-\item Voraussetzung: Man kann Zufallszahlen aus $X$ ziehen \newline
-(das ist natürlich in der Praxis nicht möglich)
+beliebig genau annähern (Erwartungswert, Varianz, Dichte, Quantile, Verteilungsfunktion, \ldots)
+\item Voraussetzung: Man kann beliebig viele Zufallszahlen aus $X$ ziehen
 \end{itemize}
 
 
 
 # Punktschätzung
 \framesubtitle{Monte-Carlo-Simulation}
-\textbf{Beispiel:}\medskip
+\begin{exampleblock}{Beispiel}
 \begin{itemize}
 \item Sei $X\sim Exp(0.25)$
 \item Die Standardabweichung ist $\sigma=4$
 \item Der Stichprobenumfang sei $n=8$
-\item Wie ist der Schätzer $s$ verteilt\newline 
-(d.h. die Stichproben-Standardabweichung)?
+\item Wie ist der Schätzer 
+$$
+S=\sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2}
+$$ 
+verteilt (d.h. die Stichproben-Standardabweichung)?
 \item Anzahl der Simulationsdurchläufe $R=10000$
 \end{itemize}
+\end{exampleblock}
 
 
 

@@ -34,6 +34,8 @@ Freiheitsgraden ist $X\sim \chi^2_\nu$.
 
 Die Abbildung zeigt die Dichtefunktion einer $\chi^2$-Verteilung mit
 3, 5 und 10 Freiheitsgraden.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -53,6 +55,30 @@ legend("topright",
        fill=c("black", "red", "blue"),
        legend=c("df=3", "df=5", "df=10"))
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Chi-Quadrat-Verteilung"
+par(cex=0.7)
+x <- seq(from=0, to=25, length=300)
+plot(x, dchisq(x, df=3),
+     type="l",
+     main="",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.25))
+
+lines(x, dchisq(x, df=5), col="red")
+lines(x, dchisq(x, df=10), col="blue")
+
+legend("topright",
+       fill=c("black", "red", "blue"),
+       legend=c("df=3", "df=5", "df=10"))
+```
+:::
 
 Erwartungswert und Varianz sind
 

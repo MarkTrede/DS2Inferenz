@@ -84,6 +84,8 @@ gekennzeichnet. Die rot schraffierte Fläche ist die
 Wahrscheinlichkeit, dass die Teststatistik unter $H_0$
 in den kritischen Bereich fällt. Sie setzt sich zusammen aus
 zwei Teilfläche mit jeweils 2.5 Prozent Wahrscheinlichkeit.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -103,6 +105,29 @@ for(x in seq(from=qnorm(0.975), to=3.5, length=40)){
   lines(-c(x,x), c(0,dnorm(x)), col="red")
 }
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Kritische Grenzen"
+par(cex=0.7)
+x <- seq(from=-3.5, to=3.5, length=200)
+plot(x, dnorm(x),
+     type="l",
+     xlab="Teststatistik T",
+     ylab="Dichte unter H0",
+     yaxs="i", ylim=c(0,0.45))
+
+abline(v=0)
+abline(v=qnorm(c(0.025,0.975)),col="red")
+
+for(x in seq(from=qnorm(0.975), to=3.5, length=40)){
+  lines(c(x,x), c(0,dnorm(x)), col="red")
+  lines(-c(x,x), c(0,dnorm(x)), col="red")
+}
+```
+:::
 
 Wie bestimmt man den p-Wert des Tests? Dazu nehmen wir an, dass die 
 Teststatistik $T$ einen (positiven oder negativen) Wert $t$ 
@@ -121,6 +146,8 @@ dass die Teststatistik besonders klein oder besonders groß ist, d.h.
 \end{align*}
 
 Grafisch lässt sich das wie folgt veranschaulichen.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -152,6 +179,43 @@ text(2.9,0.1,
 arrows(-2.7,0.08,-2,0.03,length=0.1)
 arrows(2.7,0.08,2,0.03,length=0.1)
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "p-Wert"
+par(cex=0.7)
+x <- seq(from=-3.5, to=3.5, length=200)
+plot(x, dnorm(x),
+     type="l",
+     main="",
+     xlab="Teststatistik T",
+     ylab="Dichte unter H0",
+     yaxs="i", ylim=c(0,0.45))
+
+abline(v=0)
+
+mtext("|t|",1,0.5,at=1.5)
+mtext("-|t|",1,0.5,at=-1.5)
+
+lines(c(1.5,1.5), c(0,dnorm(1.5)), col="red", lwd=3)
+lines(c(-1.5,-1.5), c(0,dnorm(1.5)), col="red", lwd=3)
+
+for(x in seq(1.5,3.5,length=40)){
+  lines(c(x,x), c(0,dnorm(x)),col="red")
+  lines(-c(x,x), c(0,dnorm(x)),col="red")
+}
+
+text(-2.9,0.11,
+     expression(Phi(-group("|",t,"|"))))
+text(2.9,0.1,
+     expression(1-Phi(group("|",t,"|"))))
+arrows(-2.7,0.08,-2,0.03,length=0.1)
+arrows(2.7,0.08,2,0.03,length=0.1)
+```
+:::
+
 Wenn die gesamte rote Fläche kleiner als das Signifikanzniveau ist, spricht 
 das gegen die Nullhypothese und man verwirft sie. 
 
@@ -454,7 +518,10 @@ setzen. Der kritische Bereich ist dann
 $[u_{1-\alpha},\infty)$. Die Grafik zeigt diesen
 Zusammenhang für $\alpha=0.05$, die kritische
 Grenze ist 1.6449.
-```{r echo=FALSE}
+
+::: {.content-visible when-format="html"}
+```{r}
+#|  echo: FALSE
 curve(dnorm(x),from=-3.5,to=3.5,
       main="Kritische Grenze",
       xlab="Teststatistik T",
@@ -466,6 +533,26 @@ for(x in seq(qnorm(0.95),3.5,length=40)){
   lines(c(x,x),c(0,dnorm(x)),col="red")
 }
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Kritische Grenze"
+par(cex=0.7)
+curve(dnorm(x),from=-3.5,to=3.5,
+      main="",
+      xlab="Teststatistik T",
+      ylab="Dichte unter mu=mu_0",
+      yaxs="i", ylim=c(0,0.45))
+abline(v=0)
+abline(v=qnorm(0.95),col="red")
+for(x in seq(qnorm(0.95),3.5,length=40)){
+  lines(c(x,x),c(0,dnorm(x)),col="red")
+}
+```
+:::
+
 Wie bestimmt man bei diesem einseitigen Test den p-Wert?
 Zur Erinnerung: Der p-Wert ist die Wahrscheinlichkeit, dass die
 Teststatistik noch stärker gegen die Nullhypothese spricht als der 

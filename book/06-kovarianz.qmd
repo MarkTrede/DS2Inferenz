@@ -118,7 +118,7 @@ E(Z)&= \int_{-\infty}^\infty\int_{-\infty}^\infty (x+y)f_{X,Y}(x,y)dydx\\
 &\quad +\int_{-\infty}^\infty\int_{-\infty}^\infty y f_{X,Y}(x,y)dxdy\\
 &= \int_{-\infty}^\infty x\left[\int_{-\infty}^\infty f_{X,Y}(x,y)dy\right] dx\\
 &\quad +\int_{-\infty}^\infty y\left[\int_{-\infty}^\infty f_{X,Y}(x,y)dx\right]dy\\
-&= \int_{-\infty}^\infty x f_X(x)dx+\int_{-\infty}^\infty y f_Y(x)dy\\
+&= \int_{-\infty}^\infty x f_X(x)dx+\int_{-\infty}^\infty y f_Y(y)dy\\
 &= E(X)+E(Y).
 \end{align*}
 
@@ -336,7 +336,8 @@ Var\left(\sum_{i=1}^n X_i\right)&= \sum_{i=1}^n\sum_{j=1}^n Cov(X_i,X_j)\\
 \end{align*}
 
 Das die letzte Umformung korrekt ist, erkennt man am besten,
-wenn man alle Kovarianzen in einem quadratischen Tableau anordnet:
+wenn man alle Kovarianzen in einem quadratischen Tableau,
+der sogenannten Kovarianzmatrix, anordnet
 $$
 \begin{array}{ccccc}
 Cov(X_1,X_1) & Cov(X_1,X_2) & Cov(X_1,X_3) & \ldots & Cov(X_1,X_n)\\
@@ -546,5 +547,5 @@ steigende lineare Beziehung, d.h. $Y=aX+b$ mit $a>0$. Wenn der Wert $-1$ ist,
 gibt es auch eine exakte lineare Beziehung, aber sie ist dann mit
 $a<0$ fallend. Liegen die Werte betragsmäßig nahe an der 1 
 (z.B. 0.8), dann ist der lineare Zusammenhang etwas verrauscht. Je
-kleiner der Betrage des Korrelationskoeffizienten ist, desto 
+kleiner der Betrag des Korrelationskoeffizienten ist, desto 
 stärker ist der lineare Zusammenhang durch Rauschen überlagert.

@@ -80,9 +80,9 @@ for(x in seq(from=qnorm(0.975), to=3.5, length=40)){
   lines(c(x,x), c(0,dnorm(x)), col="red")
   lines(-c(x,x), c(0,dnorm(x)), col="red")
 }
-text(-2.8,0.05,"2.5%",cex=1.8)
-text(2.8,0.05,"2.5%",cex=1.8)
-text(-0.05,0.18,"95%",cex=1.8)
+text(-2.8,0.05,"2.5%",cex=1.5)
+text(2.8,0.05,"2.5%",cex=1.5)
+text(-0.05,0.18,"95%",cex=1.5)
 ```
 
 
@@ -90,14 +90,10 @@ text(-0.05,0.18,"95%",cex=1.8)
 
 # Erwartungswerttests
 \framesubtitle{t-Test}
+Die kritischen Grenzen sind für $\alpha=0.05$
 ```{r}
-alpha <- 0.05
-```
-
-Die kritischen Grenzen sind
-```{r}
--qnorm(1-alpha/2)
-qnorm(1-alpha/2)
+qnorm(0.025)
+qnorm(0.975)
 ```
 
 Wenn der Betrag der Teststatistik größer als 1.96 ist, wird die Nullhypothese 
@@ -115,7 +111,6 @@ realisierte Wert der Teststatistik $t$?
 \item Die Wahrscheinlichkeit ist
 \begin{align*}
 \text{p-Wert}&=P(T < -|t|\text{ oder }T > |t|)\\
-&=\ldots\\
 &=2(1-\Phi(|t|))
 \end{align*}
 \end{itemize}
@@ -169,7 +164,7 @@ arrows(2.7,0.08,2,0.03,length=0.1)
 \item Interpretation der Umfrage als Stichprobe aus der Population 
 aller Studierenden ($X$)
 \item $n=667$ Antworten auf Skala 0-100
-\item Hypothese: $\mu=50$
+\item Hypothesen: $H_0:\mu=50$ und $H_1:\mu\neq 50$
 \end{itemize}
 \end{exampleblock}
 
@@ -230,7 +225,6 @@ n <- 10
 qt(1-alpha/2, df=n-1)
 n <- 100
 qt(1-alpha/2, df=n-1)
-qnorm(1-alpha/2)
 ```
 
 
@@ -243,7 +237,7 @@ Qualitätskontrolle:
 \item Sei $X$ das Gewicht einer 200g-Tafel Schokolade, die aus der laufenden Produktion gezogen wird
 \item Annahme: $X\sim N(\mu,\sigma^2)$
 \item Es soll geprüft werden, ob $\mu=200$ ist
-\item $H_0:\mu=200$, $H_1.\mu\neq 200$, $\alpha=0.1$
+\item $H_0:\mu=200$, $H_1:\mu\neq 200$, $\alpha=0.1$
 \item Einfache Stichprobe vom Umfang $n=10$
 \end{itemize}
 \end{exampleblock}
@@ -271,13 +265,15 @@ qt(1-alpha/2, df=n-1) # Quantil der t_9
 \textbf{Einseitige Tests}\medskip
 \begin{itemize}
 \item Null- und Alternativhypothese
-\begin{align*}
-H_0: \mu &\le \mu_0 & H_1: \mu &>\mu_0\\
-\text{oder}&&\text{oder}&\\
-H_0: \mu &\ge \mu_0 & H_1: \mu &<\mu_0\\
-\end{align*}
+$$
+H_0: \mu \le \mu_0,\qquad H_1: \mu >\mu_0
+$$
+oder
+$$
+H_0: \mu \ge \mu_0,\qquad H_1: \mu <\mu_0
+$$
 \item Die Frage ``Wie ist die Teststatistik unter $H_0$ verteilt?'' ist
-jetzt nicht mehr leicht zu beantworten
+jetzt nicht mehr so leicht zu beantworten
 \end{itemize}
 
 
@@ -293,8 +289,8 @@ eingehalten wird
 $$
 T=\sqrt{n}\frac{\bar X-\mu_0}{S}
 $$
-(approximativ) der $N(0,1)$ (oder exakt der $t_{n-1}$)
-\item Festlegung des kritischen Bereichs, wenn $H_0:\mu\le\mu_0$
+(approximativ) der $N(0,1)$ oder exakt der $t_{n-1}$
+\item Festlegung des kritischen Bereichs, wenn $H_1:\mu>\mu_0$
 \end{itemize}
 
 
@@ -313,25 +309,25 @@ abline(v=qnorm(0.95),col="red")
 for(x in seq(qnorm(0.95),3.5,length=40)){
   lines(c(x,x),c(0,dnorm(x)),col="red")
 }
-text(2.6,0.07,"5%",cex=1.8)
-text(-0.05,0.18,"95%",cex=1.8)
+text(2.6,0.07,"5%",cex=1.5)
+text(-0.05,0.18,"95%",cex=1.5)
 ```
 
 
 
 # Erwartungswerttests
 \framesubtitle{Einseitige Tests}
-$H_0:\mu\le\mu_0$
+$H_0:\mu\le\mu_0,H_1:\mu>\mu_0$
 \begin{itemize}
 \item Kritische Grenze: $u_{1-\alpha}$
-\item Wenn $T>u_{1-\alpha}$ ist, lehnt man $H_0:\mu\le\mu_0$ ab
+\item Wenn $T>u_{1-\alpha}$ ist, lehnt man $H_0$ ab
 \item p-Wert: $P(T>t)=1-\Phi(t)$
 \end{itemize}
 \medskip
-$H_0:\mu\ge\mu_0$
+$H_0:\mu\ge\mu_0,H_1:\mu<\mu_0$
 \begin{itemize}
 \item Kritische Grenze: $u_\alpha=-u_{1-\alpha}$
-\item Wenn $T< -u_{1-\alpha}$ ist, lehnt man $H_0:\mu\ge\mu_0$ ab
+\item Wenn $T< -u_{1-\alpha}$ ist, lehnt man $H_0$ ab
 \item p-Wert: $P(T<t)=\Phi(t)$
 \end{itemize}
 
@@ -339,7 +335,7 @@ $H_0:\mu\ge\mu_0$
 
 # Erwartungswerttests
 \framesubtitle{Einseitige Tests}
-Wahl der Nullhypothese:\medskip
+Wahl der Nullhypothese bei einseitigen Tests:\medskip
 \begin{itemize}
 \item Belastbarkeit der Testentscheidungen ist asymmetrisch
 \item[$\longrightarrow$] die Wahl der Nullhypothese ist \textbf{nicht gleichgültig}!
@@ -353,18 +349,16 @@ Wahl der Nullhypothese:\medskip
 
 # Erwartungswerttests
 \framesubtitle{Einseitige Tests}
-\begin{exampleblock}{Beispiel: Einseitiger Test}
-Qualitätskontrolle:
+\begin{exampleblock}{Beispiel: Qualitätskontrolle/einseitiger Test}
 \begin{itemize}
 \item Gerstelieferungen an eine Brauerei
 \item Sei $X\sim N(\mu,\sigma^2)$ der Kohlenhydratanteil der Gerste
-\item Ziehung einer einfachen Stichprobe $X_1,\ldots,X_{10}$ aus der Lieferung
-\item Die Brauerei möchte sicher sein, dass $\mu>61$ Prozent ist
-\item Ihre Hypothesen sind daher
+\item Ziehung einer einfachen Stichprobe $X_1,\ldots,X_{10}$
+\item Die Brauerei möchte sicher sein, dass $\mu>61$ ist, darum
 $$
 H_0:\mu\le 61,\qquad H_1:\mu>61
 $$
-\item Die Lieferung wird nicht angenommen, wenn $H_0$ nicht verworfen wird
+\item Die Lieferung wird nur angenommen, wenn $H_0$ verworfen wird
 \item Der mittlere Kohlenhydratanteil der Stichprobe muss signifikant größer 
 sein als 61 Prozent ($\alpha=0.1$)
 \end{itemize}
@@ -382,7 +376,7 @@ n <- length(x)
 mean(x)
 ```
 Ist dieses Stichprobenmittel signifikant größer als 61 Prozent?\newline
-(Könnte der Wert auch zufällig zustande gekommen sein?)
+(Oder könnte der Wert auch zufällig zustande gekommen sein?)
 
 
 
@@ -396,8 +390,7 @@ teststat
 qt(0.9, df=n-1)
 ```
 Da die Teststatistik größer ist als der kritische Wert, wird
-die Nullhypothese verworfen. Die Alternative (d.h. $\mu>61$)
-wird statistisch untermauert.
+die Nullhypothese verworfen. Die Brauerei kann die Lieferung annehmen.
 
 
 
@@ -409,8 +402,9 @@ wird statistisch untermauert.
 \item Vergleich der Erwartungswerte $\mu_X$ und $\mu_Y$
 \item Hypothesen
 \begin{align*}
-H_0:\mu_X=\mu_Y   && H_0:\mu_X\ge \mu_Y && H_0:\mu_X\le \mu_Y\\
-H_1:\mu_X\neq\mu_Y&& H_1:\mu_X< \mu_Y   && H_1:\mu_X> \mu_Y
+H_0:\mu_X=\mu_Y,\quad H_1:\mu_X\neq\mu_Y\\
+H_0:\mu_X\ge \mu_Y,\quad H_1:\mu_X< \mu_Y\\
+H_0:\mu_X\le \mu_Y,\quad H_1:\mu_X> \mu_Y
 \end{align*}
 \end{itemize}
 
@@ -419,16 +413,30 @@ H_1:\mu_X\neq\mu_Y&& H_1:\mu_X< \mu_Y   && H_1:\mu_X> \mu_Y
 # Erwartungswerttests
 \framesubtitle{Vergleich zweier Erwartungswerte}
 \begin{itemize}
-\item Stichproben $X_1,\ldots,X_m$ und $Y_1,\ldots,Y_n$
-\item Approximativ gilt $\bar X\sim N(\mu_X,\sigma_X^2)$
-und $\bar Y\sim N(\mu_Y,\sigma_Y^2)$
+\item Große unabhängige Stichproben $X_1,\ldots,X_m$ und $Y_1,\ldots,Y_n$
+\item Approximativ gilt 
+$$
+\frac{\bar X-\mu_X}{\sqrt{S_X^2/m}}\sim N(0,1)
+$$
+und 
+$$
+\frac{\bar Y-\mu_Y}{\sqrt{S_Y^2/n}}\sim N(0,1)
+$$
+\end{itemize}
+
+
+
+# Erwartungswerttests
+\framesubtitle{Vergleich zweier Erwartungswerte}
+\begin{itemize}
 \item Teststatistik
 $$
 T=\frac{\bar X-\bar Y}{\sqrt{\frac{S_X^2}{m}+\frac{S_Y^2}{n}}}
 $$
 \item Unter $H_0$ gilt (approximativ) $T\sim N(0,1)$
-\item Kritischer Bereich zum Signifikanzniveau $\alpha$
-\end{itemize}
+\item Kritischer Bereich zum Signifikanzniveau $\alpha$\newline 
+(linke Flanke, rechte Flanke, beide Flanken)
+\end{itemize} 
 
 
 
@@ -440,8 +448,11 @@ $$
 \item Interpretation der Umfrage als einfache Stichprobe
 \item Wie hoch ist das Monatsbudget?
 \item Unterteilung in BWL/VWL
-\item Sind die durchschnittlichen Monatsbudgets gleich?\newline
-$H_0:\mu_\text{BWL}=\mu_\text{VWL}$
+\item Sind die durchschnittlichen Monatsbudgets gleich?
+\begin{align*}
+H_0:\mu_\text{BWL}&=\mu_\text{VWL}\\
+H_1:\mu_\text{BWL}&\neq\mu_\text{VWL}
+\end{align*}
 \end{itemize}
 \end{exampleblock}
 
@@ -472,7 +483,7 @@ paste(nBWL, nVWL)
 \framesubtitle{Vergleich zweier Erwartungswerte}
 ```{r}
 teststat <- (mean(yBWL)-mean(yVWL))/
-            sqrt(var(yBWL)/nBWL+var(yVWL/nVWL))
+            sqrt(var(yBWL)/nBWL+var(yVWL)/nVWL)
 teststat
 
 alpha <- 0.05
@@ -508,8 +519,7 @@ ein kleines Geschenk im Anschreiben erhöht werden?
 \item Bernoulli-verteilte Zufallsvariablen
 \item $X$: Person ohne Geschenk spendet/spendet nicht
 \item $Y$: Person mit Geschenk spendet/spendet nicht
-\item Spendenwahrscheinlichkeiten $\pi_X$, $\pi_Y$
-\item Hypothesen
+\item Hypothesen zu Spendenwahrscheinlichkeiten $\pi_X$, $\pi_Y$
 \begin{align*}
 H_0:\pi_X&\ge \pi_Y\\
 H_1:\pi_X&<\pi_Y
@@ -522,8 +532,7 @@ H_1:\pi_X&<\pi_Y
 # Erwartungswerttests
 \framesubtitle{Vergleich zweier Erwartungswerte}
 \begin{exampleblock}{Beispiel: Spendenbereitschaft}
-\begin{itemize}
-\item Daten:
+Daten:
 \bigskip
 \begin{center}
 \begin{tabular}{lrr}
@@ -535,30 +544,27 @@ H_1:\pi_X&<\pi_Y
 \end{tabular}
 \end{center}
 \bigskip
-\item Punktschätzer der Spendenwahrscheinlichkeiten
+Punktschätzer der Spendenwahrscheinlichkeiten
 \begin{align*}
 \hat\pi_X &= 397/3262 = 0.1217 \\
 \hat\pi_Y &= 465/3237 = 0.1437
 \end{align*}
-\end{itemize}
-\end{exampleblock}
+  \end{exampleblock}
 
 
 
 # Erwartungswerttests
 \framesubtitle{Vergleich zweier Erwartungswerte}
 \begin{exampleblock}{Beispiel: Spendenbereitschaft}
-\begin{itemize}
-\item Wert der Teststatistik
+Wert der Teststatistik
 \begin{align*}
 t &=\frac{\hat\pi_X-\hat\pi_Y}{\sqrt{\frac{\hat\pi_X(1-\hat\pi_X)}{m}
 +\frac{\hat\pi_Y(1-\hat\pi_Y)}{n}}}\\[2ex]
 &= \frac{0.1217-0.1437)}{\sqrt{\frac{0.1217\cdot(1-0.1217)}{3262}
 +\frac{0.1437\cdot (1-0.1437)}{3237}}}\\[2ex]
-&= -2.615.
+&= -2.615
 \end{align*}
-\item p-Wert: $\Phi(-2.615)=0.004461$ (=\texttt{pnorm(-2.615)})
-\end{itemize}
+p-Wert: $\Phi(-2.615)=0.004461$ (=\texttt{pnorm(-2.615)})
 \end{exampleblock}
 
 

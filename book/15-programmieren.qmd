@@ -555,11 +555,25 @@ $$
 in dem Intervall $[-4,4]$. Zuerst wird ein Gitter
 von x-Werten erzeugt, anschließend wird die Funktion 
 an den Gitterpunkten berechnet.
+
+::: {.content-visible when-format="html"}
 ```{r}
 x <- seq(from=-4, to=4, length=200)
 f <- exp(-x^2)
 plot(x, f, type="l", main="Beispiel", xlab="x", ylab="f(x)")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Beispiel"
+par(cex=0.7)
+x <- seq(from=-4, to=4, length=200)
+f <- exp(-x^2)
+plot(x, f, type="l", main="", xlab="x", ylab="f(x)")
+```
+:::
 
 In einen bereits existieren Plot kann man mit der Funktion
 `lines` eine weitere Linie einfügen. Die Funktion hat die zwei
@@ -569,6 +583,8 @@ Linienoptionen angeben (z.B. `col`, `lty`, `lwd`).
 
 Beispiel: In die vorherige Grafik soll die Funktion $g(x)=\exp(-|x|)$
 als rote Linie eingefügt werden. 
+
+::: {.content-visible when-format="html"}
 ```{r}
 x <- seq(from=-4, to=4, length=200)
 f <- exp(-x^2)
@@ -577,6 +593,21 @@ g <- exp(-abs(x))
 plot(x, f, type="l", main="Beispiel", xlab="x", ylab="f(x)")
 lines(x,g, col="red")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Beispiel"
+par(cex=0.7)
+x <- seq(from=-4, to=4, length=200)
+f <- exp(-x^2)
+g <- exp(-abs(x))
+
+plot(x, f, type="l", main="", xlab="x", ylab="f(x)")
+lines(x,g, col="red")
+```
+:::
 
 Die Funktion `points` fügt Punkte in eine existierende Grafik ein.
 Die Syntax ist im wesentlichen analog zu `lines`.
@@ -592,6 +623,8 @@ Gerade an der Stelle $x=0$ gezeichnet werden. Außerdem sollen eine
 graue gepunktete horizontale Linie in Höhe $y=0.5$ und die 
 Winkelhalbierende, d.h. eine Gerade mit Achsenabschnitt 0 und
 Steigung 1, als gestrichelte Linie ergänzt werden.
+
+::: {.content-visible when-format="html"}
 ```{r}
 x <- seq(from=-4, to=4, length=200)
 f <- exp(-x^2)
@@ -602,8 +635,25 @@ lines(x,g, col="red")
 abline(v=0)
 abline(h=0.5, col="grey", lty="dotted")
 abline(a=0, b=1, lty="dashed")
-
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Beispiel"
+par(cex=0.7)
+x <- seq(from=-4, to=4, length=200)
+f <- exp(-x^2)
+g <- exp(-abs(x))
+
+plot(x, f, type="l", main="", xlab="x", ylab="f(x)")
+lines(x,g, col="red")
+abline(v=0)
+abline(h=0.5, col="grey", lty="dotted")
+abline(a=0, b=1, lty="dashed")
+```
+:::
 
 ### `hist`
 
@@ -618,10 +668,24 @@ Dichte hat, sollte man die Option `probability=TRUE` setzen.
 
 Das folgende Bild zeigt das Histogramm für eine einfache Stichprobe
 vom Umfang 1000 aus einer Standardnormalverteilung:
+
+::: {.content-visible when-format="html"}
 ```{r}
 x <- rnorm(n=1000, mean=0, sd=1)
 hist(x, breaks=40, probability=TRUE)
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Histogramm von x"
+par(cex=0.7)
+x <- rnorm(n=1000, mean=0, sd=1)
+hist(x, breaks=40, probability=TRUE, main="")
+```
+:::
+
 Wie bei einer `plot`-Grafik lassen sich die Achsenbeschriftungen mit
 den Optionen `xlab` und `ylab`, und die Überschrift mit der Option
 `main` verändern.

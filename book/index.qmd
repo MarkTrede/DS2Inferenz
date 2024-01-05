@@ -108,8 +108,10 @@ Grafiken wurden alle in R erstellt. Der zugehörige R-Code ist für diesen Kurs
 nicht relevant, wer sich dennoch dafür interessiert, kann über den Grafiken
 auf "R-Code zeigen" klicken.
 
+::: {.content-visible when-format="html"}
 Der Text in diesem Lehrbuch ist nicht geschlechtsneutral formuliert. Sie
 haben jedoch die Möglichkeit, eine gegenderte Version zu lesen.
 Die Unterschiede sind außer in @sec-hypothesentests nicht sehr groß.
+:::
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />Dieses Lehrbuch unterliegt der <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.

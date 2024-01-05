@@ -60,9 +60,8 @@ Var(\bar{X}_n) &=\frac{\sigma^2}{n}
 
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
-$E(\bar{X}_n)=$
 \begin{align*}
-&= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
+E(\bar{X}_n)&= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) \\
 &= \frac{1}{n}\sum_{i=1}^n E\left(X_i\right) \\
 &= \frac{1}{n}\sum_{i=1}^n \mu\\
 &= \mu
@@ -72,9 +71,8 @@ $E(\bar{X}_n)=$
 
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
-$Var(\bar{X}_{n})=$
 \begin{align*}
-&= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\\
+Var(\bar{X}_{n})&= Var\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\\
 &= \frac{1}{n^2}Var\left(\sum_{i=1}^n X_i\right)\\
 &= \frac{1}{n^2}\sum_{i=1}^n Var\left(X_i\right)\\
 &= \frac{1}{n^2}\sum_{i=1}^n \sigma^2= \frac{\sigma^2}{n}
@@ -84,12 +82,12 @@ $Var(\bar{X}_{n})=$
 
 # Grenzwertsätze
 \framesubtitle{Gesetz der großen Zahl}
-\begin{block}{Schwaches Gesetz der großen Zahl}
+\begin{alertblock}{Schwaches Gesetz der großen Zahl}
 Für jedes (noch so kleine) $\varepsilon >0$ gilt
 $$
 \lim_{n\rightarrow \infty}P(|\bar{X}_{n}-\mu|\geq \varepsilon) =0
 $$
-\end{block}
+\end{alertblock}
 Alternative Schreibweise
 $$
 \text{plim}_{n\rightarrow \infty }\bar{X}_{n}=\mu
@@ -136,7 +134,7 @@ rnorm(n, mean, sd)    # Normal
 rexp(n, rate)         # Exponential
 runif(n, min, max)    # Rechteck (uniform)
 rt(n, df)             # t
-rpareto(n, k, xmin)   # Pareto (im Paket distributionsrd)
+rpareto(n, k, xmin)   # Pareto (Paket distributionsrd)
 ```
 
 
@@ -246,7 +244,7 @@ $\longrightarrow$ transformierte Standardverteilungen
 $$
 Y=e^X
 $$
-mit $X\sim N(8,0.5)$
+mit $X\sim N(8,0.5^2)$
 \item Steuern und Abgaben 
 $$
 S(y)=\left\{ 
@@ -329,13 +327,13 @@ $$
 
 # Grenzwertsätze
 \framesubtitle{Zentraler Grenzwertsatz}
-\begin{block}{Zentraler Grenzwertsatz}
+\begin{alertblock}{Zentraler Grenzwertsatz}
 Für alle $u\in \mathbb{R}$ gilt
 $$
 \lim_{n\rightarrow \infty }P(U_n\leq u)=\Phi(u),
 $$
 wobei $\Phi$ die Verteilungsfunktion der $N(0,1)$ ist
-\end{block}
+\end{alertblock}
 Für großes $n$ gilt approximativ
 $$
 U_n\overset{appr}{\sim }N(0,1)
@@ -384,23 +382,7 @@ und daher
 $$
 \sum_{i=1}^{n}X_i\overset{appr}{\sim }N(n\pi,n\pi (1-\pi))
 $$
-\end{itemize}
-
-
-
-# Grenzwertsätze
-\framesubtitle{Zentraler Grenzwertsatz}
-\begin{itemize}\item Approximation der Binomialverteilung durch die 
-Normalverteilung (De Moivre, 1733)
-\item Wegen 
-$$
-\sum_{i=1}^{n}X_i\overset{appr}{\sim }N(n\pi ,n\pi (1-\pi))
-$$
-gilt
-$$
-P\left( \sum_{i=1}^{n}X_{i}\leq b\right) 
-\approx \Phi \left( \frac{b-n\pi }{\sqrt{n\pi \left( 1-\pi \right) }}\right)
-$$
+\item De Moivre, 1733
 \end{itemize}
 
 
@@ -446,7 +428,7 @@ P(95\leq Y\leq 105)  &=\Phi \left( \frac{105-0.2\cdot 500}
 \begin{itemize}
 \item Die Verteilung von $U_n$ konvergiert für $n\to\infty$ gegen $N(0,1)$
 \item $U_n$ ergibt sich aus $\bar X_n$ bzw. $X_1,\ldots,X_n$
-\item Um die Verteilung von $U_n$ zu finden, braucht man\\ 
+\item Um die Verteilung von $U_n$ zu simulieren, braucht man\\ 
 \textbf{für gegebenes }$n$ viele Ziehungen aus $U_n$
 $$
 U_{n,1},U_{n,2},\ldots,U_{n,R}
@@ -600,3 +582,40 @@ g <- seq(-3, 3, length=200)
 lines(g, pnorm(g), lwd=3)
 legend(-3,0.95,fill=c(cols,"black"),legend=c("n=2","n=5","n=10","n=20","n=50","N(0,1)"))
 ```
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen}
+\textbf{Allgemeine Vorgehensweise (mit Schleifen)}\medskip
+\begin{enumerate}
+\item Wähle die Zahl der Replikationen
+\item Initialisiere einen Vektor für die Realisationen (z.B.\ \texttt{z})
+\item Starte eine \texttt{for}-Schleife (z.B.\ mit Laufindex \texttt{r})
+\item Simuliere eine Realisation
+\item Speichere die Realisation in \texttt{z[r]}
+\item Ende der Schleife
+\item Werte den Vektor \texttt{z} aus
+\end{enumerate}
+
+
+
+# Grenzwertsätze
+\framesubtitle{Monte-Carlo-Simulationen}
+```{r}
+#| eval: FALSE
+R <- 100000
+z <- rep(0, R)
+
+for(r in 1:R){
+
+  a <- [REALISATION]
+  z[r] <- a
+  
+}
+# Auswertung, z.B.:
+mean(z) / var(z) / sd(z)
+quantile(z, prob=c(...)) / ecdf(z)
+hist(z, probability=TRUE)
+```
+

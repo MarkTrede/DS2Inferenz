@@ -1,0 +1,11 @@
+name: ds2ginferenz
+title: ds2ginferenz
+username: marktrede
+account: marktrede
+server: bookdown.org
+hostUrl: https://bookdown.org/__api__
+appId: 13216
+bundleId: 92123
+url: https://bookdown.org/marktrede/ds2ginferenz/
+asMultiple: FALSE
+asStatic: TRUE

@@ -482,6 +482,8 @@ anderen Bestandteile der Dichte dienen letztlich
 nur der Normierung. Ein Plot der Dichte
 zeigt, dass sie eine Glockenkurve beschreibt, die symmetrisch um die
 Null herum verläuft.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -495,6 +497,23 @@ plot(x, dnorm(x),
      ylim=c(0,0.45))
 abline(v=0)
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Standardnormalverteilung"
+par(cex=0.7)
+x <- seq(from=-4, to=4, length=200)
+plot(x, dnorm(x),
+     type="l",
+     xlab="x",
+     ylab=expression(phi(x)),
+     yaxs="i",
+     ylim=c(0,0.45))
+abline(v=0)
+```
+:::
 
 Die zugehörige Verteilungsfunktion wird mit $\Phi(u)=P(U\le u)$ 
 ("groß phi") bezeichnet,
@@ -504,6 +523,8 @@ $$
 Die Funktion $\Phi(u)$ ist auf ganz $\mathbb{R}$
 streng monoton wachsend, jedoch sind Werte betragsmäßig größer als 4
 extrem unwahrscheinlich, wie man an der folgenden Abbildung erkennt.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -519,11 +540,33 @@ abline(v=0)
 abline(h=1, 
        lty="dotted")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion der Standardnormalverteilung"
+par(cex=0.7)
+x <- seq(from=-4, to=4, length=200)
+plot(x, pnorm(x),
+     type="l",
+     xlab="x",
+     ylab=expression(Phi(x)),
+     yaxs="i",
+     ylim=c(0,1.1))
+abline(v=0)
+abline(h=1, 
+       lty="dotted")
+```
+:::
+
 Wegen der Symmetrie der Standardnormalverteilung um die Null herum gilt
 $$
 \Phi(u)=1-\Phi(-u).
 $$
 Die Inverse der Verteilungsfunktion ist die Quantilfunktion $\Phi^{-1}(p)$,
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -536,6 +579,23 @@ plot(x, qnorm(x),
      xaxs="i")
 abline(h=0)
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Quantilfunktion der Standardnormalverteilung"
+par(cex=0.7)
+x <- seq(from=0.001, to=0.999, length=200)
+plot(x, qnorm(x),
+     type="l",
+     xlab="x",
+     ylab=expression(Phi^-1 (x)),
+     xaxs="i")
+abline(h=0)
+```
+:::
+
 Auch hier gibt es eine Symmetriebeziehung, nämlich
 
 \begin{align*}
@@ -587,6 +647,8 @@ Der Parameter $\mu$ bewirkt eine Verschiebung der Dichte. Für positive Werte
 von $\mu$ liegt die Dichte weiter rechts, für negative Werte weiter links.
 Wenn $\mu=0$ ist, weist die Dichte eine Symmetrie um die 0 herum auf. Die
 Abbildung zeigt drei Dichten von $N(\mu,1)$ für $\mu=-1,1,5$.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -606,11 +668,37 @@ legend("topright",
                 expression(mu==1),
                 expression(mu==5)))
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Einfluss des Parameters mu"
+par(cex=0.7)
+x <- seq(from=-4, to=9, length=500)
+plot(x,dnorm(x, mean=-1, sd=1),
+     type="l",
+     col="red",
+     yaxs="i",
+     ylim=c(0, 0.45),
+     ylab="Dichten")
+lines(x,dnorm(x, mean=1, sd=1), col="green")
+lines(x,dnorm(x, mean=5, sd=1), col="blue")
+legend("topright",
+       fill=c("red", "green", "blue"),
+       legend=c(expression(mu==-1),
+                expression(mu==1),
+                expression(mu==5)))
+```
+:::
+
 Der Parameter $\sigma^2$ hat einen Einfluss auf die Form der Dichte.
 Wenn $\sigma^2$ klein ist (also nahe 0), dann ist die Dichte schmal und
 hoch und nah um den Wert $\mu$ herum konzentriert. Je größer $\sigma^2$ ist, 
 desto breiter und flacher ist die Dichte. Die Abbildung zeigt
 drei Dichten von $N(0,\sigma^2)$ für $\sigma^2=0.3,1,3$.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -630,6 +718,30 @@ legend("topright",
                 expression(sigma^2==1),
                 expression(sigma^2==3)))
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Einfluss des Parameters sigma2"
+par(cex=0.7)
+x <- seq(from=-7, to=7, length=500)
+plot(x, dnorm(x, mean=0, sd=sqrt(0.3)),
+     type="l",
+     col="red",
+     yaxs="i",
+     ylim=c(0, 0.8),
+     ylab="Dichten")
+lines(x,dnorm(x, mean=0, sd=1), col="green")
+lines(x,dnorm(x, mean=0, sd=sqrt(3)), col="blue")
+legend("topright",
+       fill=c("red","green","blue"),
+       legend=c(expression(sigma^2==0.3),
+                expression(sigma^2==1),
+                expression(sigma^2==3)))
+```
+:::
+
 Zwischen der Dichte der $N(\mu,\sigma^2)$ und der Dichte der Standardnormalverteilung besteht eine enge Beziehung. Es gilt
 $$
 f(x)=\phi\left(\frac{x-\mu}{\sigma}\right).
@@ -758,6 +870,8 @@ ist. Die Kurzschreibweise für eine exponentialverteilte Zufallsvariable
 ist $X\sim Exp(\lambda)$.
 
 Der Plot zeigt den Verlauf der Dichtefunktion von $Exp(1)$.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -772,6 +886,25 @@ plot(x, dexp(x),
      xlim=c(-0.5, 5))
 lines(c(0,0), c(0,1), lty="dotted")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Exponentialverteilung"
+par(cex=0.7)
+x <- seq(from=0.0001, to=5, length=200)
+plot(x, dexp(x),
+     type="l",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 1.1),
+     xlim=c(-0.5, 5))
+lines(c(0,0), c(0,1), lty="dotted")
+```
+:::
+
 Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
 muss die Verteilungsfunktion an der Stelle 0 den Wert 0 annehmen. Für
 die Verteilungsfunktion ergibt sich
@@ -857,6 +990,8 @@ f(x)=\left\{
 \right.
 $$
 Für $x_{min}=1$ und $k=2$ ergibt sich folgendes Bild:
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -875,6 +1010,29 @@ lines(c(xmin, xmin),
       c(0, 2), 
       lty="dotted")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Paretoverteilung"
+par(cex=0.7)
+k <- 2
+xmin <- 1
+x <- seq(from=1, to=5, length=200)
+plot(x, (k/xmin)*(xmin/x)^(k+1),
+     type="l",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 2.2),
+     xlim=c(0, 5))
+lines(c(xmin, xmin),
+      c(0, 2), 
+      lty="dotted")
+```
+:::
+
 Der Verlauf der Dichte ist auf den ersten Blick ähnlich wie bei
 der Exponentialverteilung. Jedoch fällt die Dichte der Paretoverteilung 
 deutlich langsamer gegen 0 als die Dichte der Exponentialverteilung.
@@ -994,6 +1152,8 @@ ist. Die Kurzschreibweise für eine rechteckverteilte Zufallsvariable
 ist $X\sim U(a,b)$.
 
 Der Plot zeigt den Verlauf der Dichtefunktion von $U(1,2)$.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -1007,6 +1167,24 @@ lines(c(1,2), c(1,1))
 lines(c(1,1), c(0,1), lty="dotted")
 lines(c(2,2), c(0,1), lty="dotted")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Rechteckverteilung"
+par(cex=0.7)
+plot(c(0.5, 2.5),c(0, 1.1),
+     type="n",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i")
+lines(c(1,2), c(1,1))
+lines(c(1,1), c(0,1), lty="dotted")
+lines(c(2,2), c(0,1), lty="dotted")
+```
+:::
+
 Die Verteilungsfunktion erhält man durch Integration der Dichte. Außerdem 
 muss die Verteilungsfunktion an der Stelle $a$ den Wert 0 annehmen. Für
 die Verteilungsfunktion ergibt sich
@@ -1020,6 +1198,8 @@ F(x)=\left\{
 \right.
 $$
 Die Verteilungsfunktion von $U(1,2)$ sieht wie folgt aus.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -1031,6 +1211,21 @@ plot(c(0.5, 2.5), c(0, 1.1),
      yaxs="i")
 lines(c(0.5, 1, 2, 2.5),c(0, 0, 1, 1))
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Verteilungsfunktion der Rechteckverteilung"
+par(cex=0.7)
+plot(c(0.5, 2.5), c(0, 1.1),
+     type="n",
+     xlab="x",
+     ylab="F(x)",
+     yaxs="i")
+lines(c(0.5, 1, 2, 2.5),c(0, 0, 1, 1))
+```
+:::
 
 Durch Invertieren der Verteilungsfunktion erhält man die Quantilfunktion.
 Dazu löst man die Gleichung $F(x)=p$ nach $x$ auf.
@@ -1049,7 +1244,7 @@ $$
 Als Erwartungswert und Varianz errechnet man
 
 \begin{align*}
-E(X) &= \frac{b-a}{2}\\[1ex]
+E(X) &= \frac{a+b}{2}\\[1ex]
 Var(X) &= \frac{(b-a)^2}{12}.
 \end{align*}
 
@@ -1103,6 +1298,8 @@ Der Plot zeigt den Verlauf der Dichtefunktion einer t-Verteilung
 mit $\nu=2$ Freiheitsgraden (schwarze Linie) und $\nu=10$
 Freiheitsgraden (rote Linie). Zum Vergleich ist auch die Dichte
 der Standardnormalverteilung eingefügt (gepunktete blaue Linie).
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -1117,6 +1314,25 @@ plot(x, dt(x,df=2),
 lines(x, dt(x, df=10), col="red")
 lines(x, dnorm(x), col="blue", lty="dotted")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der t-Verteilung"
+par(cex=0.7)
+x <- seq(from=-5, to=5, length=300)
+plot(x, dt(x,df=2),
+     type="l",
+     xlab="x",
+     ylab="Dichte",
+     yaxs="i",
+     ylim=c(0, 0.43))
+lines(x, dt(x, df=10), col="red")
+lines(x, dnorm(x), col="blue", lty="dotted")
+```
+:::
+
 Je größer die Zahl der Freiheitsgrade, desto ähnlicher ist die t-Verteilung der
 Standardnormalverteilung. Bei sinkenden Freiheitsgraden werden die Flanken der 
 Verteilung immer stärker, d.h. es gibt immer mehr extreme Werte (Ausreißer). 

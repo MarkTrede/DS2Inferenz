@@ -2,7 +2,7 @@
 \newcommand{\nr}{2}
 \newcommand{\thema}{}
 
-\input{Loesung}
+\input{Aufgaben}
 \begin{Exercise}
 Ein Kunde einer Bank will einen Kredit haben. Der Kredit soll 1 Mio.\
 Euro betragen, \"{u}ber ein Jahr laufen und am Ende des Jahres getilgt
@@ -78,14 +78,14 @@ Die Verteilungsfunktion ist stetig, da $\lim_{x\downarrow0}F_X(x)=0$ und $\lim_{
 
 
 \begin{Exercise}
-	Die Zahl der Bücher, die während eines Jahres aus einer großen Bibliothek verschwinden, kann als $Po(\lambda)$-verteilt angenommen werden. Sie sollen davon ausgehen, dass diese Bibliothek so groß ist, dass diese unendlich viele Bücher enthält. Bei der Jahresendrevision wird das Fehlen eines Buches mit Wahrscheinlichkeit $p$ entdeckt und in diesem Fall unmittelbar ersetzt. Bestimmen Sie die Verteilung der Anzahl fehlender Bücher nach der ersten Revision und zu Beginn der zweiten Revision. Nehmen Sie für diese Aufgabe an, dass $X_1$ bzw. $X_2$ die Anzahlen der Bücher, die während des ersten bzw. zweiten Jahres aus der Bibliothek verschwinden, beschreiben. Nehmen Sie außerdem an, dass $Y$ die Anzahl fehlender Bücher nach der ersten Revision und $Z$ die Anzahl fehlender Bücher zu Beginn der zweiten Revision beschreiben. Sie können annehmen, dass $X_2$ und $Y$ paarweise unabhängig voneinander sind.
+	Die Zahl der Bücher, die während eines Jahres aus einer großen Bibliothek verschwinden, kann als $Po(\lambda)$-verteilt angenommen werden. Sie sollen davon ausgehen, dass diese Bibliothek so groß ist, dass diese unendlich viele Bücher enthält. Bei der Jahresendrevision wird das Fehlen eines Buches mit Wahrscheinlichkeit $p$ entdeckt und in diesem Fall unmittelbar ersetzt. Nehmen Sie für diese Aufgabe an, dass $X_1$ bzw. $X_2$ die Anzahlen der Bücher, die während des ersten bzw. zweiten Jahres aus der Bibliothek verschwinden, beschreiben. Nehmen Sie außerdem an, dass $Y$ die Anzahl fehlender Bücher nach der ersten Revision und $Z$ die Anzahl fehlender Bücher zu Beginn der zweiten Revision beschreiben. Sie können annehmen, dass $X_2$ und $Y$ paarweise unabhängig voneinander sind.
 	
 	\Question Stellen Sie $Z$ als Kombination der Zufallsvariablen $Y$ und $X_2$ dar.
 	
 	\Question Zeigen Sie, dass $Y\sim Po(\lambda(1-p))$ gilt.\\
 	(Hinweis: In diesem Aufgabenteil müssen Sie ausnutzen, dass $e^x=\sum_{n=0}^\infty \frac{x^n}{n!}$. Nutzen Sie darüber hinaus den Satz der totalen Wahrscheinlichkeit für $P(Y=k)$ mit $k\in\mathbb{N}_0=\left\lbrace0,1,2,\dots\right\rbrace$.)
 	
-	\Question Nutzen Sie Ihre Ergebnisse aus a) und b), die Verteilung von $Z$ herauszufinden.\\
+	\Question Nutzen Sie Ihre Ergebnisse aus a) und b), um die Verteilung von $Z$ herauszufinden.\\
 	(Hinweis: In diesem Aufgabenteil müssen Sie ausnutzen, dass für zwei unabhängige Zufallsvariablen $W_1\sim Po(\lambda_1),W_2\sim Po(\lambda_2)$ gilt, dass $W_1+W_2\sim Po(\lambda_1+\lambda_2)$.)
 \end{Exercise}
 
@@ -113,8 +113,8 @@ Die Verteilungsfunktion ist stetig, da $\lim_{x\downarrow0}F_X(x)=0$ und $\lim_{
 
 \begin{Exercise}
 	Sei $X\sim Exp(\lambda)$. 
-	\Question In welcher Aufgabe auf Hausaufgabenblatt 21 haben Sie gezeigt, dass $E(X)=\frac{1}{\lambda}$?
-	\Question Berechnen Sie $V(X)$. Sie dürfen hierbei annehmen, dass $\lim_{x\to\infty} -x^2e^{-\lambda x}=0$.
+	\Question In welcher Aufgabe auf Hausaufgabenblatt 1 haben Sie gezeigt, dass $E(X)=\frac{1}{\lambda}$?
+	\Question Berechnen Sie $V(X)$ (oder auch $Var(X)$). Sie dürfen hierbei annehmen, dass $\lim_{x\to\infty} -x^2e^{-\lambda x}=0$.
 \end{Exercise}
 	
 \begin{Answer}

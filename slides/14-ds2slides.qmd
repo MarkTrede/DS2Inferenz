@@ -1,0 +1,638 @@
+---
+title: "Data Science 2"
+subtitle: "Bootstrap"
+format: beamer
+date: 2024-01-01
+date-format: "MMMM YYYY"
+author: "Prof. Dr. Mark Trede"
+institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
+theme: "Rochester"
+colortheme: "beaver"
+execute: 
+  echo: true
+  warning: false
+fig-align: "center"
+lang: "de"
+slide-level: 1
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 55
+---
+
+# Bootstrap
+\framesubtitle{Monte-Carlo-Simulation kritischer Grenzen}
+\textbf{Bootstrap}
+\medskip
+\begin{itemize}
+\item Für empirische Anwendungen muss man oft neue Tests konstruieren
+\item Bootstrapping ist ein allgemeiner Testansatz
+\item Er basiert auf Monte-Carlo-Simulationen
+\item Im Folgenden behandeln wir eine einfache Variante des Bootstraps
+für Hypothesentests
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Monte-Carlo-Simulation kritischer Grenzen}
+\textbf{Monte-Carlo-Simulation kritischer Grenzen}
+\medskip
+\begin{itemize}
+\item Kritische Grenzen können durch Simulationen
+bestimmt werden, \textbf{wenn man die Verteilung unter $H_0$ kennt}
+\item Beispiel:
+\begin{align*}
+H_0: \mu &=\mu_0\\
+H_1: \mu &\neq\mu_0
+\end{align*}
+und
+$$
+T=\sqrt{n}\frac{\bar X-\mu_0}{S}
+$$
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Monte-Carlo-Simulation kritischer Grenzen}
+Konkrete Annahmen:\medskip
+\begin{itemize}
+\item Wahre Verteilung: $X\sim N(63,4^2)$
+\item Hypothesen
+\begin{align*}
+H_0: \mu &=63\\
+H_1: \mu &\neq 63
+\end{align*}
+\item Stichprobe $X_1,\ldots,X_{100}$ ($n=100$)
+\item Anzahl Simulationsdurchläufe $R=100000$
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Monte-Carlo-Simulation kritischer Grenzen}
+```{r}
+mu0 <- 63
+sigma <- 4
+n <- 100
+
+R <- 100000
+teststat <- rep(0, R)
+
+for(r in 1:R){
+  x <- rnorm(n, mean=mu0, sd=sigma)
+  teststat[r] <- sqrt(n) * (mean(x) - mu0)/sd(x)
+}
+```
+
+
+
+# Bootstrap
+\framesubtitle{Monte-Carlo-Simulation kritischer Grenzen}
+Bestimmung der kritischen Grenzen: \bigskip
+```{r}
+alpha <- 0.05
+quantile(teststat, prob=c(alpha/2, 1-alpha/2))
+```
+Die theoretischen Werte sind:
+```{r}
+qt(c(alpha/2, 1-alpha/2), df=n-1)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Pseudo-Stichproben}
+\textbf{Pseudo-Stichproben}
+\medskip
+\begin{itemize}
+\item Um die kritischen Grenzen zu simulieren, braucht man die
+wahre Verteilung. Was tun, wenn man sie nicht kennt?
+\item Bootstrap-Idee: Approximiere die unbekannte Verteilung durch
+die (an $H_0$ angepasste) empirische Verteilung der konkreten Stichprobe
+\item Ziehe mit Zurücklegen $n$ Werte aus der (an $H_0$ angepassten)
+konkreten Stichprobe
+\item Pseudo-Stichprobe / Resample: $X_1^b,\ldots,X_n^b$
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Pseudo-Stichproben}
+\begin{itemize}
+\item Beispiel: t-Test
+\begin{align*}
+H_0: \mu &=63\\
+H_1: \mu &\neq 63
+\end{align*}
+und
+$$
+T=\sqrt{n}\frac{\bar X-63}{S}
+$$
+\item Wie zieht man die Pseudo-Stichproben?
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Pseudo-Stichproben}
+\begin{itemize}
+\item Konkrete Stichprobe $x_1,\ldots,x_n$
+\item Der Erwartungswert der empirischen Verteilung ist $\bar x$
+\item Verschiebe alle Werte $x_i$, so dass der Erwartungswert die Nullhypothese erfüllt
+\item Die an $H_0$ angepasste konkrete Stichprobe ist
+$$
+x_i^0=x_i-\bar x+\mu_0,\qquad i=1,\ldots,n
+$$
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Pseudo-Stichproben}
+Pseudo-Stichprobe:\medskip 
+\begin{itemize}
+\item Ziehe aus der an $H_0$ angepassten konkreten Stichprobe $x_1^0,\ldots,x_n^0$ mit Zurücklegen $n$ Werte 
+$$
+X_1^b,\ldots,X_n^b
+$$
+\item Manche Werte $x_i^0$ kommen mehrfach in der Pseudo-Stichprobe vor, 
+andere gar nicht
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Pseudo-Stichproben}
+R-Code zum Erzeugen einer Pseudo-Stichprobe:
+```{r}
+#| eval: FALSE
+x0 <- x - mean(x) + mu0
+xb <- sample(x0, 
+             size=n, 
+             replace=TRUE)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+\textbf{Bootstrap-Simulationen}
+\medskip
+\begin{itemize}
+\item Ermittlung der kritischen Grenzen durch Bootstrap
+\item Ziehe in jedem Schleifendurchlauf eine Pseudo-Stichprobe
+\item Berechne und speichere
+$$
+T^b=\sqrt{n}\frac{\overline{X^b}-\mu_0}{S^b}
+$$
+wobei $\overline{X^b}$ und $S^b$ aus der Pseudo-Stichprobe berechnet werden
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+\begin{itemize}
+\item Nach den Durchläufen: Ermittle das $\alpha/2$- und das $(1-\alpha/2)$-Quantil
+der Bootstrap-Teststatistiken
+\item Lehne $H_0:\mu=\mu_0$ ab, wenn der Wert der
+Original-Teststatistik nicht zwischen den\newline 
+kritischen Grenzen liegt
+\item Beispiel: $H_0:\mu=63$, $H_1:\mu\neq 63$. (Fiktive) konkrete 
+Original-Stichprobe $x_1,\ldots,x_{80}$
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+```{r}
+D <- read.csv("../data/bootstrap1.csv")
+x <- D$originalstichprobe
+n <- length(x)
+mean(x)
+teststat <- sqrt(n)*(mean(x) - 63)/sd(x)
+teststat 
+```
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+```{r}
+B <- 10000
+teststatb <- rep(0, B)
+
+for(b in 1:B){
+  
+  x0 <- x + mu0 - mean(x)
+  xb <- sample(x0, size=n, replace=TRUE)
+  teststatb[b] <- sqrt(n)*(mean(xb) - mu0)/sd(xb)
+  
+}
+```
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+Bestimmung der kritischen Grenzen
+```{r}
+alpha <- 0.05
+quantile(teststatb, 
+         prob=c(alpha/2, 1-alpha/2))
+```
+
+
+
+# Bootstrap
+\framesubtitle{Bootstrap-Simulationen}
+\begin{itemize}
+\item Der Wert der Original-Teststatistik ($-2.348$) liegt
+nicht zwischen den kritischen Grenzen 
+\item Folglich wird die Nullhypothese abgelehnt
+\item Die Daten sind nicht mit $H_0:\mu=63$ vereinbar
+\item Beim Bootstrap hängen die kritischen Grenzen von
+der konkreten Stichprobe ab!
+\end{itemize}
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+\begin{exampleblock}{Beispiel: Soziales Engagement und Studienfach}
+\begin{itemize}
+\item Unterscheidet sich das soziale Engagement von BWL- und VWL-Studierenden?
+\item Durchschnittliche Anzahl der Stunden pro Monat 
+\item Hypothesen
+\begin{align*}
+H_0:\mu_{BWL} &= \mu_{VWL}\\
+H_1:\mu_{BWL} &\neq \mu_{VWL}
+\end{align*}
+\end{itemize}
+\end{exampleblock}
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+D <- read.csv("../data/soziales_engagement.csv")
+head(D)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+#| echo: FALSE
+par(cex=1.5)
+plot(ecdf(D$SozialesEngagement[D$Studiengang=="BWL"]),
+     xlab="Std./Monat", ylab="F(x)", main="Verteilungsfunktionen")
+lines(ecdf(D$SozialesEngagement[D$Studiengang=="VWL"]),col="red")
+legend("bottomright", fill=c("black","red"), legend=c("BWL","VWL"))
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+x_BWL <- D$SozialesEngagement[D$Studiengang == "BWL"]
+x_VWL <- D$SozialesEngagement[D$Studiengang == "VWL"]
+n_BWL <- length(x_BWL)
+n_VWL <- length(x_VWL)
+paste(n_BWL, n_VWL)
+paste(mean(x_BWL), mean(x_VWL))
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+Anpassung der konkreten Stichproben an $H_0$:
+
+```{r}
+x0_BWL <- x_BWL - mean(x_BWL) + mean(x_VWL)
+x0_VWL <- x_VWL
+```
+
+Alle BWL-Werte werden so verschoben, dass
+$\bar x_{BWL}=\bar x_{VWL}$ gilt.
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+# Wert der Original-Teststatistik
+teststat <- (mean(x_BWL) - mean(x_VWL))/
+            sqrt(var(x_BWL)/n_BWL + var(x_VWL)/n_VWL)
+teststat
+
+# Vorbereitung der Bootstrap-Schleife
+B <- 50000
+teststatb <- rep(0, B)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+# Bootstrapping der kritischen Grenzen
+for(b in 1:B){
+  xb_BWL <- sample(x0_BWL,
+                   size = n_BWL,
+                   replace = TRUE)
+  xb_VWL <- sample(x0_VWL, 
+                   size = n_VWL, 
+                   replace = TRUE)
+  teststatb[b] <- (mean(xb_BWL) - mean(xb_VWL))/
+      sqrt(var(xb_BWL)/n_BWL + var(xb_VWL)/n_VWL)
+}
+```
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Erwartungswerte}
+```{r}
+# Kritische Grenzen (alpha=0.05)
+quantile(teststatb,
+         prob = c(0.025, 0.975))
+```
+\bigskip
+
+Da der Wert der Original-Teststatistik ($-0.471$) innerhalb
+der kritischen Grenzen liegt, wird $H_0$ nicht abgelehnt.
+Die Daten sprechen nicht signifikant gegen die Hypothese
+gleich starken sozialen Engagements von BWL- und
+VWL-Studierenden.
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+\begin{exampleblock}{Beispiel: Fahrradanbindung und Wohnzufriedenheit}
+\begin{itemize}
+\item Gibt es einen Zusammenhang zwischen der Radfahrzeit zum Dom und der Wohnzufriedenheit?
+\item Hypothesen
+\begin{align*}
+H_0:&\textsf{~~Es gibt keinen Zusammenhang}\\
+H_1:&\textsf{~~Es gibt einen Zusammenhang}
+\end{align*}
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+# Daten einlesen
+x <- read.csv("../data/wohnen.csv")
+```
+```{r}
+#| echo: FALSE
+x$Wohnzufriedenheit <- factor(x$Wohnzufriedenheit,
+                              levels=c("(sehr) unzufr.", 
+                                       "es ist okay", 
+                                       "zufrieden",
+                                       "sehr zufrieden"),
+                              ordered=TRUE)
+x$FahrzeitRadDom <- factor(x$FahrzeitRadDom,
+                           levels=c("<2",
+                                    "2-5",
+                                    "5-10",
+                                    "10-15",
+                                    "15-20",
+                                    "20-30",
+                                    ">30"),
+                           ordered=TRUE)
+x <- x[!is.na(x$FahrzeitRadDom),]
+```
+```{r}
+# Randverteilung der Fahrzeit bis zum Dom
+N_rad <- table(x$FahrzeitRadDom)
+N_rad
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+# Randverteilung der Wohnzufriedenheit
+N_zufr <- table(x$Wohnzufriedenheit)
+N_zufr
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+# Gemeinsame Verteilung
+N <- table(x$Wohnzufriedenheit, x$FahrzeitRadDom)
+N
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+# Wert der Original-Teststatistik
+n <- sum(N)
+teststat <- 0
+for(j in 1:4){
+  for(k in 1:7){
+    aux <- N_zufr[j]*N_rad[k]/n
+    teststat <- teststat + (N[j,k]-aux)^2/(aux)
+  }
+}
+teststat <- as.numeric(teststat)
+teststat
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+#| echo: FALSE
+# Bootstrapping der kritischen Grenzen
+B <- 10000
+teststatb <- rep(0, B)
+for(b in 1:B){
+  rad_b <- sample(x$FahrzeitRadDom, size=n, replace=TRUE)
+  zufr_b <- sample(x$Wohnzufriedenheit, size=n, replace=TRUE)
+  Nb_rad <- table(rad_b)
+  Nb_zufr <- table(zufr_b)
+  Nb <- table(zufr_b, rad_b)
+  teststatb[b] <- 0
+  for(j in 1:4){
+    for(k in 1:7){
+      aux <- Nb_zufr[j]*Nb_rad[k]/n
+      teststatb[b] <- teststatb[b] + (Nb[j,k]-aux)^2/(aux)
+    }
+  }
+}
+```
+```{r}
+#| eval: FALSE
+# Bootstrapping der kritischen Grenze
+B <- 10000
+teststatb <- rep(0, B)
+
+for(b in 1:B){
+  # Pseudo-Sample ziehen (unter H0 unabhängig!)
+  rad_b <- sample(x$FahrzeitRadDom, 
+                  size=n, replace=TRUE)
+  zufr_b <- sample(x$Wohnzufriedenheit, 
+                   size=n, replace=TRUE)
+  Nb_rad <- table(rad_b)
+  Nb_zufr <- table(zufr_b)
+  Nb <- table(zufr_b, rad_b)
+  ...
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+#| eval: FALSE
+  ...
+  
+  # Teststatistik für das Pseudo-Sample
+  teststatb[b] <- 0
+  for(j in 1:4){
+    for(k in 1:7){
+      aux <- Nb_zufr[j]*Nb_rad[k]/n
+      teststatb[b] <- teststatb[b]+(Nb[j,k]-aux)^2/aux
+    }
+  }
+}
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Unabhängigkeit}
+```{r}
+# Bestimmung der kritischen Grenze (alpha=0.05)
+quantile(teststatb, 0.95)
+```
+\bigskip
+
+Da der Wert der Original-Teststatistik ($35.17$) oberhalb
+der kritischen Grenze liegt, wird $H_0$ abgelehnt.
+Die Daten sprechen signifikant gegen die Hypothese
+der Unabhängigkeit. Zwischen der Fahrradentfernung zum 
+Dom und der Wohnzufriedenheit besteht ein statistisch
+signifikanter Zusammenhang.
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+\begin{exampleblock}{Beispiel: Zwei Varianzen}
+\begin{itemize}
+\item Streuen die Verdiensterwartungen von Studenten mehr als die 
+Verdiensterwartungen von Studentinnen?
+\item Hypothesen
+\begin{align*}
+H_0: Var(X_m) &\le Var(X_w) \\
+H_1: Var(X_m) &> Var(X_w)
+\end{align*}
+\item Teststatistik $T=S^2_m/S^2_w$
+\item Lehne $H_0$ ab, wenn $T$ ``zu groß'' ist
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+```{r}
+# Daten einlesen
+x <- read.csv("../data/verdiensterwartungen.csv")
+head(x)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+```{r}
+x_m <- x$ErwartetesGehalt[x$Geschlecht=="männlich"]
+x_w <- x$ErwartetesGehalt[x$Geschlecht=="weiblich"]
+n_m <- length(x_m)
+n_w <- length(x_w)
+paste(n_m, n_w)
+# Wert der Original-Teststatistik
+teststat <- var(x_m)/var(x_w)
+teststat
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+Anpassung der konkreten Stichproben an $H_0$:
+
+```{r}
+x0_m <- x_m / sd(x_m) * sd(x_w)
+x0_w <- x_w
+
+var(x0_m)
+var(x0_w)
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+```{r}
+# Bootstrapping der kritischen Grenze
+B <- 10000
+teststatb <- rep(0, B)
+for(b in 1:B){
+  xm_b <- sample(x0_m, size=n_m, replace=TRUE)
+  xw_b <- sample(x0_w, size=n_w, replace=TRUE)
+  teststatb[b] <- var(xm_b)/var(xw_b)
+}
+```
+
+
+
+# Bootstrap
+\framesubtitle{Beispiel: Zwei Varianzen}
+```{r}
+# Kritische Grenze (alpha=0.05)
+quantile(teststatb, 0.95)
+```
+\bigskip
+
+Da der Wert der Original-Teststatistik ($9.48$) über
+der kritischen Grenze liegt, wird $H_0$ abgelehnt.
+Die Verdiensterwartungen der Studenten streuen
+statistisch signifikant mehr als die Verdiensterwartungen
+der Studentinnen.
+
+
+
+# Bootstrap
+\framesubtitle{Fazit}
+\textbf{Fazit}\medskip
+\begin{itemize}
+\item Die Bootstrap-Methode ist sehr allgemein einsetzbar
+\item Anpassung der konkreten Stichprobe an die Nullhypothese
+\item Computersimulationen der Verteilung der Teststatistik unter $H_0$
+und zur Bestimmung der kritischen Grenze(n)
+\item Wichtig ist ein tiefes Verständnis der statistischen Inferenz
+\item ``Kochrezepte'' führen leicht in die Irre und machen keinen Spaß!
+\end{itemize}

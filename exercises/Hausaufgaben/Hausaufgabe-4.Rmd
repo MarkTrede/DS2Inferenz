@@ -1,0 +1,585 @@
+---
+title: "Blatt 4"
+author: "Data Science 2"
+date: "Wintersemester 2023/2024"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+*Hinweis:* Halten Sie Ihre Lösungen (insbesondere R-Code) hier und auch bei allen künftigen Aufgaben kurz, verständlich und übersichtlich. Für mathematische Notation bietet sich die \LaTeX-Syntax an, die beispielsweise im Anhang B des eLehrbuchs zu Data Science 1 (bookdown.org/marktrede/DS1Deskription) knapp zusammengefasst ist. In Data Science I haben Sie gelernt, wie Sie eine HTML-Datei durch Ihre Markdown-Datei erstellen können. Wir bitten Sie darum, diese in eine PDF-Datei zu konvertieren.
+
+In manchen Aufgaben werden Sie dazu aufgefordert, formale Aussagen zu zeigen. Wir bitten Sie darum, diese Rechnungen entweder in der Markdown-Datei mit der \LaTeX-Syntax zu schreiben oder diese Aussagen analog auf Papier (oder digital) anzufertigen und Sie in die PDF-Datei einzufügen. Am Ende sollten Sie genau eine PDF-Datei im Learnweb abgeben.
+
+# Aufgabe 1:
+
+Sei $X \sim Po(100)$. Sei $f(x):=10x^2 +3$ für $x \in \mathbb{R}$. Der Träger der Zufallsvariable $f(X)$ ist also $$
+T_{f(X)}:= \left\lbrace 10\cdot z^{2} + 3 : z \in \mathbb{N}_0 \right\rbrace.
+$$
+
+a)  Approximieren Sie den Erwartungswert sowie die Varianz der Zufallsvariablen $f(X)$ mittels Monte-Carlo-Simulation, indem Sie $10\,000$ unabhängige Realisationen der Zufallsvariable $X$ generieren.
+
+b)  Ermitteln Sie den Erwarungswert von $f(X)$ analytisch. Wie groß ist die absolute Abweichung zum approximierten Erwartungswert? Wie groß ist diese relativ zum analytischen Erwartungswert?
+
+c)  Stellen Sie die Verteilungsfunktion von $f(X)$ mittels Monte-Carlo-Simulation anhand von $10\,000$ Realisationen der Zufallsvariable $X$ grafisch dar.
+
+d)  Zeigen Sie, dass $$
+    P\left(f(X)=n\right)=e^{-\lambda}\frac{\lambda^{\sqrt{(n-3)/10}}}{\left(\sqrt{\frac{n-3}{10}}\right)!}~~~\text{ für } n\in T_{f(X)}~~\text{ und } \lambda:=100.
+    $$ *Hinweis*: Für $X \geq 0$ und $n \geq 0$ gilt $P(X^2 = n ) = P(X = \sqrt{n})$.
+
+<!-- e)  Berechnen Sie den Unterschied zur simulierten Wahrscheinlichkeitsfunktion (an den Stellen, die in der Simulation vorkommen). Zur Berechnung des Unterschieds nutzen Sie bitte die mittlere absolute Abweichung $\frac{1}{n}\sum_{k=1}^{n}|g(x_k)-h(x_k)|$ für zwei Wahrscheinlichkeitsfunktionen $g$ und $h$. -->
+
+## Lösung
+
+### zu a)
+
+Wir erzeugen zunächst die benötigten Zufallsvariablen.
+
+```{r}
+n <- 10^4
+lambda <- 100
+x <- rpois(n, lambda)
+```
+
+Nun transformieren wir die Realisationen entsprechend der gegebenen Funktion $f$ und speichern sie in einem neuen Vektor ab.
+
+```{r}
+x_f <- 10*x^2+3
+```
+
+Jetzt können wir Mittelwert und Varianz berechnen. Der Erwartungswert $E(f(X))$ beträgt
+
+```{r}
+mean(x_f)
+```
+
+Die Varianz von $f(X)$ beträgt
+
+```{r}
+var(x_f)
+```
+
+### zu b)
+
+Wir setzen die Formel für $f$ ein und nutzen die Linearität des Erwarungswerts aus. $$ E(f(X))=E(10X^2+3)= 10E(X^2)+3 $$
+
+Wir wissen, dass $Var(X)=E(X^2)-(E(X))^2$ gilt. Da wir Varianz und Erwarungswert der Poissonverteilung mit Parameter $\lambda$ bereits kennen, nutzen wir diese Gleichung in umgestellter Form. Es gilt $$E(X^2) = Var(X) + (E(X))^2 = \lambda + \lambda^2 \textrm{ für } X \sim Poi(\lambda)$$
+
+Wir schlussfolgern
+
+$$E(f(X)) = 10\cdot(\lambda + \lambda^2) +3$$.
+
+Mit $\lambda = 100$ ergibt sich für den analytisch berechneten Erwartungswert $E(f(X))$:
+
+```{r}
+EfX <- 10*(lambda+lambda^2)+3
+EfX
+```
+
+Die absolute Abweichung zum approximativen Erwartungswert beträgt:
+
+```{r}
+abs_abw <- abs( EfX - mean(x_f))
+abs_abw
+```
+
+Die relative Abweichung beträgt
+
+```{r}
+abs_abw/EfX
+```
+
+### zu c)
+
+Wir stellen die approximierte Wahrscheinlichkeitsfunktion von $f(X)$ mittels Monte-Carlo-Simulation in einem Histogramm dar.
+
+```{r}
+hist(x_f,breaks=100,probability=TRUE, main="Histogramm zu f(X)")
+```
+
+### zu d)
+
+Sei $n\in T_{f(X)}$. Es gilt: $$ P\left(f(X)=n\right) = P\left(10X^2+3=n\right) = P\left(X=\sqrt{\frac{n-3}{10}}\right)$$ In der letzten Gleichheit haben wir ausgenutzt, dass $P(X \geq 0 ) = 1$ gilt, da $X \sim Po(\lambda)$ ist. Könnte $X$ auch negative Werte annehmen, so müssten wir die negative Wurzel entsprechend ergänzen.
+
+Nun gilt entsprechend der Poissonverteilung $$ P(f(X)=n) = \exp(-\lambda)\lambda^{\sqrt{(n-3)/10}}\cdot\frac{1}{(\sqrt{\frac{n-3}{10}})!}$$.
+
+# Aufgabe 2
+
+Die Verteilung des zu versteuernden (Jahres-)Einkommens in Deutschland soll durch eine lognormalverteilte Zufallsvariable $V$ modelliert werden. In R gibt es für die Lognormalverteilung die Funktionen $\texttt{dlnorm}$ (Dichte), $\texttt{plnorm}$ (Verteilungsfunktion), $\texttt{qlnorm}$ (Quantile) und $\texttt{rlnorm}$ (Zufallszahlen). Die Parameter der Lognormalverteilung heißen in R $\texttt{meanlog}$ und $\texttt{sdlog}$. Um das zu versteuernde Einkommen zu modellieren, werden die beiden Parameter auf $\texttt{meanlog}=10.2$ und $\texttt{sdlog}=1.6$ gesetzt.
+
+Legen Sie für die weitere Bearbeitung der Aufgabe § 32a Absatz 1 des Einkommensteuergesetzes (EStG) unter Vernachlässigung der §§ 32b, 32d, 34, 34a, 34b und 34c EStG zu Grunde. Sie finden § 32a Absatz 1 EStG unter: \url{https://www.gesetze-im-internet.de/estg/__32a.html}.
+
+a)  Approximieren Sie den Erwartungswert $E(V)$ und die Standardabweichung $\sqrt{Var(V)}$ des zu versteuernden Einkommens durch eine Monte-Carlo-Simulation.
+
+b)  Approximieren Sie die Dichte des \emph{logarithmierten} zu versteuernden Einkommens $\ln(V)$ durch eine Monte-Carlo-Simulation und stellen Sie sie als Histogramm dar. Welche Verteilung erkennen Sie näherungsweise? Berechnen Sie auch hier Erwartungswert und Standardabweichung. Was fällt hinsichtlich der Parameter der oben genutzten Lognormalverteilung auf?
+
+c)  Approximieren Sie die Verteilungsfunktion der tariflichen Einkommensteuer $s(V)$, wobei $s(\cdot)$ die im EStG genannte Steuerfunktion ist. Stellen Sie die Verteilungsfunktion anschließend grafisch dar.
+
+d)  Stellen Sie die geschätzte Verteilungsfunktion des Nettoeinkommens (definiert als zu versteuerndes Einkommen minus tarifliche Einkommensteuer) grafisch dar.
+
+*Hinweise:*
+
+-   Nutzen Sie für alle vier Aufgabenteile eine Monte-Carlo-Simulation mit $10\,000$ Realisationen.
+
+-   Die Nutzung einer Schleife könnte hilfreich sein.
+
+-   Die R-Funktion zum Abrunden lautet $\texttt{floor}$.
+
+-   Berücksichtigen Sie in den grafischen Darstellungen lediglich Einkommen zwischen $0$ und $300\,000$ Euro. Dies erreichen Sie z. B. mittels des Parameters `xlim = c(0,3*10^5)` in den Funktionen $\texttt{hist}$ und $\texttt{plot}$.\
+    Beispiel:\
+    `rexp(10^4, rate=1/10^5)`
+
+    `hist(x,breaks=100, probability=TRUE, xlim=c(0,3*10^5))`
+
+## Lösung
+
+### zu a)
+
+Wir erzeugen zunächst $n=10^4$ Realisationen einer lognormalverteilten Zufallsvariablen mit den entsprechenden Parametern.
+
+```{r}
+n <- 10^4
+v <- rlnorm(n, meanlog=10.2, sdlog=1.6)
+```
+
+Nun berechnen wir den empirischen Erwartungswert:
+
+```{r}
+mean(v)
+```
+
+und die empirische Standardabweichung:
+
+```{r}
+sqrt(var(v))
+```
+
+### zu b)
+
+Wir logarithmieren die Realisationen aus a) und erstellen das entsprechende Histogramm.
+
+```{r}
+hist(log(v),breaks=100,probability=TRUE, main="Histogramm zum logarithmierten
+     zu versteuernden Einkommen")
+```
+
+Wir erkennen näherungsweise eine Normalverteilung mit Mittelwert
+
+```{r}
+mean(log(v))
+```
+
+und Standardabweichung
+
+```{r}
+sqrt(var(log(v)))
+```
+
+Die Parameter $\texttt{meanlog}$ und $\texttt{sdlog}$ der R-Funktion $\texttt{rlnorm}$ entsprechen quasi exakt dem approximierten Erwartungswert und der approximierten Standardabweichung der logarithmierten Zufallsvariablen.
+
+## zu c)
+
+Wir erstellen zuerst einen Vektor der Länge $n$. Diese entspricht der Länge des Vektors $v$. Dann berechnen wir je Eintrag die Einkommensteuer auf Basis der Einträge des Vektors $v$.
+
+```{r}
+v_s <-rep(0,n)
+for (i in 1:n){
+  x <- floor(v[i]) # x auf Basis des zu versteuernden Einkommens v berechnen
+  if (x <= 10908){
+    sum <- 0
+  }
+  else if (x <= 15999){
+    y <- (x-10908)/10**4
+    sum <- (979.18 * y + 1400) * y
+  }
+  else if (x <= 62809){
+    z <- (x-15999)/10**4
+    sum <- (192.59 * z + 2397)*z + 966.53
+  }
+  else if (x <= 277825 ){
+    sum <-  0.42*x - 9972.98 
+  }
+  else{
+    sum <-  0.45 * x - 18307.73
+  }
+  v_s[i] <- (floor(sum))
+}
+```
+
+```{r}
+plot(ecdf(v_s), xlim = c(0,3*10^5), main="Verteilungsfunktion der
+     tariflichen Einkommensteuer" )
+```
+
+## zu d)
+
+```{r}
+plot(ecdf(v-v_s), xlim = c(0,3*10^5), main="Verteilungsfunktion des
+     Nettoeinkommens" )
+```
+
+# Aufgabe 3
+
+Seien $X_1,X_2,\ldots,X_{20}$ unabhängige Wiederholungen von $X\sim t_4$ (d.h. eine t-Verteilung mit 4 Freiheitsgraden). Es gilt $E(X)=0$. Die Varianz von $X$ beträgt $Var(X)=2$. Mit $Y_n$ bezeichnen wir die Partialsummen $$
+Y_n=\sum_{i=1}^n X_i
+$$ für $n=1,\ldots,20$.
+
+a)  Leiten Sie für $n,m\in\{1,2,\ldots,20\}$ mit $m\le n$ die Kovarianz $Cov(Y_m,Y_n)$ analytisch her.
+
+b)  Führen Sie eine Monte-Carlo-Simulation durch, um das 0.1-Quantil von $Y_{20}$ zu bestimmen.
+
+c)  Approximieren Sie mit Hilfe einer Monte-Carlo-Simulation die Wahrscheinlichkeit, dass sowohl $Y_{10}$ als auch $Y_{20}$ strikt positiv sind.
+
+d)  Wie hoch ist der bedingte Erwartungswert von $Y_{20}$, wenn $Y_{10}$ strikt positiv ist? Ermitteln Sie den Wert mit Hilfe einer Monte-Carlo-Simulation.
+
+*Hinweise*:
+
+-   Erinnern Sie sich für Teilaufgabe a) an die Verträglichkeit der Kovarianz mit Summen oder schauen Sie sich das Lösungsvideo zu Aufgabe 1 von Hausaufgabenblatt 3 an.
+
+-   Die Realisationen von $Y_{10}$ und $Y_{20}$ sollten *nicht* auf unterschiedlichen Stichproben beruhen, da so die in a) nachgewiesene Abhängigkeit nicht mehr gegeben wäre.
+
+-   Um den bedingten Erwartungswert in d) zu berechnen, können Sie die Stichprobe zunächst entsprechend der Bedingung einschränken und dann den Erwartungswert ermitteln.
+
+## Lösung
+
+### zu a)
+
+Sei $m \leq n$. Sei $k:=n-m$. Dann gilt $n=k+m$. Für die Kovarianz gilt nun \begin{align*}
+Cov(Y_m, Y_{m+k}) &= Cov(\sum_{i=1}^m X_i, \sum_{j=1}^{m+k}X_j)\\
+&=\sum_{i=1}^m \sum_{j=1}^{m+k}Cov(X_i, X_j) 
+\quad \textrm{nach der Lösung zu Blatt 3 Aufgabe 1}
+\end{align*}
+
+Für $i \neq j$ gilt nun $Cov(X_i,X_j) =0$. Für $i = j$ gilt $Cov(X_i, X_j) = Var(X_i)=2$. Damit folgt \begin{align*}
+Cov(Y_m, Y_{m+k}) &= \sum_{i=1}^m Cov(X_i, X_i) \\
+&=\sum_{i=1}^m Var(X_i) \\
+&= \sum_{i=1}^m 2 \\
+&= 2m
+\end{align*}
+
+### zu b)
+
+Wir erzeugen zunächst Realisationen von $Y_{10}$ und $Y_{20}$. Dabei beachten wir dass diese jeweils auf Basis der gleichen Stichprobe gebildet werden.
+
+```{r}
+R <- 10^4
+y_10 <- rep(0,R)
+y_20 <- rep(0,R)
+for (i in 1:R){
+  x <- rt(20, df=4) # eine Stichprobe für y_10 und y_20
+  y_10[i] <- sum(x[1:10])
+  y_20[i] <- sum(x)
+}
+
+```
+
+Das approximative $0.1$-Quantil von $Y_{20}$ beträgt:
+
+```{r}
+quantile(y_20,probs=0.1)
+```
+
+### zu c)
+
+Wir möchten den Anteil der Realisationen unserer Stichprobe an der Gesamtzahl der Realisationen berechnen, für den $Y_{10}>0$ und $Y_{20}>0$ gelten.
+
+#### Variante 1
+
+Der Anteil beträgt also
+
+```{r}
+anz_positiv <- 0
+for (i in 1:R){
+  if (y_10[i]>0 & y_20[i]>0){
+    anz_positiv <- anz_positiv + 1
+  }
+}
+anz_positiv/R # R ist die Anzahl aller Realisationen
+```
+
+#### Variante 2
+
+`y_10 >0 & y_20 >0` gibt einen Vektor von True- und False-Werten zurück. Im Befehl `mean` wird True als 1 und False wird als 0 interpretiert.
+```{r}
+mean(y_10 >0 & y_20 >0)
+```
+
+Beide Ergebnisse entsprechen der gesuchten approximativen Wahrscheinlichkeit.
+
+### zu d)
+
+Wir schränken den Vektor `y_20` auf diejenigen Einträge ein, in denen `y_10>0` gilt. Dann berechnen wir den Mittelwert.
+
+#### Variante 1
+
+Dies tun wir, indem wir einen genügend langen Vektor erstellen und in diesem die Einträge von `y_20`, für die `y_10>0` gilt, speichern. Gleichzeitig bestimmen wir die tatsächliche Länge des Vektors.
+
+```{r}
+z <- rep(0,R)
+z_laenge <- 0
+for (i in 1:R){
+  if (y_10[i]>0){
+    z[z_laenge+1] <- y_20[i] # einfügen des Werts an der nächsten freien Position
+    z_laenge <- z_laenge + 1 # aktualisieren der tatsächlichen Länge
+  }
+}
+```
+
+Das gewünschte Ergebnis erhalten wir nun, indem wir den Vektor `z` auf seine tatsächliche Länge einschränken und den Mittelwert berechnen.
+
+```{r}
+mean(z[1:z_laenge])
+```
+
+Die Länge von `z`, also die Zahl der zu Grunde gelegten Realisationen beträgt in unserer Simulation im Übrigen
+
+```{r}
+z_laenge
+```
+
+#### Variante 2
+
+Wir schränken den Vektor `y_20` auf diejenigen Einträge ein, in denen `y_10>0` gilt. Dann berechnen wir den Mittelwert.
+
+```{r}
+mean(y_20[y_10>0])
+```
+
+# Aufgabe 4: Pi raten
+
+Eine Möglichkeit die Kreiszahl $\pi$ zu schätzen, besteht darin sehr viele (hier $n$) Kugeln unabhängig voneinander rechteckverteilt in einen Sandkasten mit quadratischer Grundfläche fallen zu lassen. Stellen Sie sich dafür vor, dass Sie ein Koordinatensystem über diesen Sandkasten legen, sodass der Mittelpunkt auf der Koordinate $(0,0)$ liegt, dabei bedeutet die Rechteckverteilung in diesem Sandkasten, dass der Aufprallpunkt der Kugeln durch den Zufallsvektor $(X,Y)$ beschrieben werden kann, wobei $X$ und $Y$ unabhängig und rechteckverteilt sind. Gehen Sie außerdem davon aus, dass die Seitenlänge dieses Sandkastens 1 beträgt. Sie ziehen nun einen Kreis um den Mittelpunkt des Sandkastens mit Radius $\frac{1}{2}$. Wir notieren die Koordinaten $(x,y)$ der Aufprallpunkte der Kugeln und ermitteln, wie groß der Anteil der in den Innenkreis des Quadrats gefallenen Kugeln an den insgesamt fallen gelassenen Kugeln ist. Eine Kugel ist in den Innenkreis des Quadrats gefallen, falls für ihre Koordinaten $x^2 + y^2\le(1/2)^2$ gilt. Die Idee hinter dem Vorgehen besteht darin auszunutzen, dass $P(K) = \pi(1/2)^2$ mit $K$="Der Aufprallpunkt liegt im Kreis" gilt. Außerdem nutzen wir aus, dass nach dem Gesetz der großen Zahl der Anteil nährungsweise der Wahrscheinlichkeit $P(K)$ entspricht, wenn sehr viele Kugeln geworfen werden.
+
+a)  Beschreiben Sie verbal einen Algorithmus, mit dem nach dem oben beschriebenen Verfahren eine Approximation von $\pi$ ermittelt werden kann.
+
+b)  Approximieren Sie $\pi$, indem Sie den Algorithmus in R implementieren und ausführen. Erläutern Sie Ihr Vorgehen und geben Sie Zwischenergebnisse aus. Setzen Sie die Anzahl der Kugeln auf $n=10^5$.
+
+c)  Ändern Sie den Algorithmus dahingehend, dass so lange Kugeln fallen gelassen werden, bis die Ab\-wei\-chung von der R-internen Konstante \texttt{pi} kleiner als $10^{-4}$ ist.
+
+## Lösung
+
+### zu a)
+
+1.  Um die Aufprallpunkte zu simulieren, generieren wir für jede Achse (x- und y-Achse) `n` auf dem Intervall `[-1/2,1/2]` rechteckverteilte Zufallszahlen und speichern sie in den Vektoren `x` bzw. `y`.
+2.  Wir bestimmen den Anteil derjenigen Paare `(x[i],y[i])`, die `x[i]^2+y[i]^2 <= 1` erfüllen.
+
+<!-- Seien $X_1, X_2, \ldots \sim U[-\frac{1}{2},\frac{1}{2}]$ sowie -->
+
+<!-- $Y_1, Y_2, \ldots \sim U[-\frac{1}{2},\frac{1}{2}]$ allesamt voneinander -->
+
+<!-- unabhängige Zufallsvariablen. Dann entspricht $(X_i,Y_i)$ dem -->
+
+<!-- Aufprallpunkt der $i$-ten Kugel. Somit gilt -->
+
+<!-- $$K_i:= \textrm{"i-te Kugel fällt in den Innenkreis"} = \{ (X_i-m_1)^2 + (Y_i-m_2)^2 \leq \left(\frac{d}{2}\right)^2  \}$$ -->
+
+<!-- Die Zufallsvariable $\frac{1}{n}(1_{K_1}+1_{K_2}+\ldots+1_{K_n})$ misst -->
+
+<!-- also das gesuchte Verhältnis. -->
+
+### zu b)
+
+Wir erzeugen zunächst die benötigten Zufallsvariablen
+
+```{r}
+n <- 10^5
+x <- runif(n, min=-1/2,max=1/2) # x-Koordinaten der Aufprallpunkte
+y <- runif(n, min=-1/2, max=1/2) # y-Koordinaten der Aufprallpunkte
+
+```
+
+Dann ermitteln wir den Anteil der in den Kreis gefallenen Kugeln, indem wir 1. prüfen, ob der quadratische Abstand zum Mittelpunkt \<= (1/2)\^2 ist. 2. die im Vektor enthaltenen TRUE-Werte aufsummieren und durch die Länge des Vektors teilen.
+
+```{r}
+ratio <- mean( x^2+y^2 <= (1/2)^2)
+ratio
+```
+
+Zu guter letzt bestimmen wir unseren approximativen Wert für $\pi$:
+
+```{r}
+ratio*4
+```
+
+### zu c)
+
+```{r}
+
+
+tolerance <- 10^(-4)
+error <- 1
+n <- 0
+my_pi <- NA
+while( error > tolerance ){
+  n <- n + 1
+  x <- runif(n, min=-1/2, max=1/2)
+  y <- runif(n, min=-1/2, max=1/2)
+  my_pi <- mean( x^2+y^2 <= (1/2)^2)*4
+ 
+  error <- abs(pi - my_pi )
+}
+```
+
+Hinsichtlich dieser Simulation müssen in diesem Algorithmus
+
+```{r}
+print(n)
+```
+
+Kugeln geworfen werden, damit der Fehler mit
+
+```{r}
+print(error)
+```
+
+innerhalb des Toleranzbereiches liegt. Wir haben in diesem Fall folgenden Wert für $\pi$ approximiert:
+
+```{r}
+print(my_pi)
+```
+
+<!-- ### zu d) -->
+
+<!-- Es gilt: -->
+
+<!-- $$ plim_{n\rightarrow \infty} \frac{1}{n}(1_{K_1}+1_{K_2}+\ldots+1_{K_n}) = E(1_{K_1}) = 0\cdot P(1_{K_1}=0) + 1\cdot P(1_{K_1}=1) = P(K_1) $$ wobei wir zuerst das Gesetz der großen Zahlen und dann die Definition für den Erwartungswert von diskret verteilten Zufallsvariablen genutzt haben. -->
+
+# Aufgabe 5:
+
+Seien $Y \sim U[-5,5]$, $Z \sim U[20,40]$ und $M \sim B(1,p)$ drei unabhängige Zufallsvariablen. $X$ sei eine weitere Zufallsvariable. Sie nimmt den Wert von $Y$ an, falls $M=1$ und den Wert von $Z$, falls $M=0$. Sei $X_1,\dots,X_n$ eine einfache Stichprobe aus $X$. Nehmen Sie an, dass $p=0.5$.
+
+Hinweise: Nutzen Sie für alle Aufgabenteile Monte-Carlo-Simulationen mit möglichst $10\,000$ Realisationen. Setzen Sie in den zu erstellenden Histogrammen den Parameter `breaks=100`. In Aufgabenteil d) sind $\bar X_n$ und $S$ als Zufallsvariablen zu interpretieren, während $\mu$ der vorab geschätzte Wert aus Aufgabenteil a) ist.
+
+a)  Wie hoch ist der Erwartungswert von $X$? Wie hoch wäre der Erwartungswert von $X$, wenn $p=0.9$ wäre?
+
+b)  Approximieren Sie die Dichte der Zufallsvariable $X$, indem Sie das zugehörige Histogramm erstellen.
+
+c)  Bestimmen Sie die Dichte der Zufallsvariable $X_1+\ldots+X_n$ für $n=3$ und $n=10$, indem Sie die zugehörigen Histogramme erstellen.
+
+d)  Zeigen Sie grafisch, dass die Dichte der Zufallsvariable $$
+    \sqrt{n}\frac{\bar X_n-\mu}{S}
+    $$ für $n=100$ gut durch eine Standardnormalverteilung approximiert werden kann. Die Stichprobenstandardabweichung $$
+    S = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X_n)^2}
+    $$ kann in R mit \texttt{sd} berechnet werden.
+
+## Lösung
+
+### zu a)
+
+Wir berechnen den approximativen Erwartungswert zunächst für $p=0.9$.
+
+```{r}
+R <- 10^5
+p <- 0.5
+m <- rbinom(R,1,p)
+y <- runif(R, -5, 5)
+z <- runif(R, 20, 40)
+x <- m*y+(1-m)*z
+mean(x)
+```
+
+Es folgt die Berechnung für $p=0.5$. Hierzu berechnen wir nur die Realisationen von M und X erneut.
+
+```{r}
+p <-0.5
+m <- rbinom(R,1,p)
+x <- m*y+(1-m)*z
+mean(x)
+```
+
+### zu b)
+
+Wir geben das Histogramm von x aus.
+
+```{r}
+hist(x, breaks=100, probability=TRUE)
+```
+
+### zu c)
+
+#### Variante 1
+
+Für $n=3$ ergibt sich:
+
+```{r}
+n <- 3 # also drei Summanden
+
+sumX <- rep(0,R)
+for(k in 1:R){
+  m <- rbinom(n,1,p)
+  y <- runif(n, -5, 5)
+  z <- runif(n, 20, 40)
+  x <- m*y+(1-m)*z
+  sumX[k] <- sum(x) # hier werden alle Einträge von x aufsummiert und im k-ten Eintrag von sumX gespeichert.
+}
+hist(sumX , breaks=100, probability=TRUE)
+```
+
+```{r}
+n <- 10 # also zehn Summanden
+
+sumX <- rep(0,R)
+for(k in 1:R){
+  m <- rbinom(n,1,p)
+  y <- runif(n, -5, 5)
+  z <- runif(n, 20, 40)
+  x <- m*y+(1-m)*z
+  sumX[k] <- sum(x) # hier werden alle Einträge von x aufsummiert und im k-ten Eintrag von sumX gespeichert.
+}
+hist(sumX , breaks=100, probability=TRUE)
+
+```
+
+#### Variante 2
+
+Wir beschränken uns auf $n=3$.
+
+```{r}
+n <- 3
+sumX <- 0
+for (i in 1:n){
+  m <- rbinom(R,1,p)
+  y <- runif(R, -5, 5)
+  z <- runif(R, 20, 40)
+  x <- m*y+(1-m)*z
+  sumX <- sumX + x # hier wird komponentenweise addiert
+}
+hist(sumX, breaks=100, probability=TRUE)
+```
+
+### zu d)
+<!-- Abänderung Fabian -->
+Erst brauchen wir eine gute Schätzung für `mu`.
+
+```{r}
+R <- 10^5
+p <- 0.5
+m <- rbinom(R,1,p)
+y <- runif(R, -5, 5)
+z <- runif(R, 20, 40)
+x <- m*y+(1-m)*z
+mu <- mean(x)
+```
+
+Nun berechnen wir die standardisierten Durchschnitte und speichern sie im Vektor `t` ab.
+
+```{r}
+n <- 100
+R <- 10^5
+p <- 0.5
+
+t <- rep(0,R)       # Hier ist der Vektor wo alle (barX-\mu)/sdx *n^{1/2} gespeichert sind
+
+for(i in 1:R){
+  m <- rbinom(n,1,p)
+  y <- runif(n, -5, 5)
+  z <- runif(n, 20, 40)
+  x <- m*y+(1-m)*z
+  t[i] <- (mean(x)-mu)/(sd(x))*sqrt(n)
+}
+
+hist(t, breaks=100, probability=TRUE)
+g <- seq(from=-4, to=4, length=200)
+lines(g, dnorm(g), col="red")
+```
+

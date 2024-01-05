@@ -129,18 +129,18 @@ Für den Erwartungswerttest sieht die Anpassung so aus,
 dass alle Stichprobenelemente der Original-Stichprobe,
 also $x_1,\ldots,x_n$ um $\mu_0-\bar x$ verschoben werden. 
 Die dadurch entstehende empirische Verteilung ist die
-Bootstrap-Populationsverteilung. Wir nennen sie $X^b$ 
-(für Bootstrap) mit den Ausprägungen
+Bootstrap-Populationsverteilung. Wir nennen sie $X^0$ 
+mit den Ausprägungen
 $$
-x_i^b=x_i+\mu_0-\bar x,\quad i=1,\ldots,n.
+x_i^0=x_i-\bar x+\mu_0,\quad i=1,\ldots,n.
 $$
-Die Wahrscheinlichkeitsfunktion von $X^b$ versieht jeden dieser Werte
-mit der Wahrscheinlichkeit $1/n$. Der Erwartungswert von $X^b$
+Die Wahrscheinlichkeitsfunktion von $X^0$ versieht jeden dieser Werte
+mit der Wahrscheinlichkeit $1/n$. Der Erwartungswert von $X^0$
 ist (vgl. @sec-empverteilung)
 
 \begin{align*}
-E(X^b)&=\frac{1}{n}\sum_{i=1}^n x_i^b\\
-&= \frac{1}{n}\sum_{i=1}^n (x_i+\mu_0-\bar x)\\
+E(X^0)&=\frac{1}{n}\sum_{i=1}^n x_i^0\\
+&= \frac{1}{n}\sum_{i=1}^n (x_i-\bar x+\mu_0)\\
 &= \mu_0+\frac{1}{n}\sum_{i=1}^n x_i -\bar x\\
 &= \mu_0,
 \end{align*}
@@ -150,27 +150,28 @@ so dass die Nullhypothese erfüllt ist.
 Nun ermittelt man die Verteilung der Teststatistik mit Hilfe
 von Monte-Carlo-Simulationen unter der Annahme, dass die
 Populationsverteilung nicht $X$ ist (denn die ist unbekannt), sondern 
-$X^b$ (denn die ist bekannt). Das ist der Kern der Bootstrap-Methode,
+$X^0$ (denn die ist bekannt). Das ist der Kern der Bootstrap-Methode,
 es handelt sich also um eine Monte-Carlo-Simulation der
 Verteilung der Teststatistik, bei der die unbekannte Verteilung der
 Population $X$ durch die bekannte und an die Nullhypothese
-angepasste empirische Verteilung der Stichprobe $X^b$ ersetzt 
+angepasste empirische Verteilung der Stichprobe $X^0$ ersetzt 
 wird. Im folgenden nennen wir diese Art von
-Simulation "Bootstrap-Simulation".
+Simulation "Bootstrap-Simulation" oder kurz "Bootstrap".
 
 Für die Bootstrap-Simulation muss in jedem Schleifendurchlauf
 eine neue Stichprobe aus der Bootstrap-Population
-$X^b$ gezogen werden. Diese Ziehungen nennt 
+$X^0$ gezogen werden. Diese Ziehungen nennt 
 man **Pseudo-Stichproben** oder **Resamples**. 
-Eine Pseudo-Stichprobe $X^b_1,\ldots,X^b_n$
-unter der Nullhypothese lässt sich mit der 
-R-Funktion `sample` ziehen. 
+Eine Pseudo-Stichprobe $X^b_1,\ldots,X^b_n$ (der
+Superindex $b$ steht für bootstrap) aus $X^0$
+lässt sich mit der R-Funktion `sample` ziehen. 
 ```{r}
-xb <- sample(x + mu0 - mean(x), size=n, replace=TRUE)
+x0 <- x - mean(x) + mu0
+xb <- sample(x0, size=n, replace=TRUE)
 ```
 Man zieht also aus der an die Nullhypothese angepassten
 Original-Stichprobe wie aus einer Urne
-$n$ Elemente. Nach jedem Zug wird das gezogene Element wieder zurückgelegt
+$n$ Elemente (`size=n`). Nach jedem Zug wird das gezogene Element wieder zurückgelegt
 (`replace=TRUE`), so dass ein Stichprobenelement der Original-Stichprobe
 durchaus mehrfach in der Pseudo-Stichprobe landen kann. Andere
 Elemente der Original-Stichprobe tauchen dafür in der 
@@ -181,9 +182,9 @@ Pseudo-Stichprobe gar nicht auf.
 Die Verteilung der Teststatistik unter der Nullhypothese wird 
 durch eine Bootstrap-Simulation mit vielen Schleifendurchläufen 
 ermittelt. Die Anzahl der Durchläufe nennen wir $B$.
-In jedem Schleifendurchlauf wird eine Pseudo-Stichprobe vom
-Umfang $n$ aus der Bootstrap-Population $X^b$ gezogen. 
-Aus jeder Pseudo-Stichprobe berechnet man den Wert der 
+In jedem Schleifendurchlauf wird eine Pseudo-Stichprobe 
+$X_1^b,\ldots,X_n^b$ vom Umfang $n$ aus der Population $X^0$ 
+gezogen. Aus jeder Pseudo-Stichprobe berechnet man den Wert der 
 Bootstrap-Teststatistik,
 $$
 T^b=\sqrt{n}\frac{\overline{X^b}-\mu_0}{S^b},
@@ -237,12 +238,14 @@ B <- 10000
 teststatb <- rep(0, B)
 ```
 Nun folgt die eigentliche Bootstrap-Routine. In jedem Schleifendurchlauf
-wird eine Pseudo-Stichprobe `xb` gezogen. Aus ihr wird die Teststatistik
+wird eine Pseudo-Stichprobe `xb` aus der an die Nullhypothese angepassten
+konkreten Stichprobe `x0` gezogen. Aus ihr wird die Teststatistik
 berechnet und als ein Element in dem Vektor `teststatb` abgespeichert.
 ```{r}
 for(b in 1:B){
   
-  xb <- sample(x + mu0 - mean(x), size=n, replace=TRUE)
+  x0 <- x - mean(x) + mu0
+  xb <- sample(x0, size=n, replace=TRUE)
   teststatb[b] <- sqrt(n)*(mean(xb) - mu0)/sd(xb)
   
 }
@@ -263,8 +266,9 @@ Eine Besonderheit des Bootstrapverfahrens besteht darin, dass
 die kritischen Grenzen speziell für die Original-Stichprobe
 bestimmt werden. Eine andere Original-Stichprobe führt zu anderen
 kritischen Grenzen. Natürlich gibt es auch einen Zufallseinfluss
-durch das Ziehen der Pseudo-Stichproben. Er wird jedoch
-immer kleiner, wenn man die Zahl der Durchläufe $B$ erhöht.
+durch das Ziehen der Pseudo-Stichproben. Er wird jedoch (aufgrund des
+Gesetzes der großen Zahl) immer kleiner, wenn man die Zahl der 
+Durchläufe $B$ erhöht.
 
 ## Weitere Bootstrap-Beispiele
 
@@ -322,9 +326,14 @@ teststat <- (mean(x) - mean(y))/sqrt(var(x)/m + var(y)/n)
 teststat
 ```
 Für die Anpassung an die Nullhypothese werden alle Elemente
-der $X$-Stichprobe um $\bar y-\bar x$ verschoben. Beide
-Bootstrap-Populationen haben dann den Erwartungswert $\bar y$.
+der $X$-Stichprobe um $\bar y-\bar x$ verschoben. 
+Die $Y$-Stichprobe wird nicht verändert. Beide
+Bootstrap-Populationen haben daher den Erwartungswert $\bar y$.
 Die Nullhypothese ist also erfüllt.
+```{r}
+x0 <- x - mean(x) + mean(y)
+y0 <- y
+```
 
 Der weitere R-Code sieht wie folgt aus:
 ```{r}
@@ -333,8 +342,8 @@ teststatb <- rep(0, B)
 
 for(b in 1:B){
   
-  xb <- sample(x + mean(y) - mean(x), size=m, replace=TRUE)
-  yb <- sample(y, size=n, replace=TRUE)
+  xb <- sample(x0, size=m, replace=TRUE)
+  yb <- sample(y0, size=n, replace=TRUE)
   teststatb[b] <- (mean(xb) - mean(yb))/sqrt(var(xb)/m + var(yb)/n)
   
 }
@@ -403,7 +412,7 @@ muss man beachten, dass sich bei einer Multiplikation aller Werte
 mit einer Konstanten die Varianz im Quadrat erhöht.
 Die geeignete Umskalierung ist also:
 $$
-x_i^b=x_i\cdot\sqrt{\frac{0.5}{s^2}}.
+x_i^0=x_i\cdot\sqrt{\frac{\sigma_0^2}{s^2}}.
 $$
 Die Bootstrap-Schleife sieht wie folgt aus:
 ```{r}
@@ -412,7 +421,8 @@ teststatb <- rep(0, B)
 
 for(b in 1:B){
   
-  xb <- sample(x * sqrt(0.5/teststat), size=n, replace=TRUE)
+  x0 <- x * sqrt(0.5/teststat)
+  xb <- sample(x0, size=n, replace=TRUE)
   teststatb[b] <- var(xb)
   
 }

@@ -133,6 +133,8 @@ gerade $1-\alpha/2-\alpha/2=1-\alpha$, wie die folgende Abbildung zeigt.
 Die beiden äußeren, rot schraffierten Flächen stehen jeweils für eine
 Wahrscheinlichkeit von $\alpha/2$. Die hellblau schraffierte Fläche
 steht für eine Wahrscheinlichkeit von $1-\alpha$.
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| code-fold: true
 #| code-summary: "R-Code zeigen"
@@ -184,6 +186,62 @@ text(0.4,0.25,
 text(2.4,0.08,
      expression(alpha/2))
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| fig-cap: "Dichte der Standardnormalverteilung"
+par(cex=0.7)
+x <- seq(from=-3.5, to=3.5, length=200)
+plot(x, dnorm(x), 
+     type="l", 
+     axes=FALSE,
+     ylim=c(0,0.45),
+     yaxs="i",
+     xlab="x", 
+     ylab=expression(phi(x)),
+     main="")
+
+axis(1, 
+     at=c(-4, -1.65, 0, 1.65, 4), 
+     labels=FALSE)
+axis(2, 
+     pos=0, 
+     at=c(0, 0.5), 
+     labels=FALSE)
+abline(v=c(-1.65, 1.65))
+
+mtext(expression(-u[1-alpha/2]),
+      at=-1.5, 
+      side=1, 
+      line=0.7)
+mtext(expression(u[1-alpha/2]),
+      at=1.9, 
+      side=1, 
+      line=0.7)
+mtext(0, 
+      side=1, 
+      line=1)
+
+for(x in seq(1.65, 4, by=0.05)){
+  lines(c(-x, -x), c(0, dnorm(x)), col="red")
+  lines(c(x, x), c(0, dnorm(x)), col="red")
+}
+for(y in seq(0, dnorm(0), by=0.008)){
+  lines(c(max(-1.65, -sqrt(-2*log(y*sqrt(2*pi)))),
+          min(1.65, sqrt(-2*log(y*sqrt(2*pi))))),
+        c(y, y), col="lightblue")
+}
+
+text(-2.4,0.08,
+     expression(alpha/2))
+text(0.4,0.25,
+     expression(1-alpha))
+text(2.4,0.08,
+     expression(alpha/2))
+```
+:::
 
 Innerhalb der Wahrscheinlichkeit (in den runden Klammern)
 stehen zwei Ungleichungen.
@@ -635,7 +693,12 @@ Ersetzt man den entsprechenden R-Code vor bzw. in der Schleife,
 so erhält man eine Abbildung, in der alle (konkreten) 
 Konfidenzintervalle übereinander als waagerechte Linien 
 erscheinen. Nur die roten Linien überdecken den wahren Wert nicht. 
-```{r echo=FALSE, out.width="90%", fig.asp=1}
+
+::: {.content-visible when-format="html"}
+```{r}
+#| echo: FALSE
+#| out.width: "90%"
+#| fig.asp: 1
 mu <- 63
 sigma <- 4
 n <- 8
@@ -663,6 +726,43 @@ for(r in 1:R){
   }
 }
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| out.width: "90%"
+#| fig.asp: 1
+par(cex=0.7)
+mu <- 63
+sigma <- 4
+n <- 8
+alpha <- 0.05
+R <- 50
+qnt <- qt(1-alpha/2, df=n-1)
+repeat{
+  K <- replicate(R,{
+    x <- rnorm(n, mean=mu, sd=sigma)
+    k_unten <- mean(x) - qnt * sd(x)/sqrt(n)
+    k_oben <- mean(x) + qnt * sd(x)/sqrt(n)
+    c(k_unten, k_oben)
+  })
+  z <- sum(K[1,] > mu | K[2,] < mu)
+  if(z >= 3 & z <= 4) break
+}
+plot(c(56,70),c(0,R),t="n",
+     xlab="mu", ylab="Durchlauf", main="Konfidenzintervalle")
+abline(v=mu)
+for(r in 1:R){
+  if(K[1,r] <= mu & mu <= K[2,r]){
+    lines(x=K[,r], y=c(r, r))
+  } else {
+    lines(x=K[,r], y=c(r, r), col="red")
+  }
+}
+```
+:::
+
 
 Es ist wichtig, sich klar zu machen, dass jedes 
 Konfidenzintervall aus einer eigenen

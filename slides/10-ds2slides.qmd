@@ -191,7 +191,7 @@ $$
 \framesubtitle{Konfindenzintervalle für den Erwartungswert}
 \begin{exampleblock}{Beispiel: Wohnkosten}
 \begin{itemize}
-\item Sei $X$ die Höhe der Wohnkosten von Studierenden
+\item Sei $X$ die Höhe der monatlichen Wohnkosten von Studierenden
 \item Einfache Stichprobe vom Umfang $n=564$
 \item Der Erwartungswert $\mu=E(X)$ soll geschätzt werden
 \item 0.95-Konfidenzintervall für $\mu$ ?
@@ -231,11 +231,11 @@ mean(x) + qnorm(1-alpha/2) * sd(x)/sqrt(n)
 \framesubtitle{Spezialfall: Normalverteilung}
 \textbf{Spezialfall: Normalverteilung}\medskip
 \begin{itemize}
-\item Wenn $X$ normalverteilt ist, gilt exakt
+\item Wenn $X$ normalverteilt ist, gilt (auch bei kleinem $n$) exakt
 $$
 \sqrt{n}\frac{\bar X-\mu}{S}\sim t_{n-1}
 $$
-\item Konfidenzintervall
+\item Konfidenzintervall für $\mu$
 $$
 \left[\bar X-t_{n-1,1-\alpha/2}\cdot\frac{S}{\sqrt{n}}; 
 \bar X+t_{n-1,1-\alpha/2}\cdot\frac{S}{\sqrt{n}}\right]
@@ -282,6 +282,7 @@ mean(x) + qt(1-alpha/2, df=n-1) * sd(x)/sqrt(n)
 $$
 \hat\pi=\frac{\text{Anzahl }X_i\text{ mit der Eigenschaft}}{n}
 $$
+\item Standardfehler des Schätzers: $\sqrt{\hat\pi (1-\hat\pi)/n}$
 \end{itemize}
 
 
@@ -289,7 +290,7 @@ $$
 # Konfidenzintervalle
 \framesubtitle{Spezialfall: Anteile}
 \begin{itemize}
-\item Konfidenzintervall für einen Anteil
+\item (Approximatives) Konfidenzintervall für einen Anteil
 $$
 \left[
 \hat\pi-u_{1-\alpha/2}\cdot\sqrt{\frac{\hat\pi (1-\hat\pi)}{n}};
@@ -415,6 +416,7 @@ ziemlich exakt in $(1-\alpha)\times 100$ Prozent der Simulationsdurchläufe
 \framesubtitle{Monte-Carlo-Simulation}
 ```{r}
 #| echo: FALSE
+set.seed(1234567)
 R <- 50
 
 # Vorbereitung einer leeren Grafik

@@ -2,7 +2,7 @@
 title: "Data Science 2"
 subtitle: "Weitere Hypothesentests"
 format: beamer
-date: 2023-12-01
+date: 2024-01-01
 date-format: "MMMM YYYY"
 author: "Prof. Dr. Mark Trede"
 institute: "Institut für Ökonometrie und Wirtschaftsstatistik"
@@ -77,7 +77,7 @@ rchisq(n, df=nu)
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 \textbf{Unabhängigkeitstest}\medskip
 \begin{itemize}
 \item Sind zwei Zufallsvariablen $X$ und $Y$ unabhängig voneinander?
@@ -95,7 +95,7 @@ $$
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 Wie kann man die Unabhängigkeit testen?\medskip
 \begin{itemize}
 \item Partitionierung der Träger $T_X$ und $T_Y$
@@ -108,9 +108,9 @@ Wie kann man die Unabhängigkeit testen?\medskip
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
-\begin{itemize}
-\item Häufigkeitstabelle
+\framesubtitle{Unabhängigkeitstest}
+(Absolute) Häufigkeitstabelle
+
 $$
 \begin{array}{|cc|cccc|c|}\hline
 &&&Y\in&&&\\
@@ -122,6 +122,16 @@ X\in&\vdots&\vdots&\vdots&&\vdots&\vdots\\
 &\sum&N_{\cdot 1}&N_{\cdot 2}&\ldots&N_{\cdot K}&n\\\hline
 \end{array}
 $$
+
+
+# Weitere Hypothesentests
+\framesubtitle{Unabhängigkeitstest}
+\begin{itemize}
+\item Deskriptive Unabhängigkeit, wenn 
+$$
+N_{jk}=\frac{N_{j\cdot}N_{\cdot k}}{n}
+$$
+für alle $j=1,\ldots,J$ und $k=1,\ldots,K$
 \item Teststatistik
 $$
 T= \sum_{j=1}^J \sum_{k=1}^K
@@ -132,7 +142,7 @@ $$
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 \begin{itemize}
 \item Unter Gültigkeit der Nullhypothese gilt (approximativ)
 $$
@@ -146,12 +156,13 @@ $$
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 \begin{itemize}
 \item Die Nullhypothese wird verworfen, wenn der Wert der Teststatistik 
 die kritische Grenze überschreitet
 \item Die Ablehnung von $H_0$ ist eine belastbare statistische 
-Untermauerung der Abhängigkeit von $X$ und $Y$ (wenn auch kein Beweis)
+Untermauerung der Abhängigkeit von $X$ und $Y$\newline 
+(wenn auch kein Beweis)
 \item Achtung: Die Nichtablehnung ("Annahme") von $H_0$ 
 ist keine statistische Untermauerung der Unabhängigkeit!
 \end{itemize}
@@ -159,7 +170,7 @@ ist keine statistische Untermauerung der Unabhängigkeit!
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 \begin{exampleblock}{Beispiel: Studentisches Wohnen}
 \begin{itemize}
 \item Umfrage in Data Science 1
@@ -177,7 +188,7 @@ H_1&: \text{Wohntyp und Wohnzufriedenheit sind abhängig}
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
 #| echo: FALSE
 library(readr)
@@ -191,43 +202,44 @@ x$Wohnzufriedenheit <- factor(x$Wohnzufriedenheit,
 options(width=58)
 ```
 ```{r}
-N_Wzufr <- table(x$Wohnzufriedenheit) 
-N_Wzufr  # Randverteilung Wohnzufriedenheit
-J <- length(N_Wzufr)
-J
+# Randverteilung Wohnzufriedenheit
+N_zufr <- table(x$Wohnzufriedenheit) 
+N_zufr  
+J <- length(N_zufr) # =4
 ```
 
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
-N_Wtyp <- table(x$Wohntyp) 
-N_Wtyp  # Randverteilung Wohntyp
-K <- length(N_Wtyp)
-K
+# Randverteilung Wohntyp
+N_typ <- table(x$Wohntyp) 
+N_typ  
+K <- length(N_typ) # =5
 ```
 
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
+# Gemeinsame Verteilung
 N <- table(x$Wohnzufriedenheit, x$Wohntyp)
-N  # gemeinsame Verteilung
+N  
 ```
 
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
 n <- sum(N) # Stichprobenumfang
 teststat <- 0
 
 for(j in 1:J){
   for(k in 1:K){
-    aux <- N_Wzufr[j]*N_Wtyp[k]/n
+    aux <- N_zufr[j]*N_typ[k]/n
     teststat <- teststat + (N[j,k]-aux)^2/(aux)
   }
 }
@@ -237,7 +249,7 @@ teststat <- as.numeric(teststat)
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
 # Wert der Teststatistik
 teststat
@@ -251,8 +263,97 @@ wird die Unabhängigkeitshypothese \textbf{nicht abgelehnt}
 
 
 # Weitere Hypothesentests
-\framesubtitle{Unabhänigigkeitstest}
+\framesubtitle{Unabhängigkeitstest}
 ```{r}
 chisq.test(x$Wohntyp, x$Wohnzufriedenheit)
 ```
 
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+\textbf{Anpassungstest}\medskip
+\begin{itemize}
+\item Folgt die Zufallsvariable $X$ einer vorgegebenen Verteilung?
+\item Partitionierung (Diskretisierung): $A_1,\ldots,A_J$
+\item Hypothesen
+\begin{align*}
+H_0&: P(X\in A_j)=\pi_j,\qquad j=1,\ldots,J\\
+H_1&: \text{nicht }H_0
+\end{align*}
+\item Einfache Stichprobe: $X_1,\ldots,X_n$
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+Wie kann man die Anpassung testen?\medskip
+\begin{itemize}
+\item Unter $H_0$ gilt $E(1_{X\in A_j})=\pi_j$
+\item Folglich ist 
+$$
+E\left(\sum_{i=1}^n 1_{X_i\in A_j}\right)=n\pi_j
+$$
+\item Teststatistik
+$$
+T=\sum_{j=1}^J \frac{(N_j-n\pi_j)^2}{n\pi_j}
+$$
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+\begin{itemize}
+\item Unter $H_0$ gilt (approximativ)
+$$
+T\sim \chi^2_{J-1}
+$$
+\item Kritische Grenze ist das $(1-\alpha)$-Quantil der $\chi^2_{J-1}$-Verteilung
+\item Lehne $H_0$ ab, wenn der Wert der Teststatistik größer ist als die
+kritische Grenze
+\item Ablehnung von $H_0$: Die Verteilungsannahme passt nicht
+\end{itemize}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+\begin{exampleblock}{Beispiel: Benford-Verteliung}
+\begin{itemize}
+\item Führende Ziffern "irgendwelcher" Zahlen folgen der Benford-Verteilung
+\item Die Wahrscheinlichkeit für die führende Ziffer $j$ ist
+$$
+\pi_j=\log_{10}\left(1+\frac{1}{j}\right)
+$$
+\item $P(j=1)=0.301$, $P(j=2)=0.176,\ldots,P(j=9)=0.046$
+\item Wird zur Aufdeckung von Buchhaltungsbetrug verwendet
+\item Fiktiver Datensatz vom Umfang $n=1000$
+\end{itemize}
+\end{exampleblock}
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+```{r}
+n_j <- c(271, 204, 145, 90, 81, 48, 47, 66, 48)
+pi_j <- log10(1+1/(1:9))
+print(data.frame(n_j=n_j, pi_j=pi_j))
+```
+
+
+
+# Weitere Hypothesentests
+\framesubtitle{Anpassungstest}
+```{r}
+n <- sum(n_j)
+teststat <- sum((n_j - n*pi_j)^2 / (n*pi_j))
+teststat # Wert der Teststatistik
+qchisq(0.95, df=8) # Kritische Grenze
+```
+Der Wert der Teststatistik übersteigt die kritische Grenze.
+Die Nullhypothese einer Benford-Verteilung wird
+verworfen. Die Daten weichen statistisch signifikant 
+von der Benford-Verteilung ab.

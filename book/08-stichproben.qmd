@@ -244,6 +244,8 @@ Der Vektor wird vor dem Schleifenstart initialisiert, z.B. durch die
 Ziehung einer Stichprobe aus der Paretoverteilung aktivieren wir das
 Paket `distributionsrd`. Das Paket stellt die Funktion `rpareto`
 zur Vefügung.
+
+::: {.content-visible when-format="html"}
 ```{r}
 library(distributionsrd)
 
@@ -260,8 +262,34 @@ for(r in 1:R){
   smpl_sd[r] <- sd(x)
   
 }
-hist(smpl_sd, breaks=50, xlim=c(0,2))
+hist(smpl_sd, breaks=50, xlim=c(0,2),
+     main="Verteilung der Stichproben-Standardabweichung")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Verteilung der Stichproben-Standardabweichung"
+par(cex=0.7)
+library(distributionsrd)
+
+R <- 10000
+smpl_sd <- rep(0,R)
+
+n <- 50
+xmin <- 1
+k <- 5
+
+for(r in 1:R){
+  
+  x <- rpareto(n, xmin=xmin, k=k)
+  smpl_sd[r] <- sd(x)
+  
+}
+hist(smpl_sd, breaks=50, xlim=c(0,2), main="")
+```
+:::
+
 Die Stichprobenstandardabweichung liegt also in den allermeisten Fällen 
 unterhalb von 0.5, es gibt aber Ausreißer, die teilweise deutlich größer sind.
 Das 0.999-Quantil ist

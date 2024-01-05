@@ -300,7 +300,12 @@ Die Analogie {{< var des >}} {{< var Bogenschützen >}} wären mehrere Schüsse 
 
 Die folgende Abbildung zeigt die Einschläge von vier {{< var BogenschützenPL >}}, die jeweils 20 Pfeile mit dem Ziel abschießen, möglichst dicht an dem schwarzen Punkt in der Mitte zu landen.
 
-```{r echo=FALSE,out.width="70%",fig.asp=1,fig.align='center'}
+::: {.content-visible when-format="html"}
+```{r}
+#| echo: FALSE
+#| out.width: "70%"
+#| fig.asp: 1
+#| fig.align: 'center'
 library(DescTools)
 bogen <- function(n,mx,my,sd){
   x <- rnorm(n,0,sd)
@@ -333,6 +338,47 @@ points(0.5,0.5,pch=19)
 xy <- bogen(20,0.3,0.35,0.15)
 points(xy)
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: FALSE
+#| out.width: "70%"
+#| fig.asp: 1
+#| fig.align: 'center'
+library(DescTools)
+bogen <- function(n,mx,my,sd){
+  x <- rnorm(n,0,sd)
+  y <- rnorm(n,0,sd)
+  return(list(x=x-mean(x)+mx,y=y-mean(y)+my))
+}
+n <- 20
+par(mfrow=c(2,2),mar=c(0.2,0.2,1.2,0.2),cex=0.7)
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(a)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(n,0.5,0.5,0.05)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(b)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.3,0.35,0.05)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(c)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.5,0.5,0.15)
+points(xy)
+
+plot(c(0,1),c(0,1),axes=F,xlab="",ylab="",t="n",main="(d)")
+DrawCircle(0.5,0.5,0.5)
+points(0.5,0.5,pch=19)
+xy <- bogen(20,0.3,0.35,0.15)
+points(xy)
+```
+:::
 
 {{< var Welcher >}} {{< var Schütze >}} ist der beste? 
 Offenbar trafen die Pfeile von (a) besonders nahe am Zielpunkt. {{< var Der >}} {{< var Schütze >}} (a) hat zwar das Ziel nicht exakt getroffen, aber {{< var seine >}} Pfeile lagen nicht systematisch zu hoch oder niedrig oder zu weit links oder rechts. 
@@ -544,10 +590,25 @@ Histogramm zeigt außerdem, dass die Verteilung schief ist: Eine Mehrheit
 der Schätzwerte ist etwas kleiner als der wahre Wert (gekennzeichnet
 durch die vertikale rote Linie), manchmal gibt es
 jedoch Werte, die viel zu groß sind.
+
+::: {.content-visible when-format="html"}
 ```{r}
 hist(s, breaks=50)
 abline(v=1/lambda, col="red")
 ```
+:::
+
+::: {.content-visible when-format="html"}
+```{r}
+#| fig-cap: "Verteilung des Schätzers"
+par(cex=0.7)
+
+hist(s, breaks=50)
+abline(v=1/lambda, col="red")
+```
+:::
+
+
 Der Erwartungswert des Schätzers für die Standardabweichung, $E(S)$, wird durch 
 ```{r}
 mean(s)

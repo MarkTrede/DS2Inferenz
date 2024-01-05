@@ -186,12 +186,28 @@ also sehr präzise.
 Der folgende Plot zeigt das Histogramm der Zufallszahlen
 zusammen mit der theoretischen Dichtefunktion der Normalverteilung,
 die als rote Linie ergänzt ist.
+
+::: {.content-visible when-format="html"}
 ```{r}
-hist(x, breaks=100, probability=TRUE)
+hist(x, breaks=100, probability=TRUE,
+     main="Histogramm der N(0,1)-Zufallszahlen")
 
 g <- seq(from=0, to=20, length=200)
 lines(g, dnorm(g, mean=10, sd=3), col="red")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Histogramm der N(0,1)-Zufallszahlen"
+par(cex=0.7) 
+hist(x, breaks=100, probability=TRUE, main="")
+
+g <- seq(from=0, to=20, length=200)
+lines(g, dnorm(g, mean=10, sd=3), col="red")
+```
+:::
+
 Eine Beschreibung des Befehls `hist` findet man im @sec-grafiken.
 Dort wird auch erklärt, wie man die Funktion `lines` einsetzt.
 
@@ -202,6 +218,8 @@ Treppenfunktion, aber die Stufen sind so klein (nämlich jeweils
 $1/n=0.00001$), dass sie nicht zu erkennen sind. Mit Hilfe
 der Funktion `lines` wird die theoretische Verteilungsfunktion 
 der Normalverteilung als rote Linie ergänzt.
+
+::: {.content-visible when-format="html"}
 ```{r}
 plot(ecdf(x),
      main="Verteilungsfunktion")
@@ -209,6 +227,19 @@ plot(ecdf(x),
 g <- seq(from=-5, to=25, length=200)
 lines(g, pnorm(g, mean=10, sd=3), col="red")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Verteilungsfunktion"
+par(cex=0.7)
+plot(ecdf(x), main="")
+
+g <- seq(from=-5, to=25, length=200)
+lines(g, pnorm(g, mean=10, sd=3), col="red")
+```
+:::
+
 Die beiden Linien stimmen praktisch perfekt überein. Man kann also
 die theoretische Verteilungsfunktion beliebig genau bestimmen,
 indem man eine große Zahl von Zufallszahlen generiert und 
@@ -280,9 +311,21 @@ nach der Flat-Rate-Formel berechnet.
 Die Dichte des Nettolohns kann durch das Histogramm
 approximiert werden. Diese Form der Dichte entspricht keiner
 bekannten Standardverteilung.
+
+::: {.content-visible when-format="html"}
 ```{r}
-hist(z, probability=TRUE, breaks=100, xlim=c(0, 10000))
+hist(z, probability=TRUE, breaks=100, xlim=c(0, 10000),
+     main="Histogramm des Nettolohns")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Histogramm des Nettolohns"
+par(cex=0.7)
+hist(z, probability=TRUE, breaks=100, xlim=c(0, 10000), main="")
+```
+:::
 
 Das Beispiel zeigt, wie man aus einer Zufallsvariable `x` eine andere
 Zufallsvariable `z` berechnet. Die Berechnungen wie z.B. `y <- exp(x)` 
@@ -491,15 +534,34 @@ Das Histogramm der $R=10000$ Zufallszahlen
 $U_{n,1},\ldots,U_{n,R}$ kann trotz des noch kleinen
 Umfang $n=50$ schon recht gut durch eine Standardnormalverteilung
 approximiert werden.
+
+::: {.content-visible when-format="html"}
 ```{r}
-hist(u, probability=TRUE, breaks=50)
+hist(u, probability=TRUE, breaks=50,
+     main="Verteilung von U_50")
 
 g <- seq(from=-4, to=4, length=200)
 lines(g, dnorm(g), col="red")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Verteilung von $U_{50}$"
+par(cex=0.7)
+hist(u, probability=TRUE, breaks=50, main="")
+
+g <- seq(from=-4, to=4, length=200)
+lines(g, dnorm(g), col="red")
+```
+:::
+
+
 Reduziert man die Länge der Folge auf nur $n=5$ Elemente, greift
 der zentrale Grenzwertsatz nicht gut und die Approximation 
 ist ungenau, wie das folgende Bild zeigt:
+
+::: {.content-visible when-format="html"}
 ```{r}
 n <- 5
 
@@ -510,11 +572,35 @@ for(r in 1:R){
     u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
 
 }
-hist(u, prob=TRUE, breaks=50)
+hist(u, prob=TRUE, breaks=50,
+     main="Verteilung von U_5")
 
 g <- seq(from=-3, to=5, length=200)
 lines(g, dnorm(g), col="red")
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| fig-cap: "Verteilung von $U_{5}$"
+par(cex=0.7)
+n <- 5
+
+for(r in 1:R){
+
+    x <- rexp(n, rate=2)
+    xquer <- mean(x)
+    u[r] <- sqrt(n)*(xquer - 1/2)/sqrt(1/4)
+
+}
+hist(u, prob=TRUE, breaks=50, main="")
+
+g <- seq(from=-3, to=5, length=200)
+lines(g, dnorm(g), col="red")
+```
+:::
+
+
 Wie viele Elemente die Folge $X_1,\ldots,X_n$ haben muss,
 damit der zentrale Grenzwertsatz greift, hängt von ihrer
 Verteilung ab. Es kann sein, dass schon für $n=10$ die
